@@ -41,18 +41,25 @@ jobs:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_KEY: ${{ secrets.EC2_SSH_KEY }}
         IMAGE: ${{ steps.build-image.outputs.IMAGE }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        echo "$EC2_KEY" > ec2_key.pem
+        # 处理SSH密钥，确保格式正确
+        echo "$EC2_KEY" | base64 -d > ec2_key.pem 2>/dev/null || echo "$EC2_KEY" > ec2_key.pem
         chmod 600 ec2_key.pem
-        ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_HOST << EOF
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+        
+        # 部署命令
+        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ec2_key.pem $EC2_USER@$EC2_HOST << EOF
+          set -e
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
           docker pull $IMAGE
           docker stop toolbox || true
           docker rm toolbox || true
           docker run -d --name toolbox -p 80:3000 --restart always $IMAGE
           docker system prune -f
         EOF
-        rm ec2_key.pem
+        
+        rm -f ec2_key.pem
 
     - name: Verify deployment
       run: |
