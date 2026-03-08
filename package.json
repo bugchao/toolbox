@@ -12,22 +12,16 @@
     "crawl:news": "python3 crawler/news_crawler.py --output public/news.json"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.0",
-    "qrcode": "^1.5.3",
+    "express": "^4.18.2",
     "jsqr": "^1.4.0",
-    "axios": "^1.6.5",
-    "dayjs": "^1.11.10",
-    "lucide-react": "^0.312.0"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
+    "lucide-react": "^0.577.0",
+    "qrcode": "^1.5.4",
+    "react-router-dom": "^7.13.1"
   },
   "devDependencies": {
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
-    "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
