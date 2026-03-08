@@ -21,7 +21,7 @@ WORKDIR /app
 
 # 安装Python和依赖
 RUN apk add --no-cache python3 py3-pip py3-beautifulsoup4 py3-requests
-RUN ln -s python3 /usr/bin/python
+RUN ln -sf python3 /usr/bin/python
 
 # 安装生产依赖
 COPY package*.json ./
