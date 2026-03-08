@@ -29,7 +29,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: toolbox-${{ github.sha }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -45,14 +45,16 @@ jobs:
         echo "$EC2_KEY" > ec2_key.pem
         chmod 600 ec2_key.pem
         ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_HOST << EOF
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
           docker pull $IMAGE
-          docker stop app || true
-          docker rm app || true
-          docker run -d --name app -p 80:80 $IMAGE
+          docker stop toolbox || true
+          docker rm toolbox || true
+          docker run -d --name toolbox -p 80:3000 --restart always $IMAGE
           docker system prune -f
         EOF
         rm ec2_key.pem
 
     - name: Verify deployment
       run: |
+        sleep 30
         curl -f http://${{ secrets.EC2_HOST }} || exit 1
