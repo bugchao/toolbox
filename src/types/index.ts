@@ -4,7 +4,7 @@ export interface Tool {
   description: string;
   icon: string;
   path: string;
-  category: '实用工具' | '查询工具' | '资讯工具';
+  category: '实用工具' | '查询工具' | '资讯工具' | '研发工具';
 }
 
 export interface NewsItem {

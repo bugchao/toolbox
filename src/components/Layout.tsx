@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Home, QrCode, Newspaper, MapPin, Cloud, Menu, X } from 'lucide-react'
+import { 
+  Home, QrCode, Newspaper, MapPin, Cloud, Bot, Menu, X,
+  Code, FileCode, Clock, Link2, Shuffle, Calendar, Key, 
+  Fingerprint, Braces, Hash
+} from 'lucide-react'
 import { useState } from 'react'
 
 interface LayoutProps {
@@ -18,6 +22,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '每日热点', href: '/news', icon: Newspaper },
     { name: '邮编查询', href: '/zipcode', icon: MapPin },
     { name: '天气查询', href: '/weather', icon: Cloud },
+    { name: 'AI助手', href: '/ai', icon: Bot },
+    { name: 'JSON格式化', href: '/json', icon: Braces },
+    { name: 'Base64编解码', href: '/base64', icon: FileCode },
+    { name: '时间戳转换', href: '/timestamp', icon: Clock },
+    { name: 'URL编解码', href: '/url', icon: Link2 },
+    { name: '正则测试', href: '/regex', icon: Shuffle },
+    { name: 'Cron生成', href: '/cron', icon: Calendar },
+    { name: '密码生成', href: '/password', icon: Key },
+    { name: '哈希计算', href: '/hash', icon: Fingerprint },
+    { name: '代码美化', href: '/code', icon: Code },
+    { name: 'UUID生成', href: '/uuid', icon: Hash },
   ]
 
   return (

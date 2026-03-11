@@ -1,0 +1,11 @@
+name = "ai-proxy-worker"
+main = "workers/ai-proxy.ts"
+compatibility_date = "2024-02-08"
+
+[vars]
+# 部署时设置环境变量：
+# wrangler secret put DEEPSEEK_API_KEY
+# wrangler secret put OPENAI_API_KEY
+
+[build]
+command = "npm install && npx tsc workers/ai-proxy.ts --outDir workers/dist"
