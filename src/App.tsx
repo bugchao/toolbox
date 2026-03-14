@@ -24,6 +24,7 @@ import QrCodeBeautifier from './pages/QrCodeBeautifier'
 import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
+import IpQuery from './pages/IpQuery'
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="/image-background-remover" element={<ImageBackgroundRemover />} />
         <Route path="/unit-converter" element={<UnitConverter />} />
         <Route path="/text-comparator" element={<TextComparator />} />
+        <Route path="/ip-query" element={<IpQuery />} />
       </Routes>
     </Layout>
   )

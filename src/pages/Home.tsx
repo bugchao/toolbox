@@ -156,6 +156,14 @@ const Home: React.FC = () => {
       icon: '🔄',
       path: '/text-comparator',
       category: '研发工具'
+    },
+    {
+      id: 'ip-query',
+      name: 'IP地址查询',
+      description: '查询IP地址的地理位置、运营商、时区等信息，支持地图预览',
+      icon: '🌐',
+      path: '/ip-query',
+      category: '查询工具'
     }
   ]
 
