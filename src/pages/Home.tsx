@@ -180,6 +180,14 @@ const Home: React.FC = () => {
       icon: '🔗',
       path: '/short-link',
       category: '实用工具'
+    },
+    {
+      id: 'resume-generator',
+      name: '简历生成器',
+      description: '快速生成专业简历，支持多种模板，导出PDF和Markdown格式',
+      icon: '📄',
+      path: '/resume-generator',
+      category: '实用工具'
     }
   ]
 

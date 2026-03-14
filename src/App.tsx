@@ -27,6 +27,7 @@ import TextComparator from './pages/TextComparator'
 import IpQuery from './pages/IpQuery'
 import PdfTools from './pages/PdfTools'
 import ShortLinkGenerator from './pages/ShortLinkGenerator'
+import ResumeGenerator from './pages/ResumeGenerator'
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route path="/ip-query" element={<IpQuery />} />
         <Route path="/pdf-tools" element={<PdfTools />} />
         <Route path="/short-link" element={<ShortLinkGenerator />} />
+        <Route path="/resume-generator" element={<ResumeGenerator />} />
       </Routes>
     </Layout>
   )
