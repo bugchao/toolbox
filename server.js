@@ -4,8 +4,6 @@ import path from 'path'
 import { exec } from 'child_process'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
-import * as trpcExpress from '@trpc/server/adapters/express'
-import { router } from './src/server/trpc.ts'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -15,15 +13,6 @@ const PORT = process.env.PORT || 3000
 
 // 解析JSON请求体
 app.use(express.json())
-
-// tRPC路由
-app.use(
-  '/trpc',
-  trpcExpress.createExpressMiddleware({
-    router,
-    createContext: () => ({}),
-  })
-)
 
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'dist')))

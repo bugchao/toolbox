@@ -6,7 +6,6 @@ import QrCodeReader from './pages/QrCodeReader'
 import HotNews from './pages/HotNews'
 import ZipCode from './pages/ZipCode'
 import Weather from './pages/Weather'
-import AiChat from './pages/AiChat'
 import JsonFormatter from './pages/JsonFormatter'
 import Base64 from './pages/Base64'
 import Timestamp from './pages/Timestamp'
@@ -17,6 +16,14 @@ import PasswordGenerator from './pages/PasswordGenerator'
 import HashGenerator from './pages/HashGenerator'
 import CodeFormatter from './pages/CodeFormatter'
 import UuidGenerator from './pages/UuidGenerator'
+import ImageCompressor from './pages/ImageCompressor'
+import MarkdownConverter from './pages/MarkdownConverter'
+import BMICalculator from './pages/BMICalculator'
+import ColorPicker from './pages/ColorPicker'
+import QrCodeBeautifier from './pages/QrCodeBeautifier'
+import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
+import UnitConverter from './pages/UnitConverter'
+import TextComparator from './pages/TextComparator'
 
 function App() {
   return (
@@ -25,10 +32,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/qrcode/generate" element={<QrCodeGenerator />} />
         <Route path="/qrcode/read" element={<QrCodeReader />} />
+        <Route path="/qrcode/beautifier" element={<QrCodeBeautifier />} />
         <Route path="/news" element={<HotNews />} />
         <Route path="/zipcode" element={<ZipCode />} />
         <Route path="/weather" element={<Weather />} />
-        <Route path="/ai" element={<AiChat />} />
         <Route path="/json" element={<JsonFormatter />} />
         <Route path="/base64" element={<Base64 />} />
         <Route path="/timestamp" element={<Timestamp />} />
@@ -39,6 +46,13 @@ function App() {
         <Route path="/hash" element={<HashGenerator />} />
         <Route path="/code" element={<CodeFormatter />} />
         <Route path="/uuid" element={<UuidGenerator />} />
+        <Route path="/image-compressor" element={<ImageCompressor />} />
+        <Route path="/markdown" element={<MarkdownConverter />} />
+        <Route path="/bmi" element={<BMICalculator />} />
+        <Route path="/color-picker" element={<ColorPicker />} />
+        <Route path="/image-background-remover" element={<ImageBackgroundRemover />} />
+        <Route path="/unit-converter" element={<UnitConverter />} />
+        <Route path="/text-comparator" element={<TextComparator />} />
       </Routes>
     </Layout>
   )

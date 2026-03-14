@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { 
   Home, QrCode, Newspaper, MapPin, Cloud, Bot, Menu, X,
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key, 
-  Fingerprint, Braces, Hash
+  Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
+  Eraser, Ruler
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -19,10 +20,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '首页', href: '/', icon: Home },
     { name: '二维码生成', href: '/qrcode/generate', icon: QrCode },
     { name: '二维码解析', href: '/qrcode/read', icon: QrCode },
+    { name: '二维码美化', href: '/qrcode/beautifier', icon: Wand2 },
     { name: '每日热点', href: '/news', icon: Newspaper },
     { name: '邮编查询', href: '/zipcode', icon: MapPin },
     { name: '天气查询', href: '/weather', icon: Cloud },
-    { name: 'AI助手', href: '/ai', icon: Bot },
     { name: 'JSON格式化', href: '/json', icon: Braces },
     { name: 'Base64编解码', href: '/base64', icon: FileCode },
     { name: '时间戳转换', href: '/timestamp', icon: Clock },
@@ -33,6 +34,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '哈希计算', href: '/hash', icon: Fingerprint },
     { name: '代码美化', href: '/code', icon: Code },
     { name: 'UUID生成', href: '/uuid', icon: Hash },
+    { name: '图片压缩', href: '/image-compressor', icon: Image },
+    { name: '图片去背景', href: '/image-background-remover', icon: Eraser },
+    { name: 'Markdown转换', href: '/markdown', icon: FileText },
+    { name: 'BMI计算', href: '/bmi', icon: Heart },
+    { name: '颜色拾取', href: '/color-picker', icon: Palette },
+    { name: '单位换算', href: '/unit-converter', icon: Ruler },
   ]
 
   return (

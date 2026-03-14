@@ -22,6 +22,14 @@ const Home: React.FC = () => {
       category: '实用工具'
     },
     {
+      id: 'qrcode-beautifier',
+      name: '二维码美化',
+      description: '自定义二维码颜色、样式，添加Logo，生成个性化二维码',
+      icon: '✨',
+      path: '/qrcode/beautifier',
+      category: '实用工具'
+    },
+    {
       id: 'news',
       name: '每日热点',
       description: '聚合科技、体育、AI、国际等各类热点新闻，每日自动更新',
@@ -123,6 +131,30 @@ const Home: React.FC = () => {
       description: '生成UUID、随机字符串，用于测试数据、唯一ID生成',
       icon: '🆔',
       path: '/uuid',
+      category: '研发工具'
+    },
+    {
+      id: 'image-background-remover',
+      name: '图片去背景',
+      description: '一键去除图片背景，生成透明背景PNG，本地处理保护隐私',
+      icon: '✂️',
+      path: '/image-background-remover',
+      category: '实用工具'
+    },
+    {
+      id: 'unit-converter',
+      name: '单位换算器',
+      description: '支持长度、重量、温度、面积、体积等12大类单位换算，实时转换',
+      icon: '📏',
+      path: '/unit-converter',
+      category: '实用工具'
+    },
+    {
+      id: 'text-comparator',
+      name: '文本对比工具',
+      description: '对比两段文本的差异，支持字符/单词/行级对比，高亮显示增删内容',
+      icon: '🔄',
+      path: '/text-comparator',
       category: '研发工具'
     }
   ]
