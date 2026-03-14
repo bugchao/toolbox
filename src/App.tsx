@@ -28,6 +28,8 @@ import IpQuery from './pages/IpQuery'
 import PdfTools from './pages/PdfTools'
 import ShortLinkGenerator from './pages/ShortLinkGenerator'
 import ResumeGenerator from './pages/ResumeGenerator'
+import ColorGenerator from './pages/ColorGenerator'
+import MemeGenerator from './pages/MemeGenerator'
 
 function App() {
   return (
@@ -61,6 +63,8 @@ function App() {
         <Route path="/pdf-tools" element={<PdfTools />} />
         <Route path="/short-link" element={<ShortLinkGenerator />} />
         <Route path="/resume-generator" element={<ResumeGenerator />} />
+        <Route path="/color-generator" element={<ColorGenerator />} />
+        <Route path="/meme-generator" element={<MemeGenerator />} />
       </Routes>
     </Layout>
   )
