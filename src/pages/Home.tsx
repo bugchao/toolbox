@@ -172,6 +172,14 @@ const Home: React.FC = () => {
       icon: '📄',
       path: '/pdf-tools',
       category: '实用工具'
+    },
+    {
+      id: 'short-link',
+      name: '短链接生成器',
+      description: '将长链接转换为短链接，支持自定义后缀、过期时间、访问统计',
+      icon: '🔗',
+      path: '/short-link',
+      category: '实用工具'
     }
   ]
 

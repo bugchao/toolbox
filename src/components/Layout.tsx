@@ -52,6 +52,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '颜色拾取', href: '/color-picker', icon: Palette, category: '实用工具' },
     { name: '单位换算', href: '/unit-converter', icon: Ruler, category: '实用工具' },
     { name: 'PDF工具集', href: '/pdf-tools', icon: File, category: '实用工具' },
+    { name: '短链接生成', href: '/short-link', icon: Link2, category: '实用工具' },
   ]
 
   // 分类
