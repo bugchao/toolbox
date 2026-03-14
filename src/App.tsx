@@ -25,6 +25,7 @@ import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import IpQuery from './pages/IpQuery'
+import PdfTools from './pages/PdfTools'
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path="/unit-converter" element={<UnitConverter />} />
         <Route path="/text-comparator" element={<TextComparator />} />
         <Route path="/ip-query" element={<IpQuery />} />
+        <Route path="/pdf-tools" element={<PdfTools />} />
       </Routes>
     </Layout>
   )

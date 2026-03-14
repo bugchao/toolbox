@@ -164,6 +164,14 @@ const Home: React.FC = () => {
       icon: '🌐',
       path: '/ip-query',
       category: '查询工具'
+    },
+    {
+      id: 'pdf-tools',
+      name: 'PDF工具集',
+      description: '多功能PDF处理工具，支持合并、分割、格式转换等操作，本地处理保护隐私',
+      icon: '📄',
+      path: '/pdf-tools',
+      category: '实用工具'
     }
   ]
 
