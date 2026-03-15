@@ -53,6 +53,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: '单位换算', href: '/unit-converter', icon: Ruler, category: '实用工具' },
     { name: 'PDF工具集', href: '/pdf-tools', icon: File, category: '实用工具' },
     { name: '短链接生成', href: '/short-link', icon: Link2, category: '实用工具' },
+    { name: '简历生成器', href: '/resume-generator', icon: FileText, category: '实用工具' },
+    { name: 'AI配色生成器', href: '/color-generator', icon: Palette, category: '实用工具' },
+    { name: '表情包生成器', href: '/meme-generator', icon: Wand2, category: '实用工具' },
+    { name: 'AI文案生成器', href: '/copywriting-generator', icon: FileText, category: '实用工具' },
   ]
 
   // 分类

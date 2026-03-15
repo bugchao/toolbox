@@ -30,6 +30,7 @@ import ShortLinkGenerator from './pages/ShortLinkGenerator'
 import ResumeGenerator from './pages/ResumeGenerator'
 import ColorGenerator from './pages/ColorGenerator'
 import MemeGenerator from './pages/MemeGenerator'
+import CopywritingGenerator from './pages/CopywritingGenerator'
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
         <Route path="/resume-generator" element={<ResumeGenerator />} />
         <Route path="/color-generator" element={<ColorGenerator />} />
         <Route path="/meme-generator" element={<MemeGenerator />} />
+        <Route path="/copywriting-generator" element={<CopywritingGenerator />} />
       </Routes>
     </Layout>
   )
