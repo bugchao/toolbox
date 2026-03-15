@@ -1,12 +1,21 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/server/security-api.js'
 
 const root = path.resolve(__dirname, '../..')
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'toolbox-security-api',
+      configureServer(server) {
+        server.middlewares.use(createSecurityApiMiddleware())
+      },
+    },
+  ],
   resolve: {
     // 开发/构建均从源码解析，避免 workspace 未正确 link 时解析失败
     alias: {
@@ -16,6 +25,7 @@ export default defineConfig({
       '@toolbox/tool-ip-asn': path.join(root, 'tools/tool-ip-asn'),
       '@toolbox/tool-dns-trace': path.join(root, 'tools/tool-dns-trace'),
       '@toolbox/tool-dns-propagation': path.join(root, 'tools/tool-dns-propagation'),
+      '@toolbox/tool-security-suite': path.join(root, 'tools/tool-security-suite'),
     },
   },
   server: {
@@ -24,7 +34,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-security-suite']
   },
   build: {
     outDir: 'dist'

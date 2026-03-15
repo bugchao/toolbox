@@ -53,3 +53,12 @@ export {
   AreaChart,
   Area,
 } from './charts'
+
+export { RiskBadge, MetricCard, InsightList } from './security'
+export type {
+  RiskBadgeProps,
+  MetricCardProps,
+  InsightListProps,
+  RiskLevel,
+  InsightItem,
+} from './security'

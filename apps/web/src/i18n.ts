@@ -17,6 +17,16 @@ import toolDnsTraceZh from '@toolbox/tool-dns-trace/src/locales/zh.json'
 import toolDnsTraceEn from '@toolbox/tool-dns-trace/src/locales/en.json'
 import toolDnsPropagationZh from '@toolbox/tool-dns-propagation/src/locales/zh.json'
 import toolDnsPropagationEn from '@toolbox/tool-dns-propagation/src/locales/en.json'
+import toolSecurityIpScoreZh from '@toolbox/tool-security-suite/src/locales/securityIpScore.zh.json'
+import toolSecurityIpScoreEn from '@toolbox/tool-security-suite/src/locales/securityIpScore.en.json'
+import toolSecurityDomainBlacklistZh from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.zh.json'
+import toolSecurityDomainBlacklistEn from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.en.json'
+import toolSecurityPortScanZh from '@toolbox/tool-security-suite/src/locales/securityPortScan.zh.json'
+import toolSecurityPortScanEn from '@toolbox/tool-security-suite/src/locales/securityPortScan.en.json'
+import toolSecurityDnsVulnZh from '@toolbox/tool-security-suite/src/locales/securityDnsVuln.zh.json'
+import toolSecurityDnsVulnEn from '@toolbox/tool-security-suite/src/locales/securityDnsVuln.en.json'
+import toolSecurityReportGenZh from '@toolbox/tool-security-suite/src/locales/securityReportGen.zh.json'
+import toolSecurityReportGenEn from '@toolbox/tool-security-suite/src/locales/securityReportGen.en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -35,6 +45,11 @@ export const resources = {
     toolIpAsn: toolIpAsnZh as Record<string, string>,
     toolDnsTrace: toolDnsTraceZh as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationZh as Record<string, string>,
+    toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
+    toolSecurityDomainBlacklist: toolSecurityDomainBlacklistZh as unknown as Record<string, string>,
+    toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
+    toolSecurityDnsVuln: toolSecurityDnsVulnZh as unknown as Record<string, string>,
+    toolSecurityReportGen: toolSecurityReportGenZh as unknown as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -49,6 +64,11 @@ export const resources = {
     toolIpAsn: toolIpAsnEn as Record<string, string>,
     toolDnsTrace: toolDnsTraceEn as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationEn as Record<string, string>,
+    toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
+    toolSecurityDomainBlacklist: toolSecurityDomainBlacklistEn as unknown as Record<string, string>,
+    toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,
+    toolSecurityDnsVuln: toolSecurityDnsVulnEn as unknown as Record<string, string>,
+    toolSecurityReportGen: toolSecurityReportGenEn as unknown as Record<string, string>,
   },
 } as const
 

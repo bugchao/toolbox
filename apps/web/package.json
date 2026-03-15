@@ -22,6 +22,7 @@
     "@toolbox/tool-ip-asn": "workspace:*",
     "@toolbox/tool-dns-trace": "workspace:*",
     "@toolbox/tool-dns-propagation": "workspace:*",
+    "@toolbox/tool-security-suite": "workspace:*",
     "crypto-js": "^4.2.0",
     "diff": "^8.0.3",
     "highlight.js": "^11.11.1",

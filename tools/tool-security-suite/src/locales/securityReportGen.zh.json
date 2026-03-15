@@ -1,0 +1,82 @@
+{
+  "title": "网络安全报告生成",
+  "description": "聚合域名信誉、DNS 配置、IP 风险和端口暴露结果，生成可复制和下载的安全摘要。",
+  "loading": "正在生成安全报告…",
+  "form": {
+    "domainLabel": "域名",
+    "domainPlaceholder": "可选，例如 example.com",
+    "ipLabel": "IP 地址",
+    "ipPlaceholder": "可选，例如 8.8.8.8",
+    "portTargetLabel": "端口扫描目标",
+    "portTargetPlaceholder": "可选，默认回退到域名或 IP",
+    "submit": "生成报告"
+  },
+  "errors": {
+    "empty": "请至少填写域名、IP 或端口扫描目标中的一项",
+    "request": "请求失败，请稍后重试"
+  },
+  "view": {
+    "query": "查询",
+    "history": "历史"
+  },
+  "history": {
+    "title": "查询历史",
+    "empty": "还没有历史记录，成功生成后会自动保存到本地。",
+    "rerun": "回填并重跑",
+    "remove": "删除",
+    "clear": "清空历史"
+  },
+  "cards": {
+    "overallScore": "总体风险分",
+    "sections": "报告分段",
+    "sectionsHint": "已生成的分析模块数量",
+    "findings": "关键发现",
+    "findingsHint": "汇总后的高优先级问题数",
+    "derivedIp": "推导 IP",
+    "derivedIpHint": "当只填域名时自动解析"
+  },
+  "charts": {
+    "dimensionScore": "模块分数概览"
+  },
+  "insights": {
+    "title": "优先处理项",
+    "empty": "没有可汇总的高优先级发现。"
+  },
+  "report": {
+    "previewTitle": "Markdown 报告预览",
+    "copy": "复制报告",
+    "copied": "已复制",
+    "download": "下载 .md",
+    "title": "网络安全分析报告",
+    "generatedAt": "生成时间",
+    "overallScore": "总体风险分",
+    "summary": "摘要",
+    "scope": "分析范围",
+    "highlights": "重点发现",
+    "sectionsTitle": "分模块结果",
+    "inputs": {
+      "domain": "域名",
+      "ip": "IP 地址",
+      "portTarget": "端口扫描目标"
+    },
+    "sections": {
+      "ip": "IP 风险评分",
+      "blacklist": "域名黑名单检测",
+      "dns": "DNS 配置漏洞检测",
+      "ports": "端口安全扫描"
+    }
+  },
+  "levels": {
+    "info": "信息",
+    "low": "低风险",
+    "medium": "中风险",
+    "high": "高风险",
+    "critical": "严重"
+  },
+  "dimensions": {
+    "ipRisk": "IP 风险",
+    "domainBlacklist": "域名信誉",
+    "dnsVulnerability": "DNS 配置",
+    "portExposure": "端口暴露"
+  }
+}

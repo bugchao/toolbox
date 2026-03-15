@@ -1,0 +1,66 @@
+{
+  "title": "DNS 配置漏洞检测",
+  "description": "检查 NS 冗余、DNSSEC、SPF、DMARC、CAA 和 wildcard 等常见 DNS 配置问题。",
+  "loading": "正在检测 DNS 配置…",
+  "form": {
+    "domainLabel": "域名",
+    "domainPlaceholder": "输入域名，例如 example.com",
+    "submit": "开始体检"
+  },
+  "errors": {
+    "empty": "请输入要检测的域名",
+    "request": "请求失败，请稍后重试"
+  },
+  "view": {
+    "query": "查询",
+    "history": "历史"
+  },
+  "history": {
+    "title": "查询历史",
+    "empty": "还没有历史记录，成功查询后会自动保存到本地。",
+    "rerun": "回填并重跑",
+    "remove": "删除",
+    "clear": "清空历史"
+  },
+  "cards": {
+    "overallScore": "配置风险分",
+    "delegation": "权威 NS 数",
+    "delegationHint": "建议至少 2 个权威 NS",
+    "mailAuth": "邮件认证",
+    "mailAuthHint": "SPF / DMARC 记录数",
+    "dnssec": "DNSSEC",
+    "enabled": "已启用",
+    "disabled": "未启用",
+    "wildcardHint": "发现 wildcard 解析",
+    "noWildcardHint": "未发现 wildcard 解析"
+  },
+  "charts": {
+    "dimensionScore": "风险维度拆解"
+  },
+  "insights": {
+    "title": "关键洞察",
+    "empty": "基础 DNS 体检未发现高危配置问题。"
+  },
+  "records": {
+    "spf": "SPF 记录",
+    "dmarc": "DMARC 记录",
+    "ns": "NS 记录",
+    "a": "地址记录",
+    "caa": "CAA 记录",
+    "nsAddressChecks": "NS 主机地址检查",
+    "empty": "未获取到对应记录"
+  },
+  "levels": {
+    "info": "信息",
+    "low": "低风险",
+    "medium": "中风险",
+    "high": "高风险",
+    "critical": "严重"
+  },
+  "dimensions": {
+    "delegation": "委派冗余",
+    "mailAuth": "邮件认证",
+    "policy": "证书策略",
+    "integrity": "完整性"
+  }
+}

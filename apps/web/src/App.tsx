@@ -72,6 +72,21 @@ const DnsTrace = lazy(() =>
 const DnsPropagation = lazy(() =>
   import('@toolbox/tool-dns-propagation').then((m) => ({ default: m.DnsPropagation }))
 )
+const SecurityIpScore = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityIpScore }))
+)
+const SecurityDomainBlacklist = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDomainBlacklist }))
+)
+const SecurityPortScan = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityPortScan }))
+)
+const SecurityDnsVuln = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDnsVuln }))
+)
+const SecurityReportGen = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityReportGen }))
+)
 
 function App() {
   return (
@@ -109,6 +124,11 @@ function App() {
           <Route path="/dns-query" element={<DnsQuery />} />
           <Route path="/dns-trace" element={<DnsTrace />} />
           <Route path="/dns-propagation" element={<DnsPropagation />} />
+          <Route path="/security-ip-score" element={<SecurityIpScore />} />
+          <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
+          <Route path="/security-port-scan" element={<SecurityPortScan />} />
+          <Route path="/security-dns-vuln" element={<SecurityDnsVuln />} />
+          <Route path="/security-report-gen" element={<SecurityReportGen />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
