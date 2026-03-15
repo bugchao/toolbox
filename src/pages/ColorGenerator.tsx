@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Copy, Check, Download, RefreshCw, Upload, Shuffle, Palette, Lock, Unlock, Eye, Sliders, Sun, Moon, ChevronDown, Save, FileCode, Code } from 'lucide-react'
-import chroma from 'chroma-js'
 
 interface Color {
   hex: string
@@ -12,6 +11,160 @@ interface SavedPalette {
   name: string
   colors: string[]
   createdAt: string
+}
+
+// 颜色工具函数（不依赖chroma-js）
+const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : { r: 0, g: 0, b: 0 }
+}
+
+const rgbToHex = (r: number, g: number, b: number): string => {
+  return "#" + [r, g, b].map(x => {
+    const hex = Math.max(0, Math.min(255, Math.round(x))).toString(16)
+    return hex.length === 1 ? '0' + hex : hex
+  }).join('')
+}
+
+const hslToRgb = (h: number, s: number, l: number): { r: number; g: number; b: number } => {
+  const c = (1 - Math.abs(2 * l - 1)) * s
+  const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+  const m = l - c/2
+  let r = 0, g = 0, b = 0
+  if (0 <= h && h < 60) { r = c; g = x; b = 0 }
+  else if (60 <= h && h < 120) { r = x; g = c; b = 0 }
+  else if (120 <= h && h < 180) { r = 0; g = c; b = x }
+  else if (180 <= h && h < 240) { r = 0; g = x; b = c }
+  else if (240 <= h && h < 300) { r = x; g = 0; b = c }
+  else if (300 <= h && h < 360) { r = c; g = 0; b = x }
+  return { r: r + m, g: g + m, b: b + m }
+}
+
+const rgbToHsl = (r: number, g: number, b: number): { h: number; s: number; l: number } => {
+  r /= 255; g /= 255; b /= 255
+  const max = Math.max(r, g, b), min = Math.min(r, g, b)
+  let h = 0, s = 0
+  const l = (max + min) / 2
+  if (max !== min) {
+    const d = max - min
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break
+      case g: h = ((b - r) / d + 2) / 6; break
+      case b: h = ((r - g) / d + 4) / 6; break
+    }
+  }
+  return { h: Math.round(h * 360), s: Math.round(s * 100) / 100, l: Math.round(l * 100) / 100 }
+}
+
+const adjustHue = (hex: string, degree: number): string => {
+  const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)))
+  const newH = (h + degree + 360) % 360
+  const { r, g, b } = hslToRgb(newH, s, l)
+  return rgbToHex(r, g, b)
+}
+
+const brighten = (hex: string, amount: number = 1): string => {
+  const { r, g, b } = hexToRgb(hex)
+  const factor = amount * 0.1
+  return rgbToHex(
+    Math.min(255, r + 255 * factor),
+    Math.min(255, g + 255 * factor),
+    Math.min(255, b + 255 * factor)
+  )
+}
+
+const darken = (hex: string, amount: number = 1): string => {
+  const { r, g, b } = hexToRgb(hex)
+  const factor = amount * 0.1
+  return rgbToHex(
+    Math.max(0, r - 255 * factor),
+    Math.max(0, g - 255 * factor),
+    Math.max(0, b - 255 * factor)
+  )
+}
+
+const getLuminance = (hex: string): number => {
+  const { r, g, b } = hexToRgb(hex)
+  const [rs, gs, bs] = [r, g, b].map(c => {
+    c = c / 255
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+  })
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs
+}
+
+const getContrastRatio = (hex1: string, hex2: string): number => {
+  const l1 = getLuminance(hex1)
+  const l2 = getLuminance(hex2)
+  const lighter = Math.max(l1, l2)
+  const darker = Math.min(l1, l2)
+  return (lighter + 0.05) / (darker + 0.05)
+}
+
+const getTextColor = (hex: string): string => {
+  return getLuminance(hex) > 0.5 ? '#000000' : '#ffffff'
+}
+
+const generateHarmony = (hex: string, type: string, count: number = 5): string[] => {
+  const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)))
+  const colors: string[] = [hex]
+
+  switch (type) {
+    case 'complement':
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 180) % 360, s, l))))
+      break
+    case 'splitComplement':
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 150) % 360, s, l))))
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 210) % 360, s, l))))
+      break
+    case 'triad':
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 120) % 360, s, l))))
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 240) % 360, s, l))))
+      break
+    case 'tetrad':
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 90) % 360, s, l))))
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 180) % 360, s, l))))
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 270) % 360, s, l))))
+      break
+    case 'analogous':
+      colors.push(rgbToHex(...Object.values(hslToRgb((h + 30) % 360, s, l))))
+      colors.push(rgbToHex(...Object.values(hslToRgb((h - 30 + 360) % 360, s, l))))
+      break
+    case 'monochromatic':
+      for (let i = 1; i < count; i++) {
+        const newL = l * (i / count)
+        colors.push(rgbToHex(...Object.values(hslToRgb(h, s, newL))))
+      }
+      break
+  }
+
+  return colors.slice(0, count)
+}
+
+const createColorScale = (color1: string, color2: string, steps: number): string[] => {
+  const rgb1 = hexToRgb(color1)
+  const rgb2 = hexToRgb(color2)
+  const colors: string[] = []
+  for (let i = 0; i < steps; i++) {
+    const ratio = i / (steps - 1)
+    const r = Math.round(rgb1.r + (rgb2.r - rgb1.r) * ratio)
+    const g = Math.round(rgb1.g + (rgb2.g - rgb1.g) * ratio)
+    const b = Math.round(rgb1.b + (rgb2.b - rgb1.b) * ratio)
+    colors.push(rgbToHex(r, g, b))
+  }
+  return colors
+}
+
+const randomColor = (): string => {
+  return rgbToHex(
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256)
+  )
 }
 
 const ColorGenerator: React.FC = () => {
@@ -46,19 +199,17 @@ const ColorGenerator: React.FC = () => {
 
     switch (paletteType) {
       case 'analogous':
-        newColors = chroma.scale([baseColor, chroma(baseColor).set('hsl.h', '+30'), chroma(baseColor).set('hsl.h', '-30')])
-          .colors(colorCount)
+        newColors = generateHarmony(baseColor, 'analogous', colorCount)
         break
       
       case 'monochromatic':
-        newColors = chroma.scale([chroma(baseColor).brighten(2), chroma(baseColor).darken(2)])
-          .mode('lab')
-          .colors(colorCount)
+        newColors = generateHarmony(baseColor, 'monochromatic', colorCount)
         break
       
       case 'complementary':
-        const complement = chroma(baseColor).set('hsl.h', '+180')
-        newColors = chroma.scale([baseColor, complement])
+        const complement = adjustHue(baseColor, 180)
+        newColors = createColorScale(baseColor, complement, colorCount)
+        break
           .colors(colorCount)
         break
       
