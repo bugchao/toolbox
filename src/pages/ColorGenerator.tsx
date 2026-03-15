@@ -109,6 +109,14 @@ const getTextColor = (hex: string): string => {
   return getLuminance(hex) > 0.5 ? '#000000' : '#ffffff'
 }
 
+const getRandomColor = (): string => {
+  return rgbToHex(
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256)
+  )
+}
+
 const generateHarmony = (hex: string, type: string, count: number = 5): string[] => {
   const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)))
   const colors: string[] = [hex]
@@ -210,34 +218,22 @@ const ColorGenerator: React.FC = () => {
         const complement = adjustHue(baseColor, 180)
         newColors = createColorScale(baseColor, complement, colorCount)
         break
-          .colors(colorCount)
-        break
       
       case 'triadic':
-        const c1 = chroma(baseColor).set('hsl.h', '+120')
-        const c2 = chroma(baseColor).set('hsl.h', '-120')
-        newColors = [baseColor, c1.hex(), c2.hex()]
-        if (colorCount > 3) {
-          newColors = newColors.concat(chroma.scale([baseColor, c1]).colors(colorCount - 2).slice(1))
-        }
+        newColors = generateHarmony(baseColor, 'triad', colorCount)
         break
       
       case 'split-complementary':
-        const sc1 = chroma(baseColor).set('hsl.h', '+150')
-        const sc2 = chroma(baseColor).set('hsl.h', '-150')
-        newColors = [baseColor, sc1.hex(), sc2.hex()]
-        if (colorCount > 3) {
-          newColors = newColors.concat(chroma.scale([sc1, sc2]).colors(colorCount - 2).slice(1))
-        }
+        newColors = generateHarmony(baseColor, 'splitComplement', colorCount)
         break
       
       default: // random
-        newColors = Array.from({ length: colorCount }, () => chroma.random().hex())
+        newColors = Array.from({ length: colorCount }, () => randomColor())
     }
 
     // 确保颜色数量正确
     while (newColors.length < colorCount) {
-      newColors.push(chroma.random().hex())
+      newColors.push(randomColor())
     }
     newColors = newColors.slice(0, colorCount)
 
