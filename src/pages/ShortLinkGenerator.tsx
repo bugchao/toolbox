@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link2, Copy, Check, Clock, BarChart2, Settings, Trash2, ExternalLink } from 'lucide-react'
-import { customAlphabet } from 'nanoid'
 
 interface ShortLink {
   id: string
@@ -13,8 +12,15 @@ interface ShortLink {
   active: boolean
 }
 
-// 生成短链接码的字符集（排除易混淆字符）
-const nanoid = customAlphabet('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789', 6)
+// 生成短链接码的字符集（排除易混淆字符），与 customAlphabet 行为一致
+const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789'
+const generateShortCode = (size = 6): string => {
+  let result = ''
+  for (let i = 0; i < size; i++) {
+    result += ALPHABET[Math.floor(Math.random() * ALPHABET.length)]
+  }
+  return result
+}
 
 const ShortLinkGenerator: React.FC = () => {
   const [originalUrl, setOriginalUrl] = useState('')
@@ -73,7 +79,7 @@ const ShortLinkGenerator: React.FC = () => {
       return
     }
 
-    const shortCode = customCode || nanoid()
+    const shortCode = customCode || generateShortCode()
     const shortUrl = `${window.location.origin}/s/${shortCode}`
     
     const newLink: ShortLink = {

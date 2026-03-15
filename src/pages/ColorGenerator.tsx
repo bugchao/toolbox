@@ -62,7 +62,8 @@ const rgbToHsl = (r: number, g: number, b: number): { h: number; s: number; l: n
 }
 
 const adjustHue = (hex: string, degree: number): string => {
-  const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)))
+  const rgb = hexToRgb(hex)
+  const { h, s, l } = rgbToHsl(rgb.r, rgb.g, rgb.b)
   const newH = (h + degree + 360) % 360
   const { r, g, b } = hslToRgb(newH, s, l)
   return rgbToHex(r, g, b)
@@ -118,34 +119,40 @@ const getRandomColor = (): string => {
 }
 
 const generateHarmony = (hex: string, type: string, count: number = 5): string[] => {
-  const { h, s, l } = rgbToHsl(...Object.values(hexToRgb(hex)))
+  const rgb = hexToRgb(hex)
+  const { h, s, l } = rgbToHsl(rgb.r, rgb.g, rgb.b)
   const colors: string[] = [hex]
+
+  const pushHsl = (hVal: number, sVal: number, lVal: number) => {
+    const { r, g, b } = hslToRgb(hVal, sVal, lVal)
+    colors.push(rgbToHex(r, g, b))
+  }
 
   switch (type) {
     case 'complement':
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 180) % 360, s, l))))
+      pushHsl((h + 180) % 360, s, l)
       break
     case 'splitComplement':
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 150) % 360, s, l))))
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 210) % 360, s, l))))
+      pushHsl((h + 150) % 360, s, l)
+      pushHsl((h + 210) % 360, s, l)
       break
     case 'triad':
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 120) % 360, s, l))))
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 240) % 360, s, l))))
+      pushHsl((h + 120) % 360, s, l)
+      pushHsl((h + 240) % 360, s, l)
       break
     case 'tetrad':
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 90) % 360, s, l))))
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 180) % 360, s, l))))
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 270) % 360, s, l))))
+      pushHsl((h + 90) % 360, s, l)
+      pushHsl((h + 180) % 360, s, l)
+      pushHsl((h + 270) % 360, s, l)
       break
     case 'analogous':
-      colors.push(rgbToHex(...Object.values(hslToRgb((h + 30) % 360, s, l))))
-      colors.push(rgbToHex(...Object.values(hslToRgb((h - 30 + 360) % 360, s, l))))
+      pushHsl((h + 30) % 360, s, l)
+      pushHsl((h - 30 + 360) % 360, s, l)
       break
     case 'monochromatic':
       for (let i = 1; i < count; i++) {
         const newL = l * (i / count)
-        colors.push(rgbToHex(...Object.values(hslToRgb(h, s, newL))))
+        pushHsl(h, s, newL)
       }
       break
   }
@@ -258,11 +265,12 @@ const ColorGenerator: React.FC = () => {
   const copyColor = async (color: string, index: number) => {
     let value = color
     if (colorMode === 'rgb') {
-      const rgb = chroma(color).rgb()
-      value = `rgb(${Math.round(rgb[0])}, ${Math.round(rgb[1])}, ${Math.round(rgb[2])})`
+      const rgb = hexToRgb(color)
+      value = `rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`
     } else if (colorMode === 'hsl') {
-      const hsl = chroma(color).hsl()
-      value = `hsl(${Math.round(hsl[0])}, ${Math.round(hsl[1] * 100)}%, ${Math.round(hsl[2] * 100)}%)`
+      const { r, g, b } = hexToRgb(color)
+      const hsl = rgbToHsl(r, g, b)
+      value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%)`
     }
 
     await navigator.clipboard.writeText(value)
@@ -296,7 +304,7 @@ const ColorGenerator: React.FC = () => {
           const r = pixels[i]
           const g = pixels[i + 1]
           const b = pixels[i + 2]
-          const hex = chroma(r, g, b).hex()
+          const hex = rgbToHex(r, g, b)
           colorMap.set(hex, (colorMap.get(hex) || 0) + 1)
         }
 
@@ -378,23 +386,14 @@ const ColorGenerator: React.FC = () => {
     URL.revokeObjectURL(url)
   }
 
-  // 计算对比度
-  const getContrastRatio = (color1: string, color2: string) => {
-    return chroma.contrast(color1, color2).toFixed(2)
-  }
-
-  // 获取文本颜色（根据背景色自动选择黑白）
-  const getTextColor = (bgColor: string) => {
-    return chroma(bgColor).luminance() > 0.5 ? '#000000' : '#ffffff'
-  }
-
   const formatColorValue = (hex: string) => {
     if (colorMode === 'rgb') {
-      const rgb = chroma(hex).rgb()
-      return `rgb(${Math.round(rgb[0])}, ${Math.round(rgb[1])}, ${Math.round(rgb[2])})`
+      const rgb = hexToRgb(hex)
+      return `rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`
     } else if (colorMode === 'hsl') {
-      const hsl = chroma(hex).hsl()
-      return `hsl(${Math.round(hsl[0])}, ${Math.round(hsl[1] * 100)}%, ${Math.round(hsl[2] * 100)}%)`
+      const { r, g, b } = hexToRgb(hex)
+      const hsl = rgbToHsl(r, g, b)
+      return `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%)`
     }
     return hex
   }
@@ -622,10 +621,10 @@ const ColorGenerator: React.FC = () => {
                   HEX: {color.hex.toUpperCase()}
                 </div>
                 <div className="text-sm">
-                  RGB: {chroma(color.hex).rgb().map(v => Math.round(v)).join(', ')}
+                  RGB: {(() => { const rgb = hexToRgb(color.hex); return [rgb.r, rgb.g, rgb.b].map(v => Math.round(v)).join(', '); })()}
                 </div>
                 <div className="text-sm">
-                  HSL: {chroma(color.hex).hsl().map((v, i) => i === 0 ? Math.round(v) : `${Math.round(v * 100)}%`).join(', ')}
+                  HSL: {(() => { const { r, g, b } = hexToRgb(color.hex); const hsl = rgbToHsl(r, g, b); return [hsl.h, `${Math.round(hsl.s * 100)}%`, `${Math.round(hsl.l * 100)}%`].join(', '); })()}
                 </div>
               </div>
               <div className="flex flex-col space-y-2">
@@ -734,7 +733,7 @@ const ColorGenerator: React.FC = () => {
             ))}
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
