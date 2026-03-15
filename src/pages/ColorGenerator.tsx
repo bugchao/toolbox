@@ -702,13 +702,13 @@ const ColorGenerator: React.FC = () => {
                   ))}
                 </div>
                 <div className="p-3">
-                <div className="flex justify-between items-center mb-2">
-                  <h4 className="font-medium text-gray-900">{palette.name}</h4>
-                  <div className="text-xs text-gray-500">
-                    {new Date(palette.createdAt).toLocaleDateString('zh-CN')}
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-gray-900">{palette.name}</h4>
+                    <div className="text-xs text-gray-500">
+                      {new Date(palette.createdAt).toLocaleDateString('zh-CN')}
+                    </div>
                   </div>
-                </div>
-                <div className="flex space-x-2">
+                  <div className="flex space-x-2">
                   <button
                     onClick={() => {
                       setColors(palette.colors.map(hex => ({ hex, locked: false })))
@@ -728,6 +728,7 @@ const ColorGenerator: React.FC = () => {
                   >
                     删除
                   </button>
+                </div>
                 </div>
               </div>
             ))}
