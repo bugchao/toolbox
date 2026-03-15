@@ -78,7 +78,7 @@
 | AI 会议纪要生成器 | `/meeting-minutes` | `apps/web/src/pages/MeetingMinutes.tsx` |
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 
-### 网络工具（5）
+### 网络工具（11）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -87,6 +87,12 @@
 | IP ASN 查询 | `/ip-asn` | `tools/tool-ip-asn` → IpAsn |
 | DNS Trace 递归追踪 | `/dns-trace` | `tools/tool-dns-trace` → DnsTrace |
 | DNS 传播检测 | `/dns-propagation` | `tools/tool-dns-propagation` → DnsPropagation |
+| DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
+| DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
+| DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
+| DNS 劫持检测 | `/dns-hijack-check` | `tools/tool-dns-hijack-check` → DnsHijackCheck |
+| DNS 缓存检测 | `/dns-cache-check` | `tools/tool-dns-cache-check` → DnsCacheCheck |
+| DNS 循环解析检测 | `/dns-loop-check` | `tools/tool-dns-loop-check` → DnsLoopCheck |
 
 ### 资讯工具（1）
 
@@ -112,12 +118,7 @@
 | DNS TTL 查看工具 | network | `/dns-ttl` | 待开发 | P2 | TTL 查询与建议 |
 | NS 服务器查询 | network | `/dns-ns` | 待开发 | P2 | 权威 NS 列表 |
 | CNAME 链检测 | network | `/dns-cname-chain` | 待开发 | P2 | CNAME 链解析 |
-| DNS SOA 记录解析 | network | `/dns-soa` | 待开发 | P2 | SOA 记录查看 |
-| DNS 解析失败诊断 | network | `/dns-diagnose` | 待开发 | P2 | 失败原因分析 |
-| DNS 污染检测 | network | `/dns-pollution-check` | 待开发 | P2 | 污染检测 |
-| DNS 劫持检测 | network | `/dns-hijack-check` | 待开发 | P2 | 劫持检测 |
-| DNS 缓存检测 | network | `/dns-cache-check` | 待开发 | P2 | 缓存状态 |
-| DNS 循环解析检测 | network | `/dns-loop-check` | 待开发 | P2 | 循环 CNAME/NS |
+| 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | DNS 延迟分析 | network | `/dns-latency` | 待开发 | P2 | 延迟分布 |
 | DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |

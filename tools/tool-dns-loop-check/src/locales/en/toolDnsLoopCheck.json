@@ -1,0 +1,15 @@
+{
+  "title": "DNS Loop Check",
+  "description": "Recursively follow CNAME and NS records to detect potential loops or limit-exceeded configuration errors.",
+  "domain_label": "Domain / Hostname",
+  "query_btn": "Check Dns Loops",
+  "error_empty_domain": "Please enter a domain name",
+  "scan_status": "Status",
+  "chain_detected": "Resolution Chain Detected",
+  "limit_exceeded": "Limit Exceeded (Possible Loop)",
+  "no_loops": "No loops detected. Domain resolves normally.",
+  "step": "Step",
+  "target": "Target Domain",
+  "resolves_to": "Resolves To",
+  "record_type": "Record Type"
+}

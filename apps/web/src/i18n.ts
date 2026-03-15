@@ -17,6 +17,18 @@ import toolDnsTraceZh from '@toolbox/tool-dns-trace/src/locales/zh.json'
 import toolDnsTraceEn from '@toolbox/tool-dns-trace/src/locales/en.json'
 import toolDnsPropagationZh from '@toolbox/tool-dns-propagation/src/locales/zh.json'
 import toolDnsPropagationEn from '@toolbox/tool-dns-propagation/src/locales/en.json'
+import toolDnsSoaZh from '@toolbox/tool-dns-soa/src/locales/zh/toolDnsSoa.json'
+import toolDnsSoaEn from '@toolbox/tool-dns-soa/src/locales/en/toolDnsSoa.json'
+import toolDnsDiagnoseZh from '@toolbox/tool-dns-diagnose/src/locales/zh/toolDnsDiagnose.json'
+import toolDnsDiagnoseEn from '@toolbox/tool-dns-diagnose/src/locales/en/toolDnsDiagnose.json'
+import toolDnsPollutionCheckZh from '@toolbox/tool-dns-pollution-check/src/locales/zh/toolDnsPollutionCheck.json'
+import toolDnsPollutionCheckEn from '@toolbox/tool-dns-pollution-check/src/locales/en/toolDnsPollutionCheck.json'
+import toolDnsHijackCheckZh from '@toolbox/tool-dns-hijack-check/src/locales/zh/toolDnsHijackCheck.json'
+import toolDnsHijackCheckEn from '@toolbox/tool-dns-hijack-check/src/locales/en/toolDnsHijackCheck.json'
+import toolDnsCacheCheckZh from '@toolbox/tool-dns-cache-check/src/locales/zh/toolDnsCacheCheck.json'
+import toolDnsCacheCheckEn from '@toolbox/tool-dns-cache-check/src/locales/en/toolDnsCacheCheck.json'
+import toolDnsLoopCheckZh from '@toolbox/tool-dns-loop-check/src/locales/zh/toolDnsLoopCheck.json'
+import toolDnsLoopCheckEn from '@toolbox/tool-dns-loop-check/src/locales/en/toolDnsLoopCheck.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -35,6 +47,12 @@ export const resources = {
     toolIpAsn: toolIpAsnZh as Record<string, string>,
     toolDnsTrace: toolDnsTraceZh as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationZh as Record<string, string>,
+    toolDnsSoa: toolDnsSoaZh as Record<string, string>,
+    toolDnsDiagnose: toolDnsDiagnoseZh as Record<string, string>,
+    toolDnsPollutionCheck: toolDnsPollutionCheckZh as Record<string, string>,
+    toolDnsHijackCheck: toolDnsHijackCheckZh as Record<string, string>,
+    toolDnsCacheCheck: toolDnsCacheCheckZh as Record<string, string>,
+    toolDnsLoopCheck: toolDnsLoopCheckZh as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -49,6 +67,12 @@ export const resources = {
     toolIpAsn: toolIpAsnEn as Record<string, string>,
     toolDnsTrace: toolDnsTraceEn as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationEn as Record<string, string>,
+    toolDnsSoa: toolDnsSoaEn as Record<string, string>,
+    toolDnsDiagnose: toolDnsDiagnoseEn as Record<string, string>,
+    toolDnsPollutionCheck: toolDnsPollutionCheckEn as Record<string, string>,
+    toolDnsHijackCheck: toolDnsHijackCheckEn as Record<string, string>,
+    toolDnsCacheCheck: toolDnsCacheCheckEn as Record<string, string>,
+    toolDnsLoopCheck: toolDnsLoopCheckEn as Record<string, string>,
   },
 } as const
 

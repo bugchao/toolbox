@@ -72,6 +72,24 @@ const DnsTrace = lazy(() =>
 const DnsPropagation = lazy(() =>
   import('@toolbox/tool-dns-propagation').then((m) => ({ default: m.DnsPropagation }))
 )
+const DnsSoa = lazy(() =>
+  import('@toolbox/tool-dns-soa').then((m) => ({ default: m.DnsSoa }))
+)
+const DnsDiagnose = lazy(() =>
+  import('@toolbox/tool-dns-diagnose').then((m) => ({ default: m.DnsDiagnose }))
+)
+const DnsPollutionCheck = lazy(() =>
+  import('@toolbox/tool-dns-pollution-check').then((m) => ({ default: m.DnsPollutionCheck }))
+)
+const DnsHijackCheck = lazy(() =>
+  import('@toolbox/tool-dns-hijack-check').then((m) => ({ default: m.DnsHijackCheck }))
+)
+const DnsCacheCheck = lazy(() =>
+  import('@toolbox/tool-dns-cache-check').then((m) => ({ default: m.DnsCacheCheck }))
+)
+const DnsLoopCheck = lazy(() =>
+  import('@toolbox/tool-dns-loop-check').then((m) => ({ default: m.DnsLoopCheck }))
+)
 
 function App() {
   return (
@@ -109,6 +127,12 @@ function App() {
           <Route path="/dns-query" element={<DnsQuery />} />
           <Route path="/dns-trace" element={<DnsTrace />} />
           <Route path="/dns-propagation" element={<DnsPropagation />} />
+          <Route path="/dns-soa" element={<DnsSoa />} />
+          <Route path="/dns-diagnose" element={<DnsDiagnose />} />
+          <Route path="/dns-pollution-check" element={<DnsPollutionCheck />} />
+          <Route path="/dns-hijack-check" element={<DnsHijackCheck />} />
+          <Route path="/dns-cache-check" element={<DnsCacheCheck />} />
+          <Route path="/dns-loop-check" element={<DnsLoopCheck />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />

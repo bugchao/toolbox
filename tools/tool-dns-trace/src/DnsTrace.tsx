@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { Search, Loader2, Play } from 'lucide-react'
+import { PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
+import { Loader2, Play } from 'lucide-react'
 
 // Simple UI for DNS trace
 const DnsTrace: React.FC = () => {
     const { t } = useTranslation('toolDnsTrace')
-    const { t: tHome } = useTranslation('home')
 
     const [domain, setDomain] = useState('')
     const [recordType, setRecordType] = useState('A')
@@ -14,20 +13,28 @@ const DnsTrace: React.FC = () => {
     const [traceResult, setTraceResult] = useState<any[] | null>(null)
     const [error, setError] = useState('')
 
-    const handleTrace = async () => {
-        if (!domain.trim()) {
+    const [activeTab, setActiveTab] = useState<'query' | 'history'>('query')
+
+    const { history, saveQuery, deleteQuery, clearHistory } = useQueryHistory<any[]>('dns-trace')
+
+    const handleTrace = async (queryInfo?: { domain?: string, type?: string }) => {
+        const queryDomain = queryInfo?.domain || domain
+        const queryType = queryInfo?.type || recordType
+
+        if (!queryDomain.trim()) {
             setError(t('error_empty_domain'))
             return
         }
+
+        setDomain(queryDomain)
+        setRecordType(queryType)
 
         setLoading(true)
         setError('')
         setTraceResult(null)
 
-        // Simulate recursive trace (in a real scenario, this involves backend or multiple DoH queries to root/tld/auth servers)
-        // Here we'll do a simple mock or a single DoH query just for demonstration of the UI
         try {
-            const response = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${recordType}`)
+            const response = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(queryDomain)}&type=${queryType}`)
             const data = await response.json()
 
             if (data.Status !== 0) {
@@ -48,6 +55,7 @@ const DnsTrace: React.FC = () => {
             }))
 
             setTraceResult(results)
+            saveQuery({ domain: queryDomain, type: queryType }, results)
         } catch (e) {
             setError((e as Error).message)
         } finally {
@@ -55,15 +63,34 @@ const DnsTrace: React.FC = () => {
         }
     }
 
-    return (
-        <div className="max-w-4xl mx-auto">
-            <PageHero
-                title={t('title')}
-                description={t('description')}
-                className="mb-8"
-            />
+    const historyPanel = (
+        <QueryHistory
+            history={history}
+            onRestore={(record: any) => {
+                setDomain(record.queryInfo.domain)
+                setRecordType(record.queryInfo.type || 'A')
+                if (record.result) {
+                    setTraceResult(record.result)
+                    setError('')
+                } else {
+                    handleTrace(record.queryInfo)
+                }
+                setActiveTab('query')
+            }}
+            onDelete={deleteQuery}
+            onClear={clearHistory}
+            renderItem={(queryInfo: any) => (
+                <div className="flex flex-col">
+                    <span>{queryInfo.domain}</span>
+                    <span className="text-xs text-gray-400 mt-0.5 uppercase">{queryInfo.type || 'A'}</span>
+                </div>
+            )}
+        />
+    )
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
+    const queryPanel = (
+        <div className="space-y-4">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 w-full">
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-1">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -97,7 +124,7 @@ const DnsTrace: React.FC = () => {
                     </div>
                     <div className="flex items-end">
                         <button
-                            onClick={handleTrace}
+                            onClick={() => handleTrace()}
                             disabled={loading}
                             className="w-full md:w-auto px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 transition-colors"
                         >
@@ -106,7 +133,6 @@ const DnsTrace: React.FC = () => {
                         </button>
                     </div>
                 </div>
-
                 {error && (
                     <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg border border-red-200 dark:border-red-800">
                         {error}
@@ -116,7 +142,7 @@ const DnsTrace: React.FC = () => {
 
             {traceResult && (
                 <div className="space-y-4">
-                    <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{t('trace_results')}</h3>
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{t('trace_results')}</h3>
                     {traceResult.map((result: any, idx: number) => (
                         <div key={idx} className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
                             <div className="flex items-center gap-3 mb-2">
@@ -129,7 +155,6 @@ const DnsTrace: React.FC = () => {
                                 </span>
                             </div>
                             <p className="text-gray-600 dark:text-gray-400 ml-11">{result.detail}</p>
-
                             {result.answers && Array.isArray(result.answers) && (
                                 <div className="mt-3 ml-11 p-3 bg-gray-50 dark:bg-gray-900 rounded-md overflow-x-auto">
                                     <table className="w-full text-sm text-left">
@@ -156,6 +181,18 @@ const DnsTrace: React.FC = () => {
                     ))}
                 </div>
             )}
+        </div>
+    )
+
+    return (
+        <div className="max-w-4xl mx-auto">
+            <PageHero title={t('title')} description={t('description')} />
+            <ToolTabView
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              queryPanel={queryPanel}
+              historyPanel={historyPanel}
+            />
         </div>
     )
 }

@@ -16,6 +16,12 @@ export default defineConfig({
       '@toolbox/tool-ip-asn': path.join(root, 'tools/tool-ip-asn'),
       '@toolbox/tool-dns-trace': path.join(root, 'tools/tool-dns-trace'),
       '@toolbox/tool-dns-propagation': path.join(root, 'tools/tool-dns-propagation'),
+      '@toolbox/tool-dns-soa': path.join(root, 'tools/tool-dns-soa'),
+      '@toolbox/tool-dns-diagnose': path.join(root, 'tools/tool-dns-diagnose'),
+      '@toolbox/tool-dns-pollution-check': path.join(root, 'tools/tool-dns-pollution-check'),
+      '@toolbox/tool-dns-hijack-check': path.join(root, 'tools/tool-dns-hijack-check'),
+      '@toolbox/tool-dns-cache-check': path.join(root, 'tools/tool-dns-cache-check'),
+      '@toolbox/tool-dns-loop-check': path.join(root, 'tools/tool-dns-loop-check'),
     },
   },
   server: {
@@ -24,7 +30,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check']
   },
   build: {
     outDir: 'dist'

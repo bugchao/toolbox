@@ -1,0 +1,16 @@
+{
+  "title": "DNS Hijack Check",
+  "description": "Compare authoritative DNS answers with local or specific public resolvers to verify if DNS hijacking is occurring.",
+  "domain_label": "Domain / Hostname",
+  "query_btn": "Check Hijack",
+  "server_label": "Untrusted/Local DNS Server (e.g., your ISP's)",
+  "error_empty_domain": "Please enter a domain name",
+  "auth_results": "Authoritative Answer",
+  "test_results": "Tested Resolver Answer",
+  "status_safe": "Likely Safe",
+  "status_hijacked": "Possible Hijack or Redirect",
+  "msg_match": "The tested resolver matches the authoritative IPs. No obvious hijacking detected.",
+  "msg_mismatch": "The tested resolver returned different IPs from the authoritative server! This could be a hijack, DNS poisoning, or it might be a CDN behaving differently.",
+  "expected": "Expected IPs",
+  "received": "Received IPs"
+}

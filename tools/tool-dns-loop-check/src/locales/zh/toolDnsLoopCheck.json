@@ -1,0 +1,15 @@
+{
+  "title": "DNS 循环解析检测",
+  "description": "递归跟踪 CNAME 或 NS 记录，以检测潜在的循环或超出限制的配置错误。",
+  "domain_label": "域名 / 主机名",
+  "query_btn": "检测循环",
+  "error_empty_domain": "请输入域名",
+  "scan_status": "检测状态",
+  "chain_detected": "解析链已检测",
+  "limit_exceeded": "到达跳数限制 (可能存在循环配置)",
+  "no_loops": "未检测到循环解析，域名可正常提供结果。",
+  "step": "步骤",
+  "target": "目标域名",
+  "resolves_to": "指向",
+  "record_type": "记录类型"
+}

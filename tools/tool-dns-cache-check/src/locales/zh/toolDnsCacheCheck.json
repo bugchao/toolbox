@@ -1,0 +1,15 @@
+{
+  "title": "DNS 缓存检测",
+  "description": "查询特定的 DNS 服务器以检查 TTL 值并推断缓存行为和时间。",
+  "domain_label": "域名 / 主机名",
+  "query_btn": "检测缓存 / TTL",
+  "error_empty_domain": "请输入域名",
+  "node_label": "目标边缘服务器",
+  "ttl_label": "当前 TTL",
+  "raw_data": "解析数据",
+  "msg_caching": "TTL 正在递减，表示请求的记录正被解析器缓存。",
+  "msg_fresh": "TTL 较高或接近最大值。记录可能刚刚被刷新。",
+  "google_node": "Google Cloud 节点",
+  "cloudflare_node": "Cloudflare 边缘节点",
+  "ali_node": "阿里云节点"
+}

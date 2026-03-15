@@ -1,0 +1,18 @@
+{
+  "title": "DNS SOA Query",
+  "description": "Query the Start of Authority (SOA) record for a domain to view zone administrative details.",
+  "domain_label": "Domain / Hostname",
+  "server_label": "DNS Server (Optional)",
+  "query_btn": "Query SOA",
+  "error_empty_domain": "Please enter a domain name",
+  "dns_error": "DNS Query Error",
+  "no_soa_warning": "No SOA record found. Is the domain correct? Usually, base domains (like example.com) have SOA records, but subdomains might not.",
+  "results_title": "SOA Record Details",
+  "mname": "Primary Name Server (MNAME)",
+  "rname": "Responsible Party (RNAME)",
+  "serial": "Serial Number",
+  "refresh": "Refresh Interval",
+  "retry": "Retry Interval",
+  "expire": "Expire Interval",
+  "minimum": "Minimum TTL"
+}

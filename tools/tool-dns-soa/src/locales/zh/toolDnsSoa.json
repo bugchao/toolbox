@@ -1,0 +1,18 @@
+{
+  "title": "DNS SOA 记录解析",
+  "description": "查询域名的起始授权机构 (SOA) 记录，查看区域管理详细信息。",
+  "domain_label": "域名 / 主机名",
+  "server_label": "DNS 服务器 (可选)",
+  "query_btn": "查询 SOA",
+  "error_empty_domain": "请输入域名",
+  "dns_error": "DNS 查询错误",
+  "no_soa_warning": "未找到 SOA 记录。域名是否正确？通常，主域名（如 example.com）具有 SOA 记录，而不是子域名。",
+  "results_title": "SOA 记录详情",
+  "mname": "主域名服务器 (MNAME)",
+  "rname": "责任人邮箱 (RNAME)",
+  "serial": "序列号 (Serial)",
+  "refresh": "刷新间隔 (Refresh)",
+  "retry": "重试间隔 (Retry)",
+  "expire": "过期时间 (Expire)",
+  "minimum": "最小 TTL (Minimum)"
+}

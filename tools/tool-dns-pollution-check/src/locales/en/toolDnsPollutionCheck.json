@@ -1,0 +1,16 @@
+{
+  "title": "DNS Pollution Check",
+  "description": "Query multiple public DNS servers globally to check if a domain's DNS resolution is polluted or hijacked.",
+  "domain_label": "Domain / Hostname",
+  "query_btn": "Check Pollution",
+  "error_empty_domain": "Please enter a domain name",
+  "consistency_title": "Resolution Consistency",
+  "status_consistent": "Consistent",
+  "status_inconsistent": "Inconsistent (Possible Pollution/CDN)",
+  "status_error": "Resolution Error",
+  "msg_consistent": "All queried servers returned the same IP addresses. The domain does not appear to be polluted.",
+  "msg_inconsistent": "Servers returned different IP addresses. If this domain uses a CDN (like Cloudflare or Akamai), this is completely normal. Otherwise, it might be DNS pollution/hijacking.",
+  "server": "DNS Server",
+  "result": "Result IPs",
+  "time": "Response Time"
+}
