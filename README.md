@@ -1,163 +1,146 @@
 # 🛠️ 工具盒子 - 多功能在线工具集
 
-一个功能丰富的在线工具网站，基于现代化技术栈构建，目前已上线 **26个实用工具**，目标支撑 **1000+工具** 的插件化平台。
+一个功能丰富的在线工具网站，基于 **Monorepo** 构建，主应用与工具包分离，目前已上线 **31 个实用工具**，目标支撑 **1000+ 工具** 的插件化平台。
 
-## ✨ 功能列表（26个已上线）
-
-### 📱 实用工具（12个）
-- **二维码生成**：支持自定义内容、大小、颜色，可下载PNG或复制到剪贴板
-- **二维码解析**：支持上传图片解析或摄像头实时扫描
-- **二维码美化**：自定义二维码颜色、样式，添加Logo，生成个性化二维码
-- **图片压缩/格式转换**：支持 PNG/JPG/WebP 互转，批量压缩
-- **图片去背景**：AI 自动抠图，透明背景导出，本地处理保护隐私
-- **Markdown转HTML/公众号格式**：支持自定义样式、一键复制、公式渲染
-- **BMI健康计算器**：支持公制/英制单位，提供健康建议
-- **单位换算器**：支持长度、重量、温度、面积、体积等12大类单位换算
-- **PDF工具集**：多功能PDF处理工具，支持合并、分割，本地处理保护隐私
-- **短链接生成器**：长链接转短链接，支持自定义后缀、过期时间、访问统计
-- **简历生成器**：3种模板风格，导出PDF/Markdown格式，本地数据存储
-- **AI配色生成器**：6种配色模式，支持图片取色，导出CSS/Tailwind配置
-
-### 👨‍💻 研发工具（11个）
-- **JSON格式化/校验**：JSON美化、压缩、校验，一键复制下载
-- **Base64编解码**：支持文本、图片的Base64编码和解码
-- **时间戳转换工具**：时间戳和日期时间的互相转换，支持秒/毫秒级
-- **URL编解码**：URL参数的编码和解码，处理接口参数、爬虫等场景
-- **正则表达式测试工具**：在线测试正则表达式，支持匹配结果高亮、分组显示
-- **Cron表达式生成器**：可视化生成Cron表达式，定时任务必备
-- **随机密码生成器**：生成高强度随机密码，支持自定义长度、字符类型
-- **哈希计算工具**：支持MD5、SHA1、SHA256等多种哈希算法
-- **代码美化工具**：支持JSON、XML、HTML、CSS、JS等多种代码的格式化美化
-- **UUID生成器**：生成UUID、随机字符串，用于测试数据、唯一ID生成
-- **文本对比工具**：对比两段文本的差异，支持字符/单词/行级对比，高亮显示增删内容
-
-### 🔍 查询工具（4个）
-- **邮政编码查询**：支持地址查邮编和邮编查地址，覆盖全国
-- **天气查询**：基于免费Open-Meteo API，支持全球城市实时天气和7天预报
-- **IP地址查询**：查询IP地址的地理位置、运营商、时区等信息，支持地图预览
-- **颜色拾取/调色板**：支持从本地图片取色、摄像头取色、手动输入色值，生成配色方案
-
-### 📰 资讯工具（1个）
-- **每日热点**：实时爬取科技、体育、AI、国际等各类新闻，每日自动更新
-
-## 🚀 技术栈
-
-### 前端
-- React 18 + TypeScript + Vite
-- Tailwind CSS + Lucide React 图标库
-- 响应式设计，完美适配桌面端和移动端
-
-### 后端/工具
-- Express.js 轻量后端服务
-- Python + BeautifulSoup4 新闻爬虫
-- 第三方API集成（天气、IP查询等）
-
-### 架构规划
-- 目标架构：Monorepo + 微前端 + 插件化
-- 支持工具独立开发、独立部署、按需加载
-- 目标支撑 1000+ 工具规模
-
-### 部署
-- Docker 容器化部署
-- AWS EC2 + CloudFront CDN
-- GitHub Actions CI/CD 自动构建部署
-
-## 📦 本地开发
+## 🚀 快速开始（后续开发直接按此操作）
 
 ### 环境要求
-- Node.js 20+
-- Python 3.8+
+- **Node.js 24+**
+- **pnpm 8+**（推荐 `corepack enable && corepack prepare pnpm@latest --activate`）
 
-### 安装依赖
+### 一键跑起来
 ```bash
-npm install
-pip install beautifulsoup4 requests
+# 克隆后
+pnpm install
+pnpm dev
+```
+浏览器打开 **http://localhost:3000** 即可。
+
+### 常用命令
+| 命令 | 说明 |
+|------|------|
+| `pnpm dev` | 启动开发服务器（端口 3000） |
+| `pnpm build` | 生产构建（产出在 `apps/web/dist`） |
+| `pnpm preview` | 预览构建结果 |
+| `pnpm start` | 生产模式运行（需先 `pnpm build`） |
+| `pnpm crawl:news` | 爬取新闻到 `apps/web/public/news.json` |
+| `pnpm test:e2e` | 运行 E2E 测试（Playwright） |
+
+> 详细目录结构、添加新工具步骤、工具包扩展方式见 **[docs/refactor-structure.md](docs/refactor-structure.md)**（开发必读）。
+
+---
+
+## ✨ 功能列表（31 个已上线）
+
+### 📱 实用工具（16 个）
+- 二维码生成 / 解析 / 美化、图片压缩、图片去背景、Markdown 转换、BMI 计算器、单位换算、**PDF 工具集**、短链接生成、**简历生成器**、**AI 配色生成器**、表情包生成、AI 文案生成、电子木鱼、人生进度条 等
+
+### 👨‍💻 研发工具（11 个）
+- JSON 格式化、Base64/URL 编解码、时间戳、正则/Cron、密码/哈希、代码美化、UUID、文本对比 等
+
+### 🔍 查询 / 资讯（5 个）
+- 邮编、天气、IP 查询、颜色拾取、每日热点
+
+完整清单见 **[TOOLS_LIST.md](TOOLS_LIST.md)**。
+
+---
+
+## 🏗️ 技术栈与架构
+
+- **前端**：React 18 + TypeScript + Vite，Tailwind CSS，Lucide 图标
+- **包管理**：pnpm workspace（`apps/*`、`packages/*`、`tools/*`）
+- **主应用**：`apps/web`（壳 + 路由 + 按需懒加载工具包）
+- **工具包**：`tools/tool-resume`、`tools/tool-pdf`、`tools/tool-qrcode` 等，各自独立依赖、可独立开发
+- **公共包**：`packages/core`（类型 + ToolLoader）、`packages/ui-kit`（通用 UI）
+- **后端**：Express 静态 + API，新闻爬虫为 TypeScript（cheerio），Docker 部署无 Python 依赖
+
+架构演进与规划见 **[ARCHITECTURE.md](ARCHITECTURE.md)**。
+
+---
+
+## 📂 项目结构（重构后）
+
+```
+toolbox/
+├── apps/web/              # 主应用（开发/构建入口）
+│   ├── src/
+│   │   ├── App.tsx        # 路由 + React.lazy 加载工具包
+│   │   ├── pages/         # 主应用内页面（未拆到 tools 的）
+│   │   └── components/
+│   ├── public/
+│   └── package.json
+├── packages/
+│   ├── core/              # 工具类型、ToolLoader
+│   └── ui-kit/            # 通用 UI 组件
+├── tools/                 # 独立工具包（各自 package.json）
+│   ├── tool-resume/       # 简历生成器
+│   ├── tool-pdf/          # PDF 工具集
+│   └── tool-qrcode/       # 二维码三合一
+├── package.json           # 根脚本 + express + playwright
+├── server.js              # 生产静态与 API
+├── crawler/               # 新闻爬虫
+└── docs/
+    └── refactor-structure.md   # 开发与扩展说明（必读）
 ```
 
-### 开发模式
-```bash
-npm run dev
-```
-访问 http://localhost:3000
-
-### 生产构建
-```bash
-npm run build
-npm start
-```
-
-### 手动爬取新闻
-```bash
-npm run crawl:news
-```
-
-## 🐳 Docker部署
-
-```bash
-# 构建镜像
-docker build -t toolbox .
-
-# 运行容器
-docker run -d -p 80:3000 --name toolbox --restart always toolbox
-```
-
-## ☁️ 自动部署
-
-项目配置了GitHub Actions自动部署，提交代码到main分支会自动触发：
-1. 构建Docker镜像
-2. 推送到AWS ECR
-3. 部署到EC2实例
-4. 自动验证部署结果
-
-## 📂 项目结构
-
-```
-├── src/                    # 前端源码
-│   ├── components/         # 公共组件
-│   ├── pages/              # 工具页面组件（26个工具）
-│   ├── types/              # TypeScript类型定义
-│   ├── App.tsx             # 应用入口
-│   └── main.tsx            # 渲染入口
-├── crawler/                # 爬虫脚本
-│   └── news_crawler.py     # 新闻爬虫
-├── public/                 # 静态资源
-├── server.js               # 后端API服务
-├── TOOLS_LIST.md           # 完整工具清单
-├── ARCHITECTURE.md         # 架构演进规划
-├── ROADMAP.md              # 开发路线图
-├── Dockerfile              # Docker配置
-└── .github/workflows/      # CI/CD配置
-```
+---
 
 ## 🔧 扩展新功能
 
-项目采用模块化设计，新增工具非常简单：
+### 方式一：在主应用内新增页面（简单工具、无重依赖）
+1. 在 `apps/web/src/pages/` 新建页面组件
+2. 在 `apps/web/src/App.tsx` 增加路由
+3. 在 `apps/web/src/components/Layout.tsx` 和 `apps/web/src/pages/Home.tsx` 增加导航与首页卡片
+4. 更新 `TOOLS_LIST.md`
 
-### 快速添加新工具
-1. 在`src/pages/`创建新的页面组件（参考现有工具结构）
-2. 在`src/App.tsx`添加路由配置
-3. 在`src/components/Layout.tsx`添加导航菜单
-4. 在`src/pages/Home.tsx`添加工具卡片到首页
-5. 更新`TOOLS_LIST.md`工具清单
+### 方式二：新增独立工具包（有专属依赖、需独立开发）
+1. 在 `tools/` 下新建 `tool-xxx/`，配置 `package.json`（name: `@toolbox/tool-xxx`，main: `src/index.tsx`）
+2. 在 `apps/web/package.json` 增加 `"@toolbox/tool-xxx": "workspace:*"`
+3. 在 `apps/web/src/App.tsx` 用 `React.lazy(() => import('@toolbox/tool-xxx'))` 挂路由
+4. 在 `apps/web/vite.config.ts` 的 `optimizeDeps.exclude` 加上 `@toolbox/tool-xxx`
+5. `pnpm install` 后即可开发
 
-### 架构演进规划
-我们正在进行 Monorepo + 微前端架构改造，未来支持：
-- 工具独立开发、独立打包、独立部署
-- 插件化架构，支持第三方开发者贡献工具
-- 工具市场，用户可以发现和安装更多工具
+详细步骤与注意事项见 **[docs/refactor-structure.md](docs/refactor-structure.md)**。
 
-## 📊 项目进度
-- ✅ 第一阶段：完成26个基础工具开发（100%）
-- 🔄 第二阶段：新增10个AI工具（进度30%）
-- ⏳ 第三阶段：Monorepo架构改造（规划中）
-- ⏳ 第四阶段：后端能力建设和生态开放（规划中）
+---
 
-## 🤝 贡献指南
-欢迎提交PR贡献新工具！请确保：
-1. 遵循现有的代码风格和设计规范
-2. 工具功能完整，界面友好
-3. 优先选择纯前端实现的工具，保护用户隐私
-4. 更新`TOOLS_LIST.md`添加新工具信息
+## 🐳 Docker 部署
+
+**一键构建并运行**（推荐）：
+
+```bash
+pnpm run docker:deploy
+```
+
+会依次执行：构建镜像 → 停止并删除旧容器（若存在）→ 启动新容器，访问 http://localhost:3000。
+
+**分步命令**：
+
+| 命令 | 说明 |
+|------|------|
+| `pnpm run docker:build` | 构建镜像 `toolbox:latest` |
+| `pnpm run docker:run` | 启动容器（端口 3000，名称 `toolbox`，重启策略 unless-stopped） |
+| `pnpm run docker:stop` | 停止并保留容器 |
+
+如需映射到 80 端口：`docker run -d -p 80:3000 --name toolbox --restart unless-stopped toolbox:latest`
+
+**若构建报错 `pull access denied` / `insufficient_scope`**：多为未登录 Docker Hub 或网络限制。可先执行 `docker login` 后重试；或在 Docker 设置中配置可用镜像加速/镜像源后再构建。
+
+---
+
+## 📄 文档索引
+
+| 文档 | 说明 |
+|------|------|
+| [docs/refactor-structure.md](docs/refactor-structure.md) | **开发与扩展说明**（运行、结构、添加工具/工具包） |
+| [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) | **工具规划与落位**（已开发代码位置、待开发/调研清单、分类定义） |
+| [docs/ROADMAP_CONVENTION.md](docs/ROADMAP_CONVENTION.md) | **规划约定**（怎么提规划、放哪里、怎么给 AI、避免重复） |
+| [TOOLS_LIST.md](TOOLS_LIST.md) | 完整工具清单与统计（与 TOOLS_ROADMAP 同步） |
+| [ROADMAP.md](ROADMAP.md) | **高层路线图**（当前状态、下一阶段、目标概览；细节看 TOOLS_ROADMAP + ARCHITECTURE） |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | 架构演进与分阶段实施 |
+| [docs/monorepo-tools-split-analysis.md](docs/monorepo-tools-split-analysis.md) | Monorepo 工具拆分分析 |
+
+---
 
 ## 📄 许可证
 

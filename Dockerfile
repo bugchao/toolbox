@@ -1,40 +1,43 @@
-# 多阶段构建
+# 多阶段构建（使用显式镜像地址，避免 registry scope 报错）
 # 阶段1: 构建前端
-FROM node:20-alpine AS builder
+FROM docker.io/library/node:24-alpine AS builder
 
 WORKDIR /app
 
-# 安装依赖
-COPY package*.json ./
-RUN npm ci
+# 使用 pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/web/package.json ./apps/web/
+COPY packages/core/package.json ./packages/core/
+COPY packages/ui-kit/package.json ./packages/ui-kit/
+COPY tools/tool-resume/package.json ./tools/tool-resume/
+COPY tools/tool-pdf/package.json ./tools/tool-pdf/
+COPY tools/tool-qrcode/package.json ./tools/tool-qrcode/
 
-# 复制源码
-COPY . .
+RUN pnpm install --frozen-lockfile
 
-# 构建前端
-RUN npm run build
+COPY apps ./apps
+COPY packages ./packages
+COPY tools ./tools
 
-# 阶段2: 生产环境
-FROM node:20-alpine
+# 构建前端（产出在 apps/web/dist）
+RUN pnpm run build
+
+# 阶段2: 生产环境（新闻爬虫为 TypeScript，无 Python 依赖）
+FROM docker.io/library/node:24-alpine
 
 WORKDIR /app
 
-# 安装Python和依赖
-RUN apk add --no-cache python3 py3-pip py3-beautifulsoup4 py3-requests
-RUN ln -sf python3 /usr/bin/python
+# 复制生产所需文件并安装依赖（含 cheerio、tsx 用于爬虫）
+COPY package.json server.js ./
+RUN npm install --omit=dev
 
-# 安装生产依赖
-COPY package*.json ./
-RUN npm ci --only=production
-
-# 复制构建产物
-COPY --from=builder /app/dist ./dist
-COPY server.js ./
 COPY crawler ./crawler
-COPY public ./public
+COPY --from=builder /app/apps/web/dist ./dist
+COPY --from=builder /app/apps/web/public ./public
 
 # 暴露端口
 EXPOSE 3000
 
 # 启动服务
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

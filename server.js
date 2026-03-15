@@ -17,13 +17,13 @@ app.use(express.json())
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'dist')))
 
-// API路由
+// API路由（新闻爬虫已改为 TypeScript 实现，无 Python 依赖）
 app.get('/api/news', (req, res) => {
-  // 运行爬虫脚本获取最新新闻
-  exec('python3 crawler/news_crawler.py --output /tmp/news.json', (error, stdout, stderr) => {
+  const crawlerPath = path.join(__dirname, 'crawler', 'news_crawler.ts')
+  const outputPath = '/tmp/news.json'
+  exec(`npx tsx "${crawlerPath}" --output ${outputPath}`, { cwd: __dirname }, (error, stdout, stderr) => {
     if (error) {
-      console.error(`爬虫执行错误: ${error}`)
-      // 返回缓存的新闻数据
+      console.error('爬虫执行错误:', error.message)
       try {
         const news = JSON.parse(fs.readFileSync(path.join(__dirname, 'public/news.json'), 'utf-8'))
         res.json(news)
@@ -32,9 +32,8 @@ app.get('/api/news', (req, res) => {
       }
       return
     }
-    
     try {
-      const news = JSON.parse(fs.readFileSync('/tmp/news.json', 'utf-8'))
+      const news = JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
       res.json(news)
     } catch (e) {
       res.json([])

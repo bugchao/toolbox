@@ -109,13 +109,14 @@ toolbox/
 
 ### 3. 分阶段实施路线图
 
-#### 🚩 阶段1：Monorepo改造 (1-2周)
-- [ ] 调整项目结构为Monorepo（使用pnpm + Turborepo）
-- [ ] 拆分公共UI组件库到独立包
-- [ ] 抽取核心SDK，定义工具接口规范
-- [ ] 现有工具改造为独立插件包
-- [ ] 实现基础的工具加载能力
-- **收益**：解决耦合问题，支持并行开发，构建速度提升
+#### 🚩 阶段1：Monorepo改造（进行中）
+- [x] 调整项目结构为 Monorepo（pnpm workspace：`apps/*`、`packages/*`、`tools/*`）
+- [x] 拆分公共 UI 组件库到 `packages/ui-kit`
+- [x] 抽取核心 SDK 到 `packages/core`，定义工具类型与 ToolLoader
+- [x] 主应用迁至 `apps/web`，部分工具拆为独立包（`tools/tool-resume`、`tool-pdf`、`tool-qrcode`），主应用通过 React.lazy 按需加载
+- [x] 根目录瘦身，工具专属依赖仅写在对应 `tools/tool-xxx`
+- **收益**：工具可独立开发、独立依赖，主应用构建不携带未用工具的重依赖  
+- **开发与扩展说明**：[docs/refactor-structure.md](docs/refactor-structure.md)
 
 #### 🚩 阶段2：微前端运行时 (2-3周)
 - [ ] 实现工具运行时容器

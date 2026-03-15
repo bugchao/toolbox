@@ -1,10 +1,14 @@
 # 工具盒子 - 工具清单
 
+> **开发说明**：本地运行与添加新工具请见 [docs/refactor-structure.md](docs/refactor-structure.md)。根目录执行 `pnpm install` → `pnpm dev` 即可开发。  
+> **规划与落位**：已开发/待开发/代码位置以 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 为准；新增规划、避免重复见 [docs/ROADMAP_CONVENTION.md](docs/ROADMAP_CONVENTION.md)。
+
 ## 📊 项目总览
-- 总工具数：31个
-- 已上线：29个
-- 开发中：0个
-- 目标：1000+工具
+- 总工具数：**36**（已上线 31 + 待开发 5）
+- 已上线：**31**
+- 待开发：**5**（见 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第三节）
+- 开发中：0
+- 目标：1000+ 工具
 
 ## 📋 完整工具清单
 
@@ -57,12 +61,16 @@
 | 每日热点新闻 | ✅ 已上线 | 2026-03-12 | `/news` | 聚合科技、体育、AI、国际等各类热点新闻，每日自动更新 |
 
 ## 🚀 开发计划（第二阶段）
-### 待开发工具（5个）
-1. **CSV/Excel在线编辑器** - 在线编辑表格，支持格式转换、数据筛选、图表生成
-2. **JSON/YAML/XML格式转换器** - 多种数据格式互转，实时校验
-3. **AI会议纪要生成器** - 音频/视频转文字，生成结构化会议纪要
-4. **AI UI设计生成器** - 文本描述/手绘草图生成高保真UI界面
-5. **AI PPT生成器** - 输入主题自动生成PPT大纲、内容和设计布局
+
+待开发工具清单、优先级与状态**以 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第三节为准**，此处仅作简要列出，避免重复立项前请先查该文档「已开发」表。
+
+| 工具名称 | 分类 | 建议路径 | 备注 |
+|----------|------|----------|------|
+| CSV/Excel 在线编辑器 | 实用工具 | `/sheet-editor` | 表格编辑、格式转换、筛选、图表 |
+| JSON/YAML/XML 格式转换器 | 研发工具 | `/format-converter` | 多格式互转、实时校验 |
+| AI 会议纪要生成器 | AI 工具 | `/meeting-minutes` | 音视频转文字、结构化纪要 |
+| AI UI 设计生成器 | AI 工具 | `/ui-generator` | 文本/草图生成 UI |
+| AI PPT 生成器 | AI 工具 | `/ppt-generator` | 主题→大纲、内容、排版 |
 
 ## 📈 统计信息
 | 分类 | 数量 | 占比 |

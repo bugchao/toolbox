@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Copy, Check, Palette, Shuffle, Download, Plus, X, ChevronDown, Sun, Moon, Droplet } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Color {
   id: string;
@@ -17,6 +19,7 @@ interface SavedPalette {
 }
 
 const ColorPicker: React.FC = () => {
+  const { t } = useTranslation('colorPicker');
   const [currentColor, setCurrentColor] = useState<Color>({
     id: 'current',
     hex: '#6366f1',
@@ -27,24 +30,16 @@ const ColorPicker: React.FC = () => {
   const [palette, setPalette] = useState<Color[]>([]);
   const [savedPalettes, setSavedPalettes] = useState<SavedPalette[]>([]);
   const [copiedFormat, setCopiedFormat] = useState<string | null>(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
   const [showSavedPalettes, setShowSavedPalettes] = useState(false);
   const colorInputRef = useRef<HTMLInputElement>(null);
 
   // 预设调色板
   const presetPalettes = [
-    {
-      name: 'Material Design',
-      colors: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39']
-    },
-    {
-      name: 'Tailwind 主色',
-      colors: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#06b6d4', '#3b82f6', '#8b5cf6', '#ec4899']
-    },
-    {
-      name: '柔和莫兰迪',
-      colors: ['#e8b4b8', '#eed6d9', '#a7c5eb', '#bcd2e8', '#e2e9d8', '#f0d7c0', '#d4c4c9', '#b5c9c3']
-    }
+    { nameKey: 'presetMaterial', colors: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39'] },
+    { nameKey: 'presetTailwind', colors: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#06b6d4', '#3b82f6', '#8b5cf6', '#ec4899'] },
+    { nameKey: 'presetMorandi', colors: ['#e8b4b8', '#eed6d9', '#a7c5eb', '#bcd2e8', '#e2e9d8', '#f0d7c0', '#d4c4c9', '#b5c9c3'] }
   ];
 
   // 颜色格式转换
@@ -231,7 +226,7 @@ const ColorPicker: React.FC = () => {
     if (palette.length === 0) return;
     const newSavedPalette: SavedPalette = {
       id: Math.random().toString(36).substring(2, 9),
-      name: `调色板 ${savedPalettes.length + 1}`,
+      name: t('paletteName', { n: savedPalettes.length + 1 }),
       colors: [...palette],
       createdAt: Date.now(),
     };
@@ -311,7 +306,7 @@ const ColorPicker: React.FC = () => {
   // 取色器功能
   const handleEyeDropper = async () => {
     if (!(window as any).EyeDropper) {
-      alert('当前浏览器不支持取色器功能，请使用最新版Chrome/Edge浏览器');
+      alert(t('eyedropperUnsupported'));
       return;
     }
 
@@ -342,14 +337,14 @@ const ColorPicker: React.FC = () => {
           <div>
             <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
               <Palette className="h-8 w-8 text-indigo-600" />
-              颜色拾取/调色板生成
+              {t('title')}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              智能取色、颜色转换、和谐配色方案生成
+            <p className="text-gray-600 dark:text-gray-300">
+              {t('subtitle')}
             </p>
           </div>
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
           >
             {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -359,7 +354,7 @@ const ColorPicker: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 颜色拾取器 */}
           <div className={`lg:col-span-1 rounded-lg shadow p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-            <h2 className="text-xl font-semibold mb-6">颜色拾取器</h2>
+            <h2 className="text-xl font-semibold mb-6">{t('pickerTitle')}</h2>
 
             {/* 颜色预览 */}
             <div 
@@ -384,7 +379,7 @@ const ColorPicker: React.FC = () => {
               } transition-colors`}
             >
               <Droplet className="h-4 w-4" />
-              屏幕取色
+              {t('screenPick')}
             </button>
 
             {/* 颜色值输入 */}
@@ -407,6 +402,7 @@ const ColorPicker: React.FC = () => {
                     } transition-colors`}
                   >
                     {copiedFormat === 'hex' ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                    {t('copy')}
                   </button>
                 </div>
               </div>
@@ -462,7 +458,7 @@ const ColorPicker: React.FC = () => {
                     } transition-colors flex items-center gap-1`}
                   >
                     {copiedFormat === 'rgb' ? <Check className="h-3 w-3 text-green-500" /> : <Copy className="h-3 w-3" />}
-                    复制
+                    {t('copy')}
                   </button>
                 </div>
               </div>
@@ -518,7 +514,7 @@ const ColorPicker: React.FC = () => {
                     } transition-colors flex items-center gap-1`}
                   >
                     {copiedFormat === 'hsl' ? <Check className="h-3 w-3 text-green-500" /> : <Copy className="h-3 w-3" />}
-                    复制
+                    {t('copy')}
                   </button>
                 </div>
               </div>
@@ -530,7 +526,7 @@ const ColorPicker: React.FC = () => {
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
               >
                 <Plus className="h-4 w-4" />
-                添加到调色板
+                {t('addToPalette')}
               </button>
             </div>
           </div>
@@ -538,7 +534,7 @@ const ColorPicker: React.FC = () => {
           {/* 调色板 */}
           <div className={`lg:col-span-2 rounded-lg shadow p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold">调色板</h2>
+              <h2 className="text-xl font-semibold">{t('palette')}</h2>
               <div className="flex gap-2">
                 <div className="relative">
                   <button
@@ -547,7 +543,7 @@ const ColorPicker: React.FC = () => {
                       darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
                     } transition-colors`}
                   >
-                    保存的调色板
+                    {t('savedPalettes')}
                     <ChevronDown className="h-4 w-4" />
                   </button>
                   
@@ -592,7 +588,7 @@ const ColorPicker: React.FC = () => {
                   } transition-colors`}
                 >
                   <Shuffle className="h-4 w-4" />
-                  随机生成
+                  {t('randomGenerate')}
                 </button>
 
                 <button
@@ -602,7 +598,7 @@ const ColorPicker: React.FC = () => {
                   } transition-colors`}
                   disabled={palette.length === 0}
                 >
-                  保存
+                  {t('save')}
                 </button>
 
                 <div className="relative group">
@@ -613,7 +609,7 @@ const ColorPicker: React.FC = () => {
                     disabled={palette.length === 0}
                   >
                     <Download className="h-4 w-4" />
-                    导出
+                    {t('export')}
                   </button>
                   <div className={`absolute right-0 hidden group-hover:block mt-2 w-48 rounded-md shadow-lg z-10 ${
                     darkMode ? 'bg-gray-700' : 'bg-white'
@@ -622,25 +618,25 @@ const ColorPicker: React.FC = () => {
                       onClick={() => exportPalette('css')}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
-                      CSS Variables
+                      {t('exportCss')}
                     </button>
                     <button
                       onClick={() => exportPalette('scss')}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
-                      SCSS Variables
+                      {t('exportScss')}
                     </button>
                     <button
                       onClick={() => exportPalette('tailwind')}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
-                      Tailwind Config
+                      {t('exportTailwind')}
                     </button>
                     <button
                       onClick={() => exportPalette('json')}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"
                     >
-                      JSON
+                      {t('exportJson')}
                     </button>
                   </div>
                 </div>
@@ -675,9 +671,9 @@ const ColorPicker: React.FC = () => {
                           <button
                             onClick={() => toggleLockColor(color.id)}
                             className={`p-1 rounded ${
-                              color.locked ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                              color.locked ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-200'
                             }`}
-                            title={color.locked ? '解锁' : '锁定'}
+                            title={color.locked ? t('unlock') : t('lock')}
                           >
                             {color.locked ? '🔒' : '🔓'}
                           </button>
@@ -689,7 +685,7 @@ const ColorPicker: React.FC = () => {
                           </button>
                         </div>
                       </div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className="text-xs text-gray-500 dark:text-gray-300">
                         RGB({color.rgb.r}, {color.rgb.g}, {color.rgb.b})
                       </div>
                     </div>
@@ -699,13 +695,13 @@ const ColorPicker: React.FC = () => {
             ) : (
               <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-12 text-center mb-6">
                 <Palette className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                <p className="text-gray-500 dark:text-gray-400">调色板为空，点击"添加到调色板"添加颜色</p>
+                <p className="text-gray-500 dark:text-gray-300">{t('paletteEmpty')}</p>
               </div>
             )}
 
             {/* 预设调色板 */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-medium mb-4">预设调色板</h3>
+              <h3 className="text-lg font-medium mb-4">{t('presetPalettes')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {presetPalettes.map((palette, index) => (
                   <div
@@ -728,7 +724,7 @@ const ColorPicker: React.FC = () => {
                       setPalette(newPalette);
                     }}
                   >
-                    <div className="font-medium mb-2">{palette.name}</div>
+                    <div className="font-medium mb-2">{t(palette.nameKey)}</div>
                     <div className="flex h-8 rounded overflow-hidden">
                       {palette.colors.map((color, i) => (
                         <div
@@ -745,12 +741,12 @@ const ColorPicker: React.FC = () => {
 
             {/* 使用提示 */}
             <div className={`mt-6 p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
-              <h3 className="text-sm font-medium mb-2">💡 使用提示</h3>
-              <ul className="text-xs space-y-1 text-gray-600 dark:text-gray-300">
-                <li>• 点击颜色预览区域可以打开系统颜色选择器</li>
-                <li>• 点击"屏幕取色"可以拾取屏幕上任意位置的颜色（需要Chrome/Edge 95+）</li>
-                <li>• 锁定颜色后重新生成调色板时会保留锁定的颜色</li>
-                <li>• 支持导出为CSS、SCSS、Tailwind配置等多种格式</li>
+              <h3 className="text-sm font-medium mb-2">💡 {t('tipsTitle')}</h3>
+              <ul className="text-xs space-y-1 text-gray-600 dark:text-gray-200">
+                <li>• {t('tip1')}</li>
+                <li>• {t('tip2')}</li>
+                <li>• {t('tip3')}</li>
+                <li>• {t('tip4')}</li>
               </ul>
             </div>
           </div>

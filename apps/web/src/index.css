@@ -8,15 +8,32 @@
   box-sizing: border-box;
 }
 
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* 浅色模式：参考图 - 浅蓝/米白背景，深色文字 */
+  background: #f0f4f8;
   min-height: 100vh;
+  color: #1e293b;
 }
+
+/* 暗色模式：全局生效，提升小字与次要文字可读性 */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #e5e7eb;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -29,6 +46,11 @@ code {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin-bottom: 2rem;
+}
+
+.dark .card {
+  background: #1f2937;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .btn {
