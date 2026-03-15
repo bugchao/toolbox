@@ -1,0 +1,73 @@
+{
+  "title": "Port Security Scan",
+  "description": "Probe common ports with backend TCP connections and highlight exposure risk by service type.",
+  "loading": "Scanning ports…",
+  "form": {
+    "targetLabel": "Target",
+    "targetPlaceholder": "Enter a hostname or IP, for example example.com",
+    "presetLabel": "Preset",
+    "customPortsLabel": "Extra ports",
+    "customPortsPlaceholder": "Optional comma-separated ports, for example 8081,8444",
+    "submit": "Scan target"
+  },
+  "presets": {
+    "web": "Common web ports",
+    "quick": "Quick check",
+    "common": "Common exposure set"
+  },
+  "errors": {
+    "empty": "Enter a target to scan",
+    "request": "Request failed, please retry"
+  },
+  "view": {
+    "query": "Query",
+    "history": "History"
+  },
+  "history": {
+    "title": "Query history",
+    "empty": "No local history yet. Successful queries will be saved automatically.",
+    "rerun": "Refill and rerun",
+    "remove": "Remove",
+    "clear": "Clear history"
+  },
+  "cards": {
+    "overallScore": "Exposure score",
+    "openPorts": "Open ports",
+    "totalChecked": "ports checked",
+    "filteredPorts": "Filtered ports",
+    "filteredHint": "Timed out or blocked by network controls",
+    "target": "Target"
+  },
+  "charts": {
+    "dimensionScore": "Dimension breakdown"
+  },
+  "insights": {
+    "title": "Key insights",
+    "empty": "No open port was observed in the selected set."
+  },
+  "ports": {
+    "title": "Port scan results",
+    "exposureTitle": "Open-port exposure notes"
+  },
+  "status": {
+    "listed": "Listed",
+    "clear": "Clear",
+    "unavailable": "Unavailable",
+    "open": "Open",
+    "closed": "Closed",
+    "filtered": "Filtered"
+  },
+  "levels": {
+    "info": "Info",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "dimensions": {
+    "exposure": "Exposure",
+    "criticalServices": "Critical services",
+    "adminSurface": "Admin surface",
+    "dataStores": "Data stores"
+  }
+}

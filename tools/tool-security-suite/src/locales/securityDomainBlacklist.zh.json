@@ -1,0 +1,70 @@
+{
+  "title": "域名黑名单检测",
+  "description": "通过公开 DNSBL、注册年龄和邮件认证记录，判断域名是否存在投递或信誉风险。",
+  "loading": "正在检测域名信誉…",
+  "form": {
+    "domainLabel": "域名",
+    "domainPlaceholder": "输入域名，例如 example.com",
+    "submit": "开始检测"
+  },
+  "errors": {
+    "empty": "请输入要检测的域名",
+    "request": "请求失败，请稍后重试"
+  },
+  "view": {
+    "query": "查询",
+    "history": "历史"
+  },
+  "history": {
+    "title": "查询历史",
+    "empty": "还没有历史记录，成功查询后会自动保存到本地。",
+    "rerun": "回填并重跑",
+    "remove": "删除",
+    "clear": "清空历史"
+  },
+  "cards": {
+    "overallScore": "总体风险分",
+    "blacklistHits": "黑名单命中数",
+    "blacklistHitsHint": "选定公开源中的命中次数",
+    "age": "域名年龄",
+    "mailAuth": "邮件认证",
+    "mailAuthHint": "SPF / DMARC 记录数"
+  },
+  "charts": {
+    "dimensionScore": "风险维度拆解"
+  },
+  "insights": {
+    "title": "关键洞察",
+    "empty": "当前未发现公开 DNSBL 命中。"
+  },
+  "blacklists": {
+    "title": "黑名单源检测结果"
+  },
+  "records": {
+    "spf": "SPF 记录",
+    "dmarc": "DMARC 记录",
+    "addresses": "解析地址",
+    "empty": "未获取到对应记录"
+  },
+  "status": {
+    "listed": "已命中",
+    "clear": "未命中",
+    "unavailable": "不可用",
+    "open": "开放",
+    "closed": "关闭",
+    "filtered": "过滤"
+  },
+  "levels": {
+    "info": "信息",
+    "low": "低风险",
+    "medium": "中风险",
+    "high": "高风险",
+    "critical": "严重"
+  },
+  "dimensions": {
+    "blocklists": "黑名单源",
+    "registration": "注册年龄",
+    "mailAuth": "邮件认证",
+    "reachability": "可达性"
+  }
+}

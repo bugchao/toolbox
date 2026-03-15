@@ -1,0 +1,82 @@
+{
+  "title": "Security Report Generator",
+  "description": "Aggregate domain reputation, DNS configuration, IP risk, and port exposure into a copyable and downloadable security summary.",
+  "loading": "Generating security report…",
+  "form": {
+    "domainLabel": "Domain",
+    "domainPlaceholder": "Optional, for example example.com",
+    "ipLabel": "IP address",
+    "ipPlaceholder": "Optional, for example 8.8.8.8",
+    "portTargetLabel": "Port-scan target",
+    "portTargetPlaceholder": "Optional, falls back to the domain or IP",
+    "submit": "Generate report"
+  },
+  "errors": {
+    "empty": "Provide at least one of domain, IP, or port-scan target",
+    "request": "Request failed, please retry"
+  },
+  "view": {
+    "query": "Query",
+    "history": "History"
+  },
+  "history": {
+    "title": "Query history",
+    "empty": "No local history yet. Successful reports will be saved automatically.",
+    "rerun": "Refill and rerun",
+    "remove": "Remove",
+    "clear": "Clear history"
+  },
+  "cards": {
+    "overallScore": "Overall score",
+    "sections": "Sections",
+    "sectionsHint": "Number of analysis modules included",
+    "findings": "Findings",
+    "findingsHint": "Prioritized issues after aggregation",
+    "derivedIp": "Derived IP",
+    "derivedIpHint": "Auto-resolved when only a domain is given"
+  },
+  "charts": {
+    "dimensionScore": "Module score overview"
+  },
+  "insights": {
+    "title": "Priority items",
+    "empty": "No high-priority finding was aggregated."
+  },
+  "report": {
+    "previewTitle": "Markdown preview",
+    "copy": "Copy report",
+    "copied": "Copied",
+    "download": "Download .md",
+    "title": "Network Security Analysis Report",
+    "generatedAt": "Generated at",
+    "overallScore": "Overall score",
+    "summary": "Summary",
+    "scope": "Scope",
+    "highlights": "Highlights",
+    "sectionsTitle": "Section results",
+    "inputs": {
+      "domain": "Domain",
+      "ip": "IP address",
+      "portTarget": "Port-scan target"
+    },
+    "sections": {
+      "ip": "IP Risk Score",
+      "blacklist": "Domain Blacklist Check",
+      "dns": "DNS Vulnerability Check",
+      "ports": "Port Security Scan"
+    }
+  },
+  "levels": {
+    "info": "Info",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "dimensions": {
+    "ipRisk": "IP risk",
+    "domainBlacklist": "Domain reputation",
+    "dnsVulnerability": "DNS configuration",
+    "portExposure": "Port exposure"
+  }
+}

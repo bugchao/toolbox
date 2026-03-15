@@ -78,7 +78,7 @@
 | AI 会议纪要生成器 | `/meeting-minutes` | `apps/web/src/pages/MeetingMinutes.tsx` |
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 
-### 网络工具（11）
+### 网络工具（17）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -93,6 +93,11 @@
 | DNS 劫持检测 | `/dns-hijack-check` | `tools/tool-dns-hijack-check` → DnsHijackCheck |
 | DNS 缓存检测 | `/dns-cache-check` | `tools/tool-dns-cache-check` → DnsCacheCheck |
 | DNS 循环解析检测 | `/dns-loop-check` | `tools/tool-dns-loop-check` → DnsLoopCheck |
+| IP 风险评分 | `/security-ip-score` | `tools/tool-security-suite` → SecurityIpScore |
+| 域名黑名单检测 | `/security-domain-blacklist` | `tools/tool-security-suite` → SecurityDomainBlacklist |
+| 端口安全扫描 | `/security-port-scan` | `tools/tool-security-suite` → SecurityPortScan |
+| DNS 配置漏洞检测 | `/security-dns-vuln` | `tools/tool-security-suite` → SecurityDnsVuln |
+| 网络安全报告生成 | `/security-report-gen` | `tools/tool-security-suite` → SecurityReportGen |
 
 ### 资讯工具（1）
 
@@ -197,11 +202,6 @@
 | DNS DDoS 风险检测 | network | `/security-dns-ddos` | 待开发 | P2 | 风险评估 |
 | DNSSEC 签名验证 | network | `/security-dnssec-verify` | 待开发 | P2 | 签名验证 |
 | 域名安全评分 | network | `/security-domain-score` | 待开发 | P2 | 安全评分 |
-| IP 风险评分 | network | `/security-ip-score` | 待开发 | P2 | IP 风险分 |
-| 域名黑名单检测 | network | `/security-domain-blacklist` | 待开发 | P2 | 黑名单检测 |
-| 端口安全扫描 | network | `/security-port-scan` | 待开发 | P2 | 端口扫描 |
-| DNS 配置漏洞检测 | network | `/security-dns-vuln` | 待开发 | P2 | 配置漏洞 |
-| 网络安全报告生成 | network | `/security-report-gen` | 待开发 | P2 | 报告生成 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 

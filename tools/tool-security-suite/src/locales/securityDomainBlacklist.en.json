@@ -1,0 +1,70 @@
+{
+  "title": "Domain Blacklist Check",
+  "description": "Use public DNSBL sources, registration age, and mail-auth records to estimate delivery and reputation risk for a domain.",
+  "loading": "Checking domain reputation…",
+  "form": {
+    "domainLabel": "Domain",
+    "domainPlaceholder": "Enter a domain, for example example.com",
+    "submit": "Check domain"
+  },
+  "errors": {
+    "empty": "Enter a domain to check",
+    "request": "Request failed, please retry"
+  },
+  "view": {
+    "query": "Query",
+    "history": "History"
+  },
+  "history": {
+    "title": "Query history",
+    "empty": "No local history yet. Successful queries will be saved automatically.",
+    "rerun": "Refill and rerun",
+    "remove": "Remove",
+    "clear": "Clear history"
+  },
+  "cards": {
+    "overallScore": "Overall score",
+    "blacklistHits": "Blacklist hits",
+    "blacklistHitsHint": "Hits returned by selected public sources",
+    "age": "Domain age",
+    "mailAuth": "Mail auth",
+    "mailAuthHint": "SPF / DMARC record counts"
+  },
+  "charts": {
+    "dimensionScore": "Dimension breakdown"
+  },
+  "insights": {
+    "title": "Key insights",
+    "empty": "No selected public DNSBL source returned a hit."
+  },
+  "blacklists": {
+    "title": "Blacklist source results"
+  },
+  "records": {
+    "spf": "SPF records",
+    "dmarc": "DMARC records",
+    "addresses": "Resolved addresses",
+    "empty": "No records were returned"
+  },
+  "status": {
+    "listed": "Listed",
+    "clear": "Clear",
+    "unavailable": "Unavailable",
+    "open": "Open",
+    "closed": "Closed",
+    "filtered": "Filtered"
+  },
+  "levels": {
+    "info": "Info",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "dimensions": {
+    "blocklists": "Blocklists",
+    "registration": "Registration",
+    "mailAuth": "Mail auth",
+    "reachability": "Reachability"
+  }
+}

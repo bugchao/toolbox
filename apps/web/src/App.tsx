@@ -90,6 +90,21 @@ const DnsCacheCheck = lazy(() =>
 const DnsLoopCheck = lazy(() =>
   import('@toolbox/tool-dns-loop-check').then((m) => ({ default: m.DnsLoopCheck }))
 )
+const SecurityIpScore = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityIpScore }))
+)
+const SecurityDomainBlacklist = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDomainBlacklist }))
+)
+const SecurityPortScan = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityPortScan }))
+)
+const SecurityDnsVuln = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDnsVuln }))
+)
+const SecurityReportGen = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityReportGen }))
+)
 
 function App() {
   return (
@@ -133,6 +148,11 @@ function App() {
           <Route path="/dns-hijack-check" element={<DnsHijackCheck />} />
           <Route path="/dns-cache-check" element={<DnsCacheCheck />} />
           <Route path="/dns-loop-check" element={<DnsLoopCheck />} />
+          <Route path="/security-ip-score" element={<SecurityIpScore />} />
+          <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
+          <Route path="/security-port-scan" element={<SecurityPortScan />} />
+          <Route path="/security-dns-vuln" element={<SecurityDnsVuln />} />
+          <Route path="/security-report-gen" element={<SecurityReportGen />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
@@ -145,9 +165,9 @@ function App() {
           <Route path="/life-progress" element={<LifeProgressBar />} />
           <Route path="/meeting-minutes" element={<MeetingMinutes />} />
           <Route path="/ui-generator" element={<UIGenerator />} />
-        </Routes>
-      </Suspense>
-    </Layout>
+        </Routes >
+      </Suspense >
+    </Layout >
   )
 }
 

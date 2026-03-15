@@ -2,8 +2,8 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Home, Star, QrCode, Newspaper, MapPin, Cloud, Code, FileCode, Clock, Link2,
   Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart,
-  Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
-  ShieldAlert, ShieldCheck, AlertTriangle, RefreshCw
+  AlertTriangle, RefreshCw,
+  Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route, ShieldAlert, ShieldBan, Radar, ShieldCheck, FileSearch
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -37,6 +37,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dns-hijack-check', nameKey: 'tools.dns_hijack_check', icon: ShieldCheck, categoryKey: 'network', keywords: ['dns', 'hijack', '劫持', '检测'], i18nNamespace: 'toolDnsHijackCheck' },
   { path: '/dns-cache-check', nameKey: 'tools.dns_cache_check', icon: Clock, categoryKey: 'network', keywords: ['dns', 'cache', '缓存', 'ttl'], i18nNamespace: 'toolDnsCacheCheck' },
   { path: '/dns-loop-check', nameKey: 'tools.dns_loop_check', icon: RefreshCw, categoryKey: 'network', keywords: ['dns', 'loop', '循环', 'cname'], i18nNamespace: 'toolDnsLoopCheck' },
+  { path: '/security-ip-score', nameKey: 'tools.security_ip_score', icon: ShieldAlert, categoryKey: 'network', keywords: ['security', 'ip', 'risk', '安全', '评分'], i18nNamespace: 'toolSecurityIpScore' },
+  { path: '/security-domain-blacklist', nameKey: 'tools.security_domain_blacklist', icon: ShieldBan, categoryKey: 'network', keywords: ['security', 'domain', 'blacklist', '域名', '黑名单'], i18nNamespace: 'toolSecurityDomainBlacklist' },
+  { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: Radar, categoryKey: 'network', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan' },
+  { path: '/security-dns-vuln', nameKey: 'tools.security_dns_vuln', icon: ShieldCheck, categoryKey: 'network', keywords: ['security', 'dns', 'vuln', '漏洞', '配置'], i18nNamespace: 'toolSecurityDnsVuln' },
+  { path: '/security-report-gen', nameKey: 'tools.security_report_gen', icon: FileSearch, categoryKey: 'network', keywords: ['security', 'report', '网络', '报告'], i18nNamespace: 'toolSecurityReportGen' },
   { path: '/json', nameKey: 'tools.json', icon: Braces, categoryKey: 'dev', keywords: ['json'], i18nNamespace: 'toolJson' },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: FileCode, categoryKey: 'dev', keywords: ['base64'] },
