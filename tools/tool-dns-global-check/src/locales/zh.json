@@ -1,0 +1,17 @@
+{
+  "title": "全球 DNS 解析检测",
+  "description": "对比 7 家公共 DNS（Google、Cloudflare、Quad9、AdGuard、OpenDNS、阿里、腾讯）的解析结果，查看多解析器差异",
+  "domain_label": "域名",
+  "domain_placeholder": "example.com",
+  "type_label": "记录类型",
+  "query_btn": "开始检测",
+  "provider": "解析器",
+  "region": "地区/说明",
+  "results": "解析结果",
+  "ttl": "TTL",
+  "time_ms": "响应时间",
+  "status_ok": "成功",
+  "status_fail": "失败",
+  "error_empty": "请输入域名",
+  "loading": "检测中…"
+}

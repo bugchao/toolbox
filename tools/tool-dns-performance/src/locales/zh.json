@@ -1,0 +1,21 @@
+{
+  "title": "DNS 服务器性能测试",
+  "description": "测试公共 DNS（DoH）的响应时间与可用性",
+  "domain_label": "测试域名",
+  "domain_placeholder": "google.com",
+  "type_label": "记录类型",
+  "servers_label": "要测试的 DoH 服务器",
+  "custom_doh_label": "自定义 DoH 地址（可选）",
+  "custom_doh_placeholder": "https://dns.example.com/dns-query",
+  "test_btn": "开始测试",
+  "provider": "解析器",
+  "avg_ms": "平均 (ms)",
+  "min_ms": "最小",
+  "max_ms": "最大",
+  "success": "成功",
+  "runs": "测试轮数",
+  "loading": "测试中…",
+  "browser_note_title": "关于 53 端口",
+  "browser_note": "浏览器无法直接访问 DNS 的 53 端口（UDP/TCP），本工具仅能通过 DoH（DNS over HTTPS）测试。若需测 53 端口，请使用本地命令行或服务端工具。",
+  "custom_server_name": "自定义 DoH"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "DNS Server Performance Test",
+  "description": "Test response time and availability of public DNS (DoH)",
+  "domain_label": "Test domain",
+  "domain_placeholder": "google.com",
+  "type_label": "Record type",
+  "servers_label": "DoH servers to test",
+  "custom_doh_label": "Custom DoH URL (optional)",
+  "custom_doh_placeholder": "https://dns.example.com/dns-query",
+  "test_btn": "Start Test",
+  "provider": "Provider",
+  "avg_ms": "Avg (ms)",
+  "min_ms": "Min",
+  "max_ms": "Max",
+  "success": "Success",
+  "runs": "Runs",
+  "loading": "Testing…",
+  "browser_note_title": "About port 53",
+  "browser_note": "Browsers cannot access DNS on port 53 (UDP/TCP). This tool only tests DoH (DNS over HTTPS). Use a local CLI or server-side tool to test port 53.",
+  "custom_server_name": "Custom DoH"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "AI PPT 生成器",
+  "description": "根据主题生成大纲、内容与排版，一键导出演示文稿",
+  "topic_label": "演示主题",
+  "topic_placeholder": "例如：产品发布会、季度总结、技术分享",
+  "subtitle_label": "副标题（可选）",
+  "subtitle_placeholder": "部门名称、日期或一句话说明",
+  "outline_label": "大纲（用 --- 分隔每一页，每页第一行为标题，以下 - 开头为要点）",
+  "outline_placeholder": "第一页标题\n- 要点一\n- 要点二\n---\n第二页标题\n- 要点…",
+  "theme_label": "主题",
+  "theme_blue": "蓝色商务",
+  "theme_gray": "灰色简约",
+  "theme_green": "绿色清新",
+  "theme_purple": "紫色专业",
+  "gen_outline_btn": "生成大纲",
+  "gen_ppt_btn": "生成并下载 PPT",
+  "tip": "用 --- 单独一行分隔幻灯片。每页第一行为标题，换行后以 - 或 • 开头的行会显示为要点列表。",
+  "loading": "生成中…",
+  "error_topic": "请输入主题",
+  "error_outline": "请至少填写一页大纲（含标题）"
+}

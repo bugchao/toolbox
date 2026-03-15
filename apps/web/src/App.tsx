@@ -72,6 +72,21 @@ const DnsTrace = lazy(() =>
 const DnsPropagation = lazy(() =>
   import('@toolbox/tool-dns-propagation').then((m) => ({ default: m.DnsPropagation }))
 )
+const PptGenerator = lazy(() =>
+  import('@toolbox/tool-ppt-generator').then((m) => ({ default: m.PptGenerator }))
+)
+const DnsGlobalCheck = lazy(() =>
+  import('@toolbox/tool-dns-global-check').then((m) => ({ default: m.DnsGlobalCheck }))
+)
+const DnssecCheck = lazy(() =>
+  import('@toolbox/tool-dnssec-check').then((m) => ({ default: m.DnssecCheck }))
+)
+const DnsPerformance = lazy(() =>
+  import('@toolbox/tool-dns-performance').then((m) => ({ default: m.DnsPerformance }))
+)
+const DnsTtl = lazy(() =>
+  import('@toolbox/tool-dns-ttl').then((m) => ({ default: m.DnsTtl }))
+)
 
 function App() {
   return (
@@ -109,6 +124,10 @@ function App() {
           <Route path="/dns-query" element={<DnsQuery />} />
           <Route path="/dns-trace" element={<DnsTrace />} />
           <Route path="/dns-propagation" element={<DnsPropagation />} />
+          <Route path="/dns-global-check" element={<DnsGlobalCheck />} />
+          <Route path="/dnssec-check" element={<DnssecCheck />} />
+          <Route path="/dns-performance" element={<DnsPerformance />} />
+          <Route path="/dns-ttl" element={<DnsTtl />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
@@ -121,6 +140,7 @@ function App() {
           <Route path="/life-progress" element={<LifeProgressBar />} />
           <Route path="/meeting-minutes" element={<MeetingMinutes />} />
           <Route path="/ui-generator" element={<UIGenerator />} />
+          <Route path="/ppt-generator" element={<PptGenerator />} />
         </Routes>
       </Suspense>
     </Layout>

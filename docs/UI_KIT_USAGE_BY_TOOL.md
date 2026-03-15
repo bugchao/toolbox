@@ -44,6 +44,9 @@
 | 电子木鱼/人生进度条 | /wooden-fish, /life-progress | ✅ 点击/进度动效 | ❌ | ⭕ stars | ❌ | 已有动效，可加粒子 |
 | IP 地址查询 | /ip-query | ✅ 结果区入场 | ❌ | ⭕ network | ❌ | 结果卡片 FadeIn |
 | 天气/邮编/JSON/Base64 等 | 各 path | ⭕ 区块 FadeIn | ❌ | ⭕ minimal | ❌ | 按需 FadeIn/StaggerChildren |
+| AI PPT 生成器 | /ppt-generator | ✅ 大纲/区块入场 | ❌ | ❌ | ❌ | 主题+大纲+主题色，PptxGenJS 导出 |
+| 全球 DNS 解析检测 | /dns-global-check | ✅ 结果表入场 | ❌ | ❌ | ❌ | 7 家 DoH 对比表 |
+| DNSSEC 检测 / DNS 性能测试 / DNS TTL | /dnssec-check, /dns-performance, /dns-ttl | ⭕ 结果区 FadeIn | ❌ | ❌ | ❌ | 表单+结果卡片 |
 
 ### 待开发工具（按类别抽样，其余参考同类）
 
@@ -51,8 +54,8 @@
 |----------|------|--------|--------|------|----------|----------------|
 | CSV/Excel 在线编辑器 | /sheet-editor | ✅ 表格/工具栏 | ❌ | ⭕ minimal | ✅ 若做图表预览 | 图表预览用 ChartContainer + Bar/Line |
 | JSON/YAML/XML 格式转换器 | /format-converter | ✅ 结果区 | ⭕ FlipCard 输入⇄输出 | ⭕ dots | ❌ | 双栏或 FlipCard |
-| AI 会议纪要/PPT 生成器 | /meeting-minutes, /ppt-generator | ✅ 列表/幻灯片 | ⭕ Parallax 长页 | ⭕ stars | ❌ | 长内容可 Parallax |
-| DNS 查询 / DNS Trace / 传播检测 | /dns-* | ✅ 结果/步骤入场 | ❌ | ⭕ network | ⭕ 延迟/分布图 | 解析路径、延迟分析可用 ChartContainer |
+| AI 会议纪要生成器 | /meeting-minutes | ✅ 列表/结果入场 | ⭕ Parallax 长页 | ⭕ stars | ❌ | 长内容可 Parallax |
+| DNS NS/CNAME 链/SOA 等 | /dns-ns, /dns-cname-chain, /dns-soa | ✅ 结果/步骤入场 | ❌ | ⭕ network | ⭕ 延迟/分布图 | 解析路径、延迟分析可用 ChartContainer |
 | 域名健康/安全评分 | /domain-health-score, /security-* | ✅ 评分卡片 | ❌ | ⭕ minimal | ✅ 评分雷达/柱状图 | 安全/健康维度用 Recharts |
 | IP ASN/地理/黑名单 等 | /ip-* | ✅ 结果卡片 | ❌ | ⭕ network | ❌ | 与现有 IP 查询一致 |
 | CIDR/子网/VLSM/网络规划 | /cidr-*, /subnet-*, /vlsm | ✅ 输入/结果区 | ❌ | ⭕ minimal | ⭕ 范围/容量可视化 | 子网容量等可简单柱状图 |

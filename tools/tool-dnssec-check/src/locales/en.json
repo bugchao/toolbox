@@ -1,0 +1,17 @@
+{
+  "title": "DNSSEC Check",
+  "description": "Check if a domain has DNSSEC enabled and validation status",
+  "domain_label": "Domain",
+  "domain_placeholder": "example.com",
+  "check_btn": "Check DNSSEC",
+  "status": "Status",
+  "signed": "Signed",
+  "validated": "Validated",
+  "not_signed": "DNSSEC not enabled",
+  "validation_fail": "Validation failed",
+  "dnskeys": "DNSKEY records",
+  "ds_records": "DS records",
+  "error_empty": "Please enter a domain",
+  "error_resolution_fail": "Resolution failed",
+  "loading": "Checking…"
+}

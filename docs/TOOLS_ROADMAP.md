@@ -71,14 +71,15 @@
 | IP 地址查询 | `/ip-query` | `apps/web/src/pages/IpQuery.tsx` |
 | 颜色拾取/调色板 | `/color-picker` | `apps/web/src/pages/ColorPicker.tsx` |
 
-### AI 工具（2）
+### AI 工具（3）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | AI 会议纪要生成器 | `/meeting-minutes` | `apps/web/src/pages/MeetingMinutes.tsx` |
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
+| AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（5）
+### 网络工具（9）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -87,6 +88,10 @@
 | IP ASN 查询 | `/ip-asn` | `tools/tool-ip-asn` → IpAsn |
 | DNS Trace 递归追踪 | `/dns-trace` | `tools/tool-dns-trace` → DnsTrace |
 | DNS 传播检测 | `/dns-propagation` | `tools/tool-dns-propagation` → DnsPropagation |
+| 全球 DNS 解析检测 | `/dns-global-check` | `tools/tool-dns-global-check` → DnsGlobalCheck |
+| DNSSEC 检测 | `/dnssec-check` | `tools/tool-dnssec-check` → DnssecCheck |
+| DNS 服务器性能测试 | `/dns-performance` | `tools/tool-dns-performance` → DnsPerformance |
+| DNS TTL 查看工具 | `/dns-ttl` | `tools/tool-dns-ttl` → DnsTtl |
 
 ### 资讯工具（1）
 
@@ -105,11 +110,6 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| AI PPT 生成器 | ai | `/ppt-generator` | 待开发 | P2 | 主题 → 大纲、内容、排版 |
-| 全球 DNS 解析检测 | network | `/dns-global-check` | 待开发 | P2 | 多地区解析结果 |
-| DNSSEC 检测 | network | `/dnssec-check` | 待开发 | P2 | 签名与链校验 |
-| DNS 服务器性能测试 | network | `/dns-performance` | 待开发 | P2 | 响应时间/可用性 |
-| DNS TTL 查看工具 | network | `/dns-ttl` | 待开发 | P2 | TTL 查询与建议 |
 | NS 服务器查询 | network | `/dns-ns` | 待开发 | P2 | 权威 NS 列表 |
 | CNAME 链检测 | network | `/dns-cname-chain` | 待开发 | P2 | CNAME 链解析 |
 | DNS SOA 记录解析 | network | `/dns-soa` | 待开发 | P2 | SOA 记录查看 |
@@ -229,15 +229,17 @@
 
 #### 一、DNS 查询工具（10）
 
+其中 1–3、4–7 已上线；8–10 待开发。
+
 | 序号 | 工具名称 | 建议路径（待定） | 备注 |
 |------|----------|------------------|------|
 | 1 | DNS 查询工具（A/AAAA/MX/TXT） | `/dns-query` | 多记录类型查询 |
 | 2 | DNS Trace 递归追踪 | `/dns-trace` | 递归解析路径 |
 | 3 | DNS 传播检测 | `/dns-propagation` | 全球传播状态 |
-| 4 | 全球 DNS 解析检测 | `/dns-global-check` | 多地区解析结果 |
+| 4 | 全球 DNS 解析检测 | `/dns-global-check` | 7 家 DoH 对比（Google/Cloudflare/Quad9/AdGuard/OpenDNS/阿里/腾讯） |
 | 5 | DNSSEC 检测 | `/dnssec-check` | 签名与链校验 |
-| 6 | DNS 服务器性能测试 | `/dns-performance` | 响应时间/可用性 |
-| 7 | DNS TTL 查看工具 | `/dns-ttl` | TTL 查询与建议 |
+| 6 | DNS 服务器性能测试 | `/dns-performance` | DoH 响应时间/可用性，支持自定义域名与 DoH 地址 |
+| 7 | DNS TTL 查看工具 | `/dns-ttl` | TTL 查询与优化建议 |
 | 8 | NS 服务器查询 | `/dns-ns` | 权威 NS 列表 |
 | 9 | CNAME 链检测 | `/dns-cname-chain` | CNAME 链解析 |
 | 10 | DNS SOA 记录解析 | `/dns-soa` | SOA 记录查看 |

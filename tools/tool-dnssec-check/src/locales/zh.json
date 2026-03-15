@@ -1,0 +1,17 @@
+{
+  "title": "DNSSEC 检测",
+  "description": "检查域名是否启用 DNSSEC 及签名验证状态",
+  "domain_label": "域名",
+  "domain_placeholder": "example.com",
+  "check_btn": "检测 DNSSEC",
+  "status": "状态",
+  "signed": "已签名",
+  "validated": "验证通过",
+  "not_signed": "未启用 DNSSEC",
+  "validation_fail": "验证失败",
+  "dnskeys": "DNSKEY 记录",
+  "ds_records": "DS 记录",
+  "error_empty": "请输入域名",
+  "error_resolution_fail": "解析失败",
+  "loading": "检测中…"
+}

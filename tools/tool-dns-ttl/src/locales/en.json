@@ -1,0 +1,17 @@
+{
+  "title": "DNS TTL Viewer",
+  "description": "Query TTL for a domain and get optimization suggestions",
+  "domain_label": "Domain",
+  "domain_placeholder": "example.com",
+  "query_btn": "Query TTL",
+  "record_type": "Type",
+  "ttl": "TTL",
+  "value": "Value",
+  "suggestion": "Suggestion",
+  "tip_low": "Low TTL: good for frequent changes (e.g. CDN, failover)",
+  "tip_medium": "Medium TTL: balance cache and updates",
+  "tip_high": "High TTL: good for stable records, less load",
+  "error_empty": "Please enter a domain",
+  "error_query": "Query failed",
+  "loading": "Querying…"
+}

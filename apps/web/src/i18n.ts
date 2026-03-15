@@ -17,6 +17,16 @@ import toolDnsTraceZh from '@toolbox/tool-dns-trace/src/locales/zh.json'
 import toolDnsTraceEn from '@toolbox/tool-dns-trace/src/locales/en.json'
 import toolDnsPropagationZh from '@toolbox/tool-dns-propagation/src/locales/zh.json'
 import toolDnsPropagationEn from '@toolbox/tool-dns-propagation/src/locales/en.json'
+import toolPptGeneratorZh from '@toolbox/tool-ppt-generator/src/locales/zh.json'
+import toolPptGeneratorEn from '@toolbox/tool-ppt-generator/src/locales/en.json'
+import toolDnsGlobalCheckZh from '@toolbox/tool-dns-global-check/src/locales/zh.json'
+import toolDnsGlobalCheckEn from '@toolbox/tool-dns-global-check/src/locales/en.json'
+import toolDnssecCheckZh from '@toolbox/tool-dnssec-check/src/locales/zh.json'
+import toolDnssecCheckEn from '@toolbox/tool-dnssec-check/src/locales/en.json'
+import toolDnsPerformanceZh from '@toolbox/tool-dns-performance/src/locales/zh.json'
+import toolDnsPerformanceEn from '@toolbox/tool-dns-performance/src/locales/en.json'
+import toolDnsTtlZh from '@toolbox/tool-dns-ttl/src/locales/zh.json'
+import toolDnsTtlEn from '@toolbox/tool-dns-ttl/src/locales/en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -35,6 +45,11 @@ export const resources = {
     toolIpAsn: toolIpAsnZh as Record<string, string>,
     toolDnsTrace: toolDnsTraceZh as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationZh as Record<string, string>,
+    toolPptGenerator: toolPptGeneratorZh as Record<string, string>,
+    toolDnsGlobalCheck: toolDnsGlobalCheckZh as Record<string, string>,
+    toolDnssecCheck: toolDnssecCheckZh as Record<string, string>,
+    toolDnsPerformance: toolDnsPerformanceZh as Record<string, string>,
+    toolDnsTtl: toolDnsTtlZh as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -49,6 +64,11 @@ export const resources = {
     toolIpAsn: toolIpAsnEn as Record<string, string>,
     toolDnsTrace: toolDnsTraceEn as Record<string, string>,
     toolDnsPropagation: toolDnsPropagationEn as Record<string, string>,
+    toolPptGenerator: toolPptGeneratorEn as Record<string, string>,
+    toolDnsGlobalCheck: toolDnsGlobalCheckEn as Record<string, string>,
+    toolDnssecCheck: toolDnssecCheckEn as Record<string, string>,
+    toolDnsPerformance: toolDnsPerformanceEn as Record<string, string>,
+    toolDnsTtl: toolDnsTtlEn as Record<string, string>,
   },
 } as const
 

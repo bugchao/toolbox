@@ -1,0 +1,17 @@
+{
+  "title": "Global DNS Resolution Check",
+  "description": "Compare resolution results from 7 public DNS providers (Google, Cloudflare, Quad9, AdGuard, OpenDNS, AliDNS, DNSPod)",
+  "domain_label": "Domain",
+  "domain_placeholder": "example.com",
+  "type_label": "Record type",
+  "query_btn": "Check",
+  "provider": "Provider",
+  "region": "Region / Note",
+  "results": "Results",
+  "ttl": "TTL",
+  "time_ms": "Time (ms)",
+  "status_ok": "OK",
+  "status_fail": "Fail",
+  "error_empty": "Please enter a domain",
+  "loading": "Checking…"
+}

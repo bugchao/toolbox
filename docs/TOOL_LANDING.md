@@ -19,6 +19,11 @@ toolbox/
 │   ├── tool-resume/
 │   ├── tool-pdf/
 │   ├── tool-qrcode/
+│   ├── tool-ppt-generator/
+│   ├── tool-dns-global-check/
+│   ├── tool-dnssec-check/
+│   ├── tool-dns-performance/
+│   ├── tool-dns-ttl/
 │   └── tool-<name>/          # 新工具：与 TOOLS_ROADMAP 建议路径对应
 ├── docs/
 ├── package.json             # 根脚本：dev / build / start

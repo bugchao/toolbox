@@ -27,7 +27,17 @@
       "@toolbox/tool-dns-trace": ["../../tools/tool-dns-trace"],
       "@toolbox/tool-dns-trace/*": ["../../tools/tool-dns-trace/*"],
       "@toolbox/tool-dns-propagation": ["../../tools/tool-dns-propagation"],
-      "@toolbox/tool-dns-propagation/*": ["../../tools/tool-dns-propagation/*"]
+      "@toolbox/tool-dns-propagation/*": ["../../tools/tool-dns-propagation/*"],
+      "@toolbox/tool-ppt-generator": ["../../tools/tool-ppt-generator"],
+      "@toolbox/tool-ppt-generator/*": ["../../tools/tool-ppt-generator/*"],
+      "@toolbox/tool-dns-global-check": ["../../tools/tool-dns-global-check"],
+      "@toolbox/tool-dns-global-check/*": ["../../tools/tool-dns-global-check/*"],
+      "@toolbox/tool-dnssec-check": ["../../tools/tool-dnssec-check"],
+      "@toolbox/tool-dnssec-check/*": ["../../tools/tool-dnssec-check/*"],
+      "@toolbox/tool-dns-performance": ["../../tools/tool-dns-performance"],
+      "@toolbox/tool-dns-performance/*": ["../../tools/tool-dns-performance/*"],
+      "@toolbox/tool-dns-ttl": ["../../tools/tool-dns-ttl"],
+      "@toolbox/tool-dns-ttl/*": ["../../tools/tool-dns-ttl/*"]
     },
 
     /* Linting */

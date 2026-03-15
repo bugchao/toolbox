@@ -2,7 +2,8 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Home, Star, QrCode, Newspaper, MapPin, Cloud, Code, FileCode, Clock, Link2,
   Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart,
-  Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route
+  Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
+  Presentation, ShieldCheck, Activity
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -30,6 +31,10 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dns-query', nameKey: 'tools.dns_query', icon: Server, categoryKey: 'network', keywords: ['dns', '域名', '解析'] },
   { path: '/dns-trace', nameKey: 'tools.dns_trace', icon: Route, categoryKey: 'network', keywords: ['dns', 'trace', '递归', '追踪'], i18nNamespace: 'toolDnsTrace' },
   { path: '/dns-propagation', nameKey: 'tools.dns_propagation', icon: Globe, categoryKey: 'network', keywords: ['dns', 'propagation', '传播', '检测'], i18nNamespace: 'toolDnsPropagation' },
+  { path: '/dns-global-check', nameKey: 'tools.dns_global_check', icon: Globe, categoryKey: 'network', keywords: ['dns', '全球', '解析', '检测'], i18nNamespace: 'toolDnsGlobalCheck' },
+  { path: '/dnssec-check', nameKey: 'tools.dnssec_check', icon: ShieldCheck, categoryKey: 'network', keywords: ['dns', 'dnssec', '签名', '校验'], i18nNamespace: 'toolDnssecCheck' },
+  { path: '/dns-performance', nameKey: 'tools.dns_performance', icon: Activity, categoryKey: 'network', keywords: ['dns', '性能', '响应', '可用性'], i18nNamespace: 'toolDnsPerformance' },
+  { path: '/dns-ttl', nameKey: 'tools.dns_ttl', icon: Clock, categoryKey: 'network', keywords: ['dns', 'ttl', '缓存'], i18nNamespace: 'toolDnsTtl' },
   { path: '/json', nameKey: 'tools.json', icon: Braces, categoryKey: 'dev', keywords: ['json'], i18nNamespace: 'toolJson' },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: FileCode, categoryKey: 'dev', keywords: ['base64'] },
@@ -59,6 +64,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/life-progress', nameKey: 'tools.life_progress', icon: Clock, categoryKey: 'utils', keywords: ['人生进度'] },
   { path: '/meeting-minutes', nameKey: 'tools.meeting_minutes', icon: FileText, categoryKey: 'ai', keywords: ['会议纪要', 'transcript', 'minutes'] },
   { path: '/ui-generator', nameKey: 'tools.ui_generator', icon: Wand2, categoryKey: 'ai', keywords: ['ui', 'wireframe', '设计生成'] },
+  { path: '/ppt-generator', nameKey: 'tools.ppt_generator', icon: Presentation, categoryKey: 'ai', keywords: ['ppt', '演示', '幻灯片', 'ai'], i18nNamespace: 'toolPptGenerator' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

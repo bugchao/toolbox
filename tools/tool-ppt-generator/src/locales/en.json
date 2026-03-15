@@ -1,0 +1,21 @@
+{
+  "title": "AI PPT Generator",
+  "description": "Generate outline, content and layout from a topic and export as presentation",
+  "topic_label": "Presentation topic",
+  "topic_placeholder": "e.g. Product launch, Q4 summary, Tech share",
+  "subtitle_label": "Subtitle (optional)",
+  "subtitle_placeholder": "Department, date or tagline",
+  "outline_label": "Outline (use --- to separate slides; first line = title, lines starting with - = bullets)",
+  "outline_placeholder": "Slide 1 title\n- Point one\n- Point two\n---\nSlide 2 title\n- Point…",
+  "theme_label": "Theme",
+  "theme_blue": "Blue business",
+  "theme_gray": "Gray minimal",
+  "theme_green": "Green fresh",
+  "theme_purple": "Purple professional",
+  "gen_outline_btn": "Generate outline",
+  "gen_ppt_btn": "Generate & download PPT",
+  "tip": "Use --- on its own line to separate slides. First line of each block is the title; lines starting with - or • become bullet points.",
+  "loading": "Generating…",
+  "error_topic": "Please enter a topic",
+  "error_outline": "Please add at least one slide with a title"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "DNS TTL 查看工具",
+  "description": "查询域名的 TTL 并获取优化建议",
+  "domain_label": "域名",
+  "domain_placeholder": "example.com",
+  "query_btn": "查询 TTL",
+  "record_type": "记录类型",
+  "ttl": "TTL",
+  "value": "值",
+  "suggestion": "建议",
+  "tip_low": "较低 TTL：适合频繁变更（如 CDN、故障切换）",
+  "tip_medium": "中等 TTL：平衡缓存与更新（常用）",
+  "tip_high": "较高 TTL：适合稳定记录，减少解析压力",
+  "error_empty": "请输入域名",
+  "error_query": "查询失败",
+  "loading": "查询中…"
+}
