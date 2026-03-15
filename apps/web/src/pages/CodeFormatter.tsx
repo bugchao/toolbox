@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Download, RefreshCw, Check } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const CodeFormatter: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [language, setLanguage] = useState('json')
@@ -144,10 +148,7 @@ const CodeFormatter: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">代码美化工具</h2>
-        <p className="text-gray-600">支持JSON、HTML、CSS、JS、TS等多种代码的格式化美化</p>
-      </div>
+      <PageHero title={t('tools.code')} description={tHome('toolDesc.code')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 操作栏 */}

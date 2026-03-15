@@ -102,14 +102,14 @@ const QrCodeReader: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">二维码解析器</h1>
-        
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">二维码解析器</h1>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="flex flex-col space-y-4">
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center justify-center"
+                className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center justify-center"
               >
                 <Upload className="w-4 h-4 mr-2" />
                 上传二维码图片
@@ -125,7 +125,7 @@ const QrCodeReader: React.FC = () => {
               {!isCameraActive ? (
                 <button
                   onClick={startCamera}
-                  className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center justify-center"
+                  className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center justify-center"
                 >
                   <Camera className="w-4 h-4 mr-2" />
                   摄像头扫描
@@ -133,7 +133,7 @@ const QrCodeReader: React.FC = () => {
               ) : (
                 <button
                   onClick={stopCamera}
-                  className="btn bg-red-100 text-red-700 hover:bg-red-200 flex items-center justify-center"
+                  className="btn bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-900/60 flex items-center justify-center"
                 >
                   停止扫描
                 </button>
@@ -158,14 +158,14 @@ const QrCodeReader: React.FC = () => {
             )}
 
             {error && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+              <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300">
                 {error}
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               解析结果
             </label>
             <div className="relative">
@@ -178,7 +178,7 @@ const QrCodeReader: React.FC = () => {
               {result && (
                 <button
                   onClick={copyToClipboard}
-                  className="absolute top-2 right-2 p-2 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                  className="absolute top-2 right-2 p-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg text-gray-700 dark:text-gray-200"
                   title="复制到剪贴板"
                 >
                   <Copy className="w-4 h-4" />
@@ -190,8 +190,8 @@ const QrCodeReader: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">使用说明</h2>
-        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">使用说明</h2>
+        <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
           <li>支持上传二维码图片进行解析，支持常见的图片格式</li>
           <li>可以使用摄像头实时扫描二维码，支持前后摄像头切换</li>
           <li>解析成功后可以一键复制结果内容</li>

@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "create:tool": "node scripts/create-tool.cjs",
     "dev": "pnpm -C apps/web dev",
     "build": "pnpm -C apps/web build",
     "lint": "pnpm -C apps/web lint",

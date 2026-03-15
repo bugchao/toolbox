@@ -35,6 +35,7 @@ import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import IpQuery from './pages/IpQuery'
 import ShortLinkGenerator from './pages/ShortLinkGenerator'
+import ShortLinkRedirect from './pages/ShortLinkRedirect'
 import ColorGenerator from './pages/ColorGenerator'
 import MemeGenerator from './pages/MemeGenerator'
 import CopywritingGenerator from './pages/CopywritingGenerator'
@@ -87,6 +88,7 @@ function App() {
           <Route path="/ip-query" element={<IpQuery />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
+          <Route path="/s/:code" element={<ShortLinkRedirect />} />
           <Route path="/resume-generator" element={<ResumeGenerator />} />
           <Route path="/color-generator" element={<ColorGenerator />} />
           <Route path="/meme-generator" element={<MemeGenerator />} />

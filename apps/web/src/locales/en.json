@@ -1,11 +1,13 @@
 {
   "common": {
-    "appName": "Toolbox",
+    "appName": "Bug Tide",
     "loading": "Loading...",
     "theme": {
       "light": "Light",
       "dark": "Dark"
     },
+    "backgroundShow": "Show tool page background",
+    "backgroundHide": "Hide tool page background",
     "lang_zh": "中文",
     "lang_en": "English"
   },
@@ -66,7 +68,7 @@
     "removeFromFavorites": "Remove from favorites"
   },
   "home": {
-    "welcomeTitle": "Welcome to Toolbox",
+    "welcomeTitle": "Welcome · Bug Tide",
     "welcomeSubtitle": "An online platform with many practical tools, always growing.",
     "useNow": "Use now",
     "featureTitle": "Features",
@@ -143,6 +145,6 @@
     "exportJson": "JSON"
   },
   "footer": {
-    "copyright": "© 2026 Toolbox · Always updating"
+    "copyright": "© 2026 Bug Tide · Always updating"
   }
 }

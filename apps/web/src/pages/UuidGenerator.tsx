@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, RefreshCw } from 'lucide-react'
 import { v4 as uuidv4, v1 as uuidv1, v3 as uuidv3, v5 as uuidv5 } from 'uuid'
+import { PageHero } from '@toolbox/ui-kit'
 
 const UuidGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [uuids, setUuids] = useState<string[]>([])
   const [count, setCount] = useState(1)
   const [version, setVersion] = useState<'v1' | 'v4' | 'v3' | 'v5'>('v4')
@@ -116,10 +120,7 @@ const UuidGenerator: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">UUID/随机字符串生成器</h2>
-        <p className="text-gray-600">生成UUID、随机字符串，用于测试数据、唯一ID生成等场景</p>
-      </div>
+      <PageHero title={t('tools.uuid')} description={tHome('toolDesc.uuid')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 模式选择 */}

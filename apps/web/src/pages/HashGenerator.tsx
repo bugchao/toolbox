@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, Upload, FileText } from 'lucide-react'
 import * as crypto from 'crypto-js'
+import { PageHero } from '@toolbox/ui-kit'
 
 const HashGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [input, setInput] = useState('')
   const [inputType, setInputType] = useState<'text' | 'file'>('text')
   const [hashes, setHashes] = useState<Record<string, string>>({})
@@ -69,10 +73,7 @@ const HashGenerator: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">哈希计算工具</h2>
-        <p className="text-gray-600">支持MD5、SHA1、SHA256等多种哈希算法，计算文件/文本哈希值</p>
-      </div>
+      <PageHero title={t('tools.hash')} description={tHome('toolDesc.hash')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 操作栏 */}

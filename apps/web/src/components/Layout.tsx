@@ -5,9 +5,10 @@ import {
   QrCode, Newspaper, MapPin, Cloud, Menu, X, ChevronDown,
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key,
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
-  Eraser, Ruler, Search, File, Globe, Sun, Moon, Languages
+  Eraser, Ruler, Search, File, Globe, Sun, Moon, Languages, Layers
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
+import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
 import { setLocale, type Locale } from '../i18n'
 import { TOOLS } from '../config/tools'
 import { CommandPalette } from './CommandPalette'
@@ -38,6 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t: tCommonTheme } = useTranslation('common')
   const { t: tCp } = useTranslation('commandPalette')
   const { theme, toggleTheme } = useTheme()
+  const { visible: backgroundVisible, setVisible: setBackgroundVisible } = useBackgroundVisibility()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openCategory, setOpenCategory] = useState<string | null>(null)
   const [langOpen, setLangOpen] = useState(false)
@@ -77,8 +79,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f4f8] dark:bg-gray-900 transition-colors">
-      <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+    <div className="min-h-screen flex flex-col relative">
+      <GlobalBackground />
+      <ParticlesBackground className="fixed inset-0 -z-10" />
+      <nav className="relative z-20 bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm shadow-lg border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -125,7 +129,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                       </button>
                       {isOpen && (
-                        <div className="absolute left-0 z-10 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 py-1">
+                        <div className="absolute left-0 z-50 mt-1 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 py-1">
                           {groupedNav[category.id]?.map((item) => {
                             const ItemIcon = item.icon
                             const isActive = location.pathname === item.href
@@ -160,6 +164,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 title={tCp('shortcut')}
               >
                 <Search className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setBackgroundVisible(!backgroundVisible)}
+                className={`p-2 rounded-lg transition-colors ${
+                  backgroundVisible
+                    ? 'text-indigo-500 dark:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    : 'text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+                title={backgroundVisible ? tCommon('backgroundHide') : tCommon('backgroundShow')}
+              >
+                <Layers className="w-5 h-5" />
               </button>
               <button
                 onClick={toggleTheme}
@@ -269,13 +285,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         )}
       </nav>
 
-      <main className="flex-1 max-w-7xl w-full mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           {children}
         </div>
       </main>
 
-      <footer className="mt-auto bg-white dark:bg-gray-800 shadow-inner border-t border-gray-200 dark:border-gray-700">
+      <footer className="relative z-20 mt-auto bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm shadow-inner border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500 dark:text-gray-300 text-sm">
             {tFooter('copyright')}

@@ -103,9 +103,13 @@ toolbox/                        # 仓库根（所有命令默认在根执行）
 
 ### 方式 B：新增独立工具包（有专属依赖、可独立开发）
 
-适用于：需要单独依赖（如某个 npm 库只给这个工具用）、希望工具可独立迭代的场景。
+适用于：需要单独依赖（如某个 npm 库只给这个工具用）、希望工具可独立迭代的场景。**落地规范详见 [TOOL_LANDING.md](TOOL_LANDING.md)**。
 
-1. **创建包目录**
+1. **创建包（推荐用脚手架）**
+   ```bash
+   pnpm create:tool <name>   # 如 dns-query → tools/tool-dns-query/
+   ```
+   或手动创建目录：
    ```bash
    mkdir -p tools/tool-xxx/src
    ```
@@ -207,6 +211,7 @@ A: 运行 `pnpm crawl:news` 会写入 `apps/web/public/news.json`；生产环境
 
 - [README.md](../README.md) - 项目概览与快速开始  
 - [TOOLS_ROADMAP.md](TOOLS_ROADMAP.md) - **已开发/待开发/代码落位**（避免重复开发、规划唯一来源）  
+- [TOOL_LANDING.md](TOOL_LANDING.md) - **工具规划落地目录与 Monorepo 规范**（落位目录、独立开发/部署、dev 流程、create:tool）  
 - [ROADMAP_CONVENTION.md](ROADMAP_CONVENTION.md) - 规划约定（怎么提、分类、怎么给 AI）  
 - [TOOLS_LIST.md](../TOOLS_LIST.md) - 完整工具清单与统计  
 - [ARCHITECTURE.md](../ARCHITECTURE.md) - 架构规划  

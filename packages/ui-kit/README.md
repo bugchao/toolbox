@@ -14,26 +14,33 @@
   ],
   ```
 
-## 组件
+## 组件与能力
 
-| 组件 | 说明 |
-|------|------|
-| `Button` | 按钮，支持 primary/secondary/danger/success/ghost，内置 dark 样式 |
-| `Card` | 卡片容器，统一圆角、阴影、浅/暗背景 |
-| `Input` | 输入框，统一边框与 focus 环，支持 error、size |
+| 类别 | 导出 | 说明 |
+|------|------|------|
+| 基础 | `Button`, `Card`, `Input`, `PageHero` | 按钮/卡片/输入/页面标题区，统一 dark 样式 |
+| 工具 | `cn` | 类名合并（clsx + tailwind-merge），shadcn/ui 风格基础 |
+| 动画 | `FadeIn`, `StaggerChildren` | Motion 淡入、列表错开入场 |
+| 弹簧 | `FlipCard`, `Parallax` | @react-spring 卡片翻转、视差滚动 |
+| 背景 | `ParticlesBackground`, `BackgroundVisibilityProvider`, `useBackgroundVisibility`, `particlesPresets` | 粒子背景（每工具可选预设），全局显示/隐藏 |
+| 图表 | `ChartContainer`, `LineChart`, `Line`, `BarChart`, … | Recharts 容器与常用图表组件 |
 
 ## 使用
 
 ```tsx
-import { Button, Card, Input } from '@toolbox/ui-kit'
+import { Button, Card, Input, PageHero, cn, FadeIn, FlipCard, ParticlesBackground, ChartContainer, LineChart, Line, XAxis, YAxis } from '@toolbox/ui-kit'
 
-<Card className="mt-4">
-  <Input placeholder="请输入" />
-  <Button variant="primary">确定</Button>
-</Card>
+<PageHero title="工具名" description="描述" />
+<FadeIn delay={0.1}><Card>...</Card></FadeIn>
+<FlipCard front={<div>正面</div>} back={<div>背面</div>} />
+<ParticlesBackground preset="minimal" className="absolute inset-0" />
+<ChartContainer title="趋势"><LineChart data={data}><Line dataKey="value" />...</LineChart></ChartContainer>
 ```
+
+应用根需包裹 `BackgroundVisibilityProvider` 以控制粒子背景全局开关。
 
 ## 扩展
 
 - 新增组件时在 `src/` 下实现并带齐 `dark:` 样式，再在 `src/index.ts` 中导出。
-- 可选参考 `src/theme.ts` 中的 token 保持与现有组件风格一致。
+- 风格以 **shadcn/ui** 为参考：使用 `cn()`、可选 `class-variance-authority`，与现有 token（`src/theme.ts`）一致。
+- 各工具开发前请参考 [docs/UI_KIT_USAGE_BY_TOOL.md](../../docs/UI_KIT_USAGE_BY_TOOL.md)：是否用 Motion/Spring/粒子/图表，**先在 ui-kit 封装再在工具内使用**。

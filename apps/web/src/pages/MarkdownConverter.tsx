@@ -127,6 +127,11 @@ const templates: Template[] = [
   }
 ];
 
+/** 将模板中的 body 选择器限定到预览容器，避免影响整页布局 */
+function scopeTemplateCssForPreview(css: string): string {
+  return css.replace(/\bbody\s*\{/g, '.markdown-preview-root {');
+}
+
 const MarkdownConverter: React.FC = () => {
   const [markdown, setMarkdown] = useState(`# Markdown 转换工具
 
@@ -169,6 +174,7 @@ $$ E = mc^2 $$
 `);
   const [htmlOutput, setHtmlOutput] = useState('');
   const [previewHtml, setPreviewHtml] = useState('');
+  const [contentHtml, setContentHtml] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('微信公众号');
   const [viewMode, setViewMode] = useState<'split' | 'edit' | 'preview'>('split');
   const [copied, setCopied] = useState(false);
@@ -205,10 +211,12 @@ ${contentHtml}
 </body>
 </html>`;
 
-      // 内容HTML（用于复制，不含HTML头部）
-      const contentOnlyHtml = `<style>${template.css}</style>${contentHtml}`;
+      // 预览用：限定样式到 .markdown-preview-root，避免 body 样式影响整页宽度
+      const scopedCss = scopeTemplateCssForPreview(template.css);
+      const contentOnlyHtml = `<style>${scopedCss}</style><div class="markdown-preview-root">${contentHtml}</div>`;
       
       setHtmlOutput(fullHtml);
+      setContentHtml(contentHtml);
       setPreviewHtml(contentOnlyHtml);
     } catch (error) {
       console.error('转换失败:', error);
@@ -223,13 +231,12 @@ ${contentHtml}
 
   const handleCopyHtml = async () => {
     try {
-      // 只复制body内容和样式，适合公众号粘贴
+      // 只复制 body 内容和样式，适合公众号粘贴（使用原始 template.css，含 body）
       const template = templates.find(t => t.name === selectedTemplate) || templates[0];
-      const bodyContent = previewHtml.replace(`<style>${template.css}</style>`, '');
       const copyContent = `
         <style>${template.css}</style>
         <div class="markdown-body">
-          ${bodyContent}
+          ${contentHtml}
         </div>
       `;
       
@@ -267,23 +274,23 @@ ${contentHtml}
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl min-w-0">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Markdown 格式转换</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">Markdown 格式转换</h1>
+        <p className="text-gray-600 dark:text-gray-300">
           支持转换为HTML、微信公众号、掘金等多种格式，一键复制直接使用
         </p>
       </div>
 
       {/* 工具栏 */}
-      <div className="bg-white rounded-lg shadow mb-6 p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow mb-6 p-4 border border-gray-200 dark:border-gray-700">
         <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">输出样式:</label>
+          <div className="flex items-center gap-2 min-w-0">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">输出样式:</label>
             <select
               value={selectedTemplate}
               onChange={(e) => setSelectedTemplate(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 min-w-0"
             >
               {templates.map(template => (
                 <option key={template.name} value={template.name}>
@@ -293,26 +300,26 @@ ${contentHtml}
             </select>
           </div>
 
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">视图模式:</label>
-            <div className="flex border border-gray-300 rounded-md overflow-hidden">
+          <div className="flex items-center gap-2 min-w-0 shrink-0">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">视图模式:</label>
+            <div className="flex border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
               <button
                 onClick={() => setViewMode('edit')}
-                className={`px-3 py-1.5 text-sm ${viewMode === 'edit' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                className={`px-3 py-1.5 text-sm ${viewMode === 'edit' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Edit className="h-4 w-4 inline mr-1" />
                 编辑
               </button>
               <button
                 onClick={() => setViewMode('split')}
-                className={`px-3 py-1.5 text-sm ${viewMode === 'split' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                className={`px-3 py-1.5 text-sm ${viewMode === 'split' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Code className="h-4 w-4 inline mr-1" />
                 分栏
               </button>
               <button
                 onClick={() => setViewMode('preview')}
-                className={`px-3 py-1.5 text-sm ${viewMode === 'preview' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                className={`px-3 py-1.5 text-sm ${viewMode === 'preview' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Eye className="h-4 w-4 inline mr-1" />
                 预览
@@ -320,17 +327,17 @@ ${contentHtml}
             </div>
           </div>
 
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-2 ml-auto flex-wrap">
             <button
               onClick={handlePaste}
-              className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md flex items-center gap-1 text-sm"
+              className="px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center gap-1 text-sm"
             >
               <Clipboard className="h-4 w-4" />
               粘贴
             </button>
             <button
               onClick={handleClear}
-              className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md flex items-center gap-1 text-sm"
+              className="px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center gap-1 text-sm"
             >
               清空
             </button>
@@ -351,22 +358,22 @@ ${contentHtml}
           </div>
         </div>
 
-        <div className="mt-2 text-sm text-gray-500">
+        <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           {templates.find(t => t.name === selectedTemplate)?.description}
         </div>
       </div>
 
       {/* 主内容区 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-w-0">
         {/* 编辑器 */}
         {(viewMode === 'edit' || viewMode === 'split') && (
-          <div className={`bg-white rounded-lg shadow overflow-hidden ${viewMode === 'edit' ? 'lg:col-span-2' : ''}`}>
-            <div className="border-b border-gray-200 px-4 py-2 bg-gray-50 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Edit className="h-4 w-4 text-gray-500" />
-                <span className="text-sm font-medium text-gray-700">Markdown 编辑器</span>
+          <div className={`min-w-0 flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-gray-700 ${viewMode === 'edit' ? 'lg:col-span-2' : ''}`}>
+            <div className="border-b border-gray-200 dark:border-gray-600 px-4 py-2 bg-gray-50 dark:bg-gray-700/50 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <Edit className="h-4 w-4 text-gray-500 dark:text-gray-400 shrink-0" />
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">Markdown 编辑器</span>
               </div>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
                 {markdown.length} 字符
               </span>
             </div>
@@ -374,7 +381,7 @@ ${contentHtml}
               ref={editorRef}
               value={markdown}
               onChange={(e) => setMarkdown(e.target.value)}
-              className="w-full h-[600px] p-4 font-mono text-sm resize-none focus:outline-none"
+              className="w-full min-h-[400px] h-[50vh] lg:h-[600px] p-4 font-mono text-sm resize-none focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
               placeholder="在此输入Markdown内容..."
               spellCheck="false"
             />
@@ -383,13 +390,13 @@ ${contentHtml}
 
         {/* 预览区 */}
         {(viewMode === 'preview' || viewMode === 'split') && (
-          <div className={`bg-white rounded-lg shadow overflow-hidden ${viewMode === 'preview' ? 'lg:col-span-2' : ''}`}>
-            <div className="border-b border-gray-200 px-4 py-2 bg-gray-50 flex items-center gap-2">
-              <Eye className="h-4 w-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">预览效果</span>
+          <div className={`min-w-0 flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-gray-700 ${viewMode === 'preview' ? 'lg:col-span-2' : ''}`}>
+            <div className="border-b border-gray-200 dark:border-gray-600 px-4 py-2 bg-gray-50 dark:bg-gray-700/50 flex items-center gap-2 shrink-0">
+              <Eye className="h-4 w-4 text-gray-500 dark:text-gray-400 shrink-0" />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">预览效果</span>
             </div>
-            <div 
-              className="p-4 h-[600px] overflow-auto"
+            <div
+              className="p-4 min-h-[400px] h-[50vh] lg:h-[600px] overflow-auto min-w-0 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 [&_.markdown-body]:text-gray-900 [&_.markdown-body]:dark:text-gray-100 [&_.markdown-preview-root]:max-w-full [&_.markdown-preview-root_table]:max-w-full [&_.markdown-preview-root_pre]:max-w-full"
               dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           </div>
@@ -397,12 +404,12 @@ ${contentHtml}
       </div>
 
       {/* 语法提示 */}
-      <div className="mt-6 bg-white rounded-lg shadow p-4">
-        <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+      <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700">
+        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
           <Palette className="h-4 w-4" />
           支持的语法
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-600">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-600 dark:text-gray-400">
           <div>✅ 标题 (H1-H6)</div>
           <div>✅ 粗体/斜体</div>
           <div>✅ 列表 (有序/无序)</div>

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Search, Copy, Check, AlertCircle } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const RegexTester: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [pattern, setPattern] = useState('')
   const [flags, setFlags] = useState('g')
   const [testString, setTestString] = useState('')
@@ -92,10 +96,7 @@ const RegexTester: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">正则表达式测试工具</h2>
-        <p className="text-gray-600">在线测试正则表达式，支持匹配结果高亮、分组显示</p>
-      </div>
+      <PageHero title={t('tools.regex')} description={tHome('toolDesc.regex')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 正则输入 */}

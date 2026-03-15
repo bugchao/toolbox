@@ -395,5 +395,6 @@
 | 文档 | 用途 |
 |------|------|
 | 本文档 `docs/TOOLS_ROADMAP.md` | 已开发落位 + 待开发/调研清单 + 分类与更新规范 |
+| [docs/TOOL_LANDING.md](TOOL_LANDING.md) | 工具规划落地目录、Monorepo 规范、独立开发/部署、create:tool |
 | [docs/ROADMAP_CONVENTION.md](ROADMAP_CONVENTION.md) | 规划约定（怎么提、怎么填、怎么给 AI） |
 | [TOOLS_LIST.md](../TOOLS_LIST.md) | 对外/产品向工具清单与统计（与本文档同步） |

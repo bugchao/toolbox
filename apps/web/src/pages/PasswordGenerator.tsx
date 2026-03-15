@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, RefreshCw, Eye, EyeOff } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const PasswordGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [password, setPassword] = useState('')
   const [length, setLength] = useState(16)
   const [includeUppercase, setIncludeUppercase] = useState(true)
@@ -119,10 +123,7 @@ const PasswordGenerator: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">密码生成器</h2>
-        <p className="text-gray-600">生成高强度随机密码，支持自定义长度和字符类型</p>
-      </div>
+      <PageHero title={t('tools.password')} description={tHome('toolDesc.password')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 密码展示 */}

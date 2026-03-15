@@ -61,12 +61,12 @@ const QrCodeGenerator: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">二维码生成器</h1>
-        
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">二维码生成器</h1>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 二维码内容
               </label>
               <textarea
@@ -79,7 +79,7 @@ const QrCodeGenerator: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   二维码大小 (px)
                 </label>
                 <input
@@ -93,7 +93,7 @@ const QrCodeGenerator: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   前景颜色
                 </label>
                 <input
@@ -106,7 +106,7 @@ const QrCodeGenerator: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 背景颜色
               </label>
               <input
@@ -129,7 +129,7 @@ const QrCodeGenerator: React.FC = () => {
           <div className="flex flex-col items-center justify-center">
             {qrCodeUrl ? (
               <div className="text-center space-y-4">
-                <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div className="p-4 bg-white dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm">
                   <img
                     src={qrCodeUrl}
                     alt="生成的二维码"
@@ -139,14 +139,14 @@ const QrCodeGenerator: React.FC = () => {
                 <div className="flex space-x-4 justify-center">
                   <button
                     onClick={downloadQrCode}
-                    className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center"
+                    className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     下载
                   </button>
                   <button
                     onClick={copyToClipboard}
-                    className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center"
+                    className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center"
                   >
                     <Copy className="w-4 h-4 mr-2" />
                     复制
@@ -154,7 +154,7 @@ const QrCodeGenerator: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="w-full aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
+              <div className="w-full aspect-square border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center text-gray-400 dark:text-gray-500">
                 <div className="text-center">
                   <div className="text-6xl mb-4">📱</div>
                   <p>生成的二维码将显示在这里</p>
@@ -166,8 +166,8 @@ const QrCodeGenerator: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">使用说明</h2>
-        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">使用说明</h2>
+        <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
           <li>支持生成网址、文本、联系信息等各种内容的二维码</li>
           <li>可以自定义二维码的大小、前景色和背景色</li>
           <li>生成的二维码可以下载为PNG图片或复制到剪贴板</li>

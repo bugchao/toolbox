@@ -134,32 +134,32 @@ const QrCodeBeautifier: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">二维码美化工具</h1>
-      
+      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">二维码美化工具</h1>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 左侧配置区 */}
         <div className="space-y-6">
           {/* 内容输入 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <span className="text-blue-600">📝</span> 基础内容
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <span className="text-blue-600 dark:text-blue-400">📝</span> 基础内容
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   二维码内容
                 </label>
                 <textarea
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none h-24"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none h-24 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
                   placeholder="输入网址、文本或任何内容..."
                 />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     二维码大小 (px)
                   </label>
                   <input
@@ -168,17 +168,17 @@ const QrCodeBeautifier: React.FC = () => {
                     onChange={(e) => setQrSize(Math.max(100, Math.min(1000, parseInt(e.target.value) || 300)))}
                     min="100"
                     max="1000"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     容错级别
                   </label>
                   <select
                     value={errorCorrection}
                     onChange={(e) => setErrorCorrection(e.target.value as 'L' | 'M' | 'Q' | 'H')}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   >
                     <option value="L">低 (7%)</option>
                     <option value="M">中 (15%)</option>
@@ -191,13 +191,13 @@ const QrCodeBeautifier: React.FC = () => {
           </div>
 
           {/* 颜色配置 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Palette className="w-5 h-5 text-purple-600" /> 颜色设置
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <Palette className="w-5 h-5 text-purple-600 dark:text-purple-400" /> 颜色设置
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   前景色
                 </label>
                 <div className="flex gap-2">
@@ -205,18 +205,18 @@ const QrCodeBeautifier: React.FC = () => {
                     type="color"
                     value={foregroundColor}
                     onChange={(e) => setForegroundColor(e.target.value)}
-                    className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
+                    className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded cursor-pointer bg-white"
                   />
                   <input
                     type="text"
                     value={foregroundColor}
                     onChange={(e) => setForegroundColor(e.target.value)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   背景色
                 </label>
                 <div className="flex gap-2">
@@ -224,13 +224,13 @@ const QrCodeBeautifier: React.FC = () => {
                     type="color"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
+                    className="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded cursor-pointer bg-white"
                   />
                   <input
                     type="text"
                     value={backgroundColor}
                     onChange={(e) => setBackgroundColor(e.target.value)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />
                 </div>
               </div>
@@ -238,19 +238,19 @@ const QrCodeBeautifier: React.FC = () => {
           </div>
 
           {/* Logo配置 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-green-600" /> Logo设置
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <ImageIcon className="w-5 h-5 text-green-600 dark:text-green-400" /> Logo设置
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   上传Logo
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
+                    className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
                   >
                     <Upload className="w-4 h-4" />
                     选择图片
@@ -258,7 +258,7 @@ const QrCodeBeautifier: React.FC = () => {
                   {logoImage && (
                     <button
                       onClick={removeLogo}
-                      className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                      className="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
                     >
                       移除Logo
                     </button>
@@ -275,7 +275,7 @@ const QrCodeBeautifier: React.FC = () => {
               
               {logoImage && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Logo大小 (px)
                   </label>
                   <input
@@ -284,7 +284,7 @@ const QrCodeBeautifier: React.FC = () => {
                     onChange={(e) => setLogoSize(Math.max(20, Math.min(qrSize / 3, parseInt(e.target.value) || 60)))}
                     min="20"
                     max={qrSize / 3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />
                 </div>
               )}
@@ -292,19 +292,19 @@ const QrCodeBeautifier: React.FC = () => {
           </div>
 
           {/* 样式配置 */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Layers className="w-5 h-5 text-orange-600" /> 样式设置
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <Layers className="w-5 h-5 text-orange-600 dark:text-orange-400" /> 样式设置
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   点样式
                 </label>
                 <select
                   value={dotStyle}
                   onChange={(e) => setDotStyle(e.target.value as 'square' | 'rounded' | 'dots')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="square">方形</option>
                   <option value="rounded">圆角</option>
@@ -312,13 +312,13 @@ const QrCodeBeautifier: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   角点样式
                 </label>
                 <select
                   value={eyeStyle}
                   onChange={(e) => setEyeStyle(e.target.value as 'square' | 'rounded' | 'circle')}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="square">方形</option>
                   <option value="rounded">圆角</option>
@@ -326,7 +326,7 @@ const QrCodeBeautifier: React.FC = () => {
                 </select>
               </div>
             </div>
-            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-700">
+            <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg text-sm text-yellow-700 dark:text-yellow-300">
               ⚠️ 圆点/圆角样式功能正在开发中，敬请期待
             </div>
           </div>
@@ -334,15 +334,15 @@ const QrCodeBeautifier: React.FC = () => {
 
         {/* 右侧预览区 */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">二维码预览</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">二维码预览</h2>
             <div className="flex flex-col items-center space-y-6">
-              <div 
-                className="border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center bg-gray-50"
+              <div
+                className="border-2 border-gray-200 dark:border-gray-600 rounded-lg p-4 flex items-center justify-center bg-gray-50 dark:bg-gray-700/50"
                 style={{ minHeight: qrSize + 32 }}
               >
                 {isGenerating ? (
-                  <div className="text-gray-500">生成中...</div>
+                  <div className="text-gray-500 dark:text-gray-400">生成中...</div>
                 ) : qrCodeUrl ? (
                   <img
                     src={qrCodeUrl}
@@ -351,7 +351,7 @@ const QrCodeBeautifier: React.FC = () => {
                     style={{ width: qrSize, height: qrSize }}
                   />
                 ) : (
-                  <div className="text-gray-500">请输入内容生成二维码</div>
+                  <div className="text-gray-500 dark:text-gray-400">请输入内容生成二维码</div>
                 )}
                 <canvas ref={canvasRef} className="hidden" />
               </div>
@@ -360,7 +360,7 @@ const QrCodeBeautifier: React.FC = () => {
                 <div className="flex gap-4 w-full justify-center">
                   <button
                     onClick={downloadQrCode}
-                    className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                    className="px-6 py-3 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors flex items-center gap-2"
                   >
                     <Download className="w-5 h-5" />
                     下载PNG
@@ -368,7 +368,7 @@ const QrCodeBeautifier: React.FC = () => {
                   <button
                     onClick={copyToClipboard}
                     className={`px-6 py-3 ${
-                      copied ? 'bg-green-600' : 'bg-gray-600'
+                      copied ? 'bg-green-600 dark:bg-green-500' : 'bg-gray-600 dark:bg-gray-500'
                     } text-white rounded-lg hover:bg-opacity-90 transition-colors flex items-center gap-2`}
                   >
                     <Copy className="w-5 h-5" />
@@ -379,23 +379,23 @@ const QrCodeBeautifier: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">💡 使用提示</h2>
-            <ul className="space-y-2 text-gray-700">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">💡 使用提示</h2>
+            <ul className="space-y-2 text-gray-700 dark:text-gray-300">
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span>
+                <span className="text-blue-500 dark:text-blue-400 font-bold">•</span>
                 <span>高容错级别适合添加较大的Logo，二维码被遮挡部分仍可识别</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span>
+                <span className="text-blue-500 dark:text-blue-400 font-bold">•</span>
                 <span>建议Logo大小不超过二维码的1/3，避免影响扫码识别</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span>
+                <span className="text-blue-500 dark:text-blue-400 font-bold">•</span>
                 <span>前景色和背景色需要有足够的对比度，确保扫码成功率</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-500 font-bold">•</span>
+                <span className="text-blue-500 dark:text-blue-400 font-bold">•</span>
                 <span>生成的二维码可以直接下载或复制到剪贴板使用</span>
               </li>
             </ul>

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Clock, Check } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const Timestamp: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [timestamp, setTimestamp] = useState('')
   const [datetime, setDatetime] = useState('')
   const [unit, setUnit] = useState<'second' | 'millisecond'>('second')
@@ -89,10 +93,7 @@ const Timestamp: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">时间戳转换工具</h2>
-        <p className="text-gray-600">支持秒级和毫秒级时间戳与日期时间的互相转换</p>
-      </div>
+      <PageHero title={t('tools.timestamp')} description={tHome('toolDesc.timestamp')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 操作栏 */}

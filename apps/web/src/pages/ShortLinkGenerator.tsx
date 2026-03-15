@@ -165,8 +165,8 @@ const ShortLinkGenerator: React.FC = () => {
               <label htmlFor="customCode" className="block text-sm font-medium text-gray-700 mb-2">
                 自定义后缀（可选）
               </label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+              <div className="flex rounded-lg border border-gray-300 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
+                <span className="flex items-center shrink-0 px-3 py-3 bg-gray-50 text-gray-500 text-sm border-r border-gray-200 truncate max-w-[min(100%,14rem)]">
                   {window.location.origin}/s/
                 </span>
                 <input
@@ -175,11 +175,11 @@ const ShortLinkGenerator: React.FC = () => {
                   value={customCode}
                   onChange={(e) => setCustomCode(e.target.value)}
                   placeholder="例如：my-link"
-                  className="w-full pl-32 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="flex-1 min-w-0 px-4 py-3 border-0 focus:ring-0 focus:outline-none"
                 />
               </div>
               <p className="text-xs text-gray-500 mt-1">
-                支持字母、数字、下划线、中划线，长度3-20位
+                支持字母、数字、下划线、中划线，长度 3–20 位
               </p>
             </div>
 

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, RefreshCw, Check } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const UrlEncoder: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')
@@ -44,10 +48,7 @@ const UrlEncoder: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">URL编解码工具</h2>
-        <p className="text-gray-600">URL参数的编码和解码，处理接口参数、爬虫等场景</p>
-      </div>
+      <PageHero title={t('tools.url')} description={tHome('toolDesc.url')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 操作栏 */}

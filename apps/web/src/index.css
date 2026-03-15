@@ -80,9 +80,21 @@ code {
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.2s ease;
+  background: white;
+  color: #1e293b;
 }
 
 .input:focus {
   outline: none;
   border-color: #667eea;
+}
+
+.dark .input {
+  border-color: #4b5563;
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.dark .input:focus {
+  border-color: #818cf8;
 }

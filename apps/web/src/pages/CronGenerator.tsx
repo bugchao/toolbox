@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, Clock } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const CronGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [cron, setCron] = useState('* * * * *')
   const [second, setSecond] = useState('*')
   const [minute, setMinute] = useState('*')
@@ -82,10 +86,7 @@ const CronGenerator: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Cron表达式生成器</h2>
-        <p className="text-gray-600">可视化生成Cron表达式，定时任务必备工具</p>
-      </div>
+      <PageHero title={t('tools.cron')} description={tHome('toolDesc.cron')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 结果展示 */}

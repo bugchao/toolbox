@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Download, RefreshCw, Check, AlertCircle } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 const JsonFormatter: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -66,10 +70,7 @@ const JsonFormatter: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">JSON格式化/校验工具</h2>
-        <p className="text-gray-600">支持JSON美化、压缩、校验，一键复制下载</p>
-      </div>
+      <PageHero title={t('tools.json')} description={tHome('toolDesc.json')} className="mb-8" />
 
       <div className="space-y-6">
         {/* 操作栏 */}
