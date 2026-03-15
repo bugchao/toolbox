@@ -730,8 +730,8 @@ const ColorGenerator: React.FC = () => {
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
