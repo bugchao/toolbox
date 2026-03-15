@@ -65,7 +65,7 @@ const SecurityIpScore: React.FC = () => {
 
   return (
     <SecurityWorkbench title={t('title')} description={t('description')}>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button type="button" variant={viewMode === 'query' ? 'primary' : 'ghost'} size="sm" onClick={() => setViewMode('query')}>
           <Search className="mr-2 h-4 w-4" />
           {t('view.query')}

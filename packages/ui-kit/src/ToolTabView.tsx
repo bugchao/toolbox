@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Search, History } from 'lucide-react'
+import { cn } from './lib/cn'
 
 export interface ToolTabViewProps {
   queryPanel: React.ReactNode
@@ -12,7 +13,7 @@ export interface ToolTabViewProps {
 
 /**
  * ToolTabView - Tab layout for query tools.
- * Shows two tabs: query and history (matching the design reference).
+ * 查询/历史 水平排列在顶部，内容区域在下方（上下关系）。
  */
 const ToolTabView: React.FC<ToolTabViewProps> = ({
   queryPanel,
@@ -32,46 +33,45 @@ const ToolTabView: React.FC<ToolTabViewProps> = ({
     }
   }
 
+  const tabButtonClass = (isActive: boolean) =>
+    cn(
+      'inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors',
+      isActive
+        ? 'bg-indigo-600 text-white shadow-sm'
+        : 'bg-white dark:bg-gray-800 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+    )
+
   return (
-    <div className="flex flex-col lg:flex-row gap-8">
-      {/* Tab Switcher - Small Icons on the left */}
-      <div className="flex lg:flex-col items-center gap-4 lg:pt-4">
+    <div className="flex flex-col gap-6">
+      {/* 标题区：查询/历史 水平排列，靠右 */}
+      <div className="flex flex-wrap justify-end gap-2">
         <button
+          type="button"
           onClick={() => setActiveTab('query')}
-          className={`group flex flex-col items-center justify-center gap-1 w-16 h-16 rounded-2xl transition-all ${
-            activeTab === 'query'
-              ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none translate-y-[-2px]'
-              : 'bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 shadow-sm'
-          }`}
+          className={tabButtonClass(activeTab === 'query')}
           title={queryLabel}
         >
-          <Search className="w-6 h-6" />
-          <span className="text-[10px] font-medium">{queryLabel}</span>
+          <Search className="h-4 w-4" />
+          {queryLabel}
         </button>
         <button
+          type="button"
           onClick={() => setActiveTab('history')}
-          className={`group flex flex-col items-center justify-center gap-1 w-16 h-16 rounded-2xl transition-all ${
-            activeTab === 'history'
-              ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none translate-y-[-2px]'
-              : 'bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 shadow-sm'
-          }`}
+          className={tabButtonClass(activeTab === 'history')}
           title={historyLabel}
         >
-          <History className="w-6 h-6" />
-          <span className="text-[10px] font-medium">{historyLabel}</span>
+          <History className="h-4 w-4" />
+          {historyLabel}
         </button>
       </div>
 
-      {/* Content Area */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-6">
-        {activeTab === 'history' && (
-          <div className="lg:w-80 shrink-0">
-            {historyPanel}
-          </div>
+      {/* 内容区：始终在下方 */}
+      <div className="flex-1 min-w-0">
+        {activeTab === 'history' ? (
+          <div className="max-w-2xl">{historyPanel}</div>
+        ) : (
+          queryPanel
         )}
-        <div className="flex-1 min-w-0">
-          {queryPanel}
-        </div>
       </div>
     </div>
   )
