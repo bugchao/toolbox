@@ -1,0 +1,20 @@
+{
+  "title": "JSON Formatter",
+  "description": "Format, minify, validate JSON, copy or download",
+  "indentSize": "Indent size",
+  "indent2": "2 spaces",
+  "indent4": "4 spaces",
+  "indent8": "8 spaces",
+  "format": "Format",
+  "minify": "Minify",
+  "copyResult": "Copy result",
+  "copied": "Copied",
+  "downloadJson": "Download JSON",
+  "clear": "Clear",
+  "inputLabel": "Input JSON",
+  "inputPlaceholder": "{\"name\": \"Toolbox\", \"features\": [\"JSON\", \"Base64\"]}",
+  "outputLabel": "Output",
+  "outputPlaceholder": "Formatted JSON will appear here",
+  "errorEmpty": "Please enter JSON content",
+  "errorInvalid": "JSON error: {{message}}"
+}

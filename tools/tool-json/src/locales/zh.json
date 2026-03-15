@@ -1,0 +1,20 @@
+{
+  "title": "JSON格式化",
+  "description": "JSON美化、压缩、校验，一键复制下载",
+  "indentSize": "缩进大小",
+  "indent2": "2空格",
+  "indent4": "4空格",
+  "indent8": "8空格",
+  "format": "格式化",
+  "minify": "压缩",
+  "copyResult": "复制结果",
+  "copied": "已复制",
+  "downloadJson": "下载JSON",
+  "clear": "清空",
+  "inputLabel": "输入JSON内容",
+  "inputPlaceholder": "{\"name\": \"工具盒子\", \"features\": [\"JSON格式化\", \"Base64编解码\"]}",
+  "outputLabel": "输出结果",
+  "outputPlaceholder": "格式化后的JSON会显示在这里",
+  "errorEmpty": "请输入JSON内容",
+  "errorInvalid": "JSON格式错误: {{message}}"
+}

@@ -2,7 +2,7 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Home, Star, QrCode, Newspaper, MapPin, Cloud, Code, FileCode, Clock, Link2,
   Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart,
-  Palette, Wand2, Eraser, Ruler, Search, File, Globe
+  Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -12,6 +12,8 @@ export interface ToolEntry {
   categoryKey?: string
   /** 搜索用关键词（当前语言外的拼音/英文等），可选 */
   keywords?: string[]
+  /** 独立工具包自带 i18n 时的 namespace，用于导航/首页标题与描述（如 toolJson） */
+  i18nNamespace?: string
 }
 
 export const TOOLS: ToolEntry[] = [
@@ -24,7 +26,8 @@ export const TOOLS: ToolEntry[] = [
   { path: '/zipcode', nameKey: 'tools.zipcode', icon: MapPin, categoryKey: 'query', keywords: ['邮编', 'zip'] },
   { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气'] },
   { path: '/ip-query', nameKey: 'tools.ip_query', icon: Globe, categoryKey: 'query', keywords: ['ip'] },
-  { path: '/json', nameKey: 'tools.json', icon: Braces, categoryKey: 'dev', keywords: ['json'] },
+  { path: '/dns-query', nameKey: 'tools.dns_query', icon: Server, categoryKey: 'network', keywords: ['dns', '域名', '解析'] },
+  { path: '/json', nameKey: 'tools.json', icon: Braces, categoryKey: 'dev', keywords: ['json'], i18nNamespace: 'toolJson' },
   { path: '/base64', nameKey: 'tools.base64', icon: FileCode, categoryKey: 'dev', keywords: ['base64'] },
   { path: '/timestamp', nameKey: 'tools.timestamp', icon: Clock, categoryKey: 'dev', keywords: ['时间戳'] },
   { path: '/url', nameKey: 'tools.url', icon: Link2, categoryKey: 'dev', keywords: ['url', '编解码'] },
@@ -59,4 +62,24 @@ export function getToolsForNav() {
 
 export function getToolByPath(path: string): ToolEntry | undefined {
   return TOOLS_BY_PATH.get(path)
+}
+
+/** 工具展示标题：优先使用工具自带 i18n namespace 的 title，否则用 nav.nameKey */
+export function getToolTitle(
+  tool: ToolEntry,
+  t: (key: string) => string
+): string {
+  if (tool.i18nNamespace) return t(`${tool.i18nNamespace}:title`)
+  return t(tool.nameKey)
+}
+
+/** 工具展示描述：优先使用工具自带 i18n namespace 的 description，否则用 home.toolDesc.* */
+export function getToolDescription(
+  tool: ToolEntry,
+  t: (key: string) => string,
+  tHome: (key: string) => string
+): string {
+  if (tool.i18nNamespace) return t(`${tool.i18nNamespace}:description`)
+  const descKey = tool.nameKey.replace('tools.', '')
+  return tHome(`toolDesc.${descKey}`)
 }

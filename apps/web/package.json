@@ -17,6 +17,7 @@
     "@toolbox/tool-pdf": "workspace:*",
     "@toolbox/tool-qrcode": "workspace:*",
     "@toolbox/tool-resume": "workspace:*",
+    "@toolbox/tool-json": "workspace:*",
     "crypto-js": "^4.2.0",
     "diff": "^8.0.3",
     "highlight.js": "^11.11.1",

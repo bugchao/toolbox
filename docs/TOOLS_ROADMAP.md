@@ -69,6 +69,12 @@
 | IP 地址查询 | `/ip-query` | `apps/web/src/pages/IpQuery.tsx` |
 | 颜色拾取/调色板 | `/color-picker` | `apps/web/src/pages/ColorPicker.tsx` |
 
+### 网络工具（1）
+
+| 工具名称 | 路由路径 | 代码位置 |
+|----------|----------|----------|
+| DNS 查询（A/AAAA/MX/TXT/CNAME/NS/SOA） | `/dns-query` | `apps/web/src/pages/DnsQuery.tsx` |
+
 ### 资讯工具（1）
 
 | 工具名称 | 路由路径 | 代码位置 |
@@ -91,7 +97,6 @@
 | AI 会议纪要生成器 | ai | `/meeting-minutes` | 待开发 | P2 | 音视频转文字，结构化纪要 |
 | AI UI 设计生成器 | ai | `/ui-generator` | 待开发 | P2 | 文本/草图生成 UI |
 | AI PPT 生成器 | ai | `/ppt-generator` | 待开发 | P2 | 主题 → 大纲、内容、排版 |
-| DNS 查询工具（A/AAAA/MX/TXT） | network | `/dns-query` | 待开发 | P2 | 多记录类型查询 |
 | DNS Trace 递归追踪 | network | `/dns-trace` | 待开发 | P2 | 递归解析路径 |
 | DNS 传播检测 | network | `/dns-propagation` | 待开发 | P2 | 全球传播状态 |
 | 全球 DNS 解析检测 | network | `/dns-global-check` | 待开发 | P2 | 多地区解析结果 |

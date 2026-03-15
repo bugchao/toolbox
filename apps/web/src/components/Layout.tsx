@@ -5,12 +5,12 @@ import {
   QrCode, Newspaper, MapPin, Cloud, Menu, X, ChevronDown,
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key,
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
-  Eraser, Ruler, Search, File, Globe, Sun, Moon, Languages, Layers
+  Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
 import { setLocale, type Locale } from '../i18n'
-import { TOOLS } from '../config/tools'
+import { TOOLS, getToolTitle } from '../config/tools'
 import { CommandPalette } from './CommandPalette'
 
 interface LayoutProps {
@@ -18,10 +18,8 @@ interface LayoutProps {
 }
 
 const NAV_ITEMS = TOOLS.map((t) => ({
-  nameKey: t.nameKey,
+  ...t,
   href: t.path,
-  icon: t.icon,
-  categoryKey: t.categoryKey,
 }))
 
 const CATEGORIES = [
@@ -29,6 +27,7 @@ const CATEGORIES = [
   { id: 'dev', nameKey: 'category_dev', icon: Code },
   { id: 'query', nameKey: 'category_query', icon: Search },
   { id: 'utils', nameKey: 'category_utils', icon: Wand2 },
+  { id: 'network', nameKey: 'category_network', icon: Server },
   { id: 'news', nameKey: 'category_news', icon: Newspaper },
 ] as const
 
@@ -106,7 +105,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                       }`}
                     >
                       <Icon className="w-4 h-4 mr-2" />
-                      {t(item.nameKey)}
+                      {getToolTitle(item, t)}
                     </Link>
                   )
                 })}
@@ -145,7 +144,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 onClick={() => setOpenCategory(null)}
                               >
                                 <ItemIcon className="w-4 h-4 mr-3" />
-                                {t(item.nameKey)}
+                                {getToolTitle(item, t)}
                               </Link>
                             )
                           })}
@@ -234,7 +233,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Icon className="w-5 h-5 mr-3" />
-                    {t(item.nameKey)}
+                    {getToolTitle(item, t)}
                   </Link>
                 )
               })}
@@ -273,7 +272,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             onClick={() => { setMobileMenuOpen(false); setOpenCategory(null) }}
                           >
                             <ItemIcon className="w-4 h-4 mr-3" />
-                            {t(item.nameKey)}
+                            {getToolTitle(item, t)}
                           </Link>
                         )
                       })}

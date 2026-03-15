@@ -18,6 +18,7 @@
     "category_dev": "研发工具",
     "category_query": "查询工具",
     "category_utils": "实用工具",
+    "category_network": "网络工具",
     "category_news": "资讯工具",
     "tools": {
       "qrcode_generate": "二维码生成",
@@ -27,6 +28,7 @@
       "zipcode": "邮编查询",
       "weather": "天气查询",
       "ip_query": "IP地址查询",
+      "dns_query": "DNS查询",
       "json": "JSON格式化",
       "base64": "Base64编解码",
       "timestamp": "时间戳转换",
@@ -86,6 +88,7 @@
       "zipcode": "输入地址查询邮编，或输入邮编查询对应地址",
       "weather": "查询全球城市天气，实时气温、湿度、风速、未来预报",
       "ip_query": "查询IP地址的地理位置、运营商、时区等信息，支持地图预览",
+      "dns_query": "查询域名的 A、AAAA、MX、TXT、CNAME、NS、SOA 等 DNS 记录，基于 DoH",
       "json": "JSON美化、压缩、校验，一键复制下载",
       "base64": "支持文本、图片的Base64编码和解码",
       "timestamp": "时间戳和日期时间的互相转换，支持秒/毫秒级",

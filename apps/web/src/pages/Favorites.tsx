@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Star } from 'lucide-react'
 import { useFavorites } from '../hooks/useFavorites'
-import { getToolByPath } from '../config/tools'
+import { getToolByPath, getToolTitle } from '../config/tools'
 
 const Favorites: React.FC = () => {
   const { t } = useTranslation('nav')
@@ -43,7 +43,7 @@ const Favorites: React.FC = () => {
                     to={tool.path}
                     className="font-medium text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 truncate block"
                   >
-                    {t(tool.nameKey)}
+                    {getToolTitle(tool, t)}
                   </Link>
                   <p className="text-sm text-gray-500 dark:text-gray-300 truncate">{tool.path}</p>
                 </div>

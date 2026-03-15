@@ -18,6 +18,7 @@
     "category_dev": "Dev Tools",
     "category_query": "Query",
     "category_utils": "Utilities",
+    "category_network": "Network",
     "category_news": "News",
     "tools": {
       "qrcode_generate": "QR Generate",
@@ -27,6 +28,7 @@
       "zipcode": "Zip Code",
       "weather": "Weather",
       "ip_query": "IP Query",
+      "dns_query": "DNS Query",
       "json": "JSON Formatter",
       "base64": "Base64",
       "timestamp": "Timestamp",
@@ -86,6 +88,7 @@
       "zipcode": "Look up zip code by address or address by zip code",
       "weather": "Global city weather, temperature, humidity, wind, forecast",
       "ip_query": "IP location, ISP, timezone, with map preview",
+      "dns_query": "Look up A, AAAA, MX, TXT, CNAME, NS, SOA and more via DoH",
       "json": "Format, minify, validate JSON, copy or download",
       "base64": "Encode and decode text or images to/from Base64",
       "timestamp": "Convert between timestamp and date/time, seconds or milliseconds",

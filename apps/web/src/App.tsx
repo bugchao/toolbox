@@ -16,7 +16,6 @@ import Favorites from './pages/Favorites'
 import HotNews from './pages/HotNews'
 import ZipCode from './pages/ZipCode'
 import Weather from './pages/Weather'
-import JsonFormatter from './pages/JsonFormatter'
 import Base64 from './pages/Base64'
 import Timestamp from './pages/Timestamp'
 import UrlEncoder from './pages/UrlEncoder'
@@ -34,6 +33,7 @@ import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import IpQuery from './pages/IpQuery'
+import DnsQuery from './pages/DnsQuery'
 import ShortLinkGenerator from './pages/ShortLinkGenerator'
 import ShortLinkRedirect from './pages/ShortLinkRedirect'
 import ColorGenerator from './pages/ColorGenerator'
@@ -54,6 +54,9 @@ const QrCodeBeautifier = lazy(() =>
 )
 const PdfTools = lazy(() => import('@toolbox/tool-pdf'))
 const ResumeGenerator = lazy(() => import('@toolbox/tool-resume'))
+const JsonFormatter = lazy(() =>
+  import('@toolbox/tool-json').then((m) => ({ default: m.JsonFormatter }))
+)
 
 function App() {
   return (
@@ -86,6 +89,7 @@ function App() {
           <Route path="/unit-converter" element={<UnitConverter />} />
           <Route path="/text-comparator" element={<TextComparator />} />
           <Route path="/ip-query" element={<IpQuery />} />
+          <Route path="/dns-query" element={<DnsQuery />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
           <Route path="/s/:code" element={<ShortLinkRedirect />} />

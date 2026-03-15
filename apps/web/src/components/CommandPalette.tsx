@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Star } from 'lucide-react'
-import { TOOLS } from '../config/tools'
+import { TOOLS, getToolTitle } from '../config/tools'
 import { useFavorites } from '../hooks/useFavorites'
 
 interface CommandPaletteProps {
@@ -24,7 +24,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose })
     const q = query.trim().toLowerCase()
     if (!q) return TOOLS
     return TOOLS.filter((tool) => {
-      const name = t(tool.nameKey).toLowerCase()
+      const name = getToolTitle(tool, t).toLowerCase()
       const path = tool.path.toLowerCase()
       const keywords = (tool.keywords ?? []).join(' ').toLowerCase()
       return name.includes(q) || path.includes(q) || keywords.includes(q)
@@ -144,7 +144,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose })
                   onClick={() => selectAndGo(tool)}
                 >
                   <Icon className="w-5 h-5 flex-shrink-0 text-gray-500 dark:text-gray-300" />
-                  <span className="flex-1 truncate">{t(tool.nameKey)}</span>
+                  <span className="flex-1 truncate">{getToolTitle(tool, t)}</span>
                   {tool.path !== '/' && tool.path !== '/favorites' && (
                     <button
                       type="button"

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Card } from '@toolbox/ui-kit'
-import { TOOLS } from '../config/tools'
+import { TOOLS, getToolTitle, getToolDescription } from '../config/tools'
 
 const TOOL_ICONS: Record<string, string> = {
   'tools.qrcode_generate': '📱',
@@ -13,6 +13,7 @@ const TOOL_ICONS: Record<string, string> = {
   'tools.zipcode': '📮',
   'tools.weather': '🌤️',
   'tools.ip_query': '🌐',
+  'tools.dns_query': '🔌',
   'tools.json': '📋',
   'tools.base64': '🔢',
   'tools.timestamp': '⏰',
@@ -66,7 +67,6 @@ const Home: React.FC = () => {
             {toolsForHome
               .filter((tool) => tool.categoryKey === categoryKey)
               .map((tool) => {
-                const descKey = tool.nameKey.replace('tools.', '')
                 const icon = TOOL_ICONS[tool.nameKey] ?? '🛠️'
                 return (
                   <Link
@@ -79,10 +79,10 @@ const Home: React.FC = () => {
                       <div className="text-4xl mr-4">{icon}</div>
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-black dark:text-gray-200 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                          {t(tool.nameKey)}
+                          {getToolTitle(tool, t)}
                         </h3>
                         <p className="text-black dark:text-gray-300/90 mb-4">
-                          {tHome(`toolDesc.${descKey}`)}
+                          {getToolDescription(tool, t, tHome)}
                         </p>
                         <div className="flex items-center text-indigo-600 dark:text-indigo-400 font-medium">
                           {tHome('useNow')}
