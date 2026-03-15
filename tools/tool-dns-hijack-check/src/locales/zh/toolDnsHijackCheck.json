@@ -1,0 +1,16 @@
+{
+  "title": "DNS 劫持检测",
+  "description": "比较权威 DNS 响应与本地/公共解析器的响应，以验证是否发生 DNS 劫持。",
+  "domain_label": "域名 / 主机名",
+  "query_btn": "检测劫持",
+  "server_label": "待测 DNS 服务器 (例如你本地的 ISP)",
+  "error_empty_domain": "请输入域名",
+  "auth_results": "权威/可信响应",
+  "test_results": "待测解析器响应",
+  "status_safe": "可能安全",
+  "status_hijacked": "可能被劫持或重定向",
+  "msg_match": "待测解析器与权威 IP 匹配。未检测到明显的劫持。",
+  "msg_mismatch": "待测解析器返回了与权威服务器不同的 IP！这可能是劫持、DNS 污染，或者仅仅是 CDN 不同的负载均衡调度。",
+  "expected": "预期的 IP",
+  "received": "实际接收的 IP"
+}

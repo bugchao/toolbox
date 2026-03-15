@@ -1,0 +1,15 @@
+{
+  "title": "DNS Cache Check",
+  "description": "Query specific DNS servers to inspect TTL values and infer caching behavior.",
+  "domain_label": "Domain / Hostname",
+  "query_btn": "Check Cache / TTL",
+  "error_empty_domain": "Please enter a domain name",
+  "node_label": "Target Edge Server",
+  "ttl_label": "Current TTL",
+  "raw_data": "Raw Data",
+  "msg_caching": "TTL is counting down. The record is currently cached by the resolver.",
+  "msg_fresh": "TTL is high or looks like maximum. The record might have just been refreshed.",
+  "google_node": "Google Cloud",
+  "cloudflare_node": "Cloudflare Edge",
+  "ali_node": "Alibaba Cloud"
+}

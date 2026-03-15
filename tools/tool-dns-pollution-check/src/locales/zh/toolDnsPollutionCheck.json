@@ -1,0 +1,16 @@
+{
+  "title": "DNS 污染检测",
+  "description": "向全球多个公共 DNS 服务器发起查询，检查域名的 DNS 解析是否被污染或劫持。",
+  "domain_label": "域名 / 主机名",
+  "query_btn": "检测污染",
+  "error_empty_domain": "请输入域名",
+  "consistency_title": "解析一致性",
+  "status_consistent": "一致",
+  "status_inconsistent": "不一致 (可能被污染或使用了CDN)",
+  "status_error": "解析错误",
+  "msg_consistent": "所有查询的服务器返回了相同的 IP 地址。域名通常没有被污染。",
+  "msg_inconsistent": "服务器返回了不同的 IP 地址。如果该域名使用了 CDN (如 Cloudflare 或阿里云 CDN)，这是完全正常的地理负载均衡现象。否则，可能是 DNS 污染或劫持。",
+  "server": "DNS 服务器",
+  "result": "返回的 IP",
+  "time": "响应时间"
+}

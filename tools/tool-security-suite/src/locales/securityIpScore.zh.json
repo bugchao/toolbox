@@ -1,0 +1,67 @@
+{
+  "title": "IP 风险评分",
+  "description": "结合公开情报、RDAP 注册信息、反向解析和 DNSBL 结果，对单个 IP 做轻量风险判断。",
+  "loading": "正在分析 IP 风险…",
+  "form": {
+    "ipLabel": "IP 地址",
+    "ipPlaceholder": "输入公网 IPv4 或 IPv6，例如 8.8.8.8",
+    "submit": "开始评分"
+  },
+  "errors": {
+    "empty": "请输入要分析的 IP 地址",
+    "request": "请求失败，请稍后重试"
+  },
+  "view": {
+    "query": "查询",
+    "history": "历史"
+  },
+  "history": {
+    "title": "查询历史",
+    "empty": "还没有历史记录，成功查询后会自动保存到本地。",
+    "rerun": "回填并重跑",
+    "remove": "删除",
+    "clear": "清空历史"
+  },
+  "cards": {
+    "overallScore": "总体风险分",
+    "networkOwner": "网络归属",
+    "location": "地理信息",
+    "reputation": "黑名单情报"
+  },
+  "charts": {
+    "dimensionScore": "风险维度拆解"
+  },
+  "insights": {
+    "title": "关键洞察",
+    "empty": "当前未发现明显高风险信号。"
+  },
+  "details": {
+    "registryTitle": "注册与归属信息",
+    "asn": "ASN",
+    "rdapHandle": "RDAP Handle",
+    "timezone": "时区",
+    "abuseContacts": "Abuse 联系方式",
+    "traceabilityTitle": "可追溯性",
+    "ptrRecords": "PTR 记录",
+    "ptrEmpty": "没有检测到反向解析记录",
+    "note": "评分依据为前端可访问的公开数据源，适合做预筛选，不替代专业威胁情报。"
+  },
+  "reputation": {
+    "listed": "已命中",
+    "clear": "未命中",
+    "unavailable": "无法判定"
+  },
+  "levels": {
+    "info": "信息",
+    "low": "低风险",
+    "medium": "中风险",
+    "high": "高风险",
+    "critical": "严重"
+  },
+  "dimensions": {
+    "reputation": "信誉",
+    "infrastructure": "基础设施",
+    "registration": "注册信息",
+    "traceability": "可追溯性"
+  }
+}

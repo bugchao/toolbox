@@ -27,6 +27,28 @@ import toolDnsPerformanceZh from '@toolbox/tool-dns-performance/src/locales/zh.j
 import toolDnsPerformanceEn from '@toolbox/tool-dns-performance/src/locales/en.json'
 import toolDnsTtlZh from '@toolbox/tool-dns-ttl/src/locales/zh.json'
 import toolDnsTtlEn from '@toolbox/tool-dns-ttl/src/locales/en.json'
+import toolDnsSoaZh from '@toolbox/tool-dns-soa/src/locales/zh/toolDnsSoa.json'
+import toolDnsSoaEn from '@toolbox/tool-dns-soa/src/locales/en/toolDnsSoa.json'
+import toolDnsDiagnoseZh from '@toolbox/tool-dns-diagnose/src/locales/zh/toolDnsDiagnose.json'
+import toolDnsDiagnoseEn from '@toolbox/tool-dns-diagnose/src/locales/en/toolDnsDiagnose.json'
+import toolDnsPollutionCheckZh from '@toolbox/tool-dns-pollution-check/src/locales/zh/toolDnsPollutionCheck.json'
+import toolDnsPollutionCheckEn from '@toolbox/tool-dns-pollution-check/src/locales/en/toolDnsPollutionCheck.json'
+import toolDnsHijackCheckZh from '@toolbox/tool-dns-hijack-check/src/locales/zh/toolDnsHijackCheck.json'
+import toolDnsHijackCheckEn from '@toolbox/tool-dns-hijack-check/src/locales/en/toolDnsHijackCheck.json'
+import toolDnsCacheCheckZh from '@toolbox/tool-dns-cache-check/src/locales/zh/toolDnsCacheCheck.json'
+import toolDnsCacheCheckEn from '@toolbox/tool-dns-cache-check/src/locales/en/toolDnsCacheCheck.json'
+import toolDnsLoopCheckZh from '@toolbox/tool-dns-loop-check/src/locales/zh/toolDnsLoopCheck.json'
+import toolDnsLoopCheckEn from '@toolbox/tool-dns-loop-check/src/locales/en/toolDnsLoopCheck.json'
+import toolSecurityIpScoreZh from '@toolbox/tool-security-suite/src/locales/securityIpScore.zh.json'
+import toolSecurityIpScoreEn from '@toolbox/tool-security-suite/src/locales/securityIpScore.en.json'
+import toolSecurityDomainBlacklistZh from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.zh.json'
+import toolSecurityDomainBlacklistEn from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.en.json'
+import toolSecurityPortScanZh from '@toolbox/tool-security-suite/src/locales/securityPortScan.zh.json'
+import toolSecurityPortScanEn from '@toolbox/tool-security-suite/src/locales/securityPortScan.en.json'
+import toolSecurityDnsVulnZh from '@toolbox/tool-security-suite/src/locales/securityDnsVuln.zh.json'
+import toolSecurityDnsVulnEn from '@toolbox/tool-security-suite/src/locales/securityDnsVuln.en.json'
+import toolSecurityReportGenZh from '@toolbox/tool-security-suite/src/locales/securityReportGen.zh.json'
+import toolSecurityReportGenEn from '@toolbox/tool-security-suite/src/locales/securityReportGen.en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -50,6 +72,17 @@ export const resources = {
     toolDnssecCheck: toolDnssecCheckZh as Record<string, string>,
     toolDnsPerformance: toolDnsPerformanceZh as Record<string, string>,
     toolDnsTtl: toolDnsTtlZh as Record<string, string>,
+    toolDnsSoa: toolDnsSoaZh as Record<string, string>,
+    toolDnsDiagnose: toolDnsDiagnoseZh as Record<string, string>,
+    toolDnsPollutionCheck: toolDnsPollutionCheckZh as Record<string, string>,
+    toolDnsHijackCheck: toolDnsHijackCheckZh as Record<string, string>,
+    toolDnsCacheCheck: toolDnsCacheCheckZh as Record<string, string>,
+    toolDnsLoopCheck: toolDnsLoopCheckZh as Record<string, string>,
+    toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
+    toolSecurityDomainBlacklist: toolSecurityDomainBlacklistZh as unknown as Record<string, string>,
+    toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
+    toolSecurityDnsVuln: toolSecurityDnsVulnZh as unknown as Record<string, string>,
+    toolSecurityReportGen: toolSecurityReportGenZh as unknown as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -69,6 +102,17 @@ export const resources = {
     toolDnssecCheck: toolDnssecCheckEn as Record<string, string>,
     toolDnsPerformance: toolDnsPerformanceEn as Record<string, string>,
     toolDnsTtl: toolDnsTtlEn as Record<string, string>,
+    toolDnsSoa: toolDnsSoaEn as Record<string, string>,
+    toolDnsDiagnose: toolDnsDiagnoseEn as Record<string, string>,
+    toolDnsPollutionCheck: toolDnsPollutionCheckEn as Record<string, string>,
+    toolDnsHijackCheck: toolDnsHijackCheckEn as Record<string, string>,
+    toolDnsCacheCheck: toolDnsCacheCheckEn as Record<string, string>,
+    toolDnsLoopCheck: toolDnsLoopCheckEn as Record<string, string>,
+    toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
+    toolSecurityDomainBlacklist: toolSecurityDomainBlacklistEn as unknown as Record<string, string>,
+    toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,
+    toolSecurityDnsVuln: toolSecurityDnsVulnEn as unknown as Record<string, string>,
+    toolSecurityReportGen: toolSecurityReportGenEn as unknown as Record<string, string>,
   },
 } as const
 

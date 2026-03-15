@@ -1,0 +1,66 @@
+{
+  "title": "DNS Vulnerability Check",
+  "description": "Review common DNS issues including NS redundancy, DNSSEC, SPF, DMARC, CAA, and wildcard records.",
+  "loading": "Checking DNS configuration…",
+  "form": {
+    "domainLabel": "Domain",
+    "domainPlaceholder": "Enter a domain, for example example.com",
+    "submit": "Run checks"
+  },
+  "errors": {
+    "empty": "Enter a domain to inspect",
+    "request": "Request failed, please retry"
+  },
+  "view": {
+    "query": "Query",
+    "history": "History"
+  },
+  "history": {
+    "title": "Query history",
+    "empty": "No local history yet. Successful queries will be saved automatically.",
+    "rerun": "Refill and rerun",
+    "remove": "Remove",
+    "clear": "Clear history"
+  },
+  "cards": {
+    "overallScore": "Configuration score",
+    "delegation": "Authoritative NS",
+    "delegationHint": "At least two NS records are recommended",
+    "mailAuth": "Mail auth",
+    "mailAuthHint": "SPF / DMARC record counts",
+    "dnssec": "DNSSEC",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "wildcardHint": "Wildcard DNS response detected",
+    "noWildcardHint": "No wildcard DNS response detected"
+  },
+  "charts": {
+    "dimensionScore": "Dimension breakdown"
+  },
+  "insights": {
+    "title": "Key insights",
+    "empty": "Core DNS hygiene checks did not surface a high-risk issue."
+  },
+  "records": {
+    "spf": "SPF records",
+    "dmarc": "DMARC records",
+    "ns": "NS records",
+    "a": "Address records",
+    "caa": "CAA records",
+    "nsAddressChecks": "NS hostname address checks",
+    "empty": "No records were returned"
+  },
+  "levels": {
+    "info": "Info",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "dimensions": {
+    "delegation": "Delegation",
+    "mailAuth": "Mail auth",
+    "policy": "Policy",
+    "integrity": "Integrity"
+  }
+}

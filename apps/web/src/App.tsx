@@ -45,7 +45,6 @@ import LifeProgressBar from './pages/LifeProgressBar'
 import MeetingMinutes from './pages/MeetingMinutes'
 import UIGenerator from './pages/UIGenerator'
 
-// 工具包懒加载（独立依赖，按需注入）
 const QrCodeGenerator = lazy(() =>
   import('@toolbox/tool-qrcode').then((m) => ({ default: m.QrCodeGenerator }))
 )
@@ -86,6 +85,39 @@ const DnsPerformance = lazy(() =>
 )
 const DnsTtl = lazy(() =>
   import('@toolbox/tool-dns-ttl').then((m) => ({ default: m.DnsTtl }))
+)
+const DnsSoa = lazy(() =>
+  import('@toolbox/tool-dns-soa').then((m) => ({ default: m.DnsSoa }))
+)
+const DnsDiagnose = lazy(() =>
+  import('@toolbox/tool-dns-diagnose').then((m) => ({ default: m.DnsDiagnose }))
+)
+const DnsPollutionCheck = lazy(() =>
+  import('@toolbox/tool-dns-pollution-check').then((m) => ({ default: m.DnsPollutionCheck }))
+)
+const DnsHijackCheck = lazy(() =>
+  import('@toolbox/tool-dns-hijack-check').then((m) => ({ default: m.DnsHijackCheck }))
+)
+const DnsCacheCheck = lazy(() =>
+  import('@toolbox/tool-dns-cache-check').then((m) => ({ default: m.DnsCacheCheck }))
+)
+const DnsLoopCheck = lazy(() =>
+  import('@toolbox/tool-dns-loop-check').then((m) => ({ default: m.DnsLoopCheck }))
+)
+const SecurityIpScore = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityIpScore }))
+)
+const SecurityDomainBlacklist = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDomainBlacklist }))
+)
+const SecurityPortScan = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityPortScan }))
+)
+const SecurityDnsVuln = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityDnsVuln }))
+)
+const SecurityReportGen = lazy(() =>
+  import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityReportGen }))
 )
 
 function App() {
@@ -128,6 +160,17 @@ function App() {
           <Route path="/dnssec-check" element={<DnssecCheck />} />
           <Route path="/dns-performance" element={<DnsPerformance />} />
           <Route path="/dns-ttl" element={<DnsTtl />} />
+          <Route path="/dns-soa" element={<DnsSoa />} />
+          <Route path="/dns-diagnose" element={<DnsDiagnose />} />
+          <Route path="/dns-pollution-check" element={<DnsPollutionCheck />} />
+          <Route path="/dns-hijack-check" element={<DnsHijackCheck />} />
+          <Route path="/dns-cache-check" element={<DnsCacheCheck />} />
+          <Route path="/dns-loop-check" element={<DnsLoopCheck />} />
+          <Route path="/security-ip-score" element={<SecurityIpScore />} />
+          <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
+          <Route path="/security-port-scan" element={<SecurityPortScan />} />
+          <Route path="/security-dns-vuln" element={<SecurityDnsVuln />} />
+          <Route path="/security-report-gen" element={<SecurityReportGen />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />

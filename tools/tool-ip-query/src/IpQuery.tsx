@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Search, Copy, MapPin, Globe, Wifi, Calendar, Info, Check, Loader2 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
 
 export const I18N_NAMESPACE = 'toolIpQuery'
 
@@ -32,6 +32,10 @@ const IpQuery: React.FC = () => {
   const [error, setError] = useState('')
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
+  const [activeTab, setActiveTab] = useState<'query' | 'history'>('query')
+
+  const { history, saveQuery, deleteQuery, clearHistory } = useQueryHistory<IpInfo>('ip-query')
+
   useEffect(() => {
     queryCurrentIp()
   }, [])
@@ -55,25 +59,28 @@ const IpQuery: React.FC = () => {
     }
   }
 
-  const queryIp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!ip.trim()) {
+  const queryIp = async (e?: React.FormEvent, ipToQuery?: string) => {
+    if (e) e.preventDefault()
+    const targetIp = ipToQuery || ip
+    if (!targetIp.trim()) {
       setError(t('errorEmpty'))
       return
     }
     const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-    if (!ipRegex.test(ip.trim())) {
+    if (!ipRegex.test(targetIp.trim())) {
       setError(t('errorInvalid'))
       return
     }
 
     setLoading(true)
     setError('')
+    setIp(targetIp)
     try {
-      const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(ip.trim())}`)
+      const response = await fetch(`http://ip-api.com/json/${encodeURIComponent(targetIp.trim())}`)
       const data = await response.json()
       if (data.status === 'success') {
         setIpInfo(data)
+        saveQuery({ domain: targetIp }, data)
       } else {
         setError(data.message || t('errorQuery'))
         setIpInfo(null)
@@ -115,10 +122,32 @@ const IpQuery: React.FC = () => {
     </div>
   )
 
-  return (
-    <div className="space-y-6">
-      <PageHero title={t('title')} description={t('description')} />
+  const historyPanel = (
+    <QueryHistory
+      history={history}
+      onRestore={(record: any) => {
+        const domain = record.queryInfo.domain
+        setIp(domain)
+        if (record.result) {
+          setIpInfo(record.result)
+          setError('')
+        } else {
+          queryIp(undefined, domain)
+        }
+        setActiveTab('query')
+      }}
+      onDelete={deleteQuery}
+      onClear={clearHistory}
+      renderItem={(queryInfo: any) => (
+        <div className="flex flex-col">
+          <span>{queryInfo.domain}</span>
+        </div>
+      )}
+    />
+  )
 
+  const queryPanel = (
+    <div className="space-y-6">
       <div className="card">
         <form onSubmit={queryIp} className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:space-x-4 gap-4">
@@ -246,6 +275,18 @@ const IpQuery: React.FC = () => {
           <li className="flex items-start"><span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>{t('usage4')}</li>
         </ul>
       </div>
+    </div>
+  )
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <PageHero title={t('title')} description={t('description')} />
+      <ToolTabView
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        queryPanel={queryPanel}
+        historyPanel={historyPanel}
+      />
     </div>
   )
 }

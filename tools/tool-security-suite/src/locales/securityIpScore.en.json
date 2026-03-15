@@ -1,0 +1,67 @@
+{
+  "title": "IP Risk Score",
+  "description": "Assess a single IP with lightweight signals from public reputation, RDAP ownership, reverse DNS, and DNSBL checks.",
+  "loading": "Analyzing IP risk…",
+  "form": {
+    "ipLabel": "IP address",
+    "ipPlaceholder": "Enter a public IPv4 or IPv6, for example 8.8.8.8",
+    "submit": "Score IP"
+  },
+  "errors": {
+    "empty": "Enter an IP address to analyze",
+    "request": "Request failed, please retry"
+  },
+  "view": {
+    "query": "Query",
+    "history": "History"
+  },
+  "history": {
+    "title": "Query history",
+    "empty": "No local history yet. Successful queries will be saved automatically.",
+    "rerun": "Refill and rerun",
+    "remove": "Remove",
+    "clear": "Clear history"
+  },
+  "cards": {
+    "overallScore": "Overall score",
+    "networkOwner": "Network owner",
+    "location": "Location",
+    "reputation": "Blacklist intel"
+  },
+  "charts": {
+    "dimensionScore": "Dimension breakdown"
+  },
+  "insights": {
+    "title": "Key insights",
+    "empty": "No strong high-risk signal was surfaced."
+  },
+  "details": {
+    "registryTitle": "Registry and ownership",
+    "asn": "ASN",
+    "rdapHandle": "RDAP handle",
+    "timezone": "Timezone",
+    "abuseContacts": "Abuse contacts",
+    "traceabilityTitle": "Traceability",
+    "ptrRecords": "PTR records",
+    "ptrEmpty": "No reverse DNS record was observed",
+    "note": "This score uses only public, lightweight signals and should be treated as triage rather than final threat intelligence."
+  },
+  "reputation": {
+    "listed": "Listed",
+    "clear": "Clear",
+    "unavailable": "Unavailable"
+  },
+  "levels": {
+    "info": "Info",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "critical": "Critical"
+  },
+  "dimensions": {
+    "reputation": "Reputation",
+    "infrastructure": "Infrastructure",
+    "registration": "Registration",
+    "traceability": "Traceability"
+  }
+}

@@ -79,7 +79,7 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（9）
+### 网络工具（20）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -92,6 +92,17 @@
 | DNSSEC 检测 | `/dnssec-check` | `tools/tool-dnssec-check` → DnssecCheck |
 | DNS 服务器性能测试 | `/dns-performance` | `tools/tool-dns-performance` → DnsPerformance |
 | DNS TTL 查看工具 | `/dns-ttl` | `tools/tool-dns-ttl` → DnsTtl |
+| DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
+| DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
+| DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
+| DNS 劫持检测 | `/dns-hijack-check` | `tools/tool-dns-hijack-check` → DnsHijackCheck |
+| DNS 缓存检测 | `/dns-cache-check` | `tools/tool-dns-cache-check` → DnsCacheCheck |
+| DNS 循环解析检测 | `/dns-loop-check` | `tools/tool-dns-loop-check` → DnsLoopCheck |
+| IP 风险评分 | `/security-ip-score` | `tools/tool-security-suite` → SecurityIpScore |
+| 域名黑名单检测 | `/security-domain-blacklist` | `tools/tool-security-suite` → SecurityDomainBlacklist |
+| 端口安全扫描 | `/security-port-scan` | `tools/tool-security-suite` → SecurityPortScan |
+| DNS 配置漏洞检测 | `/security-dns-vuln` | `tools/tool-security-suite` → SecurityDnsVuln |
+| 网络安全报告生成 | `/security-report-gen` | `tools/tool-security-suite` → SecurityReportGen |
 
 ### 资讯工具（1）
 
@@ -112,12 +123,7 @@
 |----------|------|----------|------|--------|------|
 | NS 服务器查询 | network | `/dns-ns` | 待开发 | P2 | 权威 NS 列表 |
 | CNAME 链检测 | network | `/dns-cname-chain` | 待开发 | P2 | CNAME 链解析 |
-| DNS SOA 记录解析 | network | `/dns-soa` | 待开发 | P2 | SOA 记录查看 |
-| DNS 解析失败诊断 | network | `/dns-diagnose` | 待开发 | P2 | 失败原因分析 |
-| DNS 污染检测 | network | `/dns-pollution-check` | 待开发 | P2 | 污染检测 |
-| DNS 劫持检测 | network | `/dns-hijack-check` | 待开发 | P2 | 劫持检测 |
-| DNS 缓存检测 | network | `/dns-cache-check` | 待开发 | P2 | 缓存状态 |
-| DNS 循环解析检测 | network | `/dns-loop-check` | 待开发 | P2 | 循环 CNAME/NS |
+| 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | DNS 延迟分析 | network | `/dns-latency` | 待开发 | P2 | 延迟分布 |
 | DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |
@@ -196,11 +202,6 @@
 | DNS DDoS 风险检测 | network | `/security-dns-ddos` | 待开发 | P2 | 风险评估 |
 | DNSSEC 签名验证 | network | `/security-dnssec-verify` | 待开发 | P2 | 签名验证 |
 | 域名安全评分 | network | `/security-domain-score` | 待开发 | P2 | 安全评分 |
-| IP 风险评分 | network | `/security-ip-score` | 待开发 | P2 | IP 风险分 |
-| 域名黑名单检测 | network | `/security-domain-blacklist` | 待开发 | P2 | 黑名单检测 |
-| 端口安全扫描 | network | `/security-port-scan` | 待开发 | P2 | 端口扫描 |
-| DNS 配置漏洞检测 | network | `/security-dns-vuln` | 待开发 | P2 | 配置漏洞 |
-| 网络安全报告生成 | network | `/security-report-gen` | 待开发 | P2 | 报告生成 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 
