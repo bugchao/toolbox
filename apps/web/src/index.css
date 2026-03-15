@@ -40,6 +40,7 @@ code {
     monospace;
 }
 
+/* 以下为兼容旧页面的全局类，新代码请使用 @toolbox/ui-kit 的 Card / Button / Input，统一主题 */
 .card {
   background: white;
   border-radius: 12px;

@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Upload, Download, FileText, Scissors, Merge, Image, FileCode, X, Check, Loader2, ChevronDown, File } from 'lucide-react'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import JSZip from 'jszip'
+import { PageHero } from '@toolbox/ui-kit'
 
 type ToolMode = 'merge' | 'split' | 'to-image' | 'to-text' | 'compress'
 
@@ -17,6 +19,8 @@ interface PdfFile {
 }
 
 const PdfTools: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [mode, setMode] = useState<ToolMode>('merge')
   const [files, setFiles] = useState<PdfFile[]>([])
   const [processing, setProcessing] = useState(false)
@@ -192,10 +196,10 @@ const PdfTools: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">PDF工具集</h1>
-        <p className="text-white opacity-80">多功能PDF处理工具，支持合并、分割、格式转换等操作</p>
-      </div>
+      <PageHero
+        title={t('tools.pdf_tools')}
+        description={tHome('toolDesc.pdf_tools')}
+      />
 
       {/* 工具选择 */}
       <div className="card">

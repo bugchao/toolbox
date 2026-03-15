@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Upload, Download, Copy, Check, Shuffle, Type, Image as ImageIcon, Trash2, Move, Maximize2, DownloadCloud } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface TextElement {
   id: string
@@ -22,6 +24,8 @@ interface MemeTemplate {
 }
 
 const MemeGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [originalImage, setOriginalImage] = useState<string | null>(null)
   const [textElements, setTextElements] = useState<TextElement[]>([])
   const [selectedTextId, setSelectedTextId] = useState<string | null>(null)
@@ -311,10 +315,10 @@ const MemeGenerator: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">表情包生成器</h1>
-        <p className="text-white opacity-80">快速制作个性化表情包，支持添加文字、自定义样式，一键导出</p>
-      </div>
+      <PageHero
+        title={t('tools.meme_generator')}
+        description={tHome('toolDesc.meme_generator')}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 左侧操作区 */}

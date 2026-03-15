@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, Sparkles, Type, Download, History, Settings, Trash2 } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface CopywritingItem {
   id: string
@@ -10,6 +12,8 @@ interface CopywritingItem {
 }
 
 const CopywritingGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [prompt, setPrompt] = useState('')
   const [copyType, setCopyType] = useState('marketing')
   const [tone, setTone] = useState('professional')
@@ -184,10 +188,10 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">AI文案生成器</h1>
-        <p className="text-white opacity-80">智能生成各类文案，支持多种风格和场景，一键复制导出</p>
-      </div>
+      <PageHero
+        title={t('tools.copywriting_generator')}
+        description={tHome('toolDesc.copywriting_generator')}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* 左侧参数配置 */}

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Card } from '@toolbox/ui-kit'
 import { TOOLS } from '../config/tools'
 
 const TOOL_ICONS: Record<string, string> = {
@@ -51,14 +52,14 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* 浅色模式：深蓝/深灰文字；深色模式：白字，与参考图一致 */}
-      <div className="text-center text-slate-800 dark:text-white">
+      <div className="text-center text-slate-800 dark:text-gray-200">
         <h1 className="text-4xl font-bold mb-4">{tHome('welcomeTitle')}</h1>
-        <p className="text-xl text-slate-600 dark:text-white/90 mb-8">{tHome('welcomeSubtitle')}</p>
+        <p className="text-xl text-slate-600 dark:text-gray-300 mb-8">{tHome('welcomeSubtitle')}</p>
       </div>
 
       {categories.map((categoryKey) => (
         <div key={categoryKey}>
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6">
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-gray-200 mb-6">
             {t(`category_${categoryKey}`)}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -71,15 +72,16 @@ const Home: React.FC = () => {
                   <Link
                     key={tool.path}
                     to={tool.path}
-                    className="card hover:transform hover:scale-105 transition-all duration-300 group"
+                    className="block hover:transform hover:scale-105 transition-all duration-300 group"
                   >
+                    <Card>
                     <div className="flex items-start">
                       <div className="text-4xl mr-4">{icon}</div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                        <h3 className="text-xl font-bold text-black dark:text-gray-200 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
                           {t(tool.nameKey)}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        <p className="text-black dark:text-gray-300/90 mb-4">
                           {tHome(`toolDesc.${descKey}`)}
                         </p>
                         <div className="flex items-center text-indigo-600 dark:text-indigo-400 font-medium">
@@ -88,6 +90,7 @@ const Home: React.FC = () => {
                         </div>
                       </div>
                     </div>
+                    </Card>
                   </Link>
                 )
               })}
@@ -95,34 +98,34 @@ const Home: React.FC = () => {
         </div>
       ))}
 
-      <div className="card mt-12">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+      <Card className="mt-12">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-6">
           {tHome('featureTitle')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center p-4">
             <div className="text-3xl mb-3">🚀</div>
-            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-100">
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-200">
               {tHome('feature1Title')}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">{tHome('feature1Desc')}</p>
+            <p className="text-gray-600 dark:text-gray-300/90">{tHome('feature1Desc')}</p>
           </div>
           <div className="text-center p-4">
             <div className="text-3xl mb-3">🔄</div>
-            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-100">
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-200">
               {tHome('feature2Title')}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">{tHome('feature2Desc')}</p>
+            <p className="text-gray-600 dark:text-gray-300/90">{tHome('feature2Desc')}</p>
           </div>
           <div className="text-center p-4">
             <div className="text-3xl mb-3">📱</div>
-            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-100">
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-gray-200">
               {tHome('feature3Title')}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">{tHome('feature3Desc')}</p>
+            <p className="text-gray-600 dark:text-gray-300/90">{tHome('feature3Desc')}</p>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   )
 }

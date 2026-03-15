@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Copy, Check, Download, RefreshCw, Upload, Shuffle, Palette, Lock, Unlock, Eye, Sliders, Sun, Moon, ChevronDown, Save, FileCode, Code } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface Color {
   hex: string
@@ -183,6 +185,8 @@ const randomColor = (): string => {
 }
 
 const ColorGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [colors, setColors] = useState<Color[]>([])
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
   const [colorMode, setColorMode] = useState<'hex' | 'rgb' | 'hsl'>('hex')
@@ -400,10 +404,10 @@ const ColorGenerator: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">AI配色生成器</h1>
-        <p className="text-white opacity-80">智能生成专业配色方案，支持多种配色模式，一键导出使用</p>
-      </div>
+      <PageHero
+        title={t('tools.color_generator')}
+        description={tHome('toolDesc.color_generator')}
+      />
 
       {/* 控制面板 */}
       <div className="card">

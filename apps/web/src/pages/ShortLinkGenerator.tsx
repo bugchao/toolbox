@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link2, Copy, Check, Clock, BarChart2, Settings, Trash2, ExternalLink } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface ShortLink {
   id: string
@@ -23,6 +25,8 @@ const generateShortCode = (size = 6): string => {
 }
 
 const ShortLinkGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [originalUrl, setOriginalUrl] = useState('')
   const [customCode, setCustomCode] = useState('')
   const [expiresDays, setExpiresDays] = useState('')
@@ -131,10 +135,10 @@ const ShortLinkGenerator: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">短链接生成器</h1>
-        <p className="text-white opacity-80">将长链接转换为短小精悍的短链接，方便分享和传播</p>
-      </div>
+      <PageHero
+        title={t('tools.short_link')}
+        description={tHome('toolDesc.short_link')}
+      />
 
       {/* 生成表单 */}
       <div className="card">

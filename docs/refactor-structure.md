@@ -60,6 +60,7 @@ toolbox/                        # 仓库根（所有命令默认在根执行）
 
 - **开发/构建入口**：都在根通过 `pnpm dev` / `pnpm build` 转调 `apps/web`，不要单独在 `apps/web` 下长期开发（除非只改主应用且确认不需要工具包）。
 - **工具专属依赖**：只写在对应 `tools/tool-xxx/package.json`，主应用不直接依赖 jspdf、qrcode 等。
+- **公共组件与主题**：`packages/ui-kit` 提供 Button、Card、Input 等，**统一浅色/暗色主题**（组件内用 Tailwind `dark:`，应用层通过 `html.dark` 切换）。新页面优先使用 `@toolbox/ui-kit`；主应用 `tailwind.config.js` 的 `content` 需包含 `../../packages/ui-kit/src/**/*.{js,ts,jsx,tsx}`。
 
 ---
 

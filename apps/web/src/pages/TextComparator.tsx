@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Upload, Download, Copy, ArrowLeftRight, FileText, X, Check } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 import { diffChars, diffWords, diffLines } from 'diff'
 
 type DiffType = 'chars' | 'words' | 'lines'
@@ -10,6 +12,8 @@ type CompareResult = {
 }[]
 
 const TextComparator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [leftText, setLeftText] = useState('')
   const [rightText, setRightText] = useState('')
   const [diffType, setDiffType] = useState<DiffType>('words')
@@ -119,10 +123,10 @@ const TextComparator: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">文本对比工具</h1>
-        <p className="text-white opacity-80">快速对比两段文本的差异，支持字符、单词、行级对比</p>
-      </div>
+      <PageHero
+        title={t('tools.text_comparator')}
+        description={tHome('toolDesc.text_comparator')}
+      />
 
       {/* 控制面板 */}
       <div className="card">

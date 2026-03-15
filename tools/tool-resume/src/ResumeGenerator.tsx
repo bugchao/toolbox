@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Download, Copy, Check, User, Briefcase, GraduationCap, Award, Book, Phone, Mail, Globe, MapPin, Link2, Plus, Trash2, Eye, FileText, Settings } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface Experience {
   id: string
@@ -63,6 +65,8 @@ interface ResumeData {
 }
 
 const ResumeGenerator: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit')
   const [selectedTemplate, setSelectedTemplate] = useState<'modern' | 'simple' | 'creative'>('modern')
   const resumeRef = useRef<HTMLDivElement>(null)
@@ -399,10 +403,10 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">简历生成器</h1>
-        <p className="text-white opacity-80">快速生成专业简历，支持导出PDF和Markdown格式</p>
-      </div>
+      <PageHero
+        title={t('tools.resume')}
+        description={tHome('toolDesc.resume')}
+      />
 
       {/* 顶部操作栏 */}
       <div className="card">

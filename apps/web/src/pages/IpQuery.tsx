@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Search, Copy, MapPin, Globe, Wifi, Calendar, Info, Check, Loader2 } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
 
 interface IpInfo {
   ip: string
@@ -21,6 +23,8 @@ interface IpInfo {
 }
 
 const IpQuery: React.FC = () => {
+  const { t } = useTranslation('nav')
+  const { t: tHome } = useTranslation('home')
   const [ip, setIp] = useState('')
   const [ipInfo, setIpInfo] = useState<IpInfo | null>(null)
   const [loading, setLoading] = useState(false)
@@ -115,10 +119,10 @@ const IpQuery: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">IP地址查询工具</h1>
-        <p className="text-white opacity-80">查询IP地址的地理位置、运营商、时区等详细信息</p>
-      </div>
+      <PageHero
+        title={t('tools.ip_query')}
+        description={tHome('toolDesc.ip_query')}
+      />
 
       {/* 搜索框 */}
       <div className="card">
