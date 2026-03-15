@@ -188,6 +188,46 @@ const Home: React.FC = () => {
       icon: '📄',
       path: '/resume-generator',
       category: '实用工具'
+    },
+    {
+      id: 'color-generator',
+      name: 'AI配色生成器',
+      description: '智能生成专业配色方案，支持多种配色模式，一键导出使用',
+      icon: '🎨',
+      path: '/color-generator',
+      category: '实用工具'
+    },
+    {
+      id: 'meme-generator',
+      name: '表情包生成器',
+      description: '快速制作个性化表情包，支持添加文字、自定义样式，一键导出',
+      icon: '😂',
+      path: '/meme-generator',
+      category: '实用工具'
+    },
+    {
+      id: 'copywriting-generator',
+      name: 'AI文案生成器',
+      description: '智能生成各类文案，支持多种风格和场景，一键复制导出',
+      icon: '✍️',
+      path: '/copywriting-generator',
+      category: '实用工具'
+    },
+    {
+      id: 'wooden-fish',
+      name: '电子木鱼',
+      description: '在线敲木鱼，积攒功德，放松减压，支持自动模式',
+      icon: '🪵',
+      path: '/wooden-fish',
+      category: '实用工具'
+    },
+    {
+      id: 'life-progress',
+      name: '人生进度条',
+      description: '可视化展示人生时间进度，激励珍惜时间规划未来',
+      icon: '⏳',
+      path: '/life-progress',
+      category: '实用工具'
     }
   ]
 

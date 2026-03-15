@@ -31,6 +31,8 @@ import ResumeGenerator from './pages/ResumeGenerator'
 import ColorGenerator from './pages/ColorGenerator'
 import MemeGenerator from './pages/MemeGenerator'
 import CopywritingGenerator from './pages/CopywritingGenerator'
+import ElectronicWoodenFish from './pages/ElectronicWoodenFish'
+import LifeProgressBar from './pages/LifeProgressBar'
 
 function App() {
   return (
@@ -67,6 +69,8 @@ function App() {
         <Route path="/color-generator" element={<ColorGenerator />} />
         <Route path="/meme-generator" element={<MemeGenerator />} />
         <Route path="/copywriting-generator" element={<CopywritingGenerator />} />
+        <Route path="/wooden-fish" element={<ElectronicWoodenFish />} />
+        <Route path="/life-progress" element={<LifeProgressBar />} />
       </Routes>
     </Layout>
   )
