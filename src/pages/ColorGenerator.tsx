@@ -443,15 +443,15 @@ const ColorGenerator: React.FC = () => {
                 </div>
                 {contrastCheck && (
                   <div className="flex space-x-4 text-sm opacity-80">
-                  <span>与白色对比度: {getContrastRatio(color.hex, '#ffffff')}:1</span>
-                  <span>与黑色对比度: {getContrastRatio(color.hex, '#000000')}:1</span>
-                </div>
+                    <span>与白色对比度: {getContrastRatio(color.hex, '#ffffff')}:1</span>
+                    <span>与黑色对比度: {getContrastRatio(color.hex, '#000000')}:1</span>
+                  </div>
                 )}
               </div>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => toggleLock(index)}
-                  className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                  className={`p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors`}
                   style={{ color: getTextColor(color.hex) }}
                   title={color.locked ? '解锁' : '锁定'}
                 >
@@ -547,14 +547,14 @@ const ColorGenerator: React.FC = () => {
               <div key={palette.id} className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="flex h-16">
                   {palette.colors.map((color, i) => (
-                  <div
-                    key={i}
-                    className="flex-1"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-              <div className="p-3">
+                    <div
+                      key={i}
+                      className="flex-1"
+                      style={{ backgroundColor: color }}
+                    />
+                  ))}
+                </div>
+                <div className="p-3">
                 <div className="flex justify-between items-center mb-2">
                   <h4 className="font-medium text-gray-900">{palette.name}</h4>
                   <div className="text-xs text-gray-500">
