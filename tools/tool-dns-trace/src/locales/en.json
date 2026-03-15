@@ -1,0 +1,9 @@
+{
+    "title": "DNS Trace",
+    "description": "Trace recursive DNS resolution process from root servers to authoritative servers",
+    "domain_label": "Domain (e.g. example.com)",
+    "type_label": "Record Type",
+    "start_trace": "Start Trace",
+    "error_empty_domain": "Please enter a valid domain",
+    "trace_results": "Trace Results"
+}

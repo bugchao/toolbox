@@ -23,7 +23,7 @@
 
 以下工具已上线，**不要再重复立项**。新增需求请在「三、待开发/调研」中登记。
 
-### 实用工具（16）
+### 实用工具（17）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -36,6 +36,7 @@
 | BMI 健康计算器 | `/bmi` | `apps/web/src/pages/BMICalculator.tsx` |
 | 单位换算器 | `/unit-converter` | `apps/web/src/pages/UnitConverter.tsx` |
 | PDF 工具集 | `/pdf-tools` | `tools/tool-pdf` → PdfTools |
+| CSV/Excel 在线编辑器 | `/sheet-editor` | `apps/web/src/pages/SheetEditor.tsx` |
 | 短链接生成器 | `/short-link` | `apps/web/src/pages/ShortLinkGenerator.tsx` |
 | 简历生成器 | `/resume-generator` | `tools/tool-resume` → ResumeGenerator |
 | AI 配色生成器 | `/color-generator` | `apps/web/src/pages/ColorGenerator.tsx` |
@@ -44,11 +45,12 @@
 | 电子木鱼 | `/wooden-fish` | `apps/web/src/pages/ElectronicWoodenFish.tsx` |
 | 人生进度条 | `/life-progress` | `apps/web/src/pages/LifeProgressBar.tsx` |
 
-### 研发工具（11）
+### 研发工具（12）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | JSON 格式化/校验 | `/json` | `apps/web/src/pages/JsonFormatter.tsx` |
+| JSON/YAML/XML 格式转换器 | `/format-converter` | `apps/web/src/pages/FormatConverter.tsx` |
 | Base64 编解码 | `/base64` | `apps/web/src/pages/Base64.tsx` |
 | 时间戳转换 | `/timestamp` | `apps/web/src/pages/Timestamp.tsx` |
 | URL 编解码 | `/url` | `apps/web/src/pages/UrlEncoder.tsx` |
@@ -69,11 +71,22 @@
 | IP 地址查询 | `/ip-query` | `apps/web/src/pages/IpQuery.tsx` |
 | 颜色拾取/调色板 | `/color-picker` | `apps/web/src/pages/ColorPicker.tsx` |
 
-### 网络工具（1）
+### AI 工具（2）
+
+| 工具名称 | 路由路径 | 代码位置 |
+|----------|----------|----------|
+| AI 会议纪要生成器 | `/meeting-minutes` | `apps/web/src/pages/MeetingMinutes.tsx` |
+| AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
+
+### 网络工具（5）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | DNS 查询（A/AAAA/MX/TXT/CNAME/NS/SOA） | `/dns-query` | `apps/web/src/pages/DnsQuery.tsx` |
+| IP 地址查询 | `/ip-query` | `tools/tool-ip-query` → IpQuery |
+| IP ASN 查询 | `/ip-asn` | `tools/tool-ip-asn` → IpAsn |
+| DNS Trace 递归追踪 | `/dns-trace` | `tools/tool-dns-trace` → DnsTrace |
+| DNS 传播检测 | `/dns-propagation` | `tools/tool-dns-propagation` → DnsPropagation |
 
 ### 资讯工具（1）
 
@@ -92,13 +105,7 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| CSV/Excel 在线编辑器 | utils | `/sheet-editor` | 待开发 | P1 | 在线编辑表格，格式转换、筛选、图表 |
-| JSON/YAML/XML 格式转换器 | dev | `/format-converter` | 待开发 | P1 | 多格式互转，实时校验 |
-| AI 会议纪要生成器 | ai | `/meeting-minutes` | 待开发 | P2 | 音视频转文字，结构化纪要 |
-| AI UI 设计生成器 | ai | `/ui-generator` | 待开发 | P2 | 文本/草图生成 UI |
 | AI PPT 生成器 | ai | `/ppt-generator` | 待开发 | P2 | 主题 → 大纲、内容、排版 |
-| DNS Trace 递归追踪 | network | `/dns-trace` | 待开发 | P2 | 递归解析路径 |
-| DNS 传播检测 | network | `/dns-propagation` | 待开发 | P2 | 全球传播状态 |
 | 全球 DNS 解析检测 | network | `/dns-global-check` | 待开发 | P2 | 多地区解析结果 |
 | DNSSEC 检测 | network | `/dnssec-check` | 待开发 | P2 | 签名与链校验 |
 | DNS 服务器性能测试 | network | `/dns-performance` | 待开发 | P2 | 响应时间/可用性 |
@@ -126,8 +133,6 @@
 | 子域名扫描 | network | `/domain-subdomain-scan` | 待开发 | P2 | 子域发现 |
 | Wildcard 解析检测 | network | `/domain-wildcard` | 待开发 | P2 | 泛解析检测 |
 | 域名健康评分 | network | `/domain-health-score` | 待开发 | P2 | 综合健康分 |
-| IP 地址查询 | network | `/ip-query` | 待开发 | P2 | 与现有 IP 查询可合并或扩展 |
-| IP ASN 查询 | network | `/ip-asn` | 待开发 | P2 | ASN/归属 |
 | IP 地理位置查询 | network | `/ip-geo` | 待开发 | P2 | 地理信息 |
 | IP 反向解析（PTR） | network | `/ip-ptr` | 待开发 | P2 | PTR 记录 |
 | IPv4 转 IPv6 | network | `/ip-v4-to-v6` | 待开发 | P2 | 地址转换 |

@@ -1,0 +1,23 @@
+{
+  "title": "IP ASN Query",
+  "description": "Look up AS number, organization and ISP for an IP",
+  "ipLabel": "IP Address",
+  "ipPlaceholder": "Enter IPv4, e.g. 8.8.8.8",
+  "query": "Query",
+  "queryMyIp": "My IP",
+  "loading": "Querying…",
+  "errorEmpty": "Please enter an IP address",
+  "errorInvalid": "Please enter a valid IPv4 address",
+  "errorNetwork": "Network error, please retry",
+  "errorQuery": "Query failed",
+  "asn": "AS number",
+  "org": "Organization",
+  "isp": "ISP",
+  "country": "Country",
+  "countryCode": "Country code",
+  "region": "Region",
+  "city": "City",
+  "usageTitle": "Usage",
+  "usage1": "Enter a public IPv4 to look up its AS number and organization.",
+  "usage2": "Data from public API; no query history stored."
+}

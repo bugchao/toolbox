@@ -6,12 +6,12 @@
 
 ## 当前状态（截至 2026-03）
 
-- **已上线工具**：31 个（清单与代码落位见 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第二节）
+- **已上线工具**：40 个（清单与代码落位见 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第二节）
 - **架构**：Monorepo 已落地
   - 主应用：`apps/web`（Vite + React，路由 + React.lazy 按需加载）
   - 工具包：`tools/tool-resume`、`tools/tool-pdf`、`tools/tool-qrcode`（独立依赖）
   - 公共包：`packages/core`、`packages/ui-kit`
-- **待开发工具**：5 个（CSV/Excel 编辑器、格式转换器、AI 会议纪要、AI UI、AI PPT，见 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第三节）
+- **待开发工具**：以 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第三节为准
 
 ---
 

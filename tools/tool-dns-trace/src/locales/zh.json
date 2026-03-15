@@ -1,0 +1,9 @@
+{
+    "title": "DNS Trace",
+    "description": "追踪域名的递归 DNS 解析过程，从根服务器到权威服务器",
+    "domain_label": "域名 (如 example.com)",
+    "type_label": "记录类型",
+    "start_trace": "开始追踪",
+    "error_empty_domain": "请输入有效的域名",
+    "trace_results": "追踪结果"
+}

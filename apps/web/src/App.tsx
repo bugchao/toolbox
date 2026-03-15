@@ -32,8 +32,9 @@ import ColorPicker from './pages/ColorPicker'
 import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
-import IpQuery from './pages/IpQuery'
 import DnsQuery from './pages/DnsQuery'
+import SheetEditor from './pages/SheetEditor'
+import FormatConverter from './pages/FormatConverter'
 import ShortLinkGenerator from './pages/ShortLinkGenerator'
 import ShortLinkRedirect from './pages/ShortLinkRedirect'
 import ColorGenerator from './pages/ColorGenerator'
@@ -41,6 +42,8 @@ import MemeGenerator from './pages/MemeGenerator'
 import CopywritingGenerator from './pages/CopywritingGenerator'
 import ElectronicWoodenFish from './pages/ElectronicWoodenFish'
 import LifeProgressBar from './pages/LifeProgressBar'
+import MeetingMinutes from './pages/MeetingMinutes'
+import UIGenerator from './pages/UIGenerator'
 
 // 工具包懒加载（独立依赖，按需注入）
 const QrCodeGenerator = lazy(() =>
@@ -56,6 +59,18 @@ const PdfTools = lazy(() => import('@toolbox/tool-pdf'))
 const ResumeGenerator = lazy(() => import('@toolbox/tool-resume'))
 const JsonFormatter = lazy(() =>
   import('@toolbox/tool-json').then((m) => ({ default: m.JsonFormatter }))
+)
+const IpQuery = lazy(() =>
+  import('@toolbox/tool-ip-query').then((m) => ({ default: m.IpQuery }))
+)
+const IpAsn = lazy(() =>
+  import('@toolbox/tool-ip-asn').then((m) => ({ default: m.IpAsn }))
+)
+const DnsTrace = lazy(() =>
+  import('@toolbox/tool-dns-trace').then((m) => ({ default: m.DnsTrace }))
+)
+const DnsPropagation = lazy(() =>
+  import('@toolbox/tool-dns-propagation').then((m) => ({ default: m.DnsPropagation }))
 )
 
 function App() {
@@ -87,9 +102,14 @@ function App() {
           <Route path="/color-picker" element={<ColorPicker />} />
           <Route path="/image-background-remover" element={<ImageBackgroundRemover />} />
           <Route path="/unit-converter" element={<UnitConverter />} />
+          <Route path="/sheet-editor" element={<SheetEditor />} />
           <Route path="/text-comparator" element={<TextComparator />} />
           <Route path="/ip-query" element={<IpQuery />} />
+          <Route path="/ip-asn" element={<IpAsn />} />
           <Route path="/dns-query" element={<DnsQuery />} />
+          <Route path="/dns-trace" element={<DnsTrace />} />
+          <Route path="/dns-propagation" element={<DnsPropagation />} />
+          <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />
           <Route path="/s/:code" element={<ShortLinkRedirect />} />
@@ -99,6 +119,8 @@ function App() {
           <Route path="/copywriting-generator" element={<CopywritingGenerator />} />
           <Route path="/wooden-fish" element={<ElectronicWoodenFish />} />
           <Route path="/life-progress" element={<LifeProgressBar />} />
+          <Route path="/meeting-minutes" element={<MeetingMinutes />} />
+          <Route path="/ui-generator" element={<UIGenerator />} />
         </Routes>
       </Suspense>
     </Layout>

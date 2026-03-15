@@ -1,0 +1,10 @@
+{
+    "title": "DNS Propagation",
+    "description": "检查域名在全球各地 DNS 服务器的解析状态与传播情况",
+    "domain_label": "域名 (如 example.com)",
+    "type_label": "记录类型",
+    "start_check": "开始检测",
+    "error_empty_domain": "请输入有效的域名",
+    "propagation_status": "全球传播状态",
+    "servers_responded": "个服务器已响应"
+}

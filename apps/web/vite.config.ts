@@ -12,6 +12,10 @@ export default defineConfig({
     alias: {
       '@toolbox/ui-kit': path.join(root, 'packages/ui-kit/src/index.ts'),
       '@toolbox/tool-json': path.join(root, 'tools/tool-json'),
+      '@toolbox/tool-ip-query': path.join(root, 'tools/tool-ip-query'),
+      '@toolbox/tool-ip-asn': path.join(root, 'tools/tool-ip-asn'),
+      '@toolbox/tool-dns-trace': path.join(root, 'tools/tool-dns-trace'),
+      '@toolbox/tool-dns-propagation': path.join(root, 'tools/tool-dns-propagation'),
     },
   },
   server: {
@@ -20,7 +24,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation']
   },
   build: {
     outDir: 'dist'

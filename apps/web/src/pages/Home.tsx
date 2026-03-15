@@ -13,6 +13,7 @@ const TOOL_ICONS: Record<string, string> = {
   'tools.zipcode': '📮',
   'tools.weather': '🌤️',
   'tools.ip_query': '🌐',
+  'tools.ip_asn': '🔢',
   'tools.dns_query': '🔌',
   'tools.json': '📋',
   'tools.base64': '🔢',
@@ -32,6 +33,7 @@ const TOOL_ICONS: Record<string, string> = {
   'tools.color_picker': '🎨',
   'tools.unit_converter': '📏',
   'tools.pdf_tools': '📄',
+  'tools.sheet_editor': '📊',
   'tools.short_link': '🔗',
   'tools.resume': '📄',
   'tools.color_generator': '🎨',
@@ -39,6 +41,9 @@ const TOOL_ICONS: Record<string, string> = {
   'tools.copywriting_generator': '✍️',
   'tools.wooden_fish': '🪵',
   'tools.life_progress': '⏳',
+  'tools.format_converter': '🧩',
+  'tools.meeting_minutes': '🗒️',
+  'tools.ui_generator': '🪄',
 }
 
 const Home: React.FC = () => {

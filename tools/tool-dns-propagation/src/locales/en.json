@@ -1,0 +1,10 @@
+{
+    "title": "DNS Propagation",
+    "description": "Check domain resolution status and propagation across global DNS servers",
+    "domain_label": "Domain (e.g. example.com)",
+    "type_label": "Record Type",
+    "start_check": "Start Check",
+    "error_empty_domain": "Please enter a valid domain",
+    "propagation_status": "Global Propagation Status",
+    "servers_responded": "servers responded"
+}

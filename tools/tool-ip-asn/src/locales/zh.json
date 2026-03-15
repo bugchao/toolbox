@@ -1,0 +1,23 @@
+{
+  "title": "IP ASN 查询",
+  "description": "查询 IP 的 AS 编号、归属运营商与组织",
+  "ipLabel": "IP 地址",
+  "ipPlaceholder": "输入 IPv4，例如 8.8.8.8",
+  "query": "查询",
+  "queryMyIp": "本机 IP",
+  "loading": "查询中…",
+  "errorEmpty": "请输入 IP 地址",
+  "errorInvalid": "请输入有效的 IPv4 格式",
+  "errorNetwork": "网络请求失败，请稍后重试",
+  "errorQuery": "查询失败",
+  "asn": "AS 编号",
+  "org": "归属组织",
+  "isp": "运营商",
+  "country": "国家/地区",
+  "countryCode": "国家代码",
+  "region": "地区",
+  "city": "城市",
+  "usageTitle": "使用说明",
+  "usage1": "输入公网 IPv4 可查询其 AS 号及归属信息。",
+  "usage2": "数据来源于公开接口，不记录查询历史。"
+}

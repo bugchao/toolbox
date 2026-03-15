@@ -5,7 +5,7 @@ import {
   QrCode, Newspaper, MapPin, Cloud, Menu, X, ChevronDown,
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key,
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
-  Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers
+  Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
@@ -25,6 +25,7 @@ const NAV_ITEMS = TOOLS.map((t) => ({
 const CATEGORIES = [
   { id: 'qrcode', nameKey: 'category_qrcode', icon: QrCode },
   { id: 'dev', nameKey: 'category_dev', icon: Code },
+  { id: 'ai', nameKey: 'category_ai', icon: Sparkles },
   { id: 'query', nameKey: 'category_query', icon: Search },
   { id: 'utils', nameKey: 'category_utils', icon: Wand2 },
   { id: 'network', nameKey: 'category_network', icon: Server },

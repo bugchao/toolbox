@@ -9,6 +9,14 @@ import zh from './locales/zh.json'
 import en from './locales/en.json'
 import toolJsonZh from '@toolbox/tool-json/src/locales/zh.json'
 import toolJsonEn from '@toolbox/tool-json/src/locales/en.json'
+import toolIpQueryZh from '@toolbox/tool-ip-query/src/locales/zh.json'
+import toolIpQueryEn from '@toolbox/tool-ip-query/src/locales/en.json'
+import toolIpAsnZh from '@toolbox/tool-ip-asn/src/locales/zh.json'
+import toolIpAsnEn from '@toolbox/tool-ip-asn/src/locales/en.json'
+import toolDnsTraceZh from '@toolbox/tool-dns-trace/src/locales/zh.json'
+import toolDnsTraceEn from '@toolbox/tool-dns-trace/src/locales/en.json'
+import toolDnsPropagationZh from '@toolbox/tool-dns-propagation/src/locales/zh.json'
+import toolDnsPropagationEn from '@toolbox/tool-dns-propagation/src/locales/en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -23,6 +31,10 @@ export const resources = {
     home: zh.home,
     colorPicker: zh.colorPicker,
     toolJson: toolJsonZh as Record<string, string>,
+    toolIpQuery: toolIpQueryZh as Record<string, string>,
+    toolIpAsn: toolIpAsnZh as Record<string, string>,
+    toolDnsTrace: toolDnsTraceZh as Record<string, string>,
+    toolDnsPropagation: toolDnsPropagationZh as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -33,6 +45,10 @@ export const resources = {
     home: en.home,
     colorPicker: en.colorPicker,
     toolJson: toolJsonEn as Record<string, string>,
+    toolIpQuery: toolIpQueryEn as Record<string, string>,
+    toolIpAsn: toolIpAsnEn as Record<string, string>,
+    toolDnsTrace: toolDnsTraceEn as Record<string, string>,
+    toolDnsPropagation: toolDnsPropagationEn as Record<string, string>,
   },
 } as const
 
@@ -53,7 +69,7 @@ i18n.use(initReactI18next).init({
 i18n.on('languageChanged', (lng) => {
   try {
     localStorage.setItem(STORAGE_KEY, lng)
-  } catch (_) {}
+  } catch (_) { }
 })
 
 export function setLocale(lng: Locale) {
