@@ -45,6 +45,10 @@ import toolDnsCnameChainZh from '@toolbox/tool-dns-cname-chain/locales/zh-CN.jso
 import toolDnsCnameChainEn from '@toolbox/tool-dns-cname-chain/locales/en-US.json'
 import toolDnsNxdomainZh from '@toolbox/tool-dns-nxdomain/locales/zh-CN.json'
 import toolDnsNxdomainEn from '@toolbox/tool-dns-nxdomain/locales/en-US.json'
+import toolDomainMxZh from '@toolbox/tool-domain-mx/locales/zh-CN.json'
+import toolDomainMxEn from '@toolbox/tool-domain-mx/locales/en-US.json'
+import toolDomainTxtZh from '@toolbox/tool-domain-txt/locales/zh-CN.json'
+import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import toolSecurityIpScoreZh from '@toolbox/tool-security-suite/src/locales/securityIpScore.zh.json'
 import toolSecurityIpScoreEn from '@toolbox/tool-security-suite/src/locales/securityIpScore.en.json'
 import toolSecurityDomainBlacklistZh from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.zh.json'
@@ -97,6 +101,8 @@ export const resources = {
     toolDnsNs: toolDnsNsZh as Record<string, string>,
     toolDnsCnameChain: toolDnsCnameChainZh as Record<string, string>,
     toolDnsNxdomain: toolDnsNxdomainZh as Record<string, string>,
+    toolDomainMx: toolDomainMxZh as Record<string, string>,
+    toolDomainTxt: toolDomainTxtZh as Record<string, string>,
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistZh as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
@@ -135,6 +141,8 @@ export const resources = {
     toolDnsNs: toolDnsNsEn as Record<string, string>,
     toolDnsCnameChain: toolDnsCnameChainEn as Record<string, string>,
     toolDnsNxdomain: toolDnsNxdomainEn as Record<string, string>,
+    toolDomainMx: toolDomainMxEn as Record<string, string>,
+    toolDomainTxt: toolDomainTxtEn as Record<string, string>,
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistEn as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,

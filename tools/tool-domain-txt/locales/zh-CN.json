@@ -1,0 +1,4 @@
+{
+  "title": "TXT 记录解析",
+  "description": "查询域名的 TXT 记录，识别 SPF、DKIM、DMARC 等配置"
+}

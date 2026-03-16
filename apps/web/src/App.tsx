@@ -109,6 +109,12 @@ const DnsNs = lazy(() =>
 )
 const DnsCnameChain = lazy(() =>
 const DnsNxdomain = lazy(() =>
+const DomainMx = lazy(() =>
+const DomainTxt = lazy(() =>
+  import('@toolbox/tool-domain-txt').then((m) => ({ default: m.default }))
+)
+  import('@toolbox/tool-domain-mx').then((m) => ({ default: m.default }))
+)
   import('@toolbox/tool-dns-nxdomain').then((m) => ({ default: m.default }))
 )
   import('@toolbox/tool-dns-cname-chain').then((m) => ({ default: m.default }))
@@ -193,6 +199,8 @@ function App() {
           <Route path="/dns-ns" element={<DnsNs />} />
           <Route path="/dns-cname-chain" element={<DnsCnameChain />} />
           <Route path="/dns-nxdomain" element={<DnsNxdomain />} />
+          <Route path="/domain-mx" element={<DomainMx />} />
+          <Route path="/domain-txt" element={<DomainTxt />} />
           <Route path="/security-ip-score" element={<SecurityIpScore />} />
           <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
           <Route path="/security-port-scan" element={<SecurityPortScan />} />

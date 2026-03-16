@@ -95,6 +95,8 @@
 | NS 服务器查询 | `/dns-ns` | `tools/tool-dns-ns` → DnsNs |
 | CNAME 链检测 | `/dns-cname-chain` | `tools/tool-dns-cname-chain` → DnsCnameChain |
 | 域名 NXDOMAIN 检测 | `/dns-nxdomain` | `tools/tool-dns-nxdomain` → DnsNxdomain |
+| MX 记录检测 | `/domain-mx` | `tools/tool-domain-mx` → DomainMx |
+| TXT 记录解析 | `/domain-txt` | `tools/tool-domain-txt` → DomainTxt |
 | DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
 | DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
 | DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
@@ -134,11 +136,9 @@
 | DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |
 | 权威 DNS 检测 | network | `/dns-authoritative` | 待开发 | P2 | 权威服务器检测 |
 | DNS 递归服务器检测 | network | `/dns-recursive` | 待开发 | P2 | 递归服务检测 |
-| MX 记录检测 | network | `/domain-mx` | 待开发 | P2 | MX 解析与优先级 |
 | SPF 记录解析 | network | `/domain-spf` | 待开发 | P2 | SPF 解析与校验 |
 | DKIM 验证工具 | network | `/domain-dkim` | 待开发 | P2 | DKIM 验证 |
 | DMARC 检测 | network | `/domain-dmarc` | 待开发 | P2 | DMARC 策略 |
-| TXT 记录解析 | network | `/domain-txt` | 待开发 | P2 | TXT 查看与解析 |
 | 域名 TTL 优化建议 | network | `/domain-ttl-advice` | 待开发 | P2 | TTL 建议 |
 | 域名 NS 配置检查 | network | `/domain-ns-check` | 待开发 | P2 | NS 配置合理性 |
 | 子域名扫描 | network | `/domain-subdomain-scan` | 待开发 | P2 | 子域发现 |

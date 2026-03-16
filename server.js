@@ -8,6 +8,8 @@ import { registerSecurityApiRoutes } from './tools/tool-security-suite/server/se
 import { registerDnsNsApiRoutes } from './tools/tool-dns-ns/server/dns-ns-api.js'
 import { registerDnsCnameChainApiRoutes } from './tools/tool-dns-cname-chain/server/dns-cname-chain-api.js'
 import { registerDnsNxdomainApiRoutes } from './tools/tool-dns-nxdomain/server/dns-nxdomain-api.js'
+import { registerDomainMxApiRoutes } from './tools/tool-domain-mx/server/domain-mx-api.js'
+import { registerDomainTxtApiRoutes } from './tools/tool-domain-txt/server/domain-txt-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -20,6 +22,8 @@ app.use(express.json())
 registerSecurityApiRoutes(app)
 registerDnsCnameChainApiRoutes(app)
 registerDnsNsApiRoutes(app)
+registerDomainTxtApiRoutes(app)
+registerDomainMxApiRoutes(app)
 registerDnsNxdomainApiRoutes(app)
 
 // 静态文件服务

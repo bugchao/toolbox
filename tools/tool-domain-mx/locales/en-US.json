@@ -1,0 +1,4 @@
+{
+  "title": "MX Record Check",
+  "description": "Query domain mail exchange records and check mail server configuration"
+}

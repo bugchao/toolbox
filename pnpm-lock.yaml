@@ -30,6 +30,9 @@ importers:
       '@toolbox/tool-dns-cache-check':
         specifier: workspace:*
         version: link:../../tools/tool-dns-cache-check
+      '@toolbox/tool-dns-cname-chain':
+        specifier: workspace:*
+        version: link:../../tools/tool-dns-cname-chain
       '@toolbox/tool-dns-diagnose':
         specifier: workspace:*
         version: link:../../tools/tool-dns-diagnose
@@ -45,6 +48,9 @@ importers:
       '@toolbox/tool-dns-ns':
         specifier: workspace:*
         version: link:../../tools/tool-dns-ns
+      '@toolbox/tool-dns-nxdomain':
+        specifier: workspace:*
+        version: link:../../tools/tool-dns-nxdomain
       '@toolbox/tool-dns-performance':
         specifier: workspace:*
         version: link:../../tools/tool-dns-performance
@@ -375,6 +381,34 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-dns-cname-chain:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.263.1
+        version: 0.263.1(react@18.3.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^13.5.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.43
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.17
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
   tools/tool-dns-diagnose:
     dependencies:
       '@toolbox/ui-kit':
@@ -488,6 +522,34 @@ importers:
         version: 5.9.3
 
   tools/tool-dns-ns:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.263.1
+        version: 0.263.1(react@18.3.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^13.5.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.43
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.17
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  tools/tool-dns-nxdomain:
     dependencies:
       '@toolbox/ui-kit':
         specifier: workspace:*

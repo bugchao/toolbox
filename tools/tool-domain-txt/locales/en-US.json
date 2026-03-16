@@ -1,0 +1,4 @@
+{
+  "title": "TXT Record Parser",
+  "description": "Query domain TXT records and identify SPF, DKIM, DMARC configurations"
+}
