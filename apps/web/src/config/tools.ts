@@ -4,7 +4,8 @@ import {
   Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart,
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
-  Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch
+  Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
+  Boxes, GitCompareArrows, PlayCircle
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -48,6 +49,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: Radar, categoryKey: 'network', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan' },
   { path: '/security-dns-vuln', nameKey: 'tools.security_dns_vuln', icon: ShieldCheck, categoryKey: 'network', keywords: ['security', 'dns', 'vuln', '漏洞', '配置'], i18nNamespace: 'toolSecurityDnsVuln' },
   { path: '/security-report-gen', nameKey: 'tools.security_report_gen', icon: FileSearch, categoryKey: 'network', keywords: ['security', 'report', '网络', '报告'], i18nNamespace: 'toolSecurityReportGen' },
+  { path: '/ipam-plan', nameKey: 'tools.ipam_plan', icon: Boxes, categoryKey: 'network', keywords: ['ipam', 'plan', 'vlsm', '规划'], i18nNamespace: 'toolIpamPlan' },
+  { path: '/ipam-inventory', nameKey: 'tools.ipam_inventory', icon: Boxes, categoryKey: 'network', keywords: ['ipam', 'inventory', '库存'], i18nNamespace: 'toolIpamInventory' },
+  { path: '/ipam-usage', nameKey: 'tools.ipam_usage', icon: Activity, categoryKey: 'network', keywords: ['ipam', 'usage', 'utilization', '使用率'], i18nNamespace: 'toolIpamUsage' },
+  { path: '/ipam-conflict', nameKey: 'tools.ipam_conflict', icon: GitCompareArrows, categoryKey: 'network', keywords: ['ipam', 'conflict', 'overlap', '冲突'], i18nNamespace: 'toolIpamConflict' },
+  { path: '/ipam-allocation-sim', nameKey: 'tools.ipam_allocation_sim', icon: PlayCircle, categoryKey: 'network', keywords: ['ipam', 'allocation', 'simulation', '分配'], i18nNamespace: 'toolIpamAllocationSim' },
   { path: '/json', nameKey: 'tools.json', icon: Braces, categoryKey: 'dev', keywords: ['json'], i18nNamespace: 'toolJson' },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: FileCode, categoryKey: 'dev', keywords: ['base64'] },

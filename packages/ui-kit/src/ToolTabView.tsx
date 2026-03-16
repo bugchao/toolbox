@@ -9,6 +9,8 @@ export interface ToolTabViewProps {
   historyLabel?: string
   activeTab?: 'query' | 'history'
   onTabChange?: (tab: 'query' | 'history') => void
+  queryContainerClassName?: string
+  historyContainerClassName?: string
 }
 
 /**
@@ -22,6 +24,8 @@ const ToolTabView: React.FC<ToolTabViewProps> = ({
   historyLabel = '历史',
   activeTab: controlledTab,
   onTabChange,
+  queryContainerClassName = '',
+  historyContainerClassName = 'max-w-2xl',
 }) => {
   const [internalTab, setInternalTab] = useState<'query' | 'history'>('query')
   const activeTab = controlledTab ?? internalTab
@@ -68,9 +72,9 @@ const ToolTabView: React.FC<ToolTabViewProps> = ({
       {/* 内容区：始终在下方 */}
       <div className="flex-1 min-w-0">
         {activeTab === 'history' ? (
-          <div className="max-w-2xl">{historyPanel}</div>
+          <div className={historyContainerClassName}>{historyPanel}</div>
         ) : (
-          queryPanel
+          <div className={queryContainerClassName}>{queryPanel}</div>
         )}
       </div>
     </div>

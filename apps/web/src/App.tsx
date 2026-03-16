@@ -122,6 +122,21 @@ const SecurityDnsVuln = lazy(() =>
 const SecurityReportGen = lazy(() =>
   import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityReportGen }))
 )
+const IpamPlan = lazy(() =>
+  import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamPlan }))
+)
+const IpamInventory = lazy(() =>
+  import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamInventory }))
+)
+const IpamUsage = lazy(() =>
+  import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamUsage }))
+)
+const IpamConflict = lazy(() =>
+  import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamConflict }))
+)
+const IpamAllocationSim = lazy(() =>
+  import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamAllocationSim }))
+)
 
 function App() {
   return (
@@ -175,6 +190,11 @@ function App() {
           <Route path="/security-port-scan" element={<SecurityPortScan />} />
           <Route path="/security-dns-vuln" element={<SecurityDnsVuln />} />
           <Route path="/security-report-gen" element={<SecurityReportGen />} />
+          <Route path="/ipam-plan" element={<IpamPlan />} />
+          <Route path="/ipam-inventory" element={<IpamInventory />} />
+          <Route path="/ipam-usage" element={<IpamUsage />} />
+          <Route path="/ipam-conflict" element={<IpamConflict />} />
+          <Route path="/ipam-allocation-sim" element={<IpamAllocationSim />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />

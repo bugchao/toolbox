@@ -79,7 +79,7 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（21）
+### 网络工具（26）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -104,6 +104,11 @@
 | 端口安全扫描 | `/security-port-scan` | `tools/tool-security-suite` → SecurityPortScan |
 | DNS 配置漏洞检测 | `/security-dns-vuln` | `tools/tool-security-suite` → SecurityDnsVuln |
 | 网络安全报告生成 | `/security-report-gen` | `tools/tool-security-suite` → SecurityReportGen |
+| IP 地址规划工具 | `/ipam-plan` | `tools/tool-ipam-suite` → IpamPlan |
+| IP 地址库存管理 | `/ipam-inventory` | `tools/tool-ipam-suite` → IpamInventory |
+| IP 使用率分析 | `/ipam-usage` | `tools/tool-ipam-suite` → IpamUsage |
+| 地址池冲突检测 | `/ipam-conflict` | `tools/tool-ipam-suite` → IpamConflict |
+| IP 地址分配模拟 | `/ipam-allocation-sim` | `tools/tool-ipam-suite` → IpamAllocationSim |
 
 ### 资讯工具（1）
 
@@ -167,11 +172,6 @@
 | DHCP Discover 模拟 | network | `/dhcp-discover-sim` | 待开发 | P2 | 抓包/模拟 |
 | DHCP 网络扫描 | network | `/dhcp-scan` | 待开发 | P2 | 发现 DHCP 服务 |
 | DHCP 地址利用率分析 | network | `/dhcp-utilization` | 待开发 | P2 | 使用率统计 |
-| IP 地址规划工具 | network | `/ipam-plan` | 待开发 | P2 | 规划与分配 |
-| IP 地址库存管理 | network | `/ipam-inventory` | 待开发 | P2 | 库存视图 |
-| IP 使用率分析 | network | `/ipam-usage` | 待开发 | P2 | 使用率 |
-| 地址池冲突检测 | network | `/ipam-conflict` | 待开发 | P2 | 重叠检测 |
-| IP 地址分配模拟 | network | `/ipam-allocation-sim` | 待开发 | P2 | 分配模拟 |
 | IP 地址回收分析 | network | `/ipam-reclaim` | 待开发 | P2 | 可回收分析 |
 | 子网利用率统计 | network | `/ipam-subnet-util` | 待开发 | P2 | 子网利用率 |
 | IP 地址变更记录 | network | `/ipam-changelog` | 待开发 | P2 | 变更记录 |

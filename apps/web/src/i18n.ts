@@ -51,6 +51,16 @@ import toolSecurityDnsVulnZh from '@toolbox/tool-security-suite/src/locales/secu
 import toolSecurityDnsVulnEn from '@toolbox/tool-security-suite/src/locales/securityDnsVuln.en.json'
 import toolSecurityReportGenZh from '@toolbox/tool-security-suite/src/locales/securityReportGen.zh.json'
 import toolSecurityReportGenEn from '@toolbox/tool-security-suite/src/locales/securityReportGen.en.json'
+import toolIpamPlanZh from '@toolbox/tool-ipam-suite/src/locales/ipamPlan.zh.json'
+import toolIpamPlanEn from '@toolbox/tool-ipam-suite/src/locales/ipamPlan.en.json'
+import toolIpamInventoryZh from '@toolbox/tool-ipam-suite/src/locales/ipamInventory.zh.json'
+import toolIpamInventoryEn from '@toolbox/tool-ipam-suite/src/locales/ipamInventory.en.json'
+import toolIpamUsageZh from '@toolbox/tool-ipam-suite/src/locales/ipamUsage.zh.json'
+import toolIpamUsageEn from '@toolbox/tool-ipam-suite/src/locales/ipamUsage.en.json'
+import toolIpamConflictZh from '@toolbox/tool-ipam-suite/src/locales/ipamConflict.zh.json'
+import toolIpamConflictEn from '@toolbox/tool-ipam-suite/src/locales/ipamConflict.en.json'
+import toolIpamAllocationSimZh from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.zh.json'
+import toolIpamAllocationSimEn from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -86,6 +96,11 @@ export const resources = {
     toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
     toolSecurityDnsVuln: toolSecurityDnsVulnZh as unknown as Record<string, string>,
     toolSecurityReportGen: toolSecurityReportGenZh as unknown as Record<string, string>,
+    toolIpamPlan: toolIpamPlanZh as unknown as Record<string, string>,
+    toolIpamInventory: toolIpamInventoryZh as unknown as Record<string, string>,
+    toolIpamUsage: toolIpamUsageZh as unknown as Record<string, string>,
+    toolIpamConflict: toolIpamConflictZh as unknown as Record<string, string>,
+    toolIpamAllocationSim: toolIpamAllocationSimZh as unknown as Record<string, string>,
   },
   en: {
     common: en.common,
@@ -117,6 +132,11 @@ export const resources = {
     toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,
     toolSecurityDnsVuln: toolSecurityDnsVulnEn as unknown as Record<string, string>,
     toolSecurityReportGen: toolSecurityReportGenEn as unknown as Record<string, string>,
+    toolIpamPlan: toolIpamPlanEn as unknown as Record<string, string>,
+    toolIpamInventory: toolIpamInventoryEn as unknown as Record<string, string>,
+    toolIpamUsage: toolIpamUsageEn as unknown as Record<string, string>,
+    toolIpamConflict: toolIpamConflictEn as unknown as Record<string, string>,
+    toolIpamAllocationSim: toolIpamAllocationSimEn as unknown as Record<string, string>,
   },
 } as const
 
