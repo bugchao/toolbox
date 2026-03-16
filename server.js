@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 import { registerSecurityApiRoutes } from './tools/tool-security-suite/server/security-api.js'
 import { registerDnsNsApiRoutes } from './tools/tool-dns-ns/server/dns-ns-api.js'
 import { registerDnsCnameChainApiRoutes } from './tools/tool-dns-cname-chain/server/dns-cname-chain-api.js'
+import { registerDnsNxdomainApiRoutes } from './tools/tool-dns-nxdomain/server/dns-nxdomain-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,6 +20,7 @@ app.use(express.json())
 registerSecurityApiRoutes(app)
 registerDnsCnameChainApiRoutes(app)
 registerDnsNsApiRoutes(app)
+registerDnsNxdomainApiRoutes(app)
 
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'dist')))

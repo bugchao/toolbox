@@ -45,6 +45,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dns-loop-check', nameKey: 'tools.dns_loop_check', icon: RefreshCw, categoryKey: 'network', keywords: ['dns', 'loop', '循环', 'cname'], i18nNamespace: 'toolDnsLoopCheck' },
   { path: '/dns-ns', nameKey: 'tools.dns_ns', icon: Server, categoryKey: 'network', keywords: ['dns', 'ns', '名称服务器', 'nameserver'], i18nNamespace: 'toolDnsNs' },
   { path: '/dns-cname-chain', nameKey: 'tools.dns_cname_chain', icon: Link2, categoryKey: 'network', keywords: ['dns', 'cname', '链', 'chain', '循环'], i18nNamespace: 'toolDnsCnameChain' },
+  { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: XCircle, categoryKey: 'network', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain' },
   { path: '/security-ip-score', nameKey: 'tools.security_ip_score', icon: ShieldAlert, categoryKey: 'network', keywords: ['security', 'ip', 'risk', '安全', '评分'], i18nNamespace: 'toolSecurityIpScore' },
   { path: '/security-domain-blacklist', nameKey: 'tools.security_domain_blacklist', icon: ShieldBan, categoryKey: 'network', keywords: ['security', 'domain', 'blacklist', '域名', '黑名单'], i18nNamespace: 'toolSecurityDomainBlacklist' },
   { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: Radar, categoryKey: 'network', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan' },

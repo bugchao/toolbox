@@ -94,6 +94,7 @@
 | DNS TTL 查看工具 | `/dns-ttl` | `tools/tool-dns-ttl` → DnsTtl |
 | NS 服务器查询 | `/dns-ns` | `tools/tool-dns-ns` → DnsNs |
 | CNAME 链检测 | `/dns-cname-chain` | `tools/tool-dns-cname-chain` → DnsCnameChain |
+| 域名 NXDOMAIN 检测 | `/dns-nxdomain` | `tools/tool-dns-nxdomain` → DnsNxdomain |
 | DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
 | DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
 | DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
@@ -128,7 +129,6 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | DNS 延迟分析 | network | `/dns-latency` | 待开发 | P2 | 延迟分布 |
 | DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |

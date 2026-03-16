@@ -37,6 +37,7 @@
     "@toolbox/tool-dns-loop-check": "workspace:*",
     "@toolbox/tool-dns-ns": "workspace:*",
     "@toolbox/tool-dns-cname-chain": "workspace:*",
+    "@toolbox/tool-dns-nxdomain": "workspace:*",
     "@toolbox/tool-security-suite": "workspace:*",
     "@toolbox/tool-ipam-suite": "workspace:*",
     "crypto-js": "^4.2.0",

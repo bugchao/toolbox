@@ -42,6 +42,7 @@ export default defineConfig({
       '@toolbox/tool-dns-loop-check': path.join(root, 'tools/tool-dns-loop-check'),
       '@toolbox/tool-dns-ns': path.join(root, 'tools/tool-dns-ns'),
       '@toolbox/tool-dns-cname-chain': path.join(root, 'tools/tool-dns-cname-chain'),
+      '@toolbox/tool-dns-nxdomain': path.join(root, 'tools/tool-dns-nxdomain'),
       '@toolbox/tool-security-suite': path.join(root, 'tools/tool-security-suite'),
       '@toolbox/tool-ipam-suite': path.join(root, 'tools/tool-ipam-suite'),
     },
@@ -52,7 +53,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-ipam-suite']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-ipam-suite']
   },
   build: {
     outDir: 'dist'

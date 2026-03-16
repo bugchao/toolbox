@@ -1,0 +1,4 @@
+{
+  "title": "Domain NXDOMAIN Check",
+  "description": "Check if a domain exists and analyze NXDOMAIN responses with possible causes"
+}

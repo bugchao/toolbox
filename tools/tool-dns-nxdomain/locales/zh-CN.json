@@ -1,0 +1,4 @@
+{
+  "title": "域名 NXDOMAIN 检测",
+  "description": "检测域名是否存在，分析 NXDOMAIN 响应和可能的原因"
+}
