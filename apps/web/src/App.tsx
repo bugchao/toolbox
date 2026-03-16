@@ -107,6 +107,9 @@ const DnsLoopCheck = lazy(() =>
 const DnsNs = lazy(() =>
   import('@toolbox/tool-dns-ns').then((m) => ({ default: m.default }))
 )
+const DnsCnameChain = lazy(() =>
+  import('@toolbox/tool-dns-cname-chain').then((m) => ({ default: m.default }))
+)
 const SecurityIpScore = lazy(() =>
   import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityIpScore }))
 )
@@ -185,6 +188,7 @@ function App() {
           <Route path="/dns-cache-check" element={<DnsCacheCheck />} />
           <Route path="/dns-loop-check" element={<DnsLoopCheck />} />
           <Route path="/dns-ns" element={<DnsNs />} />
+          <Route path="/dns-cname-chain" element={<DnsCnameChain />} />
           <Route path="/security-ip-score" element={<SecurityIpScore />} />
           <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
           <Route path="/security-port-scan" element={<SecurityPortScan />} />

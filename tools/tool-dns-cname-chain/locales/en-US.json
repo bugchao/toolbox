@@ -1,0 +1,4 @@
+{
+  "title": "CNAME Chain Checker",
+  "description": "Track CNAME resolution chain, detect circular references and resolution paths"
+}

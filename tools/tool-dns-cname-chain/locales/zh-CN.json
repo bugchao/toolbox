@@ -1,0 +1,4 @@
+{
+  "title": "CNAME 链检测",
+  "description": "追踪域名的 CNAME 解析链，检测循环引用和解析路径"
+}

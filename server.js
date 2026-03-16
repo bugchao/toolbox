@@ -6,6 +6,7 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { registerSecurityApiRoutes } from './tools/tool-security-suite/server/security-api.js'
 import { registerDnsNsApiRoutes } from './tools/tool-dns-ns/server/dns-ns-api.js'
+import { registerDnsCnameChainApiRoutes } from './tools/tool-dns-cname-chain/server/dns-cname-chain-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 3000
 // 解析JSON请求体
 app.use(express.json())
 registerSecurityApiRoutes(app)
+registerDnsCnameChainApiRoutes(app)
 registerDnsNsApiRoutes(app)
 
 // 静态文件服务
