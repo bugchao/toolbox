@@ -1,0 +1,4 @@
+{
+  "title": "NS Server Query",
+  "description": "Query authoritative NS records for a domain and retrieve nameserver list with IP addresses"
+}

@@ -79,7 +79,7 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（20）
+### 网络工具（21）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -92,6 +92,7 @@
 | DNSSEC 检测 | `/dnssec-check` | `tools/tool-dnssec-check` → DnssecCheck |
 | DNS 服务器性能测试 | `/dns-performance` | `tools/tool-dns-performance` → DnsPerformance |
 | DNS TTL 查看工具 | `/dns-ttl` | `tools/tool-dns-ttl` → DnsTtl |
+| NS 服务器查询 | `/dns-ns` | `tools/tool-dns-ns` → DnsNs |
 | DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
 | DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
 | DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
@@ -121,7 +122,6 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| NS 服务器查询 | network | `/dns-ns` | 待开发 | P2 | 权威 NS 列表 |
 | CNAME 链检测 | network | `/dns-cname-chain` | 待开发 | P2 | CNAME 链解析 |
 | 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
 | 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |

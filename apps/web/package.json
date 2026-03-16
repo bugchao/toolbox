@@ -35,6 +35,7 @@
     "@toolbox/tool-dns-hijack-check": "workspace:*",
     "@toolbox/tool-dns-cache-check": "workspace:*",
     "@toolbox/tool-dns-loop-check": "workspace:*",
+    "@toolbox/tool-dns-ns": "workspace:*",
     "@toolbox/tool-security-suite": "workspace:*",
     "crypto-js": "^4.2.0",
     "diff": "^8.0.3",

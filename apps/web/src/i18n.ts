@@ -39,6 +39,8 @@ import toolDnsCacheCheckZh from '@toolbox/tool-dns-cache-check/src/locales/zh/to
 import toolDnsCacheCheckEn from '@toolbox/tool-dns-cache-check/src/locales/en/toolDnsCacheCheck.json'
 import toolDnsLoopCheckZh from '@toolbox/tool-dns-loop-check/src/locales/zh/toolDnsLoopCheck.json'
 import toolDnsLoopCheckEn from '@toolbox/tool-dns-loop-check/src/locales/en/toolDnsLoopCheck.json'
+import toolDnsNsZh from '@toolbox/tool-dns-ns/locales/zh-CN.json'
+import toolDnsNsEn from '@toolbox/tool-dns-ns/locales/en-US.json'
 import toolSecurityIpScoreZh from '@toolbox/tool-security-suite/src/locales/securityIpScore.zh.json'
 import toolSecurityIpScoreEn from '@toolbox/tool-security-suite/src/locales/securityIpScore.en.json'
 import toolSecurityDomainBlacklistZh from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.zh.json'
@@ -78,6 +80,7 @@ export const resources = {
     toolDnsHijackCheck: toolDnsHijackCheckZh as Record<string, string>,
     toolDnsCacheCheck: toolDnsCacheCheckZh as Record<string, string>,
     toolDnsLoopCheck: toolDnsLoopCheckZh as Record<string, string>,
+    toolDnsNs: toolDnsNsZh as Record<string, string>,
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistZh as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
@@ -108,6 +111,7 @@ export const resources = {
     toolDnsHijackCheck: toolDnsHijackCheckEn as Record<string, string>,
     toolDnsCacheCheck: toolDnsCacheCheckEn as Record<string, string>,
     toolDnsLoopCheck: toolDnsLoopCheckEn as Record<string, string>,
+    toolDnsNs: toolDnsNsEn as Record<string, string>,
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistEn as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,
