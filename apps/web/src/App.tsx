@@ -1,16 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
-
-function RouteLoading() {
-  const { t } = useTranslation('common')
-  return (
-    <div className="flex items-center justify-center min-h-[200px] text-gray-500 dark:text-gray-300">
-      {t('loading')}
-    </div>
-  )
-}
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import HotNews from './pages/HotNews'
@@ -44,6 +35,15 @@ import ElectronicWoodenFish from './pages/ElectronicWoodenFish'
 import LifeProgressBar from './pages/LifeProgressBar'
 import MeetingMinutes from './pages/MeetingMinutes'
 import UIGenerator from './pages/UIGenerator'
+
+function RouteLoading() {
+  const { t } = useTranslation('common')
+  return (
+    <div className="flex min-h-[200px] items-center justify-center text-gray-500 dark:text-gray-300">
+      {t('loading')}
+    </div>
+  )
+}
 
 const QrCodeGenerator = lazy(() =>
   import('@toolbox/tool-qrcode').then((m) => ({ default: m.QrCodeGenerator }))
@@ -108,16 +108,64 @@ const DnsNs = lazy(() =>
   import('@toolbox/tool-dns-ns').then((m) => ({ default: m.default }))
 )
 const DnsCnameChain = lazy(() =>
+  import('@toolbox/tool-dns-cname-chain').then((m) => ({ default: m.default }))
+)
 const DnsNxdomain = lazy(() =>
+  import('@toolbox/tool-dns-nxdomain').then((m) => ({ default: m.default }))
+)
 const DomainMx = lazy(() =>
+  import('@toolbox/tool-domain-mx').then((m) => ({ default: m.default }))
+)
 const DomainTxt = lazy(() =>
   import('@toolbox/tool-domain-txt').then((m) => ({ default: m.default }))
 )
-  import('@toolbox/tool-domain-mx').then((m) => ({ default: m.default }))
+const DomainSpf = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
-  import('@toolbox/tool-dns-nxdomain').then((m) => ({ default: m.default }))
+const DomainDkim = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainDkim }))
 )
-  import('@toolbox/tool-dns-cname-chain').then((m) => ({ default: m.default }))
+const DomainDmarc = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainDmarc }))
+)
+const DomainTtlAdvice = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainTtlAdvice }))
+)
+const DomainNsCheck = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainNsCheck }))
+)
+const DomainSubdomainScan = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSubdomainScan }))
+)
+const DomainWildcard = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainWildcard }))
+)
+const DomainHealthScore = lazy(() =>
+  import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainHealthScore }))
+)
+const IpGeo = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpGeo }))
+)
+const IpPtr = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpPtr }))
+)
+const IpV4ToV6 = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpV4ToV6 }))
+)
+const IpBinaryHex = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpBinaryHex }))
+)
+const IpClass = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpClass }))
+)
+const IpPublic = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpPublic }))
+)
+const IpCdnCheck = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpCdnCheck }))
+)
+const IpBlacklist = lazy(() =>
+  import('@toolbox/tool-ip-ops-suite').then((m) => ({ default: m.IpBlacklist }))
 )
 const SecurityIpScore = lazy(() =>
   import('@toolbox/tool-security-suite').then((m) => ({ default: m.SecurityIpScore }))
@@ -148,6 +196,36 @@ const IpamConflict = lazy(() =>
 )
 const IpamAllocationSim = lazy(() =>
   import('@toolbox/tool-ipam-suite').then((m) => ({ default: m.IpamAllocationSim }))
+)
+const CidrCalculator = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.CidrCalculator }))
+)
+const SubnetDivide = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.SubnetDivide }))
+)
+const SubnetNetworkAddr = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.SubnetNetworkAddr }))
+)
+const SubnetBroadcast = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.SubnetBroadcast }))
+)
+const SubnetMask = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.SubnetMask }))
+)
+const IpRange = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.IpRange }))
+)
+const SubnetCapacity = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.SubnetCapacity }))
+)
+const Ipv6Cidr = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.Ipv6Cidr }))
+)
+const Vlsm = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.Vlsm }))
+)
+const NetworkPlanner = lazy(() =>
+  import('@toolbox/tool-subnet-suite').then((m) => ({ default: m.NetworkPlanner }))
 )
 
 function App() {
@@ -201,6 +279,22 @@ function App() {
           <Route path="/dns-nxdomain" element={<DnsNxdomain />} />
           <Route path="/domain-mx" element={<DomainMx />} />
           <Route path="/domain-txt" element={<DomainTxt />} />
+          <Route path="/domain-spf" element={<DomainSpf />} />
+          <Route path="/domain-dkim" element={<DomainDkim />} />
+          <Route path="/domain-dmarc" element={<DomainDmarc />} />
+          <Route path="/domain-ttl-advice" element={<DomainTtlAdvice />} />
+          <Route path="/domain-ns-check" element={<DomainNsCheck />} />
+          <Route path="/domain-subdomain-scan" element={<DomainSubdomainScan />} />
+          <Route path="/domain-wildcard" element={<DomainWildcard />} />
+          <Route path="/domain-health-score" element={<DomainHealthScore />} />
+          <Route path="/ip-geo" element={<IpGeo />} />
+          <Route path="/ip-ptr" element={<IpPtr />} />
+          <Route path="/ip-v4-to-v6" element={<IpV4ToV6 />} />
+          <Route path="/ip-binary-hex" element={<IpBinaryHex />} />
+          <Route path="/ip-class" element={<IpClass />} />
+          <Route path="/ip-public" element={<IpPublic />} />
+          <Route path="/ip-cdn-check" element={<IpCdnCheck />} />
+          <Route path="/ip-blacklist" element={<IpBlacklist />} />
           <Route path="/security-ip-score" element={<SecurityIpScore />} />
           <Route path="/security-domain-blacklist" element={<SecurityDomainBlacklist />} />
           <Route path="/security-port-scan" element={<SecurityPortScan />} />
@@ -211,6 +305,16 @@ function App() {
           <Route path="/ipam-usage" element={<IpamUsage />} />
           <Route path="/ipam-conflict" element={<IpamConflict />} />
           <Route path="/ipam-allocation-sim" element={<IpamAllocationSim />} />
+          <Route path="/cidr-calculator" element={<CidrCalculator />} />
+          <Route path="/subnet-divide" element={<SubnetDivide />} />
+          <Route path="/subnet-network-addr" element={<SubnetNetworkAddr />} />
+          <Route path="/subnet-broadcast" element={<SubnetBroadcast />} />
+          <Route path="/subnet-mask" element={<SubnetMask />} />
+          <Route path="/ip-range" element={<IpRange />} />
+          <Route path="/subnet-capacity" element={<SubnetCapacity />} />
+          <Route path="/ipv6-cidr" element={<Ipv6Cidr />} />
+          <Route path="/vlsm" element={<Vlsm />} />
+          <Route path="/network-planner" element={<NetworkPlanner />} />
           <Route path="/format-converter" element={<FormatConverter />} />
           <Route path="/pdf-tools" element={<PdfTools />} />
           <Route path="/short-link" element={<ShortLinkGenerator />} />

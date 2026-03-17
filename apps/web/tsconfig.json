@@ -18,6 +18,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@toolbox/ui-kit": ["../../packages/ui-kit/src/index.ts"],
+      "@toolbox/*": ["../../tools/*", "../../packages/*"],
       "@toolbox/tool-json": ["../../tools/tool-json"],
       "@toolbox/tool-json/*": ["../../tools/tool-json/*"],
       "@toolbox/tool-ip-query": ["../../tools/tool-ip-query"],

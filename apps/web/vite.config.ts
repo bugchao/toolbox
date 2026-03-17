@@ -1,6 +1,8 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { createDomainSuiteApiMiddleware } from '../../tools/tool-domain-suite/server/domain-suite-api.js'
+import { createIpOpsApiMiddleware } from '../../tools/tool-ip-ops-suite/server/ip-ops-api.js'
 import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/server/security-api.js'
 
 const root = path.resolve(__dirname, '../..')
@@ -13,6 +15,18 @@ export default defineConfig({
       name: 'toolbox-security-api',
       configureServer(server) {
         server.middlewares.use(createSecurityApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-domain-suite-api',
+      configureServer(server) {
+        server.middlewares.use(createDomainSuiteApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-ip-ops-api',
+      configureServer(server) {
+        server.middlewares.use(createIpOpsApiMiddleware())
       },
     },
   ],
@@ -45,8 +59,11 @@ export default defineConfig({
       '@toolbox/tool-dns-nxdomain': path.join(root, 'tools/tool-dns-nxdomain'),
       '@toolbox/tool-domain-mx': path.join(root, 'tools/tool-domain-mx'),
       '@toolbox/tool-domain-txt': path.join(root, 'tools/tool-domain-txt'),
+      '@toolbox/tool-domain-suite': path.join(root, 'tools/tool-domain-suite'),
+      '@toolbox/tool-ip-ops-suite': path.join(root, 'tools/tool-ip-ops-suite'),
       '@toolbox/tool-security-suite': path.join(root, 'tools/tool-security-suite'),
       '@toolbox/tool-ipam-suite': path.join(root, 'tools/tool-ipam-suite'),
+      '@toolbox/tool-subnet-suite': path.join(root, 'tools/tool-subnet-suite'),
     },
   },
   server: {
@@ -55,7 +72,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-domain-txt', '@toolbox/tool-ipam-suite']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite']
   },
   build: {
     outDir: 'dist'

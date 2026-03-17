@@ -79,7 +79,7 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（26）
+### 网络工具（56）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -97,6 +97,22 @@
 | 域名 NXDOMAIN 检测 | `/dns-nxdomain` | `tools/tool-dns-nxdomain` → DnsNxdomain |
 | MX 记录检测 | `/domain-mx` | `tools/tool-domain-mx` → DomainMx |
 | TXT 记录解析 | `/domain-txt` | `tools/tool-domain-txt` → DomainTxt |
+| SPF 记录解析 | `/domain-spf` | `tools/tool-domain-suite` → DomainSpf |
+| DKIM 验证工具 | `/domain-dkim` | `tools/tool-domain-suite` → DomainDkim |
+| DMARC 检测 | `/domain-dmarc` | `tools/tool-domain-suite` → DomainDmarc |
+| 域名 TTL 优化建议 | `/domain-ttl-advice` | `tools/tool-domain-suite` → DomainTtlAdvice |
+| 域名 NS 配置检查 | `/domain-ns-check` | `tools/tool-domain-suite` → DomainNsCheck |
+| 子域名扫描 | `/domain-subdomain-scan` | `tools/tool-domain-suite` → DomainSubdomainScan |
+| Wildcard 解析检测 | `/domain-wildcard` | `tools/tool-domain-suite` → DomainWildcard |
+| 域名健康评分 | `/domain-health-score` | `tools/tool-domain-suite` → DomainHealthScore |
+| IP 地理位置查询 | `/ip-geo` | `tools/tool-ip-ops-suite` → IpGeo |
+| IP 反向解析（PTR） | `/ip-ptr` | `tools/tool-ip-ops-suite` → IpPtr |
+| IPv4 转 IPv6 | `/ip-v4-to-v6` | `tools/tool-ip-ops-suite` → IpV4ToV6 |
+| IP Binary/Hex 转换 | `/ip-binary-hex` | `tools/tool-ip-ops-suite` → IpBinaryHex |
+| IP 地址分类检测 | `/ip-class` | `tools/tool-ip-ops-suite` → IpClass |
+| 公网 IP 查询 | `/ip-public` | `tools/tool-ip-ops-suite` → IpPublic |
+| IP 是否 CDN | `/ip-cdn-check` | `tools/tool-ip-ops-suite` → IpCdnCheck |
+| IP 黑名单检测 | `/ip-blacklist` | `tools/tool-ip-ops-suite` → IpBlacklist |
 | DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |
 | DNS 解析失败诊断 | `/dns-diagnose` | `tools/tool-dns-diagnose` → DnsDiagnose |
 | DNS 污染检测 | `/dns-pollution-check` | `tools/tool-dns-pollution-check` → DnsPollutionCheck |
@@ -113,6 +129,16 @@
 | IP 使用率分析 | `/ipam-usage` | `tools/tool-ipam-suite` → IpamUsage |
 | 地址池冲突检测 | `/ipam-conflict` | `tools/tool-ipam-suite` → IpamConflict |
 | IP 地址分配模拟 | `/ipam-allocation-sim` | `tools/tool-ipam-suite` → IpamAllocationSim |
+| CIDR 计算器 | `/cidr-calculator` | `tools/tool-subnet-suite` → CidrCalculator |
+| 子网划分工具 | `/subnet-divide` | `tools/tool-subnet-suite` → SubnetDivide |
+| 网络地址计算 | `/subnet-network-addr` | `tools/tool-subnet-suite` → SubnetNetworkAddr |
+| 广播地址计算 | `/subnet-broadcast` | `tools/tool-subnet-suite` → SubnetBroadcast |
+| 子网掩码转换 | `/subnet-mask` | `tools/tool-subnet-suite` → SubnetMask |
+| IP 范围计算 | `/ip-range` | `tools/tool-subnet-suite` → IpRange |
+| 子网容量计算 | `/subnet-capacity` | `tools/tool-subnet-suite` → SubnetCapacity |
+| IPv6 CIDR 计算 | `/ipv6-cidr` | `tools/tool-subnet-suite` → Ipv6Cidr |
+| VLSM 子网规划 | `/vlsm` | `tools/tool-subnet-suite` → Vlsm |
+| 网络规划生成器 | `/network-planner` | `tools/tool-subnet-suite` → NetworkPlanner |
 
 ### 资讯工具（1）
 
@@ -136,32 +162,6 @@
 | DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |
 | 权威 DNS 检测 | network | `/dns-authoritative` | 待开发 | P2 | 权威服务器检测 |
 | DNS 递归服务器检测 | network | `/dns-recursive` | 待开发 | P2 | 递归服务检测 |
-| SPF 记录解析 | network | `/domain-spf` | 待开发 | P2 | SPF 解析与校验 |
-| DKIM 验证工具 | network | `/domain-dkim` | 待开发 | P2 | DKIM 验证 |
-| DMARC 检测 | network | `/domain-dmarc` | 待开发 | P2 | DMARC 策略 |
-| 域名 TTL 优化建议 | network | `/domain-ttl-advice` | 待开发 | P2 | TTL 建议 |
-| 域名 NS 配置检查 | network | `/domain-ns-check` | 待开发 | P2 | NS 配置合理性 |
-| 子域名扫描 | network | `/domain-subdomain-scan` | 待开发 | P2 | 子域发现 |
-| Wildcard 解析检测 | network | `/domain-wildcard` | 待开发 | P2 | 泛解析检测 |
-| 域名健康评分 | network | `/domain-health-score` | 待开发 | P2 | 综合健康分 |
-| IP 地理位置查询 | network | `/ip-geo` | 待开发 | P2 | 地理信息 |
-| IP 反向解析（PTR） | network | `/ip-ptr` | 待开发 | P2 | PTR 记录 |
-| IPv4 转 IPv6 | network | `/ip-v4-to-v6` | 待开发 | P2 | 地址转换 |
-| IP Binary/Hex 转换 | network | `/ip-binary-hex` | 待开发 | P2 | 二进制/十六进制 |
-| IP 地址分类检测 | network | `/ip-class` | 待开发 | P2 | 公网/私网/保留等 |
-| 公网 IP 查询 | network | `/ip-public` | 待开发 | P2 | 出口 IP 等 |
-| IP 是否 CDN | network | `/ip-cdn-check` | 待开发 | P2 | CDN 节点判断 |
-| IP 黑名单检测 | network | `/ip-blacklist` | 待开发 | P2 | 黑名单查询 |
-| CIDR 计算器 | network | `/cidr-calculator` | 待开发 | P2 | CIDR 与范围 |
-| 子网划分工具 | network | `/subnet-divide` | 待开发 | P2 | 子网划分 |
-| 网络地址计算 | network | `/subnet-network-addr` | 待开发 | P2 | 网络号 |
-| 广播地址计算 | network | `/subnet-broadcast` | 待开发 | P2 | 广播地址 |
-| 子网掩码转换 | network | `/subnet-mask` | 待开发 | P2 | 掩码换算 |
-| IP 范围计算 | network | `/ip-range` | 待开发 | P2 | 起止 IP |
-| 子网容量计算 | network | `/subnet-capacity` | 待开发 | P2 | 可用 IP 数 |
-| IPv6 CIDR 计算 | network | `/ipv6-cidr` | 待开发 | P2 | IPv6 CIDR |
-| VLSM 子网规划 | network | `/vlsm` | 待开发 | P2 | VLSM 规划 |
-| 网络规划生成器 | network | `/network-planner` | 待开发 | P2 | 规划输出 |
 | DHCP 地址池计算器 | network | `/dhcp-pool-calc` | 待开发 | P2 | 地址池容量等 |
 | DHCP 配置生成器 | network | `/dhcp-config-gen` | 待开发 | P2 | 配置生成 |
 | DHCP Option 查询 | network | `/dhcp-option` | 待开发 | P2 | Option 含义与用法 |

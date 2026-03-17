@@ -8,8 +8,10 @@ import { registerSecurityApiRoutes } from './tools/tool-security-suite/server/se
 import { registerDnsNsApiRoutes } from './tools/tool-dns-ns/server/dns-ns-api.js'
 import { registerDnsCnameChainApiRoutes } from './tools/tool-dns-cname-chain/server/dns-cname-chain-api.js'
 import { registerDnsNxdomainApiRoutes } from './tools/tool-dns-nxdomain/server/dns-nxdomain-api.js'
+import { registerDomainSuiteApiRoutes } from './tools/tool-domain-suite/server/domain-suite-api.js'
 import { registerDomainMxApiRoutes } from './tools/tool-domain-mx/server/domain-mx-api.js'
 import { registerDomainTxtApiRoutes } from './tools/tool-domain-txt/server/domain-txt-api.js'
+import { registerIpOpsApiRoutes } from './tools/tool-ip-ops-suite/server/ip-ops-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -22,9 +24,11 @@ app.use(express.json())
 registerSecurityApiRoutes(app)
 registerDnsCnameChainApiRoutes(app)
 registerDnsNsApiRoutes(app)
+registerDomainSuiteApiRoutes(app)
 registerDomainTxtApiRoutes(app)
 registerDomainMxApiRoutes(app)
 registerDnsNxdomainApiRoutes(app)
+registerIpOpsApiRoutes(app)
 
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'dist')))
