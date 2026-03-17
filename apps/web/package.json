@@ -22,6 +22,7 @@
     "@toolbox/tool-json": "workspace:*",
     "@toolbox/tool-ip-query": "workspace:*",
     "@toolbox/tool-ip-asn": "workspace:*",
+    "@toolbox/tool-github-info": "workspace:*",
     "@toolbox/tool-dns-trace": "workspace:*",
     "@toolbox/tool-dns-propagation": "workspace:*",
     "@toolbox/tool-ppt-generator": "workspace:*",

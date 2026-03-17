@@ -1,0 +1,27 @@
+{
+  "name": "@toolbox/tool-github-info",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "scripts": {
+    "lint": "eslint . --ext ts,tsx"
+  },
+  "dependencies": {
+    "@toolbox/ui-kit": "workspace:*",
+    "lucide-react": "^0.577.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-i18next": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "react-i18next": "^15.0.0",
+    "typescript": "^5.2.2"
+  }
+}

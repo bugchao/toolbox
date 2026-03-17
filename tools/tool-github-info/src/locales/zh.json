@@ -1,0 +1,53 @@
+{
+  "title": "GitHub 信息读取",
+  "description": "输入一个 GitHub Token，读取当前认证用户信息和可访问仓库列表。Token 仅保留在当前页面内存中，不做本地持久化。",
+  "notesTitle": "说明",
+  "tabs": {
+    "query": "查询",
+    "user": "用户信息",
+    "repos": "仓库信息"
+  },
+  "form": {
+    "token": "GitHub Token",
+    "placeholder": "ghp_xxx 或 github_pat_xxx",
+    "submit": "读取信息",
+    "submitting": "读取中",
+    "hint": "推荐使用最小权限 token。工具不会把 token 写入 localStorage。"
+  },
+  "result": {
+    "empty": "输入 token 后开始读取。",
+    "updated": "更新时间",
+    "userTitle": "当前认证用户",
+    "reposTitle": "可访问仓库",
+    "repoCount": "仓库数量",
+    "fields": {
+      "login": "用户名",
+      "name": "昵称",
+      "company": "公司",
+      "location": "地区",
+      "email": "邮箱",
+      "bio": "简介",
+      "followers": "关注者",
+      "following": "正在关注",
+      "publicRepos": "公开仓库",
+      "type": "账号类型",
+      "createdAt": "注册时间",
+      "updatedAt": "资料更新",
+      "visibility": "可见性",
+      "language": "主语言",
+      "stars": "Star",
+      "forks": "Fork",
+      "updated": "最近更新",
+      "url": "地址"
+    },
+    "repoEmpty": "当前 token 没有返回仓库列表，或无可访问仓库。",
+    "private": "私有",
+    "public": "公开",
+    "errorPrefix": "读取失败"
+  },
+  "notes": [
+    "当前实现使用 GitHub REST API：/user 和 /user/repos。",
+    "仓库列表默认按最近更新时间排序，最多读取 30 个。",
+    "如果 token 权限不足，用户信息可能能返回，但仓库列表会减少或为空。"
+  ]
+}

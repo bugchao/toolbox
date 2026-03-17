@@ -12,6 +12,7 @@ const TOOL_ICONS: Record<string, string> = {
   'tools.news': '📰',
   'tools.zipcode': '📮',
   'tools.weather': '🌤️',
+  'tools.github_info': '🐙',
   'tools.ip_query': '🌐',
   'tools.ip_asn': '🔢',
   'tools.dns_query': '🔌',

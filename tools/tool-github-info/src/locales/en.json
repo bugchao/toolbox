@@ -1,0 +1,53 @@
+{
+  "title": "GitHub Info Reader",
+  "description": "Enter a GitHub token to read the authenticated user profile and accessible repositories. The token stays in memory only and is not persisted locally.",
+  "notesTitle": "Notes",
+  "tabs": {
+    "query": "Query",
+    "user": "User",
+    "repos": "Repositories"
+  },
+  "form": {
+    "token": "GitHub Token",
+    "placeholder": "ghp_xxx or github_pat_xxx",
+    "submit": "Load Info",
+    "submitting": "Loading",
+    "hint": "Use a least-privilege token when possible. The tool does not write the token to localStorage."
+  },
+  "result": {
+    "empty": "Enter a token and load the data.",
+    "updated": "Updated",
+    "userTitle": "Authenticated User",
+    "reposTitle": "Accessible Repositories",
+    "repoCount": "Repositories",
+    "fields": {
+      "login": "Login",
+      "name": "Name",
+      "company": "Company",
+      "location": "Location",
+      "email": "Email",
+      "bio": "Bio",
+      "followers": "Followers",
+      "following": "Following",
+      "publicRepos": "Public Repos",
+      "type": "Account Type",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "visibility": "Visibility",
+      "language": "Primary Language",
+      "stars": "Stars",
+      "forks": "Forks",
+      "updated": "Updated",
+      "url": "URL"
+    },
+    "repoEmpty": "The token returned no repositories, or no accessible repositories were found.",
+    "private": "Private",
+    "public": "Public",
+    "errorPrefix": "Request failed"
+  },
+  "notes": [
+    "This implementation uses the GitHub REST API endpoints /user and /user/repos.",
+    "Repositories are sorted by most recently updated and limited to 30 items.",
+    "With limited scopes, the user profile may load while repository visibility stays partial or empty."
+  ]
+}

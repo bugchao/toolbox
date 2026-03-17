@@ -59,6 +59,7 @@ const ResumeGenerator = lazy(() => import('@toolbox/tool-resume'))
 const JsonFormatter = lazy(() =>
   import('@toolbox/tool-json').then((m) => ({ default: m.JsonFormatter }))
 )
+const GithubInfo = lazy(() => import('@toolbox/tool-github-info'))
 const IpQuery = lazy(() =>
   import('@toolbox/tool-ip-query').then((m) => ({ default: m.IpQuery }))
 )
@@ -242,6 +243,7 @@ function App() {
           <Route path="/zipcode" element={<ZipCode />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="/json" element={<JsonFormatter />} />
+          <Route path="/github-info" element={<GithubInfo />} />
           <Route path="/base64" element={<Base64 />} />
           <Route path="/timestamp" element={<Timestamp />} />
           <Route path="/url" element={<UrlEncoder />} />
