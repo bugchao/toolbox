@@ -49,6 +49,8 @@ import toolDomainMxZh from '@toolbox/tool-domain-mx/locales/zh-CN.json'
 import toolDomainMxEn from '@toolbox/tool-domain-mx/locales/en-US.json'
 import toolDomainTxtZh from '@toolbox/tool-domain-txt/locales/zh-CN.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
+import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
+import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
 import toolSecurityIpScoreZh from '@toolbox/tool-security-suite/src/locales/securityIpScore.zh.json'
 import toolSecurityIpScoreEn from '@toolbox/tool-security-suite/src/locales/securityIpScore.en.json'
 import toolSecurityDomainBlacklistZh from '@toolbox/tool-security-suite/src/locales/securityDomainBlacklist.zh.json'
@@ -69,6 +71,7 @@ import toolIpamConflictZh from '@toolbox/tool-ipam-suite/src/locales/ipamConflic
 import toolIpamConflictEn from '@toolbox/tool-ipam-suite/src/locales/ipamConflict.en.json'
 import toolIpamAllocationSimZh from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.zh.json'
 import toolIpamAllocationSimEn from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.en.json'
+import { subnetZh, subnetEn } from '@toolbox/tool-subnet-suite/src/locales'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -103,6 +106,8 @@ export const resources = {
     toolDnsNxdomain: toolDnsNxdomainZh as Record<string, string>,
     toolDomainMx: toolDomainMxZh as Record<string, string>,
     toolDomainTxt: toolDomainTxtZh as Record<string, string>,
+    ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
+    ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistZh as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanZh as unknown as Record<string, string>,
@@ -113,6 +118,7 @@ export const resources = {
     toolIpamUsage: toolIpamUsageZh as unknown as Record<string, string>,
     toolIpamConflict: toolIpamConflictZh as unknown as Record<string, string>,
     toolIpamAllocationSim: toolIpamAllocationSimZh as unknown as Record<string, string>,
+    ...(subnetZh as unknown as Record<string, Record<string, string>>),
   },
   en: {
     common: en.common,
@@ -143,6 +149,8 @@ export const resources = {
     toolDnsNxdomain: toolDnsNxdomainEn as Record<string, string>,
     toolDomainMx: toolDomainMxEn as Record<string, string>,
     toolDomainTxt: toolDomainTxtEn as Record<string, string>,
+    ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
+    ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
     toolSecurityDomainBlacklist: toolSecurityDomainBlacklistEn as unknown as Record<string, string>,
     toolSecurityPortScan: toolSecurityPortScanEn as unknown as Record<string, string>,
@@ -153,6 +161,7 @@ export const resources = {
     toolIpamUsage: toolIpamUsageEn as unknown as Record<string, string>,
     toolIpamConflict: toolIpamConflictEn as unknown as Record<string, string>,
     toolIpamAllocationSim: toolIpamAllocationSimEn as unknown as Record<string, string>,
+    ...(subnetEn as unknown as Record<string, Record<string, string>>),
   },
 } as const
 
