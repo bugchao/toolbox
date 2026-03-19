@@ -118,13 +118,13 @@ const DomainMx = lazy(() =>
   import('@toolbox/tool-domain-mx').then((m) => ({ default: m.default }))
 )
 const DomainTxt = lazy(() =>
-const HttpHeaders = lazy(() => import("@toolbox/tool-http-headers").then((m) => ({ default: m.default })))
-const SslCert = lazy(() => import("@toolbox/tool-ssl-cert").then((m) => ({ default: m.default })))
-const HttpStatus = lazy(() => import("@toolbox/tool-http-status").then((m) => ({ default: m.default })))
-const TcpPort = lazy(() => import("@toolbox/tool-tcp-port").then((m) => ({ default: m.default })))
-const Ping = lazy(() => import("@toolbox/tool-ping").then((m) => ({ default: m.default })))
   import('@toolbox/tool-domain-txt').then((m) => ({ default: m.default }))
 )
+const HttpHeaders = lazy(() => import('@toolbox/tool-http-headers').then((m) => ({ default: m.default })))
+const SslCert = lazy(() => import('@toolbox/tool-ssl-cert').then((m) => ({ default: m.default })))
+const HttpStatus = lazy(() => import('@toolbox/tool-http-status').then((m) => ({ default: m.default })))
+const TcpPort = lazy(() => import('@toolbox/tool-tcp-port').then((m) => ({ default: m.default })))
+const Ping = lazy(() => import('@toolbox/tool-ping').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
