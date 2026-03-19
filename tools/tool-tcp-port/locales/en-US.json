@@ -1,0 +1,4 @@
+{
+  "title": "TCP Port Check",
+  "description": "Check if TCP ports are open on a host, supports batch detection"
+}

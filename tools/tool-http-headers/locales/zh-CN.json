@@ -1,0 +1,4 @@
+{
+  "title": "HTTP Header 检测",
+  "description": "分析网站响应头，检测安全配置和缓存策略"
+}

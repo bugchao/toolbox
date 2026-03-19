@@ -1,0 +1,4 @@
+{
+  "title": "Ping Test",
+  "description": "Check host reachability and network latency via TCP"
+}

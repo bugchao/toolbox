@@ -5,7 +5,7 @@ import {
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
-  Boxes, GitCompareArrows, PlayCircle
+  Boxes, GitCompareArrows, PlayCircle, Wifi, Radio
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -48,7 +48,12 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dns-cname-chain', nameKey: 'tools.dns_cname_chain', icon: Link2, categoryKey: 'network', keywords: ['dns', 'cname', '链', 'chain', '循环'], i18nNamespace: 'toolDnsCnameChain' },
   { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: XCircle, categoryKey: 'network', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain' },
   { path: '/domain-mx', nameKey: 'tools.domain_mx', icon: Mail, categoryKey: 'network', keywords: ['mx', '邮件', 'mail', '邮箱'], i18nNamespace: 'toolDomainMx' },
-  { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileText, categoryKey: 'network', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt' },
+  { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileText, categoryKey: 'network', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt' }
+  { path: '/http-headers', nameKey: 'tools.http_headers', icon: Globe, categoryKey: 'network', keywords: ['http', 'header', '响应头', '安全'], i18nNamespace: 'toolHttpHeaders' },
+  { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: ShieldCheck, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert' },
+  { path: '/http-status', nameKey: 'tools.http_status', icon: Activity, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus' },
+  { path: '/tcp-port-check', nameKey: 'tools.tcp_port_check', icon: Wifi, categoryKey: 'network', keywords: ['tcp', 'port', '端口', '连通性'], i18nNamespace: 'toolTcpPort' },
+  { path: '/ping', nameKey: 'tools.ping', icon: Radio, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing' },,
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'network', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' },
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'network', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' },
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'network', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' },

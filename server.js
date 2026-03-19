@@ -12,6 +12,11 @@ import { registerDomainSuiteApiRoutes } from './tools/tool-domain-suite/server/d
 import { registerDomainMxApiRoutes } from './tools/tool-domain-mx/server/domain-mx-api.js'
 import { registerDomainTxtApiRoutes } from './tools/tool-domain-txt/server/domain-txt-api.js'
 import { registerIpOpsApiRoutes } from './tools/tool-ip-ops-suite/server/ip-ops-api.js'
+import { registerHttpHeadersApiRoutes } from './tools/tool-http-headers/server/http-headers-api.js'
+import { registerSslCertApiRoutes } from './tools/tool-ssl-cert/server/ssl-cert-api.js'
+import { registerHttpStatusApiRoutes } from './tools/tool-http-status/server/http-status-api.js'
+import { registerTcpPortApiRoutes } from './tools/tool-tcp-port/server/tcp-port-api.js'
+import { registerPingApiRoutes } from './tools/tool-ping/server/ping-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,6 +33,12 @@ registerDomainSuiteApiRoutes(app)
 registerDomainTxtApiRoutes(app)
 registerDomainMxApiRoutes(app)
 registerDnsNxdomainApiRoutes(app)
+registerIpOpsApiRoutes(app)
+registerHttpHeadersApiRoutes(app)
+registerSslCertApiRoutes(app)
+registerHttpStatusApiRoutes(app)
+registerTcpPortApiRoutes(app)
+registerPingApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务
