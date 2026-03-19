@@ -6,9 +6,11 @@ import { createIpOpsApiMiddleware } from '../../tools/tool-ip-ops-suite/server/i
 import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/server/security-api.js'
 
 const root = path.resolve(__dirname, '../..')
+const base = process.env.VITE_APP_BASE_PATH || '/'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base,
   plugins: [
     react(),
     {
