@@ -48,7 +48,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dns-cname-chain', nameKey: 'tools.dns_cname_chain', icon: Link2, categoryKey: 'network', keywords: ['dns', 'cname', '链', 'chain', '循环'], i18nNamespace: 'toolDnsCnameChain' },
   { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: XCircle, categoryKey: 'network', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain' },
   { path: '/domain-mx', nameKey: 'tools.domain_mx', icon: Mail, categoryKey: 'network', keywords: ['mx', '邮件', 'mail', '邮箱'], i18nNamespace: 'toolDomainMx' },
-  { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileText, categoryKey: 'network', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt' }
+  { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileText, categoryKey: 'network', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt' },
   { path: '/http-headers', nameKey: 'tools.http_headers', icon: Globe, categoryKey: 'network', keywords: ['http', 'header', '响应头', '安全'], i18nNamespace: 'toolHttpHeaders' },
   { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: ShieldCheck, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert' },
   { path: '/http-status', nameKey: 'tools.http_status', icon: Activity, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus' },
