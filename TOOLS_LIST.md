@@ -4,8 +4,8 @@
 > **规划与落位**：已开发/待开发/代码位置以 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 为准；新增规划、避免重复见 [docs/ROADMAP_CONVENTION.md](docs/ROADMAP_CONVENTION.md)。
 
 ## 📊 项目总览
-- 总工具数：**44**（已上线 44 + 待开发 0）
-- 已上线：**44**
+- 总工具数：**93**（已上线 93 + 待开发 0）
+- 已上线：**93**
 - 待开发：**0**（见 [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md) 第三节）
 - 开发中：0
 - 目标：1000+ 工具
