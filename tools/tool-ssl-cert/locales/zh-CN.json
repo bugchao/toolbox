@@ -1,0 +1,4 @@
+{
+  "title": "SSL 证书检测",
+  "description": "检测网站 SSL/TLS 证书的有效期、颁发机构和证书链"
+}

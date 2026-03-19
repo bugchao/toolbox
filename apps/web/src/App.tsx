@@ -118,6 +118,11 @@ const DomainMx = lazy(() =>
   import('@toolbox/tool-domain-mx').then((m) => ({ default: m.default }))
 )
 const DomainTxt = lazy(() =>
+const HttpHeaders = lazy(() => import("@toolbox/tool-http-headers").then((m) => ({ default: m.default })))
+const SslCert = lazy(() => import("@toolbox/tool-ssl-cert").then((m) => ({ default: m.default })))
+const HttpStatus = lazy(() => import("@toolbox/tool-http-status").then((m) => ({ default: m.default })))
+const TcpPort = lazy(() => import("@toolbox/tool-tcp-port").then((m) => ({ default: m.default })))
+const Ping = lazy(() => import("@toolbox/tool-ping").then((m) => ({ default: m.default })))
   import('@toolbox/tool-domain-txt').then((m) => ({ default: m.default }))
 )
 const DomainSpf = lazy(() =>
@@ -281,6 +286,11 @@ function App() {
           <Route path="/dns-nxdomain" element={<DnsNxdomain />} />
           <Route path="/domain-mx" element={<DomainMx />} />
           <Route path="/domain-txt" element={<DomainTxt />} />
+          <Route path="/http-headers" element={<HttpHeaders />} />
+          <Route path="/ssl-cert" element={<SslCert />} />
+          <Route path="/http-status" element={<HttpStatus />} />
+          <Route path="/tcp-port-check" element={<TcpPort />} />
+          <Route path="/ping" element={<Ping />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

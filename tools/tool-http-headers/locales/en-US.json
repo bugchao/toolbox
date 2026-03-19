@@ -1,0 +1,4 @@
+{
+  "title": "HTTP Header Inspector",
+  "description": "Analyze HTTP response headers, check security configuration and cache policy"
+}

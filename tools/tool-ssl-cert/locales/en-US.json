@@ -1,0 +1,4 @@
+{
+  "title": "SSL Certificate Check",
+  "description": "Check SSL/TLS certificate validity, issuer and certificate chain"
+}

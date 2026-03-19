@@ -50,6 +50,16 @@ import toolDnsNxdomainEn from '@toolbox/tool-dns-nxdomain/locales/en-US.json'
 import toolDomainMxZh from '@toolbox/tool-domain-mx/locales/zh-CN.json'
 import toolDomainMxEn from '@toolbox/tool-domain-mx/locales/en-US.json'
 import toolDomainTxtZh from '@toolbox/tool-domain-txt/locales/zh-CN.json'
+import toolHttpHeadersZh from '@toolbox/tool-http-headers/locales/zh-CN.json'
+import toolHttpHeadersEn from '@toolbox/tool-http-headers/locales/en-US.json'
+import toolSslCertZh from '@toolbox/tool-ssl-cert/locales/zh-CN.json'
+import toolSslCertEn from '@toolbox/tool-ssl-cert/locales/en-US.json'
+import toolHttpStatusZh from '@toolbox/tool-http-status/locales/zh-CN.json'
+import toolHttpStatusEn from '@toolbox/tool-http-status/locales/en-US.json'
+import toolTcpPortZh from '@toolbox/tool-tcp-port/locales/zh-CN.json'
+import toolTcpPortEn from '@toolbox/tool-tcp-port/locales/en-US.json'
+import toolPingZh from '@toolbox/tool-ping/locales/zh-CN.json'
+import toolPingEn from '@toolbox/tool-ping/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -109,6 +119,11 @@ export const resources = {
     toolDnsNxdomain: toolDnsNxdomainZh as Record<string, string>,
     toolDomainMx: toolDomainMxZh as Record<string, string>,
     toolDomainTxt: toolDomainTxtZh as Record<string, string>,
+    toolHttpHeaders: toolHttpHeadersZh as Record<string, string>,
+    toolSslCert: toolSslCertZh as Record<string, string>,
+    toolHttpStatus: toolHttpStatusZh as Record<string, string>,
+    toolTcpPort: toolTcpPortZh as Record<string, string>,
+    toolPing: toolPingZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -153,6 +168,11 @@ export const resources = {
     toolDnsNxdomain: toolDnsNxdomainEn as Record<string, string>,
     toolDomainMx: toolDomainMxEn as Record<string, string>,
     toolDomainTxt: toolDomainTxtEn as Record<string, string>,
+    toolHttpHeaders: toolHttpHeadersEn as Record<string, string>,
+    toolSslCert: toolSslCertEn as Record<string, string>,
+    toolHttpStatus: toolHttpStatusEn as Record<string, string>,
+    toolTcpPort: toolTcpPortEn as Record<string, string>,
+    toolPing: toolPingEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
