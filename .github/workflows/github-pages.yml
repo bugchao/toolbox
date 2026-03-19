@@ -42,7 +42,7 @@ jobs:
 
       - name: Build web app for Pages
         env:
-          VITE_APP_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_APP_BASE_PATH: /
         run: pnpm -C apps/web build
 
       - name: Add SPA fallback
