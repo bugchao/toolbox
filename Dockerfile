@@ -6,19 +6,11 @@ WORKDIR /app
 
 # 使用 pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/web/package.json ./apps/web/
-COPY packages/core/package.json ./packages/core/
-COPY packages/ui-kit/package.json ./packages/ui-kit/
-COPY tools/tool-resume/package.json ./tools/tool-resume/
-COPY tools/tool-pdf/package.json ./tools/tool-pdf/
-COPY tools/tool-qrcode/package.json ./tools/tool-qrcode/
+
+# 直接复制完整 monorepo，避免 workspace 新增后 Dockerfile 清单遗漏导致依赖解析失败
+COPY . .
 
 RUN pnpm install --frozen-lockfile
-
-COPY apps ./apps
-COPY packages ./packages
-COPY tools ./tools
 
 # 构建前端（产出在 apps/web/dist）
 RUN pnpm run build

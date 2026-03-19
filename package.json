@@ -15,6 +15,7 @@
     "docker:run": "docker run -d -p 3000:3000 --name toolbox --restart unless-stopped toolbox:latest",
     "docker:deploy": "pnpm run docker:build && (docker stop toolbox 2>/dev/null || true) && (docker rm toolbox 2>/dev/null || true) && pnpm run docker:run",
     "docker:stop": "docker stop toolbox 2>/dev/null || true",
+    "aws:deploy": "bash scripts/deploy-aws-ec2.sh",
     "test": "pnpm -C apps/web test:run",
     "test:watch": "pnpm -C apps/web test",
     "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=$HOME/.cache/ms-playwright playwright test",

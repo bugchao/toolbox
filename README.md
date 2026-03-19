@@ -126,6 +126,51 @@ pnpm run docker:deploy
 
 **若构建报错 `pull access denied` / `insufficient_scope`**：多为未登录 Docker Hub 或网络限制。可先执行 `docker login` 后重试；或在 Docker 设置中配置可用镜像加速/镜像源后再构建。
 
+## ☁️ AWS 本地部署
+
+AWS 部署不再通过 GitHub Actions 执行，改为在本地机器直接运行脚本。这样密钥、SSH 私钥和 AWS 登录态都只留在你的本机环境。
+
+### 前置要求
+- 本机已安装并登录 `aws` CLI
+- 本机可执行 `docker`
+- 本机可通过 SSH 连接到目标 EC2
+- 目标 EC2 已安装 `docker` 与 `aws` CLI，并具备拉取 ECR 镜像权限
+
+### 必填环境变量
+
+```bash
+export AWS_REGION=ap-southeast-1
+export ECR_REPOSITORY=your-ecr-repository
+export EC2_HOST=1.2.3.4
+export EC2_USER=ec2-user
+export EC2_KEY_PATH=$HOME/.ssh/your-key.pem
+```
+
+### 可选环境变量
+
+```bash
+export APP_NAME=toolbox
+export HOST_PORT=80
+export CONTAINER_PORT=3000
+export IMAGE_TAG=toolbox-manual-001
+export AWS_ACCOUNT_ID=123456789012
+export ECR_REGISTRY=123456789012.dkr.ecr.ap-southeast-1.amazonaws.com
+```
+
+### 执行部署
+
+```bash
+pnpm run aws:deploy
+```
+
+脚本位置：`scripts/deploy-aws-ec2.sh`
+
+执行流程：
+- 本地构建 Docker 镜像
+- 登录 ECR 并推送镜像
+- SSH 登录 EC2，拉取最新镜像并重启容器
+- 本地用 `curl` 对目标主机做一次基础可用性检查
+
 ---
 
 ## 📄 文档索引
