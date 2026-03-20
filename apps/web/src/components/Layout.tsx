@@ -7,7 +7,8 @@ import {
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key,
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
-  PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep
+  PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
+  Radio, Shield, Database, Network
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
@@ -31,6 +32,11 @@ const CATEGORIES = [
   { id: 'query', nameKey: 'category_query', icon: Search },
   { id: 'utils', nameKey: 'category_utils', icon: Wand2 },
   { id: 'network', nameKey: 'category_network', icon: Server },
+  { id: 'dns', nameKey: 'category_dns', icon: Radio },
+  { id: 'domain', nameKey: 'category_domain', icon: Globe },
+  { id: 'ip', nameKey: 'category_ip', icon: Network },
+  { id: 'ipam', nameKey: 'category_ipam', icon: Database },
+  { id: 'security', nameKey: 'category_security', icon: Shield },
   { id: 'news', nameKey: 'category_news', icon: Newspaper },
 ] as const
 
