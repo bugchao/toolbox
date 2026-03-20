@@ -84,13 +84,38 @@ Set-DhcpServerv4OptionValue -ScopeId $scopeId -OptionId 42 -Value "${c.ntpServer
 Set-DhcpServerv4Scope -ScopeId $scopeId -LeaseDuration ([TimeSpan]::FromSeconds(${c.leaseTime}))`
 }
 
+// 提取到组件外部，避免每次 render 重新创建导致 input 失焦
+interface FieldProps {
+  label: string
+  value: string | number
+  onChange: (value: string) => void
+  placeholder?: string
+  type?: string
+}
+
+function Field({ label, value, onChange, placeholder, type = 'text' }: FieldProps) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full px-2.5 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+  )
+}
+
 export function DhcpConfigGen() {
   const [config, setConfig] = useState<DhcpConfig>(DEFAULT)
   const [platform, setPlatform] = useState<Platform>('isc')
   const [copied, setCopied] = useState(false)
 
-  const update = (field: keyof DhcpConfig, value: string | number) =>
-    setConfig(prev => ({ ...prev, [field]: value }))
+  const update = useCallback((field: keyof DhcpConfig) => (value: string) => {
+    setConfig(prev => ({ ...prev, [field]: field === 'leaseTime' ? parseInt(value) || 0 : value }))
+  }, [])
 
   const output = platform === 'isc' ? generateIsc(config)
     : platform === 'dnsmasq' ? generateDnsmasq(config)
@@ -111,23 +136,10 @@ export function DhcpConfigGen() {
     a.click()
   }, [output, platform])
 
-  const Field = ({ label, field, placeholder, type = 'text' }: { label: string; field: keyof DhcpConfig; placeholder?: string; type?: string }) => (
-    <div>
-      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">{label}</label>
-      <input
-        type={type}
-        value={config[field] as string}
-        onChange={e => update(field, type === 'number' ? parseInt(e.target.value) : e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-2.5 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      />
-    </div>
-  )
-
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">DHCP 配置生成器</h1>
-      <p className="text-gray-500 dark:text-gray-400">生成 ISC DHCP / dnsmasq / Windows Server DHCP 配置</p>
+      <p className="text-gray-500 dark:text-gray-400">生成 ISC DHCP / dnsmasq / Windows Server DHCP 配置文件</p>
 
       <div className="flex gap-2">
         {(['isc', 'dnsmasq', 'windows'] as Platform[]).map(p => (
@@ -143,19 +155,19 @@ export function DhcpConfigGen() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-3">
           <h2 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">网络配置</h2>
-          <Field label="子网地址" field="subnet" placeholder="192.168.1.0" />
-          <Field label="子网掩码" field="mask" placeholder="255.255.255.0" />
-          <Field label="默认网关" field="gateway" placeholder="192.168.1.1" />
-          <Field label="DNS 服务器 1" field="dns1" placeholder="8.8.8.8" />
-          <Field label="DNS 服务器 2（可选）" field="dns2" placeholder="8.8.4.4" />
-          <Field label="域名（可选）" field="domain" placeholder="local" />
+          <Field label="子网地址" value={config.subnet} onChange={update('subnet')} placeholder="192.168.1.0" />
+          <Field label="子网掩码" value={config.mask} onChange={update('mask')} placeholder="255.255.255.0" />
+          <Field label="默认网关" value={config.gateway} onChange={update('gateway')} placeholder="192.168.1.1" />
+          <Field label="DNS 服务器 1" value={config.dns1} onChange={update('dns1')} placeholder="8.8.8.8" />
+          <Field label="DNS 服务器 2（可选）" value={config.dns2} onChange={update('dns2')} placeholder="8.8.4.4" />
+          <Field label="域名（可选）" value={config.domain} onChange={update('domain')} placeholder="local" />
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-3">
           <h2 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">地址池配置</h2>
-          <Field label="地址池起始" field="poolStart" placeholder="192.168.1.100" />
-          <Field label="地址池结束" field="poolEnd" placeholder="192.168.1.200" />
-          <Field label="租约时间（秒）" field="leaseTime" placeholder="86400" type="number" />
-          <Field label="NTP 服务器（可选）" field="ntpServer" placeholder="192.168.1.1" />
+          <Field label="地址池起始" value={config.poolStart} onChange={update('poolStart')} placeholder="192.168.1.100" />
+          <Field label="地址池结束" value={config.poolEnd} onChange={update('poolEnd')} placeholder="192.168.1.200" />
+          <Field label="租约时间（秒）" value={config.leaseTime} onChange={update('leaseTime')} placeholder="86400" type="number" />
+          <Field label="NTP 服务器（可选）" value={config.ntpServer} onChange={update('ntpServer')} placeholder="192.168.1.1" />
         </div>
       </div>
 
