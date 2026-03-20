@@ -119,7 +119,12 @@
     "category_domain": "Domain Tools",
     "category_ip": "IP Tools",
     "category_ipam": "Subnet/IPAM",
-    "category_security": "Security Tools"
+    "category_security": "Security Tools",
+    "dns_latency": "DNS Latency",
+    "dns_authoritative": "Authoritative DNS",
+    "dns_recursive": "DNS Recursive Check",
+    "dns_path_viz": "DNS Path Visualizer",
+    "dns_tunnel": "DNS Tunnel Detection"
   },
   "commandPalette": {
     "placeholder": "Search tools…",

@@ -67,6 +67,11 @@ export default defineConfig({
       '@toolbox/tool-http-status': path.join(root, 'tools/tool-http-status'),
       '@toolbox/tool-tcp-port': path.join(root, 'tools/tool-tcp-port'),
       '@toolbox/tool-ping': path.join(root, 'tools/tool-ping'),
+      '@toolbox/tool-dns-latency': path.join(root, 'tools/tool-dns-latency'),
+      '@toolbox/tool-dns-authoritative': path.join(root, 'tools/tool-dns-authoritative'),
+      '@toolbox/tool-dns-recursive': path.join(root, 'tools/tool-dns-recursive'),
+      '@toolbox/tool-dns-path-viz': path.join(root, 'tools/tool-dns-path-viz'),
+      '@toolbox/tool-dns-tunnel': path.join(root, 'tools/tool-dns-tunnel'),
       '@toolbox/tool-domain-suite': path.join(root, 'tools/tool-domain-suite'),
       '@toolbox/tool-ip-ops-suite': path.join(root, 'tools/tool-ip-ops-suite'),
       '@toolbox/tool-security-suite': path.join(root, 'tools/tool-security-suite'),
@@ -80,7 +85,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-dns-latency', '@toolbox/tool-dns-authoritative', '@toolbox/tool-dns-recursive', '@toolbox/tool-dns-path-viz', '@toolbox/tool-dns-tunnel', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite']
   },
   build: {
     outDir: 'dist'

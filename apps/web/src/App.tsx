@@ -125,6 +125,11 @@ const SslCert = lazy(() => import('@toolbox/tool-ssl-cert').then((m) => ({ defau
 const HttpStatus = lazy(() => import('@toolbox/tool-http-status').then((m) => ({ default: m.default })))
 const TcpPort = lazy(() => import('@toolbox/tool-tcp-port').then((m) => ({ default: m.default })))
 const Ping = lazy(() => import('@toolbox/tool-ping').then((m) => ({ default: m.default })))
+const DnsLatency = lazy(() => import('@toolbox/tool-dns-latency').then((m) => ({ default: m.default })))
+const DnsAuthoritative = lazy(() => import('@toolbox/tool-dns-authoritative').then((m) => ({ default: m.default })))
+const DnsRecursive = lazy(() => import('@toolbox/tool-dns-recursive').then((m) => ({ default: m.default })))
+const DnsPathViz = lazy(() => import('@toolbox/tool-dns-path-viz').then((m) => ({ default: m.default })))
+const DnsTunnel = lazy(() => import('@toolbox/tool-dns-tunnel').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -291,6 +296,11 @@ function App() {
           <Route path="/http-status" element={<HttpStatus />} />
           <Route path="/tcp-port-check" element={<TcpPort />} />
           <Route path="/ping" element={<Ping />} />
+          <Route path="/dns-latency" element={<DnsLatency />} />
+          <Route path="/dns-authoritative" element={<DnsAuthoritative />} />
+          <Route path="/dns-recursive" element={<DnsRecursive />} />
+          <Route path="/dns-path-viz" element={<DnsPathViz />} />
+          <Route path="/dns-tunnel" element={<DnsTunnel />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

@@ -1,0 +1,10 @@
+{
+  "title": "Authoritative DNS Check",
+  "desc": "Detect authoritative nameservers and verify consistency across resolvers",
+  "placeholder": "Enter domain, e.g. example.com",
+  "check": "Check",
+  "checking": "Checking...",
+  "nsServers": "Authoritative NS Servers",
+  "consistency": "Resolver Consistency",
+  "soa": "SOA Record"
+}

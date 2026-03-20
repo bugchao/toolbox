@@ -1,0 +1,15 @@
+{
+  "title": "DNS Recursive Server Check",
+  "desc": "Check if DNS servers allow open recursive queries and assess DDoS amplification risk",
+  "placeholder": "Enter IP addresses, one per line or comma-separated",
+  "check": "Check",
+  "checking": "Checking...",
+  "presets": "Common DNS",
+  "total": "Total",
+  "open": "Open Recursive",
+  "closed": "Closed",
+  "openWarning": "Open recursive DNS servers detected, risk of being used for DDoS amplification attacks",
+  "details": "Details",
+  "openRecursive": "Open Recursive",
+  "closedRecursive": "Closed"
+}

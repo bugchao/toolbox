@@ -1,0 +1,8 @@
+{
+  "title": "DNS Resolution Path Visualizer",
+  "desc": "Visualize the complete DNS recursive resolution path: Root → TLD → Authoritative → Final Record",
+  "placeholder": "Enter domain, e.g. example.com",
+  "trace": "Trace",
+  "tracing": "Tracing...",
+  "pathFor": "Resolution path for:"
+}

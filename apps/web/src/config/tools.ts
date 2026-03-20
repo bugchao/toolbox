@@ -5,7 +5,7 @@ import {
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
-  Boxes, GitCompareArrows, PlayCircle, Wifi, Radio
+  Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database
 } from 'lucide-react'
 
 export interface ToolEntry {
@@ -54,6 +54,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/http-status', nameKey: 'tools.http_status', icon: Activity, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus' },
   { path: '/tcp-port-check', nameKey: 'tools.tcp_port_check', icon: Wifi, categoryKey: 'network', keywords: ['tcp', 'port', '端口', '连通性'], i18nNamespace: 'toolTcpPort' },
   { path: '/ping', nameKey: 'tools.ping', icon: Radio, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing' },
+  { path: '/dns-latency', nameKey: 'tools.dns_latency', icon: Activity, categoryKey: 'dns', keywords: ['dns', '延迟', '速度', '响应'], i18nNamespace: 'toolDnsLatency' },
+  { path: '/dns-authoritative', nameKey: 'tools.dns_authoritative', icon: Server, categoryKey: 'dns', keywords: ['dns', '权威', 'ns', '一致性'], i18nNamespace: 'toolDnsAuthoritative' },
+  { path: '/dns-recursive', nameKey: 'tools.dns_recursive', icon: Shield, categoryKey: 'dns', keywords: ['dns', '递归', '开放', 'amplification'], i18nNamespace: 'toolDnsRecursive' },
+  { path: '/dns-path-viz', nameKey: 'tools.dns_path_viz', icon: GitBranch, categoryKey: 'dns', keywords: ['dns', '路径', '可视化', '递归'], i18nNamespace: 'toolDnsPathViz' },
+  { path: '/dns-tunnel', nameKey: 'tools.dns_tunnel', icon: ShieldAlert, categoryKey: 'dns', keywords: ['dns', '隧道', '检测', '安全'], i18nNamespace: 'toolDnsTunnel' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' },
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' },
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' },

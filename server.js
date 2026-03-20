@@ -17,6 +17,11 @@ import { registerSslCertApiRoutes } from './tools/tool-ssl-cert/server/ssl-cert-
 import { registerHttpStatusApiRoutes } from './tools/tool-http-status/server/http-status-api.js'
 import { registerTcpPortApiRoutes } from './tools/tool-tcp-port/server/tcp-port-api.js'
 import { registerPingApiRoutes } from './tools/tool-ping/server/ping-api.js'
+import { registerDnsLatencyApiRoutes } from './tools/tool-dns-latency/server/dns-latency-api.js'
+import { registerDnsAuthoritativeApiRoutes } from './tools/tool-dns-authoritative/server/dns-authoritative-api.js'
+import { registerDnsRecursiveApiRoutes } from './tools/tool-dns-recursive/server/dns-recursive-api.js'
+import { registerDnsPathVizApiRoutes } from './tools/tool-dns-path-viz/server/dns-path-viz-api.js'
+import { registerDnsTunnelApiRoutes } from './tools/tool-dns-tunnel/server/dns-tunnel-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -38,6 +43,11 @@ registerSslCertApiRoutes(app)
 registerHttpStatusApiRoutes(app)
 registerTcpPortApiRoutes(app)
 registerPingApiRoutes(app)
+registerDnsLatencyApiRoutes(app)
+registerDnsAuthoritativeApiRoutes(app)
+registerDnsRecursiveApiRoutes(app)
+registerDnsPathVizApiRoutes(app)
+registerDnsTunnelApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务

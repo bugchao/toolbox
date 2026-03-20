@@ -1,0 +1,8 @@
+{
+  "title": "DNS Tunnel Detection",
+  "desc": "Detect DNS tunneling characteristics to identify data exfiltration and covert communication risks",
+  "placeholder": "Enter domain, e.g. example.com",
+  "detect": "Detect",
+  "detecting": "Detecting...",
+  "noIssues": "No issues found"
+}

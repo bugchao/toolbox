@@ -1,0 +1,8 @@
+{
+  "title": "DNS 隧道检测",
+  "desc": "检测域名是否存在 DNS 隧道特征，识别数据外传和隐蔽通信风险",
+  "placeholder": "输入域名，如 example.com",
+  "detect": "检测",
+  "detecting": "检测中...",
+  "noIssues": "未发现异常"
+}

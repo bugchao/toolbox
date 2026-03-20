@@ -1,0 +1,12 @@
+{
+  "title": "DNS Latency Analyzer",
+  "desc": "Compare response times across multiple DNS servers to find the fastest resolver",
+  "placeholder": "Enter domain, e.g. example.com",
+  "analyze": "Analyze",
+  "analyzing": "Analyzing...",
+  "avg": "Avg Latency",
+  "min": "Min Latency",
+  "max": "Max Latency",
+  "servers": "Server Responses",
+  "ok": "OK"
+}

@@ -60,6 +60,16 @@ import toolTcpPortZh from '@toolbox/tool-tcp-port/locales/zh-CN.json'
 import toolTcpPortEn from '@toolbox/tool-tcp-port/locales/en-US.json'
 import toolPingZh from '@toolbox/tool-ping/locales/zh-CN.json'
 import toolPingEn from '@toolbox/tool-ping/locales/en-US.json'
+import toolDnsLatencyZh from '@toolbox/tool-dns-latency/locales/zh-CN.json'
+import toolDnsLatencyEn from '@toolbox/tool-dns-latency/locales/en-US.json'
+import toolDnsAuthoritativeZh from '@toolbox/tool-dns-authoritative/locales/zh-CN.json'
+import toolDnsAuthoritativeEn from '@toolbox/tool-dns-authoritative/locales/en-US.json'
+import toolDnsRecursiveZh from '@toolbox/tool-dns-recursive/locales/zh-CN.json'
+import toolDnsRecursiveEn from '@toolbox/tool-dns-recursive/locales/en-US.json'
+import toolDnsPathVizZh from '@toolbox/tool-dns-path-viz/locales/zh-CN.json'
+import toolDnsPathVizEn from '@toolbox/tool-dns-path-viz/locales/en-US.json'
+import toolDnsTunnelZh from '@toolbox/tool-dns-tunnel/locales/zh-CN.json'
+import toolDnsTunnelEn from '@toolbox/tool-dns-tunnel/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -124,6 +134,11 @@ export const resources = {
     toolHttpStatus: toolHttpStatusZh as Record<string, string>,
     toolTcpPort: toolTcpPortZh as Record<string, string>,
     toolPing: toolPingZh as Record<string, string>,
+    toolDnsLatency: toolDnsLatencyZh as Record<string, string>,
+    toolDnsAuthoritative: toolDnsAuthoritativeZh as Record<string, string>,
+    toolDnsRecursive: toolDnsRecursiveZh as Record<string, string>,
+    toolDnsPathViz: toolDnsPathVizZh as Record<string, string>,
+    toolDnsTunnel: toolDnsTunnelZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -173,6 +188,11 @@ export const resources = {
     toolHttpStatus: toolHttpStatusEn as Record<string, string>,
     toolTcpPort: toolTcpPortEn as Record<string, string>,
     toolPing: toolPingEn as Record<string, string>,
+    toolDnsLatency: toolDnsLatencyEn as Record<string, string>,
+    toolDnsAuthoritative: toolDnsAuthoritativeEn as Record<string, string>,
+    toolDnsRecursive: toolDnsRecursiveEn as Record<string, string>,
+    toolDnsPathViz: toolDnsPathVizEn as Record<string, string>,
+    toolDnsTunnel: toolDnsTunnelEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
