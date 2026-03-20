@@ -418,7 +418,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               }`}
               title={settings.hideServerTools ? '当前：仅显示纯前端工具（点击显示全部）' : '点击隐藏需要后端服务的工具'}
             >
-              <span className="relative inline-flex">
+              <span className="relative flex items-center justify-center w-5 h-5">
                 <Server className="w-5 h-5" />
                 {settings.hideServerTools && (
                   <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-orange-500" />
