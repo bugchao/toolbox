@@ -5,7 +5,8 @@ import {
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
-  Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database
+  Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
+  BarChart2, Sliders
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -67,6 +68,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/dhcp-mac-binding', nameKey: 'tools.dhcp_mac_binding', icon: Link2, categoryKey: 'ipam', keywords: ['dhcp', 'mac', '绑定', '静态'], i18nNamespace: 'toolDhcpMacBinding' },
   { path: '/dhcp-config-gen', nameKey: 'tools.dhcp_config_gen', icon: FileCode, categoryKey: 'ipam', keywords: ['dhcp', '配置', '生成', 'isc', 'dnsmasq'], i18nNamespace: 'toolDhcpConfigGen' },
   { path: '/traceroute', nameKey: 'tools.traceroute', icon: Network, categoryKey: 'network', keywords: ['traceroute', '路由', '追踪', '网络'], i18nNamespace: 'toolTraceroute', mode: 'server' },
+  { path: '/dhcp-utilization', nameKey: 'tools.dhcp_utilization', icon: BarChart2, categoryKey: 'ipam', keywords: ['dhcp', '利用率', '地址池', '统计'], i18nNamespace: 'toolDhcpUtilization' },
+  { path: '/dhcp-conflict', nameKey: 'tools.dhcp_conflict', icon: AlertTriangle, categoryKey: 'ipam', keywords: ['dhcp', '冲突', '重复', 'ip'], i18nNamespace: 'toolDhcpConflict' },
+  { path: '/gslb-weight-calc', nameKey: 'tools.gslb_weight_calc', icon: Sliders, categoryKey: 'network', keywords: ['gslb', '权重', '负载均衡', '流量'], i18nNamespace: 'toolGslbWeightCalc' },
+  { path: '/web-availability', nameKey: 'tools.web_availability', icon: Globe, categoryKey: 'network', keywords: ['http', '可用性', '监控', '状态'], i18nNamespace: 'toolWebAvailability', mode: 'server' },
+  { path: '/security-domain-score', nameKey: 'tools.security_domain_score', icon: ShieldCheck, categoryKey: 'security', keywords: ['安全', '评分', 'dnssec', 'spf', 'dmarc'], i18nNamespace: 'toolSecurityDomainScore', mode: 'server' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

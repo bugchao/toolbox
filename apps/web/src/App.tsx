@@ -135,6 +135,11 @@ const DhcpOption = lazy(() => import('@toolbox/tool-dhcp-option').then((m) => ({
 const DhcpMacBinding = lazy(() => import('@toolbox/tool-dhcp-mac-binding').then((m) => ({ default: m.default })))
 const DhcpConfigGen = lazy(() => import('@toolbox/tool-dhcp-config-gen').then((m) => ({ default: m.default })))
 const Traceroute = lazy(() => import('@toolbox/tool-traceroute').then((m) => ({ default: m.default })))
+const DhcpUtilization = lazy(() => import('@toolbox/tool-dhcp-utilization').then((m) => ({ default: m.default })))
+const DhcpConflict = lazy(() => import('@toolbox/tool-dhcp-conflict').then((m) => ({ default: m.default })))
+const GslbWeightCalc = lazy(() => import('@toolbox/tool-gslb-weight-calc').then((m) => ({ default: m.default })))
+const WebAvailability = lazy(() => import('@toolbox/tool-web-availability').then((m) => ({ default: m.default })))
+const SecurityDomainScore = lazy(() => import('@toolbox/tool-security-domain-score').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -311,6 +316,11 @@ function App() {
           <Route path="/dhcp-mac-binding" element={<DhcpMacBinding />} />
           <Route path="/dhcp-config-gen" element={<DhcpConfigGen />} />
           <Route path="/traceroute" element={<Traceroute />} />
+          <Route path="/dhcp-utilization" element={<DhcpUtilization />} />
+          <Route path="/dhcp-conflict" element={<DhcpConflict />} />
+          <Route path="/gslb-weight-calc" element={<GslbWeightCalc />} />
+          <Route path="/web-availability" element={<WebAvailability />} />
+          <Route path="/security-domain-score" element={<SecurityDomainScore />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

@@ -1,0 +1,6 @@
+{
+  "name": "@toolbox/tool-gslb-weight-calc",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.tsx"
+}

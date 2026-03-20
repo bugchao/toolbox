@@ -1,0 +1,4 @@
+{
+  "title": "Web 服务可用性检测",
+  "description": "批量检测多个 URL 的 HTTP 状态码和响应时间"
+}

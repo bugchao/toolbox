@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Conflict Detector",
+  "description": "Detect duplicate IP assignments in DHCP lease lists"
+}

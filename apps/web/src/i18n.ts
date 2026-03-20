@@ -80,6 +80,16 @@ import toolDhcpConfigGenZh from '@toolbox/tool-dhcp-config-gen/locales/zh-CN.jso
 import toolDhcpConfigGenEn from '@toolbox/tool-dhcp-config-gen/locales/en-US.json'
 import toolTracerouteZh from '@toolbox/tool-traceroute/locales/zh-CN.json'
 import toolTracerouteEn from '@toolbox/tool-traceroute/locales/en-US.json'
+import toolDhcpUtilizationZh from '@toolbox/tool-dhcp-utilization/locales/zh-CN.json'
+import toolDhcpUtilizationEn from '@toolbox/tool-dhcp-utilization/locales/en-US.json'
+import toolDhcpConflictZh from '@toolbox/tool-dhcp-conflict/locales/zh-CN.json'
+import toolDhcpConflictEn from '@toolbox/tool-dhcp-conflict/locales/en-US.json'
+import toolGslbWeightCalcZh from '@toolbox/tool-gslb-weight-calc/locales/zh-CN.json'
+import toolGslbWeightCalcEn from '@toolbox/tool-gslb-weight-calc/locales/en-US.json'
+import toolWebAvailabilityZh from '@toolbox/tool-web-availability/locales/zh-CN.json'
+import toolWebAvailabilityEn from '@toolbox/tool-web-availability/locales/en-US.json'
+import toolSecurityDomainScoreZh from '@toolbox/tool-security-domain-score/locales/zh-CN.json'
+import toolSecurityDomainScoreEn from '@toolbox/tool-security-domain-score/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -154,6 +164,11 @@ export const resources = {
     toolDhcpMacBinding: toolDhcpMacBindingZh as Record<string, string>,
     toolDhcpConfigGen: toolDhcpConfigGenZh as Record<string, string>,
     toolTraceroute: toolTracerouteZh as Record<string, string>,
+    toolDhcpUtilization: toolDhcpUtilizationZh as Record<string, string>,
+    toolDhcpConflict: toolDhcpConflictZh as Record<string, string>,
+    toolGslbWeightCalc: toolGslbWeightCalcZh as Record<string, string>,
+    toolWebAvailability: toolWebAvailabilityZh as Record<string, string>,
+    toolSecurityDomainScore: toolSecurityDomainScoreZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -213,6 +228,11 @@ export const resources = {
     toolDhcpMacBinding: toolDhcpMacBindingEn as Record<string, string>,
     toolDhcpConfigGen: toolDhcpConfigGenEn as Record<string, string>,
     toolTraceroute: toolTracerouteEn as Record<string, string>,
+    toolDhcpUtilization: toolDhcpUtilizationEn as Record<string, string>,
+    toolDhcpConflict: toolDhcpConflictEn as Record<string, string>,
+    toolGslbWeightCalc: toolGslbWeightCalcEn as Record<string, string>,
+    toolWebAvailability: toolWebAvailabilityEn as Record<string, string>,
+    toolSecurityDomainScore: toolSecurityDomainScoreEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

@@ -77,6 +77,11 @@ export default defineConfig({
       '@toolbox/tool-dhcp-mac-binding': path.join(root, 'tools/tool-dhcp-mac-binding'),
       '@toolbox/tool-dhcp-config-gen': path.join(root, 'tools/tool-dhcp-config-gen'),
       '@toolbox/tool-traceroute': path.join(root, 'tools/tool-traceroute'),
+      '@toolbox/tool-dhcp-utilization': path.join(root, 'tools/tool-dhcp-utilization'),
+      '@toolbox/tool-dhcp-conflict': path.join(root, 'tools/tool-dhcp-conflict'),
+      '@toolbox/tool-gslb-weight-calc': path.join(root, 'tools/tool-gslb-weight-calc'),
+      '@toolbox/tool-web-availability': path.join(root, 'tools/tool-web-availability'),
+      '@toolbox/tool-security-domain-score': path.join(root, 'tools/tool-security-domain-score'),
       '@toolbox/tool-domain-suite': path.join(root, 'tools/tool-domain-suite'),
       '@toolbox/tool-ip-ops-suite': path.join(root, 'tools/tool-ip-ops-suite'),
       '@toolbox/tool-security-suite': path.join(root, 'tools/tool-security-suite'),
@@ -90,7 +95,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-dns-latency', '@toolbox/tool-dns-authoritative', '@toolbox/tool-dns-recursive', '@toolbox/tool-dns-path-viz', '@toolbox/tool-dns-tunnel', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite', '@toolbox/tool-dhcp-pool-calc', '@toolbox/tool-dhcp-option', '@toolbox/tool-dhcp-mac-binding', '@toolbox/tool-dhcp-config-gen', '@toolbox/tool-traceroute']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-dns-latency', '@toolbox/tool-dns-authoritative', '@toolbox/tool-dns-recursive', '@toolbox/tool-dns-path-viz', '@toolbox/tool-dns-tunnel', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite', '@toolbox/tool-dhcp-pool-calc', '@toolbox/tool-dhcp-option', '@toolbox/tool-dhcp-mac-binding', '@toolbox/tool-dhcp-config-gen', '@toolbox/tool-traceroute', '@toolbox/tool-dhcp-utilization', '@toolbox/tool-dhcp-conflict', '@toolbox/tool-gslb-weight-calc', '@toolbox/tool-web-availability', '@toolbox/tool-security-domain-score']
   },
   build: {
     outDir: 'dist'
