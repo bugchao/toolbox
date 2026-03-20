@@ -11,6 +11,7 @@ import {
   Radio, Shield, Database, Network
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
+import { useSettings } from '../contexts/SettingsContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
 import { setLocale, type Locale } from '../i18n'
 import { TOOLS, getToolTitle, getToolByPath } from '../config/tools'
@@ -69,6 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t: tCommonTheme } = useTranslation('common')
   const { t: tCp } = useTranslation('commandPalette')
   const { theme, toggleTheme } = useTheme()
+  const { settings, updateSettings } = useSettings()
   const { visible: backgroundVisible, setVisible: setBackgroundVisible } = useBackgroundVisibility()
   const navigate = useNavigate()
   const location = useLocation()
@@ -113,7 +115,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     } catch { /* ignore */ }
   }, [sidebarCollapsed])
 
-  const groupedNav = NAV_ITEMS.reduce((acc, item) => {
+  const visibleNavItems = settings.hideServerTools
+    ? NAV_ITEMS.filter((item) => item.mode !== 'server')
+    : NAV_ITEMS
+
+  const groupedNav = visibleNavItems.reduce((acc, item) => {
     if (item.categoryKey) {
       if (!acc[item.categoryKey]) acc[item.categoryKey] = []
       acc[item.categoryKey].push(item)
@@ -201,7 +207,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </div>
 
       <nav className={`flex-1 overflow-y-auto py-3 px-2 ${sidebarCollapsed ? 'overflow-x-visible' : 'overflow-x-hidden'}`}>
-        {NAV_ITEMS.filter((item) => !item.categoryKey).map((item) => {
+        {visibleNavItems.filter((item) => !item.categoryKey).map((item) => {
           const Icon = item.icon
           const isActive = location.pathname === item.href
           return (
@@ -265,8 +271,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         }`}
                       >
                         <ItemIcon className="w-4 h-4 shrink-0 opacity-80" />
-                        <span className="truncate">{getToolTitle(item, t)}</span>
-                        {isActive && <ChevronRight className="w-3.5 h-3.5 shrink-0 ml-auto" />}
+                        <span className="truncate flex-1">{getToolTitle(item, t)}</span>
+                        {item.mode === 'server' && (
+                          <span
+                            title="需要后端服务"
+                            className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0 ml-auto"
+                          />
+                        )}
+                        {isActive && !item.mode && <ChevronRight className="w-3.5 h-3.5 shrink-0 ml-auto" />}
+                        {isActive && item.mode === 'server' && <ChevronRight className="w-3.5 h-3.5 shrink-0" />}
                       </Link>
                     )
                   })}
@@ -393,6 +406,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               title={backgroundVisible ? tCommon('backgroundHide') : tCommon('backgroundShow')}
             >
               <Layers className="w-5 h-5" />
+            </button>
+            {/* 隐藏后端工具开关 */}
+            <button
+              type="button"
+              onClick={() => updateSettings({ hideServerTools: !settings.hideServerTools })}
+              className={`p-2 rounded-lg transition-colors ${
+                settings.hideServerTools
+                  ? 'text-orange-500 bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30'
+                  : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+              title={settings.hideServerTools ? '当前：仅显示纯前端工具（点击显示全部）' : '点击隐藏需要后端服务的工具'}
+            >
+              <span className="relative inline-flex">
+                <Server className="w-5 h-5" />
+                {settings.hideServerTools && (
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-orange-500" />
+                )}
+              </span>
             </button>
             <button
               type="button"
