@@ -1,0 +1,4 @@
+{
+  "title": "DNSSEC Verification",
+  "description": "Verify DNSSEC trust chain integrity with layered chain visualization"
+}

@@ -1,0 +1,4 @@
+{
+  "title": "DNS DDoS Risk Check",
+  "description": "Detect open recursion, ANY amplification and other DNS DDoS risks"
+}

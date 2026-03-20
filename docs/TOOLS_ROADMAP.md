@@ -159,6 +159,11 @@
 | GSLB 权重分配计算器 | `/gslb-weight-calc` | `tools/tool-gslb-weight-calc` → GslbWeightCalc |
 | Web 服务可用性检测 | `/web-availability` | `tools/tool-web-availability` → WebAvailability |
 | 域名安全评分 | `/security-domain-score` | `tools/tool-security-domain-score` → SecurityDomainScore |
+| GSLB 故障切换模拟 | `/gslb-failover-sim` | `tools/tool-gslb-failover-sim` → GslbFailoverSim |
+| GEO 解析模拟 | `/gslb-geo-sim` | `tools/tool-gslb-geo-sim` → GslbGeoSim |
+| DNSSEC 签名验证 | `/security-dnssec-verify` | `tools/tool-security-dnssec-verify` → SecurityDnssecVerify |
+| DNS DDoS 风险检测 | `/security-dns-ddos` | `tools/tool-security-dns-ddos` → SecurityDnsDdos |
+| CDN 检测 | `/cdn-check` | `tools/tool-cdn-check` → CdnCheck |
 
 ### 资讯工具（1）
 
@@ -190,18 +195,13 @@
 | GSLB 策略模拟 | network | `/gslb-policy-sim` | 待开发 | P2 | 策略模拟 |
 | 解析命中预测 | network | `/gslb-hit-predict` | 待开发 | P2 | 命中预测 |
 | 健康检查模拟 | network | `/gslb-health-sim` | 待开发 | P2 | 健康检查模拟 |
-| 故障切换模拟 | network | `/gslb-failover-sim` | 待开发 | P2 | 故障切换 |
-| GEO 解析模拟 | network | `/gslb-geo-sim` | 待开发 | P2 | 地域解析 |
 | 运营商解析模拟 | network | `/gslb-isp-sim` | 待开发 | P2 | 运营商线路 |
 | 延迟调度模拟 | network | `/gslb-latency-sim` | 待开发 | P2 | 延迟调度 |
 | 多节点流量预测 | network | `/gslb-traffic-predict` | 待开发 | P2 | 流量预测 |
 | GSLB 规则验证 | network | `/gslb-rule-validate` | 待开发 | P2 | 规则校验 |
-| CDN 检测 | network | `/cdn-check` | 待开发 | P2 | CDN 识别 |
 | 服务器延迟测试 | network | `/server-latency` | 待开发 | P2 | 延迟测试 |
 | API 可用性测试 | network | `/api-availability` | 待开发 | P2 | API 可用性 |
 | 域名是否被劫持 | network | `/security-domain-hijack` | 待开发 | P2 | 劫持检测 |
-| DNS DDoS 风险检测 | network | `/security-dns-ddos` | 待开发 | P2 | 风险评估 |
-| DNSSEC 签名验证 | network | `/security-dnssec-verify` | 待开发 | P2 | 签名验证 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 

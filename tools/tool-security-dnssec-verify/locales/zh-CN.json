@@ -1,0 +1,4 @@
+{
+  "title": "DNSSEC 签名验证",
+  "description": "验证域名 DNSSEC 信任链完整性，仿 DNSViz 分层展示"
+}

@@ -1,0 +1,4 @@
+{
+  "title": "GEO 解析模拟",
+  "description": "模拟不同地区/运营商的 DNS 解析结果，预测 GSLB 地理调度策略"
+}

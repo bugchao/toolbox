@@ -1,0 +1,4 @@
+{
+  "title": "GSLB Failover Simulator",
+  "description": "Simulate node failures and observe automatic GSLB traffic redistribution"
+}

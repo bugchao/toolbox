@@ -90,6 +90,16 @@ import toolWebAvailabilityZh from '@toolbox/tool-web-availability/locales/zh-CN.
 import toolWebAvailabilityEn from '@toolbox/tool-web-availability/locales/en-US.json'
 import toolSecurityDomainScoreZh from '@toolbox/tool-security-domain-score/locales/zh-CN.json'
 import toolSecurityDomainScoreEn from '@toolbox/tool-security-domain-score/locales/en-US.json'
+import toolGslbFailoverSimZh from '@toolbox/tool-gslb-failover-sim/locales/zh-CN.json'
+import toolGslbFailoverSimEn from '@toolbox/tool-gslb-failover-sim/locales/en-US.json'
+import toolGslbGeoSimZh from '@toolbox/tool-gslb-geo-sim/locales/zh-CN.json'
+import toolGslbGeoSimEn from '@toolbox/tool-gslb-geo-sim/locales/en-US.json'
+import toolSecurityDnssecVerifyZh from '@toolbox/tool-security-dnssec-verify/locales/zh-CN.json'
+import toolSecurityDnssecVerifyEn from '@toolbox/tool-security-dnssec-verify/locales/en-US.json'
+import toolSecurityDnsDdosZh from '@toolbox/tool-security-dns-ddos/locales/zh-CN.json'
+import toolSecurityDnsDdosEn from '@toolbox/tool-security-dns-ddos/locales/en-US.json'
+import toolCdnCheckZh from '@toolbox/tool-cdn-check/locales/zh-CN.json'
+import toolCdnCheckEn from '@toolbox/tool-cdn-check/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -169,6 +179,11 @@ export const resources = {
     toolGslbWeightCalc: toolGslbWeightCalcZh as Record<string, string>,
     toolWebAvailability: toolWebAvailabilityZh as Record<string, string>,
     toolSecurityDomainScore: toolSecurityDomainScoreZh as Record<string, string>,
+    toolGslbFailoverSim: toolGslbFailoverSimZh as Record<string, string>,
+    toolGslbGeoSim: toolGslbGeoSimZh as Record<string, string>,
+    toolSecurityDnssecVerify: toolSecurityDnssecVerifyZh as Record<string, string>,
+    toolSecurityDnsDdos: toolSecurityDnsDdosZh as Record<string, string>,
+    toolCdnCheck: toolCdnCheckZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -233,6 +248,11 @@ export const resources = {
     toolGslbWeightCalc: toolGslbWeightCalcEn as Record<string, string>,
     toolWebAvailability: toolWebAvailabilityEn as Record<string, string>,
     toolSecurityDomainScore: toolSecurityDomainScoreEn as Record<string, string>,
+    toolGslbFailoverSim: toolGslbFailoverSimEn as Record<string, string>,
+    toolGslbGeoSim: toolGslbGeoSimEn as Record<string, string>,
+    toolSecurityDnssecVerify: toolSecurityDnssecVerifyEn as Record<string, string>,
+    toolSecurityDnsDdos: toolSecurityDnsDdosEn as Record<string, string>,
+    toolCdnCheck: toolCdnCheckEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

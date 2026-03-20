@@ -1,0 +1,4 @@
+{
+  "title": "DNS DDoS 风险检测",
+  "description": "检测开放递归、ANY 放大因子等 DNS DDoS 攻击风险"
+}

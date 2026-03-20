@@ -140,6 +140,11 @@ const DhcpConflict = lazy(() => import('@toolbox/tool-dhcp-conflict').then((m) =
 const GslbWeightCalc = lazy(() => import('@toolbox/tool-gslb-weight-calc').then((m) => ({ default: m.default })))
 const WebAvailability = lazy(() => import('@toolbox/tool-web-availability').then((m) => ({ default: m.default })))
 const SecurityDomainScore = lazy(() => import('@toolbox/tool-security-domain-score').then((m) => ({ default: m.default })))
+const GslbFailoverSim = lazy(() => import('@toolbox/tool-gslb-failover-sim').then((m) => ({ default: m.default })))
+const GslbGeoSim = lazy(() => import('@toolbox/tool-gslb-geo-sim').then((m) => ({ default: m.default })))
+const SecurityDnssecVerify = lazy(() => import('@toolbox/tool-security-dnssec-verify').then((m) => ({ default: m.default })))
+const SecurityDnsDdos = lazy(() => import('@toolbox/tool-security-dns-ddos').then((m) => ({ default: m.default })))
+const CdnCheck = lazy(() => import('@toolbox/tool-cdn-check').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -321,6 +326,11 @@ function App() {
           <Route path="/gslb-weight-calc" element={<GslbWeightCalc />} />
           <Route path="/web-availability" element={<WebAvailability />} />
           <Route path="/security-domain-score" element={<SecurityDomainScore />} />
+          <Route path="/gslb-failover-sim" element={<GslbFailoverSim />} />
+          <Route path="/gslb-geo-sim" element={<GslbGeoSim />} />
+          <Route path="/security-dnssec-verify" element={<SecurityDnssecVerify />} />
+          <Route path="/security-dns-ddos" element={<SecurityDnsDdos />} />
+          <Route path="/cdn-check" element={<CdnCheck />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

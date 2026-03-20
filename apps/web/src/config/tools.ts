@@ -6,7 +6,7 @@ import {
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
-  BarChart2, Sliders
+  BarChart2, Sliders, Zap
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -73,6 +73,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/gslb-weight-calc', nameKey: 'tools.gslb_weight_calc', icon: Sliders, categoryKey: 'network', keywords: ['gslb', '权重', '负载均衡', '流量'], i18nNamespace: 'toolGslbWeightCalc' },
   { path: '/web-availability', nameKey: 'tools.web_availability', icon: Globe, categoryKey: 'network', keywords: ['http', '可用性', '监控', '状态'], i18nNamespace: 'toolWebAvailability', mode: 'server' },
   { path: '/security-domain-score', nameKey: 'tools.security_domain_score', icon: ShieldCheck, categoryKey: 'security', keywords: ['安全', '评分', 'dnssec', 'spf', 'dmarc'], i18nNamespace: 'toolSecurityDomainScore', mode: 'server' },
+  { path: '/gslb-failover-sim', nameKey: 'tools.gslb_failover_sim', icon: Zap, categoryKey: 'network', keywords: ['gslb', '故障', '切换', '模拟', 'failover'], i18nNamespace: 'toolGslbFailoverSim' },
+  { path: '/gslb-geo-sim', nameKey: 'tools.gslb_geo_sim', icon: MapPin, categoryKey: 'network', keywords: ['gslb', 'geo', '地理', '解析', '模拟'], i18nNamespace: 'toolGslbGeoSim' },
+  { path: '/security-dnssec-verify', nameKey: 'tools.security_dnssec_verify', icon: ShieldCheck, categoryKey: 'security', keywords: ['dnssec', '签名', '验证', '信任链'], i18nNamespace: 'toolSecurityDnssecVerify', mode: 'server' },
+  { path: '/security-dns-ddos', nameKey: 'tools.security_dns_ddos', icon: ShieldAlert, categoryKey: 'security', keywords: ['ddos', 'dns', '放大', '攻击', '风险'], i18nNamespace: 'toolSecurityDnsDdos', mode: 'server' },
+  { path: '/cdn-check', nameKey: 'tools.cdn_check', icon: Globe, categoryKey: 'network', keywords: ['cdn', '检测', 'cloudflare', '阿里云'], i18nNamespace: 'toolCdnCheck', mode: 'server' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

@@ -25,6 +25,9 @@ import { registerDnsTunnelApiRoutes } from './tools/tool-dns-tunnel/server/dns-t
 import { registerTracerouteApiRoutes } from './tools/tool-traceroute/server/traceroute-api.js'
 import { registerWebAvailabilityApiRoutes } from './tools/tool-web-availability/server/web-availability-api.js'
 import { registerSecurityDomainScoreApiRoutes } from './tools/tool-security-domain-score/server/security-domain-score-api.js'
+import { registerDnssecVerifyApiRoutes } from './tools/tool-security-dnssec-verify/server/dnssec-verify-api.js'
+import { registerSecurityDnsDdosApiRoutes } from './tools/tool-security-dns-ddos/server/dns-ddos-api.js'
+import { registerCdnCheckApiRoutes } from './tools/tool-cdn-check/server/cdn-check-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -54,6 +57,9 @@ registerDnsTunnelApiRoutes(app)
 registerTracerouteApiRoutes(app)
 registerWebAvailabilityApiRoutes(app)
 registerSecurityDomainScoreApiRoutes(app)
+registerDnssecVerifyApiRoutes(app)
+registerSecurityDnsDdosApiRoutes(app)
+registerCdnCheckApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务
