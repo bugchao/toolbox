@@ -1,0 +1,4 @@
+{
+  "title": "DHCP 配置生成器",
+  "description": "生成 ISC DHCP / dnsmasq / Windows Server DHCP 配置文件"
+}

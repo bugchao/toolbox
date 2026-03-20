@@ -22,6 +22,7 @@ import { registerDnsAuthoritativeApiRoutes } from './tools/tool-dns-authoritativ
 import { registerDnsRecursiveApiRoutes } from './tools/tool-dns-recursive/server/dns-recursive-api.js'
 import { registerDnsPathVizApiRoutes } from './tools/tool-dns-path-viz/server/dns-path-viz-api.js'
 import { registerDnsTunnelApiRoutes } from './tools/tool-dns-tunnel/server/dns-tunnel-api.js'
+import { registerTracerouteApiRoutes } from './tools/tool-traceroute/server/traceroute-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -48,6 +49,7 @@ registerDnsAuthoritativeApiRoutes(app)
 registerDnsRecursiveApiRoutes(app)
 registerDnsPathVizApiRoutes(app)
 registerDnsTunnelApiRoutes(app)
+registerTracerouteApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务

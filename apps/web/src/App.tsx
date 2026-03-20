@@ -130,6 +130,11 @@ const DnsAuthoritative = lazy(() => import('@toolbox/tool-dns-authoritative').th
 const DnsRecursive = lazy(() => import('@toolbox/tool-dns-recursive').then((m) => ({ default: m.default })))
 const DnsPathViz = lazy(() => import('@toolbox/tool-dns-path-viz').then((m) => ({ default: m.default })))
 const DnsTunnel = lazy(() => import('@toolbox/tool-dns-tunnel').then((m) => ({ default: m.default })))
+const DhcpPoolCalc = lazy(() => import('@toolbox/tool-dhcp-pool-calc').then((m) => ({ default: m.default })))
+const DhcpOption = lazy(() => import('@toolbox/tool-dhcp-option').then((m) => ({ default: m.default })))
+const DhcpMacBinding = lazy(() => import('@toolbox/tool-dhcp-mac-binding').then((m) => ({ default: m.default })))
+const DhcpConfigGen = lazy(() => import('@toolbox/tool-dhcp-config-gen').then((m) => ({ default: m.default })))
+const Traceroute = lazy(() => import('@toolbox/tool-traceroute').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -301,6 +306,11 @@ function App() {
           <Route path="/dns-recursive" element={<DnsRecursive />} />
           <Route path="/dns-path-viz" element={<DnsPathViz />} />
           <Route path="/dns-tunnel" element={<DnsTunnel />} />
+          <Route path="/dhcp-pool-calc" element={<DhcpPoolCalc />} />
+          <Route path="/dhcp-option" element={<DhcpOption />} />
+          <Route path="/dhcp-mac-binding" element={<DhcpMacBinding />} />
+          <Route path="/dhcp-config-gen" element={<DhcpConfigGen />} />
+          <Route path="/traceroute" element={<Traceroute />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

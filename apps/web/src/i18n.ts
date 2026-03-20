@@ -70,6 +70,16 @@ import toolDnsPathVizZh from '@toolbox/tool-dns-path-viz/locales/zh-CN.json'
 import toolDnsPathVizEn from '@toolbox/tool-dns-path-viz/locales/en-US.json'
 import toolDnsTunnelZh from '@toolbox/tool-dns-tunnel/locales/zh-CN.json'
 import toolDnsTunnelEn from '@toolbox/tool-dns-tunnel/locales/en-US.json'
+import toolDhcpPoolCalcZh from '@toolbox/tool-dhcp-pool-calc/locales/zh-CN.json'
+import toolDhcpPoolCalcEn from '@toolbox/tool-dhcp-pool-calc/locales/en-US.json'
+import toolDhcpOptionZh from '@toolbox/tool-dhcp-option/locales/zh-CN.json'
+import toolDhcpOptionEn from '@toolbox/tool-dhcp-option/locales/en-US.json'
+import toolDhcpMacBindingZh from '@toolbox/tool-dhcp-mac-binding/locales/zh-CN.json'
+import toolDhcpMacBindingEn from '@toolbox/tool-dhcp-mac-binding/locales/en-US.json'
+import toolDhcpConfigGenZh from '@toolbox/tool-dhcp-config-gen/locales/zh-CN.json'
+import toolDhcpConfigGenEn from '@toolbox/tool-dhcp-config-gen/locales/en-US.json'
+import toolTracerouteZh from '@toolbox/tool-traceroute/locales/zh-CN.json'
+import toolTracerouteEn from '@toolbox/tool-traceroute/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -139,6 +149,11 @@ export const resources = {
     toolDnsRecursive: toolDnsRecursiveZh as Record<string, string>,
     toolDnsPathViz: toolDnsPathVizZh as Record<string, string>,
     toolDnsTunnel: toolDnsTunnelZh as Record<string, string>,
+    toolDhcpPoolCalc: toolDhcpPoolCalcZh as Record<string, string>,
+    toolDhcpOption: toolDhcpOptionZh as Record<string, string>,
+    toolDhcpMacBinding: toolDhcpMacBindingZh as Record<string, string>,
+    toolDhcpConfigGen: toolDhcpConfigGenZh as Record<string, string>,
+    toolTraceroute: toolTracerouteZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -193,6 +208,11 @@ export const resources = {
     toolDnsRecursive: toolDnsRecursiveEn as Record<string, string>,
     toolDnsPathViz: toolDnsPathVizEn as Record<string, string>,
     toolDnsTunnel: toolDnsTunnelEn as Record<string, string>,
+    toolDhcpPoolCalc: toolDhcpPoolCalcEn as Record<string, string>,
+    toolDhcpOption: toolDhcpOptionEn as Record<string, string>,
+    toolDhcpMacBinding: toolDhcpMacBindingEn as Record<string, string>,
+    toolDhcpConfigGen: toolDhcpConfigGenEn as Record<string, string>,
+    toolTraceroute: toolTracerouteEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

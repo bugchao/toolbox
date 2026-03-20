@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Pool Calculator",
+  "description": "Calculate available IP count from subnet and pool range"
+}
