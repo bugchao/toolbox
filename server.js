@@ -28,6 +28,7 @@ import { registerSecurityDomainScoreApiRoutes } from './tools/tool-security-doma
 import { registerDnssecVerifyApiRoutes } from './tools/tool-security-dnssec-verify/server/dnssec-verify-api.js'
 import { registerSecurityDnsDdosApiRoutes } from './tools/tool-security-dns-ddos/server/dns-ddos-api.js'
 import { registerCdnCheckApiRoutes } from './tools/tool-cdn-check/server/cdn-check-api.js'
+import { registerServerLatencyApiRoutes } from './tools/tool-server-latency/server/server-latency-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -60,6 +61,7 @@ registerSecurityDomainScoreApiRoutes(app)
 registerDnssecVerifyApiRoutes(app)
 registerSecurityDnsDdosApiRoutes(app)
 registerCdnCheckApiRoutes(app)
+registerServerLatencyApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务

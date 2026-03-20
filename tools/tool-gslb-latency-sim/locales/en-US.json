@@ -1,0 +1,4 @@
+{
+  "title": "GSLB Latency Scheduler",
+  "description": "Simulate nearest/round-robin/weighted/random scheduling strategies"
+}

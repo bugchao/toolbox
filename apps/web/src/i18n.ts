@@ -100,6 +100,16 @@ import toolSecurityDnsDdosZh from '@toolbox/tool-security-dns-ddos/locales/zh-CN
 import toolSecurityDnsDdosEn from '@toolbox/tool-security-dns-ddos/locales/en-US.json'
 import toolCdnCheckZh from '@toolbox/tool-cdn-check/locales/zh-CN.json'
 import toolCdnCheckEn from '@toolbox/tool-cdn-check/locales/en-US.json'
+import toolDhcpDiscoverSimZh from '@toolbox/tool-dhcp-discover-sim/locales/zh-CN.json'
+import toolDhcpDiscoverSimEn from '@toolbox/tool-dhcp-discover-sim/locales/en-US.json'
+import toolIpamSubnetUtilZh from '@toolbox/tool-ipam-subnet-util/locales/zh-CN.json'
+import toolIpamSubnetUtilEn from '@toolbox/tool-ipam-subnet-util/locales/en-US.json'
+import toolGslbHealthSimZh from '@toolbox/tool-gslb-health-sim/locales/zh-CN.json'
+import toolGslbHealthSimEn from '@toolbox/tool-gslb-health-sim/locales/en-US.json'
+import toolGslbLatencySimZh from '@toolbox/tool-gslb-latency-sim/locales/zh-CN.json'
+import toolGslbLatencySimEn from '@toolbox/tool-gslb-latency-sim/locales/en-US.json'
+import toolServerLatencyZh from '@toolbox/tool-server-latency/locales/zh-CN.json'
+import toolServerLatencyEn from '@toolbox/tool-server-latency/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -184,6 +194,11 @@ export const resources = {
     toolSecurityDnssecVerify: toolSecurityDnssecVerifyZh as Record<string, string>,
     toolSecurityDnsDdos: toolSecurityDnsDdosZh as Record<string, string>,
     toolCdnCheck: toolCdnCheckZh as Record<string, string>,
+    toolDhcpDiscoverSim: toolDhcpDiscoverSimZh as Record<string, string>,
+    toolIpamSubnetUtil: toolIpamSubnetUtilZh as Record<string, string>,
+    toolGslbHealthSim: toolGslbHealthSimZh as Record<string, string>,
+    toolGslbLatencySim: toolGslbLatencySimZh as Record<string, string>,
+    toolServerLatency: toolServerLatencyZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -253,6 +268,11 @@ export const resources = {
     toolSecurityDnssecVerify: toolSecurityDnssecVerifyEn as Record<string, string>,
     toolSecurityDnsDdos: toolSecurityDnsDdosEn as Record<string, string>,
     toolCdnCheck: toolCdnCheckEn as Record<string, string>,
+    toolDhcpDiscoverSim: toolDhcpDiscoverSimEn as Record<string, string>,
+    toolIpamSubnetUtil: toolIpamSubnetUtilEn as Record<string, string>,
+    toolGslbHealthSim: toolGslbHealthSimEn as Record<string, string>,
+    toolGslbLatencySim: toolGslbLatencySimEn as Record<string, string>,
+    toolServerLatency: toolServerLatencyEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

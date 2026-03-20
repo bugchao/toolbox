@@ -1,0 +1,4 @@
+{
+  "title": "Server Latency Test",
+  "description": "Test server response latency from multiple regions to detect network bottlenecks"
+}

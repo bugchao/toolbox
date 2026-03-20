@@ -145,6 +145,11 @@ const GslbGeoSim = lazy(() => import('@toolbox/tool-gslb-geo-sim').then((m) => (
 const SecurityDnssecVerify = lazy(() => import('@toolbox/tool-security-dnssec-verify').then((m) => ({ default: m.default })))
 const SecurityDnsDdos = lazy(() => import('@toolbox/tool-security-dns-ddos').then((m) => ({ default: m.default })))
 const CdnCheck = lazy(() => import('@toolbox/tool-cdn-check').then((m) => ({ default: m.default })))
+const DhcpDiscoverSim = lazy(() => import('@toolbox/tool-dhcp-discover-sim').then((m) => ({ default: m.default })))
+const IpamSubnetUtil = lazy(() => import('@toolbox/tool-ipam-subnet-util').then((m) => ({ default: m.default })))
+const GslbHealthSim = lazy(() => import('@toolbox/tool-gslb-health-sim').then((m) => ({ default: m.default })))
+const GslbLatencySim = lazy(() => import('@toolbox/tool-gslb-latency-sim').then((m) => ({ default: m.default })))
+const ServerLatency = lazy(() => import('@toolbox/tool-server-latency').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -331,6 +336,11 @@ function App() {
           <Route path="/security-dnssec-verify" element={<SecurityDnssecVerify />} />
           <Route path="/security-dns-ddos" element={<SecurityDnsDdos />} />
           <Route path="/cdn-check" element={<CdnCheck />} />
+          <Route path="/dhcp-discover-sim" element={<DhcpDiscoverSim />} />
+          <Route path="/ipam-subnet-util" element={<IpamSubnetUtil />} />
+          <Route path="/gslb-health-sim" element={<GslbHealthSim />} />
+          <Route path="/gslb-latency-sim" element={<GslbLatencySim />} />
+          <Route path="/server-latency" element={<ServerLatency />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

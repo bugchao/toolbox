@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Discover Simulator",
+  "description": "Animate the 4-step DHCP handshake: Discover → Offer → Request → ACK"
+}
