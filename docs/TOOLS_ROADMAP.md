@@ -139,6 +139,21 @@
 | IPv6 CIDR 计算 | `/ipv6-cidr` | `tools/tool-subnet-suite` → Ipv6Cidr |
 | VLSM 子网规划 | `/vlsm` | `tools/tool-subnet-suite` → Vlsm |
 | 网络规划生成器 | `/network-planner` | `tools/tool-subnet-suite` → NetworkPlanner |
+| HTTP Header 检测 | `/http-headers` | `tools/tool-http-headers` → HttpHeaders |
+| SSL 证书检测 | `/ssl-cert` | `tools/tool-ssl-cert` → SslCert |
+| HTTP 状态检测 | `/http-status` | `tools/tool-http-status` → HttpStatus |
+| TCP 端口检测 | `/tcp-port-check` | `tools/tool-tcp-port` → TcpPortCheck |
+| Ping 测试 | `/ping` | `tools/tool-ping` → Ping |
+| DNS 延迟分析 | `/dns-latency` | `tools/tool-dns-latency` → DnsLatency |
+| 权威 DNS 检测 | `/dns-authoritative` | `tools/tool-dns-authoritative` → DnsAuthoritative |
+| DNS 递归服务器检测 | `/dns-recursive` | `tools/tool-dns-recursive` → DnsRecursive |
+| DNS 解析路径可视化 | `/dns-path-viz` | `tools/tool-dns-path-viz` → DnsPathViz |
+| DNS 隧道检测 | `/dns-tunnel` | `tools/tool-dns-tunnel` → DnsTunnel |
+| DHCP 地址池计算器 | `/dhcp-pool-calc` | `tools/tool-dhcp-pool-calc` → DhcpPoolCalc |
+| DHCP Option 查询 | `/dhcp-option` | `tools/tool-dhcp-option` → DhcpOption |
+| DHCP MAC 绑定生成 | `/dhcp-mac-binding` | `tools/tool-dhcp-mac-binding` → DhcpMacBinding |
+| DHCP 配置生成器 | `/dhcp-config-gen` | `tools/tool-dhcp-config-gen` → DhcpConfigGen |
+| Traceroute 路由追踪 | `/traceroute` | `tools/tool-traceroute` → Traceroute |
 
 ### 资讯工具（1）
 
@@ -157,16 +172,8 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
-| DNS 延迟分析 | network | `/dns-latency` | 待开发 | P2 | 延迟分布 |
-| DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |
-| 权威 DNS 检测 | network | `/dns-authoritative` | 待开发 | P2 | 权威服务器检测 |
-| DNS 递归服务器检测 | network | `/dns-recursive` | 待开发 | P2 | 递归服务检测 |
-| DHCP 地址池计算器 | network | `/dhcp-pool-calc` | 待开发 | P2 | 地址池容量等 |
-| DHCP 配置生成器 | network | `/dhcp-config-gen` | 待开发 | P2 | 配置生成 |
-| DHCP Option 查询 | network | `/dhcp-option` | 待开发 | P2 | Option 含义与用法 |
+
 | DHCP Lease 分析 | network | `/dhcp-lease-analysis` | 待开发 | P2 | Lease 分析 |
-| DHCP MAC 绑定生成 | network | `/dhcp-mac-binding` | 待开发 | P2 | 静态绑定生成 |
 | DHCP 地址冲突检测 | network | `/dhcp-conflict` | 待开发 | P2 | 冲突检测 |
 | DHCP 日志分析 | network | `/dhcp-log-analysis` | 待开发 | P2 | 日志解析 |
 | DHCP Discover 模拟 | network | `/dhcp-discover-sim` | 待开发 | P2 | 抓包/模拟 |
@@ -187,18 +194,11 @@
 | 延迟调度模拟 | network | `/gslb-latency-sim` | 待开发 | P2 | 延迟调度 |
 | 多节点流量预测 | network | `/gslb-traffic-predict` | 待开发 | P2 | 流量预测 |
 | GSLB 规则验证 | network | `/gslb-rule-validate` | 待开发 | P2 | 规则校验 |
-| Ping 测试 | network | `/ping` | 待开发 | P2 | ICMP Ping |
-| Traceroute | network | `/traceroute` | 待开发 | P2 | 路由追踪 |
-| TCP 端口检测 | network | `/tcp-port-check` | 待开发 | P2 | 端口连通性 |
-| HTTP Header 检测 | network | `/http-headers` | 待开发 | P2 | 响应头查看 |
-| SSL 证书检测 | network | `/ssl-cert` | 待开发 | P2 | 证书链与有效期 |
 | CDN 检测 | network | `/cdn-check` | 待开发 | P2 | CDN 识别 |
-| HTTP 状态检测 | network | `/http-status` | 待开发 | P2 | 状态码与可用性 |
 | Web 服务可用性检测 | network | `/web-availability` | 待开发 | P2 | 可用性监控 |
 | 服务器延迟测试 | network | `/server-latency` | 待开发 | P2 | 延迟测试 |
 | API 可用性测试 | network | `/api-availability` | 待开发 | P2 | API 可用性 |
 | 域名是否被劫持 | network | `/security-domain-hijack` | 待开发 | P2 | 劫持检测 |
-| DNS 隧道检测 | network | `/security-dns-tunnel` | 待开发 | P2 | 隧道检测 |
 | DNS DDoS 风险检测 | network | `/security-dns-ddos` | 待开发 | P2 | 风险评估 |
 | DNSSEC 签名验证 | network | `/security-dnssec-verify` | 待开发 | P2 | 签名验证 |
 | 域名安全评分 | network | `/security-domain-score` | 待开发 | P2 | 安全评分 |
