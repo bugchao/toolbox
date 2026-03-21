@@ -1,0 +1,15 @@
+{
+  "title": "DNS 递归服务器检测",
+  "desc": "检测 DNS 服务器是否开放递归查询，评估 DNS 放大攻击风险",
+  "placeholder": "输入 IP 地址，每行一个或用逗号分隔",
+  "check": "检测",
+  "checking": "检测中...",
+  "presets": "常用 DNS",
+  "total": "检测总数",
+  "open": "开放递归",
+  "closed": "已关闭",
+  "openWarning": "发现开放递归 DNS 服务器，存在被用于 DDoS 放大攻击的风险，建议立即处理",
+  "details": "检测详情",
+  "openRecursive": "开放递归",
+  "closedRecursive": "非开放"
+}

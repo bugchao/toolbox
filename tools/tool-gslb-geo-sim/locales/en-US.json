@@ -1,0 +1,4 @@
+{
+  "title": "GEO DNS Simulation",
+  "description": "Simulate DNS resolution results by region and ISP for GSLB geo-routing"
+}

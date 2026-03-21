@@ -1,0 +1,4 @@
+{
+  "title": "Web Availability Checker",
+  "description": "Batch check HTTP status and response time for multiple URLs"
+}

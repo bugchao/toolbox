@@ -8,8 +8,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github.css';
-import 'katex/dist/katex.min.css';
+// highlight.js 和 katex CSS 不全局引入，改为在 iframe 内隔离加载
 
 interface Template {
   name: string;
@@ -211,9 +210,26 @@ ${contentHtml}
 </body>
 </html>`;
 
-      // 预览用：限定样式到 .markdown-preview-root，避免 body 样式影响整页宽度
-      const scopedCss = scopeTemplateCssForPreview(template.css);
-      const contentOnlyHtml = `<style>${scopedCss}</style><div class="markdown-preview-root">${contentHtml}</div>`;
+      // 预览用：用完整 HTML 文档 + iframe srcdoc 隔离，避免 CSS 污染主应用
+      const contentOnlyHtml = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+* { box-sizing: border-box; }
+${template.css}
+pre { overflow-x: auto; } code { word-break: break-word; }
+img { max-width: 100%; }
+table { max-width: 100%; overflow-x: auto; display: block; }
+</style>
+</head>
+<body>
+${contentHtml}
+</body>
+</html>`;
       
       setHtmlOutput(fullHtml);
       setContentHtml(contentHtml);
@@ -395,9 +411,11 @@ ${contentHtml}
               <Eye className="h-4 w-4 text-gray-500 dark:text-gray-400 shrink-0" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">预览效果</span>
             </div>
-            <div
-              className="p-4 min-h-[400px] h-[50vh] lg:h-[600px] overflow-auto min-w-0 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 [&_.markdown-body]:text-gray-900 [&_.markdown-body]:dark:text-gray-100 [&_.markdown-preview-root]:max-w-full [&_.markdown-preview-root_table]:max-w-full [&_.markdown-preview-root_pre]:max-w-full"
-              dangerouslySetInnerHTML={{ __html: previewHtml }}
+            <iframe
+              srcDoc={previewHtml}
+              className="w-full min-h-[400px] h-[50vh] lg:h-[600px] border-0 bg-white"
+              sandbox="allow-same-origin"
+              title="Markdown 预览"
             />
           </div>
         )}

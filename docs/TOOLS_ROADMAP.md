@@ -139,6 +139,41 @@
 | IPv6 CIDR 计算 | `/ipv6-cidr` | `tools/tool-subnet-suite` → Ipv6Cidr |
 | VLSM 子网规划 | `/vlsm` | `tools/tool-subnet-suite` → Vlsm |
 | 网络规划生成器 | `/network-planner` | `tools/tool-subnet-suite` → NetworkPlanner |
+| HTTP Header 检测 | `/http-headers` | `tools/tool-http-headers` → HttpHeaders |
+| SSL 证书检测 | `/ssl-cert` | `tools/tool-ssl-cert` → SslCert |
+| HTTP 状态检测 | `/http-status` | `tools/tool-http-status` → HttpStatus |
+| TCP 端口检测 | `/tcp-port-check` | `tools/tool-tcp-port` → TcpPortCheck |
+| Ping 测试 | `/ping` | `tools/tool-ping` → Ping |
+| DNS 延迟分析 | `/dns-latency` | `tools/tool-dns-latency` → DnsLatency |
+| 权威 DNS 检测 | `/dns-authoritative` | `tools/tool-dns-authoritative` → DnsAuthoritative |
+| DNS 递归服务器检测 | `/dns-recursive` | `tools/tool-dns-recursive` → DnsRecursive |
+| DNS 解析路径可视化 | `/dns-path-viz` | `tools/tool-dns-path-viz` → DnsPathViz |
+| DNS 隧道检测 | `/dns-tunnel` | `tools/tool-dns-tunnel` → DnsTunnel |
+| DHCP 地址池计算器 | `/dhcp-pool-calc` | `tools/tool-dhcp-pool-calc` → DhcpPoolCalc |
+| DHCP Option 查询 | `/dhcp-option` | `tools/tool-dhcp-option` → DhcpOption |
+| DHCP MAC 绑定生成 | `/dhcp-mac-binding` | `tools/tool-dhcp-mac-binding` → DhcpMacBinding |
+| DHCP 配置生成器 | `/dhcp-config-gen` | `tools/tool-dhcp-config-gen` → DhcpConfigGen |
+| Traceroute 路由追踪 | `/traceroute` | `tools/tool-traceroute` → Traceroute |
+| DHCP 地址利用率分析 | `/dhcp-utilization` | `tools/tool-dhcp-utilization` → DhcpUtilization |
+| DHCP 地址冲突检测 | `/dhcp-conflict` | `tools/tool-dhcp-conflict` → DhcpConflict |
+| GSLB 权重分配计算器 | `/gslb-weight-calc` | `tools/tool-gslb-weight-calc` → GslbWeightCalc |
+| Web 服务可用性检测 | `/web-availability` | `tools/tool-web-availability` → WebAvailability |
+| 域名安全评分 | `/security-domain-score` | `tools/tool-security-domain-score` → SecurityDomainScore |
+| GSLB 故障切换模拟 | `/gslb-failover-sim` | `tools/tool-gslb-failover-sim` → GslbFailoverSim |
+| GEO 解析模拟 | `/gslb-geo-sim` | `tools/tool-gslb-geo-sim` → GslbGeoSim |
+| DNSSEC 签名验证 | `/security-dnssec-verify` | `tools/tool-security-dnssec-verify` → SecurityDnssecVerify |
+| DNS DDoS 风险检测 | `/security-dns-ddos` | `tools/tool-security-dns-ddos` → SecurityDnsDdos |
+| CDN 检测 | `/cdn-check` | `tools/tool-cdn-check` → CdnCheck |
+| DHCP Discover 模拟 | `/dhcp-discover-sim` | `tools/tool-dhcp-discover-sim` → DhcpDiscoverSim |
+| 子网利用率统计 | `/ipam-subnet-util` | `tools/tool-ipam-subnet-util` → IpamSubnetUtil |
+| GSLB 健康检查模拟 | `/gslb-health-sim` | `tools/tool-gslb-health-sim` → GslbHealthSim |
+| GSLB 延迟调度模拟 | `/gslb-latency-sim` | `tools/tool-gslb-latency-sim` → GslbLatencySim |
+| 服务器延迟测试 | `/server-latency` | `tools/tool-server-latency` → ServerLatency |
+| DHCP Lease 分析 | `/dhcp-lease-analysis` | `tools/tool-dhcp-lease-analysis` → DhcpLeaseAnalysis |
+| IP 资源可视化 | `/ipam-visualize` | `tools/tool-ipam-visualize` → IpamVisualize |
+| GSLB 策略模拟 | `/gslb-policy-sim` | `tools/tool-gslb-policy-sim` → GslbPolicySim |
+| GSLB 规则验证 | `/gslb-rule-validate` | `tools/tool-gslb-rule-validate` → GslbRuleValidate |
+| API 可用性测试 | `/api-availability` | `tools/tool-api-availability` → ApiAvailability |
 
 ### 资讯工具（1）
 
@@ -157,51 +192,16 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| 域名 NXDOMAIN 检测 | network | `/dns-nxdomain` | 待开发 | P2 | NXDOMAIN 分析 |
-| DNS 延迟分析 | network | `/dns-latency` | 待开发 | P2 | 延迟分布 |
-| DNS 解析路径可视化 | network | `/dns-path-viz` | 待开发 | P2 | 路径图 |
-| 权威 DNS 检测 | network | `/dns-authoritative` | 待开发 | P2 | 权威服务器检测 |
-| DNS 递归服务器检测 | network | `/dns-recursive` | 待开发 | P2 | 递归服务检测 |
-| DHCP 地址池计算器 | network | `/dhcp-pool-calc` | 待开发 | P2 | 地址池容量等 |
-| DHCP 配置生成器 | network | `/dhcp-config-gen` | 待开发 | P2 | 配置生成 |
-| DHCP Option 查询 | network | `/dhcp-option` | 待开发 | P2 | Option 含义与用法 |
-| DHCP Lease 分析 | network | `/dhcp-lease-analysis` | 待开发 | P2 | Lease 分析 |
-| DHCP MAC 绑定生成 | network | `/dhcp-mac-binding` | 待开发 | P2 | 静态绑定生成 |
-| DHCP 地址冲突检测 | network | `/dhcp-conflict` | 待开发 | P2 | 冲突检测 |
+
 | DHCP 日志分析 | network | `/dhcp-log-analysis` | 待开发 | P2 | 日志解析 |
-| DHCP Discover 模拟 | network | `/dhcp-discover-sim` | 待开发 | P2 | 抓包/模拟 |
 | DHCP 网络扫描 | network | `/dhcp-scan` | 待开发 | P2 | 发现 DHCP 服务 |
-| DHCP 地址利用率分析 | network | `/dhcp-utilization` | 待开发 | P2 | 使用率统计 |
 | IP 地址回收分析 | network | `/ipam-reclaim` | 待开发 | P2 | 可回收分析 |
-| 子网利用率统计 | network | `/ipam-subnet-util` | 待开发 | P2 | 子网利用率 |
 | IP 地址变更记录 | network | `/ipam-changelog` | 待开发 | P2 | 变更记录 |
 | IP 地址扫描 | network | `/ipam-scan` | 待开发 | P2 | 存活/占用扫描 |
-| IP 资源可视化 | network | `/ipam-visualize` | 待开发 | P2 | 拓扑/树状图 |
-| GSLB 策略模拟 | network | `/gslb-policy-sim` | 待开发 | P2 | 策略模拟 |
 | 解析命中预测 | network | `/gslb-hit-predict` | 待开发 | P2 | 命中预测 |
-| 权重分配计算器 | network | `/gslb-weight-calc` | 待开发 | P2 | 权重计算 |
-| 健康检查模拟 | network | `/gslb-health-sim` | 待开发 | P2 | 健康检查模拟 |
-| 故障切换模拟 | network | `/gslb-failover-sim` | 待开发 | P2 | 故障切换 |
-| GEO 解析模拟 | network | `/gslb-geo-sim` | 待开发 | P2 | 地域解析 |
 | 运营商解析模拟 | network | `/gslb-isp-sim` | 待开发 | P2 | 运营商线路 |
-| 延迟调度模拟 | network | `/gslb-latency-sim` | 待开发 | P2 | 延迟调度 |
 | 多节点流量预测 | network | `/gslb-traffic-predict` | 待开发 | P2 | 流量预测 |
-| GSLB 规则验证 | network | `/gslb-rule-validate` | 待开发 | P2 | 规则校验 |
-| Ping 测试 | network | `/ping` | 待开发 | P2 | ICMP Ping |
-| Traceroute | network | `/traceroute` | 待开发 | P2 | 路由追踪 |
-| TCP 端口检测 | network | `/tcp-port-check` | 待开发 | P2 | 端口连通性 |
-| HTTP Header 检测 | network | `/http-headers` | 待开发 | P2 | 响应头查看 |
-| SSL 证书检测 | network | `/ssl-cert` | 待开发 | P2 | 证书链与有效期 |
-| CDN 检测 | network | `/cdn-check` | 待开发 | P2 | CDN 识别 |
-| HTTP 状态检测 | network | `/http-status` | 待开发 | P2 | 状态码与可用性 |
-| Web 服务可用性检测 | network | `/web-availability` | 待开发 | P2 | 可用性监控 |
-| 服务器延迟测试 | network | `/server-latency` | 待开发 | P2 | 延迟测试 |
-| API 可用性测试 | network | `/api-availability` | 待开发 | P2 | API 可用性 |
 | 域名是否被劫持 | network | `/security-domain-hijack` | 待开发 | P2 | 劫持检测 |
-| DNS 隧道检测 | network | `/security-dns-tunnel` | 待开发 | P2 | 隧道检测 |
-| DNS DDoS 风险检测 | network | `/security-dns-ddos` | 待开发 | P2 | 风险评估 |
-| DNSSEC 签名验证 | network | `/security-dnssec-verify` | 待开发 | P2 | 签名验证 |
-| 域名安全评分 | network | `/security-domain-score` | 待开发 | P2 | 安全评分 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 

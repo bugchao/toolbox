@@ -62,6 +62,66 @@ import toolTcpPortZh from '@toolbox/tool-tcp-port/locales/zh-CN.json'
 import toolTcpPortEn from '@toolbox/tool-tcp-port/locales/en-US.json'
 import toolPingZh from '@toolbox/tool-ping/locales/zh-CN.json'
 import toolPingEn from '@toolbox/tool-ping/locales/en-US.json'
+import toolDnsLatencyZh from '@toolbox/tool-dns-latency/locales/zh-CN.json'
+import toolDnsLatencyEn from '@toolbox/tool-dns-latency/locales/en-US.json'
+import toolDnsAuthoritativeZh from '@toolbox/tool-dns-authoritative/locales/zh-CN.json'
+import toolDnsAuthoritativeEn from '@toolbox/tool-dns-authoritative/locales/en-US.json'
+import toolDnsRecursiveZh from '@toolbox/tool-dns-recursive/locales/zh-CN.json'
+import toolDnsRecursiveEn from '@toolbox/tool-dns-recursive/locales/en-US.json'
+import toolDnsPathVizZh from '@toolbox/tool-dns-path-viz/locales/zh-CN.json'
+import toolDnsPathVizEn from '@toolbox/tool-dns-path-viz/locales/en-US.json'
+import toolDnsTunnelZh from '@toolbox/tool-dns-tunnel/locales/zh-CN.json'
+import toolDnsTunnelEn from '@toolbox/tool-dns-tunnel/locales/en-US.json'
+import toolDhcpPoolCalcZh from '@toolbox/tool-dhcp-pool-calc/locales/zh-CN.json'
+import toolDhcpPoolCalcEn from '@toolbox/tool-dhcp-pool-calc/locales/en-US.json'
+import toolDhcpOptionZh from '@toolbox/tool-dhcp-option/locales/zh-CN.json'
+import toolDhcpOptionEn from '@toolbox/tool-dhcp-option/locales/en-US.json'
+import toolDhcpMacBindingZh from '@toolbox/tool-dhcp-mac-binding/locales/zh-CN.json'
+import toolDhcpMacBindingEn from '@toolbox/tool-dhcp-mac-binding/locales/en-US.json'
+import toolDhcpConfigGenZh from '@toolbox/tool-dhcp-config-gen/locales/zh-CN.json'
+import toolDhcpConfigGenEn from '@toolbox/tool-dhcp-config-gen/locales/en-US.json'
+import toolTracerouteZh from '@toolbox/tool-traceroute/locales/zh-CN.json'
+import toolTracerouteEn from '@toolbox/tool-traceroute/locales/en-US.json'
+import toolDhcpUtilizationZh from '@toolbox/tool-dhcp-utilization/locales/zh-CN.json'
+import toolDhcpUtilizationEn from '@toolbox/tool-dhcp-utilization/locales/en-US.json'
+import toolDhcpConflictZh from '@toolbox/tool-dhcp-conflict/locales/zh-CN.json'
+import toolDhcpConflictEn from '@toolbox/tool-dhcp-conflict/locales/en-US.json'
+import toolGslbWeightCalcZh from '@toolbox/tool-gslb-weight-calc/locales/zh-CN.json'
+import toolGslbWeightCalcEn from '@toolbox/tool-gslb-weight-calc/locales/en-US.json'
+import toolWebAvailabilityZh from '@toolbox/tool-web-availability/locales/zh-CN.json'
+import toolWebAvailabilityEn from '@toolbox/tool-web-availability/locales/en-US.json'
+import toolSecurityDomainScoreZh from '@toolbox/tool-security-domain-score/locales/zh-CN.json'
+import toolSecurityDomainScoreEn from '@toolbox/tool-security-domain-score/locales/en-US.json'
+import toolGslbFailoverSimZh from '@toolbox/tool-gslb-failover-sim/locales/zh-CN.json'
+import toolGslbFailoverSimEn from '@toolbox/tool-gslb-failover-sim/locales/en-US.json'
+import toolGslbGeoSimZh from '@toolbox/tool-gslb-geo-sim/locales/zh-CN.json'
+import toolGslbGeoSimEn from '@toolbox/tool-gslb-geo-sim/locales/en-US.json'
+import toolSecurityDnssecVerifyZh from '@toolbox/tool-security-dnssec-verify/locales/zh-CN.json'
+import toolSecurityDnssecVerifyEn from '@toolbox/tool-security-dnssec-verify/locales/en-US.json'
+import toolSecurityDnsDdosZh from '@toolbox/tool-security-dns-ddos/locales/zh-CN.json'
+import toolSecurityDnsDdosEn from '@toolbox/tool-security-dns-ddos/locales/en-US.json'
+import toolCdnCheckZh from '@toolbox/tool-cdn-check/locales/zh-CN.json'
+import toolCdnCheckEn from '@toolbox/tool-cdn-check/locales/en-US.json'
+import toolDhcpDiscoverSimZh from '@toolbox/tool-dhcp-discover-sim/locales/zh-CN.json'
+import toolDhcpDiscoverSimEn from '@toolbox/tool-dhcp-discover-sim/locales/en-US.json'
+import toolIpamSubnetUtilZh from '@toolbox/tool-ipam-subnet-util/locales/zh-CN.json'
+import toolIpamSubnetUtilEn from '@toolbox/tool-ipam-subnet-util/locales/en-US.json'
+import toolGslbHealthSimZh from '@toolbox/tool-gslb-health-sim/locales/zh-CN.json'
+import toolGslbHealthSimEn from '@toolbox/tool-gslb-health-sim/locales/en-US.json'
+import toolGslbLatencySimZh from '@toolbox/tool-gslb-latency-sim/locales/zh-CN.json'
+import toolGslbLatencySimEn from '@toolbox/tool-gslb-latency-sim/locales/en-US.json'
+import toolServerLatencyZh from '@toolbox/tool-server-latency/locales/zh-CN.json'
+import toolServerLatencyEn from '@toolbox/tool-server-latency/locales/en-US.json'
+import toolDhcpLeaseAnalysisZh from '@toolbox/tool-dhcp-lease-analysis/locales/zh-CN.json'
+import toolDhcpLeaseAnalysisEn from '@toolbox/tool-dhcp-lease-analysis/locales/en-US.json'
+import toolIpamVisualizeZh from '@toolbox/tool-ipam-visualize/locales/zh-CN.json'
+import toolIpamVisualizeEn from '@toolbox/tool-ipam-visualize/locales/en-US.json'
+import toolGslbPolicySimZh from '@toolbox/tool-gslb-policy-sim/locales/zh-CN.json'
+import toolGslbPolicySimEn from '@toolbox/tool-gslb-policy-sim/locales/en-US.json'
+import toolGslbRuleValidateZh from '@toolbox/tool-gslb-rule-validate/locales/zh-CN.json'
+import toolGslbRuleValidateEn from '@toolbox/tool-gslb-rule-validate/locales/en-US.json'
+import toolApiAvailabilityZh from '@toolbox/tool-api-availability/locales/zh-CN.json'
+import toolApiAvailabilityEn from '@toolbox/tool-api-availability/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -127,6 +187,36 @@ export const resources = {
     toolHttpStatus: toolHttpStatusZh as Record<string, string>,
     toolTcpPort: toolTcpPortZh as Record<string, string>,
     toolPing: toolPingZh as Record<string, string>,
+    toolDnsLatency: toolDnsLatencyZh as Record<string, string>,
+    toolDnsAuthoritative: toolDnsAuthoritativeZh as Record<string, string>,
+    toolDnsRecursive: toolDnsRecursiveZh as Record<string, string>,
+    toolDnsPathViz: toolDnsPathVizZh as Record<string, string>,
+    toolDnsTunnel: toolDnsTunnelZh as Record<string, string>,
+    toolDhcpPoolCalc: toolDhcpPoolCalcZh as Record<string, string>,
+    toolDhcpOption: toolDhcpOptionZh as Record<string, string>,
+    toolDhcpMacBinding: toolDhcpMacBindingZh as Record<string, string>,
+    toolDhcpConfigGen: toolDhcpConfigGenZh as Record<string, string>,
+    toolTraceroute: toolTracerouteZh as Record<string, string>,
+    toolDhcpUtilization: toolDhcpUtilizationZh as Record<string, string>,
+    toolDhcpConflict: toolDhcpConflictZh as Record<string, string>,
+    toolGslbWeightCalc: toolGslbWeightCalcZh as Record<string, string>,
+    toolWebAvailability: toolWebAvailabilityZh as Record<string, string>,
+    toolSecurityDomainScore: toolSecurityDomainScoreZh as Record<string, string>,
+    toolGslbFailoverSim: toolGslbFailoverSimZh as Record<string, string>,
+    toolGslbGeoSim: toolGslbGeoSimZh as Record<string, string>,
+    toolSecurityDnssecVerify: toolSecurityDnssecVerifyZh as Record<string, string>,
+    toolSecurityDnsDdos: toolSecurityDnsDdosZh as Record<string, string>,
+    toolCdnCheck: toolCdnCheckZh as Record<string, string>,
+    toolDhcpDiscoverSim: toolDhcpDiscoverSimZh as Record<string, string>,
+    toolIpamSubnetUtil: toolIpamSubnetUtilZh as Record<string, string>,
+    toolGslbHealthSim: toolGslbHealthSimZh as Record<string, string>,
+    toolGslbLatencySim: toolGslbLatencySimZh as Record<string, string>,
+    toolServerLatency: toolServerLatencyZh as Record<string, string>,
+    toolDhcpLeaseAnalysis: toolDhcpLeaseAnalysisZh as Record<string, string>,
+    toolIpamVisualize: toolIpamVisualizeZh as Record<string, string>,
+    toolGslbPolicySim: toolGslbPolicySimZh as Record<string, string>,
+    toolGslbRuleValidate: toolGslbRuleValidateZh as Record<string, string>,
+    toolApiAvailability: toolApiAvailabilityZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -177,6 +267,36 @@ export const resources = {
     toolHttpStatus: toolHttpStatusEn as Record<string, string>,
     toolTcpPort: toolTcpPortEn as Record<string, string>,
     toolPing: toolPingEn as Record<string, string>,
+    toolDnsLatency: toolDnsLatencyEn as Record<string, string>,
+    toolDnsAuthoritative: toolDnsAuthoritativeEn as Record<string, string>,
+    toolDnsRecursive: toolDnsRecursiveEn as Record<string, string>,
+    toolDnsPathViz: toolDnsPathVizEn as Record<string, string>,
+    toolDnsTunnel: toolDnsTunnelEn as Record<string, string>,
+    toolDhcpPoolCalc: toolDhcpPoolCalcEn as Record<string, string>,
+    toolDhcpOption: toolDhcpOptionEn as Record<string, string>,
+    toolDhcpMacBinding: toolDhcpMacBindingEn as Record<string, string>,
+    toolDhcpConfigGen: toolDhcpConfigGenEn as Record<string, string>,
+    toolTraceroute: toolTracerouteEn as Record<string, string>,
+    toolDhcpUtilization: toolDhcpUtilizationEn as Record<string, string>,
+    toolDhcpConflict: toolDhcpConflictEn as Record<string, string>,
+    toolGslbWeightCalc: toolGslbWeightCalcEn as Record<string, string>,
+    toolWebAvailability: toolWebAvailabilityEn as Record<string, string>,
+    toolSecurityDomainScore: toolSecurityDomainScoreEn as Record<string, string>,
+    toolGslbFailoverSim: toolGslbFailoverSimEn as Record<string, string>,
+    toolGslbGeoSim: toolGslbGeoSimEn as Record<string, string>,
+    toolSecurityDnssecVerify: toolSecurityDnssecVerifyEn as Record<string, string>,
+    toolSecurityDnsDdos: toolSecurityDnsDdosEn as Record<string, string>,
+    toolCdnCheck: toolCdnCheckEn as Record<string, string>,
+    toolDhcpDiscoverSim: toolDhcpDiscoverSimEn as Record<string, string>,
+    toolIpamSubnetUtil: toolIpamSubnetUtilEn as Record<string, string>,
+    toolGslbHealthSim: toolGslbHealthSimEn as Record<string, string>,
+    toolGslbLatencySim: toolGslbLatencySimEn as Record<string, string>,
+    toolServerLatency: toolServerLatencyEn as Record<string, string>,
+    toolDhcpLeaseAnalysis: toolDhcpLeaseAnalysisEn as Record<string, string>,
+    toolIpamVisualize: toolIpamVisualizeEn as Record<string, string>,
+    toolGslbPolicySim: toolGslbPolicySimEn as Record<string, string>,
+    toolGslbRuleValidate: toolGslbRuleValidateEn as Record<string, string>,
+    toolApiAvailability: toolApiAvailabilityEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

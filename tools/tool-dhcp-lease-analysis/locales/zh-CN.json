@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Lease 分析",
+  "description": "粘贴 dhcpd.leases 内容，解析租约状态和分配详情"
+}

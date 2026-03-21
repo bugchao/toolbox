@@ -1,0 +1,4 @@
+{
+  "title": "GSLB Health Check Simulator",
+  "description": "Simulate GSLB health probing with configurable thresholds and auto failover"
+}

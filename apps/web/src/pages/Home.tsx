@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Card } from '@toolbox/ui-kit'
 import { TOOLS, getToolTitle, getToolDescription } from '../config/tools'
+import { useSettings } from '../contexts/SettingsContext'
 
 const TOOL_ICONS: Record<string, string> = {
   'tools.qrcode_generate': '📱',
@@ -110,8 +111,10 @@ const Home: React.FC = () => {
   const { t } = useTranslation('nav')
   const { t: tHome } = useTranslation('home')
 
+  const { settings } = useSettings()
   const toolsForHome = TOOLS.filter(
-    (tool) => tool.path !== '/' && tool.path !== '/favorites' && tool.categoryKey
+    (tool) => tool.path !== '/' && tool.path !== '/favorites' && tool.categoryKey &&
+      (!settings.hideServerTools || tool.mode !== 'server')
   )
   const categories = Array.from(new Set(toolsForHome.map((tool) => tool.categoryKey))) as string[]
 

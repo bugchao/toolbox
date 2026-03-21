@@ -1,0 +1,12 @@
+{
+  "title": "DNS 延迟分析",
+  "desc": "对比多个 DNS 服务器的响应速度，找出最快的解析服务器",
+  "placeholder": "输入域名，如 example.com",
+  "analyze": "分析",
+  "analyzing": "分析中...",
+  "avg": "平均延迟",
+  "min": "最低延迟",
+  "max": "最高延迟",
+  "servers": "各服务器响应",
+  "ok": "成功"
+}

@@ -1,0 +1,4 @@
+{
+  "title": "DHCP 地址冲突检测",
+  "description": "粘贴 DHCP 租约列表，自动检测重复分配的 IP 地址"
+}

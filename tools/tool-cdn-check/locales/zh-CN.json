@@ -1,0 +1,4 @@
+{
+  "title": "CDN 检测",
+  "description": "识别域名使用的 CDN 服务商，支持 Cloudflare、阿里云等主流 CDN"
+}

@@ -1,0 +1,4 @@
+{
+  "title": "DHCP MAC Binding Generator",
+  "description": "Generate static MAC binding configs for ISC / dnsmasq / MikroTik"
+}

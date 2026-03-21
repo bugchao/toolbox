@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Discover 模拟",
+  "description": "动态演示 DHCP 四步握手过程（Discover → Offer → Request → ACK）"
+}

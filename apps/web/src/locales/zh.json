@@ -114,7 +114,17 @@
       "life_progress": "人生进度条",
       "meeting_minutes": "AI 会议纪要生成器",
       "ui_generator": "AI UI 设计生成器"
-    }
+    },
+    "category_dns": "DNS 工具",
+    "category_domain": "域名工具",
+    "category_ip": "IP 工具",
+    "category_ipam": "子网/IPAM",
+    "category_security": "安全工具",
+    "dns_latency": "DNS 延迟分析",
+    "dns_authoritative": "权威 DNS 检测",
+    "dns_recursive": "DNS 递归检测",
+    "dns_path_viz": "DNS 路径可视化",
+    "dns_tunnel": "DNS 隧道检测"
   },
   "commandPalette": {
     "placeholder": "搜索工具…",

@@ -125,6 +125,36 @@ const SslCert = lazy(() => import('@toolbox/tool-ssl-cert').then((m) => ({ defau
 const HttpStatus = lazy(() => import('@toolbox/tool-http-status').then((m) => ({ default: m.default })))
 const TcpPort = lazy(() => import('@toolbox/tool-tcp-port').then((m) => ({ default: m.default })))
 const Ping = lazy(() => import('@toolbox/tool-ping').then((m) => ({ default: m.default })))
+const DnsLatency = lazy(() => import('@toolbox/tool-dns-latency').then((m) => ({ default: m.default })))
+const DnsAuthoritative = lazy(() => import('@toolbox/tool-dns-authoritative').then((m) => ({ default: m.default })))
+const DnsRecursive = lazy(() => import('@toolbox/tool-dns-recursive').then((m) => ({ default: m.default })))
+const DnsPathViz = lazy(() => import('@toolbox/tool-dns-path-viz').then((m) => ({ default: m.default })))
+const DnsTunnel = lazy(() => import('@toolbox/tool-dns-tunnel').then((m) => ({ default: m.default })))
+const DhcpPoolCalc = lazy(() => import('@toolbox/tool-dhcp-pool-calc').then((m) => ({ default: m.default })))
+const DhcpOption = lazy(() => import('@toolbox/tool-dhcp-option').then((m) => ({ default: m.default })))
+const DhcpMacBinding = lazy(() => import('@toolbox/tool-dhcp-mac-binding').then((m) => ({ default: m.default })))
+const DhcpConfigGen = lazy(() => import('@toolbox/tool-dhcp-config-gen').then((m) => ({ default: m.default })))
+const Traceroute = lazy(() => import('@toolbox/tool-traceroute').then((m) => ({ default: m.default })))
+const DhcpUtilization = lazy(() => import('@toolbox/tool-dhcp-utilization').then((m) => ({ default: m.default })))
+const DhcpConflict = lazy(() => import('@toolbox/tool-dhcp-conflict').then((m) => ({ default: m.default })))
+const GslbWeightCalc = lazy(() => import('@toolbox/tool-gslb-weight-calc').then((m) => ({ default: m.default })))
+const WebAvailability = lazy(() => import('@toolbox/tool-web-availability').then((m) => ({ default: m.default })))
+const SecurityDomainScore = lazy(() => import('@toolbox/tool-security-domain-score').then((m) => ({ default: m.default })))
+const GslbFailoverSim = lazy(() => import('@toolbox/tool-gslb-failover-sim').then((m) => ({ default: m.default })))
+const GslbGeoSim = lazy(() => import('@toolbox/tool-gslb-geo-sim').then((m) => ({ default: m.default })))
+const SecurityDnssecVerify = lazy(() => import('@toolbox/tool-security-dnssec-verify').then((m) => ({ default: m.default })))
+const SecurityDnsDdos = lazy(() => import('@toolbox/tool-security-dns-ddos').then((m) => ({ default: m.default })))
+const CdnCheck = lazy(() => import('@toolbox/tool-cdn-check').then((m) => ({ default: m.default })))
+const DhcpDiscoverSim = lazy(() => import('@toolbox/tool-dhcp-discover-sim').then((m) => ({ default: m.default })))
+const IpamSubnetUtil = lazy(() => import('@toolbox/tool-ipam-subnet-util').then((m) => ({ default: m.default })))
+const GslbHealthSim = lazy(() => import('@toolbox/tool-gslb-health-sim').then((m) => ({ default: m.default })))
+const GslbLatencySim = lazy(() => import('@toolbox/tool-gslb-latency-sim').then((m) => ({ default: m.default })))
+const ServerLatency = lazy(() => import('@toolbox/tool-server-latency').then((m) => ({ default: m.default })))
+const DhcpLeaseAnalysis = lazy(() => import('@toolbox/tool-dhcp-lease-analysis').then((m) => ({ default: m.default })))
+const IpamVisualize = lazy(() => import('@toolbox/tool-ipam-visualize').then((m) => ({ default: m.default })))
+const GslbPolicySim = lazy(() => import('@toolbox/tool-gslb-policy-sim').then((m) => ({ default: m.default })))
+const GslbRuleValidate = lazy(() => import('@toolbox/tool-gslb-rule-validate').then((m) => ({ default: m.default })))
+const ApiAvailability = lazy(() => import('@toolbox/tool-api-availability').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -291,6 +321,36 @@ function App() {
           <Route path="/http-status" element={<HttpStatus />} />
           <Route path="/tcp-port-check" element={<TcpPort />} />
           <Route path="/ping" element={<Ping />} />
+          <Route path="/dns-latency" element={<DnsLatency />} />
+          <Route path="/dns-authoritative" element={<DnsAuthoritative />} />
+          <Route path="/dns-recursive" element={<DnsRecursive />} />
+          <Route path="/dns-path-viz" element={<DnsPathViz />} />
+          <Route path="/dns-tunnel" element={<DnsTunnel />} />
+          <Route path="/dhcp-pool-calc" element={<DhcpPoolCalc />} />
+          <Route path="/dhcp-option" element={<DhcpOption />} />
+          <Route path="/dhcp-mac-binding" element={<DhcpMacBinding />} />
+          <Route path="/dhcp-config-gen" element={<DhcpConfigGen />} />
+          <Route path="/traceroute" element={<Traceroute />} />
+          <Route path="/dhcp-utilization" element={<DhcpUtilization />} />
+          <Route path="/dhcp-conflict" element={<DhcpConflict />} />
+          <Route path="/gslb-weight-calc" element={<GslbWeightCalc />} />
+          <Route path="/web-availability" element={<WebAvailability />} />
+          <Route path="/security-domain-score" element={<SecurityDomainScore />} />
+          <Route path="/gslb-failover-sim" element={<GslbFailoverSim />} />
+          <Route path="/gslb-geo-sim" element={<GslbGeoSim />} />
+          <Route path="/security-dnssec-verify" element={<SecurityDnssecVerify />} />
+          <Route path="/security-dns-ddos" element={<SecurityDnsDdos />} />
+          <Route path="/cdn-check" element={<CdnCheck />} />
+          <Route path="/dhcp-discover-sim" element={<DhcpDiscoverSim />} />
+          <Route path="/ipam-subnet-util" element={<IpamSubnetUtil />} />
+          <Route path="/gslb-health-sim" element={<GslbHealthSim />} />
+          <Route path="/gslb-latency-sim" element={<GslbLatencySim />} />
+          <Route path="/server-latency" element={<ServerLatency />} />
+          <Route path="/dhcp-lease-analysis" element={<DhcpLeaseAnalysis />} />
+          <Route path="/ipam-visualize" element={<IpamVisualize />} />
+          <Route path="/gslb-policy-sim" element={<GslbPolicySim />} />
+          <Route path="/gslb-rule-validate" element={<GslbRuleValidate />} />
+          <Route path="/api-availability" element={<ApiAvailability />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

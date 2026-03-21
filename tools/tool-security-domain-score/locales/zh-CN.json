@@ -1,0 +1,4 @@
+{
+  "title": "域名安全评分",
+  "description": "综合检测 DNSSEC、SPF、DMARC、SSL 等安全配置，输出安全评分"
+}

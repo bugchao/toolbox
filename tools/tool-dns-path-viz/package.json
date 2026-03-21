@@ -1,0 +1,10 @@
+{
+  "name": "@toolbox/tool-dns-path-viz",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.tsx",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-i18next": "^13.0.0"
+  }
+}

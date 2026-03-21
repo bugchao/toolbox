@@ -1,0 +1,10 @@
+{
+  "title": "权威 DNS 检测",
+  "desc": "检测域名的权威名称服务器，验证多解析器一致性",
+  "placeholder": "输入域名，如 example.com",
+  "check": "检测",
+  "checking": "检测中...",
+  "nsServers": "权威 NS 服务器",
+  "consistency": "解析器一致性验证",
+  "soa": "SOA 记录"
+}

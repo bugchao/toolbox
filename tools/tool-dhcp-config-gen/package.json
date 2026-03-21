@@ -1,0 +1,6 @@
+{
+  "name": "@toolbox/tool-dhcp-config-gen",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.tsx"
+}

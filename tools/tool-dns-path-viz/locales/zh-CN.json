@@ -1,0 +1,8 @@
+{
+  "title": "DNS 解析路径可视化",
+  "desc": "可视化展示 DNS 递归解析的完整路径：根服务器 → TLD → 权威服务器 → 最终记录",
+  "placeholder": "输入域名，如 example.com",
+  "trace": "追踪",
+  "tracing": "追踪中...",
+  "pathFor": "解析路径："
+}

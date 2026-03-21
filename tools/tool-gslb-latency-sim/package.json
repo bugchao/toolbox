@@ -1,0 +1,6 @@
+{
+  "name": "@toolbox/tool-gslb-latency-sim",
+  "version": "1.0.0",
+  "main": "src/index.tsx",
+  "dependencies": {}
+}

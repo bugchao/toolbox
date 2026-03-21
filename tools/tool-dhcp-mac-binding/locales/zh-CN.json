@@ -1,0 +1,4 @@
+{
+  "title": "DHCP MAC 绑定生成",
+  "description": "批量生成 ISC / dnsmasq / MikroTik 静态地址绑定配置"
+}

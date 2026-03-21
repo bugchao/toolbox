@@ -361,6 +361,8 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-api-availability: {}
+
   tools/tool-base64:
     dependencies:
       '@toolbox/ui-kit':
@@ -388,6 +390,33 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-cdn-check: {}
+
+  tools/tool-dhcp-config-gen: {}
+
+  tools/tool-dhcp-conflict: {}
+
+  tools/tool-dhcp-discover-sim: {}
+
+  tools/tool-dhcp-lease-analysis: {}
+
+  tools/tool-dhcp-mac-binding: {}
+
+  tools/tool-dhcp-option: {}
+
+  tools/tool-dhcp-pool-calc: {}
+
+  tools/tool-dhcp-utilization: {}
+
+  tools/tool-dns-authoritative:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-i18next:
+        specifier: ^13.0.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   tools/tool-dns-cache-check:
     dependencies:
@@ -529,6 +558,15 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-dns-latency:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-i18next:
+        specifier: ^13.0.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   tools/tool-dns-loop-check:
     dependencies:
       '@toolbox/ui-kit':
@@ -612,6 +650,15 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
+
+  tools/tool-dns-path-viz:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-i18next:
+        specifier: ^13.0.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   tools/tool-dns-performance:
     dependencies:
@@ -697,6 +744,15 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-dns-recursive:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-i18next:
+        specifier: ^13.0.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   tools/tool-dns-soa:
     dependencies:
       '@toolbox/ui-kit':
@@ -780,6 +836,15 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-dns-tunnel:
+    dependencies:
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
+      react-i18next:
+        specifier: ^13.0.0
+        version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   tools/tool-dnssec-check:
     dependencies:
@@ -921,6 +986,20 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-gslb-failover-sim: {}
+
+  tools/tool-gslb-geo-sim: {}
+
+  tools/tool-gslb-health-sim: {}
+
+  tools/tool-gslb-latency-sim: {}
+
+  tools/tool-gslb-policy-sim: {}
+
+  tools/tool-gslb-rule-validate: {}
+
+  tools/tool-gslb-weight-calc: {}
+
   tools/tool-http-headers:
     dependencies:
       '@toolbox/ui-kit':
@@ -1061,6 +1140,8 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-ipam-subnet-util: {}
+
   tools/tool-ipam-suite:
     dependencies:
       '@toolbox/ui-kit':
@@ -1088,6 +1169,8 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-ipam-visualize: {}
 
   tools/tool-json:
     dependencies:
@@ -1275,6 +1358,12 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-security-dns-ddos: {}
+
+  tools/tool-security-dnssec-verify: {}
+
+  tools/tool-security-domain-score: {}
+
   tools/tool-security-suite:
     dependencies:
       '@toolbox/ui-kit':
@@ -1302,6 +1391,8 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-server-latency: {}
 
   tools/tool-ssl-cert:
     dependencies:
@@ -1415,6 +1506,8 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-traceroute: {}
+
   tools/tool-weather:
     dependencies:
       '@toolbox/ui-kit':
@@ -1442,6 +1535,8 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-web-availability: {}
 
 packages:
 

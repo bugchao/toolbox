@@ -1,0 +1,6 @@
+{
+  "name": "@toolbox/tool-dhcp-pool-calc",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.tsx"
+}

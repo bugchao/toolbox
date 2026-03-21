@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Config Generator",
+  "description": "Generate ISC DHCP / dnsmasq / Windows Server DHCP configuration"
+}

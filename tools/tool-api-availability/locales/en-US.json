@@ -1,0 +1,4 @@
+{
+  "title": "API Availability Test",
+  "description": "Batch test HTTP API endpoints for availability, latency and status codes"
+}

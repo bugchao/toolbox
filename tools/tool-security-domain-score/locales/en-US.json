@@ -1,0 +1,4 @@
+{
+  "title": "Domain Security Score",
+  "description": "Check DNSSEC, SPF, DMARC, SSL and output a security grade"
+}
