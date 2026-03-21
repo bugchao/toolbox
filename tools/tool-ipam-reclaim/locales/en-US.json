@@ -1,0 +1,4 @@
+{
+  "title": "IP Reclaim Analysis",
+  "description": "Analyze IP address usage, identify idle addresses and batch reclaim them"
+}

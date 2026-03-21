@@ -1,0 +1,4 @@
+{
+  "title": "DNS Hit Prediction",
+  "description": "Predict DNS resolution hits and QPS per node based on regional population and internet rates"
+}

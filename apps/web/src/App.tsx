@@ -155,6 +155,11 @@ const IpamVisualize = lazy(() => import('@toolbox/tool-ipam-visualize').then((m)
 const GslbPolicySim = lazy(() => import('@toolbox/tool-gslb-policy-sim').then((m) => ({ default: m.default })))
 const GslbRuleValidate = lazy(() => import('@toolbox/tool-gslb-rule-validate').then((m) => ({ default: m.default })))
 const ApiAvailability = lazy(() => import('@toolbox/tool-api-availability').then((m) => ({ default: m.default })))
+const GslbIspSim = lazy(() => import('@toolbox/tool-gslb-isp-sim').then((m) => ({ default: m.default })))
+const GslbTrafficPredict = lazy(() => import('@toolbox/tool-gslb-traffic-predict').then((m) => ({ default: m.default })))
+const GslbHitPredict = lazy(() => import('@toolbox/tool-gslb-hit-predict').then((m) => ({ default: m.default })))
+const IpamReclaim = lazy(() => import('@toolbox/tool-ipam-reclaim').then((m) => ({ default: m.default })))
+const SecurityDomainHijack = lazy(() => import('@toolbox/tool-security-domain-hijack').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -351,6 +356,11 @@ function App() {
           <Route path="/gslb-policy-sim" element={<GslbPolicySim />} />
           <Route path="/gslb-rule-validate" element={<GslbRuleValidate />} />
           <Route path="/api-availability" element={<ApiAvailability />} />
+          <Route path="/gslb-isp-sim" element={<GslbIspSim />} />
+          <Route path="/gslb-traffic-predict" element={<GslbTrafficPredict />} />
+          <Route path="/gslb-hit-predict" element={<GslbHitPredict />} />
+          <Route path="/ipam-reclaim" element={<IpamReclaim />} />
+          <Route path="/security-domain-hijack" element={<SecurityDomainHijack />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

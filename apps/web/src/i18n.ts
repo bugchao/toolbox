@@ -121,6 +121,16 @@ import toolGslbPolicySimEn from '@toolbox/tool-gslb-policy-sim/locales/en-US.jso
 import toolGslbRuleValidateZh from '@toolbox/tool-gslb-rule-validate/locales/zh-CN.json'
 import toolGslbRuleValidateEn from '@toolbox/tool-gslb-rule-validate/locales/en-US.json'
 import toolApiAvailabilityZh from '@toolbox/tool-api-availability/locales/zh-CN.json'
+import toolGslbIspSimZh from '@toolbox/tool-gslb-isp-sim/locales/zh-CN.json'
+import toolGslbIspSimEn from '@toolbox/tool-gslb-isp-sim/locales/en-US.json'
+import toolGslbTrafficPredictZh from '@toolbox/tool-gslb-traffic-predict/locales/zh-CN.json'
+import toolGslbTrafficPredictEn from '@toolbox/tool-gslb-traffic-predict/locales/en-US.json'
+import toolGslbHitPredictZh from '@toolbox/tool-gslb-hit-predict/locales/zh-CN.json'
+import toolGslbHitPredictEn from '@toolbox/tool-gslb-hit-predict/locales/en-US.json'
+import toolIpamReclaimZh from '@toolbox/tool-ipam-reclaim/locales/zh-CN.json'
+import toolIpamReclaimEn from '@toolbox/tool-ipam-reclaim/locales/en-US.json'
+import toolSecurityDomainHijackZh from '@toolbox/tool-security-domain-hijack/locales/zh-CN.json'
+import toolSecurityDomainHijackEn from '@toolbox/tool-security-domain-hijack/locales/en-US.json'
 import toolApiAvailabilityEn from '@toolbox/tool-api-availability/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
@@ -217,6 +227,11 @@ export const resources = {
     toolGslbPolicySim: toolGslbPolicySimZh as Record<string, string>,
     toolGslbRuleValidate: toolGslbRuleValidateZh as Record<string, string>,
     toolApiAvailability: toolApiAvailabilityZh as Record<string, string>,
+    toolGslbIspSim: toolGslbIspSimZh as Record<string, string>,
+    toolGslbTrafficPredict: toolGslbTrafficPredictZh as Record<string, string>,
+    toolGslbHitPredict: toolGslbHitPredictZh as Record<string, string>,
+    toolIpamReclaim: toolIpamReclaimZh as Record<string, string>,
+    toolSecurityDomainHijack: toolSecurityDomainHijackZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -297,6 +312,11 @@ export const resources = {
     toolGslbPolicySim: toolGslbPolicySimEn as Record<string, string>,
     toolGslbRuleValidate: toolGslbRuleValidateEn as Record<string, string>,
     toolApiAvailability: toolApiAvailabilityEn as Record<string, string>,
+    toolGslbIspSim: toolGslbIspSimEn as Record<string, string>,
+    toolGslbTrafficPredict: toolGslbTrafficPredictEn as Record<string, string>,
+    toolGslbHitPredict: toolGslbHitPredictEn as Record<string, string>,
+    toolIpamReclaim: toolIpamReclaimEn as Record<string, string>,
+    toolSecurityDomainHijack: toolSecurityDomainHijackEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
