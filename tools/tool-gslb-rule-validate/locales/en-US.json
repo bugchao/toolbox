@@ -1,0 +1,4 @@
+{
+  "title": "GSLB Rule Validator",
+  "description": "Validate GSLB routing rules, detect priority conflicts and missing fallbacks"
+}

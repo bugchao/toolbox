@@ -1,0 +1,4 @@
+{
+  "title": "GSLB Policy Simulator",
+  "description": "Compare nearest/round-robin/weighted/least-conn/random scheduling policies"
+}

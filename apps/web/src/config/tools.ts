@@ -6,7 +6,7 @@ import {
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
-  BarChart2, Sliders, Zap
+  BarChart2, Sliders, Zap, CheckCircle
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -83,6 +83,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/gslb-health-sim', nameKey: 'tools.gslb_health_sim', icon: Heart, categoryKey: 'network', keywords: ['gslb', '健康', '检查', '模拟'], i18nNamespace: 'toolGslbHealthSim' },
   { path: '/gslb-latency-sim', nameKey: 'tools.gslb_latency_sim', icon: Zap, categoryKey: 'network', keywords: ['gslb', '延迟', '调度', '模拟'], i18nNamespace: 'toolGslbLatencySim' },
   { path: '/server-latency', nameKey: 'tools.server_latency', icon: Activity, categoryKey: 'network', keywords: ['延迟', '测速', '服务器', 'ping'], i18nNamespace: 'toolServerLatency', mode: 'server' },
+  { path: '/dhcp-lease-analysis', nameKey: 'tools.dhcp_lease_analysis', icon: FileText, categoryKey: 'network', keywords: ['dhcp', 'lease', '租约', '分析'], i18nNamespace: 'toolDhcpLeaseAnalysis' },
+  { path: '/ipam-visualize', nameKey: 'tools.ipam_visualize', icon: Boxes, categoryKey: 'ipam', keywords: ['ip', '可视化', '子网', '树状图'], i18nNamespace: 'toolIpamVisualize' },
+  { path: '/gslb-policy-sim', nameKey: 'tools.gslb_policy_sim', icon: Sliders, categoryKey: 'network', keywords: ['gslb', '策略', '轮询', '权重'], i18nNamespace: 'toolGslbPolicySim' },
+  { path: '/gslb-rule-validate', nameKey: 'tools.gslb_rule_validate', icon: CheckCircle, categoryKey: 'network', keywords: ['gslb', '规则', '验证', '校验'], i18nNamespace: 'toolGslbRuleValidate' },
+  { path: '/api-availability', nameKey: 'tools.api_availability', icon: Activity, categoryKey: 'network', keywords: ['api', '可用性', '健康检查', 'http'], i18nNamespace: 'toolApiAvailability', mode: 'server' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

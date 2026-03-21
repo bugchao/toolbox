@@ -110,6 +110,16 @@ import toolGslbLatencySimZh from '@toolbox/tool-gslb-latency-sim/locales/zh-CN.j
 import toolGslbLatencySimEn from '@toolbox/tool-gslb-latency-sim/locales/en-US.json'
 import toolServerLatencyZh from '@toolbox/tool-server-latency/locales/zh-CN.json'
 import toolServerLatencyEn from '@toolbox/tool-server-latency/locales/en-US.json'
+import toolDhcpLeaseAnalysisZh from '@toolbox/tool-dhcp-lease-analysis/locales/zh-CN.json'
+import toolDhcpLeaseAnalysisEn from '@toolbox/tool-dhcp-lease-analysis/locales/en-US.json'
+import toolIpamVisualizeZh from '@toolbox/tool-ipam-visualize/locales/zh-CN.json'
+import toolIpamVisualizeEn from '@toolbox/tool-ipam-visualize/locales/en-US.json'
+import toolGslbPolicySimZh from '@toolbox/tool-gslb-policy-sim/locales/zh-CN.json'
+import toolGslbPolicySimEn from '@toolbox/tool-gslb-policy-sim/locales/en-US.json'
+import toolGslbRuleValidateZh from '@toolbox/tool-gslb-rule-validate/locales/zh-CN.json'
+import toolGslbRuleValidateEn from '@toolbox/tool-gslb-rule-validate/locales/en-US.json'
+import toolApiAvailabilityZh from '@toolbox/tool-api-availability/locales/zh-CN.json'
+import toolApiAvailabilityEn from '@toolbox/tool-api-availability/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
 import { domainSuiteZh, domainSuiteEn } from '@toolbox/tool-domain-suite/src/locales'
 import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
@@ -199,6 +209,11 @@ export const resources = {
     toolGslbHealthSim: toolGslbHealthSimZh as Record<string, string>,
     toolGslbLatencySim: toolGslbLatencySimZh as Record<string, string>,
     toolServerLatency: toolServerLatencyZh as Record<string, string>,
+    toolDhcpLeaseAnalysis: toolDhcpLeaseAnalysisZh as Record<string, string>,
+    toolIpamVisualize: toolIpamVisualizeZh as Record<string, string>,
+    toolGslbPolicySim: toolGslbPolicySimZh as Record<string, string>,
+    toolGslbRuleValidate: toolGslbRuleValidateZh as Record<string, string>,
+    toolApiAvailability: toolApiAvailabilityZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -273,6 +288,11 @@ export const resources = {
     toolGslbHealthSim: toolGslbHealthSimEn as Record<string, string>,
     toolGslbLatencySim: toolGslbLatencySimEn as Record<string, string>,
     toolServerLatency: toolServerLatencyEn as Record<string, string>,
+    toolDhcpLeaseAnalysis: toolDhcpLeaseAnalysisEn as Record<string, string>,
+    toolIpamVisualize: toolIpamVisualizeEn as Record<string, string>,
+    toolGslbPolicySim: toolGslbPolicySimEn as Record<string, string>,
+    toolGslbRuleValidate: toolGslbRuleValidateEn as Record<string, string>,
+    toolApiAvailability: toolApiAvailabilityEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

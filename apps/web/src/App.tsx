@@ -150,6 +150,11 @@ const IpamSubnetUtil = lazy(() => import('@toolbox/tool-ipam-subnet-util').then(
 const GslbHealthSim = lazy(() => import('@toolbox/tool-gslb-health-sim').then((m) => ({ default: m.default })))
 const GslbLatencySim = lazy(() => import('@toolbox/tool-gslb-latency-sim').then((m) => ({ default: m.default })))
 const ServerLatency = lazy(() => import('@toolbox/tool-server-latency').then((m) => ({ default: m.default })))
+const DhcpLeaseAnalysis = lazy(() => import('@toolbox/tool-dhcp-lease-analysis').then((m) => ({ default: m.default })))
+const IpamVisualize = lazy(() => import('@toolbox/tool-ipam-visualize').then((m) => ({ default: m.default })))
+const GslbPolicySim = lazy(() => import('@toolbox/tool-gslb-policy-sim').then((m) => ({ default: m.default })))
+const GslbRuleValidate = lazy(() => import('@toolbox/tool-gslb-rule-validate').then((m) => ({ default: m.default })))
+const ApiAvailability = lazy(() => import('@toolbox/tool-api-availability').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -341,6 +346,11 @@ function App() {
           <Route path="/gslb-health-sim" element={<GslbHealthSim />} />
           <Route path="/gslb-latency-sim" element={<GslbLatencySim />} />
           <Route path="/server-latency" element={<ServerLatency />} />
+          <Route path="/dhcp-lease-analysis" element={<DhcpLeaseAnalysis />} />
+          <Route path="/ipam-visualize" element={<IpamVisualize />} />
+          <Route path="/gslb-policy-sim" element={<GslbPolicySim />} />
+          <Route path="/gslb-rule-validate" element={<GslbRuleValidate />} />
+          <Route path="/api-availability" element={<ApiAvailability />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

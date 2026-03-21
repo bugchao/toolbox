@@ -169,6 +169,11 @@
 | GSLB 健康检查模拟 | `/gslb-health-sim` | `tools/tool-gslb-health-sim` → GslbHealthSim |
 | GSLB 延迟调度模拟 | `/gslb-latency-sim` | `tools/tool-gslb-latency-sim` → GslbLatencySim |
 | 服务器延迟测试 | `/server-latency` | `tools/tool-server-latency` → ServerLatency |
+| DHCP Lease 分析 | `/dhcp-lease-analysis` | `tools/tool-dhcp-lease-analysis` → DhcpLeaseAnalysis |
+| IP 资源可视化 | `/ipam-visualize` | `tools/tool-ipam-visualize` → IpamVisualize |
+| GSLB 策略模拟 | `/gslb-policy-sim` | `tools/tool-gslb-policy-sim` → GslbPolicySim |
+| GSLB 规则验证 | `/gslb-rule-validate` | `tools/tool-gslb-rule-validate` → GslbRuleValidate |
+| API 可用性测试 | `/api-availability` | `tools/tool-api-availability` → ApiAvailability |
 
 ### 资讯工具（1）
 
@@ -188,19 +193,14 @@
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
 
-| DHCP Lease 分析 | network | `/dhcp-lease-analysis` | 待开发 | P2 | Lease 分析 |
 | DHCP 日志分析 | network | `/dhcp-log-analysis` | 待开发 | P2 | 日志解析 |
 | DHCP 网络扫描 | network | `/dhcp-scan` | 待开发 | P2 | 发现 DHCP 服务 |
 | IP 地址回收分析 | network | `/ipam-reclaim` | 待开发 | P2 | 可回收分析 |
 | IP 地址变更记录 | network | `/ipam-changelog` | 待开发 | P2 | 变更记录 |
 | IP 地址扫描 | network | `/ipam-scan` | 待开发 | P2 | 存活/占用扫描 |
-| IP 资源可视化 | network | `/ipam-visualize` | 待开发 | P2 | 拓扑/树状图 |
-| GSLB 策略模拟 | network | `/gslb-policy-sim` | 待开发 | P2 | 策略模拟 |
 | 解析命中预测 | network | `/gslb-hit-predict` | 待开发 | P2 | 命中预测 |
 | 运营商解析模拟 | network | `/gslb-isp-sim` | 待开发 | P2 | 运营商线路 |
 | 多节点流量预测 | network | `/gslb-traffic-predict` | 待开发 | P2 | 流量预测 |
-| GSLB 规则验证 | network | `/gslb-rule-validate` | 待开发 | P2 | 规则校验 |
-| API 可用性测试 | network | `/api-availability` | 待开发 | P2 | API 可用性 |
 | 域名是否被劫持 | network | `/security-domain-hijack` | 待开发 | P2 | 劫持检测 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）

@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Lease Analyzer",
+  "description": "Paste dhcpd.leases content to parse lease states and allocation details"
+}

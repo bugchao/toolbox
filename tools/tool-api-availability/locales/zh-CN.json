@@ -1,0 +1,4 @@
+{
+  "title": "API 可用性测试",
+  "description": "批量检测 HTTP API 端点的可用性、响应时间和状态码"
+}
