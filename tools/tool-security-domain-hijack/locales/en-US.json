@@ -1,0 +1,4 @@
+{
+  "title": "Domain Hijack Detection",
+  "description": "Detect DNS hijacking by comparing authoritative and public DNS resolution results"
+}

@@ -1,0 +1,4 @@
+{
+  "title": "DHCP 网络扫描",
+  "description": "发现网络中所有 DHCP 服务器，检测非授权 DHCP 服务"
+}

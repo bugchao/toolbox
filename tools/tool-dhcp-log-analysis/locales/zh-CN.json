@@ -1,0 +1,4 @@
+{
+  "title": "DHCP 日志分析",
+  "description": "解析 ISC DHCP 服务器日志，分析各类消息分布和设备活动"
+}

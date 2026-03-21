@@ -1,0 +1,4 @@
+{
+  "title": "ISP DNS Simulation",
+  "description": "Simulate DNS resolution by ISP (Mobile/Unicom/Telecom) to verify routing policies"
+}

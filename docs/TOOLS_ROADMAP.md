@@ -177,6 +177,15 @@
 | GSLB 策略模拟 | `/gslb-policy-sim` | `tools/tool-gslb-policy-sim` → GslbPolicySim |
 | GSLB 规则验证 | `/gslb-rule-validate` | `tools/tool-gslb-rule-validate` → GslbRuleValidate |
 | API 可用性测试 | `/api-availability` | `tools/tool-api-availability` → ApiAvailability |
+| 运营商解析模拟 | `/gslb-isp-sim` | `tools/tool-gslb-isp-sim` → GslbIspSim |
+| 多节点流量预测 | `/gslb-traffic-predict` | `tools/tool-gslb-traffic-predict` → GslbTrafficPredict |
+| 解析命中预测 | `/gslb-hit-predict` | `tools/tool-gslb-hit-predict` → GslbHitPredict |
+| IP 地址回收分析 | `/ipam-reclaim` | `tools/tool-ipam-reclaim` → IpamReclaim |
+| 域名劫持检测 | `/security-domain-hijack` | `tools/tool-security-domain-hijack` → SecurityDomainHijack |
+| DHCP 日志分析 | `/dhcp-log-analysis` | `tools/tool-dhcp-log-analysis` → DhcpLogAnalysis |
+| DHCP 网络扫描 | `/dhcp-scan` | `tools/tool-dhcp-scan` → DhcpScan |
+| IP 地址变更记录 | `/ipam-changelog` | `tools/tool-ipam-changelog` → IpamChangelog |
+| IP 地址扫描 | `/ipam-scan` | `tools/tool-ipam-scan` → IpamScan |
 
 ### 资讯工具（1）
 
@@ -195,15 +204,6 @@
 
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
-| DHCP 日志分析 | network | `/dhcp-log-analysis` | 待开发 | P2 | 日志解析 |
-| DHCP 网络扫描 | network | `/dhcp-scan` | 待开发 | P2 | 发现 DHCP 服务 |
-| IP 地址回收分析 | network | `/ipam-reclaim` | 待开发 | P2 | 可回收分析 |
-| IP 地址变更记录 | network | `/ipam-changelog` | 待开发 | P2 | 变更记录 |
-| IP 地址扫描 | network | `/ipam-scan` | 待开发 | P2 | 存活/占用扫描 |
-| 解析命中预测 | network | `/gslb-hit-predict` | 待开发 | P2 | 命中预测 |
-| 运营商解析模拟 | network | `/gslb-isp-sim` | 待开发 | P2 | 运营商线路 |
-| 多节点流量预测 | network | `/gslb-traffic-predict` | 待开发 | P2 | 流量预测 |
-| 域名是否被劫持 | network | `/security-domain-hijack` | 待开发 | P2 | 劫持检测 |
 | **── 生活：效率 & 习惯 ──** | | | | | |
 | 番茄钟 + 数据统计 | life | `/pomodoro` | 待开发 | P1 | 番茄工作法 + 专注时长统计 |
 | 习惯打卡 + 连续记录 | life | `/habit-tracker` | 待开发 | P1 | 习惯追踪 + 连续天数 |

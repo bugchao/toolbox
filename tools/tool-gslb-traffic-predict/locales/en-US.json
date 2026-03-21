@@ -1,0 +1,4 @@
+{
+  "title": "Multi-Node Traffic Prediction",
+  "description": "Predict normal and peak traffic per node based on weights, detect capacity bottlenecks"
+}

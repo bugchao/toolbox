@@ -6,7 +6,7 @@ import {
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
-  BarChart2, Sliders, Zap, CheckCircle
+  BarChart2, Sliders, Zap, CheckCircle, TrendingUp, Target, Trash2
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -88,6 +88,15 @@ export const TOOLS: ToolEntry[] = [
   { path: '/gslb-policy-sim', nameKey: 'tools.gslb_policy_sim', icon: Sliders, categoryKey: 'network', keywords: ['gslb', '策略', '轮询', '权重'], i18nNamespace: 'toolGslbPolicySim' },
   { path: '/gslb-rule-validate', nameKey: 'tools.gslb_rule_validate', icon: CheckCircle, categoryKey: 'network', keywords: ['gslb', '规则', '验证', '校验'], i18nNamespace: 'toolGslbRuleValidate' },
   { path: '/api-availability', nameKey: 'tools.api_availability', icon: Activity, categoryKey: 'network', keywords: ['api', '可用性', '健康检查', 'http'], i18nNamespace: 'toolApiAvailability', mode: 'server' },
+  { path: '/gslb-isp-sim', nameKey: 'tools.gslb_isp_sim', icon: Radio, categoryKey: 'network', keywords: ['gslb', '运营商', 'isp', '移动', '联通'], i18nNamespace: 'toolGslbIspSim' },
+  { path: '/gslb-traffic-predict', nameKey: 'tools.gslb_traffic_predict', icon: TrendingUp, categoryKey: 'network', keywords: ['gslb', '流量', '预测', '容量', 'qps'], i18nNamespace: 'toolGslbTrafficPredict' },
+  { path: '/gslb-hit-predict', nameKey: 'tools.gslb_hit_predict', icon: Target, categoryKey: 'network', keywords: ['gslb', '命中', '预测', 'dns', '解析'], i18nNamespace: 'toolGslbHitPredict' },
+  { path: '/ipam-reclaim', nameKey: 'tools.ipam_reclaim', icon: Trash2, categoryKey: 'ipam', keywords: ['ip', '回收', '闲置', 'ipam'], i18nNamespace: 'toolIpamReclaim' },
+  { path: '/security-domain-hijack', nameKey: 'tools.security_domain_hijack', icon: ShieldAlert, categoryKey: 'security', keywords: ['劫持', 'dns', '安全', '域名'], i18nNamespace: 'toolSecurityDomainHijack', mode: 'server' },
+  { path: '/dhcp-log-analysis', nameKey: 'tools.dhcp_log_analysis', icon: FileText, categoryKey: 'network', keywords: ['dhcp', '日志', '分析', 'syslog'], i18nNamespace: 'toolDhcpLogAnalysis' },
+  { path: '/dhcp-scan', nameKey: 'tools.dhcp_scan', icon: Radar, categoryKey: 'network', keywords: ['dhcp', '扫描', '发现', 'rogue'], i18nNamespace: 'toolDhcpScan' },
+  { path: '/ipam-changelog', nameKey: 'tools.ipam_changelog', icon: Clock, categoryKey: 'ipam', keywords: ['ip', '变更', '记录', '审计'], i18nNamespace: 'toolIpamChangelog' },
+  { path: '/ipam-scan', nameKey: 'tools.ipam_scan', icon: Search, categoryKey: 'ipam', keywords: ['ip', '扫描', '存活', 'ping'], i18nNamespace: 'toolIpamScan' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

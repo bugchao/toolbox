@@ -30,6 +30,7 @@ import { registerSecurityDnsDdosApiRoutes } from './tools/tool-security-dns-ddos
 import { registerCdnCheckApiRoutes } from './tools/tool-cdn-check/server/cdn-check-api.js'
 import { registerServerLatencyApiRoutes } from './tools/tool-server-latency/server/server-latency-api.js'
 import { registerApiAvailabilityApiRoutes } from './tools/tool-api-availability/server/api-availability-api.js'
+import { registerSecurityDomainHijackApiRoutes } from './tools/tool-security-domain-hijack/server/domain-hijack-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -64,6 +65,7 @@ registerSecurityDnsDdosApiRoutes(app)
 registerCdnCheckApiRoutes(app)
 registerServerLatencyApiRoutes(app)
 registerApiAvailabilityApiRoutes(app)
+registerSecurityDomainHijackApiRoutes(app)
 registerIpOpsApiRoutes(app)
 
 // 静态文件服务
