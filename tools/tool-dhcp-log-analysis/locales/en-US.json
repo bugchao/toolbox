@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Log Analyzer",
+  "description": "Parse ISC DHCP server logs to analyze message types and device activity"
+}

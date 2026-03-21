@@ -1,0 +1,4 @@
+{
+  "title": "DHCP Network Scanner",
+  "description": "Discover all DHCP servers on the network including rogue DHCP detection"
+}

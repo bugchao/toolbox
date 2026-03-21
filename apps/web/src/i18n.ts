@@ -130,6 +130,14 @@ import toolGslbHitPredictEn from '@toolbox/tool-gslb-hit-predict/locales/en-US.j
 import toolIpamReclaimZh from '@toolbox/tool-ipam-reclaim/locales/zh-CN.json'
 import toolIpamReclaimEn from '@toolbox/tool-ipam-reclaim/locales/en-US.json'
 import toolSecurityDomainHijackZh from '@toolbox/tool-security-domain-hijack/locales/zh-CN.json'
+import toolDhcpLogAnalysisZh from '@toolbox/tool-dhcp-log-analysis/locales/zh-CN.json'
+import toolDhcpLogAnalysisEn from '@toolbox/tool-dhcp-log-analysis/locales/en-US.json'
+import toolDhcpScanZh from '@toolbox/tool-dhcp-scan/locales/zh-CN.json'
+import toolDhcpScanEn from '@toolbox/tool-dhcp-scan/locales/en-US.json'
+import toolIpamChangelogZh from '@toolbox/tool-ipam-changelog/locales/zh-CN.json'
+import toolIpamChangelogEn from '@toolbox/tool-ipam-changelog/locales/en-US.json'
+import toolIpamScanZh from '@toolbox/tool-ipam-scan/locales/zh-CN.json'
+import toolIpamScanEn from '@toolbox/tool-ipam-scan/locales/en-US.json'
 import toolSecurityDomainHijackEn from '@toolbox/tool-security-domain-hijack/locales/en-US.json'
 import toolApiAvailabilityEn from '@toolbox/tool-api-availability/locales/en-US.json'
 import toolDomainTxtEn from '@toolbox/tool-domain-txt/locales/en-US.json'
@@ -232,6 +240,10 @@ export const resources = {
     toolGslbHitPredict: toolGslbHitPredictZh as Record<string, string>,
     toolIpamReclaim: toolIpamReclaimZh as Record<string, string>,
     toolSecurityDomainHijack: toolSecurityDomainHijackZh as Record<string, string>,
+    toolDhcpLogAnalysis: toolDhcpLogAnalysisZh as Record<string, string>,
+    toolDhcpScan: toolDhcpScanZh as Record<string, string>,
+    toolIpamChangelog: toolIpamChangelogZh as Record<string, string>,
+    toolIpamScan: toolIpamScanZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -317,6 +329,10 @@ export const resources = {
     toolGslbHitPredict: toolGslbHitPredictEn as Record<string, string>,
     toolIpamReclaim: toolIpamReclaimEn as Record<string, string>,
     toolSecurityDomainHijack: toolSecurityDomainHijackEn as Record<string, string>,
+    toolDhcpLogAnalysis: toolDhcpLogAnalysisEn as Record<string, string>,
+    toolDhcpScan: toolDhcpScanEn as Record<string, string>,
+    toolIpamChangelog: toolIpamChangelogEn as Record<string, string>,
+    toolIpamScan: toolIpamScanEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

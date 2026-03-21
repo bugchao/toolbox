@@ -160,6 +160,10 @@ const GslbTrafficPredict = lazy(() => import('@toolbox/tool-gslb-traffic-predict
 const GslbHitPredict = lazy(() => import('@toolbox/tool-gslb-hit-predict').then((m) => ({ default: m.default })))
 const IpamReclaim = lazy(() => import('@toolbox/tool-ipam-reclaim').then((m) => ({ default: m.default })))
 const SecurityDomainHijack = lazy(() => import('@toolbox/tool-security-domain-hijack').then((m) => ({ default: m.default })))
+const DhcpLogAnalysis = lazy(() => import('@toolbox/tool-dhcp-log-analysis').then((m) => ({ default: m.default })))
+const DhcpScan = lazy(() => import('@toolbox/tool-dhcp-scan').then((m) => ({ default: m.default })))
+const IpamChangelog = lazy(() => import('@toolbox/tool-ipam-changelog').then((m) => ({ default: m.default })))
+const IpamScan = lazy(() => import('@toolbox/tool-ipam-scan').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -361,6 +365,10 @@ function App() {
           <Route path="/gslb-hit-predict" element={<GslbHitPredict />} />
           <Route path="/ipam-reclaim" element={<IpamReclaim />} />
           <Route path="/security-domain-hijack" element={<SecurityDomainHijack />} />
+          <Route path="/dhcp-log-analysis" element={<DhcpLogAnalysis />} />
+          <Route path="/dhcp-scan" element={<DhcpScan />} />
+          <Route path="/ipam-changelog" element={<IpamChangelog />} />
+          <Route path="/ipam-scan" element={<IpamScan />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />
