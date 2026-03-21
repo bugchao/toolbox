@@ -164,6 +164,11 @@ const DhcpLogAnalysis = lazy(() => import('@toolbox/tool-dhcp-log-analysis').the
 const DhcpScan = lazy(() => import('@toolbox/tool-dhcp-scan').then((m) => ({ default: m.default })))
 const IpamChangelog = lazy(() => import('@toolbox/tool-ipam-changelog').then((m) => ({ default: m.default })))
 const IpamScan = lazy(() => import('@toolbox/tool-ipam-scan').then((m) => ({ default: m.default })))
+const Pomodoro = lazy(() => import('@toolbox/tool-pomodoro').then((m) => ({ default: m.default })))
+const HabitTracker = lazy(() => import('@toolbox/tool-habit-tracker').then((m) => ({ default: m.default })))
+const SalaryCalc = lazy(() => import('@toolbox/tool-salary-calc').then((m) => ({ default: m.default })))
+const CurrencyConverter = lazy(() => import('@toolbox/tool-currency-converter').then((m) => ({ default: m.default })))
+const JwtDecoder = lazy(() => import('@toolbox/tool-jwt-decoder').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -369,6 +374,11 @@ function App() {
           <Route path="/dhcp-scan" element={<DhcpScan />} />
           <Route path="/ipam-changelog" element={<IpamChangelog />} />
           <Route path="/ipam-scan" element={<IpamScan />} />
+          <Route path="/pomodoro" element={<Pomodoro />} />
+          <Route path="/habit-tracker" element={<HabitTracker />} />
+          <Route path="/salary-calc" element={<SalaryCalc />} />
+          <Route path="/currency-converter" element={<CurrencyConverter />} />
+          <Route path="/jwt-decoder" element={<JwtDecoder />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

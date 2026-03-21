@@ -1,0 +1,4 @@
+{
+  "title": "JWT Decoder",
+  "description": "Decode JWT tokens and inspect Header, Payload and expiry status"
+}

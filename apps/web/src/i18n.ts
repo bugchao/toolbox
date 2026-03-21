@@ -137,6 +137,16 @@ import toolDhcpScanEn from '@toolbox/tool-dhcp-scan/locales/en-US.json'
 import toolIpamChangelogZh from '@toolbox/tool-ipam-changelog/locales/zh-CN.json'
 import toolIpamChangelogEn from '@toolbox/tool-ipam-changelog/locales/en-US.json'
 import toolIpamScanZh from '@toolbox/tool-ipam-scan/locales/zh-CN.json'
+import toolPomodoroZh from '@toolbox/tool-pomodoro/locales/zh-CN.json'
+import toolPomodoroEn from '@toolbox/tool-pomodoro/locales/en-US.json'
+import toolHabitTrackerZh from '@toolbox/tool-habit-tracker/locales/zh-CN.json'
+import toolHabitTrackerEn from '@toolbox/tool-habit-tracker/locales/en-US.json'
+import toolSalaryCalcZh from '@toolbox/tool-salary-calc/locales/zh-CN.json'
+import toolSalaryCalcEn from '@toolbox/tool-salary-calc/locales/en-US.json'
+import toolCurrencyConverterZh from '@toolbox/tool-currency-converter/locales/zh-CN.json'
+import toolCurrencyConverterEn from '@toolbox/tool-currency-converter/locales/en-US.json'
+import toolJwtDecoderZh from '@toolbox/tool-jwt-decoder/locales/zh-CN.json'
+import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
 import toolIpamScanEn from '@toolbox/tool-ipam-scan/locales/en-US.json'
 import toolSecurityDomainHijackEn from '@toolbox/tool-security-domain-hijack/locales/en-US.json'
 import toolApiAvailabilityEn from '@toolbox/tool-api-availability/locales/en-US.json'
@@ -244,6 +254,11 @@ export const resources = {
     toolDhcpScan: toolDhcpScanZh as Record<string, string>,
     toolIpamChangelog: toolIpamChangelogZh as Record<string, string>,
     toolIpamScan: toolIpamScanZh as Record<string, string>,
+    toolPomodoro: toolPomodoroZh as Record<string, string>,
+    toolHabitTracker: toolHabitTrackerZh as Record<string, string>,
+    toolSalaryCalc: toolSalaryCalcZh as Record<string, string>,
+    toolCurrencyConverter: toolCurrencyConverterZh as Record<string, string>,
+    toolJwtDecoder: toolJwtDecoderZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -333,6 +348,11 @@ export const resources = {
     toolDhcpScan: toolDhcpScanEn as Record<string, string>,
     toolIpamChangelog: toolIpamChangelogEn as Record<string, string>,
     toolIpamScan: toolIpamScanEn as Record<string, string>,
+    toolPomodoro: toolPomodoroEn as Record<string, string>,
+    toolHabitTracker: toolHabitTrackerEn as Record<string, string>,
+    toolSalaryCalc: toolSalaryCalcEn as Record<string, string>,
+    toolCurrencyConverter: toolCurrencyConverterEn as Record<string, string>,
+    toolJwtDecoder: toolJwtDecoderEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
