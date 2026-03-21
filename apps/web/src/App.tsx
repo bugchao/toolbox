@@ -169,6 +169,11 @@ const HabitTracker = lazy(() => import('@toolbox/tool-habit-tracker').then((m) =
 const SalaryCalc = lazy(() => import('@toolbox/tool-salary-calc').then((m) => ({ default: m.default })))
 const CurrencyConverter = lazy(() => import('@toolbox/tool-currency-converter').then((m) => ({ default: m.default })))
 const JwtDecoder = lazy(() => import('@toolbox/tool-jwt-decoder').then((m) => ({ default: m.default })))
+const ExpenseTracker = lazy(() => import('@toolbox/tool-expense-tracker').then((m) => ({ default: m.default })))
+const SubscriptionManager = lazy(() => import('@toolbox/tool-subscription-manager').then((m) => ({ default: m.default })))
+const CalorieCalc = lazy(() => import('@toolbox/tool-calorie-calc').then((m) => ({ default: m.default })))
+const RandomMenu = lazy(() => import('@toolbox/tool-random-menu').then((m) => ({ default: m.default })))
+const CurlToFetch = lazy(() => import('@toolbox/tool-curl-to-fetch').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -379,6 +384,11 @@ function App() {
           <Route path="/salary-calc" element={<SalaryCalc />} />
           <Route path="/currency-converter" element={<CurrencyConverter />} />
           <Route path="/jwt-decoder" element={<JwtDecoder />} />
+          <Route path="/expense-tracker" element={<ExpenseTracker />} />
+          <Route path="/subscription-manager" element={<SubscriptionManager />} />
+          <Route path="/calorie-calc" element={<CalorieCalc />} />
+          <Route path="/random-menu" element={<RandomMenu />} />
+          <Route path="/curl-to-fetch" element={<CurlToFetch />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

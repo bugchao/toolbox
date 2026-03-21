@@ -146,6 +146,16 @@ import toolSalaryCalcEn from '@toolbox/tool-salary-calc/locales/en-US.json'
 import toolCurrencyConverterZh from '@toolbox/tool-currency-converter/locales/zh-CN.json'
 import toolCurrencyConverterEn from '@toolbox/tool-currency-converter/locales/en-US.json'
 import toolJwtDecoderZh from '@toolbox/tool-jwt-decoder/locales/zh-CN.json'
+import toolExpenseTrackerZh from '@toolbox/tool-expense-tracker/locales/zh-CN.json'
+import toolExpenseTrackerEn from '@toolbox/tool-expense-tracker/locales/en-US.json'
+import toolSubscriptionManagerZh from '@toolbox/tool-subscription-manager/locales/zh-CN.json'
+import toolSubscriptionManagerEn from '@toolbox/tool-subscription-manager/locales/en-US.json'
+import toolCalorieCalcZh from '@toolbox/tool-calorie-calc/locales/zh-CN.json'
+import toolCalorieCalcEn from '@toolbox/tool-calorie-calc/locales/en-US.json'
+import toolRandomMenuZh from '@toolbox/tool-random-menu/locales/zh-CN.json'
+import toolRandomMenuEn from '@toolbox/tool-random-menu/locales/en-US.json'
+import toolCurlToFetchZh from '@toolbox/tool-curl-to-fetch/locales/zh-CN.json'
+import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
 import toolIpamScanEn from '@toolbox/tool-ipam-scan/locales/en-US.json'
 import toolSecurityDomainHijackEn from '@toolbox/tool-security-domain-hijack/locales/en-US.json'
@@ -259,6 +269,11 @@ export const resources = {
     toolSalaryCalc: toolSalaryCalcZh as Record<string, string>,
     toolCurrencyConverter: toolCurrencyConverterZh as Record<string, string>,
     toolJwtDecoder: toolJwtDecoderZh as Record<string, string>,
+    toolExpenseTracker: toolExpenseTrackerZh as Record<string, string>,
+    toolSubscriptionManager: toolSubscriptionManagerZh as Record<string, string>,
+    toolCalorieCalc: toolCalorieCalcZh as Record<string, string>,
+    toolRandomMenu: toolRandomMenuZh as Record<string, string>,
+    toolCurlToFetch: toolCurlToFetchZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -353,6 +368,11 @@ export const resources = {
     toolSalaryCalc: toolSalaryCalcEn as Record<string, string>,
     toolCurrencyConverter: toolCurrencyConverterEn as Record<string, string>,
     toolJwtDecoder: toolJwtDecoderEn as Record<string, string>,
+    toolExpenseTracker: toolExpenseTrackerEn as Record<string, string>,
+    toolSubscriptionManager: toolSubscriptionManagerEn as Record<string, string>,
+    toolCalorieCalc: toolCalorieCalcEn as Record<string, string>,
+    toolRandomMenu: toolRandomMenuEn as Record<string, string>,
+    toolCurlToFetch: toolCurlToFetchEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

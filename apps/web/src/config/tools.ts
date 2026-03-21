@@ -7,7 +7,8 @@ import {
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
   BarChart2, Sliders, Zap, CheckCircle, TrendingUp, Target, Trash2,
-  Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound
+  Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound,
+  Receipt, CreditCard, Flame, UtensilsCrossed, ArrowRightLeft
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -103,6 +104,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/salary-calc', nameKey: 'tools.salary_calc', icon: DollarSign, categoryKey: 'life', keywords: ['工资', '税后', '五险一金', '个税'], i18nNamespace: 'toolSalaryCalc' },
   { path: '/currency-converter', nameKey: 'tools.currency_converter', icon: ArrowLeftRight, categoryKey: 'life', keywords: ['汇率', '换算', '货币', '外汇'], i18nNamespace: 'toolCurrencyConverter' },
   { path: '/jwt-decoder', nameKey: 'tools.jwt_decoder', icon: KeyRound, categoryKey: 'dev', keywords: ['jwt', 'token', '解析', '解码'], i18nNamespace: 'toolJwtDecoder' },
+  { path: '/expense-tracker', nameKey: 'tools.expense_tracker', icon: Receipt, categoryKey: 'life', keywords: ['记账', '支出', '消费', '财务'], i18nNamespace: 'toolExpenseTracker' },
+  { path: '/subscription-manager', nameKey: 'tools.subscription_manager', icon: CreditCard, categoryKey: 'life', keywords: ['订阅', 'netflix', 'ai', '费用'], i18nNamespace: 'toolSubscriptionManager' },
+  { path: '/calorie-calc', nameKey: 'tools.calorie_calc', icon: Flame, categoryKey: 'life', keywords: ['卡路里', '热量', '饮食', '营养'], i18nNamespace: 'toolCalorieCalc' },
+  { path: '/random-menu', nameKey: 'tools.random_menu', icon: UtensilsCrossed, categoryKey: 'life', keywords: ['菜单', '吃什么', '随机', '美食'], i18nNamespace: 'toolRandomMenu' },
+  { path: '/curl-to-fetch', nameKey: 'tools.curl_to_fetch', icon: ArrowRightLeft, categoryKey: 'dev', keywords: ['curl', 'fetch', 'http', '转换'], i18nNamespace: 'toolCurlToFetch' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},
