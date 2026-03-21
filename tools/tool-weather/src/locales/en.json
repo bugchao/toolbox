@@ -1,0 +1,54 @@
+{
+  "title": "Weather",
+  "description": "Default to IP-based location lookup and support weather queries for the last 7 days, last 30 days, or a custom date range.",
+  "searchLabel": "City or Region",
+  "searchPlaceholder": "For example: Beijing, Shanghai, Tokyo, Singapore",
+  "searchAction": "Search Weather",
+  "searching": "Loading...",
+  "locating": "Locating...",
+  "useIpLocation": "Use Current Location",
+  "locationResolved": "Current query location: {{location}}",
+  "locationPending": "Resolving your default city, or search for a place manually.",
+  "ipBadge": "IP default location",
+  "presets": {
+    "last7d": "Last 7 Days",
+    "last30d": "Last 30 Days",
+    "custom": "Custom Range"
+  },
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "applyRange": "Apply Range",
+  "rangeHint": "Custom ranges can span up to 31 days. Future dates are available through {{date}}.",
+  "currentWeather": "Current Weather",
+  "rangeResultTitle": "Range Weather",
+  "rangeResolved": "{{start}} to {{end}}, {{days}} day(s)",
+  "summary": {
+    "averageHigh": "Average High",
+    "averageLow": "Average Low",
+    "totalPrecipitation": "Total Precipitation",
+    "peakWind": "Peak Wind"
+  },
+  "metrics": {
+    "humidity": "Humidity",
+    "wind": "Wind Speed",
+    "observedAt": "Observed At",
+    "rainfall": "Rainfall"
+  },
+  "empty": "No weather data yet. Resolve a location or search for a city, then apply a range.",
+  "notesTitle": "Notes",
+  "notes": {
+    "note1": "The page tries to resolve your current city from IP on load and immediately fetches current weather plus the last 7 days.",
+    "note2": "The last 7 days and last 30 days presets are primarily for recent historical weather. Custom ranges can merge historical and forecast data when future dates are included.",
+    "note3": "Each request supports up to 31 days. Future data remains limited by the Open-Meteo forecast window.",
+    "note4": "If IP-based lookup fails, search for a city directly in either Chinese or English."
+  },
+  "errors": {
+    "missingDate": "Please choose both a start date and an end date",
+    "invalidRange": "The start date cannot be later than the end date",
+    "tooLong": "A single query cannot exceed 31 days",
+    "futureLimit": "Future weather is only available through {{date}}",
+    "locationRequired": "Please resolve your current location or search for a city first",
+    "generic": "Weather lookup failed. Please try again later.",
+    "ipLocateFallback": "IP-based default location failed. Search for a city manually to continue."
+  }
+}

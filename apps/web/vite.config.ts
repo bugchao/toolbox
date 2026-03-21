@@ -41,6 +41,7 @@ export default defineConfig({
     alias: {
       '@toolbox/ui-kit': path.join(root, 'packages/ui-kit/src/index.ts'),
       '@toolbox/tool-json': path.join(root, 'tools/tool-json'),
+      '@toolbox/tool-weather': path.join(root, 'tools/tool-weather'),
       '@toolbox/tool-github-info': path.join(root, 'tools/tool-github-info'),
       '@toolbox/tool-ip-query': path.join(root, 'tools/tool-ip-query'),
       '@toolbox/tool-ip-asn': path.join(root, 'tools/tool-ip-asn'),
@@ -80,7 +81,7 @@ export default defineConfig({
     fs: { allow: [root] },
   },
   optimizeDeps: {
-    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite']
+    exclude: ['@toolbox/tool-resume', '@toolbox/tool-pdf', '@toolbox/tool-qrcode', '@toolbox/tool-json', '@toolbox/tool-weather', '@toolbox/tool-github-info', '@toolbox/tool-ip-query', '@toolbox/tool-ip-asn', '@toolbox/tool-dns-trace', '@toolbox/tool-dns-propagation', '@toolbox/tool-ppt-generator', '@toolbox/tool-dns-global-check', '@toolbox/tool-dnssec-check', '@toolbox/tool-dns-performance', '@toolbox/tool-dns-ttl', '@toolbox/tool-security-suite', '@toolbox/tool-dns-soa', '@toolbox/tool-dns-diagnose', '@toolbox/tool-dns-pollution-check', '@toolbox/tool-dns-hijack-check', '@toolbox/tool-dns-cache-check', '@toolbox/tool-dns-loop-check', '@toolbox/tool-dns-ns', '@toolbox/tool-dns-cname-chain', '@toolbox/tool-dns-nxdomain', '@toolbox/tool-domain-mx', '@toolbox/tool-http-headers', '@toolbox/tool-ssl-cert', '@toolbox/tool-http-status', '@toolbox/tool-tcp-port', '@toolbox/tool-ping', '@toolbox/tool-domain-txt', '@toolbox/tool-domain-suite', '@toolbox/tool-ip-ops-suite', '@toolbox/tool-ipam-suite', '@toolbox/tool-subnet-suite']
   },
   build: {
     outDir: 'dist'

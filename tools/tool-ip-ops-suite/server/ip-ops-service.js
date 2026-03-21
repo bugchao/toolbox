@@ -83,6 +83,50 @@ async function fetchJsonWithTimeout(url) {
   }
 }
 
+async function lookupIpGeoFromIpWho(normalized) {
+  const data = await fetchJsonWithTimeout(`https://ipwho.is/${encodeURIComponent(normalized)}`)
+  if (data.success === false) throw new Error(data.message || 'Geo lookup failed')
+
+  return {
+    ip: normalized,
+    timestamp: new Date().toISOString(),
+    bogon: Boolean(data.bogon),
+    country: data.country,
+    region: data.region,
+    city: data.city,
+    continent: data.continent,
+    latitude: data.latitude,
+    longitude: data.longitude,
+    timezone: data.timezone?.id || data.timezone,
+    postal: data.postal,
+    connection: data.connection ?? null,
+  }
+}
+
+async function lookupIpGeoFromIpApi(normalized) {
+  const data = await fetchJsonWithTimeout(`http://ip-api.com/json/${encodeURIComponent(normalized)}`)
+  if (data.status !== 'success') throw new Error(data.message || 'Geo lookup failed')
+
+  return {
+    ip: normalized,
+    timestamp: new Date().toISOString(),
+    bogon: false,
+    country: data.country,
+    region: data.regionName || data.region,
+    city: data.city,
+    continent: data.continent || null,
+    latitude: data.lat,
+    longitude: data.lon,
+    timezone: data.timezone,
+    postal: data.zip,
+    connection: {
+      isp: data.isp,
+      org: data.org,
+      asn: data.as,
+    },
+  }
+}
+
 export async function lookupIpGeo(ip) {
   const normalized = assertIp(ip)
   const classification = classifyIp(normalized)
@@ -97,24 +141,22 @@ export async function lookupIpGeo(ip) {
     }
   }
 
-  const data = await fetchJsonWithTimeout(`https://ipwho.is/${encodeURIComponent(normalized)}`)
-  if (data.success === false) throw new Error(data.message || 'Geo lookup failed')
+  let lastError = null
+  const providers = [lookupIpGeoFromIpWho, lookupIpGeoFromIpApi]
 
-  return {
-    ip: normalized,
-    timestamp: new Date().toISOString(),
-    bogon: Boolean(data.bogon),
-    classification,
-    country: data.country,
-    region: data.region,
-    city: data.city,
-    continent: data.continent,
-    latitude: data.latitude,
-    longitude: data.longitude,
-    timezone: data.timezone?.id || data.timezone,
-    postal: data.postal,
-    connection: data.connection ?? null,
+  for (const provider of providers) {
+    try {
+      const payload = await provider(normalized)
+      return {
+        ...payload,
+        classification,
+      }
+    } catch (error) {
+      lastError = error
+    }
   }
+
+  throw new Error(lastError?.message || 'Geo lookup failed')
 }
 
 export async function lookupIpPtr(ip) {

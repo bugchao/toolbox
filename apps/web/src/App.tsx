@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import HotNews from './pages/HotNews'
 import ZipCode from './pages/ZipCode'
-import Weather from './pages/Weather'
 import Base64 from './pages/Base64'
 import Timestamp from './pages/Timestamp'
 import UrlEncoder from './pages/UrlEncoder'
@@ -59,6 +58,7 @@ const ResumeGenerator = lazy(() => import('@toolbox/tool-resume'))
 const JsonFormatter = lazy(() =>
   import('@toolbox/tool-json').then((m) => ({ default: m.JsonFormatter }))
 )
+const Weather = lazy(() => import('@toolbox/tool-weather'))
 const GithubInfo = lazy(() => import('@toolbox/tool-github-info'))
 const IpQuery = lazy(() =>
   import('@toolbox/tool-ip-query').then((m) => ({ default: m.IpQuery }))

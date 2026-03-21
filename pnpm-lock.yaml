@@ -84,6 +84,12 @@ importers:
       '@toolbox/tool-github-info':
         specifier: workspace:*
         version: link:../../tools/tool-github-info
+      '@toolbox/tool-http-headers':
+        specifier: workspace:*
+        version: link:../../tools/tool-http-headers
+      '@toolbox/tool-http-status':
+        specifier: workspace:*
+        version: link:../../tools/tool-http-status
       '@toolbox/tool-ip-asn':
         specifier: workspace:*
         version: link:../../tools/tool-ip-asn
@@ -102,6 +108,9 @@ importers:
       '@toolbox/tool-pdf':
         specifier: workspace:*
         version: link:../../tools/tool-pdf
+      '@toolbox/tool-ping':
+        specifier: workspace:*
+        version: link:../../tools/tool-ping
       '@toolbox/tool-ppt-generator':
         specifier: workspace:*
         version: link:../../tools/tool-ppt-generator
@@ -114,9 +123,18 @@ importers:
       '@toolbox/tool-security-suite':
         specifier: workspace:*
         version: link:../../tools/tool-security-suite
+      '@toolbox/tool-ssl-cert':
+        specifier: workspace:*
+        version: link:../../tools/tool-ssl-cert
       '@toolbox/tool-subnet-suite':
         specifier: workspace:*
         version: link:../../tools/tool-subnet-suite
+      '@toolbox/tool-tcp-port':
+        specifier: workspace:*
+        version: link:../../tools/tool-tcp-port
+      '@toolbox/tool-weather':
+        specifier: workspace:*
+        version: link:../../tools/tool-weather
       '@toolbox/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
@@ -1370,6 +1388,34 @@ importers:
         version: 5.9.3
 
   tools/tool-timestamp:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-weather:
     dependencies:
       '@toolbox/ui-kit':
         specifier: workspace:*

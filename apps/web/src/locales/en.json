@@ -146,7 +146,7 @@
       "qrcode_beautifier": "Customize QR style, colors, and add logo",
       "news": "Tech, sports, AI, world news and more, updated daily",
       "zipcode": "Look up zip code by address or address by zip code",
-      "weather": "Global city weather, temperature, humidity, wind, forecast",
+      "weather": "Default to IP-based location lookup and support last 7 days, last 30 days, and custom weather ranges",
       "github_info": "Enter a GitHub token to read the authenticated user profile and accessible repositories without persisting the token",
       "ip_query": "IP location, ISP, timezone, with map preview",
       "ip_asn": "Look up AS number, network owner, and ISP details for an IP",

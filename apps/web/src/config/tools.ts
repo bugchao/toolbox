@@ -27,7 +27,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/qrcode/beautifier', nameKey: 'tools.qrcode_beautifier', icon: Wand2, categoryKey: 'qrcode', keywords: ['qr', '美化'] },
   { path: '/news', nameKey: 'tools.news', icon: Newspaper, categoryKey: 'news', keywords: ['热点', '新闻'] },
   { path: '/zipcode', nameKey: 'tools.zipcode', icon: MapPin, categoryKey: 'query', keywords: ['邮编', 'zip'] },
-  { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气'] },
+  { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气', 'weather', 'forecast'], i18nNamespace: 'toolWeather' },
   { path: '/github-info', nameKey: 'tools.github_info', icon: FileSearch, categoryKey: 'dev', keywords: ['github', 'token', 'repo', 'user'], i18nNamespace: 'toolGithubInfo' },
   { path: '/ip-query', nameKey: 'tools.ip_query', icon: Globe, categoryKey: 'network', keywords: ['ip'], i18nNamespace: 'toolIpQuery' },
   { path: '/ip-asn', nameKey: 'tools.ip_asn', icon: Globe, categoryKey: 'network', keywords: ['asn', 'as', '归属'], i18nNamespace: 'toolIpAsn' },

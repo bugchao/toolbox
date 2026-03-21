@@ -20,6 +20,7 @@
     "@toolbox/tool-qrcode": "workspace:*",
     "@toolbox/tool-resume": "workspace:*",
     "@toolbox/tool-json": "workspace:*",
+    "@toolbox/tool-weather": "workspace:*",
     "@toolbox/tool-ip-query": "workspace:*",
     "@toolbox/tool-ip-asn": "workspace:*",
     "@toolbox/tool-github-info": "workspace:*",

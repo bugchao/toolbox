@@ -39,7 +39,7 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ items, className = '' }) =>
           )}
         >
           <div className="text-xs font-medium uppercase tracking-[0.18em] opacity-70">{item.label}</div>
-          <div className="mt-2 text-sm font-semibold leading-6">{item.value}</div>
+          <div className="mt-2 break-words text-sm font-semibold leading-6">{item.value}</div>
         </div>
       ))}
     </div>

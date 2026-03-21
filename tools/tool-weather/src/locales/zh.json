@@ -1,0 +1,54 @@
+{
+  "title": "天气查询",
+  "description": "默认基于 IP 定位当前城市，支持最近 7 天、最近 30 天以及自定义时间范围天气查询。",
+  "searchLabel": "城市或地区",
+  "searchPlaceholder": "例如：北京、上海、Tokyo、Singapore",
+  "searchAction": "查询天气",
+  "searching": "查询中...",
+  "locating": "定位中...",
+  "useIpLocation": "使用当前位置",
+  "locationResolved": "当前查询位置：{{location}}",
+  "locationPending": "正在定位默认城市，或手动输入城市查询",
+  "ipBadge": "IP 默认定位",
+  "presets": {
+    "last7d": "最近 7 天",
+    "last30d": "最近 30 天",
+    "custom": "自定义范围"
+  },
+  "startDate": "开始日期",
+  "endDate": "结束日期",
+  "applyRange": "应用时间范围",
+  "rangeHint": "自定义范围最多 31 天，未来时间最多可查到 {{date}}。",
+  "currentWeather": "当前天气",
+  "rangeResultTitle": "时间范围天气",
+  "rangeResolved": "{{start}} 至 {{end}}，共 {{days}} 天",
+  "summary": {
+    "averageHigh": "平均最高温",
+    "averageLow": "平均最低温",
+    "totalPrecipitation": "累计降水",
+    "peakWind": "最大风速"
+  },
+  "metrics": {
+    "humidity": "相对湿度",
+    "wind": "风速",
+    "observedAt": "观测时间",
+    "rainfall": "降水"
+  },
+  "empty": "暂无天气数据，请先定位或搜索城市并应用时间范围。",
+  "notesTitle": "功能说明",
+  "notes": {
+    "note1": "默认打开页面时会尝试基于 IP 自动定位当前位置，并拉取当前天气和最近 7 天数据。",
+    "note2": "最近 7 天和最近 30 天主要用于历史天气回顾；如果自定义范围包含未来日期，会自动合并预报数据。",
+    "note3": "自定义范围单次最多支持 31 天；未来天气受 Open-Meteo 预报窗口限制。",
+    "note4": "如果城市定位失败，可以直接输入中英文城市名称重新查询。"
+  },
+  "errors": {
+    "missingDate": "请选择完整的开始和结束日期",
+    "invalidRange": "开始日期不能晚于结束日期",
+    "tooLong": "单次查询时间范围不能超过 31 天",
+    "futureLimit": "未来天气最多支持查询到 {{date}}",
+    "locationRequired": "请先定位当前位置或搜索一个城市",
+    "generic": "天气查询失败，请稍后重试",
+    "ipLocateFallback": "默认 IP 定位失败，请手动输入城市后查询"
+  }
+}
