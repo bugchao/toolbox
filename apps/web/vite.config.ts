@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 import { createDomainSuiteApiMiddleware } from '../../tools/tool-domain-suite/server/domain-suite-api.js'
 import { createIpOpsApiMiddleware } from '../../tools/tool-ip-ops-suite/server/ip-ops-api.js'
 import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/server/security-api.js'
-import { createStoreMiddleware } from '../../server/store-middleware.js'
 
 const root = path.resolve(__dirname, '../..')
 const base = process.env.VITE_APP_BASE_PATH || '/'
@@ -14,12 +13,6 @@ export default defineConfig({
   base,
   plugins: [
     react(),
-    {
-      name: 'toolbox-store-api',
-      configureServer(server) {
-        server.middlewares.use(createStoreMiddleware())
-      },
-    },
     {
       name: 'toolbox-security-api',
       configureServer(server) {

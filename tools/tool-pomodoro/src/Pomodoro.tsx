@@ -20,7 +20,7 @@ interface PomodoroData {
 const DEFAULT_DATA: PomodoroData = { sessions: [], totalFocus: 0 }
 
 export function Pomodoro() {
-  const { data, save, loading, error, backend } = useToolStorage<PomodoroData>(
+  const { data, save, loading, backend } = useToolStorage<PomodoroData>(
     'pomodoro', 'data', DEFAULT_DATA
   )
 
@@ -81,22 +81,12 @@ export function Pomodoro() {
     <div className="max-w-md mx-auto p-6 text-center text-gray-400 py-20">加载中...</div>
   )
 
-  if (error) return (
-    <div className="max-w-md mx-auto p-6">
-      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center">
-        <div className="text-red-600 dark:text-red-400 font-semibold mb-2">⚠️ 服务端不可用</div>
-        <div className="text-sm text-red-500 dark:text-red-300 mb-4">{error}</div>
-        <div className="text-xs text-red-400 dark:text-red-500">请确保后端服务已启动（node server.js）</div>
-      </div>
-    </div>
-  )
-
   return (
     <div className="max-w-md mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 text-center flex-1">番茄钟</h1>
-        <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-400">
-          {backend === 'server' ? '☁️ 云端' : '💾 本地'}
+        <span className="text-xs px-2 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500">
+          💾 本地存储
         </span>
       </div>
 
