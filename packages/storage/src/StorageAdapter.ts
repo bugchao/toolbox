@@ -1,48 +1,41 @@
 /**
- * StorageAdapter: auto-detects server availability and routes to
- * ServerStorage or BrowserStorage accordingly.
- *
- * Detection is done once per session with a 1.5s timeout ping.
- * Result is cached for the lifetime of the page.
+ * StorageAdapter: auto-detects server availability.
+ * 
+ * Server-only mode: All data is stored on the server.
+ * If server is unavailable, operations fail gracefully with clear errors.
+ * No fallback to browser storage — ensures data consistency across devices.
  */
 
 import { BrowserStorage } from './BrowserStorage'
 import { ServerStorage } from './ServerStorage'
 
-export type StorageBackend = 'server' | 'browser'
+export type StorageBackend = 'server' | 'offline'
 
 let _backend: StorageBackend | null = null
-let _detecting = false
 let _detectPromise: Promise<StorageBackend> | null = null
 
 async function detectBackend(): Promise<StorageBackend> {
   if (_backend) return _backend
   if (_detectPromise) return _detectPromise
 
-  _detecting = true
   _detectPromise = (async () => {
     const BASE = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_URL) || '/api'
     try {
       const controller = new AbortController()
-      const timer = setTimeout(() => controller.abort(), 1500)
+      const timer = setTimeout(() => controller.abort(), 2000)
       const res = await fetch(`${BASE}/store/ping`, { signal: controller.signal })
       clearTimeout(timer)
       if (res.ok) {
-        // Verify response body has { ok: true } to avoid false positives
-        // (e.g. Vite returning HTML 200 for unmatched routes)
         try {
           const body = await res.json()
-          _backend = body?.ok === true ? 'server' : 'browser'
-        } catch {
-          _backend = 'browser'
-        }
-      } else {
-        _backend = 'browser'
+          if (body?.ok === true) {
+            _backend = 'server'
+            return _backend
+          }
+        } catch {}
       }
-    } catch {
-      _backend = 'browser'
-    }
-    _detecting = false
+    } catch {}
+    _backend = 'offline'
     return _backend
   })()
 
@@ -52,31 +45,18 @@ async function detectBackend(): Promise<StorageBackend> {
 // Pre-warm detection on import (non-blocking)
 detectBackend().catch(() => {})
 
-async function getBackend() {
+async function ensureServer(): Promise<void> {
   const b = await detectBackend()
-  return b === 'server' ? ServerStorage : BrowserStorage
-}
-
-/** Fallback: if server write fails, transparently fall back to browser storage */
-async function resilientSet<T>(ns: string, key: string, value: T): Promise<void> {
-  if (_backend === 'server') {
-    try {
-      await ServerStorage.set(ns, key, value)
-      return
-    } catch {
-      // Server write failed — downgrade for this session
-      console.warn('[StorageAdapter] server write failed, falling back to browser storage')
-      _backend = 'browser'
-    }
+  if (b !== 'server') {
+    throw new Error('Storage server unavailable. Please ensure the backend is running.')
   }
-  await BrowserStorage.set(ns, key, value)
 }
 
 export const StorageAdapter = {
-  /** Returns current backend ('server' | 'browser' | null if still detecting) */
+  /** Returns current backend ('server' | 'offline' | null if still detecting) */
   get backend(): StorageBackend | null { return _backend },
 
-  /** Force re-detection (e.g. after server comes online) */
+  /** Force re-detection (e.g. after server restart) */
   async redetect(): Promise<StorageBackend> {
     _backend = null
     _detectPromise = null
@@ -84,56 +64,47 @@ export const StorageAdapter = {
   },
 
   async get<T>(ns: string, key: string): Promise<T | null> {
-    if (_backend === 'server') {
-      try {
-        const v = await ServerStorage.get<T>(ns, key)
-        // null = not found on server, also try browser (migration scenario)
-        if (v !== null) return v
-        return BrowserStorage.get<T>(ns, key)
-      } catch {
-        _backend = 'browser'
-        return BrowserStorage.get<T>(ns, key)
-      }
-    }
-    return BrowserStorage.get<T>(ns, key)
+    await ensureServer()
+    return ServerStorage.get<T>(ns, key)
   },
 
   async set<T>(ns: string, key: string, value: T): Promise<void> {
-    return resilientSet(ns, key, value)
+    await ensureServer()
+    await ServerStorage.set(ns, key, value)
   },
 
   async remove(ns: string, key: string): Promise<void> {
-    return (await getBackend()).remove(ns, key)
+    await ensureServer()
+    await ServerStorage.remove(ns, key)
   },
 
   async list(ns: string): Promise<string[]> {
-    return (await getBackend()).list(ns)
+    await ensureServer()
+    return ServerStorage.list(ns)
   },
 
   async clear(ns: string): Promise<void> {
-    return (await getBackend()).clear(ns)
+    await ensureServer()
+    await ServerStorage.clear(ns)
   },
 
   /**
-   * Migrate all browser storage data to server.
-   * Call after server becomes available for the first time.
+   * Migrate browser storage data to server (for users switching from offline mode).
    */
-  async migrateToServer(): Promise<{ migrated: number; errors: number }> {
+  async migrateFromBrowser(): Promise<{ migrated: number; errors: number }> {
+    await ensureServer()
     const all = await BrowserStorage.exportAll()
     let migrated = 0, errors = 0
     for (const [ns, kvs] of Object.entries(all)) {
       for (const [key, value] of Object.entries(kvs)) {
         try {
           await ServerStorage.set(ns, key, value)
-          await BrowserStorage.remove(ns, key)
           migrated++
         } catch {
           errors++
         }
       }
     }
-    // After migration, switch to server
-    _backend = 'server'
     return { migrated, errors }
   },
 }

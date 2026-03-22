@@ -1,15 +1,12 @@
 /**
  * useToolStorage: React hook for tool-level persistent storage.
- *
+ * 
+ * Server-only mode: Fails gracefully when server is unavailable.
+ * 
  * Usage:
- *   const { data, save, remove, loading, backend } = useToolStorage<MyData>(
- *     'habit-tracker', 'habits', defaultValue
+ *   const { data, save, loading, error, backend } = useToolStorage<MyData>(
+ *     'habit-tracker', 'data', defaultValue
  *   )
- *
- * - Automatically loads on mount
- * - save(newData) persists and updates local state
- * - remove() deletes and resets to defaultValue
- * - backend: 'server' | 'browser' | null
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react'
@@ -20,12 +17,10 @@ export interface ToolStorageResult<T> {
   save: (value: T) => Promise<void>
   remove: () => Promise<void>
   loading: boolean
+  error: string | null
   backend: StorageBackend | null
-  /** List all keys in this namespace */
   listKeys: () => Promise<string[]>
-  /** Get a specific key (for multi-key use) */
   getKey: <V>(key: string, def: V) => Promise<V>
-  /** Set a specific key (for multi-key use) */
   setKey: <V>(key: string, value: V) => Promise<void>
 }
 
@@ -36,6 +31,7 @@ export function useToolStorage<T>(
 ): ToolStorageResult<T> {
   const [data, setData] = useState<T>(defaultValue)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [backend, setBackend] = useState<StorageBackend | null>(null)
   const mountedRef = useRef(true)
 
@@ -45,14 +41,19 @@ export function useToolStorage<T>(
 
     const load = async () => {
       try {
+        setError(null)
         const stored = await StorageAdapter.get<T>(namespace, key)
         if (!cancelled && mountedRef.current) {
           if (stored !== null) setData(stored)
           setBackend(StorageAdapter.backend)
           setLoading(false)
         }
-      } catch {
-        if (!cancelled && mountedRef.current) setLoading(false)
+      } catch (err) {
+        if (!cancelled && mountedRef.current) {
+          setError(err instanceof Error ? err.message : 'Storage unavailable')
+          setBackend(StorageAdapter.backend)
+          setLoading(false)
+        }
       }
     }
 
@@ -64,26 +65,50 @@ export function useToolStorage<T>(
   }, [namespace, key])
 
   const save = useCallback(async (value: T) => {
-    setData(value)
-    await StorageAdapter.set(namespace, key, value)
-    setBackend(StorageAdapter.backend)
+    try {
+      setError(null)
+      setData(value)
+      await StorageAdapter.set(namespace, key, value)
+      setBackend(StorageAdapter.backend)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save')
+      throw err
+    }
   }, [namespace, key])
 
   const remove = useCallback(async () => {
-    await StorageAdapter.remove(namespace, key)
-    setData(defaultValue)
+    try {
+      setError(null)
+      await StorageAdapter.remove(namespace, key)
+      setData(defaultValue)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to remove')
+      throw err
+    }
   }, [namespace, key, defaultValue])
 
-  const listKeys = useCallback(() => StorageAdapter.list(namespace), [namespace])
+  const listKeys = useCallback(async () => {
+    await ensureServer()
+    return StorageAdapter.list(namespace)
+  }, [namespace])
 
   const getKey = useCallback(async <V>(k: string, def: V): Promise<V> => {
+    await ensureServer()
     const v = await StorageAdapter.get<V>(namespace, k)
     return v ?? def
   }, [namespace])
 
   const setKey = useCallback(async <V>(k: string, value: V) => {
+    await ensureServer()
     await StorageAdapter.set(namespace, k, value)
   }, [namespace])
 
-  return { data, save, remove, loading, backend, listKeys, getKey, setKey }
+  return { data, save, remove, loading, error, backend, listKeys, getKey, setKey }
+}
+
+async function ensureServer() {
+  const b = await (StorageAdapter as any).detectBackend?.() ?? StorageAdapter.backend
+  if (b !== 'server') {
+    throw new Error('服务端不可用，请确保后端服务已启动')
+  }
 }

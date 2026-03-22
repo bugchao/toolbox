@@ -45,7 +45,7 @@ const InputField = ({ value, onChange, placeholder, className }: { value: string
 )
 
 export function HabitTracker() {
-  const { data: habits, save: saveHabits, loading, backend } = useToolStorage<Habit[]>(
+  const { data: habits, save: saveHabits, loading, error, backend } = useToolStorage<Habit[]>(
     'habit-tracker', 'habits', DEFAULT_HABITS
   )
   const [newName, setNewName] = useState('')
@@ -78,6 +78,16 @@ export function HabitTracker() {
 
   if (loading) return (
     <div className="max-w-2xl mx-auto p-6 text-center text-gray-400 py-20">加载中...</div>
+  )
+
+  if (error) return (
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center">
+        <div className="text-red-600 dark:text-red-400 font-semibold mb-2">⚠️ 服务端不可用</div>
+        <div className="text-sm text-red-500 dark:text-red-300 mb-4">{error}</div>
+        <div className="text-xs text-red-400 dark:text-red-500">请确保后端服务已启动（node server.js）</div>
+      </div>
+    </div>
   )
 
   return (
