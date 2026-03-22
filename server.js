@@ -31,6 +31,7 @@ import { registerCdnCheckApiRoutes } from './tools/tool-cdn-check/server/cdn-che
 import { registerServerLatencyApiRoutes } from './tools/tool-server-latency/server/server-latency-api.js'
 import { registerApiAvailabilityApiRoutes } from './tools/tool-api-availability/server/api-availability-api.js'
 import { registerSecurityDomainHijackApiRoutes } from './tools/tool-security-domain-hijack/server/domain-hijack-api.js'
+import { registerStoreApiRoutes } from './server/store-api.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -67,6 +68,7 @@ registerServerLatencyApiRoutes(app)
 registerApiAvailabilityApiRoutes(app)
 registerSecurityDomainHijackApiRoutes(app)
 registerIpOpsApiRoutes(app)
+registerStoreApiRoutes(app).catch(err => console.warn('[store-api] init error:', err.message))
 
 // 静态文件服务
 app.use(express.static(path.join(__dirname, 'dist')))

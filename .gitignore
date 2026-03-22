@@ -40,3 +40,9 @@ __pycache__/
 
 # SSH keys
 *.pem
+
+# SQLite storage database
+toolbox-store.db
+toolbox-store.db-shm
+toolbox-store.db-wal
+
