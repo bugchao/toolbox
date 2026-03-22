@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import { ManifestToolRoute } from './tooling/ManifestToolRoute'
 import weatherToolManifest from '@toolbox/tool-weather/tool.manifest'
+import todoListToolManifest from '@toolbox/tool-todo-list/tool.manifest'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import HotNews from './pages/HotNews'
@@ -307,6 +308,7 @@ function App() {
           <Route path="/news" element={<HotNews />} />
           <Route path="/zipcode" element={<ZipCode />} />
           <Route path="/weather" element={<ManifestToolRoute manifest={weatherToolManifest} />} />
+          <Route path="/todo-list" element={<ManifestToolRoute manifest={todoListToolManifest} />} />
           <Route path="/json" element={<JsonFormatter />} />
           <Route path="/github-info" element={<GithubInfo />} />
           <Route path="/base64" element={<Base64 />} />
