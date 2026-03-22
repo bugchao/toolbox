@@ -174,6 +174,11 @@ const SubscriptionManager = lazy(() => import('@toolbox/tool-subscription-manage
 const CalorieCalc = lazy(() => import('@toolbox/tool-calorie-calc').then((m) => ({ default: m.default })))
 const RandomMenu = lazy(() => import('@toolbox/tool-random-menu').then((m) => ({ default: m.default })))
 const CurlToFetch = lazy(() => import('@toolbox/tool-curl-to-fetch').then((m) => ({ default: m.default })))
+const InstallmentCalc = lazy(() => import('@toolbox/tool-installment-calc').then((m) => ({ default: m.default })))
+const OkrPlanner = lazy(() => import('@toolbox/tool-okr-planner').then((m) => ({ default: m.default })))
+const TravelChecklist = lazy(() => import('@toolbox/tool-travel-checklist').then((m) => ({ default: m.default })))
+const TravelBudget = lazy(() => import('@toolbox/tool-travel-budget').then((m) => ({ default: m.default })))
+const SplitBill = lazy(() => import('@toolbox/tool-split-bill').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -389,6 +394,11 @@ function App() {
           <Route path="/calorie-calc" element={<CalorieCalc />} />
           <Route path="/random-menu" element={<RandomMenu />} />
           <Route path="/curl-to-fetch" element={<CurlToFetch />} />
+          <Route path="/installment-calc" element={<InstallmentCalc />} />
+          <Route path="/okr-planner" element={<OkrPlanner />} />
+          <Route path="/travel-checklist" element={<TravelChecklist />} />
+          <Route path="/travel-budget" element={<TravelBudget />} />
+          <Route path="/split-bill" element={<SplitBill />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

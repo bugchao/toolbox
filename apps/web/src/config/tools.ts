@@ -8,7 +8,8 @@ import {
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
   BarChart2, Sliders, Zap, CheckCircle, TrendingUp, Target, Trash2,
   Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound,
-  Receipt, CreditCard, Flame, UtensilsCrossed, ArrowRightLeft
+  Receipt, CreditCard, Flame, UtensilsCrossed, ArrowRightLeft,
+  Calculator, ListChecks, PlaneTakeoff, SplitSquareHorizontal
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -109,6 +110,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/calorie-calc', nameKey: 'tools.calorie_calc', icon: Flame, categoryKey: 'life', keywords: ['卡路里', '热量', '饮食', '营养'], i18nNamespace: 'toolCalorieCalc' },
   { path: '/random-menu', nameKey: 'tools.random_menu', icon: UtensilsCrossed, categoryKey: 'life', keywords: ['菜单', '吃什么', '随机', '美食'], i18nNamespace: 'toolRandomMenu' },
   { path: '/curl-to-fetch', nameKey: 'tools.curl_to_fetch', icon: ArrowRightLeft, categoryKey: 'dev', keywords: ['curl', 'fetch', 'http', '转换'], i18nNamespace: 'toolCurlToFetch' },
+  { path: '/installment-calc', nameKey: 'tools.installment_calc', icon: Calculator, categoryKey: 'life', keywords: ['分期', '贷款', '还款', '利率'], i18nNamespace: 'toolInstallmentCalc' },
+  { path: '/okr-planner', nameKey: 'tools.okr_planner', icon: Target, categoryKey: 'life', keywords: ['okr', '目标', '计划', '季度'], i18nNamespace: 'toolOkrPlanner' },
+  { path: '/travel-checklist', nameKey: 'tools.travel_checklist', icon: ListChecks, categoryKey: 'travel', keywords: ['旅行', 'checklist', '清单', '出行'], i18nNamespace: 'toolTravelChecklist' },
+  { path: '/travel-budget', nameKey: 'tools.travel_budget', icon: PlaneTakeoff, categoryKey: 'travel', keywords: ['旅行', '预算', '费用', '旅游'], i18nNamespace: 'toolTravelBudget' },
+  { path: '/split-bill', nameKey: 'tools.split_bill', icon: SplitSquareHorizontal, categoryKey: 'travel', keywords: ['aa', '分摊', '账单', '聚餐'], i18nNamespace: 'toolSplitBill' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

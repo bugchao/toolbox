@@ -155,6 +155,16 @@ import toolCalorieCalcEn from '@toolbox/tool-calorie-calc/locales/en-US.json'
 import toolRandomMenuZh from '@toolbox/tool-random-menu/locales/zh-CN.json'
 import toolRandomMenuEn from '@toolbox/tool-random-menu/locales/en-US.json'
 import toolCurlToFetchZh from '@toolbox/tool-curl-to-fetch/locales/zh-CN.json'
+import toolInstallmentCalcZh from '@toolbox/tool-installment-calc/locales/zh-CN.json'
+import toolInstallmentCalcEn from '@toolbox/tool-installment-calc/locales/en-US.json'
+import toolOkrPlannerZh from '@toolbox/tool-okr-planner/locales/zh-CN.json'
+import toolOkrPlannerEn from '@toolbox/tool-okr-planner/locales/en-US.json'
+import toolTravelChecklistZh from '@toolbox/tool-travel-checklist/locales/zh-CN.json'
+import toolTravelChecklistEn from '@toolbox/tool-travel-checklist/locales/en-US.json'
+import toolTravelBudgetZh from '@toolbox/tool-travel-budget/locales/zh-CN.json'
+import toolTravelBudgetEn from '@toolbox/tool-travel-budget/locales/en-US.json'
+import toolSplitBillZh from '@toolbox/tool-split-bill/locales/zh-CN.json'
+import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
 import toolIpamScanEn from '@toolbox/tool-ipam-scan/locales/en-US.json'
@@ -274,6 +284,11 @@ export const resources = {
     toolCalorieCalc: toolCalorieCalcZh as Record<string, string>,
     toolRandomMenu: toolRandomMenuZh as Record<string, string>,
     toolCurlToFetch: toolCurlToFetchZh as Record<string, string>,
+    toolInstallmentCalc: toolInstallmentCalcZh as Record<string, string>,
+    toolOkrPlanner: toolOkrPlannerZh as Record<string, string>,
+    toolTravelChecklist: toolTravelChecklistZh as Record<string, string>,
+    toolTravelBudget: toolTravelBudgetZh as Record<string, string>,
+    toolSplitBill: toolSplitBillZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -373,6 +388,11 @@ export const resources = {
     toolCalorieCalc: toolCalorieCalcEn as Record<string, string>,
     toolRandomMenu: toolRandomMenuEn as Record<string, string>,
     toolCurlToFetch: toolCurlToFetchEn as Record<string, string>,
+    toolInstallmentCalc: toolInstallmentCalcEn as Record<string, string>,
+    toolOkrPlanner: toolOkrPlannerEn as Record<string, string>,
+    toolTravelChecklist: toolTravelChecklistEn as Record<string, string>,
+    toolTravelBudget: toolTravelBudgetEn as Record<string, string>,
+    toolSplitBill: toolSplitBillEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
