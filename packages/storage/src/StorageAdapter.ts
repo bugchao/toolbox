@@ -27,7 +27,18 @@ async function detectBackend(): Promise<StorageBackend> {
       const timer = setTimeout(() => controller.abort(), 1500)
       const res = await fetch(`${BASE}/store/ping`, { signal: controller.signal })
       clearTimeout(timer)
-      _backend = res.ok ? 'server' : 'browser'
+      if (res.ok) {
+        // Verify response body has { ok: true } to avoid false positives
+        // (e.g. Vite returning HTML 200 for unmatched routes)
+        try {
+          const body = await res.json()
+          _backend = body?.ok === true ? 'server' : 'browser'
+        } catch {
+          _backend = 'browser'
+        }
+      } else {
+        _backend = 'browser'
+      }
     } catch {
       _backend = 'browser'
     }
@@ -46,6 +57,21 @@ async function getBackend() {
   return b === 'server' ? ServerStorage : BrowserStorage
 }
 
+/** Fallback: if server write fails, transparently fall back to browser storage */
+async function resilientSet<T>(ns: string, key: string, value: T): Promise<void> {
+  if (_backend === 'server') {
+    try {
+      await ServerStorage.set(ns, key, value)
+      return
+    } catch {
+      // Server write failed — downgrade for this session
+      console.warn('[StorageAdapter] server write failed, falling back to browser storage')
+      _backend = 'browser'
+    }
+  }
+  await BrowserStorage.set(ns, key, value)
+}
+
 export const StorageAdapter = {
   /** Returns current backend ('server' | 'browser' | null if still detecting) */
   get backend(): StorageBackend | null { return _backend },
@@ -58,11 +84,22 @@ export const StorageAdapter = {
   },
 
   async get<T>(ns: string, key: string): Promise<T | null> {
-    return (await getBackend()).get<T>(ns, key)
+    if (_backend === 'server') {
+      try {
+        const v = await ServerStorage.get<T>(ns, key)
+        // null = not found on server, also try browser (migration scenario)
+        if (v !== null) return v
+        return BrowserStorage.get<T>(ns, key)
+      } catch {
+        _backend = 'browser'
+        return BrowserStorage.get<T>(ns, key)
+      }
+    }
+    return BrowserStorage.get<T>(ns, key)
   },
 
   async set<T>(ns: string, key: string, value: T): Promise<void> {
-    return (await getBackend()).set<T>(ns, key, value)
+    return resilientSet(ns, key, value)
   },
 
   async remove(ns: string, key: string): Promise<void> {
