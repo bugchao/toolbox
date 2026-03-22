@@ -9,7 +9,8 @@ import {
   BarChart2, Sliders, Zap, CheckCircle, TrendingUp, Target, Trash2,
   Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound,
   Receipt, CreditCard, Flame, UtensilsCrossed, ArrowRightLeft,
-  Calculator, ListChecks, PlaneTakeoff, SplitSquareHorizontal
+  Calculator, ListChecks, PlaneTakeoff, SplitSquareHorizontal,
+  Luggage, ChefHat, BookOpen
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -115,6 +116,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/travel-checklist', nameKey: 'tools.travel_checklist', icon: ListChecks, categoryKey: 'travel', keywords: ['旅行', 'checklist', '清单', '出行'], i18nNamespace: 'toolTravelChecklist' },
   { path: '/travel-budget', nameKey: 'tools.travel_budget', icon: PlaneTakeoff, categoryKey: 'travel', keywords: ['旅行', '预算', '费用', '旅游'], i18nNamespace: 'toolTravelBudget' },
   { path: '/split-bill', nameKey: 'tools.split_bill', icon: SplitSquareHorizontal, categoryKey: 'travel', keywords: ['aa', '分摊', '账单', '聚餐'], i18nNamespace: 'toolSplitBill' },
+  { path: '/timezone-calc', nameKey: 'tools.timezone_calc', icon: Clock, categoryKey: 'travel', keywords: ['时差', '时区', '换算', '时间'], i18nNamespace: 'toolTimezoneCalc' },
+  { path: '/distance-calc', nameKey: 'tools.distance_calc', icon: MapPin, categoryKey: 'travel', keywords: ['距离', '地图', '城市', '经纬度'], i18nNamespace: 'toolDistanceCalc' },
+  { path: '/packing-list', nameKey: 'tools.packing_list', icon: Luggage, categoryKey: 'travel', keywords: ['行李', '清单', '打包', '出行'], i18nNamespace: 'toolPackingList' },
+  { path: '/recipe-finder', nameKey: 'tools.recipe_finder', icon: ChefHat, categoryKey: 'life', keywords: ['菜谱', '食材', '烹饪', '推荐'], i18nNamespace: 'toolRecipeFinder' },
+  { path: '/study-timer', nameKey: 'tools.study_timer', icon: BookOpen, categoryKey: 'learn', keywords: ['学习', '计时', '专注', '统计'], i18nNamespace: 'toolStudyTimer' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},

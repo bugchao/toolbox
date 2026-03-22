@@ -164,6 +164,16 @@ import toolTravelChecklistEn from '@toolbox/tool-travel-checklist/locales/en-US.
 import toolTravelBudgetZh from '@toolbox/tool-travel-budget/locales/zh-CN.json'
 import toolTravelBudgetEn from '@toolbox/tool-travel-budget/locales/en-US.json'
 import toolSplitBillZh from '@toolbox/tool-split-bill/locales/zh-CN.json'
+import toolTimezoneCalcZh from '@toolbox/tool-timezone-calc/locales/zh-CN.json'
+import toolTimezoneCalcEn from '@toolbox/tool-timezone-calc/locales/en-US.json'
+import toolDistanceCalcZh from '@toolbox/tool-distance-calc/locales/zh-CN.json'
+import toolDistanceCalcEn from '@toolbox/tool-distance-calc/locales/en-US.json'
+import toolPackingListZh from '@toolbox/tool-packing-list/locales/zh-CN.json'
+import toolPackingListEn from '@toolbox/tool-packing-list/locales/en-US.json'
+import toolRecipeFinderZh from '@toolbox/tool-recipe-finder/locales/zh-CN.json'
+import toolRecipeFinderEn from '@toolbox/tool-recipe-finder/locales/en-US.json'
+import toolStudyTimerZh from '@toolbox/tool-study-timer/locales/zh-CN.json'
+import toolStudyTimerEn from '@toolbox/tool-study-timer/locales/en-US.json'
 import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
@@ -289,6 +299,11 @@ export const resources = {
     toolTravelChecklist: toolTravelChecklistZh as Record<string, string>,
     toolTravelBudget: toolTravelBudgetZh as Record<string, string>,
     toolSplitBill: toolSplitBillZh as Record<string, string>,
+    toolTimezoneCalc: toolTimezoneCalcZh as Record<string, string>,
+    toolDistanceCalc: toolDistanceCalcZh as Record<string, string>,
+    toolPackingList: toolPackingListZh as Record<string, string>,
+    toolRecipeFinder: toolRecipeFinderZh as Record<string, string>,
+    toolStudyTimer: toolStudyTimerZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -393,6 +408,11 @@ export const resources = {
     toolTravelChecklist: toolTravelChecklistEn as Record<string, string>,
     toolTravelBudget: toolTravelBudgetEn as Record<string, string>,
     toolSplitBill: toolSplitBillEn as Record<string, string>,
+    toolTimezoneCalc: toolTimezoneCalcEn as Record<string, string>,
+    toolDistanceCalc: toolDistanceCalcEn as Record<string, string>,
+    toolPackingList: toolPackingListEn as Record<string, string>,
+    toolRecipeFinder: toolRecipeFinderEn as Record<string, string>,
+    toolStudyTimer: toolStudyTimerEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
