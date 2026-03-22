@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Plus, Trash2, CheckCircle, Circle } from 'lucide-react'
+import { useToolStorage } from '@toolbox/storage'
 
 interface Habit {
   id: string
@@ -11,6 +12,12 @@ interface Habit {
 
 const COLORS = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500', 'bg-blue-500', 'bg-purple-500']
 const EMOJIS = ['🏃', '📚', '💧', '🧘', '💪', '🥗', '😴', '✍️', '🎯', '🎸']
+
+const DEFAULT_HABITS: Habit[] = [
+  { id: 'default-1', name: '早起运动', emoji: '🏃', color: 'bg-green-500', checks: {} },
+  { id: 'default-2', name: '阅读30分钟', emoji: '📚', color: 'bg-blue-500', checks: {} },
+  { id: 'default-3', name: '喝8杯水', emoji: '💧', color: 'bg-cyan-500', checks: {} },
+]
 
 function getLast7Days(): string[] {
   return Array.from({ length: 7 }, (_, i) => {
@@ -38,11 +45,9 @@ const InputField = ({ value, onChange, placeholder, className }: { value: string
 )
 
 export function HabitTracker() {
-  const [habits, setHabits] = useState<Habit[]>([
-    { id: nid(), name: '早起运动', emoji: '🏃', color: 'bg-green-500', checks: {} },
-    { id: nid(), name: '阅读30分钟', emoji: '📚', color: 'bg-blue-500', checks: {} },
-    { id: nid(), name: '喝8杯水', emoji: '💧', color: 'bg-cyan-500', checks: {} },
-  ])
+  const { data: habits, save: saveHabits, loading, backend } = useToolStorage<Habit[]>(
+    'habit-tracker', 'habits', DEFAULT_HABITS
+  )
   const [newName, setNewName] = useState('')
   const [newEmoji, setNewEmoji] = useState('🎯')
   const [newColor, setNewColor] = useState(COLORS[3])
@@ -51,46 +56,63 @@ export function HabitTracker() {
   const today = new Date().toISOString().slice(0, 10)
 
   const toggle = (habitId: string, date: string) => {
-    setHabits(hs => hs.map(h => h.id === habitId
+    const updated = habits.map(h => h.id === habitId
       ? { ...h, checks: { ...h.checks, [date]: !h.checks[date] } }
-      : h))
+      : h)
+    saveHabits(updated)
   }
 
   const addHabit = () => {
     if (!newName.trim()) return
-    setHabits(hs => [...hs, { id: nid(), name: newName.trim(), emoji: newEmoji, color: newColor, checks: {} }])
+    saveHabits([...habits, { id: nid(), name: newName.trim(), emoji: newEmoji, color: newColor, checks: {} }])
     setNewName('')
   }
 
-  const removeHabit = (id: string) => setHabits(hs => hs.filter(h => h.id !== id))
+  const removeHabit = (id: string) => saveHabits(habits.filter(h => h.id !== id))
 
-  const dayLabels = days.map(d => {
-    const dt = new Date(d)
-    return { date: d, label: ['日', '一', '二', '三', '四', '五', '六'][dt.getDay()], isToday: d === today }
-  })
+  const dayLabels = days.map(d => ({
+    date: d,
+    label: new Date(d).toLocaleDateString('zh-CN', { weekday: 'short' }),
+    isToday: d === today,
+  }))
+
+  if (loading) return (
+    <div className="max-w-2xl mx-auto p-6 text-center text-gray-400 py-20">加载中...</div>
+  )
 
   return (
     <div className="max-w-2xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">习惯打卡</h1>
-      <p className="text-gray-500 dark:text-gray-400">追踪每日习惯，建立连续打卡记录</p>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">习惯打卡</h1>
+        <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-400">
+          {backend === 'server' ? '☁️ 云端' : '💾 本地'}
+        </span>
+      </div>
+      <p className="text-gray-500 dark:text-gray-400">坚持每日打卡，养成好习惯</p>
 
       {/* 添加习惯 */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">添加新习惯</h2>
+        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">新增习惯</h2>
         <div className="flex gap-2 flex-wrap">
           <InputField value={newName} onChange={setNewName} placeholder="习惯名称" className="flex-1 min-w-32" />
-          <select value={newEmoji} onChange={e => setNewEmoji(e.target.value)}
-            className="px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            {EMOJIS.map(e => <option key={e} value={e}>{e}</option>)}
-          </select>
           <div className="flex gap-1">
-            {COLORS.map(c => (
-              <button key={c} onClick={() => setNewColor(c)}
-                className={`w-7 h-7 rounded-full ${c} ${newColor === c ? 'ring-2 ring-offset-2 ring-indigo-500' : ''}`} />
+            {EMOJIS.map(e => (
+              <button key={e} onClick={() => setNewEmoji(e)}
+                className={`text-lg w-8 h-8 rounded transition-colors ${
+                  newEmoji === e ? 'bg-indigo-100 dark:bg-indigo-900/30' : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}>{e}</button>
             ))}
           </div>
+        </div>
+        <div className="flex gap-2 items-center">
+          {COLORS.map(c => (
+            <button key={c} onClick={() => setNewColor(c)}
+              className={`w-6 h-6 rounded-full ${c} transition-transform ${
+                newColor === c ? 'scale-125 ring-2 ring-offset-2 ring-gray-400' : ''
+              }`} />
+          ))}
           <button onClick={addHabit} disabled={!newName.trim()}
-            className="flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors">
+            className="ml-auto flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors">
             <Plus className="w-4 h-4" />添加
           </button>
         </div>
@@ -102,31 +124,33 @@ export function HabitTracker() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-100 dark:border-gray-700">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">习惯</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500">习惯</th>
                 {dayLabels.map(d => (
-                  <th key={d.date} className={`px-2 py-3 text-center text-xs font-medium ${
-                    d.isToday ? 'text-indigo-500' : 'text-gray-400'
+                  <th key={d.date} className={`px-2 py-3 text-center text-xs font-semibold ${
+                    d.isToday ? 'text-indigo-500' : 'text-gray-500'
                   }`}>
                     <div>{d.label}</div>
-                    <div className={`text-xs ${d.isToday ? 'font-bold' : ''}`}>{d.date.slice(8)}</div>
+                    <div className={`mt-0.5 ${ d.isToday ? 'text-indigo-400' : 'text-gray-400' }`}>
+                      {new Date(d.date).getDate()}
+                    </div>
                   </th>
                 ))}
-                <th className="px-3 py-3 text-center text-xs font-medium text-gray-400">连续</th>
+                <th className="px-3 py-3 text-center text-xs font-semibold text-gray-500">连续</th>
                 <th className="px-2 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-50 dark:divide-gray-700/50">
               {habits.map(habit => {
                 const streak = getStreak(habit, days)
                 const weekDone = days.filter(d => habit.checks[d]).length
                 return (
-                  <tr key={habit.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                  <tr key={habit.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <span className={`w-2 h-8 rounded-full ${habit.color}`} />
-                        <span className="text-lg">{habit.emoji}</span>
+                        <span className={`w-2.5 h-2.5 rounded-full ${habit.color}`} />
+                        <span className="text-base">{habit.emoji}</span>
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{habit.name}</div>
+                          <div className="text-sm font-medium text-gray-700 dark:text-gray-100">{habit.name}</div>
                           <div className="text-xs text-gray-400">{weekDone}/7 本周</div>
                         </div>
                       </div>
