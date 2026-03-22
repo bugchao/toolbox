@@ -9,8 +9,6 @@ import zh from './locales/zh.json'
 import en from './locales/en.json'
 import toolJsonZh from '@toolbox/tool-json/src/locales/zh.json'
 import toolJsonEn from '@toolbox/tool-json/src/locales/en.json'
-import toolWeatherZh from '@toolbox/tool-weather/src/locales/zh.json'
-import toolWeatherEn from '@toolbox/tool-weather/src/locales/en.json'
 import toolGithubInfoZh from '@toolbox/tool-github-info/src/locales/zh.json'
 import toolGithubInfoEn from '@toolbox/tool-github-info/src/locales/en.json'
 import toolIpQueryZh from '@toolbox/tool-ip-query/src/locales/zh.json'
@@ -218,7 +216,6 @@ export const resources = {
     home: zh.home,
     colorPicker: zh.colorPicker,
     toolJson: toolJsonZh as Record<string, string>,
-    toolWeather: toolWeatherZh as unknown as Record<string, string>,
     toolGithubInfo: toolGithubInfoZh as unknown as Record<string, string>,
     toolIpQuery: toolIpQueryZh as Record<string, string>,
     toolIpAsn: toolIpAsnZh as Record<string, string>,
@@ -327,7 +324,6 @@ export const resources = {
     home: en.home,
     colorPicker: en.colorPicker,
     toolJson: toolJsonEn as Record<string, string>,
-    toolWeather: toolWeatherEn as unknown as Record<string, string>,
     toolGithubInfo: toolGithubInfoEn as unknown as Record<string, string>,
     toolIpQuery: toolIpQueryEn as Record<string, string>,
     toolIpAsn: toolIpAsnEn as Record<string, string>,

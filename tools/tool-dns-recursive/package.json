@@ -2,6 +2,7 @@
   "name": "@toolbox/tool-dns-recursive",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "main": "src/index.tsx",
   "dependencies": {
     "react": "^18.0.0",

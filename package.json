@@ -6,10 +6,15 @@
   "scripts": {
     "create:tool": "node scripts/create-tool.cjs",
     "dev": "pnpm -C apps/web dev",
+    "dev:api": "pnpm -C apps/api-gateway dev",
+    "dev:full": "pnpm --parallel --filter @toolbox/web --filter @toolbox/api-gateway dev",
     "build": "pnpm -C apps/web build",
+    "build:backend": "pnpm -C apps/api-gateway build",
     "lint": "pnpm -C apps/web lint",
     "preview": "pnpm -C apps/web preview",
     "start": "node server.js",
+    "start:api": "pnpm -C apps/api-gateway start",
+    "start:api:dist": "pnpm run build:backend && pnpm -C apps/api-gateway start:dist",
     "crawl:news": "tsx crawler/news_crawler.ts --output apps/web/public/news.json",
     "docker:build": "docker build -t toolbox:latest .",
     "docker:run": "docker run -d -p 3000:3000 --name toolbox --restart unless-stopped toolbox:latest",
@@ -24,6 +29,7 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "better-sqlite3": "^12.8.0",
     "cheerio": "^1.0.0",
     "express": "^4.18.2",
     "tsx": "^4.19.0"

@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
+import { ManifestToolRoute } from './tooling/ManifestToolRoute'
+import weatherToolManifest from '@toolbox/tool-weather/tool.manifest'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import HotNews from './pages/HotNews'
@@ -58,7 +60,6 @@ const ResumeGenerator = lazy(() => import('@toolbox/tool-resume'))
 const JsonFormatter = lazy(() =>
   import('@toolbox/tool-json').then((m) => ({ default: m.JsonFormatter }))
 )
-const Weather = lazy(() => import('@toolbox/tool-weather'))
 const GithubInfo = lazy(() => import('@toolbox/tool-github-info'))
 const IpQuery = lazy(() =>
   import('@toolbox/tool-ip-query').then((m) => ({ default: m.IpQuery }))
@@ -305,7 +306,7 @@ function App() {
           <Route path="/qrcode/beautifier" element={<QrCodeBeautifier />} />
           <Route path="/news" element={<HotNews />} />
           <Route path="/zipcode" element={<ZipCode />} />
-          <Route path="/weather" element={<Weather />} />
+          <Route path="/weather" element={<ManifestToolRoute manifest={weatherToolManifest} />} />
           <Route path="/json" element={<JsonFormatter />} />
           <Route path="/github-info" element={<GithubInfo />} />
           <Route path="/base64" element={<Base64 />} />

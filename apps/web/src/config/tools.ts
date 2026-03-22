@@ -1,4 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
+import i18n from '../i18n'
+import { getToolManifestMetaByPath } from '../tooling/tool-manifests'
 import {
   Home, Star, QrCode, Newspaper, MapPin, Cloud, Code, FileCode, Clock, Link2,
   Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart, Mail, XCircle,
@@ -35,7 +37,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/qrcode/beautifier', nameKey: 'tools.qrcode_beautifier', icon: Wand2, categoryKey: 'qrcode', keywords: ['qr', '美化'] },
   { path: '/news', nameKey: 'tools.news', icon: Newspaper, categoryKey: 'news', keywords: ['热点', '新闻'] , mode: 'server'},
   { path: '/zipcode', nameKey: 'tools.zipcode', icon: MapPin, categoryKey: 'query', keywords: ['邮编', 'zip'] , mode: 'server'},
-  { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气'] , mode: 'server'},
+  { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气', 'weather', 'forecast'], i18nNamespace: 'toolWeather', mode: 'hybrid' },
   { path: '/github-info', nameKey: 'tools.github_info', icon: FileSearch, categoryKey: 'dev', keywords: ['github', 'token', 'repo', 'user'], i18nNamespace: 'toolGithubInfo' , mode: 'server'},
   { path: '/ip-query', nameKey: 'tools.ip_query', icon: Globe, categoryKey: 'ip', keywords: ['ip'], i18nNamespace: 'toolIpQuery' , mode: 'server'},
   { path: '/ip-asn', nameKey: 'tools.ip_asn', icon: Globe, categoryKey: 'ip', keywords: ['asn', 'as', '归属'], i18nNamespace: 'toolIpAsn' , mode: 'server'},
@@ -204,7 +206,12 @@ export function getToolTitle(
   tool: ToolEntry,
   t: (key: string) => string
 ): string {
-  if (tool.i18nNamespace) return t(`${tool.i18nNamespace}:title`)
+  if (tool.i18nNamespace) {
+    const translated = t(`${tool.i18nNamespace}:title`)
+    if (translated !== `${tool.i18nNamespace}:title`) return translated
+  }
+  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
+  if (manifestMeta?.title) return manifestMeta.title
   return t(tool.nameKey)
 }
 
@@ -214,7 +221,12 @@ export function getToolDescription(
   t: (key: string) => string,
   tHome: (key: string) => string
 ): string {
-  if (tool.i18nNamespace) return t(`${tool.i18nNamespace}:description`)
+  if (tool.i18nNamespace) {
+    const translated = t(`${tool.i18nNamespace}:description`)
+    if (translated !== `${tool.i18nNamespace}:description`) return translated
+  }
+  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
+  if (manifestMeta?.description) return manifestMeta.description
   const descKey = tool.nameKey.replace('tools.', '')
   return tHome(`toolDesc.${descKey}`)
 }

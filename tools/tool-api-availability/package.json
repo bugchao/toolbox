@@ -1,6 +1,7 @@
 {
   "name": "@toolbox/tool-api-availability",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.tsx",
   "dependencies": {}
 }

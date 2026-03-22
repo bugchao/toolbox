@@ -1,6 +1,7 @@
 {
   "name": "@toolbox/tool-server-latency",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.tsx",
   "dependencies": {}
 }

@@ -40,6 +40,7 @@ const packageJson = {
     lint: 'eslint . --ext ts,tsx',
   },
   dependencies: {
+    '@toolbox/tool-registry': 'workspace:*',
     '@toolbox/ui-kit': 'workspace:*',
     'lucide-react': '^0.577.0',
     react: '^18.3.1',
@@ -63,16 +64,19 @@ const indexTsx = `export { default } from './${pascal}'
 
 const componentTsx = `import React from 'react'
 import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { useTranslation } from 'react-i18next'
 
 const ${pascal}: React.FC = () => {
+  const { t } = useTranslation('tool${pascal}')
+
   return (
     <div className="relative min-h-[60vh]">
       {/* 粒子背景，受应用层 BackgroundVisibilityProvider 全局开关控制 */}
       <ParticlesBackground preset="minimal" className="absolute inset-0" />
       <div className="relative z-10 space-y-6">
         <PageHero
-          title="${pascal}"
-          description="TODO: 从 TOOLS_ROADMAP 与 i18n 补充标题与描述"
+          title={t('title')}
+          description={t('description')}
         />
         {/* TODO: 实现工具内容 */}
       </div>
@@ -83,7 +87,47 @@ const ${pascal}: React.FC = () => {
 export default ${pascal}
 `
 
+const manifestTs = `import { defineToolManifest } from '@toolbox/tool-registry'
+
+const tool${pascal}Manifest = defineToolManifest({
+  id: 'tool-${name}',
+  path: '/${name}',
+  namespace: 'tool${pascal}',
+  mode: 'client',
+  meta: {
+    zh: {
+      title: '${pascal}',
+      description: 'TODO: 补充中文描述',
+    },
+    en: {
+      title: '${pascal}',
+      description: 'TODO: Add an English description',
+    },
+  },
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
+
+export default tool${pascal}Manifest
+`
+
+const zhLocale = `{
+  "title": "${pascal}",
+  "description": "TODO: 补充中文描述"
+}
+`
+
+const enLocale = `{
+  "title": "${pascal}",
+  "description": "TODO: Add an English description"
+}
+`
+
 fs.mkdirSync(path.join(dir, 'src'), { recursive: true })
+fs.mkdirSync(path.join(dir, 'src', 'locales'), { recursive: true })
 
 fs.writeFileSync(
   path.join(dir, 'package.json'),
@@ -92,12 +136,17 @@ fs.writeFileSync(
 )
 fs.writeFileSync(path.join(dir, 'src', 'index.tsx'), indexTsx, 'utf8')
 fs.writeFileSync(path.join(dir, 'src', `${pascal}.tsx`), componentTsx, 'utf8')
+fs.writeFileSync(path.join(dir, 'tool.manifest.ts'), manifestTs, 'utf8')
+fs.writeFileSync(path.join(dir, 'src', 'locales', 'zh.json'), zhLocale, 'utf8')
+fs.writeFileSync(path.join(dir, 'src', 'locales', 'en.json'), enLocale, 'utf8')
 
 console.log(`Created: tools/tool-${name}/`)
 console.log('Next:')
 console.log(`  1. pnpm install`)
 console.log(`  2. apps/web: add "@toolbox/tool-${name}": "workspace:*" and route in App.tsx`)
-console.log(`  3. apps/web/vite.config.ts: add '@toolbox/tool-${name}' to optimizeDeps.exclude`)
-console.log(`  4. config/tools.ts, Layout, Home: register nav and card`)
-console.log(`  5. See docs/TOOL_LANDING.md and docs/refactor-structure.md`)
+console.log(`  3. apps/web/src/tooling/tool-manifests.ts: register tool.manifest.ts`)
+console.log(`  4. apps/web/vite.config.ts: add '@toolbox/tool-${name}' alias if this package is source-resolved`)
+console.log(`  5. config/tools.ts: register nav, category, keywords and mode`)
+console.log(`  6. If backend is needed, add a domain service module under services/* and mount it in api-gateway`)
+console.log(`  7. See docs/ARCHITECTURE_GRADUAL.md`)
 process.exit(0)

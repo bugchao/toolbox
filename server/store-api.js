@@ -18,15 +18,72 @@ import fs from 'fs'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-let db = null
+let store = null
+let backendName = 'uninitialized'
 
-async function getDb() {
-  if (db) return db
+function ensureParentDir(filePath) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true })
+}
+
+function createJsonFileStore(filePath) {
+  ensureParentDir(filePath)
+
+  const readState = () => {
+    if (!fs.existsSync(filePath)) return {}
+    try {
+      return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    } catch {
+      return {}
+    }
+  }
+
+  const writeState = (state) => {
+    fs.writeFileSync(filePath, JSON.stringify(state, null, 2), 'utf-8')
+  }
+
+  return {
+    kind: 'json-file',
+    list(ns) {
+      const state = readState()
+      return Object.keys(state[ns] || {})
+    },
+    get(ns, key) {
+      const state = readState()
+      return state[ns]?.[key]
+    },
+    set(ns, key, value) {
+      const state = readState()
+      state[ns] ||= {}
+      state[ns][key] = value
+      writeState(state)
+    },
+    remove(ns, key) {
+      const state = readState()
+      const existed = Object.prototype.hasOwnProperty.call(state[ns] || {}, key)
+      if (!existed) return 0
+      delete state[ns][key]
+      if (state[ns] && Object.keys(state[ns]).length === 0) delete state[ns]
+      writeState(state)
+      return 1
+    },
+    clear(ns) {
+      const state = readState()
+      const deleted = Object.keys(state[ns] || {}).length
+      if (deleted) {
+        delete state[ns]
+        writeState(state)
+      }
+      return deleted
+    },
+  }
+}
+
+async function getStore() {
+  if (store) return store
   try {
-    // Dynamic import to avoid hard dependency
     const { default: Database } = await import('better-sqlite3')
     const dbPath = process.env.STORE_DB_PATH || path.join(__dirname, '..', 'toolbox-store.db')
-    db = new Database(dbPath)
+    const db = new Database(dbPath)
     db.exec(`
       CREATE TABLE IF NOT EXISTS kv_store (
         ns         TEXT NOT NULL,
@@ -37,23 +94,54 @@ async function getDb() {
       );
       CREATE INDEX IF NOT EXISTS idx_kv_ns ON kv_store(ns);
     `)
+    backendName = 'sqlite'
+    store = {
+      kind: 'sqlite',
+      list(ns) {
+        const rows = db.prepare('SELECT key FROM kv_store WHERE ns = ?').all(ns)
+        return rows.map((row) => row.key)
+      },
+      get(ns, key) {
+        const row = db.prepare('SELECT value FROM kv_store WHERE ns = ? AND key = ?').get(ns, key)
+        if (!row) return undefined
+        return JSON.parse(row.value)
+      },
+      set(ns, key, value) {
+        db.prepare(`
+          INSERT INTO kv_store (ns, key, value, updated_at)
+          VALUES (?, ?, ?, unixepoch())
+          ON CONFLICT(ns, key) DO UPDATE SET value = excluded.value, updated_at = unixepoch()
+        `).run(ns, key, JSON.stringify(value))
+      },
+      remove(ns, key) {
+        const info = db.prepare('DELETE FROM kv_store WHERE ns = ? AND key = ?').run(ns, key)
+        return info.changes
+      },
+      clear(ns) {
+        const info = db.prepare('DELETE FROM kv_store WHERE ns = ?').run(ns)
+        return info.changes
+      },
+    }
     console.log('[store-api] SQLite ready:', dbPath)
-    return db
+    return store
   } catch (err) {
-    console.warn('[store-api] SQLite unavailable, store API disabled:', err.message)
-    return null
+    const filePath = process.env.STORE_JSON_PATH || path.join(__dirname, '..', 'toolbox-store.json')
+    backendName = 'json-file'
+    store = createJsonFileStore(filePath)
+    console.log('[store-api] using JSON file backend:', filePath)
+    return store
   }
 }
 
 export async function registerStoreApiRoutes(app) {
-  // Pre-init DB (non-blocking, failures are graceful)
-  await getDb().catch(() => null)
+  await getStore().catch(() => null)
 
-  // Helper: get db or respond 503
-  async function withDb(req, res, fn) {
-    const d = await getDb()
-    if (!d) return res.status(503).json({ error: 'Storage backend unavailable (better-sqlite3 not installed)' })
-    try { fn(d) } catch (err) {
+  async function withStore(res, fn) {
+    const activeStore = await getStore()
+    if (!activeStore) {
+      return res.status(503).json({ error: 'Storage backend unavailable' })
+    }
+    try { fn(activeStore) } catch (err) {
       console.error('[store-api] error:', err)
       res.status(500).json({ error: err.message })
     }
@@ -64,16 +152,15 @@ export async function registerStoreApiRoutes(app) {
 
   // GET /api/store/ping
   app.get('/api/store/ping', (req, res) => {
-    res.json({ ok: true, backend: 'sqlite', time: Date.now() })
+    res.json({ ok: true, backend: backendName, time: Date.now() })
   })
 
   // GET /api/store/:ns
   app.get('/api/store/:ns', async (req, res) => {
     const { ns } = req.params
     if (!valid(ns)) return res.status(400).json({ error: 'Invalid namespace' })
-    await withDb(req, res, (db) => {
-      const rows = db.prepare('SELECT key FROM kv_store WHERE ns = ?').all(ns)
-      res.json({ keys: rows.map(r => r.key) })
+    await withStore(res, (activeStore) => {
+      res.json({ keys: activeStore.list(ns) })
     })
   })
 
@@ -81,9 +168,8 @@ export async function registerStoreApiRoutes(app) {
   app.delete('/api/store/:ns', async (req, res) => {
     const { ns } = req.params
     if (!valid(ns)) return res.status(400).json({ error: 'Invalid namespace' })
-    await withDb(req, res, (db) => {
-      const info = db.prepare('DELETE FROM kv_store WHERE ns = ?').run(ns)
-      res.json({ deleted: info.changes })
+    await withStore(res, (activeStore) => {
+      res.json({ deleted: activeStore.clear(ns) })
     })
   })
 
@@ -91,14 +177,10 @@ export async function registerStoreApiRoutes(app) {
   app.get('/api/store/:ns/:key', async (req, res) => {
     const { ns, key } = req.params
     if (!valid(ns) || !valid(key)) return res.status(400).json({ error: 'Invalid namespace or key' })
-    await withDb(req, res, (db) => {
-      const row = db.prepare('SELECT value FROM kv_store WHERE ns = ? AND key = ?').get(ns, key)
-      if (!row) return res.status(404).json({ error: 'Not found' })
-      try {
-        res.json({ value: JSON.parse(row.value) })
-      } catch {
-        res.json({ value: row.value })
-      }
+    await withStore(res, (activeStore) => {
+      const value = activeStore.get(ns, key)
+      if (value === undefined) return res.status(404).json({ error: 'Not found' })
+      res.json({ value })
     })
   })
 
@@ -108,12 +190,8 @@ export async function registerStoreApiRoutes(app) {
     if (!valid(ns) || !valid(key)) return res.status(400).json({ error: 'Invalid namespace or key' })
     const { value } = req.body
     if (value === undefined) return res.status(400).json({ error: 'Missing value in body' })
-    await withDb(req, res, (db) => {
-      db.prepare(`
-        INSERT INTO kv_store (ns, key, value, updated_at)
-        VALUES (?, ?, ?, unixepoch())
-        ON CONFLICT(ns, key) DO UPDATE SET value = excluded.value, updated_at = unixepoch()
-      `).run(ns, key, JSON.stringify(value))
+    await withStore(res, (activeStore) => {
+      activeStore.set(ns, key, value)
       res.json({ ok: true })
     })
   })
@@ -122,9 +200,8 @@ export async function registerStoreApiRoutes(app) {
   app.delete('/api/store/:ns/:key', async (req, res) => {
     const { ns, key } = req.params
     if (!valid(ns) || !valid(key)) return res.status(400).json({ error: 'Invalid namespace or key' })
-    await withDb(req, res, (db) => {
-      const info = db.prepare('DELETE FROM kv_store WHERE ns = ? AND key = ?').run(ns, key)
-      res.json({ deleted: info.changes })
+    await withStore(res, (activeStore) => {
+      res.json({ deleted: activeStore.remove(ns, key) })
     })
   })
 }
