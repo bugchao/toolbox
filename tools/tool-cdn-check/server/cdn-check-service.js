@@ -75,8 +75,8 @@ export async function checkCdn(domain) {
 
   const cnameStr = cnameChain.join(' → ')
   let provider = null
-  let confidence: 'high' | 'medium' | 'low' = 'low'
-  const evidenceHeaders: string[] = []
+  let confidence = 'low'
+  const evidenceHeaders = []
 
   // 检测 CNAME
   for (const cname of cnameChain) {
@@ -117,7 +117,7 @@ export async function checkCdn(domain) {
     dnsLookupTtl = parseInt(ttlResult.stdout.trim()) || null
   } catch {}
 
-  const providerNames: Record<string, string> = {
+  const providerNames = {
     cloudflare: 'Cloudflare', fastly: 'Fastly', akamai: 'Akamai',
     cloudfront: 'AWS CloudFront', cdn77: 'CDN77', bunny: 'Bunny CDN',
     vercel: 'Vercel Edge', netlify: 'Netlify Edge', aliyun: '阿里云 CDN',
@@ -125,7 +125,7 @@ export async function checkCdn(domain) {
   }
 
   const summary = hasCdn
-    ? `检测到 ${providerNames[provider!] || '未知'} CDN，置信度${confidence === 'high' ? '高' : confidence === 'medium' ? '中' : '低'}`
+    ? `检测到 ${providerNames[provider] || '未知'} CDN，置信度${confidence === 'high' ? '高' : confidence === 'medium' ? '中' : '低'}`
     : '未检测到明显 CDN 特征，可能直接托管或使用未知 CDN'
 
   return {
