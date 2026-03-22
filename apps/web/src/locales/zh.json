@@ -20,6 +20,9 @@
     "category_query": "查询工具",
     "category_utils": "实用工具",
     "category_network": "网络工具",
+    "category_life": "生活工具",
+    "category_travel": "旅行工具",
+    "category_learn": "学习工具",
     "category_news": "资讯工具",
     "tools": {
       "qrcode_generate": "二维码生成",

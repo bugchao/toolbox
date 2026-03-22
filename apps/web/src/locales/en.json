@@ -20,6 +20,9 @@
     "category_query": "Query",
     "category_utils": "Utilities",
     "category_network": "Network",
+    "category_life": "Life Tools",
+    "category_travel": "Travel Tools",
+    "category_learn": "Learning Tools",
     "category_news": "News",
     "tools": {
       "qrcode_generate": "QR Generate",

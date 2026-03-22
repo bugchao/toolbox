@@ -8,7 +8,8 @@ import {
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
-  Radio, Shield, Database, Network
+  Radio, Shield, Database, Network,
+  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
@@ -38,6 +39,9 @@ const CATEGORIES = [
   { id: 'ip', nameKey: 'category_ip', icon: Network },
   { id: 'ipam', nameKey: 'category_ipam', icon: Database },
   { id: 'security', nameKey: 'category_security', icon: Shield },
+  { id: 'life', nameKey: 'category_life', icon: HeartIcon },
+  { id: 'travel', nameKey: 'category_travel', icon: Plane },
+  { id: 'learn', nameKey: 'category_learn', icon: BookOpen },
   { id: 'news', nameKey: 'category_news', icon: Newspaper },
 ] as const
 
