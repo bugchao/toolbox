@@ -39,11 +39,14 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@toolbox/service-core': path.join(root, 'packages/service-core/src/index.js'),
+      '@toolbox/legacy-tools-service': path.join(root, 'services/legacy-tools-service/src/index.js'),
       '@toolbox/i18n-runtime': path.join(root, 'packages/i18n-runtime/src/index.ts'),
       '@toolbox/tool-registry': path.join(root, 'packages/tool-registry/src/index.ts'),
       '@toolbox/ui-kit': path.join(root, 'packages/ui-kit/src/index.ts'),
       '@toolbox/tool-json': path.join(root, 'tools/tool-json'),
       '@toolbox/tool-weather': path.join(root, 'tools/tool-weather'),
+      '@toolbox/tool-todo-list': path.join(root, 'tools/tool-todo-list'),
       '@toolbox/tool-github-info': path.join(root, 'tools/tool-github-info'),
       '@toolbox/tool-ip-query': path.join(root, 'tools/tool-ip-query'),
       '@toolbox/tool-ip-asn': path.join(root, 'tools/tool-ip-asn'),

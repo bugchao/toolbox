@@ -31,6 +31,7 @@
       "news": "每日热点",
       "zipcode": "邮编查询",
       "weather": "天气查询",
+      "todo_list": "待办清单",
       "github_info": "GitHub 信息读取",
       "ip_query": "IP地址查询",
       "ip_asn": "IP ASN 查询",

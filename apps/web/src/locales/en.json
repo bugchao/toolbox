@@ -31,6 +31,7 @@
       "news": "Hot News",
       "zipcode": "Zip Code",
       "weather": "Weather",
+      "todo_list": "Todo List",
       "github_info": "GitHub Info Reader",
       "ip_query": "IP Query",
       "ip_asn": "IP ASN",

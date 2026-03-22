@@ -29,6 +29,8 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "@toolbox/legacy-tools-service": "workspace:*",
+    "@toolbox/service-core": "workspace:*",
     "better-sqlite3": "^12.8.0",
     "cheerio": "^1.0.0",
     "express": "^4.18.2",

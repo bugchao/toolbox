@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@toolbox/legacy-tools-service':
+        specifier: workspace:*
+        version: link:services/legacy-tools-service
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:packages/service-core
       better-sqlite3:
         specifier: ^12.8.0
         version: 12.8.0

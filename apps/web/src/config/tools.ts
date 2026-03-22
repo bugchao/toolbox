@@ -38,6 +38,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/news', nameKey: 'tools.news', icon: Newspaper, categoryKey: 'news', keywords: ['热点', '新闻'] , mode: 'server'},
   { path: '/zipcode', nameKey: 'tools.zipcode', icon: MapPin, categoryKey: 'query', keywords: ['邮编', 'zip'] , mode: 'server'},
   { path: '/weather', nameKey: 'tools.weather', icon: Cloud, categoryKey: 'query', keywords: ['天气', 'weather', 'forecast'], i18nNamespace: 'toolWeather', mode: 'hybrid' },
+  { path: '/todo-list', nameKey: 'tools.todo_list', icon: ListChecks, categoryKey: 'life', keywords: ['待办', '任务', '清单', 'todo'], i18nNamespace: 'toolTodoList', mode: 'client' },
   { path: '/github-info', nameKey: 'tools.github_info', icon: FileSearch, categoryKey: 'dev', keywords: ['github', 'token', 'repo', 'user'], i18nNamespace: 'toolGithubInfo' , mode: 'server'},
   { path: '/ip-query', nameKey: 'tools.ip_query', icon: Globe, categoryKey: 'ip', keywords: ['ip'], i18nNamespace: 'toolIpQuery' , mode: 'server'},
   { path: '/ip-asn', nameKey: 'tools.ip_asn', icon: Globe, categoryKey: 'ip', keywords: ['asn', 'as', '归属'], i18nNamespace: 'toolIpAsn' , mode: 'server'},
