@@ -20,7 +20,7 @@ interface PomodoroData {
 const DEFAULT_DATA: PomodoroData = { sessions: [], totalFocus: 0 }
 
 export function Pomodoro() {
-  const { data, save, loading, backend } = useToolStorage<PomodoroData>(
+  const { data, save, loading, backend, serverAvailable, switchToServer, switchToBrowser } = useToolStorage<PomodoroData>(
     'pomodoro', 'data', DEFAULT_DATA
   )
 
@@ -85,9 +85,25 @@ export function Pomodoro() {
     <div className="max-w-md mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 text-center flex-1">番茄钟</h1>
-        <span className="text-xs px-2 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500">
-          💾 本地存储
-        </span>
+        <div className="flex items-center gap-2">
+          <span className={`text-xs px-2 py-1 rounded-full ${
+            backend === 'server'
+              ? 'bg-green-100 dark:bg-green-900/30 text-green-500'
+              : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500'
+          }`}>
+            {backend === 'server' ? '☁️ 云端' : '💾 本地'}
+          </span>
+          {serverAvailable && backend === 'browser' && (
+            <button onClick={switchToServer} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              切换到云端
+            </button>
+          )}
+          {backend === 'server' && (
+            <button onClick={switchToBrowser} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              切换到本地
+            </button>
+          )}
+        </div>
       </div>
 
       {/* 模式切换 */}

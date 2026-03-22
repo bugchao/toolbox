@@ -45,7 +45,7 @@ const InputField = ({ value, onChange, placeholder, className }: { value: string
 )
 
 export function HabitTracker() {
-  const { data: habits, save: saveHabits, loading, backend } = useToolStorage<Habit[]>(
+  const { data: habits, save: saveHabits, loading, backend, serverAvailable, switchToServer, switchToBrowser } = useToolStorage<Habit[]>(
     'habit-tracker', 'habits', DEFAULT_HABITS
   )
   const [newName, setNewName] = useState('')
@@ -84,11 +84,29 @@ export function HabitTracker() {
     <div className="max-w-2xl mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">习惯打卡</h1>
-        <span className="text-xs px-2 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500">
-          💾 本地存储
-        </span>
+        <div className="flex items-center gap-2">
+          <span className={`text-xs px-2 py-1 rounded-full ${
+            backend === 'server'
+              ? 'bg-green-100 dark:bg-green-900/30 text-green-500'
+              : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500'
+          }`}>
+            {backend === 'server' ? '☁️ 云端' : '💾 本地'}
+          </span>
+          {serverAvailable && backend === 'browser' && (
+            <button onClick={switchToServer} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              切换到云端
+            </button>
+          )}
+          {backend === 'server' && (
+            <button onClick={switchToBrowser} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              切换到本地
+            </button>
+          )}
+        </div>
       </div>
-      <p className="text-gray-500 dark:text-gray-400">坚持每日打卡，养成好习惯</p>
+      <p className="text-gray-500 dark:text-gray-400">
+        {backend === 'server' ? '☁️ 数据同步到服务端，多设备共享' : '💾 数据存储在浏览器，仅本机可用'}
+      </p>
 
       {/* 添加习惯 */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
