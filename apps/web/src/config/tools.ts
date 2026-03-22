@@ -202,32 +202,42 @@ export function getToolByPath(path: string): ToolEntry | undefined {
   return TOOLS_BY_PATH.get(path)
 }
 
-/** 工具展示标题：优先使用工具自带 i18n namespace 的 title，否则用 nav.nameKey */
+/** 工具展示标题：优先使用 manifest meta（立即可用），回退到 i18n namespace，最后用 nav.nameKey */
 export function getToolTitle(
   tool: ToolEntry,
   t: (key: string) => string
 ): string {
+  // 1. 优先使用 manifest meta（立即可用，无需等待 i18n namespace 加载）
+  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
+  if (manifestMeta?.title) return manifestMeta.title
+  
+  // 2. 回退到 i18n namespace（如果已加载）
   if (tool.i18nNamespace) {
     const translated = t(`${tool.i18nNamespace}:title`)
     if (translated !== `${tool.i18nNamespace}:title`) return translated
   }
-  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
-  if (manifestMeta?.title) return manifestMeta.title
+  
+  // 3. 最终回退到 nav.nameKey
   return t(tool.nameKey)
 }
 
-/** 工具展示描述：优先使用工具自带 i18n namespace 的 description，否则用 home.toolDesc.* */
+/** 工具展示描述：优先使用 manifest meta，回退到 i18n namespace，最后用 home.toolDesc.* */
 export function getToolDescription(
   tool: ToolEntry,
   t: (key: string) => string,
   tHome: (key: string) => string
 ): string {
+  // 1. 优先使用 manifest meta（立即可用）
+  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
+  if (manifestMeta?.description) return manifestMeta.description
+  
+  // 2. 回退到 i18n namespace（如果已加载）
   if (tool.i18nNamespace) {
     const translated = t(`${tool.i18nNamespace}:description`)
     if (translated !== `${tool.i18nNamespace}:description`) return translated
   }
-  const manifestMeta = getToolManifestMetaByPath(tool.path, i18n.resolvedLanguage || i18n.language)
-  if (manifestMeta?.description) return manifestMeta.description
+  
+  // 3. 最终回退到 home.toolDesc.*
   const descKey = tool.nameKey.replace('tools.', '')
   return tHome(`toolDesc.${descKey}`)
 }
