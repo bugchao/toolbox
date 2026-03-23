@@ -1,1 +1,1 @@
-export { SalaryCalc as default } from './SalaryCalc'
+export { default } from './SalaryCalc'

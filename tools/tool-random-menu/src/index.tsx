@@ -1,1 +1,1 @@
-export { RandomMenu as default } from './RandomMenu'
+export { default } from './RandomMenu'

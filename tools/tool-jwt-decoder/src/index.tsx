@@ -1,1 +1,1 @@
-export { JwtDecoder as default } from './JwtDecoder'
+export { default } from './JwtDecoder'

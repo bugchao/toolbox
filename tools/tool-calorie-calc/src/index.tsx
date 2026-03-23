@@ -1,1 +1,1 @@
-export { CalorieCalc as default } from './CalorieCalc'
+export { default } from './CalorieCalc'

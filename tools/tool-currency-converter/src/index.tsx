@@ -1,1 +1,1 @@
-export { CurrencyConverter as default } from './CurrencyConverter'
+export { default } from './CurrencyConverter'
