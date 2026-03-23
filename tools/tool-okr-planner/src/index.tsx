@@ -1,1 +1,1 @@
-export { OkrPlanner as default } from './OkrPlanner'
+export { default } from './OkrPlanner'
