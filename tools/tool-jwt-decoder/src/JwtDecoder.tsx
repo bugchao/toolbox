@@ -48,7 +48,7 @@ export default function JwtDecoder() {
       <PageHero
         title={t('title')}
         description={t('description')}
-        icon={<Key className="w-8 h-8" />}
+        icon={Key}
       />
       <div className="max-w-3xl mx-auto px-4 py-6 space-y-4">
         {/* 输入 */}

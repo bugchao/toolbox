@@ -72,7 +72,7 @@ export default function CalorieCalc() {
       <PageHero
         title={t('title')}
         description={t('description')}
-        icon={<Apple className="w-8 h-8" />}
+        icon={Apple}
       />
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
         {/* 分类 */}

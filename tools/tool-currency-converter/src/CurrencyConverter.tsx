@@ -62,7 +62,7 @@ export default function CurrencyConverter() {
       <PageHero
         title={t('title')}
         description={t('description')}
-        icon={<ArrowLeftRight className="w-8 h-8" />}
+        icon={ArrowLeftRight}
       />
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
         {/* 金额 */}

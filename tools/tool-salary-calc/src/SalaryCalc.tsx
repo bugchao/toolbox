@@ -71,7 +71,7 @@ export default function SalaryCalc() {
       <PageHero
         title={t('title')}
         description={t('description')}
-        icon={<Calculator className="w-8 h-8" />}
+        icon={Calculator}
       />
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
         {/* 月薪 */}
