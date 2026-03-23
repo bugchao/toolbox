@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Plus, Trash2, ChevronDown, ChevronRight, Target, CheckSquare, Square, Edit2, Check, X } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
@@ -68,6 +69,7 @@ const DEFAULT_STATE: OkrState = (() => {
 
 // ---- Component ----
 export default function OkrPlanner() {
+  const { t } = useTranslation('toolOkrPlanner')
   const { data: state, save } = useToolStorage<OkrState>('okr-planner', 'data', DEFAULT_STATE)
   const [newObjTitle, setNewObjTitle] = useState('')
   const [newObjQuarter, setNewObjQuarter] = useState('2026-Q2')
@@ -174,8 +176,8 @@ export default function OkrPlanner() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <PageHero
-        title="目标拆解（OKR）"
-        description="设定目标与关键结果，逐层拆解子任务，追踪进度"
+        title={t('title')}
+        description={t('description')}
         icon={Target}
       />
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-5">
@@ -217,7 +219,7 @@ export default function OkrPlanner() {
             <div className="flex items-center gap-1">
               <input value={newGroupName} onChange={e => setNewGroupName(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') addGroup(); if (e.key === 'Escape') setAddingGroup(false) }}
-                placeholder="目标集合名称..."
+                placeholder={t('groupPlaceholder')}
                 className="px-2 py-1 text-sm border border-indigo-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 w-32 focus:outline-none" autoFocus />
               <button onClick={addGroup} className="text-green-500 hover:text-green-600"><Check className="w-4 h-4" /></button>
               <button onClick={() => setAddingGroup(false)} className="text-gray-400"><X className="w-4 h-4" /></button>
@@ -225,17 +227,17 @@ export default function OkrPlanner() {
           ) : (
             <button onClick={() => setAddingGroup(true)}
               className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-gray-400 border border-dashed border-gray-300 dark:border-gray-600 hover:border-indigo-400 hover:text-indigo-500 transition-colors">
-              <Plus className="w-3.5 h-3.5" />新建
+              <Plus className="w-3.5 h-3.5" />{t('newGroup')}
             </button>
           )}
         </div>
 
         {/* ---- Add Objective ---- */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">新增目标 (O)</h2>
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('addObjective')}</h2>
           <div className="flex gap-2">
             <input value={newObjTitle} onChange={e => setNewObjTitle(e.target.value)}
-              placeholder="目标描述..." onKeyDown={e => e.key === 'Enter' && addObjective()}
+              placeholder={t('objectivePlaceholder')} onKeyDown={e => e.key === 'Enter' && addObjective()}
               className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
             <select value={newObjQuarter} onChange={e => setNewObjQuarter(e.target.value)}
               className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none">
@@ -252,7 +254,7 @@ export default function OkrPlanner() {
           {objectives.length === 0 && (
             <div className="text-center py-12 text-gray-400">
               <Target className="w-10 h-10 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">还没有目标，添加第一个 O 开始吧</p>
+              <p className="text-sm">{t('emptyHint')}</p>
             </div>
           )}
           {objectives.map(obj => {
@@ -345,7 +347,7 @@ export default function OkrPlanner() {
                                   value={newSubTexts[subKey] || ''}
                                   onChange={e => setNewSubTexts(t => ({ ...t, [subKey]: e.target.value }))}
                                   onKeyDown={e => e.key === 'Enter' && addSubTask(obj.id, kr.id)}
-                                  placeholder="添加子任务..."
+                                  placeholder={t('subTaskPlaceholder')}
                                   className="flex-1 px-2 py-1 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
                                 <button onClick={() => addSubTask(obj.id, kr.id)}
                                   className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-lg hover:bg-gray-200 transition-colors">
@@ -365,7 +367,7 @@ export default function OkrPlanner() {
                         value={newKrTexts[obj.id] || ''}
                         onChange={v => setNewKrTexts(t => ({ ...t, [obj.id]: v.target.value }))}
                         onKeyDown={e => e.key === 'Enter' && addKr(obj.id)}
-                        placeholder="添加关键结果..."
+                        placeholder={t('krPlaceholder')}
                         className="flex-1 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500" />
                       <button onClick={() => addKr(obj.id)}
                         className="px-2 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-lg hover:bg-gray-200 transition-colors">
@@ -379,7 +381,7 @@ export default function OkrPlanner() {
           })}
         </div>
 
-        <p className="text-xs text-center text-gray-400">✅ OKR 数据已自动保存到本地</p>
+        <p className="text-xs text-center text-gray-400">{t('autoSave')}</p>
       </div>
     </div>
   )

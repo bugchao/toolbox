@@ -1,4 +1,9 @@
 {
   "title": "Packing List",
-  "description": "Generate packing lists by travel type and track what you've packed"
+  "description": "Generate packing list by travel type, check off items",
+  "packed": "Packed",
+  "reset": "Reset",
+  "addItem": "Add item...",
+  "all": "All",
+  "autoSave": "✅ Packing list saved, auto-restored on next visit"
 }

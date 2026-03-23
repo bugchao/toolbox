@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Plus, Trash2, CheckSquare, Square, RotateCcw, Luggage } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
@@ -54,6 +55,7 @@ const DEFAULT_STATE: PackingState = {
 }
 
 export default function PackingList() {
+  const { t } = useTranslation('toolPackingList')
   const { data: state, save } = useToolStorage<PackingState>('packing-list', 'data', DEFAULT_STATE)
   const [newText, setNewText] = useState('')
   const [newCat, setNewCat] = useState('其他')
@@ -86,8 +88,8 @@ export default function PackingList() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <PageHero
-        title="行李清单"
-        description="根据旅行类型生成行李清单，逐项打包确认"
+        title={t('title')}
+        description={t('description')}
         icon={Luggage}
       />
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
@@ -104,7 +106,7 @@ export default function PackingList() {
         {/* 进度 */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600 dark:text-gray-400">已装包 {packed}/{filtered.length}</span>
+            <span className="text-gray-600 dark:text-gray-400">{t('packed')} {packed}/{filtered.length}</span>
             <div className="flex gap-2">
               <span className={`font-semibold ${
                 pct === 100 ? 'text-green-500' : pct > 50 ? 'text-amber-500' : 'text-gray-500'
@@ -133,7 +135,7 @@ export default function PackingList() {
 
         {/* 添加物品 */}
         <div className="flex gap-2">
-          <input value={newText} onChange={e => setNewText(e.target.value)} placeholder="添加物品..."
+          <input value={newText} onChange={e => setNewText(e.target.value)} placeholder={t('addItem')}
             onKeyDown={e => e.key === 'Enter' && add()}
             className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500" />
           <select value={newCat} onChange={e => setNewCat(e.target.value)}
@@ -171,7 +173,7 @@ export default function PackingList() {
           ))}
         </div>
 
-        <p className="text-xs text-center text-gray-400">✅ 行李清单已自动保存，下次访问自动恢复</p>
+        <p className="text-xs text-center text-gray-400">{t('autoSave')}</p>
       </div>
     </div>
   )

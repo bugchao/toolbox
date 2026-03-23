@@ -1,4 +1,12 @@
 {
   "title": "OKR Planner",
-  "description": "Set objectives and key results, break down tasks, track progress"
+  "description": "Set objectives and key results, break down tasks, track progress",
+  "addObjective": "Add Objective (O)",
+  "objectivePlaceholder": "Objective description...",
+  "krPlaceholder": "Add key result...",
+  "subTaskPlaceholder": "Add sub-task...",
+  "newGroup": "New",
+  "groupPlaceholder": "Group name...",
+  "emptyHint": "No objectives yet, add your first O to get started",
+  "autoSave": "✅ OKR data saved locally"
 }

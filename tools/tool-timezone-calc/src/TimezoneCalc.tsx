@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Plus, Trash2, Clock } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
@@ -57,6 +58,7 @@ function isDaytime(date: Date, tz: string): boolean {
 }
 
 export default function TimezoneCalc() {
+  const { t } = useTranslation('toolTimezoneCalc')
   const { data: state, save } = useToolStorage<TimezoneState>('timezone-calc', 'data', DEFAULT_STATE)
   const [now, setNow] = useState(new Date())
   const [baseTime, setBaseTime] = useState('')
@@ -84,14 +86,14 @@ export default function TimezoneCalc() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <PageHero
-        title="时差计算器"
-        description="多时区时间对比，支持自定义时间换算"
+        title={t('title')}
+        description={t('description')}
         icon={Clock}
       />
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         {/* 时间换算 */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">时间换算</h2>
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('timeConvert')}</h2>
           <div className="flex gap-2 flex-wrap">
             <input type="datetime-local" value={baseTime} onChange={e => setBaseTime(e.target.value)}
               className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500" />
@@ -99,7 +101,7 @@ export default function TimezoneCalc() {
               className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none">
               {TIMEZONES.map(t => <option key={t.tz} value={t.tz}>{t.flag} {t.label}</option>)}
             </select>
-            {baseTime && <button onClick={() => setBaseTime('')} className="px-3 py-2 text-sm text-gray-400 hover:text-gray-600 border border-gray-300 dark:border-gray-600 rounded-lg">用当前时间</button>}
+            {baseTime && <button onClick={() => setBaseTime('')} className="px-3 py-2 text-sm text-gray-400 hover:text-gray-600 border border-gray-300 dark:border-gray-600 rounded-lg">{t('useNow')}</button>}
           </div>
         </div>
 
@@ -124,7 +126,7 @@ export default function TimezoneCalc() {
                   <span className="text-xl">{info.flag}</span>
                   <div>
                     <div className="text-sm font-medium text-gray-700 dark:text-gray-300">{info.label}</div>
-                    <div className="text-xs text-gray-400">{offset} · {daytime ? '☀️ 白天' : '🌙 夜晚'}</div>
+                    <div className="text-xs text-gray-400">{offset} · {daytime ? `☀️ ${t('daytime')}` : `🌙 ${t('night')}`}</div>
                   </div>
                 </div>
                 <div className="font-mono text-2xl font-bold text-gray-900 dark:text-gray-100">{timeStr}</div>
@@ -143,12 +145,12 @@ export default function TimezoneCalc() {
           </select>
           <button onClick={addCard}
             className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium transition-colors">
-            <Plus className="w-4 h-4" />添加
+            <Plus className="w-4 h-4" />{t('addTz')}
           </button>
         </div>
 
         {/* 存储提示 */}
-        <p className="text-xs text-center text-gray-400">✅ 时区配置已自动保存，下次访问自动恢复</p>
+        <p className="text-xs text-center text-gray-400">{t('autoSave')}</p>
       </div>
     </div>
   )

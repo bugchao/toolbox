@@ -1,4 +1,10 @@
 {
   "title": "时差计算器",
-  "description": "多时区时间对比，支持自定义时间换算"
+  "description": "多时区时间对比，支持自定义时间换算",
+  "timeConvert": "时间换算",
+  "useNow": "用当前时间",
+  "addTz": "添加",
+  "daytime": "白天",
+  "night": "夜晚",
+  "autoSave": "✅ 时区配置已自动保存，下次访问自动恢复"
 }
