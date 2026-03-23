@@ -1,0 +1,9 @@
+{
+  "title": "Calorie Calculator",
+  "description": "Look up food calories and estimate intake",
+  "search": "Search food...",
+  "selectFood": "Select Food",
+  "weight": "Weight (grams)",
+  "estimatedCalories": "Estimated Calories",
+  "tips": "Tips"
+}

@@ -1,146 +1,117 @@
-import React, { useState, useMemo } from 'react'
-import { Copy, CheckCircle, AlertTriangle, ShieldCheck } from 'lucide-react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PageHero } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
+import { Key, AlertTriangle, CheckCircle } from 'lucide-react'
 
 function base64UrlDecode(str: string): string {
+  let base64 = str.replace(/-/g, '+').replace(/_/g, '/')
+  while (base64.length % 4) base64 += '='
   try {
-    const base64 = str.replace(/-/g, '+').replace(/_/g, '/')
-    const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=')
-    return decodeURIComponent(atob(padded).split('').map(c =>
-      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-    ).join(''))
+    return decodeURIComponent(
+      atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+    )
   } catch {
-    return ''
+    return atob(base64)
   }
 }
 
-interface JwtParts {
-  header: Record<string, unknown> | null
-  payload: Record<string, unknown> | null
-  signature: string
-  valid: boolean
-  error?: string
-}
-
-function parseJwt(token: string): JwtParts {
-  const parts = token.trim().split('.')
-  if (parts.length !== 3) return { header: null, payload: null, signature: '', valid: false, error: 'JWT 格式错误：应包含3段（header.payload.signature）' }
+function decodeJwt(token: string) {
   try {
-    const header = JSON.parse(base64UrlDecode(parts[0]))
-    const payload = JSON.parse(base64UrlDecode(parts[1]))
-    return { header, payload, signature: parts[2], valid: true }
-  } catch (e) {
-    return { header: null, payload: null, signature: '', valid: false, error: '解析失败：' + (e instanceof Error ? e.message : String(e)) }
+    const parts = token.trim().split('.')
+    if (parts.length !== 3) return { valid: false, error: '无效的 JWT 格式，应包含 3 个部分', header: {}, payload: {}, signature: '' }
+    const [h, p, signature] = parts
+    return { valid: true, header: JSON.parse(base64UrlDecode(h)), payload: JSON.parse(base64UrlDecode(p)), signature }
+  } catch (e: any) {
+    return { valid: false, error: e.message || '解码失败', header: {}, payload: {}, signature: '' }
   }
 }
 
-function formatTime(ts: number): string {
-  try { return new Date(ts * 1000).toLocaleString('zh-CN') } catch { return String(ts) }
+const SAMPLE_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+interface JwtState {
+  token: string
 }
 
-function isExpired(payload: Record<string, unknown>): boolean | null {
-  if (!payload.exp) return null
-  return Date.now() / 1000 > (payload.exp as number)
-}
+const DEFAULT_STATE: JwtState = { token: '' }
 
-const SAMPLE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjk5OTk5OTk5OTl9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+export default function JwtDecoder() {
+  const { t } = useTranslation('toolJwtDecoder')
+  const [state, setState] = useToolStorage<JwtState>('jwt-decoder', DEFAULT_STATE)
+  const { token } = state
+  const setToken = (token: string) => setState(prev => ({ ...prev, token }))
 
-const JsonBlock = ({ data, title }: { data: Record<string, unknown>; title: string }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-    <div className="px-4 py-2 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-      <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{title}</span>
-    </div>
-    <div className="p-4">
-      <table className="w-full text-sm">
-        <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
-          {Object.entries(data).map(([k, v]) => {
-            const isTime = (k === 'exp' || k === 'iat' || k === 'nbf') && typeof v === 'number'
-            const expired = k === 'exp' ? isExpired(data) : null
-            return (
-              <tr key={k}>
-                <td className="py-2 pr-4 font-mono text-indigo-500 font-medium whitespace-nowrap w-28">{k}</td>
-                <td className="py-2 font-mono text-gray-700 dark:text-gray-300 break-all">
-                  {isTime ? (
-                    <span>
-                      {String(v)}
-                      <span className="ml-2 text-gray-400">({formatTime(v as number)})</span>
-                      {expired === true && <span className="ml-2 text-red-500 text-xs">已过期</span>}
-                      {expired === false && <span className="ml-2 text-green-500 text-xs">有效</span>}
-                    </span>
-                  ) : String(v)}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </div>
-  </div>
-)
+  const result = useMemo(() => decodeJwt(token), [token])
 
-export function JwtDecoder() {
-  const [token, setToken] = useState('')
-  const [copied, setCopied] = useState(false)
-
-  const result = useMemo(() => token.trim() ? parseJwt(token) : null, [token])
-
-  const copy = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) })
-  }
-
-  const expired = result?.payload ? isExpired(result.payload) : null
+  const fmt = (obj: object) => JSON.stringify(obj, null, 2)
 
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">JWT 解析工具</h1>
-      <p className="text-gray-500 dark:text-gray-400">解码 JWT Token，查看 Header、Payload 内容及过期状态</p>
-
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">JWT Token</label>
-          <button onClick={() => { setToken(SAMPLE) }} className="text-xs text-indigo-500 hover:underline">加载示例</button>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero
+        title={t('title')}
+        description={t('description')}
+        icon={<Key className="w-8 h-8" />}
+      />
+      <div className="max-w-3xl mx-auto px-4 py-6 space-y-4">
+        {/* 输入 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('token')}</label>
+          <textarea value={token} onChange={e => setToken(e.target.value)}
+            placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            rows={4}
+            className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <button onClick={() => setToken(SAMPLE_JWT)} className="text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+            {t('loadSample')}
+          </button>
         </div>
-        <textarea value={token} onChange={e => setToken(e.target.value)} rows={4}
-          placeholder="粘贴 JWT Token..."
-          className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" />
-      </div>
 
-      {result && !result.valid && (
-        <div className="flex items-center gap-2 text-red-500 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl p-4">
-          <AlertTriangle className="w-4 h-4 shrink-0" /><span className="text-sm">{result.error}</span>
-        </div>
-      )}
-
-      {result?.valid && (
-        <>
-          {/* 状态 */}
-          <div className={`flex items-center gap-2 rounded-xl p-4 border ${
-            expired === true ? 'bg-red-50 dark:bg-red-900/10 border-red-200 dark:border-red-800 text-red-600' :
-            expired === false ? 'bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800 text-green-600' :
-            'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500'
+        {/* 验证状态 */}
+        {token && (
+          <div className={`rounded-xl p-4 flex items-center gap-3 ${
+            result.valid
+              ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+              : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
           }`}>
-            <ShieldCheck className="w-4 h-4" />
-            <span className="text-sm font-medium">
-              {expired === true ? 'Token 已过期' : expired === false ? 'Token 有效' : 'Token 格式正确（无过期时间）'}
-            </span>
-            <span className="ml-auto text-xs">{result.header?.alg as string} / {result.header?.typ as string}</span>
-          </div>
-
-          {result.header && <JsonBlock data={result.header} title="Header" />}
-          {result.payload && <JsonBlock data={result.payload} title="Payload" />}
-
-          {/* 签名 */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div className="px-4 py-2 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Signature</span>
-              <button onClick={() => copy(result.signature)}
-                className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600">
-                {copied ? <CheckCircle className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}复制
-              </button>
+            {result.valid
+              ? <CheckCircle className="w-5 h-5 text-green-500" />
+              : <AlertTriangle className="w-5 h-5 text-red-500" />}
+            <div>
+              <div className={`font-medium ${result.valid ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
+                {result.valid ? t('validFormat') : t('invalidFormat')}
+              </div>
+              {!result.valid && result.error && <div className="text-sm text-red-600 dark:text-red-400">{result.error}</div>}
             </div>
-            <div className="p-4 font-mono text-xs text-orange-500 break-all">{result.signature}</div>
           </div>
-        </>
-      )}
+        )}
+
+        {/* 解析结果 */}
+        {result.valid && (
+          <div className="grid gap-4">
+            {[
+              { label: t('header'), data: result.header, color: 'bg-indigo-500' },
+              { label: t('payload'), data: result.payload, color: 'bg-green-500' },
+            ].map(({ label, data, color }) => (
+              <div key={label} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className={`${color} text-white px-4 py-2 font-medium`}>{label}</div>
+                <pre className="p-4 text-sm font-mono text-gray-900 dark:text-gray-100 overflow-x-auto bg-gray-50 dark:bg-gray-900">
+                  {fmt(data as object)}
+                </pre>
+              </div>
+            ))}
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="bg-purple-500 text-white px-4 py-2 font-medium">{t('signature')}</div>
+              <pre className="p-4 text-sm font-mono text-gray-900 dark:text-gray-100 overflow-x-auto bg-gray-50 dark:bg-gray-900 break-all">
+                {result.signature}
+              </pre>
+            </div>
+          </div>
+        )}
+
+        {/* 说明 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <p className="text-sm text-gray-500">⚠️ 本工具仅用于解码 JWT，不验证签名。生产环境中请务必验证签名！</p>
+        </div>
+      </div>
     </div>
   )
 }

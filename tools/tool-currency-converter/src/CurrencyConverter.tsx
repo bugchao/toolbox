@@ -1,112 +1,138 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { ArrowLeftRight, RefreshCw } from 'lucide-react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PageHero } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
+import { ArrowLeftRight, TrendingUp } from 'lucide-react'
 
 const CURRENCIES = [
-  { code: 'CNY', name: '人民币', symbol: '¥', flag: '🇨🇳' },
-  { code: 'USD', name: '美元', symbol: '$', flag: '🇺🇸' },
-  { code: 'EUR', name: '欧元', symbol: '€', flag: '🇪🇺' },
-  { code: 'GBP', name: '英镑', symbol: '£', flag: '🇬🇧' },
-  { code: 'JPY', name: '日元', symbol: '¥', flag: '🇯🇵' },
-  { code: 'KRW', name: '韩元', symbol: '₩', flag: '🇰🇷' },
-  { code: 'HKD', name: '港币', symbol: 'HK$', flag: '🇭🇰' },
-  { code: 'SGD', name: '新加坡元', symbol: 'S$', flag: '🇸🇬' },
-  { code: 'AUD', name: '澳元', symbol: 'A$', flag: '🇦🇺' },
-  { code: 'CAD', name: '加元', symbol: 'C$', flag: '🇨🇦' },
-  { code: 'CHF', name: '瑞士法郎', symbol: 'Fr', flag: '🇨🇭' },
-  { code: 'THB', name: '泰铢', symbol: '฿', flag: '🇹🇭' },
+  { code: 'CNY', name: '人民币', symbol: '¥' },
+  { code: 'USD', name: '美元', symbol: '$' },
+  { code: 'EUR', name: '欧元', symbol: '€' },
+  { code: 'JPY', name: '日元', symbol: '¥' },
+  { code: 'GBP', name: '英镑', symbol: '£' },
+  { code: 'AUD', name: '澳元', symbol: 'A$' },
+  { code: 'CAD', name: '加元', symbol: 'C$' },
+  { code: 'CHF', name: '瑞郎', symbol: 'Fr' },
+  { code: 'HKD', name: '港币', symbol: 'HK$' },
+  { code: 'KRW', name: '韩元', symbol: '₩' },
+  { code: 'THB', name: '泰铢', symbol: '฿' },
+  { code: 'SGD', name: '新元', symbol: 'S$' },
 ]
 
-// 固定汇率（相对USD），使用近似值（不调用外部API）
-const RATES_VS_USD: Record<string, number> = {
-  USD: 1, CNY: 7.24, EUR: 0.92, GBP: 0.79, JPY: 149.5,
-  KRW: 1325, HKD: 7.82, SGD: 1.34, AUD: 1.53, CAD: 1.36, CHF: 0.90, THB: 35.1,
+const BASE_RATES: Record<string, number> = {
+  CNY: 1, USD: 0.138, EUR: 0.129, JPY: 20.5, GBP: 0.109,
+  AUD: 0.215, CAD: 0.193, CHF: 0.123, HKD: 1.076,
+  KRW: 189.5, THB: 4.72, SGD: 0.185,
 }
 
-function convert(amount: number, from: string, to: string): number {
-  const usd = amount / RATES_VS_USD[from]
-  return usd * RATES_VS_USD[to]
+interface ConverterState {
+  amount: number
+  fromCurrency: string
+  toCurrency: string
 }
 
-const CurrencySelect = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
-  <select value={value} onChange={e => onChange(e.target.value)}
-    className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-    {CURRENCIES.map(c => (
-      <option key={c.code} value={c.code}>{c.flag} {c.code} - {c.name}</option>
-    ))}
-  </select>
-)
+const DEFAULT_STATE: ConverterState = {
+  amount: 100,
+  fromCurrency: 'CNY',
+  toCurrency: 'USD',
+}
 
-export function CurrencyConverter() {
-  const [amount, setAmount] = useState(100)
-  const [from, setFrom] = useState('USD')
-  const [to, setTo] = useState('CNY')
-  const [lastUpdated] = useState(() => new Date().toLocaleDateString('zh-CN'))
+export default function CurrencyConverter() {
+  const { t } = useTranslation('toolCurrencyConverter')
+  const [state, setState] = useToolStorage<ConverterState>('currency-converter', DEFAULT_STATE)
 
-  const result = convert(amount, from, to)
-  const rate = convert(1, from, to)
+  const { amount, fromCurrency, toCurrency } = state
 
-  const swap = useCallback(() => { setFrom(to); setTo(from) }, [from, to])
+  const set = (patch: Partial<ConverterState>) =>
+    setState(prev => ({ ...prev, ...patch }))
 
-  const fromCur = CURRENCIES.find(c => c.code === from)!
-  const toCur = CURRENCIES.find(c => c.code === to)!
+  const result = useMemo(() => {
+    const fromRate = BASE_RATES[fromCurrency]
+    const toRate = BASE_RATES[toCurrency]
+    return {
+      converted: (amount * toRate) / fromRate,
+      rate: toRate / fromRate,
+      inverseRate: fromRate / toRate,
+    }
+  }, [amount, fromCurrency, toCurrency])
+
+  const swap = () => set({ fromCurrency: toCurrency, toCurrency: fromCurrency })
 
   return (
-    <div className="max-w-md mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">汇率换算</h1>
-        <span className="text-xs text-gray-400 flex items-center gap-1">
-          <RefreshCw className="w-3 h-3" />参考汇率 {lastUpdated}
-        </span>
-      </div>
-
-      <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800 rounded-xl p-3 text-xs text-yellow-700 dark:text-yellow-400">
-        汇率为内置参考值，实际汇率请以银行/交易所为准
-      </div>
-
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-4">
-        {/* 金额输入 */}
-        <div>
-          <label className="block text-xs text-gray-500 mb-1">金额</label>
-          <input type="number" value={amount} onChange={e => setAmount(parseFloat(e.target.value) || 0)}
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero
+        title={t('title')}
+        description={t('description')}
+        icon={<ArrowLeftRight className="w-8 h-8" />}
+      />
+      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
+        {/* 金额 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('amount')}</label>
+          <input type="number" value={amount} onChange={e => set({ amount: Number(e.target.value) })}
             className="w-full px-3 py-3 text-2xl font-bold rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         </div>
 
         {/* 货币选择 */}
-        <div className="flex gap-2 items-center">
-          <div className="flex-1 space-y-1">
-            <label className="block text-xs text-gray-500">从</label>
-            <CurrencySelect value={from} onChange={setFrom} />
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('from')}</label>
+            <select value={fromCurrency} onChange={e => set({ fromCurrency: e.target.value })}
+              className="w-full px-3 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} - {c.name}</option>)}
+            </select>
           </div>
-          <button onClick={swap}
-            className="mt-5 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 transition-colors">
-            <ArrowLeftRight className="w-4 h-4" />
+          <button onClick={swap} className="mt-6 p-3 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 hover:bg-indigo-200 transition-colors">
+            <ArrowLeftRight className="w-5 h-5" />
           </button>
-          <div className="flex-1 space-y-1">
-            <label className="block text-xs text-gray-500">到</label>
-            <CurrencySelect value={to} onChange={setTo} />
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('to')}</label>
+            <select value={toCurrency} onChange={e => set({ toCurrency: e.target.value })}
+              className="w-full px-3 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} - {c.name}</option>)}
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* 结果 */}
-      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-5 text-white">
-        <div className="text-sm opacity-80 mb-1">{amount.toLocaleString()} {fromCur.flag} {from} =</div>
-        <div className="text-4xl font-bold">{toCur.symbol}{result.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-        <div className="text-sm opacity-70 mt-1">{toCur.flag} {to} · {toCur.name}</div>
-      </div>
+        {/* 结果 */}
+        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-6 text-white">
+          <div className="text-sm opacity-80 mb-1">{amount.toLocaleString()} {fromCurrency} =</div>
+          <div className="text-4xl font-bold">
+            {result.converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {toCurrency}
+          </div>
+          <div className="text-sm opacity-80 mt-2">1 {fromCurrency} = {result.rate.toFixed(4)} {toCurrency}</div>
+        </div>
 
-      {/* 汇率参考 */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <div className="text-xs text-gray-500 mb-3">1 {from} 对其他货币</div>
-        <div className="grid grid-cols-2 gap-2">
-          {CURRENCIES.filter(c => c.code !== from).map(c => (
-            <div key={c.code} className="flex justify-between text-sm">
-              <span className="text-gray-500">{c.flag} {c.code}</span>
-              <span className="font-mono font-medium text-gray-900 dark:text-gray-100">
-                {convert(1, from, c.code).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}
-              </span>
+        {/* 汇率信息 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <TrendingUp className="w-4 h-4 text-gray-400" />
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('rateInfo')}</h3>
+          </div>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-gray-600 dark:text-gray-400">1 {fromCurrency}</span>
+              <span className="text-gray-900 dark:text-gray-100">= {result.rate.toFixed(6)} {toCurrency}</span>
             </div>
-          ))}
+            <div className="flex justify-between">
+              <span className="text-gray-600 dark:text-gray-400">1 {toCurrency}</span>
+              <span className="text-gray-900 dark:text-gray-100">= {result.inverseRate.toFixed(6)} {fromCurrency}</span>
+            </div>
+          </div>
+          <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-400">⚠️ {t('disclaimer')}</div>
+        </div>
+
+        {/* 快速换算 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('quickConvert')}</h3>
+          <div className="grid grid-cols-3 gap-2">
+            {[100, 500, 1000, 5000, 10000, 50000].map(val => (
+              <button key={val} onClick={() => set({ amount: val })}
+                className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                {val.toLocaleString()}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

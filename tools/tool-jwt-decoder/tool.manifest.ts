@@ -1,7 +1,10 @@
-import type { ToolManifest } from '@toolbox/tool-registry'
+import { defineToolManifest } from '@toolbox/tool-registry'
 
-const manifest: ToolManifest = {
+const toolJwtDecoderManifest = defineToolManifest({
+  id: 'tool-jwt-decoder',
   path: '/jwt-decoder',
+  namespace: 'toolJwtDecoder',
+  mode: 'client',
   meta: {
     zh: {
       title: 'JWT 解析工具',
@@ -12,7 +15,11 @@ const manifest: ToolManifest = {
       description: 'Decode JWT tokens and view Header and Payload',
     },
   },
-  component: () => import('./src/index'),
-}
+  loadComponent: () => import('./src/JwtDecoder'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
 
-export default manifest
+export default toolJwtDecoderManifest

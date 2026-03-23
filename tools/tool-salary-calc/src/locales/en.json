@@ -1,0 +1,11 @@
+{
+  "title": "Salary Calculator",
+  "description": "Calculate social insurance, tax, and net salary",
+  "grossSalary": "Gross Salary",
+  "socialBase": "Social Insurance Base",
+  "threshold": "Tax Threshold",
+  "netSalary": "Net Salary",
+  "incomeTax": "Income Tax",
+  "deductions": "Deduction Details",
+  "takeHomeRatio": "Take-home Ratio"
+}

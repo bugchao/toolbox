@@ -1,151 +1,125 @@
-import React, { useState } from 'react'
-import { Shuffle, Plus, Trash2, UtensilsCrossed } from 'lucide-react'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PageHero } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
+import { UtensilsCrossed, RotateCcw, Sparkles } from 'lucide-react'
 
-interface MenuItem {
-  id: string
-  name: string
-  category: string
-  tags: string[]
+const MENU_CATEGORIES: Record<string, string[]> = {
+  早餐: ['豆浆油条', '包子馒头', '鸡蛋灌饼', '煎饼果子', '馄饨', '面条', '粥', '面包牛奶'],
+  午餐: ['红烧肉', '宫保鸡丁', '鱼香肉丝', '麻婆豆腐', '回锅肉', '糖醋里脊', '水煮肉片', '酸菜鱼', '辣子鸡', '干锅'],
+  晚餐: ['清淡炒菜', '凉拌菜', '汤面', '饺子', '馄饨', '沙拉', '三明治', '粥'],
+  快餐: ['汉堡', '披萨', '炸鸡', '寿司', '拉面', '炒饭', '盖浇饭', '麻辣烫'],
+  健康: ['鸡胸肉沙拉', '清蒸鱼', '水煮菜', '糙米饭', '凉拌鸡丝', '蔬菜汤', '水果沙拉'],
 }
 
-const CATEGORIES = ['中餐', '西餐', '日料', '快餐', '小吃', '外卖']
+const ALL_MENUS = Object.values(MENU_CATEGORIES).flat()
 
-let uid = 0
-const nid = () => String(++uid + Date.now())
+interface MenuState {
+  selectedCategory: string
+  result: string
+  history: string[]
+}
 
-const DEFAULT_MENUS: MenuItem[] = [
-  { id: nid(), name: '红烧肉', category: '中餐', tags: ['家常', '下饭'] },
-  { id: nid(), name: '宫保鸡丁', category: '中餐', tags: ['家常', '辣'] },
-  { id: nid(), name: '番茄炒蛋', category: '中餐', tags: ['家常', '快手'] },
-  { id: nid(), name: '蛋炒饭', category: '中餐', tags: ['快手', '简单'] },
-  { id: nid(), name: '麻婆豆腐', category: '中餐', tags: ['辣', '下饭'] },
-  { id: nid(), name: '牛肉拉面', category: '中餐', tags: ['面食', '暖胃'] },
-  { id: nid(), name: '披萨', category: '西餐', tags: ['外卖', '聚餐'] },
-  { id: nid(), name: '意大利面', category: '西餐', tags: ['西式', '简单'] },
-  { id: nid(), name: '寿司', category: '日料', tags: ['清淡', '精致'] },
-  { id: nid(), name: '拉面', category: '日料', tags: ['面食', '汤'] },
-  { id: nid(), name: '汉堡', category: '快餐', tags: ['快手', '外卖'] },
-  { id: nid(), name: '炸鸡', category: '快餐', tags: ['解馋', '外卖'] },
-  { id: nid(), name: '煎饼果子', category: '小吃', tags: ['早餐', '快手'] },
-  { id: nid(), name: '沙县小吃', category: '小吃', tags: ['经济', '快手'] },
-]
+const DEFAULT_STATE: MenuState = {
+  selectedCategory: '全部',
+  result: '',
+  history: [],
+}
 
-const NameInput = ({ value, onChange }: { value: string; onChange: (v: string) => void }) => (
-  <input value={value} onChange={e => onChange(e.target.value)} placeholder="菜名"
-    className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-orange-500" />
-)
+export default function RandomMenu() {
+  const { t } = useTranslation('toolRandomMenu')
+  const [state, setState] = useToolStorage<MenuState>('random-menu', DEFAULT_STATE)
+  const [animating, setAnimating] = React.useState(false)
 
-export function RandomMenu() {
-  const [menus, setMenus] = useState<MenuItem[]>(DEFAULT_MENUS)
-  const [picked, setPicked] = useState<MenuItem | null>(null)
-  const [spinning, setSpinning] = useState(false)
-  const [filterCat, setFilterCat] = useState('全部')
-  const [newName, setNewName] = useState('')
-  const [newCat, setNewCat] = useState('中餐')
-  const [history, setHistory] = useState<string[]>([])
+  const { selectedCategory, result, history } = state
+  const set = (patch: Partial<MenuState>) => setState(prev => ({ ...prev, ...patch }))
 
-  const pool = filterCat === '全部' ? menus : menus.filter(m => m.category === filterCat)
-
-  const spin = () => {
-    if (pool.length === 0) return
-    setSpinning(true)
-    setPicked(null)
+  const getRandomMenu = useCallback(() => {
+    setAnimating(true)
+    const menus = selectedCategory === '全部' ? ALL_MENUS : (MENU_CATEGORIES[selectedCategory] || ALL_MENUS)
     let count = 0
-    const maxCount = 8 + Math.floor(Math.random() * 5)
     const interval = setInterval(() => {
-      const random = pool[Math.floor(Math.random() * pool.length)]
-      setPicked(random)
+      set({ result: menus[Math.floor(Math.random() * menus.length)] })
       count++
-      if (count >= maxCount) {
+      if (count >= 20) {
         clearInterval(interval)
-        setSpinning(false)
-        setHistory(h => [random.name, ...h.slice(0, 9)])
+        const final = menus[Math.floor(Math.random() * menus.length)]
+        setState(prev => ({
+          ...prev,
+          result: final,
+          history: [final, ...prev.history].slice(0, 5),
+        }))
+        setAnimating(false)
       }
-    }, 100)
-  }
-
-  const addMenu = () => {
-    if (!newName.trim()) return
-    setMenus(prev => [...prev, { id: nid(), name: newName.trim(), category: newCat, tags: [] }])
-    setNewName('')
-  }
-
-  const remove = (id: string) => setMenus(prev => prev.filter(m => m.id !== id))
+    }, 80)
+  }, [selectedCategory])
 
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">随机菜单</h1>
-      <p className="text-gray-500 dark:text-gray-400">选择困难症救星 — 今天吃什么？</p>
-
-      {/* 大转盘区 */}
-      <div className="bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl p-8 text-center text-white">
-        <div className="min-h-20 flex items-center justify-center">
-          {picked ? (
-            <div className={`text-4xl font-bold transition-all ${spinning ? 'opacity-60 scale-95' : 'opacity-100 scale-100'}`}>
-              🍽️ {picked.name}
-            </div>
-          ) : (
-            <div className="text-white/60 text-lg">按下按钮决定今天吃什么</div>
-          )}
-        </div>
-        {picked && !spinning && (
-          <div className="mt-2 text-sm opacity-80">{picked.category} · {picked.tags.join(' ')}</div>
-        )}
-        <button onClick={spin} disabled={pool.length === 0 || spinning}
-          className="mt-6 flex items-center gap-2 mx-auto px-8 py-3 bg-white text-orange-500 rounded-full font-bold text-lg hover:bg-orange-50 disabled:opacity-50 transition-all hover:scale-105 active:scale-95">
-          <Shuffle className={`w-5 h-5 ${spinning ? 'animate-spin' : ''}`} />
-          {spinning ? '选择中...' : '随机一个！'}
-        </button>
-      </div>
-
-      {/* 分类筛选 */}
-      <div className="flex gap-2 flex-wrap">
-        {(['全部', ...CATEGORIES]).map(c => (
-          <button key={c} onClick={() => setFilterCat(c)}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-              filterCat === c ? 'bg-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-            }`}>{c} {c !== '全部' ? `(${menus.filter(m => m.category === c).length})` : `(${menus.length})`}</button>
-        ))}
-      </div>
-
-      {/* 添加菜品 */}
-      <div className="flex gap-2">
-        <NameInput value={newName} onChange={setNewName} />
-        <select value={newCat} onChange={e => setNewCat(e.target.value)}
-          className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-orange-500">
-          {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
-        <button onClick={addMenu} className="px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm transition-colors">
-          <Plus className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* 菜品列表 */}
-      <div className="grid grid-cols-2 gap-2">
-        {(filterCat === '全部' ? menus : menus.filter(m => m.category === filterCat)).map(m => (
-          <div key={m.id} className={`flex items-center gap-2 p-2.5 rounded-xl border transition-all ${
-            picked?.id === m.id ? 'border-orange-400 bg-orange-50 dark:bg-orange-900/20' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'
-          }`}>
-            <UtensilsCrossed className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-            <span className="text-sm flex-1 text-gray-700 dark:text-gray-300">{m.name}</span>
-            <button onClick={() => remove(m.id)} className="text-gray-200 hover:text-red-400 transition-colors">
-              <Trash2 className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* 历史 */}
-      {history.length > 0 && (
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3">
-          <div className="text-xs text-gray-400 mb-2">最近选择</div>
-          <div className="flex gap-1.5 flex-wrap">
-            {history.map((h, i) => (
-              <span key={i} className="px-2 py-0.5 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded text-xs text-gray-500">{h}</span>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero
+        title={t('title')}
+        description={t('description')}
+        icon={<UtensilsCrossed className="w-8 h-8" />}
+      />
+      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
+        {/* 分类 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('selectCategory')}</label>
+          <div className="flex flex-wrap gap-2">
+            {['全部', ...Object.keys(MENU_CATEGORIES)].map(cat => (
+              <button key={cat} onClick={() => set({ selectedCategory: cat })}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  selectedCategory === cat
+                    ? 'bg-orange-500 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                }`}>{cat}</button>
             ))}
           </div>
         </div>
-      )}
+
+        {/* 随机按钮 */}
+        <div className="flex justify-center">
+          <button onClick={getRandomMenu} disabled={animating}
+            className="px-12 py-6 bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 disabled:opacity-50 text-white rounded-2xl font-bold text-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:transform-none">
+            <div className="flex items-center gap-3">
+              <Sparkles className={`w-6 h-6 ${animating ? 'animate-spin' : ''}`} />
+              {animating ? t('picking') : t('randomPick')}
+              <Sparkles className={`w-6 h-6 ${animating ? 'animate-spin' : ''}`} />
+            </div>
+          </button>
+        </div>
+
+        {/* 结果 */}
+        {result && (
+          <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-white text-center">
+            <div className="text-sm opacity-80 mb-2">{t('todayEat')}</div>
+            <div className="text-5xl font-bold mb-4">{result}</div>
+            <div className="text-sm opacity-80">
+              {selectedCategory === '全部' ? '来自全部菜单' : `来自${selectedCategory}分类`}
+            </div>
+          </div>
+        )}
+
+        {/* 历史 */}
+        {history.length > 0 && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <RotateCcw className="w-4 h-4 text-gray-400" />
+                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('history')}</h3>
+              </div>
+              <button onClick={() => set({ history: [] })} className="text-xs text-gray-400 hover:text-red-400 transition-colors">{t('clear')}</button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {history.map((item, i) => (
+                <span key={i} className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">
+                  {i + 1}. {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,0 +1,10 @@
+{
+  "title": "随机菜单生成器",
+  "description": "解决每天吃什么的选择困难症",
+  "selectCategory": "选择分类",
+  "randomPick": "随机选择",
+  "picking": "选择中...",
+  "todayEat": "今天吃",
+  "history": "历史记录",
+  "clear": "清空"
+}

@@ -1,115 +1,152 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { PageHero } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
+import { Calculator, DollarSign } from 'lucide-react'
 
-// 2024年个税税率表
 const TAX_BRACKETS = [
-  { min: 0, max: 3000, rate: 0.03, deduction: 0 },
-  { min: 3000, max: 12000, rate: 0.1, deduction: 210 },
-  { min: 12000, max: 25000, rate: 0.2, deduction: 1410 },
-  { min: 25000, max: 35000, rate: 0.25, deduction: 2660 },
-  { min: 35000, max: 55000, rate: 0.30, deduction: 4410 },
-  { min: 55000, max: 80000, rate: 0.35, deduction: 7160 },
-  { min: 80000, max: Infinity, rate: 0.45, deduction: 15160 },
+  { min: 0, max: 36000, rate: 0.03, quickDeduction: 0 },
+  { min: 36000, max: 144000, rate: 0.1, quickDeduction: 2520 },
+  { min: 144000, max: 300000, rate: 0.2, quickDeduction: 16920 },
+  { min: 300000, max: 420000, rate: 0.25, quickDeduction: 31920 },
+  { min: 420000, max: 660000, rate: 0.3, quickDeduction: 52920 },
+  { min: 660000, max: 960000, rate: 0.35, quickDeduction: 85920 },
+  { min: 960000, max: Infinity, rate: 0.45, quickDeduction: 181920 },
 ]
 
-// 各城市社保缴纳比例（个人部分）
-const CITIES: Record<string, { pension: number; medical: number; unemployment: number; housing: number; medicalExtra: number }> = {
-  '北京': { pension: 0.08, medical: 0.02, unemployment: 0.005, housing: 0.12, medicalExtra: 3 },
-  '上海': { pension: 0.08, medical: 0.02, unemployment: 0.005, housing: 0.07, medicalExtra: 0 },
-  '广州': { pension: 0.08, medical: 0.02, unemployment: 0.002, housing: 0.05, medicalExtra: 0 },
-  '深圳': { pension: 0.08, medical: 0.02, unemployment: 0.003, housing: 0.05, medicalExtra: 0 },
-  '杭州': { pension: 0.08, medical: 0.02, unemployment: 0.005, housing: 0.12, medicalExtra: 3 },
-  '其他': { pension: 0.08, medical: 0.02, unemployment: 0.005, housing: 0.07, medicalExtra: 0 },
+const SOCIAL_RATE = {
+  pension: 0.08,
+  medical: 0.02,
+  unemployment: 0.005,
+  housing: 0.12,
 }
 
-const EXEMPT = 5000 // 起征点
-
-function calcTax(taxable: number): number {
-  if (taxable <= 0) return 0
-  const bracket = TAX_BRACKETS.find(b => taxable > b.min && taxable <= b.max) ||
-    TAX_BRACKETS[TAX_BRACKETS.length - 1]
-  return taxable * bracket.rate - bracket.deduction
+interface SalaryState {
+  grossSalary: number
+  socialBase: number
+  threshold: number
 }
 
-const NumberInput = ({ label, value, onChange, prefix, suffix }: {
-  label: string; value: number; onChange: (v: number) => void; prefix?: string; suffix?: string
-}) => (
-  <div>
-    <label className="block text-xs text-gray-500 mb-1">{label}</label>
-    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-white dark:bg-gray-700">
-      {prefix && <span className="px-2 text-sm text-gray-400 bg-gray-50 dark:bg-gray-600 border-r border-gray-300 dark:border-gray-600">{prefix}</span>}
-      <input type="number" value={value} onChange={e => onChange(parseFloat(e.target.value) || 0)}
-        className="flex-1 px-3 py-2 text-sm text-gray-900 dark:text-gray-100 bg-transparent focus:outline-none" />
-      {suffix && <span className="px-2 text-sm text-gray-400">{suffix}</span>}
-    </div>
-  </div>
-)
+const DEFAULT_STATE: SalaryState = {
+  grossSalary: 10000,
+  socialBase: 10000,
+  threshold: 5000,
+}
 
-export function SalaryCalc() {
-  const [gross, setGross] = useState(15000)
-  const [city, setCity] = useState('北京')
-  const [extraDeduct, setExtraDeduct] = useState(0) // 专项附加扣除
+export default function SalaryCalc() {
+  const { t } = useTranslation('toolSalaryCalc')
+  const [state, setState] = useToolStorage<SalaryState>('salary-calc', DEFAULT_STATE)
+
+  const { grossSalary, socialBase, threshold } = state
 
   const result = useMemo(() => {
-    const rates = CITIES[city]
-    const pension = gross * rates.pension
-    const medical = gross * rates.medical + rates.medicalExtra
-    const unemployment = gross * rates.unemployment
-    const housing = gross * rates.housing
-    const socialTotal = pension + medical + unemployment + housing
+    const socialInsurance = socialBase * (SOCIAL_RATE.pension + SOCIAL_RATE.medical + SOCIAL_RATE.unemployment + SOCIAL_RATE.housing)
+    const taxableIncome = Math.max(0, grossSalary - socialInsurance - threshold)
+    let tax = 0
+    for (const b of TAX_BRACKETS) {
+      if (taxableIncome > b.min) {
+        tax += (Math.min(taxableIncome, b.max) - b.min) * b.rate
+      }
+    }
+    const netSalary = grossSalary - socialInsurance - tax
+    return {
+      socialInsurance,
+      taxableIncome,
+      tax,
+      netSalary,
+      pension: socialBase * SOCIAL_RATE.pension,
+      medical: socialBase * SOCIAL_RATE.medical,
+      unemployment: socialBase * SOCIAL_RATE.unemployment,
+      housing: socialBase * SOCIAL_RATE.housing,
+    }
+  }, [grossSalary, socialBase, threshold])
 
-    const taxBase = Math.max(0, gross - socialTotal - EXEMPT - extraDeduct)
-    const tax = calcTax(taxBase)
-    const net = gross - socialTotal - tax
-    const effectiveRate = gross > 0 ? ((tax + socialTotal) / gross * 100) : 0
+  const set = (key: keyof SalaryState, val: number) =>
+    setState((prev) => ({ ...prev, [key]: val }))
 
-    return { pension, medical, unemployment, housing, socialTotal, taxBase, tax, net, effectiveRate }
-  }, [gross, city, extraDeduct])
+  const fmt = (n: number) => `¥${n.toFixed(2)}`
 
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">工资税后计算器</h1>
-      <p className="text-gray-500 dark:text-gray-400">计算五险一金扣除及个人所得税，得出税后实发工资</p>
-
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-4">
-        <NumberInput label="税前月薪" value={gross} onChange={setGross} prefix="¥" />
-        <div>
-          <label className="block text-xs text-gray-500 mb-1">城市（影响公积金比例）</label>
-          <select value={city} onChange={e => setCity(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            {Object.keys(CITIES).map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </div>
-        <NumberInput label="专项附加扣除（子女教育/房贷等）" value={extraDeduct} onChange={setExtraDeduct} prefix="¥" />
-      </div>
-
-      {/* 结果卡片 */}
-      <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-5 text-white">
-        <div className="text-sm opacity-80 mb-1">税后实发</div>
-        <div className="text-4xl font-bold">¥{result.net.toFixed(2)}</div>
-        <div className="text-sm opacity-70 mt-1">综合税率 {result.effectiveRate.toFixed(1)}%</div>
-      </div>
-
-      {/* 明细 */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">扣费明细</h2>
-        {[
-          { label: '税前工资', value: gross, type: 'neutral' },
-          { label: '养老保险 (8%)', value: -result.pension, type: 'deduct' },
-          { label: '医疗保险 (2%+附加)', value: -result.medical, type: 'deduct' },
-          { label: '失业保险', value: -result.unemployment, type: 'deduct' },
-          { label: `住房公积金 (${(CITIES[city].housing * 100).toFixed(0)}%)`, value: -result.housing, type: 'deduct' },
-          { label: '个税计税基数', value: result.taxBase, type: 'neutral' },
-          { label: '个人所得税', value: -result.tax, type: 'deduct' },
-          { label: '实发工资', value: result.net, type: 'income' },
-        ].map(item => (
-          <div key={item.label} className="flex justify-between items-center text-sm">
-            <span className="text-gray-600 dark:text-gray-400">{item.label}</span>
-            <span className={`font-medium font-mono ${
-              item.type === 'income' ? 'text-green-500' :
-              item.type === 'deduct' ? 'text-red-400' : 'text-gray-900 dark:text-gray-100'
-            }`}>{item.value < 0 ? '-' : ''}¥{Math.abs(item.value).toFixed(2)}</span>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero
+        title={t('title')}
+        description={t('description')}
+        icon={<Calculator className="w-8 h-8" />}
+      />
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+        {/* 输入 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('grossSalary')}</label>
+            <div className="relative">
+              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input type="number" value={grossSalary} onChange={e => set('grossSalary', Number(e.target.value))}
+                className="w-full pl-9 pr-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            </div>
           </div>
-        ))}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('socialBase')}</label>
+            <input type="number" value={socialBase} onChange={e => set('socialBase', Number(e.target.value))}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('threshold')}</label>
+            <select value={threshold} onChange={e => set('threshold', Number(e.target.value))}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value={5000}>5000 元（现行标准）</option>
+              <option value={3500}>3500 元（旧标准）</option>
+            </select>
+          </div>
+        </div>
+
+        {/* 结果卡片 */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl p-4 text-white">
+            <div className="text-sm opacity-80">{t('netSalary')}</div>
+            <div className="text-3xl font-bold">{fmt(result.netSalary)}</div>
+          </div>
+          <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-xl p-4 text-white">
+            <div className="text-sm opacity-80">{t('incomeTax')}</div>
+            <div className="text-3xl font-bold">{fmt(result.tax)}</div>
+          </div>
+        </div>
+
+        {/* 明细 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('deductions')}</h3>
+          <div className="space-y-2 text-sm">
+            {[
+              ['养老保险 (8%)', result.pension],
+              ['医疗保险 (2%)', result.medical],
+              ['失业保险 (0.5%)', result.unemployment],
+              ['住房公积金 (12%)', result.housing],
+            ].map(([label, val]) => (
+              <div key={label as string} className="flex justify-between">
+                <span className="text-gray-600 dark:text-gray-400">{label}</span>
+                <span className="text-gray-900 dark:text-gray-100">{fmt(val as number)}</span>
+              </div>
+            ))}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-medium">
+              <span className="text-gray-700 dark:text-gray-300">社保合计</span>
+              <span>{fmt(result.socialInsurance)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600 dark:text-gray-400">应纳税所得额</span>
+              <span>{fmt(result.taxableIncome)}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 到手比例 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600 dark:text-gray-400">{t('takeHomeRatio')}</span>
+            <span className="text-lg font-bold text-green-500">{((result.netSalary / grossSalary) * 100).toFixed(1)}%</span>
+          </div>
+          <div className="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-full bg-green-500 transition-all" style={{ width: `${(result.netSalary / grossSalary) * 100}%` }} />
+          </div>
+        </div>
       </div>
     </div>
   )

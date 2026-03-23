@@ -1,7 +1,10 @@
-import type { ToolManifest } from '@toolbox/tool-registry'
+import { defineToolManifest } from '@toolbox/tool-registry'
 
-const manifest: ToolManifest = {
+const toolSalaryCalcManifest = defineToolManifest({
+  id: 'tool-salary-calc',
   path: '/salary-calc',
+  namespace: 'toolSalaryCalc',
+  mode: 'client',
   meta: {
     zh: {
       title: '工资税后计算器',
@@ -12,7 +15,11 @@ const manifest: ToolManifest = {
       description: 'Calculate social insurance, tax, and net salary',
     },
   },
-  component: () => import('./src/index'),
-}
+  loadComponent: () => import('./src/SalaryCalc'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
 
-export default manifest
+export default toolSalaryCalcManifest

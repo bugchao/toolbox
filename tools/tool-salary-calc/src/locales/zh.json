@@ -1,0 +1,11 @@
+{
+  "title": "工资税后计算器",
+  "description": "计算五险一金和个税，得出税后工资",
+  "grossSalary": "税前工资",
+  "socialBase": "社保基数",
+  "threshold": "个税起征点",
+  "netSalary": "税后工资",
+  "incomeTax": "个人所得税",
+  "deductions": "扣除明细",
+  "takeHomeRatio": "到手比例"
+}

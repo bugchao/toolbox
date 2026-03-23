@@ -1,0 +1,11 @@
+{
+  "title": "JWT Decoder",
+  "description": "Decode JWT tokens and view Header and Payload",
+  "token": "JWT Token",
+  "loadSample": "Load Sample Token",
+  "validFormat": "Valid Format",
+  "invalidFormat": "Invalid Format",
+  "header": "Header",
+  "payload": "Payload",
+  "signature": "Signature"
+}

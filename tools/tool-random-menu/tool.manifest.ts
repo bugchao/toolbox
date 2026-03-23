@@ -1,7 +1,10 @@
-import type { ToolManifest } from '@toolbox/tool-registry'
+import { defineToolManifest } from '@toolbox/tool-registry'
 
-const manifest: ToolManifest = {
+const toolRandomMenuManifest = defineToolManifest({
+  id: 'tool-random-menu',
   path: '/random-menu',
+  namespace: 'toolRandomMenu',
+  mode: 'client',
   meta: {
     zh: {
       title: '随机菜单生成器',
@@ -12,7 +15,11 @@ const manifest: ToolManifest = {
       description: 'Solve the daily dilemma of what to eat',
     },
   },
-  component: () => import('./src/index'),
-}
+  loadComponent: () => import('./src/RandomMenu'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
 
-export default manifest
+export default toolRandomMenuManifest

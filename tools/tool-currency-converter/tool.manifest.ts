@@ -1,7 +1,10 @@
-import type { ToolManifest } from '@toolbox/tool-registry'
+import { defineToolManifest } from '@toolbox/tool-registry'
 
-const manifest: ToolManifest = {
+const toolCurrencyConverterManifest = defineToolManifest({
+  id: 'tool-currency-converter',
   path: '/currency-converter',
+  namespace: 'toolCurrencyConverter',
+  mode: 'client',
   meta: {
     zh: {
       title: '汇率换算',
@@ -12,7 +15,11 @@ const manifest: ToolManifest = {
       description: 'Real-time currency conversion with multiple currencies',
     },
   },
-  component: () => import('./src/index'),
-}
+  loadComponent: () => import('./src/CurrencyConverter'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
 
-export default manifest
+export default toolCurrencyConverterManifest

@@ -1,0 +1,11 @@
+{
+  "title": "JWT 解析工具",
+  "description": "解码 JWT Token，查看 Header 和 Payload",
+  "token": "JWT Token",
+  "loadSample": "填入示例 Token",
+  "validFormat": "格式有效",
+  "invalidFormat": "格式无效",
+  "header": "Header（头部）",
+  "payload": "Payload（负载）",
+  "signature": "Signature（签名）"
+}

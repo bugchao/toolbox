@@ -1,0 +1,10 @@
+{
+  "title": "Currency Converter",
+  "description": "Real-time currency conversion with multiple currencies",
+  "amount": "Amount",
+  "from": "From",
+  "to": "To",
+  "rateInfo": "Exchange Rate Info",
+  "quickConvert": "Quick Convert",
+  "disclaimer": "Rates are for reference only. Actual rates may vary."
+}

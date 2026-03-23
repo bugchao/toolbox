@@ -1,7 +1,10 @@
-import type { ToolManifest } from '@toolbox/tool-registry'
+import { defineToolManifest } from '@toolbox/tool-registry'
 
-const manifest: ToolManifest = {
+const toolCalorieCalcManifest = defineToolManifest({
+  id: 'tool-calorie-calc',
   path: '/calorie-calc',
+  namespace: 'toolCalorieCalc',
+  mode: 'client',
   meta: {
     zh: {
       title: '卡路里估算',
@@ -12,7 +15,11 @@ const manifest: ToolManifest = {
       description: 'Look up food calories and estimate intake',
     },
   },
-  component: () => import('./src/index'),
-}
+  loadComponent: () => import('./src/CalorieCalc'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
+  },
+})
 
-export default manifest
+export default toolCalorieCalcManifest

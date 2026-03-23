@@ -1,0 +1,10 @@
+{
+  "title": "Random Menu Generator",
+  "description": "Solve the daily dilemma of what to eat",
+  "selectCategory": "Select Category",
+  "randomPick": "Random Pick",
+  "picking": "Picking...",
+  "todayEat": "Today's Pick",
+  "history": "History",
+  "clear": "Clear"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "卡路里估算",
+  "description": "查询食物热量，估算摄入卡路里",
+  "search": "搜索食物...",
+  "selectFood": "选择食物",
+  "weight": "重量（克）",
+  "estimatedCalories": "估算热量",
+  "tips": "小贴士"
+}
