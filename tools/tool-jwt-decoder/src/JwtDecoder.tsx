@@ -27,8 +27,6 @@ function decodeJwt(token: string) {
   }
 }
 
-const SAMPLE_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-
 interface JwtState {
   token: string
 }
@@ -37,9 +35,9 @@ const DEFAULT_STATE: JwtState = { token: '' }
 
 export default function JwtDecoder() {
   const { t } = useTranslation('toolJwtDecoder')
-  const [state, setState] = useToolStorage<JwtState>('jwt-decoder', DEFAULT_STATE)
+  const { data: state, save } = useToolStorage<JwtState>('jwt-decoder', 'data', DEFAULT_STATE)
   const { token } = state
-  const setToken = (token: string) => setState(prev => ({ ...prev, token }))
+  const setToken = (val: string) => save({ ...state, token: val })
 
   const result = useMemo(() => decodeJwt(token), [token])
 
@@ -59,28 +57,23 @@ export default function JwtDecoder() {
           <textarea value={token} onChange={e => setToken(e.target.value)}
             placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
             rows={4}
-            className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          <button onClick={() => setToken(SAMPLE_JWT)} className="text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+            className="w-full font-mono text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 resize-none" />
+          <button onClick={() => setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c')}
+            className="text-sm text-blue-500 hover:text-blue-600 transition-colors">
             {t('loadSample')}
           </button>
         </div>
 
-        {/* 验证状态 */}
+        {/* 状态 */}
         {token && (
-          <div className={`rounded-xl p-4 flex items-center gap-3 ${
-            result.valid
-              ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
-              : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+          <div className={`rounded-xl p-3 flex items-center gap-2 ${
+            result.valid ? 'bg-green-50 dark:bg-green-900/20 text-green-600' : 'bg-red-50 dark:bg-red-900/20 text-red-500'
           }`}>
             {result.valid
-              ? <CheckCircle className="w-5 h-5 text-green-500" />
-              : <AlertTriangle className="w-5 h-5 text-red-500" />}
-            <div>
-              <div className={`font-medium ${result.valid ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
-                {result.valid ? t('validFormat') : t('invalidFormat')}
-              </div>
-              {!result.valid && result.error && <div className="text-sm text-red-600 dark:text-red-400">{result.error}</div>}
-            </div>
+              ? <><CheckCircle className="w-4 h-4" /><span className="text-sm">{t('valid')}</span></>
+              : <><AlertTriangle className="w-4 h-4" /><div className="text-sm text-red-400">{result.error}</div>}
+            </>
+          }
           </div>
         )}
 

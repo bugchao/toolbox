@@ -39,12 +39,11 @@ const DEFAULT_STATE: ConverterState = {
 
 export default function CurrencyConverter() {
   const { t } = useTranslation('toolCurrencyConverter')
-  const [state, setState] = useToolStorage<ConverterState>('currency-converter', DEFAULT_STATE)
+  const { data: state, save } = useToolStorage<ConverterState>('currency-converter', 'data', DEFAULT_STATE)
 
   const { amount, fromCurrency, toCurrency } = state
 
-  const set = (patch: Partial<ConverterState>) =>
-    setState(prev => ({ ...prev, ...patch }))
+  const set = (patch: Partial<ConverterState>) => save({ ...state, ...patch })
 
   const result = useMemo(() => {
     const fromRate = BASE_RATES[fromCurrency]
@@ -68,39 +67,42 @@ export default function CurrencyConverter() {
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
         {/* 金额 */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('amount')}</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('amount')}</label>
           <input type="number" value={amount} onChange={e => set({ amount: Number(e.target.value) })}
-            className="w-full px-3 py-3 text-2xl font-bold rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            className="w-full text-2xl font-bold border-b-2 border-blue-500 bg-transparent text-gray-900 dark:text-gray-100 pb-2 outline-none" />
         </div>
 
         {/* 货币选择 */}
-        <div className="flex items-center gap-3">
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('from')}</label>
-            <select value={fromCurrency} onChange={e => set({ fromCurrency: e.target.value })}
-              className="w-full px-3 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} - {c.name}</option>)}
-            </select>
-          </div>
-          <button onClick={swap} className="mt-6 p-3 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 hover:bg-indigo-200 transition-colors">
-            <ArrowLeftRight className="w-5 h-5" />
-          </button>
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('to')}</label>
-            <select value={toCurrency} onChange={e => set({ toCurrency: e.target.value })}
-              className="w-full px-3 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} - {c.name}</option>)}
-            </select>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <label className="block text-xs text-gray-500 mb-1">{t('from')}</label>
+              <select value={fromCurrency} onChange={e => set({ fromCurrency: e.target.value })}
+                className="w-full border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.symbol} {c.name} ({c.code})</option>)}
+              </select>
+            </div>
+            <button onClick={swap} className="mt-5 p-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+              <ArrowLeftRight className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+            </button>
+            <div className="flex-1">
+              <label className="block text-xs text-gray-500 mb-1">{t('to')}</label>
+              <select value={toCurrency} onChange={e => set({ toCurrency: e.target.value })}
+                className="w-full border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.symbol} {c.name} ({c.code})</option>)}
+              </select>
+            </div>
           </div>
         </div>
 
         {/* 结果 */}
-        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-6 text-white">
-          <div className="text-sm opacity-80 mb-1">{amount.toLocaleString()} {fromCurrency} =</div>
-          <div className="text-4xl font-bold">
-            {result.converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {toCurrency}
+        <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl p-6 text-white">
+          <div className="flex items-center gap-2 mb-1">
+            <TrendingUp className="w-5 h-5" />
+            <span className="text-sm opacity-80">{t('result')}</span>
           </div>
-          <div className="text-sm opacity-80 mt-2">1 {fromCurrency} = {result.rate.toFixed(4)} {toCurrency}</div>
+          <div className="text-4xl font-bold">{result.converted.toFixed(4)}</div>
+          <div className="text-lg opacity-80 mt-1">{toCurrency}</div>
         </div>
 
         {/* 汇率信息 */}

@@ -35,7 +35,7 @@ const DEFAULT_STATE: SalaryState = {
 
 export default function SalaryCalc() {
   const { t } = useTranslation('toolSalaryCalc')
-  const [state, setState] = useToolStorage<SalaryState>('salary-calc', DEFAULT_STATE)
+  const { data: state, save } = useToolStorage<SalaryState>('salary-calc', 'data', DEFAULT_STATE)
 
   const { grossSalary, socialBase, threshold } = state
 
@@ -62,7 +62,7 @@ export default function SalaryCalc() {
   }, [grossSalary, socialBase, threshold])
 
   const set = (key: keyof SalaryState, val: number) =>
-    setState((prev) => ({ ...prev, [key]: val }))
+    save({ ...state, [key]: val })
 
   const fmt = (n: number) => `¥${n.toFixed(2)}`
 
@@ -73,67 +73,64 @@ export default function SalaryCalc() {
         description={t('description')}
         icon={<Calculator className="w-8 h-8" />}
       />
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
-        {/* 输入 */}
+      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
+        {/* 月薪 */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('grossSalary')}</label>
-            <div className="relative">
-              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="number" value={grossSalary} onChange={e => set('grossSalary', Number(e.target.value))}
-                className="w-full pl-9 pr-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('inputParams')}</h3>
+          {([
+            { label: t('grossSalary'), key: 'grossSalary' as const, min: 0, max: 100000 },
+            { label: t('socialBase'), key: 'socialBase' as const, min: 0, max: 100000 },
+            { label: t('threshold'), key: 'threshold' as const, min: 3500, max: 5000 },
+          ] as const).map(({ label, key, min, max }) => (
+            <div key={key}>
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-600 dark:text-gray-400">{label}</span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">¥{state[key].toLocaleString()}</span>
+              </div>
+              <input type="range" min={min} max={max} step={100} value={state[key]}
+                onChange={e => set(key, Number(e.target.value))}
+                className="w-full accent-blue-500" />
+              <input type="number" value={state[key]} onChange={e => set(key, Number(e.target.value))}
+                className="mt-1 w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
             </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('socialBase')}</label>
-            <input type="number" value={socialBase} onChange={e => set('socialBase', Number(e.target.value))}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('threshold')}</label>
-            <select value={threshold} onChange={e => set('threshold', Number(e.target.value))}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              <option value={5000}>5000 元（现行标准）</option>
-              <option value={3500}>3500 元（旧标准）</option>
-            </select>
-          </div>
+          ))}
         </div>
 
-        {/* 结果卡片 */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl p-4 text-white">
-            <div className="text-sm opacity-80">{t('netSalary')}</div>
-            <div className="text-3xl font-bold">{fmt(result.netSalary)}</div>
+        {/* 结果 */}
+        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-6 text-white">
+          <div className="flex items-center gap-2 mb-1">
+            <DollarSign className="w-5 h-5" />
+            <span className="text-sm opacity-80">{t('netSalary')}</span>
           </div>
-          <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-xl p-4 text-white">
-            <div className="text-sm opacity-80">{t('incomeTax')}</div>
-            <div className="text-3xl font-bold">{fmt(result.tax)}</div>
-          </div>
+          <div className="text-4xl font-bold">{fmt(result.netSalary)}</div>
+          <div className="mt-3 text-sm opacity-80">{t('takeHomeRatio')}: {((result.netSalary / grossSalary) * 100).toFixed(1)}%</div>
         </div>
 
         {/* 明细 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('deductions')}</h3>
-          <div className="space-y-2 text-sm">
-            {[
-              ['养老保险 (8%)', result.pension],
-              ['医疗保险 (2%)', result.medical],
-              ['失业保险 (0.5%)', result.unemployment],
-              ['住房公积金 (12%)', result.housing],
-            ].map(([label, val]) => (
-              <div key={label as string} className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">{label}</span>
-                <span className="text-gray-900 dark:text-gray-100">{fmt(val as number)}</span>
-              </div>
-            ))}
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-medium">
-              <span className="text-gray-700 dark:text-gray-300">社保合计</span>
-              <span>{fmt(result.socialInsurance)}</span>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('breakdown')}</h3>
+          {([
+            ['养老保险 (8%)', result.pension],
+            ['医疗保险 (2%)', result.medical],
+            ['失业保险 (0.5%)', result.unemployment],
+            ['住房公积金 (12%)', result.housing],
+          ] as const).map(([label, val]) => (
+            <div key={label as string} className="flex justify-between">
+              <span className="text-gray-600 dark:text-gray-400">{label}</span>
+              <span className="text-gray-900 dark:text-gray-100">{fmt(val as number)}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">应纳税所得额</span>
-              <span>{fmt(result.taxableIncome)}</span>
-            </div>
+          ))}
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-2 flex justify-between font-medium">
+            <span className="text-gray-700 dark:text-gray-300">社保合计</span>
+            <span>{fmt(result.socialInsurance)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600 dark:text-gray-400">应纳税所得额</span>
+            <span>{fmt(result.taxableIncome)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600 dark:text-gray-400">{t('personalTax')}</span>
+            <span className="text-red-500">{fmt(result.tax)}</span>
           </div>
         </div>
 

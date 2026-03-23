@@ -26,7 +26,7 @@ const FOOD_DATABASE = [
   { name: '苹果', calories: 52, category: '水果' },
   { name: '香蕉', calories: 89, category: '水果' },
   { name: '橙子', calories: 47, category: '水果' },
-  { name: '葡萄', calories: 67, category: '水果' },
+  { name: '葡萝', calories: 67, category: '水果' },
   { name: '西瓜', calories: 30, category: '水果' },
   { name: '草莓', calories: 32, category: '水果' },
   { name: '鸡蛋', calories: 155, category: '其他' },
@@ -52,11 +52,11 @@ const DEFAULT_STATE: CalorieState = {
 
 export default function CalorieCalc() {
   const { t } = useTranslation('toolCalorieCalc')
-  const [state, setState] = useToolStorage<CalorieState>('calorie-calc', DEFAULT_STATE)
+  const { data: state, save } = useToolStorage<CalorieState>('calorie-calc', 'data', DEFAULT_STATE)
   const [search, setSearch] = useState('')
 
   const { selectedFood, weight, category } = state
-  const set = (patch: Partial<CalorieState>) => setState(prev => ({ ...prev, ...patch }))
+  const set = (patch: Partial<CalorieState>) => save({ ...state, ...patch })
 
   const filteredFoods = useMemo(() =>
     FOOD_DATABASE.filter(f =>
@@ -64,8 +64,8 @@ export default function CalorieCalc() {
       (!search || f.name.includes(search))
     ), [category, search])
 
-  const food = FOOD_DATABASE.find(f => f.name === selectedFood)
-  const calories = food ? (food.calories * weight) / 100 : 0
+  const foodData = FOOD_DATABASE.find(f => f.name === selectedFood)
+  const calories = foodData ? (foodData.calories * weight) / 100 : 0
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -74,34 +74,39 @@ export default function CalorieCalc() {
         description={t('description')}
         icon={<Apple className="w-8 h-8" />}
       />
-      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
-        {/* 搜索和分类 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-          <input type="text" placeholder={t('search')} value={search} onChange={e => setSearch(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500" />
+      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
+        {/* 分类 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('category')}</label>
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.map(cat => (
               <button key={cat} onClick={() => set({ category: cat })}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  category === cat ? 'bg-green-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-                }`}>{cat}</button>
+                className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                  category === cat
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+                }`}>
+                {cat}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* 食物列表 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">{t('selectFood')}</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-64 overflow-y-auto">
+        {/* 搜索 + 食物列表 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+          <input value={search} onChange={e => setSearch(e.target.value)}
+            placeholder={t('searchPlaceholder')}
+            className="w-full border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto">
             {filteredFoods.map(f => (
               <button key={f.name} onClick={() => set({ selectedFood: f.name })}
-                className={`px-3 py-2 rounded-lg text-sm text-left transition-colors border-2 ${
+                className={`px-2 py-2 rounded-lg text-sm text-center transition-colors ${
                   selectedFood === f.name
-                    ? 'bg-green-100 dark:bg-green-900/30 border-green-500'
-                    : 'bg-gray-50 dark:bg-gray-700 border-transparent hover:bg-gray-100 dark:hover:bg-gray-600'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200'
                 }`}>
-                <div className="font-medium text-gray-900 dark:text-gray-100">{f.name}</div>
-                <div className="text-xs text-gray-500">{f.calories} kcal/100g</div>
+                <div>{f.name}</div>
+                <div className="text-xs opacity-70">{f.calories}kcal/100g</div>
               </button>
             ))}
           </div>
@@ -110,9 +115,10 @@ export default function CalorieCalc() {
         {/* 重量 */}
         {selectedFood && (
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('weight')}</label>
-            <input type="number" value={weight} onChange={e => set({ weight: Number(e.target.value) })}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500" />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('weight')}: {weight}g</label>
+            <input type="range" min={10} max={1000} step={10} value={weight}
+              onChange={e => set({ weight: Number(e.target.value) })}
+              className="w-full accent-green-500" />
             <div className="flex gap-2">
               {[50, 100, 200, 300, 500].map(w => (
                 <button key={w} onClick={() => set({ weight: w })}

@@ -28,31 +28,31 @@ const DEFAULT_STATE: MenuState = {
 
 export default function RandomMenu() {
   const { t } = useTranslation('toolRandomMenu')
-  const [state, setState] = useToolStorage<MenuState>('random-menu', DEFAULT_STATE)
+  const { data: state, save } = useToolStorage<MenuState>('random-menu', 'data', DEFAULT_STATE)
   const [animating, setAnimating] = React.useState(false)
 
   const { selectedCategory, result, history } = state
-  const set = (patch: Partial<MenuState>) => setState(prev => ({ ...prev, ...patch }))
+  const set = (patch: Partial<MenuState>) => save({ ...state, ...patch })
 
   const getRandomMenu = useCallback(() => {
     setAnimating(true)
     const menus = selectedCategory === '全部' ? ALL_MENUS : (MENU_CATEGORIES[selectedCategory] || ALL_MENUS)
     let count = 0
     const interval = setInterval(() => {
-      set({ result: menus[Math.floor(Math.random() * menus.length)] })
+      save({ ...state, result: menus[Math.floor(Math.random() * menus.length)] })
       count++
       if (count >= 20) {
         clearInterval(interval)
         const final = menus[Math.floor(Math.random() * menus.length)]
-        setState(prev => ({
-          ...prev,
+        save({
+          ...state,
           result: final,
-          history: [final, ...prev.history].slice(0, 5),
-        }))
+          history: [final, ...state.history].slice(0, 5),
+        })
         setAnimating(false)
       }
     }, 80)
-  }, [selectedCategory])
+  }, [selectedCategory, state])
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -64,28 +64,27 @@ export default function RandomMenu() {
       <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
         {/* 分类 */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('selectCategory')}</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('category')}</label>
           <div className="flex flex-wrap gap-2">
             {['全部', ...Object.keys(MENU_CATEGORIES)].map(cat => (
               <button key={cat} onClick={() => set({ selectedCategory: cat })}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   selectedCategory === cat
                     ? 'bg-orange-500 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
-                }`}>{cat}</button>
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+                }`}>
+                {cat}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* 随机按钮 */}
-        <div className="flex justify-center">
+        {/* 按钮 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
           <button onClick={getRandomMenu} disabled={animating}
-            className="px-12 py-6 bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 disabled:opacity-50 text-white rounded-2xl font-bold text-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 disabled:transform-none">
-            <div className="flex items-center gap-3">
-              <Sparkles className={`w-6 h-6 ${animating ? 'animate-spin' : ''}`} />
-              {animating ? t('picking') : t('randomPick')}
-              <Sparkles className={`w-6 h-6 ${animating ? 'animate-spin' : ''}`} />
-            </div>
+            className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-70">
+            <Sparkles className={`w-5 h-5 ${animating ? 'animate-spin' : ''}`} />
+            {animating ? t('spinning') : t('spin')}
           </button>
         </div>
 
