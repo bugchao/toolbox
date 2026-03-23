@@ -1,4 +1,10 @@
 {
   "title": "随机菜单",
-  "description": "今天吃什么？选择困难症救星"
+  "description": "选择困难症救星，帮你决定今天吃什么",
+  "category": "餐食分类",
+  "spin": "帮我决定！",
+  "spinning": "决定中...",
+  "todayEat": "今天就吃",
+  "history": "历史记录",
+  "clear": "清空"
 }

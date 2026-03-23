@@ -1,4 +1,10 @@
 {
   "title": "JWT 解析工具",
-  "description": "解码 JWT Token，查看 Header、Payload 及过期状态"
+  "description": "解码并分析 JSON Web Token 的结构和内容",
+  "token": "JWT Token",
+  "loadSample": "加载示例",
+  "valid": "有效的 JWT 格式",
+  "header": "Header（头部）",
+  "payload": "Payload（载荷）",
+  "signature": "Signature（签名）"
 }

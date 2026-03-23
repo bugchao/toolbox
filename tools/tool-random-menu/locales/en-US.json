@@ -1,4 +1,10 @@
 {
   "title": "Random Menu",
-  "description": "Can't decide what to eat? Let us pick for you!"
+  "description": "Can't decide what to eat? Let us help!",
+  "category": "Category",
+  "spin": "Decide for me!",
+  "spinning": "Deciding...",
+  "todayEat": "Today eat",
+  "history": "History",
+  "clear": "Clear"
 }

@@ -1,4 +1,11 @@
 {
   "title": "汇率换算",
-  "description": "多货币实时汇率换算工具"
+  "description": "主流货币实时汇率换算",
+  "amount": "金额",
+  "from": "从",
+  "to": "到",
+  "result": "换算结果",
+  "rateInfo": "汇率信息",
+  "disclaimer": "汇率仅供参考，实际以银行为准",
+  "quickConvert": "快速换算"
 }

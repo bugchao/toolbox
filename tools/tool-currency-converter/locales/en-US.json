@@ -1,4 +1,11 @@
 {
   "title": "Currency Converter",
-  "description": "Multi-currency exchange rate converter"
+  "description": "Real-time exchange rate conversion for major currencies",
+  "amount": "Amount",
+  "from": "From",
+  "to": "To",
+  "result": "Result",
+  "rateInfo": "Rate Info",
+  "disclaimer": "Rates are for reference only, actual rates may vary",
+  "quickConvert": "Quick Convert"
 }

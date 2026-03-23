@@ -1,4 +1,10 @@
 {
   "title": "JWT Decoder",
-  "description": "Decode JWT tokens and inspect Header, Payload and expiry status"
+  "description": "Decode and analyze the structure and content of JSON Web Tokens",
+  "token": "JWT Token",
+  "loadSample": "Load Sample",
+  "valid": "Valid JWT format",
+  "header": "Header",
+  "payload": "Payload",
+  "signature": "Signature"
 }

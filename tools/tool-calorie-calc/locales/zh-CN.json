@@ -1,4 +1,9 @@
 {
   "title": "卡路里估算",
-  "description": "记录今日饮食，估算热量和营养素摄入"
+  "description": "查询食物热量，科学管理饮食",
+  "category": "食物分类",
+  "searchPlaceholder": "搜索食物...",
+  "weight": "重量",
+  "estimatedCalories": "估算热量",
+  "tips": "健康贴士"
 }

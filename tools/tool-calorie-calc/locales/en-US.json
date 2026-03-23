@@ -1,4 +1,9 @@
 {
   "title": "Calorie Calculator",
-  "description": "Track daily food intake and estimate calories and nutrients"
+  "description": "Look up food calories and manage your diet scientifically",
+  "category": "Food Category",
+  "searchPlaceholder": "Search food...",
+  "weight": "Weight",
+  "estimatedCalories": "Estimated Calories",
+  "tips": "Health Tips"
 }
