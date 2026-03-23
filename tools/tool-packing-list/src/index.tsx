@@ -1,1 +1,1 @@
-export { PackingList as default } from './PackingList'
+export { default } from './PackingList'

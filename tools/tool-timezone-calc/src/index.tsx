@@ -1,1 +1,1 @@
-export { TimezoneCalc as default } from './TimezoneCalc'
+export { default } from './TimezoneCalc'

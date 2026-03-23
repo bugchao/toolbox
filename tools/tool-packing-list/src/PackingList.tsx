@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Plus, Trash2, CheckSquare, Square, RotateCcw, Luggage } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
 
 interface PackItem {
   id: string
@@ -7,6 +9,11 @@ interface PackItem {
   category: string
   qty: number
   packed: boolean
+}
+
+interface PackingState {
+  items: PackItem[]
+  selectedTpl: string
 }
 
 const TEMPLATES: Record<string, Record<string, string[]>> = {
@@ -41,33 +48,33 @@ function buildFromTemplate(tpl: string): PackItem[] {
   )
 }
 
-const ItemInput = ({ value, onChange, onAdd }: { value: string; onChange: (v: string) => void; onAdd: () => void }) => (
-  <input value={value} onChange={e => onChange(e.target.value)} placeholder="添加物品..."
-    onKeyDown={e => e.key === 'Enter' && onAdd()}
-    className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500" />
-)
+const DEFAULT_STATE: PackingState = {
+  items: buildFromTemplate('商务出行'),
+  selectedTpl: '商务出行',
+}
 
-export function PackingList() {
-  const [items, setItems] = useState<PackItem[]>(buildFromTemplate('商务出行'))
-  const [selectedTpl, setSelectedTpl] = useState('商务出行')
+export default function PackingList() {
+  const { data: state, save } = useToolStorage<PackingState>('packing-list', 'data', DEFAULT_STATE)
   const [newText, setNewText] = useState('')
   const [newCat, setNewCat] = useState('其他')
   const [filterCat, setFilterCat] = useState('全部')
 
+  const { items, selectedTpl } = state
+  const set = (patch: Partial<PackingState>) => save({ ...state, ...patch })
+
   const loadTemplate = (tpl: string) => {
-    setSelectedTpl(tpl)
-    setItems(buildFromTemplate(tpl))
+    set({ selectedTpl: tpl, items: buildFromTemplate(tpl) })
     setFilterCat('全部')
   }
 
-  const toggle = (id: string) => setItems(prev => prev.map(i => i.id === id ? { ...i, packed: !i.packed } : i))
-  const remove = (id: string) => setItems(prev => prev.filter(i => i.id !== id))
-  const reset = () => setItems(prev => prev.map(i => ({ ...i, packed: false })))
-  const setQty = (id: string, qty: number) => setItems(prev => prev.map(i => i.id === id ? { ...i, qty: Math.max(1, qty) } : i))
+  const toggle = (id: string) => set({ items: items.map(i => i.id === id ? { ...i, packed: !i.packed } : i) })
+  const removeItem = (id: string) => set({ items: items.filter(i => i.id !== id) })
+  const reset = () => set({ items: items.map(i => ({ ...i, packed: false })) })
+  const setQty = (id: string, qty: number) => set({ items: items.map(i => i.id === id ? { ...i, qty: Math.max(1, qty) } : i) })
 
   const add = () => {
     if (!newText.trim()) return
-    setItems(prev => [...prev, { id: nid(), text: newText.trim(), category: newCat, qty: 1, packed: false }])
+    set({ items: [...items, { id: nid(), text: newText.trim(), category: newCat, qty: 1, packed: false }] })
     setNewText('')
   }
 
@@ -77,81 +84,94 @@ export function PackingList() {
   const pct = filtered.length > 0 ? Math.round(packed / filtered.length * 100) : 0
 
   return (
-    <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">行李清单</h1>
-      <p className="text-gray-500 dark:text-gray-400">根据旅行类型生成行李清单，逐项打包确认</p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero
+        title="行李清单"
+        description="根据旅行类型生成行李清单，逐项打包确认"
+        icon={Luggage}
+      />
+      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
+        {/* 模板选择 */}
+        <div className="flex gap-2 flex-wrap">
+          {Object.keys(TEMPLATES).map(tpl => (
+            <button key={tpl} onClick={() => loadTemplate(tpl)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                selectedTpl === tpl ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'
+              }`}><Luggage className="w-3.5 h-3.5" />{tpl}</button>
+          ))}
+        </div>
 
-      {/* 模板选择 */}
-      <div className="flex gap-2 flex-wrap">
-        {Object.keys(TEMPLATES).map(tpl => (
-          <button key={tpl} onClick={() => loadTemplate(tpl)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              selectedTpl === tpl ? 'bg-indigo-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-            }`}><Luggage className="w-3.5 h-3.5" />{tpl}</button>
-        ))}
-      </div>
-
-      {/* 进度 */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
-        <div className="flex justify-between text-sm">
-          <span className="text-gray-600 dark:text-gray-400">已装包 {packed}/{filtered.length}</span>
-          <div className="flex gap-2">
-            <span className={`font-semibold ${pct === 100 ? 'text-green-500' : 'text-indigo-500'}`}>{pct}%</span>
-            <button onClick={reset} className="text-gray-400 hover:text-gray-600">
-              <RotateCcw className="w-3.5 h-3.5" />
-            </button>
+        {/* 进度 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-gray-600 dark:text-gray-400">已装包 {packed}/{filtered.length}</span>
+            <div className="flex gap-2">
+              <span className={`font-semibold ${
+                pct === 100 ? 'text-green-500' : pct > 50 ? 'text-amber-500' : 'text-gray-500'
+              }`}>{pct}%</span>
+              <button onClick={reset} className="text-gray-400 hover:text-gray-600 transition-colors">
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+          <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className={`h-full transition-all ${
+              pct === 100 ? 'bg-green-500' : 'bg-indigo-500'
+            }`} style={{ width: `${pct}%` }} />
           </div>
         </div>
-        <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-          <div className={`h-full rounded-full transition-all ${pct === 100 ? 'bg-green-500' : 'bg-indigo-500'}`} style={{ width: `${pct}%` }} />
+
+        {/* 分类筛选 */}
+        <div className="flex gap-2 flex-wrap">
+          {categories.map(cat => (
+            <button key={cat} onClick={() => setFilterCat(cat)}
+              className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                filterCat === cat ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'
+              }`}>{cat}</button>
+          ))}
         </div>
-      </div>
 
-      {/* 分类筛选 */}
-      <div className="flex gap-2 flex-wrap">
-        {categories.map(c => (
-          <button key={c} onClick={() => setFilterCat(c)}
-            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-              filterCat === c ? 'bg-indigo-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-            }`}>{c}</button>
-        ))}
-      </div>
+        {/* 添加物品 */}
+        <div className="flex gap-2">
+          <input value={newText} onChange={e => setNewText(e.target.value)} placeholder="添加物品..."
+            onKeyDown={e => e.key === 'Enter' && add()}
+            className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+          <select value={newCat} onChange={e => setNewCat(e.target.value)}
+            className="px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none">
+            {Array.from(new Set(items.map(i => i.category))).map(c => <option key={c}>{c}</option>)}
+            <option value="其他">其他</option>
+          </select>
+          <button onClick={add} className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg">
+            <Plus className="w-4 h-4" />
+          </button>
+        </div>
 
-      {/* 添加 */}
-      <div className="flex gap-2">
-        <ItemInput value={newText} onChange={setNewText} onAdd={add} />
-        <select value={newCat} onChange={e => setNewCat(e.target.value)}
-          className="px-2 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none">
-          {Array.from(new Set(items.map(i => i.category))).map(c => <option key={c} value={c}>{c}</option>)}
-          <option value="其他">其他</option>
-        </select>
-        <button onClick={add} className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg">
-          <Plus className="w-4 h-4" />
-        </button>
-      </div>
+        {/* 列表 */}
+        <div className="space-y-1.5">
+          {filtered.map(item => (
+            <div key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
+              item.packed ? 'bg-gray-50 dark:bg-gray-700/30 border-gray-100 dark:border-gray-700' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
+            }`}>
+              <button onClick={() => toggle(item.id)} className="shrink-0">
+                {item.packed
+                  ? <CheckSquare className="w-5 h-5 text-green-500" />
+                  : <Square className="w-5 h-5 text-gray-300 dark:text-gray-600" />}
+              </button>
+              <span className={`flex-1 text-sm ${
+                item.packed ? 'line-through text-gray-400' : 'text-gray-700 dark:text-gray-300'
+              }`}>{item.text}</span>
+              <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{item.category}</span>
+              <span className="text-xs text-gray-400">×</span>
+              <input type="number" min={1} value={item.qty} onChange={e => setQty(item.id, parseInt(e.target.value) || 1)}
+                className="w-12 text-center text-sm rounded border border-gray-200 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 focus:outline-none" />
+              <button onClick={() => removeItem(item.id)} className="text-gray-200 hover:text-red-400 transition-colors">
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          ))}
+        </div>
 
-      {/* 列表 */}
-      <div className="space-y-1.5">
-        {filtered.map(item => (
-          <div key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
-            item.packed ? 'bg-gray-50 dark:bg-gray-700/30 border-gray-100 dark:border-gray-700' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
-          }`}>
-            <button onClick={() => toggle(item.id)} className="shrink-0">
-              {item.packed
-                ? <CheckSquare className="w-5 h-5 text-green-500" />
-                : <Square className="w-5 h-5 text-gray-300 dark:text-gray-600" />}
-            </button>
-            <span className={`flex-1 text-sm ${
-              item.packed ? 'line-through text-gray-400' : 'text-gray-700 dark:text-gray-300'
-            }`}>{item.text}</span>
-            <span className="text-xs text-gray-400 px-2">×</span>
-            <input type="number" min={1} value={item.qty} onChange={e => setQty(item.id, parseInt(e.target.value) || 1)}
-              className="w-12 text-center text-sm rounded border border-gray-200 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 focus:outline-none" />
-            <button onClick={() => remove(item.id)} className="text-gray-200 hover:text-red-400 transition-colors">
-              <Trash2 className="w-4 h-4" />
-            </button>
-          </div>
-        ))}
+        <p className="text-xs text-center text-gray-400">✅ 行李清单已自动保存，下次访问自动恢复</p>
       </div>
     </div>
   )
