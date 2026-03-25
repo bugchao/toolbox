@@ -56,6 +56,16 @@ const IdCardParser = lazy(() => import('@toolbox/tool-id-card-parser'))
 const ColorBlindSim = lazy(() => import('@toolbox/tool-color-blind-sim'))
 const TextToSpeech = lazy(() => import('@toolbox/tool-text-to-speech'))
 const CurrencyHistory = lazy(() => import('@toolbox/tool-currency-history'))
+const OneLiner = lazy(() => import('@toolbox/tool-one-liner'))
+const Eli5 = lazy(() => import('@toolbox/tool-eli5'))
+const MultiPerspective = lazy(() => import('@toolbox/tool-multi-perspective'))
+const McqGen = lazy(() => import('@toolbox/tool-mcq-gen'))
+const MorseCode = lazy(() => import('@toolbox/tool-morse-code'))
+const AsciiArt = lazy(() => import('@toolbox/tool-ascii-art'))
+const PasswordStrength = lazy(() => import('@toolbox/tool-password-strength'))
+const BaseConverter = lazy(() => import('@toolbox/tool-base-converter'))
+const WordCount = lazy(() => import('@toolbox/tool-word-count'))
+const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
 
 function RouteLoading() {
   const { t } = useTranslation('common')
@@ -494,6 +504,25 @@ function App() {
           <Route path="/quiz-gen" element={<QuizGen />} />
           <Route path="/trip-planner" element={<TripPlanner />} />
           <Route path="/day-trip" element={<DayTrip />} />
+          <Route path="/spaced-repetition" element={<SpacedRepetition />} />
+          <Route path="/travel-translator" element={<TravelTranslator />} />
+          <Route path="/project-scaffold" element={<ProjectScaffold />} />
+          <Route path="/knowledge-compare" element={<KnowledgeCompare />} />
+          <Route path="/loan-calc" element={<LoanCalc />} />
+          <Route path="/id-card-parser" element={<IdCardParser />} />
+          <Route path="/color-blind-sim" element={<ColorBlindSim />} />
+          <Route path="/text-to-speech" element={<TextToSpeech />} />
+          <Route path="/currency-history" element={<CurrencyHistory />} />
+          <Route path="/one-liner" element={<OneLiner />} />
+          <Route path="/eli5" element={<Eli5 />} />
+          <Route path="/multi-perspective" element={<MultiPerspective />} />
+          <Route path="/mcq-gen" element={<McqGen />} />
+          <Route path="/morse-code" element={<MorseCode />} />
+          <Route path="/ascii-art" element={<AsciiArt />} />
+          <Route path="/password-strength" element={<PasswordStrength />} />
+          <Route path="/base-converter" element={<BaseConverter />} />
+          <Route path="/word-count" element={<WordCount />} />
+          <Route path="/pomodoro-pro" element={<PomodoroPro />} />
         </Routes>
       </Suspense>
     </Layout>

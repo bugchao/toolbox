@@ -1,0 +1,16 @@
+{
+  "title": "密码强度检测",
+  "description": "实时检测密码强度，给出安全建议",
+  "placeholder": "输入密码检测强度",
+  "show": "显示",
+  "hide": "隐藏",
+  "veryWeak": "非常弱",
+  "weak": "弱",
+  "fair": "一般",
+  "strong": "强",
+  "veryStrong": "非常强",
+  "suggestions": "改进建议",
+  "generate": "生成强密码",
+  "copy": "复制",
+  "copied": "已复制"
+}

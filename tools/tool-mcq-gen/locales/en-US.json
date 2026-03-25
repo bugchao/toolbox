@@ -1,0 +1,14 @@
+{
+  "title": "MCQ Generator",
+  "description": "Create multiple choice questions, generate quizzes, grade answers",
+  "addQuestion": "Add question",
+  "questionPlaceholder": "Question text",
+  "optionPlaceholder": "Option",
+  "correct": "Correct answer",
+  "startQuiz": "Start quiz",
+  "submit": "Submit",
+  "score": "Score",
+  "restart": "Restart",
+  "empty": "No questions yet",
+  "autoSave": "✅ Questions saved"
+}

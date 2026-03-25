@@ -1,0 +1,11 @@
+{
+  "title": "Base Converter",
+  "description": "Convert between binary, octal, decimal and hexadecimal",
+  "binary": "Binary",
+  "octal": "Octal",
+  "decimal": "Decimal",
+  "hex": "Hexadecimal",
+  "copy": "Copy",
+  "copied": "Copied",
+  "invalid": "Invalid input"
+}

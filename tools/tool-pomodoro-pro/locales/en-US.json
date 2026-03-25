@@ -1,0 +1,17 @@
+{
+  "title": "Pomodoro Pro",
+  "description": "Focus timer with task binding and session statistics",
+  "work": "Focus",
+  "shortBreak": "Short break",
+  "longBreak": "Long break",
+  "start": "Start",
+  "pause": "Pause",
+  "reset": "Reset",
+  "skip": "Skip",
+  "addTask": "Add task",
+  "taskPlaceholder": "What to focus on...",
+  "todayPomodoros": "Today's pomodoros",
+  "totalFocus": "Total focus",
+  "settings": "Settings",
+  "autoSave": "✅ Records saved"
+}

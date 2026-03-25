@@ -54,9 +54,15 @@ importers:
       '@toolbox/i18n-runtime':
         specifier: workspace:*
         version: link:../../packages/i18n-runtime
+      '@toolbox/tool-ascii-art':
+        specifier: workspace:*
+        version: link:../../tools/tool-ascii-art
       '@toolbox/tool-barcode-reader':
         specifier: workspace:*
         version: link:../../tools/tool-barcode-reader
+      '@toolbox/tool-base-converter':
+        specifier: workspace:*
+        version: link:../../tools/tool-base-converter
       '@toolbox/tool-color-blind-sim':
         specifier: workspace:*
         version: link:../../tools/tool-color-blind-sim
@@ -123,6 +129,9 @@ importers:
       '@toolbox/tool-domain-txt':
         specifier: workspace:*
         version: link:../../tools/tool-domain-txt
+      '@toolbox/tool-eli5':
+        specifier: workspace:*
+        version: link:../../tools/tool-eli5
       '@toolbox/tool-expiry-reminder':
         specifier: workspace:*
         version: link:../../tools/tool-expiry-reminder
@@ -168,15 +177,33 @@ importers:
       '@toolbox/tool-loan-calc':
         specifier: workspace:*
         version: link:../../tools/tool-loan-calc
+      '@toolbox/tool-mcq-gen':
+        specifier: workspace:*
+        version: link:../../tools/tool-mcq-gen
       '@toolbox/tool-mistake-book':
         specifier: workspace:*
         version: link:../../tools/tool-mistake-book
+      '@toolbox/tool-morse-code':
+        specifier: workspace:*
+        version: link:../../tools/tool-morse-code
+      '@toolbox/tool-multi-perspective':
+        specifier: workspace:*
+        version: link:../../tools/tool-multi-perspective
+      '@toolbox/tool-one-liner':
+        specifier: workspace:*
+        version: link:../../tools/tool-one-liner
+      '@toolbox/tool-password-strength':
+        specifier: workspace:*
+        version: link:../../tools/tool-password-strength
       '@toolbox/tool-pdf':
         specifier: workspace:*
         version: link:../../tools/tool-pdf
       '@toolbox/tool-ping':
         specifier: workspace:*
         version: link:../../tools/tool-ping
+      '@toolbox/tool-pomodoro-pro':
+        specifier: workspace:*
+        version: link:../../tools/tool-pomodoro-pro
       '@toolbox/tool-ppt-generator':
         specifier: workspace:*
         version: link:../../tools/tool-ppt-generator
@@ -231,6 +258,9 @@ importers:
       '@toolbox/tool-weather':
         specifier: workspace:*
         version: link:../../tools/tool-weather
+      '@toolbox/tool-word-count':
+        specifier: workspace:*
+        version: link:../../tools/tool-word-count
       '@toolbox/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
@@ -513,6 +543,21 @@ importers:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-ascii-art:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-barcode-reader:
     dependencies:
       '@toolbox/storage':
@@ -546,6 +591,21 @@ importers:
       typescript:
         specifier: '*'
         version: 5.9.3
+
+  tools/tool-base-converter:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-base64:
     dependencies:
@@ -1525,6 +1585,21 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  tools/tool-eli5:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-expense-tracker:
     dependencies:
       '@toolbox/storage':
@@ -2375,6 +2450,24 @@ importers:
         specifier: ^2.15.3
         version: 2.15.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
+  tools/tool-mcq-gen:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-mistake-book:
     dependencies:
       '@toolbox/storage':
@@ -2406,6 +2499,36 @@ importers:
         specifier: '*'
         version: 5.9.3
 
+  tools/tool-morse-code:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-multi-perspective:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-okr-planner:
     dependencies:
       '@toolbox/storage':
@@ -2427,6 +2550,21 @@ importers:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-one-liner:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-packing-list:
     dependencies:
       '@toolbox/storage':
@@ -2446,6 +2584,21 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-i18next:
         specifier: ^15.4.1
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-password-strength:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-pdf:
@@ -2529,6 +2682,24 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-i18next:
         specifier: ^15.4.1
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-pomodoro-pro:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-ppt-generator:
@@ -3353,6 +3524,21 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-i18next:
         specifier: ^15.4.1
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-word-count:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
 packages:

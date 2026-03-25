@@ -1,0 +1,13 @@
+{
+  "title": "摩斯密码",
+  "description": "文字与摩斯密码互相转换，支持音频播放",
+  "textToMorse": "文字 → 摩斯",
+  "morseToText": "摩斯 → 文字",
+  "textPlaceholder": "输入文字...",
+  "morsePlaceholder": "输入摩斯密码（用空格分隔）...",
+  "play": "播放音频",
+  "stop": "停止",
+  "copy": "复制",
+  "copied": "已复制",
+  "speed": "速度"
+}

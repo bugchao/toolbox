@@ -214,6 +214,26 @@ import toolTextToSpeechZh from '@toolbox/tool-text-to-speech/locales/zh-CN.json'
 import toolTextToSpeechEn from '@toolbox/tool-text-to-speech/locales/en-US.json'
 import toolCurrencyHistoryZh from '@toolbox/tool-currency-history/locales/zh-CN.json'
 import toolCurrencyHistoryEn from '@toolbox/tool-currency-history/locales/en-US.json'
+import toolOneLinerZh from '@toolbox/tool-one-liner/locales/zh-CN.json'
+import toolOneLinerEn from '@toolbox/tool-one-liner/locales/en-US.json'
+import toolEli5Zh from '@toolbox/tool-eli5/locales/zh-CN.json'
+import toolEli5En from '@toolbox/tool-eli5/locales/en-US.json'
+import toolMultiPerspectiveZh from '@toolbox/tool-multi-perspective/locales/zh-CN.json'
+import toolMultiPerspectiveEn from '@toolbox/tool-multi-perspective/locales/en-US.json'
+import toolMcqGenZh from '@toolbox/tool-mcq-gen/locales/zh-CN.json'
+import toolMcqGenEn from '@toolbox/tool-mcq-gen/locales/en-US.json'
+import toolMorseCodeZh from '@toolbox/tool-morse-code/locales/zh-CN.json'
+import toolMorseCodeEn from '@toolbox/tool-morse-code/locales/en-US.json'
+import toolAsciiArtZh from '@toolbox/tool-ascii-art/locales/zh-CN.json'
+import toolAsciiArtEn from '@toolbox/tool-ascii-art/locales/en-US.json'
+import toolPasswordStrengthZh from '@toolbox/tool-password-strength/locales/zh-CN.json'
+import toolPasswordStrengthEn from '@toolbox/tool-password-strength/locales/en-US.json'
+import toolBaseConverterZh from '@toolbox/tool-base-converter/locales/zh-CN.json'
+import toolBaseConverterEn from '@toolbox/tool-base-converter/locales/en-US.json'
+import toolWordCountZh from '@toolbox/tool-word-count/locales/zh-CN.json'
+import toolWordCountEn from '@toolbox/tool-word-count/locales/en-US.json'
+import toolPomodoroProZh from '@toolbox/tool-pomodoro-pro/locales/zh-CN.json'
+import toolPomodoroProEn from '@toolbox/tool-pomodoro-pro/locales/en-US.json'
 import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
@@ -355,6 +375,25 @@ export const resources = {
     toolQuizGen: toolQuizGenZh as Record<string, string>,
     toolTripPlanner: toolTripPlannerZh as Record<string, string>,
     toolDayTrip: toolDayTripZh as Record<string, string>,
+    toolSpacedRepetition: toolSpacedRepetitionZh as Record<string, string>,
+    toolTravelTranslator: toolTravelTranslatorZh as Record<string, string>,
+    toolProjectScaffold: toolProjectScaffoldZh as Record<string, string>,
+    toolKnowledgeCompare: toolKnowledgeCompareZh as Record<string, string>,
+    toolLoanCalc: toolLoanCalcZh as Record<string, string>,
+    toolIdCardParser: toolIdCardParserZh as Record<string, string>,
+    toolColorBlindSim: toolColorBlindSimZh as Record<string, string>,
+    toolTextToSpeech: toolTextToSpeechZh as Record<string, string>,
+    toolCurrencyHistory: toolCurrencyHistoryZh as Record<string, string>,
+    toolOneLiner: toolOneLinerZh as Record<string, string>,
+    toolEli5: toolEli5Zh as Record<string, string>,
+    toolMultiPerspective: toolMultiPerspectiveZh as Record<string, string>,
+    toolMcqGen: toolMcqGenZh as Record<string, string>,
+    toolMorseCode: toolMorseCodeZh as Record<string, string>,
+    toolAsciiArt: toolAsciiArtZh as Record<string, string>,
+    toolPasswordStrength: toolPasswordStrengthZh as Record<string, string>,
+    toolBaseConverter: toolBaseConverterZh as Record<string, string>,
+    toolWordCount: toolWordCountZh as Record<string, string>,
+    toolPomodoroPro: toolPomodoroProZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -484,6 +523,16 @@ export const resources = {
     toolColorBlindSim: toolColorBlindSimEn as Record<string, string>,
     toolTextToSpeech: toolTextToSpeechEn as Record<string, string>,
     toolCurrencyHistory: toolCurrencyHistoryEn as Record<string, string>,
+    toolOneLiner: toolOneLinerEn as Record<string, string>,
+    toolEli5: toolEli5En as Record<string, string>,
+    toolMultiPerspective: toolMultiPerspectiveEn as Record<string, string>,
+    toolMcqGen: toolMcqGenEn as Record<string, string>,
+    toolMorseCode: toolMorseCodeEn as Record<string, string>,
+    toolAsciiArt: toolAsciiArtEn as Record<string, string>,
+    toolPasswordStrength: toolPasswordStrengthEn as Record<string, string>,
+    toolBaseConverter: toolBaseConverterEn as Record<string, string>,
+    toolWordCount: toolWordCountEn as Record<string, string>,
+    toolPomodoroPro: toolPomodoroProEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

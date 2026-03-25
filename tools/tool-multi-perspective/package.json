@@ -1,0 +1,12 @@
+{
+  "name": "@toolbox/tool-multi-perspective",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@toolbox/ui-kit": "workspace:*",
+    "lucide-react": "^0.577.0",
+    "react": "^18.3.1",
+    "react-i18next": "^15.1.0"
+  }
+}

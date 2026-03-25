@@ -14,7 +14,8 @@ import {
   Calculator, ListChecks, PlaneTakeoff, SplitSquareHorizontal,
   Luggage, ChefHat, BookOpen, BookMarked, CalendarDays, ShoppingBag,
   Bell, Users, ScanLine, Brain, Compass,
-  RotateCcw, Languages, FolderTree, Eye, Volume2
+  RotateCcw, Languages, FolderTree, Eye, Volume2,
+  Lightbulb, Baby, Telescope, Type
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -213,6 +214,16 @@ export const TOOLS: ToolEntry[] = [
   { path: '/color-blind-sim', nameKey: 'tools.color_blind_sim', icon: Eye, categoryKey: 'utils', keywords: ['色盲', '无障碍', 'color blind', 'accessibility'], i18nNamespace: 'toolColorBlindSim' },
   { path: '/text-to-speech', nameKey: 'tools.text_to_speech', icon: Volume2, categoryKey: 'utils', keywords: ['语音', 'tts', '朗读', 'text to speech'], i18nNamespace: 'toolTextToSpeech' },
   { path: '/currency-history', nameKey: 'tools.currency_history', icon: TrendingUp, categoryKey: 'utils', keywords: ['汇率', '历史', 'exchange rate', '外汇'], i18nNamespace: 'toolCurrencyHistory' },
+  { path: '/one-liner', nameKey: 'tools.one_liner', icon: Lightbulb, categoryKey: 'learn', keywords: ['一句话', '解释', 'one liner', '概念'], i18nNamespace: 'toolOneLiner' },
+  { path: '/eli5', nameKey: 'tools.eli5', icon: Baby, categoryKey: 'learn', keywords: ['ELI5', '简单解释', '5岁', '类比'], i18nNamespace: 'toolEli5' },
+  { path: '/multi-perspective', nameKey: 'tools.multi_perspective', icon: Telescope, categoryKey: 'learn', keywords: ['多角度', '视角', '专家', '类比'], i18nNamespace: 'toolMultiPerspective' },
+  { path: '/mcq-gen', nameKey: 'tools.mcq_gen', icon: ListChecks, categoryKey: 'learn', keywords: ['选择题', '出题', 'quiz', '测验'], i18nNamespace: 'toolMcqGen' },
+  { path: '/morse-code', nameKey: 'tools.morse_code', icon: Radio, categoryKey: 'utils', keywords: ['摩斯', '密码', 'morse', '电报'], i18nNamespace: 'toolMorseCode' },
+  { path: '/ascii-art', nameKey: 'tools.ascii_art', icon: Type, categoryKey: 'utils', keywords: ['ASCII', '艺术字', 'art', '字体'], i18nNamespace: 'toolAsciiArt' },
+  { path: '/password-strength', nameKey: 'tools.password_strength', icon: ShieldCheck, categoryKey: 'utils', keywords: ['密码', '强度', 'password', '安全'], i18nNamespace: 'toolPasswordStrength' },
+  { path: '/base-converter', nameKey: 'tools.base_converter', icon: ArrowLeftRight, categoryKey: 'dev', keywords: ['进制', '二进制', '十六进制', 'base'], i18nNamespace: 'toolBaseConverter' },
+  { path: '/word-count', nameKey: 'tools.word_count', icon: FileText, categoryKey: 'utils', keywords: ['字数', '统计', 'word count', '文本'], i18nNamespace: 'toolWordCount' },
+  { path: '/pomodoro-pro', nameKey: 'tools.pomodoro_pro', icon: Timer, categoryKey: 'life', keywords: ['番茄钟', '专注', 'pomodoro', '计时'], i18nNamespace: 'toolPomodoroPro' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

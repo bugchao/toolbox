@@ -1,0 +1,9 @@
+{
+  "title": "ASCII Art",
+  "description": "Convert text to ASCII art fonts",
+  "inputPlaceholder": "Enter text (max 5 chars recommended)",
+  "font": "Font style",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download"
+}

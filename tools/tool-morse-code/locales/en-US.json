@@ -1,0 +1,13 @@
+{
+  "title": "Morse Code",
+  "description": "Convert text to morse code and back, with audio playback",
+  "textToMorse": "Text → Morse",
+  "morseToText": "Morse → Text",
+  "textPlaceholder": "Enter text...",
+  "morsePlaceholder": "Enter morse code (space separated)...",
+  "play": "Play audio",
+  "stop": "Stop",
+  "copy": "Copy",
+  "copied": "Copied",
+  "speed": "Speed"
+}

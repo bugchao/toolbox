@@ -1,0 +1,14 @@
+{
+  "title": "Word Count",
+  "description": "Multi-dimension text statistics: chars, words, sentences, reading time",
+  "placeholder": "Paste or type text here...",
+  "chars": "Characters",
+  "charsNoSpace": "Chars (no spaces)",
+  "words": "Words",
+  "sentences": "Sentences",
+  "paragraphs": "Paragraphs",
+  "lines": "Lines",
+  "readTime": "Reading time",
+  "minutes": "min",
+  "clear": "Clear"
+}

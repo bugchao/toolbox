@@ -1,0 +1,17 @@
+{
+  "title": "番茄钟 Pro",
+  "description": "专注计时器，绑定任务，统计专注时长",
+  "work": "专注",
+  "shortBreak": "短休息",
+  "longBreak": "长休息",
+  "start": "开始",
+  "pause": "暂停",
+  "reset": "重置",
+  "skip": "跳过",
+  "addTask": "添加任务",
+  "taskPlaceholder": "今天要做什么...",
+  "todayPomodoros": "今日番茄数",
+  "totalFocus": "累计专注",
+  "settings": "设置",
+  "autoSave": "✅ 记录已保存"
+}

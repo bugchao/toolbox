@@ -1,0 +1,16 @@
+{
+  "title": "Password Strength",
+  "description": "Real-time password strength analysis with security suggestions",
+  "placeholder": "Enter password to check",
+  "show": "Show",
+  "hide": "Hide",
+  "veryWeak": "Very Weak",
+  "weak": "Weak",
+  "fair": "Fair",
+  "strong": "Strong",
+  "veryStrong": "Very Strong",
+  "suggestions": "Suggestions",
+  "generate": "Generate strong password",
+  "copy": "Copy",
+  "copied": "Copied"
+}
