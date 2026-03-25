@@ -100,7 +100,7 @@ export default function CalorieCalc() {
   const [meal, setMeal] = useState<MealType>('早餐')
   const [showPicker, setShowPicker] = useState(true)
 
-  const diary = state.diary[date] || []
+  const diary = (state.diary ?? {})[date] || []
   const totalCalories = diary.reduce((s, e) => s + e.calories, 0)
   const goalPct = Math.min(100, Math.round((totalCalories / state.goal) * 100))
 
@@ -138,14 +138,14 @@ export default function CalorieCalc() {
         time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
       }
     })
-    const newDiary = { ...state.diary, [date]: [...diary, ...newEntries] }
+    const newDiary = { ...(state.diary ?? {}), [date]: [...diary, ...newEntries] }
     save({ ...state, diary: newDiary })
     setSelected([])
     setShowPicker(false)
   }
 
   const removeEntry = (id: string) => {
-    const newDiary = { ...state.diary, [date]: diary.filter(e => e.id !== id) }
+    const newDiary = { ...(state.diary ?? {}), [date]: diary.filter(e => e.id !== id) }
     save({ ...state, diary: newDiary })
   }
 
