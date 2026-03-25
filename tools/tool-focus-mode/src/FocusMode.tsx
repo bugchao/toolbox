@@ -89,7 +89,7 @@ function formatDuration(minutes: number): string {
 
 export default function FocusMode() {
   const { t } = useTranslation('toolFocusMode')
-  const { data: state, save } = useToolStorage<FocusState>('focus-mode', 'data', DEFAULT_STATE)
+  const { data: state, save, loading } = useToolStorage<FocusState>('focus-mode', 'data', DEFAULT_STATE)
   
   // 计时器状态
   const [timeLeft, setTimeLeft] = useState(25 * 60)
@@ -115,13 +115,24 @@ export default function FocusMode() {
   
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const stateRef = useRef(state)
+  const currentSessionStartRef = useRef<string | null>(null)
+  
+  // 保持 stateRef 同步
+  useEffect(() => {
+    stateRef.current = state
+  }, [state])
   
   // 预设时长选项
   const focusPresets = [15, 25, 45, 60, 90]
   const breakPresets = [5, 10, 15, 20, 30]
   
-  // 恢复保存的状态
+  // 恢复保存的状态 - 等存储加载完成后执行一次
+  const hasRestored = useRef(false)
   useEffect(() => {
+    if (loading || hasRestored.current) return
+    hasRestored.current = true
+    
     if (state.currentSession) {
       const saved = state.currentSession
       // 检查保存的状态是否过期（超过24小时）
@@ -130,9 +141,10 @@ export default function FocusMode() {
       const hoursPassed = (now - savedTime) / (1000 * 60 * 60)
       
       if (hoursPassed < 24) {
+        currentSessionStartRef.current = saved.startTime
         setTimeLeft(saved.timeLeft)
         setTotalTime(saved.totalTime)
-        setStatus(saved.status === 'focusing' ? 'paused' : saved.status) // 长时间后自动暂停
+        setStatus(saved.status === 'focusing' ? 'paused' : saved.status)
         setMode(saved.mode)
         setCycles(saved.cycles)
         setFocusDuration(saved.focusDuration)
@@ -142,14 +154,22 @@ export default function FocusMode() {
       } else {
         // 状态过期，清除
         const { currentSession: _, ...rest } = state
+        currentSessionStartRef.current = null
         save(rest)
       }
     }
-  }, [state.currentSession])
+  }, [loading, save, state])
   
-  // 保存当前状态
-  useEffect(() => {
+  // 保存当前状态 - 使用 stateRef 避免闭包问题
+  const saveCurrentState = useCallback(() => {
+    const currentState = stateRef.current
     if (status !== 'ready') {
+      const preservedStartTime =
+        currentSessionStartRef.current ??
+        currentState.currentSession?.startTime ??
+        new Date().toISOString()
+      currentSessionStartRef.current = preservedStartTime
+
       const currentSession: CurrentSession = {
         timeLeft,
         totalTime,
@@ -160,15 +180,48 @@ export default function FocusMode() {
         shortBreakDuration,
         longBreakDuration,
         currentTask,
-        startTime: new Date().toISOString()
+        startTime: preservedStartTime
       }
-      save({ ...state, currentSession })
+      save({ ...currentState, currentSession })
     } else {
       // 清除当前会话状态
-      const { currentSession: _, ...rest } = state
+      const { currentSession: _, ...rest } = currentState
+      currentSessionStartRef.current = null
       save(rest)
     }
-  }, [timeLeft, status, mode, cycles, focusDuration, shortBreakDuration, longBreakDuration, currentTask])
+  }, [currentTask, cycles, focusDuration, longBreakDuration, mode, save, shortBreakDuration, status, timeLeft, totalTime])
+  
+  // 页面可见性变化时保存状态
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        saveCurrentState()
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [saveCurrentState])
+  
+  // 页面卸载前保存状态
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      saveCurrentState()
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [saveCurrentState])
+  
+  // 定时保存状态（每5秒）
+  useEffect(() => {
+    if (status === 'focusing' || status === 'break') {
+      const interval = setInterval(() => {
+        saveCurrentState()
+      }, 5000)
+      return () => clearInterval(interval)
+    }
+  }, [status, saveCurrentState])
   
   // 计算统计数据
   const stats = React.useMemo(() => {
@@ -276,10 +329,10 @@ export default function FocusMode() {
         newStreak = 1
       }
       
-      const { currentSession: _, ...restState } = state
+      const { currentSession: _, ...restState } = stateRef.current
       save({
         ...restState,
-        sessions: [...state.sessions, session],
+        sessions: [...restState.sessions, session],
         lastFocusDate: today,
         streak: newStreak
       })
@@ -300,6 +353,7 @@ export default function FocusMode() {
         setTimeLeft(shortBreakDuration * 60)
         setTotalTime(shortBreakDuration * 60)
       }
+      currentSessionStartRef.current = new Date().toISOString()
       setStatus('break')
       
     } else if (status === 'break') {
@@ -307,6 +361,7 @@ export default function FocusMode() {
       setMode('focus')
       setTimeLeft(focusDuration * 60)
       setTotalTime(focusDuration * 60)
+      currentSessionStartRef.current = null
       setStatus('ready')
     }
   }
@@ -320,6 +375,7 @@ export default function FocusMode() {
   
   // 控制按钮
   const handleStart = () => {
+    currentSessionStartRef.current = new Date().toISOString()
     setStatus('focusing')
     setMode('focus')
   }
@@ -333,6 +389,7 @@ export default function FocusMode() {
   }
   
   const handleReset = () => {
+    currentSessionStartRef.current = null
     setStatus('ready')
     setTimeLeft(focusDuration * 60)
     setTotalTime(focusDuration * 60)
@@ -364,10 +421,10 @@ export default function FocusMode() {
       interruptReason: reason
     }
     
-    const { currentSession: _, ...restState } = state
+    const { currentSession: _, ...restState } = stateRef.current
     save({
       ...restState,
-      sessions: [...state.sessions, session]
+      sessions: [...restState.sessions, session]
     })
     
     setShowInterruptDialog(false)
