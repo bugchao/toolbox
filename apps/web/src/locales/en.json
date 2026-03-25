@@ -117,7 +117,10 @@
       "wooden_fish": "Wooden Fish",
       "life_progress": "Life Progress",
       "meeting_minutes": "AI Meeting Minutes",
-      "ui_generator": "AI UI Generator"
+      "ui_generator": "AI UI Generator",
+      "study_timer": "Study Timer",
+      "study_planner": "Study Planner",
+      "focus_mode": "Focus Mode"
     },
     "category_dns": "DNS Tools",
     "category_domain": "Domain Tools",

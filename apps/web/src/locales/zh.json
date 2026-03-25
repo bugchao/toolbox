@@ -117,7 +117,10 @@
       "wooden_fish": "电子木鱼",
       "life_progress": "人生进度条",
       "meeting_minutes": "AI 会议纪要生成器",
-      "ui_generator": "AI UI 设计生成器"
+      "ui_generator": "AI UI 设计生成器",
+      "study_timer": "学习时长统计",
+      "study_planner": "学习计划生成器",
+      "focus_mode": "专注模式"
     },
     "category_dns": "DNS 工具",
     "category_domain": "域名工具",

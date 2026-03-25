@@ -124,17 +124,28 @@ export default function FocusMode() {
   useEffect(() => {
     if (state.currentSession) {
       const saved = state.currentSession
-      setTimeLeft(saved.timeLeft)
-      setTotalTime(saved.totalTime)
-      setStatus(saved.status)
-      setMode(saved.mode)
-      setCycles(saved.cycles)
-      setFocusDuration(saved.focusDuration)
-      setShortBreakDuration(saved.shortBreakDuration)
-      setLongBreakDuration(saved.longBreakDuration)
-      setCurrentTask(saved.currentTask)
+      // 检查保存的状态是否过期（超过24小时）
+      const savedTime = new Date(saved.startTime).getTime()
+      const now = Date.now()
+      const hoursPassed = (now - savedTime) / (1000 * 60 * 60)
+      
+      if (hoursPassed < 24) {
+        setTimeLeft(saved.timeLeft)
+        setTotalTime(saved.totalTime)
+        setStatus(saved.status === 'focusing' ? 'paused' : saved.status) // 长时间后自动暂停
+        setMode(saved.mode)
+        setCycles(saved.cycles)
+        setFocusDuration(saved.focusDuration)
+        setShortBreakDuration(saved.shortBreakDuration)
+        setLongBreakDuration(saved.longBreakDuration)
+        setCurrentTask(saved.currentTask)
+      } else {
+        // 状态过期，清除
+        const { currentSession: _, ...rest } = state
+        save(rest)
+      }
     }
-  }, [])
+  }, [state.currentSession])
   
   // 保存当前状态
   useEffect(() => {

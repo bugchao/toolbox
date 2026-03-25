@@ -124,6 +124,8 @@ export const TOOLS: ToolEntry[] = [
   { path: '/packing-list', nameKey: 'tools.packing_list', icon: Luggage, categoryKey: 'travel', keywords: ['行李', '清单', '打包', '出行'], i18nNamespace: 'toolPackingList' },
   { path: '/recipe-finder', nameKey: 'tools.recipe_finder', icon: ChefHat, categoryKey: 'life', keywords: ['菜谱', '食材', '烹饪', '推荐'], i18nNamespace: 'toolRecipeFinder' },
   { path: '/study-timer', nameKey: 'tools.study_timer', icon: BookOpen, categoryKey: 'learn', keywords: ['学习', '计时', '专注', '统计'], i18nNamespace: 'toolStudyTimer' },
+  { path: '/study-planner', nameKey: 'tools.study_planner', icon: BookOpen, categoryKey: 'learn', keywords: ['学习', '计划', 'AI', '复习', '备考'], i18nNamespace: 'toolStudyPlanner' },
+  { path: '/focus-mode', nameKey: 'tools.focus_mode', icon: Target, categoryKey: 'learn', keywords: ['专注', '番茄钟', '计时', '白噪音', '沉浸'], i18nNamespace: 'toolFocusMode' },
   { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: ShieldCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf' , mode: 'server'},
   { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim' , mode: 'server'},
   { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: FileSearch, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc' , mode: 'server'},
