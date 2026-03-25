@@ -131,7 +131,7 @@ export default function HttpDebugger() {
                 {Object.entries(response.headers).map(([k, v]) => (
                   <div key={k} className="flex gap-2">
                     <span className="text-gray-500 shrink-0">{k}:</span>
-                    <span className="text-gray-700 dark:text-gray-300 break-all">{v}</span>
+                    <span className="text-gray-700 dark:text-gray-300 break-all">{String(v)}</span>
                   </div>
                 ))}
               </div>

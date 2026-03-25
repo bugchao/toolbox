@@ -85,7 +85,7 @@ export default function TravelCostEstimate() {
               {Object.entries(custom).map(([key, val]) => (
                 <div key={key}>
                   <label className="text-xs text-gray-400 mb-0.5 block">{t(key)}</label>
-                  <input type="number" min={0} value={val}
+                  <input type="number" min={0} value={typeof val === 'number' ? val : 0}
                     onChange={e => setCustom(c => ({ ...c, [key]: parseFloat(e.target.value) || 0 }))}
                     className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none" />
                 </div>
