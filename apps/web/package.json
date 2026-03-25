@@ -104,6 +104,16 @@
     "@toolbox/tool-password-strength": "workspace:*",
     "@toolbox/tool-base-converter": "workspace:*",
     "@toolbox/tool-word-count": "workspace:*",
+    "@toolbox/tool-pomodoro-pro": "workspace:*",
+    "@toolbox/tool-one-liner": "workspace:*",
+    "@toolbox/tool-eli5": "workspace:*",
+    "@toolbox/tool-multi-perspective": "workspace:*",
+    "@toolbox/tool-mcq-gen": "workspace:*",
+    "@toolbox/tool-morse-code": "workspace:*",
+    "@toolbox/tool-ascii-art": "workspace:*",
+    "@toolbox/tool-password-strength": "workspace:*",
+    "@toolbox/tool-base-converter": "workspace:*",
+    "@toolbox/tool-word-count": "workspace:*",
     "@toolbox/tool-pomodoro-pro": "workspace:*"
   },
   "devDependencies": {
