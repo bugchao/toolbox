@@ -186,6 +186,8 @@ const DistanceCalc = lazy(() => import('@toolbox/tool-distance-calc').then((m) =
 const PackingList = lazy(() => import('@toolbox/tool-packing-list').then((m) => ({ default: m.default })))
 const RecipeFinder = lazy(() => import('@toolbox/tool-recipe-finder').then((m) => ({ default: m.default })))
 const StudyTimer = lazy(() => import('@toolbox/tool-study-timer').then((m) => ({ default: m.default })))
+const StudyPlanner = lazy(() => import('@toolbox/tool-study-planner').then((m) => ({ default: m.default })))
+const FocusMode = lazy(() => import('@toolbox/tool-focus-mode').then((m) => ({ default: m.default })))
 const DomainSpf = lazy(() =>
   import('@toolbox/tool-domain-suite').then((m) => ({ default: m.DomainSpf }))
 )
@@ -412,6 +414,8 @@ function App() {
           <Route path="/packing-list" element={<PackingList />} />
           <Route path="/recipe-finder" element={<RecipeFinder />} />
           <Route path="/study-timer" element={<StudyTimer />} />
+          <Route path="/study-planner" element={<StudyPlanner />} />
+          <Route path="/focus-mode" element={<FocusMode />} />
           <Route path="/domain-spf" element={<DomainSpf />} />
           <Route path="/domain-dkim" element={<DomainDkim />} />
           <Route path="/domain-dmarc" element={<DomainDmarc />} />

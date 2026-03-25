@@ -172,6 +172,10 @@ import toolRecipeFinderZh from '@toolbox/tool-recipe-finder/locales/zh-CN.json'
 import toolRecipeFinderEn from '@toolbox/tool-recipe-finder/locales/en-US.json'
 import toolStudyTimerZh from '@toolbox/tool-study-timer/locales/zh-CN.json'
 import toolStudyTimerEn from '@toolbox/tool-study-timer/locales/en-US.json'
+import toolStudyPlannerZh from '@toolbox/tool-study-planner/locales/zh-CN.json'
+import toolStudyPlannerEn from '@toolbox/tool-study-planner/locales/en-US.json'
+import toolFocusModeZh from '@toolbox/tool-focus-mode/locales/zh-CN.json'
+import toolFocusModeEn from '@toolbox/tool-focus-mode/locales/en-US.json'
 import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
@@ -301,6 +305,8 @@ export const resources = {
     toolPackingList: toolPackingListZh as Record<string, string>,
     toolRecipeFinder: toolRecipeFinderZh as Record<string, string>,
     toolStudyTimer: toolStudyTimerZh as Record<string, string>,
+    toolStudyPlanner: toolStudyPlannerZh as unknown as Record<string, string>,
+    toolFocusMode: toolFocusModeZh as unknown as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -409,6 +415,8 @@ export const resources = {
     toolPackingList: toolPackingListEn as Record<string, string>,
     toolRecipeFinder: toolRecipeFinderEn as Record<string, string>,
     toolStudyTimer: toolStudyTimerEn as Record<string, string>,
+    toolStudyPlanner: toolStudyPlannerEn as unknown as Record<string, string>,
+    toolFocusMode: toolFocusModeEn as unknown as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
