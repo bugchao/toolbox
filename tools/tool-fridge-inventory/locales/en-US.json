@@ -1,0 +1,16 @@
+{
+  "title": "Fridge Inventory",
+  "description": "Manage fridge items, track stock and expiry dates",
+  "add": "Add item",
+  "name": "Item name",
+  "qty": "Qty",
+  "unit": "Unit",
+  "expiry": "Expiry date",
+  "category": "Category",
+  "fresh": "Fresh",
+  "expiringSoon": "Expiring soon",
+  "expired": "Expired",
+  "all": "All",
+  "empty": "Fridge is empty",
+  "autoSave": "✅ Inventory saved automatically"
+}

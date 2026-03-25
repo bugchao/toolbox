@@ -1,0 +1,12 @@
+{
+  "title": "Daily Planner",
+  "description": "Plan your time blocks, track completion",
+  "workday": "Workday template",
+  "weekend": "Weekend template",
+  "clear": "Clear",
+  "done": "Done",
+  "pending": "Pending",
+  "addTask": "Add task",
+  "placeholder": "What to do in this slot...",
+  "autoSave": "✅ Plan saved automatically"
+}

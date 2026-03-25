@@ -1,0 +1,14 @@
+{
+  "title": "Mistake Book",
+  "description": "Record mistakes, categorize, mark mastered, review regularly",
+  "add": "Add Mistake",
+  "questionPlaceholder": "Question content...",
+  "answerPlaceholder": "Correct answer...",
+  "analysisPlaceholder": "Solution / reason for mistake...",
+  "submit": "Save",
+  "mastered": "Mastered",
+  "unmastered": "Not mastered",
+  "all": "All",
+  "empty": "No mistakes recorded yet",
+  "autoSave": "✅ Mistakes saved automatically"
+}

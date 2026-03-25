@@ -1,0 +1,17 @@
+{
+  "title": "保质期提醒",
+  "description": "追踪物品保质期，到期前及时提醒",
+  "add": "添加物品",
+  "namePlaceholder": "物品名称",
+  "buyDate": "购买日期",
+  "shelfLife": "保质期（天）",
+  "category": "分类",
+  "expired": "已过期",
+  "expiringSoon": "即将过期",
+  "fresh": "新鲜",
+  "all": "全部",
+  "daysLeft": "天",
+  "daysAgo": "天前过期",
+  "empty": "还没有添加任何物品",
+  "autoSave": "✅ 数据已自动保存"
+}

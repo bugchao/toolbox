@@ -1,0 +1,12 @@
+{
+  "title": "今日计划",
+  "description": "规划每日时间块，追踪完成进度",
+  "workday": "工作日模板",
+  "weekend": "休息日模板",
+  "clear": "清空",
+  "done": "已完成",
+  "pending": "待完成",
+  "addTask": "添加任务",
+  "placeholder": "这个时段做什么...",
+  "autoSave": "✅ 计划已自动保存"
+}

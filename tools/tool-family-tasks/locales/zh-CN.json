@@ -1,0 +1,16 @@
+{
+  "title": "家庭任务",
+  "description": "为家庭成员分配任务，追踪完成情况",
+  "addMember": "添加成员",
+  "addTask": "添加任务",
+  "memberPlaceholder": "成员名称",
+  "taskPlaceholder": "任务描述",
+  "all": "全部",
+  "done": "已完成",
+  "pending": "待完成",
+  "high": "紧急",
+  "medium": "普通",
+  "low": "不急",
+  "empty": "还没有任务",
+  "autoSave": "✅ 任务已自动保存"
+}

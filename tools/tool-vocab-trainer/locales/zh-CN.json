@@ -1,0 +1,17 @@
+{
+  "title": "单词记忆",
+  "description": "卡片翻转记忆单词，追踪掌握进度",
+  "addWord": "添加单词",
+  "wordPlaceholder": "单词",
+  "meaningPlaceholder": "释义",
+  "mastered": "已掌握",
+  "learning": "学习中",
+  "all": "全部",
+  "know": "✓ 认识",
+  "dontKnow": "✗ 不认识",
+  "clickToFlip": "点击翻转查看释义",
+  "masteredCount": "已掌握",
+  "totalCount": "共",
+  "empty": "还没有单词，先添加几个吧",
+  "autoSave": "✅ 单词本已自动保存"
+}

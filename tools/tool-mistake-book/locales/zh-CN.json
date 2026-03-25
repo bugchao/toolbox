@@ -1,0 +1,14 @@
+{
+  "title": "错题本",
+  "description": "记录错题，分类整理，标记掌握，定期复习",
+  "add": "添加错题",
+  "questionPlaceholder": "题目内容...",
+  "answerPlaceholder": "正确答案...",
+  "analysisPlaceholder": "解题思路/错因分析...",
+  "submit": "保存",
+  "mastered": "已掌握",
+  "unmastered": "未掌握",
+  "all": "全部",
+  "empty": "还没有错题记录",
+  "autoSave": "✅ 错题已自动保存"
+}

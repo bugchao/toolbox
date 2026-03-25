@@ -1,0 +1,17 @@
+{
+  "title": "Expiry Reminder",
+  "description": "Track expiry dates and get reminded before items expire",
+  "add": "Add item",
+  "namePlaceholder": "Item name",
+  "buyDate": "Purchase date",
+  "shelfLife": "Shelf life (days)",
+  "category": "Category",
+  "expired": "Expired",
+  "expiringSoon": "Expiring soon",
+  "fresh": "Fresh",
+  "all": "All",
+  "daysLeft": "days left",
+  "daysAgo": "days ago",
+  "empty": "No items added yet",
+  "autoSave": "✅ Data saved automatically"
+}

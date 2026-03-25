@@ -1,0 +1,14 @@
+{
+  "title": "Quiz",
+  "description": "Multi-category quiz, random questions, test your knowledge",
+  "start": "Start quiz",
+  "next": "Next",
+  "finish": "See results",
+  "restart": "Try again",
+  "score": "Score",
+  "correct": "Correct!",
+  "wrong": "Wrong",
+  "answer": "Correct answer",
+  "all": "All",
+  "autoSave": "✅ Score history saved"
+}

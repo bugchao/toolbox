@@ -1,0 +1,15 @@
+{
+  "title": "Barcode Reader",
+  "description": "Upload image to decode barcodes and QR codes",
+  "upload": "Upload image",
+  "uploadHint": "Click or drag image here (JPG/PNG/GIF)",
+  "result": "Result",
+  "type": "Type",
+  "value": "Value",
+  "copy": "Copy",
+  "copied": "Copied",
+  "history": "History",
+  "empty": "No result yet",
+  "error": "Failed to decode. Please ensure the image is clear and contains a barcode.",
+  "autoSave": "✅ History saved automatically"
+}

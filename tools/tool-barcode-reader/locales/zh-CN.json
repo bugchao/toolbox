@@ -1,0 +1,15 @@
+{
+  "title": "条形码识别",
+  "description": "上传图片识别条形码和二维码内容",
+  "upload": "上传图片",
+  "uploadHint": "点击或拖拽图片到此处（支持 JPG/PNG/GIF）",
+  "result": "识别结果",
+  "type": "类型",
+  "value": "内容",
+  "copy": "复制",
+  "copied": "已复制",
+  "history": "历史记录",
+  "empty": "暂无识别结果",
+  "error": "识别失败，请确保图片清晰且包含条形码",
+  "autoSave": "✅ 历史记录已自动保存"
+}

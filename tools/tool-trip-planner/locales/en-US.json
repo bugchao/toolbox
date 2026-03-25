@@ -1,0 +1,13 @@
+{
+  "title": "Trip Planner",
+  "description": "Plan multi-day trips, manage attractions and activities by day",
+  "addDay": "Add day",
+  "addItem": "Add activity",
+  "placeholder": "Attraction / activity / restaurant...",
+  "timePlaceholder": "Time (e.g. 09:00)",
+  "day": "Day ",
+  "dayUnit": "",
+  "clear": "Clear",
+  "empty": "No itinerary yet",
+  "autoSave": "✅ Trip saved automatically"
+}

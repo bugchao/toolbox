@@ -1,0 +1,16 @@
+{
+  "title": "冰箱库存",
+  "description": "管理冰箱食材，掌握库存状态和保质期",
+  "add": "添加食材",
+  "name": "食材名称",
+  "qty": "数量",
+  "unit": "单位",
+  "expiry": "过期日期",
+  "category": "分类",
+  "fresh": "新鲜",
+  "expiringSoon": "即将过期",
+  "expired": "已过期",
+  "all": "全部",
+  "empty": "冰箱是空的",
+  "autoSave": "✅ 库存已自动保存"
+}

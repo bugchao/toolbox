@@ -1,0 +1,21 @@
+{
+  "name": "@toolbox/tool-quiz-gen",
+  "version": "0.0.1",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "dependencies": {
+    "@toolbox/ui-kit": "workspace:*",
+    "@toolbox/storage": "workspace:*",
+    "lucide-react": "*",
+    "react-i18next": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*"
+  }
+}

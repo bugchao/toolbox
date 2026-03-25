@@ -1,0 +1,12 @@
+{
+  "title": "Day Trip",
+  "description": "Recommended day trip routes by city, with attractions, food and transport tips",
+  "selectCity": "Select city",
+  "morning": "Morning",
+  "noon": "Lunch",
+  "afternoon": "Afternoon",
+  "evening": "Evening",
+  "food": "Local food",
+  "tips": "Travel tips",
+  "noCity": "Please select a city"
+}

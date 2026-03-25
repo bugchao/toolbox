@@ -192,6 +192,16 @@ export const TOOLS: ToolEntry[] = [
   { path: '/meeting-minutes', nameKey: 'tools.meeting_minutes', icon: FileText, categoryKey: 'ai', keywords: ['会议纪要', 'transcript', 'minutes'] },
   { path: '/ui-generator', nameKey: 'tools.ui_generator', icon: Wand2, categoryKey: 'ai', keywords: ['ui', 'wireframe', '设计生成'] },
   { path: '/ppt-generator', nameKey: 'tools.ppt_generator', icon: Presentation, categoryKey: 'ai', keywords: ['ppt', '演示', '幻灯片', 'ai'], i18nNamespace: 'toolPptGenerator' },
+  { path: '/vocab-trainer', nameKey: 'tools.vocab_trainer', icon: BookOpen, categoryKey: 'learn', keywords: ['单词', 'vocabulary', '记忆', 'flashcard'], i18nNamespace: 'toolVocabTrainer' },
+  { path: '/mistake-book', nameKey: 'tools.mistake_book', icon: BookMarked, categoryKey: 'learn', keywords: ['错题', '题本', '复习'], i18nNamespace: 'toolMistakeBook' },
+  { path: '/daily-planner', nameKey: 'tools.daily_planner', icon: CalendarDays, categoryKey: 'life', keywords: ['计划', '时间块', '日程', 'planner'], i18nNamespace: 'toolDailyPlanner' },
+  { path: '/fridge-inventory', nameKey: 'tools.fridge_inventory', icon: ShoppingBag, categoryKey: 'life', keywords: ['冰箱', '库存', '食材', 'fridge'], i18nNamespace: 'toolFridgeInventory' },
+  { path: '/expiry-reminder', nameKey: 'tools.expiry_reminder', icon: Bell, categoryKey: 'life', keywords: ['保质期', '过期', '提醒', 'expiry'], i18nNamespace: 'toolExpiryReminder' },
+  { path: '/family-tasks', nameKey: 'tools.family_tasks', icon: Users, categoryKey: 'life', keywords: ['家庭', '任务', '家务', 'family'], i18nNamespace: 'toolFamilyTasks' },
+  { path: '/barcode-reader', nameKey: 'tools.barcode_reader', icon: ScanLine, categoryKey: 'utils', keywords: ['条形码', '二维码', 'barcode', 'qr', '扫码'], i18nNamespace: 'toolBarcodeReader' },
+  { path: '/quiz-gen', nameKey: 'tools.quiz_gen', icon: Brain, categoryKey: 'learn', keywords: ['出题', '竞答', '知识', 'quiz'], i18nNamespace: 'toolQuizGen' },
+  { path: '/trip-planner', nameKey: 'tools.trip_planner', icon: MapPin, categoryKey: 'travel', keywords: ['行程', '旅行', '规划', 'trip'], i18nNamespace: 'toolTripPlanner' },
+  { path: '/day-trip', nameKey: 'tools.day_trip', icon: Compass, categoryKey: 'travel', keywords: ['一日游', '城市', '景点', 'day trip'], i18nNamespace: 'toolDayTrip' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

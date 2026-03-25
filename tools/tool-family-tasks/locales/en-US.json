@@ -1,0 +1,16 @@
+{
+  "title": "Family Tasks",
+  "description": "Assign tasks to family members, track completion",
+  "addMember": "Add member",
+  "addTask": "Add task",
+  "memberPlaceholder": "Member name",
+  "taskPlaceholder": "Task description",
+  "all": "All",
+  "done": "Done",
+  "pending": "Pending",
+  "high": "Urgent",
+  "medium": "Normal",
+  "low": "Low",
+  "empty": "No tasks yet",
+  "autoSave": "✅ Tasks saved automatically"
+}

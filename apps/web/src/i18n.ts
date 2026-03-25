@@ -176,6 +176,26 @@ import toolStudyPlannerZh from '@toolbox/tool-study-planner/locales/zh-CN.json'
 import toolStudyPlannerEn from '@toolbox/tool-study-planner/locales/en-US.json'
 import toolFocusModeZh from '@toolbox/tool-focus-mode/locales/zh-CN.json'
 import toolFocusModeEn from '@toolbox/tool-focus-mode/locales/en-US.json'
+import toolVocabTrainerZh from '@toolbox/tool-vocab-trainer/locales/zh-CN.json'
+import toolVocabTrainerEn from '@toolbox/tool-vocab-trainer/locales/en-US.json'
+import toolMistakeBookZh from '@toolbox/tool-mistake-book/locales/zh-CN.json'
+import toolMistakeBookEn from '@toolbox/tool-mistake-book/locales/en-US.json'
+import toolDailyPlannerZh from '@toolbox/tool-daily-planner/locales/zh-CN.json'
+import toolDailyPlannerEn from '@toolbox/tool-daily-planner/locales/en-US.json'
+import toolFridgeInventoryZh from '@toolbox/tool-fridge-inventory/locales/zh-CN.json'
+import toolFridgeInventoryEn from '@toolbox/tool-fridge-inventory/locales/en-US.json'
+import toolExpiryReminderZh from '@toolbox/tool-expiry-reminder/locales/zh-CN.json'
+import toolExpiryReminderEn from '@toolbox/tool-expiry-reminder/locales/en-US.json'
+import toolFamilyTasksZh from '@toolbox/tool-family-tasks/locales/zh-CN.json'
+import toolFamilyTasksEn from '@toolbox/tool-family-tasks/locales/en-US.json'
+import toolBarcodeReaderZh from '@toolbox/tool-barcode-reader/locales/zh-CN.json'
+import toolBarcodeReaderEn from '@toolbox/tool-barcode-reader/locales/en-US.json'
+import toolQuizGenZh from '@toolbox/tool-quiz-gen/locales/zh-CN.json'
+import toolQuizGenEn from '@toolbox/tool-quiz-gen/locales/en-US.json'
+import toolTripPlannerZh from '@toolbox/tool-trip-planner/locales/zh-CN.json'
+import toolTripPlannerEn from '@toolbox/tool-trip-planner/locales/en-US.json'
+import toolDayTripZh from '@toolbox/tool-day-trip/locales/zh-CN.json'
+import toolDayTripEn from '@toolbox/tool-day-trip/locales/en-US.json'
 import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
@@ -307,6 +327,16 @@ export const resources = {
     toolStudyTimer: toolStudyTimerZh as Record<string, string>,
     toolStudyPlanner: toolStudyPlannerZh as unknown as Record<string, string>,
     toolFocusMode: toolFocusModeZh as unknown as Record<string, string>,
+    toolVocabTrainer: toolVocabTrainerZh as Record<string, string>,
+    toolMistakeBook: toolMistakeBookZh as Record<string, string>,
+    toolDailyPlanner: toolDailyPlannerZh as Record<string, string>,
+    toolFridgeInventory: toolFridgeInventoryZh as Record<string, string>,
+    toolExpiryReminder: toolExpiryReminderZh as Record<string, string>,
+    toolFamilyTasks: toolFamilyTasksZh as Record<string, string>,
+    toolBarcodeReader: toolBarcodeReaderZh as Record<string, string>,
+    toolQuizGen: toolQuizGenZh as Record<string, string>,
+    toolTripPlanner: toolTripPlannerZh as Record<string, string>,
+    toolDayTrip: toolDayTripZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -417,6 +447,16 @@ export const resources = {
     toolStudyTimer: toolStudyTimerEn as Record<string, string>,
     toolStudyPlanner: toolStudyPlannerEn as unknown as Record<string, string>,
     toolFocusMode: toolFocusModeEn as unknown as Record<string, string>,
+    toolVocabTrainer: toolVocabTrainerEn as Record<string, string>,
+    toolMistakeBook: toolMistakeBookEn as Record<string, string>,
+    toolDailyPlanner: toolDailyPlannerEn as Record<string, string>,
+    toolFridgeInventory: toolFridgeInventoryEn as Record<string, string>,
+    toolExpiryReminder: toolExpiryReminderEn as Record<string, string>,
+    toolFamilyTasks: toolFamilyTasksEn as Record<string, string>,
+    toolBarcodeReader: toolBarcodeReaderEn as Record<string, string>,
+    toolQuizGen: toolQuizGenEn as Record<string, string>,
+    toolTripPlanner: toolTripPlannerEn as Record<string, string>,
+    toolDayTrip: toolDayTripEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

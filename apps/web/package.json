@@ -75,7 +75,17 @@
     "remark-math": "^6.0.0",
     "remark-rehype": "^11.1.2",
     "uuid": "^13.0.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@toolbox/tool-vocab-trainer": "workspace:*",
+    "@toolbox/tool-mistake-book": "workspace:*",
+    "@toolbox/tool-daily-planner": "workspace:*",
+    "@toolbox/tool-fridge-inventory": "workspace:*",
+    "@toolbox/tool-expiry-reminder": "workspace:*",
+    "@toolbox/tool-family-tasks": "workspace:*",
+    "@toolbox/tool-barcode-reader": "workspace:*",
+    "@toolbox/tool-quiz-gen": "workspace:*",
+    "@toolbox/tool-trip-planner": "workspace:*",
+    "@toolbox/tool-day-trip": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

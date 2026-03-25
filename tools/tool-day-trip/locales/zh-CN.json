@@ -1,0 +1,12 @@
+{
+  "title": "一日游推荐",
+  "description": "按城市推荐一日游路线，含景点、美食和交通建议",
+  "selectCity": "选择城市",
+  "morning": "上午",
+  "noon": "午餐",
+  "afternoon": "下午",
+  "evening": "傍晚",
+  "food": "特色美食",
+  "tips": "出行贴士",
+  "noCity": "请选择一个城市"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Vocab Trainer",
+  "description": "Flip cards to memorize words, track mastery progress",
+  "addWord": "Add word",
+  "wordPlaceholder": "Word",
+  "meaningPlaceholder": "Meaning",
+  "mastered": "Mastered",
+  "learning": "Learning",
+  "all": "All",
+  "know": "✓ Know it",
+  "dontKnow": "✗ Don't know",
+  "clickToFlip": "Click to flip",
+  "masteredCount": "Mastered",
+  "totalCount": "Total",
+  "empty": "No words yet, add some!",
+  "autoSave": "✅ Vocab saved automatically"
+}

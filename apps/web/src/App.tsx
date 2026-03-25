@@ -37,6 +37,16 @@ import ElectronicWoodenFish from './pages/ElectronicWoodenFish'
 import LifeProgressBar from './pages/LifeProgressBar'
 import MeetingMinutes from './pages/MeetingMinutes'
 import UIGenerator from './pages/UIGenerator'
+const VocabTrainer = lazy(() => import('@toolbox/tool-vocab-trainer'))
+const MistakeBook = lazy(() => import('@toolbox/tool-mistake-book'))
+const DailyPlanner = lazy(() => import('@toolbox/tool-daily-planner'))
+const FridgeInventory = lazy(() => import('@toolbox/tool-fridge-inventory'))
+const ExpiryReminder = lazy(() => import('@toolbox/tool-expiry-reminder'))
+const FamilyTasks = lazy(() => import('@toolbox/tool-family-tasks'))
+const BarcodeReader = lazy(() => import('@toolbox/tool-barcode-reader'))
+const QuizGen = lazy(() => import('@toolbox/tool-quiz-gen'))
+const TripPlanner = lazy(() => import('@toolbox/tool-trip-planner'))
+const DayTrip = lazy(() => import('@toolbox/tool-day-trip'))
 
 function RouteLoading() {
   const { t } = useTranslation('common')
@@ -465,6 +475,16 @@ function App() {
           <Route path="/meeting-minutes" element={<MeetingMinutes />} />
           <Route path="/ui-generator" element={<UIGenerator />} />
           <Route path="/ppt-generator" element={<PptGenerator />} />
+          <Route path="/vocab-trainer" element={<VocabTrainer />} />
+          <Route path="/mistake-book" element={<MistakeBook />} />
+          <Route path="/daily-planner" element={<DailyPlanner />} />
+          <Route path="/fridge-inventory" element={<FridgeInventory />} />
+          <Route path="/expiry-reminder" element={<ExpiryReminder />} />
+          <Route path="/family-tasks" element={<FamilyTasks />} />
+          <Route path="/barcode-reader" element={<BarcodeReader />} />
+          <Route path="/quiz-gen" element={<QuizGen />} />
+          <Route path="/trip-planner" element={<TripPlanner />} />
+          <Route path="/day-trip" element={<DayTrip />} />
         </Routes>
       </Suspense>
     </Layout>

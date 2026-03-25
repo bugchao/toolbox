@@ -1,0 +1,13 @@
+{
+  "title": "行程规划器",
+  "description": "规划多天旅行行程，分天管理景点和活动",
+  "addDay": "添加天数",
+  "addItem": "添加行程",
+  "placeholder": "景点/活动/餐厅...",
+  "timePlaceholder": "时间（如09:00）",
+  "day": "第",
+  "dayUnit": "天",
+  "clear": "清空",
+  "empty": "还没有行程安排",
+  "autoSave": "✅ 行程已自动保存"
+}
