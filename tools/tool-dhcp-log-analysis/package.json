@@ -1,6 +1,18 @@
 {
   "name": "@toolbox/tool-dhcp-log-analysis",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.tsx",
-  "dependencies": {}
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.4.1",
+    "lucide-react": "^0.577.0",
+    "@toolbox/ui-kit": "workspace:*",
+    "@toolbox/storage": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
 }

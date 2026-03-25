@@ -74,7 +74,7 @@ export function SplitBill() {
   const settlements = useMemo(() => {
     const creditors: { id: string; amount: number }[] = []
     const debtors: { id: string; amount: number }[] = []
-    Object.entries(balances).forEach(([id, bal]) => {
+    Object.entries(balances).forEach(([id, bal]: [string, number]) => {
       if (bal > 0.01) creditors.push({ id, amount: bal })
       else if (bal < -0.01) debtors.push({ id, amount: -bal })
     })
