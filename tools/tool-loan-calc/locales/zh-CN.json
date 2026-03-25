@@ -1,0 +1,19 @@
+{
+  "title": "贷款计算器",
+  "description": "等额本息/等额本金还款计算，含还款计划表",
+  "amount": "贷款金额（元）",
+  "rate": "年利率（%）",
+  "months": "贷款期限（月）",
+  "method": "还款方式",
+  "equalInstallment": "等额本息",
+  "equalPrincipal": "等额本金",
+  "calculate": "计算",
+  "monthlyPayment": "月供",
+  "totalPayment": "还款总额",
+  "totalInterest": "利息总额",
+  "schedule": "还款计划",
+  "month": "期次",
+  "principal": "本金",
+  "interest": "利息",
+  "remaining": "剩余本金"
+}

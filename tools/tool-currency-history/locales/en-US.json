@@ -1,0 +1,15 @@
+{
+  "title": "Currency History",
+  "description": "Historical exchange rate trends for major currencies",
+  "base": "Base currency",
+  "target": "Target currency",
+  "period": "Period",
+  "week": "1 week",
+  "month": "1 month",
+  "quarter": "3 months",
+  "year": "1 year",
+  "current": "Current rate",
+  "high": "High",
+  "low": "Low",
+  "change": "Change"
+}

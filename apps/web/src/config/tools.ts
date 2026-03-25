@@ -12,7 +12,9 @@ import {
   Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound,
   Receipt, CreditCard, Flame, UtensilsCrossed, ArrowRightLeft,
   Calculator, ListChecks, PlaneTakeoff, SplitSquareHorizontal,
-  Luggage, ChefHat, BookOpen
+  Luggage, ChefHat, BookOpen, BookMarked, CalendarDays, ShoppingBag,
+  Bell, Users, ScanLine, Brain, Compass,
+  RotateCcw, Languages, FolderTree, Eye, Volume2
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -202,6 +204,15 @@ export const TOOLS: ToolEntry[] = [
   { path: '/quiz-gen', nameKey: 'tools.quiz_gen', icon: Brain, categoryKey: 'learn', keywords: ['出题', '竞答', '知识', 'quiz'], i18nNamespace: 'toolQuizGen' },
   { path: '/trip-planner', nameKey: 'tools.trip_planner', icon: MapPin, categoryKey: 'travel', keywords: ['行程', '旅行', '规划', 'trip'], i18nNamespace: 'toolTripPlanner' },
   { path: '/day-trip', nameKey: 'tools.day_trip', icon: Compass, categoryKey: 'travel', keywords: ['一日游', '城市', '景点', 'day trip'], i18nNamespace: 'toolDayTrip' },
+  { path: '/spaced-repetition', nameKey: 'tools.spaced_repetition', icon: RotateCcw, categoryKey: 'learn', keywords: ['间隔重复', 'anki', '记忆', 'spaced repetition'], i18nNamespace: 'toolSpacedRepetition' },
+  { path: '/travel-translator', nameKey: 'tools.travel_translator', icon: Languages, categoryKey: 'travel', keywords: ['翻译', '旅行', '短语', 'translator'], i18nNamespace: 'toolTravelTranslator' },
+  { path: '/project-scaffold', nameKey: 'tools.project_scaffold', icon: FolderTree, categoryKey: 'dev', keywords: ['项目结构', '脚手架', 'scaffold', '目录树'], i18nNamespace: 'toolProjectScaffold' },
+  { path: '/knowledge-compare', nameKey: 'tools.knowledge_compare', icon: GitCompareArrows, categoryKey: 'learn', keywords: ['对比', '比较', 'compare', '技术选型'], i18nNamespace: 'toolKnowledgeCompare' },
+  { path: '/loan-calc', nameKey: 'tools.loan_calc', icon: Calculator, categoryKey: 'life', keywords: ['贷款', '房贷', '月供', 'loan', '等额本息'], i18nNamespace: 'toolLoanCalc' },
+  { path: '/id-card-parser', nameKey: 'tools.id_card_parser', icon: CreditCard, categoryKey: 'utils', keywords: ['身份证', '解析', 'id card', '籍贯', '生日'], i18nNamespace: 'toolIdCardParser' },
+  { path: '/color-blind-sim', nameKey: 'tools.color_blind_sim', icon: Eye, categoryKey: 'utils', keywords: ['色盲', '无障碍', 'color blind', 'accessibility'], i18nNamespace: 'toolColorBlindSim' },
+  { path: '/text-to-speech', nameKey: 'tools.text_to_speech', icon: Volume2, categoryKey: 'utils', keywords: ['语音', 'tts', '朗读', 'text to speech'], i18nNamespace: 'toolTextToSpeech' },
+  { path: '/currency-history', nameKey: 'tools.currency_history', icon: TrendingUp, categoryKey: 'utils', keywords: ['汇率', '历史', 'exchange rate', '外汇'], i18nNamespace: 'toolCurrencyHistory' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

@@ -1,0 +1,12 @@
+{
+  "title": "Knowledge Compare",
+  "description": "Compare concepts, technologies or tools across dimensions",
+  "addItem": "Add item",
+  "addDimension": "Add dimension",
+  "itemPlaceholder": "Item name",
+  "dimensionPlaceholder": "Dimension name",
+  "notePlaceholder": "Fill in comparison...",
+  "clear": "Clear",
+  "template": "Template",
+  "autoSave": "✅ Comparison saved automatically"
+}

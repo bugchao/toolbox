@@ -1,0 +1,12 @@
+{
+  "title": "知识对比",
+  "description": "多维度对比概念、技术或工具，帮助决策",
+  "addItem": "添加对比项",
+  "addDimension": "添加维度",
+  "itemPlaceholder": "对比项名称",
+  "dimensionPlaceholder": "维度名称",
+  "notePlaceholder": "填写对比内容...",
+  "clear": "清空",
+  "template": "模板",
+  "autoSave": "✅ 对比表已自动保存"
+}

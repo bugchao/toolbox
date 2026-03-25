@@ -1,0 +1,16 @@
+{
+  "title": "身份证解析",
+  "description": "解析18位身份证号码，提取省份/生日/性别/校验位等信息",
+  "placeholder": "输入18位身份证号码",
+  "parse": "解析",
+  "region": "籍贯",
+  "birthday": "出生日期",
+  "age": "年龄",
+  "gender": "性别",
+  "male": "男",
+  "female": "女",
+  "checksum": "校验位",
+  "valid": "✅ 格式正确",
+  "invalid": "❌ 格式错误",
+  "empty": "请输入身份证号码"
+}

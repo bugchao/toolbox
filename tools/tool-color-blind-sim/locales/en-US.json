@@ -1,0 +1,13 @@
+{
+  "title": "Color Blind Simulator",
+  "description": "Simulate color blindness types to help with accessible design",
+  "upload": "Upload image",
+  "uploadHint": "Click or drag image (JPG/PNG)",
+  "normal": "Normal vision",
+  "protanopia": "Protanopia",
+  "deuteranopia": "Deuteranopia",
+  "tritanopia": "Tritanopia",
+  "achromatopsia": "Achromatopsia",
+  "original": "Original",
+  "simulated": "Simulated"
+}

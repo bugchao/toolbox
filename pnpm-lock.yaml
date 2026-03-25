@@ -57,6 +57,12 @@ importers:
       '@toolbox/tool-barcode-reader':
         specifier: workspace:*
         version: link:../../tools/tool-barcode-reader
+      '@toolbox/tool-color-blind-sim':
+        specifier: workspace:*
+        version: link:../../tools/tool-color-blind-sim
+      '@toolbox/tool-currency-history':
+        specifier: workspace:*
+        version: link:../../tools/tool-currency-history
       '@toolbox/tool-daily-planner':
         specifier: workspace:*
         version: link:../../tools/tool-daily-planner
@@ -138,6 +144,9 @@ importers:
       '@toolbox/tool-http-status':
         specifier: workspace:*
         version: link:../../tools/tool-http-status
+      '@toolbox/tool-id-card-parser':
+        specifier: workspace:*
+        version: link:../../tools/tool-id-card-parser
       '@toolbox/tool-ip-asn':
         specifier: workspace:*
         version: link:../../tools/tool-ip-asn
@@ -153,6 +162,12 @@ importers:
       '@toolbox/tool-json':
         specifier: workspace:*
         version: link:../../tools/tool-json
+      '@toolbox/tool-knowledge-compare':
+        specifier: workspace:*
+        version: link:../../tools/tool-knowledge-compare
+      '@toolbox/tool-loan-calc':
+        specifier: workspace:*
+        version: link:../../tools/tool-loan-calc
       '@toolbox/tool-mistake-book':
         specifier: workspace:*
         version: link:../../tools/tool-mistake-book
@@ -165,6 +180,9 @@ importers:
       '@toolbox/tool-ppt-generator':
         specifier: workspace:*
         version: link:../../tools/tool-ppt-generator
+      '@toolbox/tool-project-scaffold':
+        specifier: workspace:*
+        version: link:../../tools/tool-project-scaffold
       '@toolbox/tool-qrcode':
         specifier: workspace:*
         version: link:../../tools/tool-qrcode
@@ -180,6 +198,9 @@ importers:
       '@toolbox/tool-security-suite':
         specifier: workspace:*
         version: link:../../tools/tool-security-suite
+      '@toolbox/tool-spaced-repetition':
+        specifier: workspace:*
+        version: link:../../tools/tool-spaced-repetition
       '@toolbox/tool-ssl-cert':
         specifier: workspace:*
         version: link:../../tools/tool-ssl-cert
@@ -195,6 +216,12 @@ importers:
       '@toolbox/tool-tcp-port':
         specifier: workspace:*
         version: link:../../tools/tool-tcp-port
+      '@toolbox/tool-text-to-speech':
+        specifier: workspace:*
+        version: link:../../tools/tool-text-to-speech
+      '@toolbox/tool-travel-translator':
+        specifier: workspace:*
+        version: link:../../tools/tool-travel-translator
       '@toolbox/tool-trip-planner':
         specifier: workspace:*
         version: link:../../tools/tool-trip-planner
@@ -584,6 +611,24 @@ importers:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-color-blind-sim:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-curl-to-fetch:
     dependencies:
       '@toolbox/ui-kit':
@@ -619,6 +664,27 @@ importers:
       react-i18next:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-currency-history:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      recharts:
+        specifier: ^2.15.3
+        version: 2.15.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   tools/tool-daily-planner:
     dependencies:
@@ -1909,6 +1975,24 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  tools/tool-id-card-parser:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-installment-calc:
     dependencies:
       '@toolbox/storage':
@@ -2196,6 +2280,24 @@ importers:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-knowledge-compare:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-learn-suite:
     dependencies:
       '@toolbox/ui-kit':
@@ -2251,6 +2353,27 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-loan-calc:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      recharts:
+        specifier: ^2.15.3
+        version: 2.15.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   tools/tool-mistake-book:
     dependencies:
@@ -2438,6 +2561,24 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-project-scaffold:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-qrcode:
     dependencies:
@@ -2728,6 +2869,24 @@ importers:
         specifier: ^15.4.1
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-spaced-repetition:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-split-bill:
     dependencies:
       '@toolbox/ui-kit':
@@ -2890,6 +3049,24 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  tools/tool-text-to-speech:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-timestamp:
     dependencies:
       '@toolbox/ui-kit':
@@ -3048,6 +3225,24 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-travel-translator:
+    dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-trip-planner:
     dependencies:

@@ -85,7 +85,16 @@
     "@toolbox/tool-barcode-reader": "workspace:*",
     "@toolbox/tool-quiz-gen": "workspace:*",
     "@toolbox/tool-trip-planner": "workspace:*",
-    "@toolbox/tool-day-trip": "workspace:*"
+    "@toolbox/tool-day-trip": "workspace:*",
+    "@toolbox/tool-spaced-repetition": "workspace:*",
+    "@toolbox/tool-travel-translator": "workspace:*",
+    "@toolbox/tool-project-scaffold": "workspace:*",
+    "@toolbox/tool-knowledge-compare": "workspace:*",
+    "@toolbox/tool-loan-calc": "workspace:*",
+    "@toolbox/tool-id-card-parser": "workspace:*",
+    "@toolbox/tool-color-blind-sim": "workspace:*",
+    "@toolbox/tool-text-to-speech": "workspace:*",
+    "@toolbox/tool-currency-history": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

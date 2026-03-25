@@ -1,0 +1,19 @@
+{
+  "title": "Loan Calculator",
+  "description": "Equal installment / equal principal repayment with schedule",
+  "amount": "Loan amount",
+  "rate": "Annual rate (%)",
+  "months": "Term (months)",
+  "method": "Method",
+  "equalInstallment": "Equal installment",
+  "equalPrincipal": "Equal principal",
+  "calculate": "Calculate",
+  "monthlyPayment": "Monthly payment",
+  "totalPayment": "Total payment",
+  "totalInterest": "Total interest",
+  "schedule": "Schedule",
+  "month": "Month",
+  "principal": "Principal",
+  "interest": "Interest",
+  "remaining": "Remaining"
+}

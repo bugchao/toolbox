@@ -1,0 +1,15 @@
+{
+  "title": "汇率历史",
+  "description": "查看主要货币历史汇率走势图",
+  "base": "基准货币",
+  "target": "目标货币",
+  "period": "时间段",
+  "week": "近1周",
+  "month": "近1月",
+  "quarter": "近3月",
+  "year": "近1年",
+  "current": "当前汇率",
+  "high": "最高",
+  "low": "最低",
+  "change": "涨跌幅"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Project Scaffold",
+  "description": "Choose framework and features, generate project structure",
+  "framework": "Framework",
+  "features": "Features",
+  "generate": "Generate tree",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "preview": "Preview"
+}

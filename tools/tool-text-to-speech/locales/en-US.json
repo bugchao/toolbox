@@ -1,0 +1,14 @@
+{
+  "title": "Text to Speech",
+  "description": "Type text and hear it read aloud using browser TTS",
+  "placeholder": "Enter text to speak...",
+  "speak": "Speak",
+  "stop": "Stop",
+  "pause": "Pause",
+  "resume": "Resume",
+  "voice": "Voice",
+  "rate": "Rate",
+  "pitch": "Pitch",
+  "volume": "Volume",
+  "noSupport": "Browser does not support speech synthesis"
+}

@@ -196,6 +196,24 @@ import toolTripPlannerZh from '@toolbox/tool-trip-planner/locales/zh-CN.json'
 import toolTripPlannerEn from '@toolbox/tool-trip-planner/locales/en-US.json'
 import toolDayTripZh from '@toolbox/tool-day-trip/locales/zh-CN.json'
 import toolDayTripEn from '@toolbox/tool-day-trip/locales/en-US.json'
+import toolSpacedRepetitionZh from '@toolbox/tool-spaced-repetition/locales/zh-CN.json'
+import toolSpacedRepetitionEn from '@toolbox/tool-spaced-repetition/locales/en-US.json'
+import toolTravelTranslatorZh from '@toolbox/tool-travel-translator/locales/zh-CN.json'
+import toolTravelTranslatorEn from '@toolbox/tool-travel-translator/locales/en-US.json'
+import toolProjectScaffoldZh from '@toolbox/tool-project-scaffold/locales/zh-CN.json'
+import toolProjectScaffoldEn from '@toolbox/tool-project-scaffold/locales/en-US.json'
+import toolKnowledgeCompareZh from '@toolbox/tool-knowledge-compare/locales/zh-CN.json'
+import toolKnowledgeCompareEn from '@toolbox/tool-knowledge-compare/locales/en-US.json'
+import toolLoanCalcZh from '@toolbox/tool-loan-calc/locales/zh-CN.json'
+import toolLoanCalcEn from '@toolbox/tool-loan-calc/locales/en-US.json'
+import toolIdCardParserZh from '@toolbox/tool-id-card-parser/locales/zh-CN.json'
+import toolIdCardParserEn from '@toolbox/tool-id-card-parser/locales/en-US.json'
+import toolColorBlindSimZh from '@toolbox/tool-color-blind-sim/locales/zh-CN.json'
+import toolColorBlindSimEn from '@toolbox/tool-color-blind-sim/locales/en-US.json'
+import toolTextToSpeechZh from '@toolbox/tool-text-to-speech/locales/zh-CN.json'
+import toolTextToSpeechEn from '@toolbox/tool-text-to-speech/locales/en-US.json'
+import toolCurrencyHistoryZh from '@toolbox/tool-currency-history/locales/zh-CN.json'
+import toolCurrencyHistoryEn from '@toolbox/tool-currency-history/locales/en-US.json'
 import toolSplitBillEn from '@toolbox/tool-split-bill/locales/en-US.json'
 import toolCurlToFetchEn from '@toolbox/tool-curl-to-fetch/locales/en-US.json'
 import toolJwtDecoderEn from '@toolbox/tool-jwt-decoder/locales/en-US.json'
@@ -457,6 +475,15 @@ export const resources = {
     toolQuizGen: toolQuizGenEn as Record<string, string>,
     toolTripPlanner: toolTripPlannerEn as Record<string, string>,
     toolDayTrip: toolDayTripEn as Record<string, string>,
+    toolSpacedRepetition: toolSpacedRepetitionEn as Record<string, string>,
+    toolTravelTranslator: toolTravelTranslatorEn as Record<string, string>,
+    toolProjectScaffold: toolProjectScaffoldEn as Record<string, string>,
+    toolKnowledgeCompare: toolKnowledgeCompareEn as Record<string, string>,
+    toolLoanCalc: toolLoanCalcEn as Record<string, string>,
+    toolIdCardParser: toolIdCardParserEn as Record<string, string>,
+    toolColorBlindSim: toolColorBlindSimEn as Record<string, string>,
+    toolTextToSpeech: toolTextToSpeechEn as Record<string, string>,
+    toolCurrencyHistory: toolCurrencyHistoryEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

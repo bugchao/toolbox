@@ -1,0 +1,11 @@
+{
+  "title": "项目结构生成器",
+  "description": "选择框架和功能，一键生成项目目录树",
+  "framework": "框架",
+  "features": "功能模块",
+  "generate": "生成目录树",
+  "copy": "复制",
+  "copied": "已复制",
+  "download": "下载",
+  "preview": "预览"
+}

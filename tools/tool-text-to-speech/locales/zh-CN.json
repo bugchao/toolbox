@@ -1,0 +1,14 @@
+{
+  "title": "文字转语音",
+  "description": "输入文字，浏览器原生 TTS 语音朗读",
+  "placeholder": "输入要朗读的文字...",
+  "speak": "开始朗读",
+  "stop": "停止",
+  "pause": "暂停",
+  "resume": "继续",
+  "voice": "语音",
+  "rate": "语速",
+  "pitch": "音调",
+  "volume": "音量",
+  "noSupport": "浏览器不支持语音合成"
+}

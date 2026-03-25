@@ -1,0 +1,13 @@
+{
+  "title": "色盲模拟器",
+  "description": "模拟不同类型色盲的视觉效果，辅助无障碍设计",
+  "upload": "上传图片",
+  "uploadHint": "点击或拖拽图片（JPG/PNG）",
+  "normal": "正常视觉",
+  "protanopia": "红色盲",
+  "deuteranopia": "绿色盲",
+  "tritanopia": "蓝色盲",
+  "achromatopsia": "全色盲",
+  "original": "原图",
+  "simulated": "模拟效果"
+}

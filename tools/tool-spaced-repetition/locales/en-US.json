@@ -1,0 +1,17 @@
+{
+  "title": "Spaced Repetition",
+  "description": "Science-based spaced repetition for smarter review",
+  "addCard": "Add card",
+  "front": "Front (question)",
+  "back": "Back (answer)",
+  "again": "Again",
+  "hard": "Hard",
+  "good": "Good",
+  "easy": "Easy",
+  "due": "Due",
+  "new": "New",
+  "review": "Start review",
+  "finished": "All done for today!",
+  "empty": "No cards yet, add some!",
+  "autoSave": "✅ Cards saved automatically"
+}

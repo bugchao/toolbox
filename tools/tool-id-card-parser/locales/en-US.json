@@ -1,0 +1,16 @@
+{
+  "title": "ID Card Parser",
+  "description": "Parse Chinese 18-digit ID card numbers",
+  "placeholder": "Enter 18-digit ID card number",
+  "parse": "Parse",
+  "region": "Region",
+  "birthday": "Birthday",
+  "age": "Age",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "checksum": "Checksum",
+  "valid": "✅ Valid",
+  "invalid": "❌ Invalid",
+  "empty": "Please enter an ID number"
+}
