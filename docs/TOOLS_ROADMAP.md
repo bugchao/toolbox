@@ -193,6 +193,41 @@
 |----------|----------|----------|
 | 每日热点新闻 | `/news` | `apps/web/src/pages/HotNews.tsx` |
 
+### 生活工具（21）
+
+| 工具名称 | 路由路径 | 代码位置 |
+|----------|----------|----------|
+| 番茄钟 | `/pomodoro` | `tools/tool-pomodoro` → Pomodoro |
+| 习惯打卡 | `/habit-tracker` | `tools/tool-habit-tracker` → HabitTracker |
+| OKR 规划器 | `/okr-planner` | `tools/tool-okr-planner` → OkrPlanner |
+| 记账工具 | `/expense-tracker` | `tools/tool-expense-tracker` → ExpenseTracker |
+| 订阅费用管理 | `/subscription-manager` | `tools/tool-subscription-manager` → SubscriptionManager |
+| 分期计算器 | `/installment-calc` | `tools/tool-installment-calc` → InstallmentCalc |
+| 工资税后计算器 | `/salary-calc` | `tools/tool-salary-calc` → SalaryCalc |
+| 汇率换算工具 | `/currency-converter` | `tools/tool-currency-converter` → CurrencyConverter |
+| 卡路里估算工具 | `/calorie-calc` | `tools/tool-calorie-calc` → CalorieCalc |
+| 菜谱推荐 | `/recipe-finder` | `tools/tool-recipe-finder` → RecipeFinder |
+| 随机菜单生成器 | `/random-menu` | `tools/tool-random-menu` → RandomMenu |
+| curl 转 fetch | `/curl-to-fetch` | `tools/tool-curl-to-fetch` → CurlToFetch |
+| JWT 解析工具 | `/jwt-decoder` | `tools/tool-jwt-decoder` → JwtDecoder |
+| 旅行 Checklist 生成 | `/travel-checklist` | `tools/tool-travel-checklist` → TravelChecklist |
+| 旅行预算计算器 | `/travel-budget` | `tools/tool-travel-budget` → TravelBudget |
+| AA 分摊工具 | `/split-bill` | `tools/tool-split-bill` → SplitBill |
+| 时差计算器 | `/timezone-calc` | `tools/tool-timezone-calc` → TimezoneCalc |
+| 地图距离计算 | `/distance-calc` | `tools/tool-distance-calc` → DistanceCalc |
+| 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
+| 学习时长统计 | `/study-timer` | `tools/tool-study-timer` → StudyTimer |
+
+### 旅游工具（0）
+
+| 工具名称 | 路由路径 | 代码位置 |
+|----------|----------|----------|
+
+### 学习工具（0）
+
+| 工具名称 | 路由路径 | 代码位置 |
+|----------|----------|----------|
+
 ---
 
 ## 三、待开发 / 调研工具
@@ -205,57 +240,57 @@
 | 工具名称 | 分类 | 建议路径 | 状态 | 优先级 | 备注 |
 |----------|------|----------|------|--------|------|
 | **── 生活：效率 & 习惯 ──** | | | | | |
-| 番茄钟 + 数据统计 | life | `/pomodoro` | 待开发 | P1 | 番茄工作法 + 专注时长统计 |
-| 习惯打卡 + 连续记录 | life | `/habit-tracker` | 待开发 | P1 | 习惯追踪 + 连续天数 |
-| 目标拆解工具（OKR mini） | life | `/okr-planner` | 待开发 | P1 | OKR 目标拆解与追踪 |
+| ~~番茄钟 + 数据统计~~ | life | `/pomodoro` | **已上线** | - | 番茄工作法 + 专注时长统计 |
+| ~~习惯打卡 + 连续记录~~ | life | `/habit-tracker` | **已上线** | - | 习惯追踪 + 连续天数 |
+| ~~目标拆解工具（OKR mini）~~ | life | `/okr-planner` | **已上线** | - | OKR 目标拆解与追踪 |
 | 今日计划自动生成器 | life | `/daily-planner` | 待开发 | P2 | AI 生成每日计划 |
 | 时间日志分析 | life | `/time-logger` | 待开发 | P2 | 时间花费分析「时间去哪了」 |
 | 拖延症评估 + 改进建议 | life | `/procrastination-test` | 待开发 | P2 | 拖延评估 + AI 建议 |
 | 每日复盘生成器 | life | `/daily-review` | 待开发 | P2 | AI 辅助每日复盘 |
 | **── 生活：财务 & 消费 ──** | | | | | |
-| 记账工具 | life | `/expense-tracker` | 待开发 | P1 | 支持标签统计 |
-| 订阅费用管理 | life | `/subscription-manager` | 待开发 | P1 | Netflix/AI 等订阅管理 |
-| 分期计算器 | life | `/installment-calc` | 待开发 | P1 | 分期还款计算 |
-| 工资税后计算器 | life | `/salary-calc` | 待开发 | P1 | 五险一金 + 税后工资 |
-| 汇率换算工具 | life | `/currency-converter` | 待开发 | P1 | 实时汇率换算 |
+| ~~记账工具~~ | life | `/expense-tracker` | **已上线** | - | 支持标签统计 |
+| ~~订阅费用管理~~ | life | `/subscription-manager` | **已上线** | - | Netflix/AI 等订阅管理 |
+| ~~分期计算器~~ | life | `/installment-calc` | **已上线** | - | 分期还款计算 |
+| ~~工资税后计算器~~ | life | `/salary-calc` | **已上线** | - | 五险一金 + 税后工资 |
+| ~~汇率换算工具~~ | life | `/currency-converter` | **已上线** | - | 实时汇率换算 |
 | 理财收益模拟器 | life | `/investment-sim` | 待开发 | P2 | 收益率模拟 |
 | **── 生活：健康 & 生活 ──** | | | | | |
-| 卡路里估算工具 | life | `/calorie-calc` | 待开发 | P1 | 食物热量估算 |
+| ~~卡路里估算工具~~ | life | `/calorie-calc` | **已上线** | - | 食物热量估算 |
 | 睡眠质量记录 | life | `/sleep-tracker` | 待开发 | P2 | 睡眠时长 + 质量评分 |
 | 饮水提醒工具 | life | `/water-reminder` | 待开发 | P2 | 每日饮水量追踪 |
 | 跑步数据分析 | life | `/running-tracker` | 待开发 | P2 | 配速/里程/趋势分析 |
 | 久坐提醒工具 | life | `/sedentary-reminder` | 待开发 | P2 | 久坐提醒 + 拉伸建议 |
 | **── 生活：日常工具 ──** | | | | | |
-| 菜谱推荐（根据食材） | life | `/recipe-finder` | 待开发 | P1 | 输入食材推荐菜谱 |
+| ~~菜谱推荐（根据食材）~~ | life | `/recipe-finder` | **已上线** | - | 输入食材推荐菜谱 |
 | 冰箱库存管理 | life | `/fridge-inventory` | 待开发 | P2 | 食材库存管理 |
 | 保质期提醒 | life | `/expiry-reminder` | 待开发 | P2 | 食品/药品过期提醒 |
-| 随机菜单生成器 | life | `/random-menu` | 待开发 | P1 | 今天吃什么 |
+| ~~随机菜单生成器~~ | life | `/random-menu` | **已上线** | - | 今天吃什么 |
 | 家庭任务分配工具 | life | `/family-tasks` | 待开发 | P2 | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
 | 条形码识别 | utils | `/barcode-reader` | 待开发 | P1 | 条形码扫描与解析 |
 | **── 生活：开发者友好 ──** | | | | | |
-| curl 转 fetch | dev | `/curl-to-fetch` | 待开发 | P1 | curl 命令转 JS fetch 代码 |
-| JWT 解析工具 | dev | `/jwt-decoder` | 待开发 | P1 | JWT Token 解码与验证 |
+| ~~curl 转 fetch~~ | dev | `/curl-to-fetch` | **已上线** | - | curl 命令转 JS fetch 代码 |
+| ~~JWT 解析工具~~ | dev | `/jwt-decoder` | **已上线** | - | JWT Token 解码与验证 |
 | HTTP 请求调试器 | dev | `/http-debugger` | 待开发 | P2 | 在线发送 HTTP 请求调试 |
 | **── 旅游：行程规划 ──** | | | | | |
 | AI 行程规划器 | travel | `/trip-planner` | 待开发 | P1 | 输入预算+天数 AI 生成行程 |
 | 城市游玩路线生成 | travel | `/city-route` | 待开发 | P2 | 单城市景点路线规划 |
 | 一日游智能推荐 | travel | `/day-trip` | 待开发 | P1 | 一日游方案推荐（含"东京一天怎么玩"场景） |
 | 多城市路线优化 | travel | `/multi-city-route` | 待开发 | P2 | 多城市最优路线（TSP） |
-| 旅行 Checklist 生成 | travel | `/travel-checklist` | 待开发 | P1 | 根据目的地生成准备清单 |
+| ~~旅行 Checklist 生成~~ | travel | `/travel-checklist` | **已上线** | - | 根据目的地生成准备清单 |
 | **── 旅游：预算 & 成本 ──** | | | | | |
-| 旅行预算计算器 | travel | `/travel-budget` | 待开发 | P1 | 交通/住宿/餐饮预算 |
-| AA 分摊工具 | travel | `/split-bill` | 待开发 | P1 | 多人费用分摊 |
+| ~~旅行预算计算器~~ | travel | `/travel-budget` | **已上线** | - | 交通/住宿/餐饮预算 |
+| ~~AA 分摊工具~~ | travel | `/split-bill` | **已上线** | - | 多人费用分摊 |
 | 汇率 + 消费估算 | travel | `/travel-cost-estimate` | 待开发 | P2 | 目的地消费水平 + 汇率 |
 | 旅行成本对比工具 | travel | `/travel-cost-compare` | 待开发 | P2 | 多目的地成本对比 |
 | **── 旅游：导航 & 信息 ──** | | | | | |
 | 景点热度分析 | travel | `/attraction-heatmap` | 待开发 | P2 | 按时间段分析热度 |
 | 人流预测工具 | travel | `/crowd-forecast` | 待开发 | P3 | 简易人流预测 |
 | 天气 + 穿搭建议 | travel | `/weather-outfit` | 待开发 | P2 | 目的地天气 + 穿衣建议 |
-| 时差计算器 | travel | `/timezone-calc` | 待开发 | P1 | 多时区时差换算 |
-| 地图距离计算 | travel | `/distance-calc` | 待开发 | P1 | 两点间距离计算 |
+| ~~时差计算器~~ | travel | `/timezone-calc` | **已上线** | - | 多时区时差换算 |
+| ~~地图距离计算~~ | travel | `/distance-calc` | **已上线** | - | 两点间距离计算 |
 | **── 旅游：实用工具 ──** | | | | | |
-| 行李清单生成器 | travel | `/packing-list` | 待开发 | P1 | AI 生成行李清单 |
+| ~~行李清单生成器~~ | travel | `/packing-list` | **已上线** | - | AI 生成行李清单 |
 | 航班信息查询聚合 | travel | `/flight-search` | 待开发 | P2 | 航班信息聚合查询 |
 | 酒店价格趋势 | travel | `/hotel-trend` | 待开发 | P3 | 酒店历史价格趋势 |
 | 签证信息助手 | travel | `/visa-info` | 待开发 | P2 | 各国签证要求查询 |
@@ -275,7 +310,7 @@
 | 学习计划生成器 | learn | `/study-planner` | 待开发 | P1 | AI 生成学习计划 |
 | 记忆曲线复习提醒 | learn | `/spaced-repetition` | 待开发 | P1 | Anki lite 版 |
 | 专注模式 | learn | `/focus-mode` | 待开发 | P2 | 屏蔽干扰专注学习 |
-| 学习时长统计 | learn | `/study-timer` | 待开发 | P1 | 学习时间记录与统计 |
+| ~~学习时长统计~~ | learn | `/study-timer` | **已上线** | - | 学习时间记录与统计 |
 | **── 学习：内容处理 ──** | | | | | |
 | 文本摘要工具 | learn | `/text-summary` | 待开发 | P1 | AI 文本自动摘要 |
 | PDF 总结工具 | learn | `/pdf-summary` | 待开发 | P1 | AI 总结 PDF 内容 |

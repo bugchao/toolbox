@@ -1,1 +1,1 @@
-export { SubscriptionManager as default } from './SubscriptionManager'
+export { default } from './SubscriptionManager'

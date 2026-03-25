@@ -49,6 +49,7 @@
     "@toolbox/tool-security-suite": "workspace:*",
     "@toolbox/tool-ssl-cert": "workspace:*",
     "@toolbox/tool-subnet-suite": "workspace:*",
+    "@toolbox/tool-subscription-manager": "workspace:*",
     "@toolbox/tool-tcp-port": "workspace:*",
     "@toolbox/tool-weather": "workspace:*",
     "@toolbox/ui-kit": "workspace:*",

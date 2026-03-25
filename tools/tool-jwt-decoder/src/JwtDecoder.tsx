@@ -69,11 +69,11 @@ export default function JwtDecoder() {
           <div className={`rounded-xl p-3 flex items-center gap-2 ${
             result.valid ? 'bg-green-50 dark:bg-green-900/20 text-green-600' : 'bg-red-50 dark:bg-red-900/20 text-red-500'
           }`}>
-            {result.valid
-              ? <><CheckCircle className="w-4 h-4" /><span className="text-sm">{t('valid')}</span></>
-              : <><AlertTriangle className="w-4 h-4" /><div className="text-sm text-red-400">{result.error}</div>}
-            </>
-          }
+            {result.valid ? (
+              <><CheckCircle className="w-4 h-4" /><span className="text-sm">{t('valid')}</span></>
+            ) : (
+              <><AlertTriangle className="w-4 h-4" /><div className="text-sm text-red-400">{result.error}</div></>
+            )}
           </div>
         )}
 
