@@ -1,0 +1,18 @@
+{
+  "title": "Running Tracker",
+  "description": "Log your runs and analyze pace and mileage trends",
+  "addRun": "Add run",
+  "date": "Date",
+  "distance": "Distance (km)",
+  "duration": "Duration (min)",
+  "pace": "Pace",
+  "calories": "Calories (kcal)",
+  "save": "Save",
+  "totalDistance": "Total distance",
+  "totalRuns": "Total runs",
+  "avgPace": "Avg pace",
+  "trend": "Mileage trend",
+  "empty": "No runs yet",
+  "km": "km",
+  "minPerKm": "min/km"
+}

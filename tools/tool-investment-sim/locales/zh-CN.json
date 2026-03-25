@@ -1,0 +1,14 @@
+{
+  "title": "理财收益模拟器",
+  "description": "模拟复利和定投收益，预测资产增长曲线",
+  "initialAmount": "初始本金（元）",
+  "monthlyAmount": "每月定投（元）",
+  "annualRate": "年化收益率（%）",
+  "years": "投资年限（年）",
+  "calculate": "计算",
+  "totalInvested": "累计投入",
+  "totalReturn": "预期收益",
+  "finalAmount": "最终资产",
+  "growthChart": "资产增长曲线",
+  "disclaimer": "仅供参考，不构成投资建议"
+}

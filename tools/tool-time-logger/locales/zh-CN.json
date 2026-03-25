@@ -1,0 +1,22 @@
+{
+  "title": "时间日志",
+  "description": "记录每日时间花费，分析时间去哪了",
+  "addRecord": "添加记录",
+  "activity": "活动名称",
+  "activityPlaceholder": "如：写代码、开会、刷视频",
+  "duration": "时长（分钟）",
+  "category": "分类",
+  "work": "工作",
+  "learn": "学习",
+  "life": "生活",
+  "entertainment": "娱乐",
+  "exercise": "运动",
+  "other": "其他",
+  "save": "保存",
+  "today": "今日",
+  "week": "本周",
+  "total": "合计",
+  "hours": "小时",
+  "distribution": "时间分布",
+  "empty": "今天还没有记录"
+}

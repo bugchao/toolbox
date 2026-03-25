@@ -1,0 +1,22 @@
+{
+  "title": "Time Logger",
+  "description": "Track your daily time usage and analyze where time goes",
+  "addRecord": "Add record",
+  "activity": "Activity",
+  "activityPlaceholder": "e.g. Coding, Meeting, Browsing",
+  "duration": "Duration (min)",
+  "category": "Category",
+  "work": "Work",
+  "learn": "Learning",
+  "life": "Life",
+  "entertainment": "Entertainment",
+  "exercise": "Exercise",
+  "other": "Other",
+  "save": "Save",
+  "today": "Today",
+  "week": "This week",
+  "total": "Total",
+  "hours": "hours",
+  "distribution": "Distribution",
+  "empty": "No records today"
+}

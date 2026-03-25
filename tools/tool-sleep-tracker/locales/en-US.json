@@ -1,0 +1,20 @@
+{
+  "title": "Sleep Tracker",
+  "description": "Track sleep duration and quality, analyze sleep patterns",
+  "addRecord": "Add record",
+  "bedtime": "Bedtime",
+  "wakeTime": "Wake time",
+  "quality": "Sleep quality",
+  "poor": "Poor",
+  "fair": "Fair",
+  "good": "Good",
+  "great": "Great",
+  "note": "Note",
+  "save": "Save",
+  "duration": "Duration",
+  "avgDuration": "Avg duration",
+  "avgQuality": "Avg quality",
+  "trend": "Sleep trend",
+  "empty": "No records yet",
+  "hours": "h"
+}

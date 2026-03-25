@@ -1,0 +1,17 @@
+{
+  "title": "Travel Cost Estimate",
+  "description": "Quickly estimate travel costs and convert to your budget",
+  "destination": "Destination",
+  "days": "Days",
+  "budget": "Budget (¥)",
+  "currency": "Local currency",
+  "exchangeRate": "Exchange rate (1 foreign = ? CNY)",
+  "perDay": "Daily budget",
+  "accommodation": "Accommodation",
+  "food": "Food",
+  "transport": "Transport",
+  "activities": "Activities",
+  "shopping": "Shopping",
+  "total": "Estimated total",
+  "calculate": "Calculate"
+}

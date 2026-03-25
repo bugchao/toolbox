@@ -66,16 +66,16 @@ const PasswordStrength = lazy(() => import('@toolbox/tool-password-strength'))
 const BaseConverter = lazy(() => import('@toolbox/tool-base-converter'))
 const WordCount = lazy(() => import('@toolbox/tool-word-count'))
 const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
-const OneLiner = lazy(() => import('@toolbox/tool-one-liner'))
-const Eli5 = lazy(() => import('@toolbox/tool-eli5'))
-const MultiPerspective = lazy(() => import('@toolbox/tool-multi-perspective'))
-const McqGen = lazy(() => import('@toolbox/tool-mcq-gen'))
-const MorseCode = lazy(() => import('@toolbox/tool-morse-code'))
-const AsciiArt = lazy(() => import('@toolbox/tool-ascii-art'))
-const PasswordStrength = lazy(() => import('@toolbox/tool-password-strength'))
-const BaseConverter = lazy(() => import('@toolbox/tool-base-converter'))
-const WordCount = lazy(() => import('@toolbox/tool-word-count'))
-const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
+const TimeLogger = lazy(() => import('@toolbox/tool-time-logger'))
+const InvestmentSim = lazy(() => import('@toolbox/tool-investment-sim'))
+const SleepTracker = lazy(() => import('@toolbox/tool-sleep-tracker'))
+const WaterReminder = lazy(() => import('@toolbox/tool-water-reminder'))
+const RunningTracker = lazy(() => import('@toolbox/tool-running-tracker'))
+const SedentaryReminder = lazy(() => import('@toolbox/tool-sedentary-reminder'))
+const HttpDebugger = lazy(() => import('@toolbox/tool-http-debugger'))
+const TravelCostEstimate = lazy(() => import('@toolbox/tool-travel-cost-estimate'))
+const MultiCityRoute = lazy(() => import('@toolbox/tool-multi-city-route'))
+const VisaInfo = lazy(() => import('@toolbox/tool-visa-info'))
 
 function RouteLoading() {
   const { t } = useTranslation('common')
@@ -533,6 +533,16 @@ function App() {
           <Route path="/base-converter" element={<BaseConverter />} />
           <Route path="/word-count" element={<WordCount />} />
           <Route path="/pomodoro-pro" element={<PomodoroPro />} />
+          <Route path="/time-logger" element={<TimeLogger />} />
+          <Route path="/investment-sim" element={<InvestmentSim />} />
+          <Route path="/sleep-tracker" element={<SleepTracker />} />
+          <Route path="/water-reminder" element={<WaterReminder />} />
+          <Route path="/running-tracker" element={<RunningTracker />} />
+          <Route path="/sedentary-reminder" element={<SedentaryReminder />} />
+          <Route path="/http-debugger" element={<HttpDebugger />} />
+          <Route path="/travel-cost-estimate" element={<TravelCostEstimate />} />
+          <Route path="/multi-city-route" element={<MultiCityRoute />} />
+          <Route path="/visa-info" element={<VisaInfo />} />
         </Routes>
       </Suspense>
     </Layout>

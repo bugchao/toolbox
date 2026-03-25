@@ -1,0 +1,14 @@
+{
+  "title": "Investment Simulator",
+  "description": "Simulate compound interest and DCA returns, visualize asset growth",
+  "initialAmount": "Initial amount (¥)",
+  "monthlyAmount": "Monthly contribution (¥)",
+  "annualRate": "Annual return rate (%)",
+  "years": "Investment period (years)",
+  "calculate": "Calculate",
+  "totalInvested": "Total invested",
+  "totalReturn": "Expected return",
+  "finalAmount": "Final amount",
+  "growthChart": "Growth chart",
+  "disclaimer": "For reference only, not financial advice"
+}

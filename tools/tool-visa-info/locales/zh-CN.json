@@ -1,0 +1,14 @@
+{
+  "title": "签证信息",
+  "description": "查询中国公民前往各国的签证要求",
+  "search": "搜索国家...",
+  "all": "全部",
+  "visaFree": "免签",
+  "visaOnArrival": "落地签",
+  "eVisa": "电子签",
+  "required": "需要签证",
+  "duration": "最长停留",
+  "days": "天",
+  "note": "备注",
+  "disclaimer": "信息仅供参考，出行前请核实最新政策"
+}

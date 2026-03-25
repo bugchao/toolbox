@@ -1,0 +1,14 @@
+{
+  "title": "久坐提醒",
+  "description": "定时提醒起身活动，推荐拉伸动作",
+  "interval": "提醒间隔（分钟）",
+  "start": "开始提醒",
+  "stop": "停止",
+  "reset": "重置",
+  "sitting": "已久坐",
+  "minutes": "分钟",
+  "timeToMove": "该起来动一动了！",
+  "stretches": "推荐拉伸",
+  "todayBreaks": "今日活动次数",
+  "next": "下次提醒"
+}

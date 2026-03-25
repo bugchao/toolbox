@@ -1,0 +1,18 @@
+{
+  "title": "HTTP 调试器",
+  "description": "在线发送 HTTP 请求，调试 API 接口",
+  "method": "方法",
+  "url": "URL",
+  "headers": "请求头",
+  "body": "请求体",
+  "send": "发送",
+  "response": "响应",
+  "status": "状态码",
+  "time": "耗时",
+  "addHeader": "添加请求头",
+  "key": "Key",
+  "value": "Value",
+  "loading": "请求中...",
+  "error": "请求失败",
+  "corsNote": "注：跨域请求可能受浏览器 CORS 限制"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "跑步记录",
+  "description": "记录跑步数据，分析配速和里程趋势",
+  "addRun": "添加跑步",
+  "date": "日期",
+  "distance": "距离（km）",
+  "duration": "时长（分钟）",
+  "pace": "配速",
+  "calories": "消耗（kcal）",
+  "save": "保存",
+  "totalDistance": "累计里程",
+  "totalRuns": "跑步次数",
+  "avgPace": "平均配速",
+  "trend": "里程趋势",
+  "empty": "还没有跑步记录",
+  "km": "km",
+  "minPerKm": "分/km"
+}

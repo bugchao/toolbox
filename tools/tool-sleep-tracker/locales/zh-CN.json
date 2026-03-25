@@ -1,0 +1,20 @@
+{
+  "title": "睡眠记录",
+  "description": "记录睡眠时长和质量，分析睡眠趋势",
+  "addRecord": "添加记录",
+  "bedtime": "入睡时间",
+  "wakeTime": "起床时间",
+  "quality": "睡眠质量",
+  "poor": "较差",
+  "fair": "一般",
+  "good": "良好",
+  "great": "很好",
+  "note": "备注",
+  "save": "保存",
+  "duration": "时长",
+  "avgDuration": "平均时长",
+  "avgQuality": "平均质量",
+  "trend": "睡眠趋势",
+  "empty": "暂无记录",
+  "hours": "小时"
+}

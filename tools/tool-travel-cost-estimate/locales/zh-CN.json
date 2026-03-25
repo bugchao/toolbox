@@ -1,0 +1,17 @@
+{
+  "title": "旅行消费估算",
+  "description": "快速估算目的地消费水平，换算人民币预算",
+  "destination": "目的地",
+  "days": "天数",
+  "budget": "预算（元）",
+  "currency": "当地货币",
+  "exchangeRate": "汇率（1外币=?元）",
+  "perDay": "每日预算",
+  "accommodation": "住宿",
+  "food": "餐饮",
+  "transport": "交通",
+  "activities": "景点/活动",
+  "shopping": "购物",
+  "total": "预计总花费",
+  "calculate": "计算"
+}

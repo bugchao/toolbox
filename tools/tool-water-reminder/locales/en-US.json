@@ -1,0 +1,14 @@
+{
+  "title": "Water Reminder",
+  "description": "Track daily water intake and build healthy hydration habits",
+  "goal": "Daily goal (ml)",
+  "add": "Add",
+  "custom": "Custom",
+  "ml": "ml",
+  "today": "Today",
+  "remaining": "Remaining",
+  "completed": "Goal achieved!",
+  "history": "Recent logs",
+  "reset": "Reset today",
+  "tip": "Recommended: 1500-2000ml per day"
+}

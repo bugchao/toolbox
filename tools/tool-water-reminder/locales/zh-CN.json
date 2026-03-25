@@ -1,0 +1,14 @@
+{
+  "title": "饮水提醒",
+  "description": "追踪每日饮水量，养成健康饮水习惯",
+  "goal": "每日目标（ml）",
+  "add": "添加",
+  "custom": "自定义",
+  "ml": "ml",
+  "today": "今日已喝",
+  "remaining": "还需",
+  "completed": "目标达成！",
+  "history": "最近记录",
+  "reset": "重置今日",
+  "tip": "建议每天喝 1500-2000ml 水"
+}

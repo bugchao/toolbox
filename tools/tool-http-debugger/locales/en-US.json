@@ -1,0 +1,18 @@
+{
+  "title": "HTTP Debugger",
+  "description": "Send HTTP requests online and debug API endpoints",
+  "method": "Method",
+  "url": "URL",
+  "headers": "Headers",
+  "body": "Body",
+  "send": "Send",
+  "response": "Response",
+  "status": "Status",
+  "time": "Time",
+  "addHeader": "Add header",
+  "key": "Key",
+  "value": "Value",
+  "loading": "Sending...",
+  "error": "Request failed",
+  "corsNote": "Note: Cross-origin requests may be blocked by CORS"
+}

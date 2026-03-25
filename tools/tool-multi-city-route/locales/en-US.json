@@ -1,0 +1,15 @@
+{
+  "title": "Multi-City Route",
+  "description": "Enter multiple cities and find the optimal visit order",
+  "addCity": "Add city",
+  "cityPlaceholder": "City name",
+  "startCity": "Starting city",
+  "optimize": "Optimize route",
+  "result": "Recommended route",
+  "totalDistance": "Total distance (est.)",
+  "order": "Visit order",
+  "distance": "Distance",
+  "km": "km",
+  "empty": "Please add at least 3 cities",
+  "note": "Distances are straight-line estimates"
+}

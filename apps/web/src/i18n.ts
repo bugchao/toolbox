@@ -264,6 +264,26 @@ import toolIpamConflictEn from '@toolbox/tool-ipam-suite/src/locales/ipamConflic
 import toolIpamAllocationSimZh from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.zh.json'
 import toolIpamAllocationSimEn from '@toolbox/tool-ipam-suite/src/locales/ipamAllocationSim.en.json'
 import { subnetZh, subnetEn } from '@toolbox/tool-subnet-suite/src/locales'
+import toolHttpDebuggerZh from '@toolbox/tool-http-debugger/locales/zh-CN.json'
+import toolHttpDebuggerEn from '@toolbox/tool-http-debugger/locales/en-US.json'
+import toolInvestmentSimZh from '@toolbox/tool-investment-sim/locales/zh-CN.json'
+import toolInvestmentSimEn from '@toolbox/tool-investment-sim/locales/en-US.json'
+import toolMultiCityRouteZh from '@toolbox/tool-multi-city-route/locales/zh-CN.json'
+import toolMultiCityRouteEn from '@toolbox/tool-multi-city-route/locales/en-US.json'
+import toolRunningTrackerZh from '@toolbox/tool-running-tracker/locales/zh-CN.json'
+import toolRunningTrackerEn from '@toolbox/tool-running-tracker/locales/en-US.json'
+import toolSedentaryReminderZh from '@toolbox/tool-sedentary-reminder/locales/zh-CN.json'
+import toolSedentaryReminderEn from '@toolbox/tool-sedentary-reminder/locales/en-US.json'
+import toolSleepTrackerZh from '@toolbox/tool-sleep-tracker/locales/zh-CN.json'
+import toolSleepTrackerEn from '@toolbox/tool-sleep-tracker/locales/en-US.json'
+import toolTimeLoggerZh from '@toolbox/tool-time-logger/locales/zh-CN.json'
+import toolTimeLoggerEn from '@toolbox/tool-time-logger/locales/en-US.json'
+import toolTravelCostEstimateZh from '@toolbox/tool-travel-cost-estimate/locales/zh-CN.json'
+import toolTravelCostEstimateEn from '@toolbox/tool-travel-cost-estimate/locales/en-US.json'
+import toolVisaInfoZh from '@toolbox/tool-visa-info/locales/zh-CN.json'
+import toolVisaInfoEn from '@toolbox/tool-visa-info/locales/en-US.json'
+import toolWaterReminderZh from '@toolbox/tool-water-reminder/locales/zh-CN.json'
+import toolWaterReminderEn from '@toolbox/tool-water-reminder/locales/en-US.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -394,6 +414,16 @@ export const resources = {
     toolBaseConverter: toolBaseConverterZh as Record<string, string>,
     toolWordCount: toolWordCountZh as Record<string, string>,
     toolPomodoroPro: toolPomodoroProZh as Record<string, string>,
+    toolTimeLogger: toolTimeLoggerZh as Record<string, string>,
+    toolInvestmentSim: toolInvestmentSimZh as Record<string, string>,
+    toolSleepTracker: toolSleepTrackerZh as Record<string, string>,
+    toolWaterReminder: toolWaterReminderZh as Record<string, string>,
+    toolRunningTracker: toolRunningTrackerZh as Record<string, string>,
+    toolSedentaryReminder: toolSedentaryReminderZh as Record<string, string>,
+    toolHttpDebugger: toolHttpDebuggerZh as Record<string, string>,
+    toolTravelCostEstimate: toolTravelCostEstimateZh as Record<string, string>,
+    toolMultiCityRoute: toolMultiCityRouteZh as Record<string, string>,
+    toolVisaInfo: toolVisaInfoZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -533,6 +563,16 @@ export const resources = {
     toolBaseConverter: toolBaseConverterEn as Record<string, string>,
     toolWordCount: toolWordCountEn as Record<string, string>,
     toolPomodoroPro: toolPomodoroProEn as Record<string, string>,
+    toolTimeLogger: toolTimeLoggerEn as Record<string, string>,
+    toolInvestmentSim: toolInvestmentSimEn as Record<string, string>,
+    toolSleepTracker: toolSleepTrackerEn as Record<string, string>,
+    toolWaterReminder: toolWaterReminderEn as Record<string, string>,
+    toolRunningTracker: toolRunningTrackerEn as Record<string, string>,
+    toolSedentaryReminder: toolSedentaryReminderEn as Record<string, string>,
+    toolHttpDebugger: toolHttpDebuggerEn as Record<string, string>,
+    toolTravelCostEstimate: toolTravelCostEstimateEn as Record<string, string>,
+    toolMultiCityRoute: toolMultiCityRouteEn as Record<string, string>,
+    toolVisaInfo: toolVisaInfoEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

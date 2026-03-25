@@ -15,7 +15,8 @@ import {
   Luggage, ChefHat, BookOpen, BookMarked, CalendarDays, ShoppingBag,
   Bell, Users, ScanLine, Brain, Compass,
   RotateCcw, Languages, FolderTree, Eye, Volume2,
-  Lightbulb, Baby, Telescope, Type
+  Lightbulb, Baby, Telescope, Type,
+  Moon, Droplets, AlarmClock, Terminal, Navigation
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -224,6 +225,16 @@ export const TOOLS: ToolEntry[] = [
   { path: '/base-converter', nameKey: 'tools.base_converter', icon: ArrowLeftRight, categoryKey: 'dev', keywords: ['进制', '二进制', '十六进制', 'base'], i18nNamespace: 'toolBaseConverter' },
   { path: '/word-count', nameKey: 'tools.word_count', icon: FileText, categoryKey: 'utils', keywords: ['字数', '统计', 'word count', '文本'], i18nNamespace: 'toolWordCount' },
   { path: '/pomodoro-pro', nameKey: 'tools.pomodoro_pro', icon: Timer, categoryKey: 'life', keywords: ['番茄钟', '专注', 'pomodoro', '计时'], i18nNamespace: 'toolPomodoroPro' },
+  { path: '/time-logger', nameKey: 'tools.time_logger', icon: Clock, categoryKey: 'life', keywords: ['时间', '日志', '记录', 'time log'], i18nNamespace: 'toolTimeLogger' },
+  { path: '/investment-sim', nameKey: 'tools.investment_sim', icon: TrendingUp, categoryKey: 'finance', keywords: ['理财', '复利', '定投', '收益模拟'], i18nNamespace: 'toolInvestmentSim' },
+  { path: '/sleep-tracker', nameKey: 'tools.sleep_tracker', icon: Moon, categoryKey: 'life', keywords: ['睡眠', '记录', '健康', 'sleep'], i18nNamespace: 'toolSleepTracker' },
+  { path: '/water-reminder', nameKey: 'tools.water_reminder', icon: Droplets, categoryKey: 'life', keywords: ['饮水', '喝水', '健康', 'water'], i18nNamespace: 'toolWaterReminder' },
+  { path: '/running-tracker', nameKey: 'tools.running_tracker', icon: Activity, categoryKey: 'life', keywords: ['跑步', '运动', '里程', 'running'], i18nNamespace: 'toolRunningTracker' },
+  { path: '/sedentary-reminder', nameKey: 'tools.sedentary_reminder', icon: AlarmClock, categoryKey: 'life', keywords: ['久坐', '提醒', '拉伸', '健康'], i18nNamespace: 'toolSedentaryReminder' },
+  { path: '/http-debugger', nameKey: 'tools.http_debugger', icon: Terminal, categoryKey: 'dev', keywords: ['HTTP', 'API', '调试', 'request'], i18nNamespace: 'toolHttpDebugger' },
+  { path: '/travel-cost-estimate', nameKey: 'tools.travel_cost_estimate', icon: PlaneTakeoff, categoryKey: 'travel', keywords: ['旅行', '消费', '预算', '估算'], i18nNamespace: 'toolTravelCostEstimate' },
+  { path: '/multi-city-route', nameKey: 'tools.multi_city_route', icon: Navigation, categoryKey: 'travel', keywords: ['路线', '城市', '行程', '优化'], i18nNamespace: 'toolMultiCityRoute' },
+  { path: '/visa-info', nameKey: 'tools.visa_info', icon: Globe, categoryKey: 'travel', keywords: ['签证', '免签', '出行', 'visa'], i18nNamespace: 'toolVisaInfo' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

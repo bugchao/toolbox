@@ -1,0 +1,14 @@
+{
+  "title": "Sedentary Reminder",
+  "description": "Get reminded to move regularly with stretch suggestions",
+  "interval": "Reminder interval (min)",
+  "start": "Start",
+  "stop": "Stop",
+  "reset": "Reset",
+  "sitting": "Sitting for",
+  "minutes": "min",
+  "timeToMove": "Time to move!",
+  "stretches": "Stretch suggestions",
+  "todayBreaks": "Breaks today",
+  "next": "Next reminder"
+}

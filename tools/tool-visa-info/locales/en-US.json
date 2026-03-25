@@ -1,0 +1,14 @@
+{
+  "title": "Visa Info",
+  "description": "Check visa requirements for Chinese passport holders",
+  "search": "Search country...",
+  "all": "All",
+  "visaFree": "Visa-free",
+  "visaOnArrival": "Visa on arrival",
+  "eVisa": "e-Visa",
+  "required": "Visa required",
+  "duration": "Max stay",
+  "days": "days",
+  "note": "Note",
+  "disclaimer": "For reference only. Verify latest policies before travel."
+}

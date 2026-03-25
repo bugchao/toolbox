@@ -1,0 +1,15 @@
+{
+  "title": "多城市路线优化",
+  "description": "输入多个城市，自动规划最优游览顺序",
+  "addCity": "添加城市",
+  "cityPlaceholder": "城市名称",
+  "startCity": "出发城市",
+  "optimize": "优化路线",
+  "result": "推荐路线",
+  "totalDistance": "总距离（估算）",
+  "order": "游览顺序",
+  "distance": "距离",
+  "km": "km",
+  "empty": "请至少添加3个城市",
+  "note": "距离基于城市间直线距离估算"
+}
