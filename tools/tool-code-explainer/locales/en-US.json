@@ -1,0 +1,17 @@
+{
+  "title": "Code Explainer",
+  "description": "Explain code logic line by line for any programming language",
+  "inputPlaceholder": "Paste the code to explain...",
+  "language": "Language",
+  "explain": "Explain",
+  "clear": "Clear",
+  "copy": "Copy",
+  "copied": "Copied",
+  "result": "Explanation",
+  "lineN": "Line {{n}}",
+  "overview": "Overview",
+  "noInput": "Please enter code to explain",
+  "complexity": "Complexity",
+  "keywords": "Keywords",
+  "auto": "Auto detect"
+}

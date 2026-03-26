@@ -1,0 +1,18 @@
+{
+  "title": "概念解释器",
+  "description": "输入任何概念，获得通俗易懂的多层次解释",
+  "inputPlaceholder": "输入一个概念，如：递归、量子纠缠、通货膨胀...",
+  "explain": "解释",
+  "clear": "清空",
+  "copy": "复制",
+  "copied": "已复制",
+  "simple": "一句话版本",
+  "analogy": "类比理解",
+  "detail": "详细解释",
+  "example": "实际例子",
+  "related": "相关概念",
+  "noInput": "请输入概念",
+  "category": "分类",
+  "searchPlaceholder": "搜索概念...",
+  "all": "全部"
+}

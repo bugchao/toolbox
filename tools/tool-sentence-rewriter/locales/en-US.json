@@ -1,0 +1,20 @@
+{
+  "title": "Sentence Rewriter",
+  "description": "Rewrite sentences in multiple styles for richer expression",
+  "inputPlaceholder": "Enter the sentence to rewrite...",
+  "rewrite": "Rewrite",
+  "clear": "Clear",
+  "copy": "Copy",
+  "copied": "Copied",
+  "style": "Rewrite Style",
+  "formal": "Formal",
+  "casual": "Casual",
+  "concise": "Concise",
+  "elaborate": "Elaborate",
+  "persuasive": "Persuasive",
+  "poetic": "Poetic",
+  "result": "Rewrite Result",
+  "original": "Original",
+  "noInput": "Please enter a sentence to rewrite",
+  "tip": "Tip: Results are based on rule transformations, great for practicing different expression styles"
+}

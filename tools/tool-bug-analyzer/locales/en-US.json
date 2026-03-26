@@ -1,0 +1,19 @@
+{
+  "title": "Bug Analyzer",
+  "description": "Paste error messages to quickly identify causes and get fix suggestions",
+  "inputPlaceholder": "Paste error message, stack trace or exception log...",
+  "analyze": "Analyze",
+  "clear": "Clear",
+  "copy": "Copy Fix",
+  "copied": "Copied",
+  "errorType": "Error Type",
+  "cause": "Possible Cause",
+  "fix": "Fix Suggestion",
+  "severity": "Severity",
+  "high": "High",
+  "medium": "Medium",
+  "low": "Low",
+  "noInput": "Please enter error message",
+  "relatedDocs": "Related Docs",
+  "checklist": "Checklist"
+}

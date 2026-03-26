@@ -1,0 +1,19 @@
+{
+  "title": "Bug 分析器",
+  "description": "粘贴报错信息，快速定位问题原因和修复建议",
+  "inputPlaceholder": "粘贴错误信息、堆栈追踪或异常日志...",
+  "analyze": "分析",
+  "clear": "清空",
+  "copy": "复制修复建议",
+  "copied": "已复制",
+  "errorType": "错误类型",
+  "cause": "可能原因",
+  "fix": "修复建议",
+  "severity": "严重程度",
+  "high": "高",
+  "medium": "中",
+  "low": "低",
+  "noInput": "请输入错误信息",
+  "relatedDocs": "相关文档",
+  "checklist": "排查清单"
+}

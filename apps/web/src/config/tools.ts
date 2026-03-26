@@ -321,34 +321,6 @@ export function getToolDescription(
   const descKey = tool.nameKey.replace('tools.', '')
   return tHome(`toolDesc.${descKey}`)
 }
-)
-}
-}
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-}
-
 
 
 

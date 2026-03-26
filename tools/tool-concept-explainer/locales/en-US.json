@@ -1,0 +1,18 @@
+{
+  "title": "Concept Explainer",
+  "description": "Enter any concept and get multi-level plain-language explanations",
+  "inputPlaceholder": "Enter a concept, e.g.: recursion, quantum entanglement...",
+  "explain": "Explain",
+  "clear": "Clear",
+  "copy": "Copy",
+  "copied": "Copied",
+  "simple": "One-liner",
+  "analogy": "Analogy",
+  "detail": "Detailed",
+  "example": "Example",
+  "related": "Related",
+  "noInput": "Please enter a concept",
+  "category": "Category",
+  "searchPlaceholder": "Search concepts...",
+  "all": "All"
+}

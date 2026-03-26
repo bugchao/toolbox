@@ -1,0 +1,20 @@
+{
+  "title": "句子改写器",
+  "description": "多种风格改写句子，让表达更丰富",
+  "inputPlaceholder": "输入需要改写的句子...",
+  "rewrite": "改写",
+  "clear": "清空",
+  "copy": "复制",
+  "copied": "已复制",
+  "style": "改写风格",
+  "formal": "正式",
+  "casual": "口语",
+  "concise": "简洁",
+  "elaborate": "详细",
+  "persuasive": "说服性",
+  "poetic": "文艺",
+  "result": "改写结果",
+  "original": "原句",
+  "noInput": "请输入需要改写的句子",
+  "tip": "提示：改写结果基于规则变换，适合练习不同表达风格"
+}
