@@ -3,7 +3,7 @@ import i18n from '../i18n'
 import { getToolManifestMetaByPath } from '../tooling/tool-manifests'
 import {
   Home, Star, QrCode, Newspaper, MapPin, Cloud, Code, FileCode, Clock, Link2,
-  Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart, Mail, XCircle,
+  Shuffle, Calendar, Key, Fingerprint, Braces, Hash, Image, FileText, Heart, Mail, MailOpen, XCircle,
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
@@ -50,8 +50,15 @@ import {
   Superscript, Subscript, Highlighter, SpellCheck, Languages as Lang2,
   ChevronRight, ChevronDown, ArrowUp, ArrowDown, TrendingDown,
   Expand, Shrink, ZoomIn, ZoomOut, Fullscreen,
-  Crosshair, Anchor, Compass as CompassIcon, Locate, LocateFixed,
-  BarChart, BarChart3, BarChart4, LineChart, PieChart, AreaChart, ScatterChart
+  Crosshair, Anchor, Locate, LocateFixed,
+  BarChart, BarChart3, BarChart4, LineChart, PieChart, AreaChart, ScatterChart,
+  CloudSun, SearchCode, Landmark, Bug, CloudOff, Gauge, Crown, Cable, Scale,
+  MonitorCheck, Siren, ShieldHalf, Bomb, SlidersHorizontal, BadgeCheck, Signal,
+  Skull, ScrollText, Scan, History, TimerOff, GraduationCap, MailCheck, MailWarning,
+  Asterisk, Repeat2, Globe2, CircleOff, OctagonX, TriangleAlert, AlertOctagon,
+  Split, Antenna, ToggleLeft, ChevronsLeftRight, TreePine, LockKeyhole, Repeat,
+  Scissors, Pipette, Laugh, Waves, Sparkles, Paintbrush2, BookA, Backpack,
+  Binoculars, PersonStanding, Stamp
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -100,7 +107,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/domain-mx', nameKey: 'tools.domain_mx', icon: Mail, categoryKey: 'domain', keywords: ['mx', '邮件', 'mail', '邮箱'], i18nNamespace: 'toolDomainMx' , mode: 'server'},
   { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileType, categoryKey: 'domain', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt' , mode: 'server'},
   { path: '/http-headers', nameKey: 'tools.http_headers', icon: Webhook, categoryKey: 'network', keywords: ['http', 'header', '响应头', '安全'], i18nNamespace: 'toolHttpHeaders' , mode: 'server'},
-  { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: BadgeLock, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert' , mode: 'server'},
+  { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: ShieldCheck, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert' , mode: 'server'},
   { path: '/http-status', nameKey: 'tools.http_status', icon: CheckCircle, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus' , mode: 'server'},
   { path: '/tcp-port-check', nameKey: 'tools.tcp_port_check', icon: Power, categoryKey: 'network', keywords: ['tcp', 'port', '端口', '连通性'], i18nNamespace: 'toolTcpPort' , mode: 'server'},
   { path: '/ping', nameKey: 'tools.ping', icon: Radar, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing' , mode: 'server'},
@@ -126,7 +133,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/cdn-check', nameKey: 'tools.cdn_check', icon: Cloud, categoryKey: 'network', keywords: ['cdn', '检测', 'cloudflare', '阿里云'], i18nNamespace: 'toolCdnCheck', mode: 'server' },
   { path: '/dhcp-discover-sim', nameKey: 'tools.dhcp_discover_sim', icon: Wifi, categoryKey: 'network', keywords: ['dhcp', 'discover', '握手', '模拟'], i18nNamespace: 'toolDhcpDiscoverSim' },
   { path: '/ipam-subnet-util', nameKey: 'tools.ipam_subnet_util', icon: BarChart4, categoryKey: 'ipam', keywords: ['子网', '利用率', 'cidr', 'ip'], i18nNamespace: 'toolIpamSubnetUtil' },
-  { path: '/gslb-health-sim', nameKey: 'tools.gslb_health_sim', icon: Pulse, categoryKey: 'network', keywords: ['gslb', '健康', '检查', '模拟'], i18nNamespace: 'toolGslbHealthSim' },
+  { path: '/gslb-health-sim', nameKey: 'tools.gslb_health_sim', icon: Activity, categoryKey: 'network', keywords: ['gslb', '健康', '检查', '模拟'], i18nNamespace: 'toolGslbHealthSim' },
   { path: '/gslb-latency-sim', nameKey: 'tools.gslb_latency_sim', icon: Activity, categoryKey: 'network', keywords: ['gslb', '延迟', '调度', '模拟'], i18nNamespace: 'toolGslbLatencySim' },
   { path: '/server-latency', nameKey: 'tools.server_latency', icon: Timer, categoryKey: 'network', keywords: ['延迟', '测速', '服务器', 'ping'], i18nNamespace: 'toolServerLatency', mode: 'server' },
   { path: '/dhcp-lease-analysis', nameKey: 'tools.dhcp_lease_analysis', icon: FileBarChart, categoryKey: 'network', keywords: ['dhcp', 'lease', '租约', '分析'], i18nNamespace: 'toolDhcpLeaseAnalysis' },
@@ -183,7 +190,7 @@ export const TOOLS: ToolEntry[] = [
   { path: '/ip-blacklist', nameKey: 'tools.ip_blacklist', icon: CircleOff, categoryKey: 'ip', keywords: ['ip', 'blacklist', 'dnsbl', '黑名单'], i18nNamespace: 'toolIpBlacklist' , mode: 'server'},
   { path: '/security-ip-score', nameKey: 'tools.security_ip_score', icon: Trophy, categoryKey: 'security', keywords: ['security', 'ip', 'risk', '安全', '评分'], i18nNamespace: 'toolSecurityIpScore' , mode: 'server'},
   { path: '/security-domain-blacklist', nameKey: 'tools.security_domain_blacklist', icon: OctagonX, categoryKey: 'security', keywords: ['security', 'domain', 'blacklist', '域名', '黑名单'], i18nNamespace: 'toolSecurityDomainBlacklist' , mode: 'server'},
-  { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: PortMapping, categoryKey: 'security', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan' , mode: 'server'},
+  { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: Network, categoryKey: 'security', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan' , mode: 'server'},
   { path: '/security-dns-vuln', nameKey: 'tools.security_dns_vuln', icon: TriangleAlert, categoryKey: 'security', keywords: ['security', 'dns', 'vuln', '漏洞', '配置'], i18nNamespace: 'toolSecurityDnsVuln' , mode: 'server'},
   { path: '/security-report-gen', nameKey: 'tools.security_report_gen', icon: FileWarning, categoryKey: 'security', keywords: ['security', 'report', '网络', '报告'], i18nNamespace: 'toolSecurityReportGen' , mode: 'server'},
   { path: '/ipam-plan', nameKey: 'tools.ipam_plan', icon: LayoutGrid, categoryKey: 'ipam', keywords: ['ipam', 'plan', 'vlsm', '规划'], i18nNamespace: 'toolIpamPlan' , mode: 'server'},
