@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-habit-tracker",
+  "name": "@toolbox/tool-fitness-planner",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.tsx",

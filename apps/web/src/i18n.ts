@@ -282,6 +282,16 @@ import toolTravelCostEstimateZh from '@toolbox/tool-travel-cost-estimate/locales
 import toolTravelCostEstimateEn from '@toolbox/tool-travel-cost-estimate/locales/en-US.json'
 import toolVisaInfoZh from '@toolbox/tool-visa-info/locales/zh-CN.json'
 import toolVisaInfoEn from '@toolbox/tool-visa-info/locales/en-US.json'
+import toolFitnessPlannerZh from '@toolbox/tool-fitness-planner/locales/zh-CN.json'
+import toolFitnessPlannerEn from '@toolbox/tool-fitness-planner/locales/en-US.json'
+import toolMeetingSchedulerZh from '@toolbox/tool-meeting-scheduler/locales/zh-CN.json'
+import toolMeetingSchedulerEn from '@toolbox/tool-meeting-scheduler/locales/en-US.json'
+import toolColorSystemZh from '@toolbox/tool-color-system/locales/zh-CN.json'
+import toolColorSystemEn from '@toolbox/tool-color-system/locales/en-US.json'
+import toolGraphqlBuilderZh from '@toolbox/tool-graphql-builder/locales/zh-CN.json'
+import toolGraphqlBuilderEn from '@toolbox/tool-graphql-builder/locales/en-US.json'
+import toolHabitTrackerZh from '@toolbox/tool-habit-tracker/locales/zh-CN.json'
+import toolHabitTrackerEn from '@toolbox/tool-habit-tracker/locales/en-US.json'
 import toolWaterReminderZh from '@toolbox/tool-water-reminder/locales/zh-CN.json'
 import toolWaterReminderEn from '@toolbox/tool-water-reminder/locales/en-US.json'
 
@@ -424,6 +434,11 @@ export const resources = {
     toolTravelCostEstimate: toolTravelCostEstimateZh as Record<string, string>,
     toolMultiCityRoute: toolMultiCityRouteZh as Record<string, string>,
     toolVisaInfo: toolVisaInfoZh as Record<string, string>,
+    toolFitnessPlanner: toolFitnessPlannerZh as Record<string, string>,
+    toolMeetingScheduler: toolMeetingSchedulerZh as Record<string, string>,
+    toolColorSystem: toolColorSystemZh as Record<string, string>,
+    toolGraphqlBuilder: toolGraphqlBuilderZh as Record<string, string>,
+    toolHabitTracker: toolHabitTrackerZh as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -573,6 +588,11 @@ export const resources = {
     toolTravelCostEstimate: toolTravelCostEstimateEn as Record<string, string>,
     toolMultiCityRoute: toolMultiCityRouteEn as Record<string, string>,
     toolVisaInfo: toolVisaInfoEn as Record<string, string>,
+    toolFitnessPlanner: toolFitnessPlannerEn as Record<string, string>,
+    toolMeetingScheduler: toolMeetingSchedulerEn as Record<string, string>,
+    toolColorSystem: toolColorSystemEn as Record<string, string>,
+    toolGraphqlBuilder: toolGraphqlBuilderEn as Record<string, string>,
+    toolHabitTracker: toolHabitTrackerEn as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,

@@ -76,6 +76,11 @@ const HttpDebugger = lazy(() => import('@toolbox/tool-http-debugger'))
 const TravelCostEstimate = lazy(() => import('@toolbox/tool-travel-cost-estimate'))
 const MultiCityRoute = lazy(() => import('@toolbox/tool-multi-city-route'))
 const VisaInfo = lazy(() => import('@toolbox/tool-visa-info'))
+const FitnessPlanner = lazy(() => import('@toolbox/tool-fitness-planner'))
+const MeetingScheduler = lazy(() => import('@toolbox/tool-meeting-scheduler'))
+const ColorSystem = lazy(() => import('@toolbox/tool-color-system'))
+const GraphqlBuilder = lazy(() => import('@toolbox/tool-graphql-builder'))
+const HabitTracker = lazy(() => import('@toolbox/tool-habit-tracker'))
 
 function RouteLoading() {
   const { t } = useTranslation('common')
@@ -543,6 +548,11 @@ function App() {
           <Route path="/travel-cost-estimate" element={<TravelCostEstimate />} />
           <Route path="/multi-city-route" element={<MultiCityRoute />} />
           <Route path="/visa-info" element={<VisaInfo />} />
+          <Route path="/fitness-planner" element={<FitnessPlanner />} />
+          <Route path="/meeting-scheduler" element={<MeetingScheduler />} />
+          <Route path="/color-system" element={<ColorSystem />} />
+          <Route path="/graphql-builder" element={<GraphqlBuilder />} />
+          <Route path="/habit-tracker" element={<HabitTracker />} />
         </Routes>
       </Suspense>
     </Layout>

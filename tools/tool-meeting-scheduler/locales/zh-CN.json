@@ -1,0 +1,23 @@
+{
+  "title": "会议时间协调器",
+  "description": "多时区会议时间查找，快速找到所有参与者的最佳会议时间",
+  "addParticipant": "添加参与者",
+  "name": "姓名",
+  "namePlaceholder": "请输入姓名",
+  "timezone": "时区",
+  "workStart": "工作开始",
+  "workEnd": "工作结束",
+  "add": "添加",
+  "remove": "删除",
+  "participants": "参与者列表",
+  "noParticipants": "请先添加参与者",
+  "findSlots": "查找最佳时间",
+  "bestSlots": "推荐会议时间",
+  "noSlots": "未找到合适的时间段，请调整工作时间",
+  "duration": "会议时长（分钟）",
+  "localTime": "本地时间",
+  "allAvailable": "所有人可用",
+  "reset": "重置",
+  "copy": "复制",
+  "copied": "已复制"
+}

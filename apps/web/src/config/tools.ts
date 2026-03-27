@@ -58,7 +58,8 @@ import {
   Asterisk, Repeat2, Globe2, CircleOff, OctagonX, TriangleAlert, AlertOctagon,
   Split, Antenna, ToggleLeft, ChevronsLeftRight, TreePine, LockKeyhole, Repeat,
   Scissors, Pipette, Laugh, Waves, Sparkles, Paintbrush2, BookA, Backpack,
-  Binoculars, PersonStanding, Stamp
+  Binoculars, PersonStanding, Stamp,
+  CalendarRange, Code2
 } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -277,6 +278,11 @@ export const TOOLS: ToolEntry[] = [
   { path: '/travel-cost-estimate', nameKey: 'tools.travel_cost_estimate', icon: Wallet, categoryKey: 'travel', keywords: ['旅行', '消费', '预算', '估算'], i18nNamespace: 'toolTravelCostEstimate' },
   { path: '/multi-city-route', nameKey: 'tools.multi_city_route', icon: Navigation, categoryKey: 'travel', keywords: ['路线', '城市', '行程', '优化'], i18nNamespace: 'toolMultiCityRoute' },
   { path: '/visa-info', nameKey: 'tools.visa_info', icon: Stamp, categoryKey: 'travel', keywords: ['签证', '免签', '出行', 'visa'], i18nNamespace: 'toolVisaInfo' },
+  { path: '/fitness-planner', nameKey: 'tools.fitness_planner', icon: Dumbbell, categoryKey: 'life', keywords: ['健身', '训练', '计划', 'fitness'], i18nNamespace: 'toolFitnessPlanner' },
+  { path: '/meeting-scheduler', nameKey: 'tools.meeting_scheduler', icon: CalendarRange, categoryKey: 'life', keywords: ['会议', '时区', '时间', 'meeting'], i18nNamespace: 'toolMeetingScheduler' },
+  { path: '/color-system', nameKey: 'tools.color_system', icon: Palette, categoryKey: 'design', keywords: ['色彩', '设计', '品牌', 'color'], i18nNamespace: 'toolColorSystem' },
+  { path: '/graphql-builder', nameKey: 'tools.graphql_builder', icon: Code2, categoryKey: 'dev', keywords: ['graphql', '查询', 'api', 'builder'], i18nNamespace: 'toolGraphqlBuilder' },
+  { path: '/habit-tracker', nameKey: 'tools.habit_tracker', icon: CheckSquare, categoryKey: 'life', keywords: ['习惯', '打卡', '追踪', 'habit'], i18nNamespace: 'toolHabitTracker' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))

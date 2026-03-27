@@ -1,0 +1,23 @@
+{
+  "title": "Meeting Time Coordinator",
+  "description": "Find the best meeting time across multiple timezones",
+  "addParticipant": "Add Participant",
+  "name": "Name",
+  "namePlaceholder": "Enter name",
+  "timezone": "Timezone",
+  "workStart": "Work Start",
+  "workEnd": "Work End",
+  "add": "Add",
+  "remove": "Remove",
+  "participants": "Participants",
+  "noParticipants": "Please add participants first",
+  "findSlots": "Find Best Times",
+  "bestSlots": "Recommended Times",
+  "noSlots": "No available slots found, try adjusting work hours",
+  "duration": "Meeting Duration (minutes)",
+  "localTime": "Local Time",
+  "allAvailable": "All Available",
+  "reset": "Reset",
+  "copy": "Copy",
+  "copied": "Copied"
+}

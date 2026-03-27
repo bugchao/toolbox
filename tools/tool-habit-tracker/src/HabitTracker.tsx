@@ -1,205 +1,152 @@
-import React, { useState } from 'react'
-import { Plus, Trash2, CheckCircle, Circle } from 'lucide-react'
-import { useToolStorage } from '@toolbox/storage'
+import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { CheckSquare, Plus, Trash2, Check, Flame } from 'lucide-react'
+import { PageHero } from '@toolbox/ui-kit'
+
+const ICONS = ['🏃', '📚', '💧', '🧘', '💪', '🥗', '😴', '✍️', '🎯', '🌅']
 
 interface Habit {
   id: string
   name: string
-  emoji: string
-  color: string
-  checks: Record<string, boolean> // date -> checked
+  icon: string
+  createdAt: string
+  checkins: string[] // ISO date strings
 }
 
-const COLORS = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500', 'bg-blue-500', 'bg-purple-500']
-const EMOJIS = ['🏃', '📚', '💧', '🧘', '💪', '🥗', '😴', '✍️', '🎯', '🎸']
-
-const DEFAULT_HABITS: Habit[] = [
-  { id: 'default-1', name: '早起运动', emoji: '🏃', color: 'bg-green-500', checks: {} },
-  { id: 'default-2', name: '阅读30分钟', emoji: '📚', color: 'bg-blue-500', checks: {} },
-  { id: 'default-3', name: '喝8杯水', emoji: '💧', color: 'bg-cyan-500', checks: {} },
-]
-
-function getLast7Days(): string[] {
-  return Array.from({ length: 7 }, (_, i) => {
-    const d = new Date()
-    d.setDate(d.getDate() - (6 - i))
-    return d.toISOString().slice(0, 10)
-  })
+function todayStr() {
+  return new Date().toISOString().slice(0, 10)
 }
 
-function getStreak(habit: Habit, days: string[]): number {
+function getStreak(checkins: string[]): number {
+  if (checkins.length === 0) return 0
+  const sorted = [...checkins].sort().reverse()
   let streak = 0
-  for (let i = days.length - 1; i >= 0; i--) {
-    if (habit.checks[days[i]]) streak++
-    else break
+  let cur = new Date()
+  for (const d of sorted) {
+    const diff = Math.round((cur.getTime() - new Date(d).getTime()) / 86400000)
+    if (diff > 1) break
+    streak++
+    cur = new Date(d)
   }
   return streak
 }
 
-let uid = 0
-const nid = () => String(++uid + Date.now())
+function getLast30Days(): string[] {
+  return Array.from({ length: 30 }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (29 - i))
+    return d.toISOString().slice(0, 10)
+  })
+}
 
-const InputField = ({ value, onChange, placeholder, className }: { value: string; onChange: (v: string) => void; placeholder: string; className?: string }) => (
-  <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-    className={`px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${className}`} />
-)
+const STORAGE_KEY = 'toolbox-habit-tracker'
 
-export function HabitTracker() {
-  const { data: habits, save: saveHabits, loading, backend, serverAvailable, switchToServer, switchToBrowser } = useToolStorage<Habit[]>(
-    'habit-tracker', 'habits', DEFAULT_HABITS
-  )
-  const [newName, setNewName] = useState('')
-  const [newEmoji, setNewEmoji] = useState('🎯')
-  const [newColor, setNewColor] = useState(COLORS[3])
+export default function HabitTracker() {
+  const { t } = useTranslation('toolHabitTracker')
+  const [habits, setHabits] = useState<Habit[]>(() => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch { return [] }
+  })
+  const [form, setForm] = useState({ name: '', icon: ICONS[0] })
 
-  const days = getLast7Days()
-  const today = new Date().toISOString().slice(0, 10)
-
-  const toggle = (habitId: string, date: string) => {
-    const updated = habits.map(h => h.id === habitId
-      ? { ...h, checks: { ...h.checks, [date]: !h.checks[date] } }
-      : h)
-    saveHabits(updated)
-  }
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(habits))
+  }, [habits])
 
   const addHabit = () => {
-    if (!newName.trim()) return
-    saveHabits([...habits, { id: nid(), name: newName.trim(), emoji: newEmoji, color: newColor, checks: {} }])
-    setNewName('')
+    if (!form.name.trim()) return
+    setHabits(h => [...h, { id: Date.now().toString(), name: form.name, icon: form.icon, createdAt: todayStr(), checkins: [] }])
+    setForm(f => ({ ...f, name: '' }))
   }
 
-  const removeHabit = (id: string) => saveHabits(habits.filter(h => h.id !== id))
+  const toggleCheckin = (id: string) => {
+    const today = todayStr()
+    setHabits(h => h.map(x => x.id !== id ? x : {
+      ...x,
+      checkins: x.checkins.includes(today) ? x.checkins.filter(d => d !== today) : [...x.checkins, today]
+    }))
+  }
 
-  const dayLabels = days.map(d => ({
-    date: d,
-    label: new Date(d).toLocaleDateString('zh-CN', { weekday: 'short' }),
-    isToday: d === today,
-  }))
+  const removeHabit = (id: string) => {
+    if (!confirm(t('confirmRemove'))) return
+    setHabits(h => h.filter(x => x.id !== id))
+  }
 
-  if (loading) return (
-    <div className="max-w-2xl mx-auto p-6 text-center text-gray-400 py-20">加载中...</div>
-  )
+  const last30 = getLast30Days()
+  const today = todayStr()
 
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">习惯打卡</h1>
-        <div className="flex items-center gap-2">
-          <span className={`text-xs px-2 py-1 rounded-full ${
-            backend === 'server'
-              ? 'bg-green-100 dark:bg-green-900/30 text-green-500'
-              : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500'
-          }`}>
-            {backend === 'server' ? '☁️ 云端' : '💾 本地'}
-          </span>
-          {serverAvailable && backend === 'browser' && (
-            <button onClick={switchToServer} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-              切换到云端
-            </button>
-          )}
-          {backend === 'server' && (
-            <button onClick={switchToBrowser} className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-              切换到本地
-            </button>
-          )}
-        </div>
-      </div>
-      <p className="text-gray-500 dark:text-gray-400">
-        {backend === 'server' ? '☁️ 数据同步到服务端，多设备共享' : '💾 数据存储在浏览器，仅本机可用'}
-      </p>
-
-      {/* 添加习惯 */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">新增习惯</h2>
-        <div className="flex gap-2 flex-wrap">
-          <InputField value={newName} onChange={setNewName} placeholder="习惯名称" className="flex-1 min-w-32" />
-          <div className="flex gap-1">
-            {EMOJIS.map(e => (
-              <button key={e} onClick={() => setNewEmoji(e)}
-                className={`text-lg w-8 h-8 rounded transition-colors ${
-                  newEmoji === e ? 'bg-indigo-100 dark:bg-indigo-900/30' : 'hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}>{e}</button>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <PageHero icon={CheckSquare} titleKey="title" descriptionKey="description" namespace="toolHabitTracker" />
+      <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+        {/* Add habit */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">{t('addHabit')}</h2>
+          <div className="flex gap-2 flex-wrap mb-3">
+            {ICONS.map(ic => (
+              <button key={ic} onClick={() => setForm(f => ({ ...f, icon: ic }))}
+                className={`text-xl w-9 h-9 rounded-lg transition-colors ${form.icon === ic ? 'bg-indigo-100 dark:bg-indigo-900/40 ring-2 ring-indigo-500' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}`}>
+                {ic}
+              </button>
             ))}
           </div>
+          <div className="flex gap-2">
+            <input className="flex-1 border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2 text-sm bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder={t('habitNamePlaceholder')} value={form.name}
+              onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+              onKeyDown={e => e.key === 'Enter' && addHabit()} />
+            <button onClick={addHabit} className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl px-4 py-2 text-sm font-medium flex items-center gap-1.5 transition-colors">
+              <Plus className="w-4 h-4" />{t('add')}
+            </button>
+          </div>
         </div>
-        <div className="flex gap-2 items-center">
-          {COLORS.map(c => (
-            <button key={c} onClick={() => setNewColor(c)}
-              className={`w-6 h-6 rounded-full ${c} transition-transform ${
-                newColor === c ? 'scale-125 ring-2 ring-offset-2 ring-gray-400' : ''
-              }`} />
-          ))}
-          <button onClick={addHabit} disabled={!newName.trim()}
-            className="ml-auto flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg text-sm font-medium transition-colors">
-            <Plus className="w-4 h-4" />添加
-          </button>
-        </div>
-      </div>
 
-      {/* 打卡表格 */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500">习惯</th>
-                {dayLabels.map(d => (
-                  <th key={d.date} className={`px-2 py-3 text-center text-xs font-semibold ${
-                    d.isToday ? 'text-indigo-500' : 'text-gray-500'
-                  }`}>
-                    <div>{d.label}</div>
-                    <div className={`mt-0.5 ${ d.isToday ? 'text-indigo-400' : 'text-gray-400' }`}>
-                      {new Date(d.date).getDate()}
-                    </div>
-                  </th>
-                ))}
-                <th className="px-3 py-3 text-center text-xs font-semibold text-gray-500">连续</th>
-                <th className="px-2 py-3"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50 dark:divide-gray-700/50">
-              {habits.map(habit => {
-                const streak = getStreak(habit, days)
-                const weekDone = days.filter(d => habit.checks[d]).length
-                return (
-                  <tr key={habit.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
-                        <span className={`w-2.5 h-2.5 rounded-full ${habit.color}`} />
-                        <span className="text-base">{habit.emoji}</span>
-                        <div>
-                          <div className="text-sm font-medium text-gray-700 dark:text-gray-100">{habit.name}</div>
-                          <div className="text-xs text-gray-400">{weekDone}/7 本周</div>
+        {/* Habits */}
+        {habits.length === 0 ? (
+          <div className="text-center py-12 text-gray-400 text-sm">{t('noHabits')}</div>
+        ) : (
+          <div className="space-y-4">
+            {habits.map(h => {
+              const checked = h.checkins.includes(today)
+              const streak = getStreak(h.checkins)
+              const rate = last30.length > 0 ? Math.round(h.checkins.filter(d => last30.includes(d)).length / last30.length * 100) : 0
+              return (
+                <div key={h.id} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{h.icon}</span>
+                      <div>
+                        <div className="font-semibold text-gray-800 dark:text-gray-100">{h.name}</div>
+                        <div className="flex items-center gap-3 text-xs text-gray-400 mt-0.5">
+                          <span className="flex items-center gap-0.5"><Flame className="w-3 h-3 text-orange-400" />{streak} {t('days')}</span>
+                          <span>{t('total')}: {h.checkins.length} {t('days')}</span>
+                          <span>{t('rate')}: {rate}%</span>
                         </div>
                       </div>
-                    </td>
-                    {dayLabels.map(d => (
-                      <td key={d.date} className="px-2 py-3 text-center">
-                        <button onClick={() => toggle(habit.id, d.date)}
-                          className="mx-auto block transition-transform hover:scale-110">
-                          {habit.checks[d.date]
-                            ? <CheckCircle className={`w-6 h-6 ${habit.color.replace('bg-', 'text-')}`} />
-                            : <Circle className="w-6 h-6 text-gray-200 dark:text-gray-600" />}
-                        </button>
-                      </td>
-                    ))}
-                    <td className="px-3 py-3 text-center">
-                      <span className={`text-sm font-bold ${
-                        streak >= 7 ? 'text-yellow-500' : streak >= 3 ? 'text-green-500' : 'text-gray-400'
-                      }`}>{streak > 0 ? `🔥${streak}` : '—'}</span>
-                    </td>
-                    <td className="px-2 py-3">
-                      <button onClick={() => removeHabit(habit.id)}
-                        className="text-gray-300 hover:text-red-400 transition-colors">
-                        <Trash2 className="w-4 h-4" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => toggleCheckin(h.id)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-colors ${
+                          checked ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 'bg-indigo-600 hover:bg-indigo-700 text-white'}`}>
+                        {checked ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                        {checked ? t('checkedIn') : t('checkin')}
                       </button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+                      <button onClick={() => removeHabit(h.id)} className="text-red-400 hover:text-red-600"><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                  </div>
+                  {/* 30-day grid */}
+                  <div className="flex gap-0.5 flex-wrap mt-2">
+                    {last30.map(d => (
+                      <div key={d} title={d}
+                        className={`w-4 h-4 rounded-sm ${
+                          h.checkins.includes(d) ? 'bg-indigo-500' : 'bg-gray-100 dark:bg-gray-700'
+                        }`} />
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )

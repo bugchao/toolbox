@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-habit-tracker",
+  "name": "@toolbox/tool-graphql-builder",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.tsx",
