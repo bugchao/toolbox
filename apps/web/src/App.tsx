@@ -23,12 +23,12 @@ import MarkdownConverter from './pages/MarkdownConverter'
 import BMICalculator from './pages/BMICalculator'
 import ColorPicker from './pages/ColorPicker'
 import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
-import ImageWatermark from './pages/ImageWatermark'
-import ImageCropper from './pages/ImageCropper'
-import ImageRotator from './pages/ImageRotator'
-import ImageFilter from './pages/ImageFilter'
-import ImageStitcher from './pages/ImageStitcher'
-import ImageWatermarkRemover from './pages/ImageWatermarkRemover'
+const ImageWatermark = lazy(() => import('@toolbox/tool-image-watermark'))
+const ImageCropper = lazy(() => import('@toolbox/tool-image-cropper'))
+const ImageRotator = lazy(() => import('@toolbox/tool-image-rotator'))
+const ImageFilter = lazy(() => import('@toolbox/tool-image-filter'))
+const ImageStitcher = lazy(() => import('@toolbox/tool-image-stitcher'))
+const ImageWatermarkRemover = lazy(() => import('@toolbox/tool-image-watermark-remover'))
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import DnsQuery from './pages/DnsQuery'
