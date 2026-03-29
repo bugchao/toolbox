@@ -263,9 +263,9 @@
 | **── 生活：健康 & 生活 ──** | | | | | |
 | ~~卡路里估算工具~~ | life | `/calorie-calc` | **已上线** | - | 食物热量估算 |
 | 睡眠质量记录 | life | `/sleep-tracker` | 待开发 | P2 | 睡眠时长 + 质量评分 |
-| 饮水提醒工具 | life | `/water-reminder` | 待开发 | P2 | 每日饮水量追踪 |
-| 跑步数据分析 | life | `/running-tracker` | 待开发 | P2 | 配速/里程/趋势分析 |
-| 久坐提醒工具 | life | `/sedentary-reminder` | 待开发 | P2 | 久坐提醒 + 拉伸建议 |
+| 饮水提醒工具 | life | `/water-reminder` | **已上线** | P2 | 每日饮水量追踪 |
+| 跑步数据分析 | life | `/running-tracker` | **已上线** | P2 | 配速/里程/趋势分析 |
+| 久坐提醒工具 | life | `/sedentary-reminder` | **已上线** | P2 | 久坐提醒 + 拉伸建议 |
 | **── 生活：日常工具 ──** | | | | | |
 | ~~菜谱推荐（根据食材）~~ | life | `/recipe-finder` | **已上线** | - | 输入食材推荐菜谱 |
 | 冰箱库存管理 | life | `/fridge-inventory` | 待开发 | P2 | 食材库存管理 |
@@ -289,17 +289,17 @@
 | **── 生活：开发者友好 ──** | | | | | |
 | ~~curl 转 fetch~~ | dev | `/curl-to-fetch` | **已上线** | - | curl 命令转 JS fetch 代码 |
 | ~~JWT 解析工具~~ | dev | `/jwt-decoder` | **已上线** | - | JWT Token 解码与验证 |
-| HTTP 请求调试器 | dev | `/http-debugger` | 待开发 | P2 | 在线发送 HTTP 请求调试 |
+| HTTP 请求调试器 | dev | `/http-debugger` | **已上线** | P2 | 在线发送 HTTP 请求调试 |
 | **── 旅游：行程规划 ──** | | | | | |
-| AI 行程规划器 | travel | `/trip-planner` | 待开发 | P1 | 输入预算+天数 AI 生成行程 |
-| 城市游玩路线生成 | travel | `/city-route` | 待开发 | P2 | 单城市景点路线规划 |
-| 一日游智能推荐 | travel | `/day-trip` | 待开发 | P1 | 一日游方案推荐（含"东京一天怎么玩"场景） |
-| 多城市路线优化 | travel | `/multi-city-route` | 待开发 | P2 | 多城市最优路线（TSP） |
+| AI 行程规划器 | travel | `/trip-planner` | **已上线** | P1 | 输入预算+天数 AI 生成行程 |
+| 城市游玩路线生成 | travel | `/city-route` | **已上线** | P2 | 单城市景点路线规划 |
+| 一日游智能推荐 | travel | `/day-trip` | **已上线** | P1 | 一日游方案推荐（含"东京一天怎么玩"场景） |
+| 多城市路线优化 | travel | `/multi-city-route` | **已上线** | P2 | 多城市最优路线（TSP） |
 | ~~旅行 Checklist 生成~~ | travel | `/travel-checklist` | **已上线** | - | 根据目的地生成准备清单 |
 | **── 旅游：预算 & 成本 ──** | | | | | |
 | ~~旅行预算计算器~~ | travel | `/travel-budget` | **已上线** | - | 交通/住宿/餐饮预算 |
 | ~~AA 分摊工具~~ | travel | `/split-bill` | **已上线** | - | 多人费用分摊 |
-| 汇率 + 消费估算 | travel | `/travel-cost-estimate` | 待开发 | P2 | 目的地消费水平 + 汇率 |
+| 汇率 + 消费估算 | travel | `/travel-cost-estimate` | **已上线** | P2 | 目的地消费水平 + 汇率 |
 | 旅行成本对比工具 | travel | `/travel-cost-compare` | 待开发 | P2 | 多目的地成本对比 |
 | **── 旅游：导航 & 信息 ──** | | | | | |
 | 景点热度分析 | travel | `/attraction-heatmap` | 待开发 | P2 | 按时间段分析热度 |
@@ -311,7 +311,7 @@
 | ~~行李清单生成器~~ | travel | `/packing-list` | **已上线** | - | AI 生成行李清单 |
 | 航班信息查询聚合 | travel | `/flight-search` | 待开发 | P2 | 航班信息聚合查询 |
 | 酒店价格趋势 | travel | `/hotel-trend` | 待开发 | P3 | 酒店历史价格趋势 |
-| 签证信息助手 | travel | `/visa-info` | 待开发 | P2 | 各国签证要求查询 |
+| 签证信息助手 | travel | `/visa-info` | **已上线** | P2 | 各国签证要求查询 |
 | 旅行风险提醒 | travel | `/travel-risk` | 待开发 | P2 | 目的地安全/健康风险 |
 | **── 旅游：体验增强 ──** | | | | | |
 | 拍照点推荐 | travel | `/photo-spots` | 待开发 | P2 | 热门拍照机位推荐 |
@@ -320,14 +320,14 @@
 | 路线地图可视化 | travel | `/route-map` | 待开发 | P2 | 路线地图可视化展示 |
 | **── 旅游：AI 增强 ──** | | | | | |
 | 餐厅推荐 | travel | `/restaurant-finder` | 待开发 | P2 | 结合时间/预算推荐餐厅 |
-| 语言翻译助手（旅行场景） | travel | `/travel-translator` | 待开发 | P1 | 旅行常用语翻译 |
+| 语言翻译助手（旅行场景） | travel | `/travel-translator` | **已上线** | P1 | 旅行常用语翻译 |
 | 旅行对话模拟 | travel | `/travel-conversation` | 待开发 | P2 | 旅行口语练习 |
 | 旅行攻略总结器 | travel | `/travel-guide-summary` | 待开发 | P2 | AI 总结旅行攻略 |
 | 游记自动生成 | travel | `/travel-journal` | 待开发 | P2 | AI 生成游记文章 |
 | **── 学习：学习效率 ──** | | | | | |
-| 学习计划生成器 | learn | `/study-planner` | 待开发 | P1 | AI 生成学习计划 |
-| 记忆曲线复习提醒 | learn | `/spaced-repetition` | 待开发 | P1 | Anki lite 版 |
-| 专注模式 | learn | `/focus-mode` | 待开发 | P2 | 屏蔽干扰专注学习 |
+| 学习计划生成器 | learn | `/study-planner` | **已上线** | P1 | AI 生成学习计划 |
+| 记忆曲线复习提醒 | learn | `/spaced-repetition` | **已上线** | P1 | Anki lite 版 |
+| 专注模式 | learn | `/focus-mode` | **已上线** | P2 | 屏蔽干扰专注学习 |
 | ~~学习时长统计~~ | learn | `/study-timer` | **已上线** | - | 学习时间记录与统计 |
 | **── 学习：内容处理 ──** | | | | | |
 | 文本摘要工具 | learn | `/text-summary` | 待开发 | P1 | AI 文本自动摘要 |
@@ -336,14 +336,14 @@
 | 笔记整理助手 | learn | `/note-organizer` | 待开发 | P2 | AI 辅助笔记整理 |
 | **── 学习：知识理解 ──** | | | | | |
 | 概念解释工具 | learn | `/concept-explainer` | 待开发 | P1 | AI 解释任意概念 |
-| 一句话讲清工具 | learn | `/one-liner` | 待开发 | P1 | 用一句话解释复杂概念 |
+| 一句话讲清工具 | learn | `/one-liner` | **已上线** | P1 | 用一句话解释复杂概念 |
 | 术语词典生成 | learn | `/glossary-gen` | 待开发 | P2 | 自动生成术语词典 |
 | 知识图谱生成 | learn | `/knowledge-graph` | 待开发 | P2 | 可视化知识关系图 |
 | **── 学习：练习 & 测试 ──** | | | | | |
-| 自动出题工具 | learn | `/quiz-gen` | 待开发 | P1 | AI 根据内容自动出题 |
-| 选择题生成器 | learn | `/mcq-gen` | 待开发 | P1 | 生成选择题 |
+| 自动出题工具 | learn | `/quiz-gen` | **已上线** | P1 | AI 根据内容自动出题 |
+| 选择题生成器 | learn | `/mcq-gen` | **已上线** | P1 | 生成选择题 |
 | 编程题生成 | learn | `/coding-challenge` | 待开发 | P2 | AI 生成编程练习题 |
-| 错题本系统 | learn | `/mistake-book` | 待开发 | P2 | 错题收集与复习 |
+| 错题本系统 | learn | `/mistake-book` | **已上线** | P2 | 错题收集与复习 |
 | **── 学习：编程学习 ──** | | | | | |
 | 代码解释器 | learn | `/code-explainer` | 待开发 | P1 | 输入代码 AI 逐行解释 |
 | Bug 分析工具 | learn | `/bug-analyzer` | 待开发 | P1 | AI 分析代码 Bug |
@@ -351,14 +351,14 @@
 | 前端面试题生成 | learn | `/frontend-interview` | 待开发 | P2 | 前端面试题库 + 生成 |
 | 系统设计练习工具 | learn | `/system-design` | 待开发 | P2 | 系统设计题练习 |
 | **── 学习：语言学习 ──** | | | | | |
-| 单词记忆工具 | learn | `/vocab-trainer` | 待开发 | P1 | 单词记忆 + 复习 |
-| 句子改写工具 | learn | `/sentence-rewriter` | 待开发 | P1 | AI 句子改写/润色 |
+| 单词记忆工具 | learn | `/vocab-trainer` | **已上线** | P1 | 单词记忆 + 复习 |
+| 句子改写工具 | learn | `/sentence-rewriter` | **已上线** | P1 | AI 句子改写/润色 |
 | AI 对话练习 | learn | `/conversation-practice` | 待开发 | P2 | AI 口语对话练习 |
 | 发音评估工具 | learn | `/pronunciation-eval` | 待开发 | P3 | 语音发音评估 |
 | **── 学习：AI 增强学习 ──** | | | | | |
-| "像5岁小孩解释"工具 | learn | `/eli5` | 待开发 | P1 | ELI5 简化解释 |
-| 多角度解释 | learn | `/multi-perspective` | 待开发 | P1 | 专家/小白多角度解释 |
-| 知识对比工具 | learn | `/knowledge-compare` | 待开发 | P1 | 概念/技术对比分析 |
+| "像5岁小孩解释"工具 | learn | `/eli5` | **已上线** | P1 | ELI5 简化解释 |
+| 多角度解释 | learn | `/multi-perspective` | **已上线** | P1 | 专家/小白多角度解释 |
+| 知识对比工具 | learn | `/knowledge-compare` | **已上线** | P1 | 概念/技术对比分析 |
 | 学习路径规划 | learn | `/learning-path` | 待开发 | P2 | 从0到专家的学习路径 |
 | 问答 + 深挖 | learn | `/deep-dive-qa` | 待开发 | P2 | 递进式深度学习问答 |
 
