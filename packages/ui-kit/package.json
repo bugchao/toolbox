@@ -9,6 +9,9 @@
     "dev": "tsc --watch",
     "lint": "eslint . --ext ts,tsx"
   },
+  "peerDependencies": {
+    "react-i18next": "^15.0.0"
+  },
   "dependencies": {
     "@react-spring/web": "^9.7.3",
     "@tsparticles/engine": "^3.0.0",
@@ -24,6 +27,7 @@
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
+    "react-i18next": "^15.1.0",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@typescript-eslint/eslint-plugin": "^8.57.1",

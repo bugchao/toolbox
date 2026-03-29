@@ -1,23 +1,43 @@
 import React from 'react'
 import type { LucideIcon } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { theme } from './theme'
 
-export interface PageHeroProps {
+type PageHeroBase = {
   /** 标题前的图标（可选） */
   icon?: LucideIcon
-  /** 主标题 */
-  title: React.ReactNode
-  /** 副标题/描述（可选） */
-  description?: React.ReactNode
   /** 外层容器 className */
   className?: string
 }
 
-/**
- * 页面顶部标题区，随浅色/暗色主题自动切换文字颜色（浅色下深色字、暗色下浅色字）
- * 用于替换各处硬编码的 text-white，避免在 light 模式下不可见
- */
-const PageHero: React.FC<PageHeroProps> = ({ icon: Icon, title, description, className = '' }) => {
+export type PageHeroProps = PageHeroBase &
+  (
+    | {
+        /** 主标题 */
+        title: React.ReactNode
+        /** 副标题/描述（可选） */
+        description?: React.ReactNode
+      }
+    | ({
+        titleKey: string
+        descriptionKey?: string
+      } & (
+        | { namespace: string; i18nNamespace?: string }
+        | { i18nNamespace: string; namespace?: string }
+      ))
+  )
+
+function PageHeroLayout({
+  icon: Icon,
+  title,
+  description,
+  className = '',
+}: {
+  icon?: LucideIcon
+  title: React.ReactNode
+  description?: React.ReactNode
+  className?: string
+}) {
   return (
     <div className={`text-center ${className}`}>
       {Icon ? (
@@ -32,6 +52,48 @@ const PageHero: React.FC<PageHeroProps> = ({ icon: Icon, title, description, cla
         <p className={`${theme.textMuted} opacity-90`}>{description}</p>
       )}
     </div>
+  )
+}
+
+function PageHeroI18n(
+  props: Extract<PageHeroProps, { titleKey: string }>
+) {
+  const {
+    icon,
+    titleKey,
+    descriptionKey,
+    namespace,
+    i18nNamespace,
+    className = '',
+  } = props
+  const ns = i18nNamespace ?? namespace
+  const { t } = useTranslation(ns)
+  return (
+    <PageHeroLayout
+      icon={icon}
+      title={t(titleKey)}
+      description={descriptionKey != null ? t(descriptionKey) : undefined}
+      className={className}
+    />
+  )
+}
+
+/**
+ * 页面顶部标题区，随浅色/暗色主题自动切换文字颜色（浅色下深色字、暗色下浅色字）
+ * 用于替换各处硬编码的 text-white，避免在 light 模式下不可见
+ */
+const PageHero: React.FC<PageHeroProps> = (props) => {
+  if ('titleKey' in props) {
+    return <PageHeroI18n {...props} />
+  }
+  const { icon, title, description, className } = props
+  return (
+    <PageHeroLayout
+      icon={icon}
+      title={title}
+      description={description}
+      className={className}
+    />
   )
 }
 
