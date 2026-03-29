@@ -120,7 +120,13 @@
       "ui_generator": "AI UI Generator",
       "study_timer": "Study Timer",
       "study_planner": "Study Planner",
-      "focus_mode": "Focus Mode"
+      "focus_mode": "Focus Mode",
+      "image_watermark": "Image Watermark",
+      "image_cropper": "Image Cropper",
+      "image_rotator": "Image Rotator",
+      "image_filter": "Image Filter",
+      "image_stitcher": "Image Stitcher",
+      "image_watermark_remover": "Image Watermark Remover"
     },
     "category_dns": "DNS Tools",
     "category_domain": "Domain Tools",

@@ -120,7 +120,13 @@
       "ui_generator": "AI UI 设计生成器",
       "study_timer": "学习时长统计",
       "study_planner": "学习计划生成器",
-      "focus_mode": "专注模式"
+      "focus_mode": "专注模式",
+      "image_watermark": "图片水印",
+      "image_cropper": "图片裁剪",
+      "image_rotator": "图片旋转/翻转",
+      "image_filter": "图片滤镜",
+      "image_stitcher": "图片拼接",
+      "image_watermark_remover": "图片去水印"
     },
     "category_dns": "DNS 工具",
     "category_domain": "域名工具",
@@ -209,7 +215,13 @@
       "life_progress": "可视化展示人生时间进度，激励珍惜时间规划未来",
       "meeting_minutes": "上传音视频或字幕文件，整理转写稿并自动提炼摘要、决策和行动项",
       "ui_generator": "从文本描述和草图推断界面结构，生成 UI 线框与 React/Tailwind 骨架"
-    }
+    },
+    "image_watermark": "为图片添加文字或 Logo 水印，支持批量处理",
+    "image_cropper": "自由裁剪、预设比例、旋转翻转",
+    "image_rotator": "任意角度旋转，水平垂直翻转",
+    "image_filter": "12 种预设滤镜，8 个高级参数",
+    "image_stitcher": "横向/纵向拼接，自定义间距",
+    "image_watermark_remover": "手动涂抹，AI 智能修复"
   },
   "colorPicker": {
     "title": "颜色拾取/调色板生成",

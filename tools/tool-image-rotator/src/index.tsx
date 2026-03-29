@@ -1,1 +1,2 @@
-export { ImageRotator as default } from './ImageRotator'
+export { default } from './ImageRotator'
+export { default as ImageRotator } from './ImageRotator'

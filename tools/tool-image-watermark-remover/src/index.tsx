@@ -1,1 +1,2 @@
-export { ImageWatermarkRemover as default } from './ImageWatermarkRemover'
+export { default } from './ImageWatermarkRemover'
+export { default as ImageWatermarkRemover } from './ImageWatermarkRemover'

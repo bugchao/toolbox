@@ -1,1 +1,2 @@
-export { ImageCropper as default } from './ImageCropper'
+export { default } from './ImageCropper'
+export { default as ImageCropper } from './ImageCropper'
