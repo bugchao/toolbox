@@ -289,7 +289,6 @@ export const TOOLS: ToolEntry[] = [
   { path: '/meeting-scheduler', nameKey: 'tools.meeting_scheduler', icon: CalendarRange, categoryKey: 'life', keywords: ['会议', '时区', '时间', 'meeting'], i18nNamespace: 'toolMeetingScheduler' },
   { path: '/color-system', nameKey: 'tools.color_system', icon: Palette, categoryKey: 'design', keywords: ['色彩', '设计', '品牌', 'color'], i18nNamespace: 'toolColorSystem' },
   { path: '/graphql-builder', nameKey: 'tools.graphql_builder', icon: Code2, categoryKey: 'dev', keywords: ['graphql', '查询', 'api', 'builder'], i18nNamespace: 'toolGraphqlBuilder' },
-  { path: '/habit-tracker', nameKey: 'tools.habit_tracker', icon: CheckSquare, categoryKey: 'life', keywords: ['习惯', '打卡', '追踪', 'habit'], i18nNamespace: 'toolHabitTracker' },
 ]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))
