@@ -26,7 +26,7 @@
 
 以下工具已上线，**不要再重复立项**。新增需求请在「三、待开发/调研」中登记。
 
-### 实用工具（17）
+### 实用工具（23）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -35,6 +35,12 @@
 | 二维码美化 | `/qrcode/beautifier` | `tools/tool-qrcode` → QrCodeBeautifier |
 | 图片压缩/格式转换 | `/image-compressor` | `apps/web/src/pages/ImageCompressor.tsx` |
 | 图片去背景 | `/image-background-remover` | `apps/web/src/pages/ImageBackgroundRemover.tsx` |
+| 图片水印 | `/image-watermark` | `apps/web/src/pages/ImageWatermark.tsx` |
+| 图片裁剪 | `/image-cropper` | `apps/web/src/pages/ImageCropper.tsx` |
+| 图片旋转/翻转 | `/image-rotator` | `apps/web/src/pages/ImageRotator.tsx` |
+| 图片滤镜 | `/image-filter` | `apps/web/src/pages/ImageFilter.tsx` |
+| 图片拼接 | `/image-stitcher` | `apps/web/src/pages/ImageStitcher.tsx` |
+| 图片去水印 | `/image-watermark-remover` | `apps/web/src/pages/ImageWatermarkRemover.tsx` |
 | Markdown 转 HTML/公众号 | `/markdown` | `apps/web/src/pages/MarkdownConverter.tsx` |
 | BMI 健康计算器 | `/bmi` | `apps/web/src/pages/BMICalculator.tsx` |
 | 单位换算器 | `/unit-converter` | `apps/web/src/pages/UnitConverter.tsx` |
@@ -268,9 +274,15 @@
 | 家庭任务分配工具 | life | `/family-tasks` | 待开发 | P2 | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
 | 条形码识别 | utils | `/barcode-reader` | 待开发 | P1 | 条形码扫描与解析 |
-| **── 实用：图像处理（调研立项，陆续实现）──** | | | | | |
+| **── 实用：图像处理（已完成 6 个）──** | | | | | |
+| ~~图片水印~~ | utils | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
+| ~~图片裁剪~~ | utils | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
+| ~~图片旋转/翻转~~ | utils | `/image-rotator` | **已上线** | - | 任意角度旋转，水平垂直翻转 |
+| ~~图片滤镜~~ | utils | `/image-filter` | **已上线** | - | 12 种预设滤镜，8 个高级参数 |
+| ~~图片拼接~~ | utils | `/image-stitcher` | **已上线** | - | 横向/纵向拼接，自定义间距 |
+| ~~图片去水印~~ | utils | `/image-watermark-remover` | **已上线** | - | 手动涂抹，AI 智能修复 |
+| **── 实用：图像处理（后续补充）──** | | | | | |
 | Canvas 图像工作台 | utils | `/image-canvas-lab` | 待开发 | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
-| 在线图片处理套件（裁剪/DPI/格式/压缩扩展） | utils | `/image-toolkit` | 待开发 | P1 | 对标改图宝能力子集：裁剪、压缩、水印、格式转换、DPI、多格式入参；**已有** `/image-compressor`，本项侧重裁剪/水印/DPI/批量 |
 | 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | 待开发 | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
 | 图像本地加载预览基座 | utils | `/image-local-preview` | 待开发 | P2 | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
 | 图像处理实验工作台 | utils | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
