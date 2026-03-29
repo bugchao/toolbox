@@ -7,7 +7,7 @@ import {
   AlertTriangle, RefreshCw,
   Palette, Wand2, Eraser, Ruler, Search, File, Globe, Server, Route,
   Presentation, ShieldCheck, Activity, ShieldAlert, ShieldBan, Radar, FileSearch,
-  PenTool, Crop, RotateCw, Sparkles, Grid3x3,
+  PenTool, Crop, RotateCw, Grid3x3,
   Boxes, GitCompareArrows, PlayCircle, Wifi, Radio, GitBranch, Shield, Network, Database,
   BarChart2, Sliders, Zap, CheckCircle, TrendingUp, Target, Trash2,
   Timer, CheckSquare, DollarSign, ArrowLeftRight, KeyRound,

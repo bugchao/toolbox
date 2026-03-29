@@ -4,7 +4,10 @@ import { Upload, Download, RotateCw, FlipHorizontal, FlipVertical, X, Plus } fro
 interface RotateImage {
   id: string;
   originalFile: File;
+  originalSize?: number;
   previewUrl: string;
+  processedBlob?: Blob;
+  processedSize?: number;
   processedUrl?: string;
   status: 'pending' | 'processing' | 'done' | 'error';
   error?: string;
