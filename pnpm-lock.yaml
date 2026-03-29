@@ -749,6 +749,21 @@ importers:
         specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-color-system:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-concept-explainer:
     dependencies:
       '@toolbox/ui-kit':
@@ -1758,6 +1773,21 @@ importers:
         specifier: '*'
         version: 5.9.3
 
+  tools/tool-fitness-planner:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
   tools/tool-focus-mode:
     dependencies:
       '@toolbox/storage':
@@ -1837,6 +1867,21 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
+
+  tools/tool-graphql-builder:
+    dependencies:
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-gslb-failover-sim:
     dependencies:
@@ -2050,9 +2095,6 @@ importers:
 
   tools/tool-habit-tracker:
     dependencies:
-      '@toolbox/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
       '@toolbox/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
@@ -2062,11 +2104,8 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
       react-i18next:
-        specifier: ^15.4.1
+        specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
   tools/tool-http-debugger:
@@ -2566,6 +2605,21 @@ importers:
       '@toolbox/storage':
         specifier: workspace:*
         version: link:../../packages/storage
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-i18next:
+        specifier: ^15.1.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+
+  tools/tool-meeting-scheduler:
+    dependencies:
       '@toolbox/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit

@@ -6,107 +6,6 @@ import { Card } from '@toolbox/ui-kit'
 import { TOOLS, getToolTitle, getToolDescription } from '../config/tools'
 import { useSettings } from '../contexts/SettingsContext'
 
-const TOOL_ICONS: Record<string, string> = {
-  'tools.qrcode_generate': '📱',
-  'tools.qrcode_read': '🔍',
-  'tools.qrcode_beautifier': '✨',
-  'tools.news': '📰',
-  'tools.zipcode': '📮',
-  'tools.weather': '🌤️',
-  'tools.github_info': '🐙',
-  'tools.ip_query': '🌐',
-  'tools.ip_asn': '🔢',
-  'tools.dns_query': '🔌',
-  'tools.dns_trace': '🔍',
-  'tools.dns_propagation': '🌍',
-  'tools.dns_global_check': '🌏',
-  'tools.dnssec_check': '🔐',
-  'tools.dns_performance': '⚡',
-  'tools.dns_ttl': '⏱️',
-  'tools.dns_soa': '📋',
-  'tools.dns_diagnose': '🩺',
-  'tools.dns_pollution_check': '☣️',
-  'tools.dns_hijack_check': '🚨',
-  'tools.dns_cache_check': '💾',
-  'tools.dns_loop_check': '🔄',
-  'tools.dns_ns': '🖥️',
-  'tools.dns_cname_chain': '🔗',
-  'tools.dns_nxdomain': '❌',
-  'tools.domain_mx': '📧',
-  'tools.domain_txt': '📄',
-  'tools.http_headers': '🔍',
-  'tools.ssl_cert': '🔒',
-  'tools.http_status': '📡',
-  'tools.tcp_port_check': '🔌',
-  'tools.ping': '📶',
-  'tools.domain_spf': '🛡️',
-  'tools.domain_dkim': '🔑',
-  'tools.domain_dmarc': '📮',
-  'tools.domain_ttl_advice': '⏱️',
-  'tools.domain_ns_check': '🛰️',
-  'tools.domain_subdomain_scan': '🧪',
-  'tools.domain_wildcard': '🪄',
-  'tools.domain_health_score': '💯',
-  'tools.ip_geo': '🗺️',
-  'tools.ip_ptr': '🧷',
-  'tools.ip_v4_to_v6': '🔁',
-  'tools.ip_binary_hex': '🧮',
-  'tools.ip_class': '🏷️',
-  'tools.ip_public': '☁️',
-  'tools.ip_cdn_check': '🌐',
-  'tools.ip_blacklist': '🚫',
-  'tools.security_ip_score': '🛡️',
-  'tools.security_domain_blacklist': '🚫',
-  'tools.security_port_scan': '📡',
-  'tools.security_dns_vuln': '🧭',
-  'tools.security_report_gen': '📑',
-  'tools.ipam_plan': '🗺️',
-  'tools.ipam_inventory': '🧱',
-  'tools.ipam_usage': '📈',
-  'tools.ipam_conflict': '⚠️',
-  'tools.ipam_allocation_sim': '🎯',
-  'tools.cidr_calculator': '📐',
-  'tools.subnet_divide': '🧩',
-  'tools.subnet_network_addr': '🧭',
-  'tools.subnet_broadcast': '📣',
-  'tools.subnet_mask': '🥽',
-  'tools.ip_range': '↔️',
-  'tools.subnet_capacity': '📦',
-  'tools.ipv6_cidr': '🧬',
-  'tools.vlsm': '🗂️',
-  'tools.network_planner': '🗺️',
-  'tools.json': '📋',
-  'tools.base64': '🔢',
-  'tools.timestamp': '⏰',
-  'tools.url': '🔗',
-  'tools.regex': '🔍',
-  'tools.cron': '📅',
-  'tools.password': '🔑',
-  'tools.hash': '#️⃣',
-  'tools.code': '💄',
-  'tools.uuid': '🆔',
-  'tools.text_comparator': '🔄',
-  'tools.image_compressor': '📷',
-  'tools.image_bg_remover': '✂️',
-  'tools.markdown': '📝',
-  'tools.bmi': '❤️',
-  'tools.color_picker': '🎨',
-  'tools.unit_converter': '📏',
-  'tools.pdf_tools': '📄',
-  'tools.sheet_editor': '📊',
-  'tools.short_link': '🔗',
-  'tools.resume': '📄',
-  'tools.color_generator': '🎨',
-  'tools.meme_generator': '😂',
-  'tools.copywriting_generator': '✍️',
-  'tools.wooden_fish': '🪵',
-  'tools.life_progress': '⏳',
-  'tools.format_converter': '🧩',
-  'tools.meeting_minutes': '🗒️',
-  'tools.ui_generator': '🪄',
-  'tools.ppt_generator': '📊',
-}
-
 const Home: React.FC = () => {
   const { t } = useTranslation('nav')
   const { t: tHome } = useTranslation('home')
@@ -135,7 +34,7 @@ const Home: React.FC = () => {
             {toolsForHome
               .filter((tool) => tool.categoryKey === categoryKey)
               .map((tool) => {
-                const icon = TOOL_ICONS[tool.nameKey] ?? '🛠️'
+                const Icon = tool.icon
                 return (
                   <Link
                     key={tool.path}
@@ -144,7 +43,10 @@ const Home: React.FC = () => {
                   >
                     <Card>
                     <div className="flex items-start">
-                      <div className="text-4xl mr-4">{icon}</div>
+                      <Icon
+                        className="w-10 h-10 shrink-0 mr-4 text-gray-500 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors"
+                        aria-hidden
+                      />
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-black dark:text-gray-200 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
                           {getToolTitle(tool, t)}

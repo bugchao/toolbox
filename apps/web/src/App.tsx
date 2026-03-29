@@ -211,7 +211,6 @@ const DhcpScan = lazy(() => import('@toolbox/tool-dhcp-scan').then((m) => ({ def
 const IpamChangelog = lazy(() => import('@toolbox/tool-ipam-changelog').then((m) => ({ default: m.default })))
 const IpamScan = lazy(() => import('@toolbox/tool-ipam-scan').then((m) => ({ default: m.default })))
 const Pomodoro = lazy(() => import('@toolbox/tool-pomodoro').then((m) => ({ default: m.default })))
-const HabitTracker = lazy(() => import('@toolbox/tool-habit-tracker').then((m) => ({ default: m.default })))
 const SalaryCalc = lazy(() => import('@toolbox/tool-salary-calc').then((m) => ({ default: m.default })))
 const CurrencyConverter = lazy(() => import('@toolbox/tool-currency-converter').then((m) => ({ default: m.default })))
 const JwtDecoder = lazy(() => import('@toolbox/tool-jwt-decoder').then((m) => ({ default: m.default })))
@@ -552,7 +551,6 @@ function App() {
           <Route path="/meeting-scheduler" element={<MeetingScheduler />} />
           <Route path="/color-system" element={<ColorSystem />} />
           <Route path="/graphql-builder" element={<GraphqlBuilder />} />
-          <Route path="/habit-tracker" element={<HabitTracker />} />
         </Routes>
       </Suspense>
     </Layout>
