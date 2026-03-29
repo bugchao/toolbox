@@ -24,7 +24,7 @@ test.describe('图片旋转工具 E2E 测试', () => {
     await expect(slider).toBeVisible()
   })
 
-  test'翻转按钮', async ({ page }) => {
+  test('翻转按钮', async ({ page }) => {
     await page.goto('/image-rotator')
     
     await expect(page.getByRole('button', { name: '水平翻转' })).toBeVisible()

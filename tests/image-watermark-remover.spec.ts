@@ -7,7 +7,7 @@ test.describe('图片去水印工具 E2E 测试', () => {
     await expect(page.getByText('智能识别并涂抹水印区域')).toBeVisible()
   })
 
-  test'使用说明显示', async ({ page }) => {
+  test('使用说明显示', async ({ page }) => {
     await page.goto('/image-watermark-remover')
     
     await expect(page.getByText('使用说明')).toBeVisible()
