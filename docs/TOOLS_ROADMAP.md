@@ -35,12 +35,12 @@
 | 二维码美化 | `/qrcode/beautifier` | `tools/tool-qrcode` → QrCodeBeautifier |
 | 图片压缩/格式转换 | `/image-compressor` | `apps/web/src/pages/ImageCompressor.tsx` |
 | 图片去背景 | `/image-background-remover` | `apps/web/src/pages/ImageBackgroundRemover.tsx` |
-| 图片水印 | `/image-watermark` | `apps/web/src/pages/ImageWatermark.tsx` |
-| 图片裁剪 | `/image-cropper` | `apps/web/src/pages/ImageCropper.tsx` |
-| 图片旋转/翻转 | `/image-rotator` | `apps/web/src/pages/ImageRotator.tsx` |
-| 图片滤镜 | `/image-filter` | `apps/web/src/pages/ImageFilter.tsx` |
-| 图片拼接 | `/image-stitcher` | `apps/web/src/pages/ImageStitcher.tsx` |
-| 图片去水印 | `/image-watermark-remover` | `apps/web/src/pages/ImageWatermarkRemover.tsx` |
+| 图片水印 | `/image-watermark` | `tools/tool-image-watermark` → ImageWatermark |
+| 图片裁剪 | `/image-cropper` | `tools/tool-image-cropper` → ImageCropper |
+| 图片旋转/翻转 | `/image-rotator` | `tools/tool-image-rotator` → ImageRotator |
+| 图片滤镜 | `/image-filter` | `tools/tool-image-filter` → ImageFilter |
+| 图片拼接 | `/image-stitcher` | `tools/tool-image-stitcher` → ImageStitcher |
+| 图片去水印 | `/image-watermark-remover` | `tools/tool-image-watermark-remover` → ImageWatermarkRemover |
 | Markdown 转 HTML/公众号 | `/markdown` | `apps/web/src/pages/MarkdownConverter.tsx` |
 | BMI 健康计算器 | `/bmi` | `apps/web/src/pages/BMICalculator.tsx` |
 | 单位换算器 | `/unit-converter` | `apps/web/src/pages/UnitConverter.tsx` |
