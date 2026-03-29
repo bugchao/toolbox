@@ -6,8 +6,8 @@ interface RotateImage {
   originalFile: File;
   originalSize?: number;
   previewUrl: string;
-  processedBlob?: Blob;
-  processedSize?: number;
+  processedBlob?: Blob | null;
+  processedSize?: number | null;
   processedUrl?: string;
   status: 'pending' | 'processing' | 'done' | 'error';
   error?: string;
