@@ -1,0 +1,135 @@
+// 网络工具配置 - Network Tools
+// 包含：DNS/IP/DHCP/GSLB/IPAM/安全/HTTP/TCP/Ping/CDN 等工具
+
+import type { ToolEntry } from './tools'
+import {
+  SearchCode, Route, Waypoints, MapIcon, ShieldAlert, BarChart3, AlarmClock,
+  Landmark, Bug, CloudOff, EyeOff, HardDrive, RefreshCw, Server, Mail, FileType,
+  Webhook, ShieldCheck, CheckCircle, Power, Radar, Gauge, Crown, GitBranch, Lock,
+  Database, Cable, FileCog, GitFork, BarChart2, AlertTriangle, Scale, MonitorCheck,
+  Award, Siren, Globe, ShieldHalf, Bomb, Cloud, Wifi, BarChart4, Activity,
+  SlidersHorizontal, BadgeCheck, Plug, Signal, LineChart, Target, Trash2, Skull,
+  ScrollText, Scan, History, ScanSearch, Network, Cpu, Timer, Antenna, ToggleLeft,
+  ChevronsLeftRight, Expand, TreePine, LayoutDashboard, Split, MemoryStick,
+  AlertOctagon, Calculator, CircuitBoard, Sigma
+} from 'lucide-react'
+
+export const NETWORK_TOOLS: ToolEntry[] = [
+  // DNS 工具（20 个）
+  { path: '/dns-query', nameKey: 'tools.dns_query', icon: SearchCode, categoryKey: 'dns', keywords: ['dns', '域名', '解析'], mode: 'server' },
+  { path: '/dns-trace', nameKey: 'tools.dns_trace', icon: Route, categoryKey: 'dns', keywords: ['dns', 'trace', '递归', '追踪'], i18nNamespace: 'toolDnsTrace', mode: 'server' },
+  { path: '/dns-propagation', nameKey: 'tools.dns_propagation', icon: Waypoints, categoryKey: 'dns', keywords: ['dns', 'propagation', '传播', '检测'], i18nNamespace: 'toolDnsPropagation', mode: 'server' },
+  { path: '/dns-global-check', nameKey: 'tools.dns_global_check', icon: MapIcon, categoryKey: 'dns', keywords: ['dns', '全球', '解析', '检测'], i18nNamespace: 'toolDnsGlobalCheck', mode: 'server' },
+  { path: '/dnssec-check', nameKey: 'tools.dnssec_check', icon: ShieldAlert, categoryKey: 'dns', keywords: ['dns', 'dnssec', '签名', '校验'], i18nNamespace: 'toolDnssecCheck', mode: 'server' },
+  { path: '/dns-performance', nameKey: 'tools.dns_performance', icon: BarChart3, categoryKey: 'dns', keywords: ['dns', '性能', '响应', '可用性'], i18nNamespace: 'toolDnsPerformance', mode: 'server' },
+  { path: '/dns-ttl', nameKey: 'tools.dns_ttl', icon: AlarmClock, categoryKey: 'dns', keywords: ['dns', 'ttl', '缓存'], i18nNamespace: 'toolDnsTtl', mode: 'server' },
+  { path: '/dns-soa', nameKey: 'tools.dns_soa', icon: Landmark, categoryKey: 'dns', keywords: ['dns', 'soa', '解析'], i18nNamespace: 'toolDnsSoa', mode: 'server' },
+  { path: '/dns-diagnose', nameKey: 'tools.dns_diagnose', icon: Bug, categoryKey: 'dns', keywords: ['dns', 'diagnose', '诊断', '失败'], i18nNamespace: 'toolDnsDiagnose', mode: 'server' },
+  { path: '/dns-pollution-check', nameKey: 'tools.dns_pollution_check', icon: CloudOff, categoryKey: 'dns', keywords: ['dns', 'pollution', '污染', '检测'], i18nNamespace: 'toolDnsPollutionCheck', mode: 'server' },
+  { path: '/dns-hijack-check', nameKey: 'tools.dns_hijack_check', icon: EyeOff, categoryKey: 'dns', keywords: ['dns', 'hijack', '劫持', '检测'], i18nNamespace: 'toolDnsHijackCheck', mode: 'server' },
+  { path: '/dns-cache-check', nameKey: 'tools.dns_cache_check', icon: HardDrive, categoryKey: 'dns', keywords: ['dns', 'cache', '缓存', 'ttl'], i18nNamespace: 'toolDnsCacheCheck', mode: 'server' },
+  { path: '/dns-loop-check', nameKey: 'tools.dns_loop_check', icon: RefreshCw, categoryKey: 'dns', keywords: ['dns', 'loop', '循环', 'cname'], i18nNamespace: 'toolDnsLoopCheck', mode: 'server' },
+  { path: '/dns-ns', nameKey: 'tools.dns_ns', icon: Server, categoryKey: 'dns', keywords: ['dns', 'ns', '名称服务器', 'nameserver'], i18nNamespace: 'toolDnsNs', mode: 'server' },
+  { path: '/dns-cname-chain', nameKey: 'tools.dns_cname_chain', icon: Link2, categoryKey: 'dns', keywords: ['dns', 'cname', '链', 'chain', '循环'], i18nNamespace: 'toolDnsCnameChain', mode: 'server' },
+  { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: XCircle, categoryKey: 'dns', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain', mode: 'server' },
+  { path: '/dns-latency', nameKey: 'tools.dns_latency', icon: Gauge, categoryKey: 'dns', keywords: ['dns', '延迟', '速度', '响应'], i18nNamespace: 'toolDnsLatency', mode: 'server' },
+  { path: '/dns-authoritative', nameKey: 'tools.dns_authoritative', icon: Crown, categoryKey: 'dns', keywords: ['dns', '权威', 'ns', '一致性'], i18nNamespace: 'toolDnsAuthoritative', mode: 'server' },
+  { path: '/dns-recursive', nameKey: 'tools.dns_recursive', icon: Shield, categoryKey: 'dns', keywords: ['dns', '递归', '开放', 'amplification'], i18nNamespace: 'toolDnsRecursive', mode: 'server' },
+  { path: '/dns-path-viz', nameKey: 'tools.dns_path_viz', icon: GitBranch, categoryKey: 'dns', keywords: ['dns', '路径', '可视化', '递归'], i18nNamespace: 'toolDnsPathViz', mode: 'server' },
+  { path: '/dns-tunnel', nameKey: 'tools.dns_tunnel', icon: Lock, categoryKey: 'dns', keywords: ['dns', '隧道', '检测', '安全'], i18nNamespace: 'toolDnsTunnel', mode: 'server' },
+
+  // 域名工具（10 个）
+  { path: '/domain-mx', nameKey: 'tools.domain_mx', icon: Mail, categoryKey: 'domain', keywords: ['mx', '邮件', 'mail', '邮箱'], i18nNamespace: 'toolDomainMx', mode: 'server' },
+  { path: '/domain-txt', nameKey: 'tools.domain_txt', icon: FileType, categoryKey: 'domain', keywords: ['txt', 'spf', 'dkim', 'dmarc', '记录'], i18nNamespace: 'toolDomainTxt', mode: 'server' },
+  { path: '/domain-spf', nameKey: 'tools.domain_spf', icon: MailCheck, categoryKey: 'domain', keywords: ['spf', 'mail', 'policy', '邮件'], i18nNamespace: 'toolDomainSpf', mode: 'server' },
+  { path: '/domain-dkim', nameKey: 'tools.domain_dkim', icon: Key, categoryKey: 'domain', keywords: ['dkim', 'selector', 'mail', '签名'], i18nNamespace: 'toolDomainDkim', mode: 'server' },
+  { path: '/domain-dmarc', nameKey: 'tools.domain_dmarc', icon: MailWarning, categoryKey: 'domain', keywords: ['dmarc', 'mail', 'policy', '报告'], i18nNamespace: 'toolDomainDmarc', mode: 'server' },
+  { path: '/domain-ttl-advice', nameKey: 'tools.domain_ttl_advice', icon: Hourglass, categoryKey: 'domain', keywords: ['ttl', 'domain', '缓存', '优化'], i18nNamespace: 'toolDomainTtlAdvice', mode: 'server' },
+  { path: '/domain-ns-check', nameKey: 'tools.domain_ns_check', icon: Signpost, categoryKey: 'domain', keywords: ['ns', 'nameserver', '权威'], i18nNamespace: 'toolDomainNsCheck', mode: 'server' },
+  { path: '/domain-subdomain-scan', nameKey: 'tools.domain_subdomain_scan', icon: Telescope, categoryKey: 'domain', keywords: ['subdomain', 'scan', '子域'], i18nNamespace: 'toolDomainSubdomainScan', mode: 'server' },
+  { path: '/domain-wildcard', nameKey: 'tools.domain_wildcard', icon: Asterisk, categoryKey: 'domain', keywords: ['wildcard', 'dns', '泛解析'], i18nNamespace: 'toolDomainWildcard', mode: 'server' },
+  { path: '/domain-health-score', nameKey: 'tools.domain_health_score', icon: HeartPulse, categoryKey: 'domain', keywords: ['health', 'score', 'domain', '健康'], i18nNamespace: 'toolDomainHealthScore', mode: 'server' },
+
+  // IP 工具（15 个）
+  { path: '/ip-query', nameKey: 'tools.ip_query', icon: MapPin, categoryKey: 'ip', keywords: ['ip'], i18nNamespace: 'toolIpQuery', mode: 'server' },
+  { path: '/ip-asn', nameKey: 'tools.ip_asn', icon: Network, categoryKey: 'ip', keywords: ['asn', 'as', '归属'], i18nNamespace: 'toolIpAsn', mode: 'server' },
+  { path: '/ip-geo', nameKey: 'tools.ip_geo', icon: MapPinned, categoryKey: 'ip', keywords: ['geo', 'ip', 'location', '地理'], i18nNamespace: 'toolIpGeo', mode: 'server' },
+  { path: '/ip-ptr', nameKey: 'tools.ip_ptr', icon: LocateFixed, categoryKey: 'ip', keywords: ['ptr', 'reverse', 'rdns'], i18nNamespace: 'toolIpPtr', mode: 'server' },
+  { path: '/ip-v4-to-v6', nameKey: 'tools.ip_v4_to_v6', icon: Repeat2, categoryKey: 'ip', keywords: ['ipv4', 'ipv6', '转换'], i18nNamespace: 'toolIpV4ToV6' },
+  { path: '/ip-binary-hex', nameKey: 'tools.ip_binary_hex', icon: Cpu, categoryKey: 'ip', keywords: ['binary', 'hex', 'ip', '转换'], i18nNamespace: 'toolIpBinaryHex' },
+  { path: '/ip-class', nameKey: 'tools.ip_class', icon: Tag, categoryKey: 'ip', keywords: ['class', 'private', 'public', '分类'], i18nNamespace: 'toolIpClass' },
+  { path: '/ip-public', nameKey: 'tools.ip_public', icon: Locate, categoryKey: 'ip', keywords: ['public', '出口', '公网'], i18nNamespace: 'toolIpPublic' },
+  { path: '/ip-cdn-check', nameKey: 'tools.ip_cdn_check', icon: Globe2, categoryKey: 'ip', keywords: ['cdn', 'edge', 'ip', '节点'], i18nNamespace: 'toolIpCdnCheck', mode: 'server' },
+  { path: '/ip-blacklist', nameKey: 'tools.ip_blacklist', icon: CircleOff, categoryKey: 'ip', keywords: ['ip', 'blacklist', 'dnsbl', '黑名单'], i18nNamespace: 'toolIpBlacklist', mode: 'server' },
+
+  // HTTP/TCP/Ping 工具（9 个）
+  { path: '/http-headers', nameKey: 'tools.http_headers', icon: Webhook, categoryKey: 'network', keywords: ['http', 'header', '响应头', '安全'], i18nNamespace: 'toolHttpHeaders', mode: 'server' },
+  { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: ShieldCheck, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert', mode: 'server' },
+  { path: '/http-status', nameKey: 'tools.http_status', icon: CheckCircle, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus', mode: 'server' },
+  { path: '/tcp-port-check', nameKey: 'tools.tcp_port_check', icon: Power, categoryKey: 'network', keywords: ['tcp', 'port', '端口', '连通性'], i18nNamespace: 'toolTcpPort', mode: 'server' },
+  { path: '/ping', nameKey: 'tools.ping', icon: Radar, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing', mode: 'server' },
+  { path: '/traceroute', nameKey: 'tools.traceroute', icon: GitFork, categoryKey: 'network', keywords: ['traceroute', '路由', '追踪', '网络'], i18nNamespace: 'toolTraceroute', mode: 'server' },
+  { path: '/server-latency', nameKey: 'tools.server_latency', icon: Timer, categoryKey: 'network', keywords: ['延迟', '测速', '服务器', 'ping'], i18nNamespace: 'toolServerLatency', mode: 'server' },
+  { path: '/web-availability', nameKey: 'tools.web_availability', icon: MonitorCheck, categoryKey: 'network', keywords: ['http', '可用性', '监控', '状态'], i18nNamespace: 'toolWebAvailability', mode: 'server' },
+  { path: '/api-availability', nameKey: 'tools.api_availability', icon: Plug, categoryKey: 'network', keywords: ['api', '可用性', '健康检查', 'http'], i18nNamespace: 'toolApiAvailability', mode: 'server' },
+  { path: '/cdn-check', nameKey: 'tools.cdn_check', icon: Cloud, categoryKey: 'network', keywords: ['cdn', '检测', 'cloudflare', '阿里云'], i18nNamespace: 'toolCdnCheck', mode: 'server' },
+
+  // DHCP 工具（12 个）
+  { path: '/dhcp-pool-calc', nameKey: 'tools.dhcp_pool_calc', icon: Database, categoryKey: 'ipam', keywords: ['dhcp', '地址池', '计算', 'ip'], i18nNamespace: 'toolDhcpPoolCalc' },
+  { path: '/dhcp-option', nameKey: 'tools.dhcp_option', icon: Settings, categoryKey: 'ipam', keywords: ['dhcp', 'option', '选项', '查询'], i18nNamespace: 'toolDhcpOption' },
+  { path: '/dhcp-mac-binding', nameKey: 'tools.dhcp_mac_binding', icon: Cable, categoryKey: 'ipam', keywords: ['dhcp', 'mac', '绑定', '静态'], i18nNamespace: 'toolDhcpMacBinding' },
+  { path: '/dhcp-config-gen', nameKey: 'tools.dhcp_config_gen', icon: FileCog, categoryKey: 'ipam', keywords: ['dhcp', '配置', '生成', 'isc', 'dnsmasq'], i18nNamespace: 'toolDhcpConfigGen' },
+  { path: '/dhcp-utilization', nameKey: 'tools.dhcp_utilization', icon: BarChart2, categoryKey: 'ipam', keywords: ['dhcp', '利用率', '地址池', '统计'], i18nNamespace: 'toolDhcpUtilization' },
+  { path: '/dhcp-conflict', nameKey: 'tools.dhcp_conflict', icon: AlertTriangle, categoryKey: 'ipam', keywords: ['dhcp', '冲突', '重复', 'ip'], i18nNamespace: 'toolDhcpConflict' },
+  { path: '/dhcp-discover-sim', nameKey: 'tools.dhcp_discover_sim', icon: Wifi, categoryKey: 'network', keywords: ['dhcp', 'discover', '握手', '模拟'], i18nNamespace: 'toolDhcpDiscoverSim' },
+  { path: '/dhcp-lease-analysis', nameKey: 'tools.dhcp_lease_analysis', icon: FileBarChart, categoryKey: 'network', keywords: ['dhcp', 'lease', '租约', '分析'], i18nNamespace: 'toolDhcpLeaseAnalysis' },
+  { path: '/dhcp-log-analysis', nameKey: 'tools.dhcp_log_analysis', icon: ScrollText, categoryKey: 'network', keywords: ['dhcp', '日志', '分析', 'syslog'], i18nNamespace: 'toolDhcpLogAnalysis' },
+  { path: '/dhcp-scan', nameKey: 'tools.dhcp_scan', icon: Scan, categoryKey: 'network', keywords: ['dhcp', '扫描', '发现', 'rogue'], i18nNamespace: 'toolDhcpScan' },
+
+  // GSLB 工具（12 个）
+  { path: '/gslb-weight-calc', nameKey: 'tools.gslb_weight_calc', icon: Scale, categoryKey: 'network', keywords: ['gslb', '权重', '负载均衡', '流量'], i18nNamespace: 'toolGslbWeightCalc' },
+  { path: '/gslb-failover-sim', nameKey: 'tools.gslb_failover_sim', icon: Siren, categoryKey: 'network', keywords: ['gslb', '故障', '切换', '模拟', 'failover'], i18nNamespace: 'toolGslbFailoverSim' },
+  { path: '/gslb-geo-sim', nameKey: 'tools.gslb_geo_sim', icon: Globe, categoryKey: 'network', keywords: ['gslb', 'geo', '地理', '解析', '模拟'], i18nNamespace: 'toolGslbGeoSim' },
+  { path: '/gslb-health-sim', nameKey: 'tools.gslb_health_sim', icon: Activity, categoryKey: 'network', keywords: ['gslb', '健康', '检查', '模拟'], i18nNamespace: 'toolGslbHealthSim' },
+  { path: '/gslb-latency-sim', nameKey: 'tools.gslb_latency_sim', icon: Activity, categoryKey: 'network', keywords: ['gslb', '延迟', '调度', '模拟'], i18nNamespace: 'toolGslbLatencySim' },
+  { path: '/gslb-policy-sim', nameKey: 'tools.gslb_policy_sim', icon: SlidersHorizontal, categoryKey: 'network', keywords: ['gslb', '策略', '轮询', '权重'], i18nNamespace: 'toolGslbPolicySim' },
+  { path: '/gslb-rule-validate', nameKey: 'tools.gslb_rule_validate', icon: BadgeCheck, categoryKey: 'network', keywords: ['gslb', '规则', '验证', '校验'], i18nNamespace: 'toolGslbRuleValidate' },
+  { path: '/gslb-isp-sim', nameKey: 'tools.gslb_isp_sim', icon: Signal, categoryKey: 'network', keywords: ['gslb', '运营商', 'isp', '移动', '联通'], i18nNamespace: 'toolGslbIspSim' },
+  { path: '/gslb-traffic-predict', nameKey: 'tools.gslb_traffic_predict', icon: LineChart, categoryKey: 'network', keywords: ['gslb', '流量', '预测', '容量', 'qps'], i18nNamespace: 'toolGslbTrafficPredict' },
+  { path: '/gslb-hit-predict', nameKey: 'tools.gslb_hit_predict', icon: Target, categoryKey: 'network', keywords: ['gslb', '命中', '预测', 'dns', '解析'], i18nNamespace: 'toolGslbHitPredict' },
+
+  // IPAM 工具（10 个）
+  { path: '/ipam-plan', nameKey: 'tools.ipam_plan', icon: LayoutGrid, categoryKey: 'ipam', keywords: ['ipam', 'plan', 'vlsm', '规划'], i18nNamespace: 'toolIpamPlan', mode: 'server' },
+  { path: '/ipam-inventory', nameKey: 'tools.ipam_inventory', icon: Package, categoryKey: 'ipam', keywords: ['ipam', 'inventory', '库存'], i18nNamespace: 'toolIpamInventory', mode: 'server' },
+  { path: '/ipam-usage', nameKey: 'tools.ipam_usage', icon: PieChart, categoryKey: 'ipam', keywords: ['ipam', 'usage', 'utilization', '使用率'], i18nNamespace: 'toolIpamUsage', mode: 'server' },
+  { path: '/ipam-conflict', nameKey: 'tools.ipam_conflict', icon: AlertOctagon, categoryKey: 'ipam', keywords: ['ipam', 'conflict', 'overlap', '冲突'], i18nNamespace: 'toolIpamConflict', mode: 'server' },
+  { path: '/ipam-allocation-sim', nameKey: 'tools.ipam_allocation_sim', icon: MemoryStick, categoryKey: 'ipam', keywords: ['ipam', 'allocation', 'simulation', '分配'], i18nNamespace: 'toolIpamAllocationSim', mode: 'server' },
+  { path: '/ipam-subnet-util', nameKey: 'tools.ipam_subnet_util', icon: BarChart4, categoryKey: 'ipam', keywords: ['子网', '利用率', 'cidr', 'ip'], i18nNamespace: 'toolIpamSubnetUtil' },
+  { path: '/ipam-visualize', nameKey: 'tools.ipam_visualize', icon: Boxes, categoryKey: 'ipam', keywords: ['ip', '可视化', '子网', '树状图'], i18nNamespace: 'toolIpamVisualize' },
+  { path: '/ipam-reclaim', nameKey: 'tools.ipam_reclaim', icon: Trash2, categoryKey: 'ipam', keywords: ['ip', '回收', '闲置', 'ipam'], i18nNamespace: 'toolIpamReclaim' },
+  { path: '/ipam-changelog', nameKey: 'tools.ipam_changelog', icon: History, categoryKey: 'ipam', keywords: ['ip', '变更', '记录', '审计'], i18nNamespace: 'toolIpamChangelog' },
+  { path: '/ipam-scan', nameKey: 'tools.ipam_scan', icon: ScanSearch, categoryKey: 'ipam', keywords: ['ip', '扫描', '存活', 'ping'], i18nNamespace: 'toolIpamScan' },
+
+  // 子网工具（10 个）
+  { path: '/cidr-calculator', nameKey: 'tools.cidr_calculator', icon: Calculator, categoryKey: 'ipam', keywords: ['cidr', '子网', '范围'], i18nNamespace: 'toolCidrCalculator' },
+  { path: '/subnet-divide', nameKey: 'tools.subnet_divide', icon: Split, categoryKey: 'ipam', keywords: ['subnet', 'divide', '划分'], i18nNamespace: 'toolSubnetDivide' },
+  { path: '/subnet-network-addr', nameKey: 'tools.subnet_network_addr', icon: CircuitBoard, categoryKey: 'ipam', keywords: ['network', 'address', '网络号'], i18nNamespace: 'toolSubnetNetworkAddr' },
+  { path: '/subnet-broadcast', nameKey: 'tools.subnet_broadcast', icon: Antenna, categoryKey: 'ipam', keywords: ['broadcast', '广播地址'], i18nNamespace: 'toolSubnetBroadcast' },
+  { path: '/subnet-mask', nameKey: 'tools.subnet_mask', icon: ToggleLeft, categoryKey: 'ipam', keywords: ['mask', 'prefix', '掩码'], i18nNamespace: 'toolSubnetMask' },
+  { path: '/ip-range', nameKey: 'tools.ip_range', icon: ChevronsLeftRight, categoryKey: 'ipam', keywords: ['range', 'ip', '范围'], i18nNamespace: 'toolIpRange' },
+  { path: '/subnet-capacity', nameKey: 'tools.subnet_capacity', icon: Expand, categoryKey: 'ipam', keywords: ['capacity', 'usable', '容量'], i18nNamespace: 'toolSubnetCapacity' },
+  { path: '/ipv6-cidr', nameKey: 'tools.ipv6_cidr', icon: Sigma, categoryKey: 'ipam', keywords: ['ipv6', 'cidr', '前缀'], i18nNamespace: 'toolIpv6Cidr' },
+  { path: '/vlsm', nameKey: 'tools.vlsm', icon: TreePine, categoryKey: 'ipam', keywords: ['vlsm', '规划', '子网'], i18nNamespace: 'toolVlsm' },
+  { path: '/network-planner', nameKey: 'tools.network_planner', icon: LayoutDashboard, categoryKey: 'ipam', keywords: ['network', 'planner', '规划'], i18nNamespace: 'toolNetworkPlanner' },
+
+  // 安全工具（10 个）
+  { path: '/security-ip-score', nameKey: 'tools.security_ip_score', icon: Trophy, categoryKey: 'security', keywords: ['security', 'ip', 'risk', '安全', '评分'], i18nNamespace: 'toolSecurityIpScore', mode: 'server' },
+  { path: '/security-domain-blacklist', nameKey: 'tools.security_domain_blacklist', icon: OctagonX, categoryKey: 'security', keywords: ['security', 'domain', 'blacklist', '域名', '黑名单'], i18nNamespace: 'toolSecurityDomainBlacklist', mode: 'server' },
+  { path: '/security-port-scan', nameKey: 'tools.security_port_scan', icon: Network, categoryKey: 'security', keywords: ['security', 'port', 'scan', '端口', '扫描'], i18nNamespace: 'toolSecurityPortScan', mode: 'server' },
+  { path: '/security-dns-vuln', nameKey: 'tools.security_dns_vuln', icon: TriangleAlert, categoryKey: 'security', keywords: ['security', 'dns', 'vuln', '漏洞', '配置'], i18nNamespace: 'toolSecurityDnsVuln', mode: 'server' },
+  { path: '/security-report-gen', nameKey: 'tools.security_report_gen', icon: FileWarning, categoryKey: 'security', keywords: ['security', 'report', '网络', '报告'], i18nNamespace: 'toolSecurityReportGen', mode: 'server' },
+  { path: '/security-domain-score', nameKey: 'tools.security_domain_score', icon: Award, categoryKey: 'security', keywords: ['安全', '评分', 'dnssec', 'spf', 'dmarc'], i18nNamespace: 'toolSecurityDomainScore', mode: 'server' },
+  { path: '/security-dnssec-verify', nameKey: 'tools.security_dnssec_verify', icon: ShieldHalf, categoryKey: 'security', keywords: ['dnssec', '签名', '验证', '信任链'], i18nNamespace: 'toolSecurityDnssecVerify', mode: 'server' },
+  { path: '/security-dns-ddos', nameKey: 'tools.security_dns_ddos', icon: Bomb, categoryKey: 'security', keywords: ['ddos', 'dns', '放大', '攻击', '风险'], i18nNamespace: 'toolSecurityDnsDdos', mode: 'server' },
+  { path: '/security-domain-hijack', nameKey: 'tools.security_domain_hijack', icon: Skull, categoryKey: 'security', keywords: ['劫持', 'dns', '安全', '域名'], i18nNamespace: 'toolSecurityDomainHijack', mode: 'server' },
+]
