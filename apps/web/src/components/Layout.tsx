@@ -15,7 +15,7 @@ import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
 import { setLocale, type Locale } from '../i18n'
-import { TOOLS, getToolTitle, getToolByPath } from '../config/tools'
+import { TOOLS, TOOLS_BY_PATH, getToolTitle, getToolByPath } from '../config/tools'
 import { CommandPalette } from './CommandPalette'
 
 interface LayoutProps {
@@ -122,6 +122,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const visibleNavItems = settings.hideServerTools
     ? NAV_ITEMS.filter((item) => item.mode !== 'server')
     : NAV_ITEMS
+
+  // 计算工具总数（排除首页和收藏夹）
+  const totalTools = TOOLS.filter(t => t.path !== '/' && t.path !== '/favorites').length
+  const visibleTools = settings.hideServerTools
+    ? TOOLS.filter(t => t.path !== '/' && t.path !== '/favorites' && t.mode !== 'server').length
+    : totalTools
 
   const groupedNav = visibleNavItems.reduce((acc, item) => {
     if (item.categoryKey) {
@@ -503,9 +509,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </main>
 
         <footer className="py-4 px-4 sm:px-6 lg:px-8 border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/30">
-          <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
-            {tFooter('copyright')}
-          </p>
+          <div className="text-center">
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-1">
+              {tFooter('copyright')}
+            </p>
+            <p className="text-gray-400 dark:text-gray-500 text-xs">
+              🛠️ {visibleTools} / {totalTools} 个工具
+              {settings.hideServerTools && (
+                <span className="ml-2 text-orange-500 dark:text-orange-400">
+                  （已隐藏需要后端服务的工具）
+                </span>
+              )}
+            </p>
+          </div>
         </footer>
       </div>
 
