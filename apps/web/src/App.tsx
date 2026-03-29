@@ -24,6 +24,11 @@ import BMICalculator from './pages/BMICalculator'
 import ColorPicker from './pages/ColorPicker'
 import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
 import ImageWatermark from './pages/ImageWatermark'
+import ImageCropper from './pages/ImageCropper'
+import ImageRotator from './pages/ImageRotator'
+import ImageFilter from './pages/ImageFilter'
+import ImageStitcher from './pages/ImageStitcher'
+import ImageWatermarkRemover from './pages/ImageWatermarkRemover'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import DnsQuery from './pages/DnsQuery'
@@ -368,6 +373,11 @@ function App() {
           <Route path="/uuid" element={<UuidGenerator />} />
           <Route path="/image-compressor" element={<ImageCompressor />} />
           <Route path="/image-watermark" element={<ImageWatermark />} />
+          <Route path="/image-cropper" element={<ImageCropper />} />
+          <Route path="/image-rotator" element={<ImageRotator />} />
+          <Route path="/image-filter" element={<ImageFilter />} />
+          <Route path="/image-stitcher" element={<ImageStitcher />} />
+          <Route path="/image-watermark-remover" element={<ImageWatermarkRemover />} />
           <Route path="/markdown" element={<MarkdownConverter />} />
           <Route path="/bmi" element={<BMICalculator />} />
           <Route path="/color-picker" element={<ColorPicker />} />
