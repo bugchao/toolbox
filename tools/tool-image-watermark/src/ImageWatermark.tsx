@@ -4,6 +4,7 @@ import { Upload, Download, Type, Image as ImageIcon, X, Plus, Trash2, Settings }
 interface WatermarkImage {
   id: string;
   originalFile: File;
+  originalSize?: number;
   processedBlob?: Blob;
   processedSize?: number;
   status: 'pending' | 'processing' | 'done' | 'error';
