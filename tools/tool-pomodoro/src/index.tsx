@@ -1,1 +1,2 @@
-export { Pomodoro as default } from './Pomodoro'
+export { default } from './PomodoroTimer'
+export { default as PomodoroTimer } from './PomodoroTimer'
