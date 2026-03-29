@@ -23,6 +23,7 @@ import MarkdownConverter from './pages/MarkdownConverter'
 import BMICalculator from './pages/BMICalculator'
 import ColorPicker from './pages/ColorPicker'
 import ImageBackgroundRemover from './pages/ImageBackgroundRemover'
+import ImageWatermark from './pages/ImageWatermark'
 import UnitConverter from './pages/UnitConverter'
 import TextComparator from './pages/TextComparator'
 import DnsQuery from './pages/DnsQuery'
@@ -366,6 +367,7 @@ function App() {
           <Route path="/code" element={<CodeFormatter />} />
           <Route path="/uuid" element={<UuidGenerator />} />
           <Route path="/image-compressor" element={<ImageCompressor />} />
+          <Route path="/image-watermark" element={<ImageWatermark />} />
           <Route path="/markdown" element={<MarkdownConverter />} />
           <Route path="/bmi" element={<BMICalculator />} />
           <Route path="/color-picker" element={<ColorPicker />} />
