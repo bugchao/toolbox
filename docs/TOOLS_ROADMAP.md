@@ -224,15 +224,39 @@
 | 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
 | 学习时长统计 | `/study-timer` | `tools/tool-study-timer` → StudyTimer |
 
-### 旅游工具（0）
+### 旅游工具（12）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
+| AI 行程规划器 | `/trip-planner` | `tools/tool-trip-planner` → TripPlanner |
+| 一日游智能推荐 | `/day-trip` | `tools/tool-day-trip` → DayTrip |
+| 多城市路线优化 | `/multi-city-route` | `tools/tool-multi-city-route` → MultiCityRoute |
+| 旅行 Checklist 生成 | `/travel-checklist` | `tools/tool-travel-checklist` → TravelChecklist |
+| 旅行预算计算器 | `/travel-budget` | `tools/tool-travel-budget` → TravelBudget |
+| AA 分摊工具 | `/split-bill` | `tools/tool-split-bill` → SplitBill |
+| 汇率 + 消费估算 | `/travel-cost-estimate` | `tools/tool-travel-cost-estimate` → TravelCostEstimate |
+| 时差计算器 | `/timezone-calc` | `tools/tool-timezone-calc` → TimezoneCalc |
+| 地图距离计算 | `/distance-calc` | `tools/tool-distance-calc` → DistanceCalc |
+| 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
+| 签证信息助手 | `/visa-info` | `tools/tool-visa-info` → VisaInfo |
+| 语言翻译助手（旅行场景） | `/travel-translator` | `tools/tool-travel-translator` → TravelTranslator |
 
-### 学习工具（0）
+### 学习工具（12）
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
+| 学习计划生成器 | `/study-planner` | `tools/tool-study-planner` → StudyPlanner |
+| 记忆曲线复习提醒 | `/spaced-repetition` | `tools/tool-spaced-repetition` → SpacedRepetition |
+| 专注模式 | `/focus-mode` | `tools/tool-focus-mode` → FocusMode |
+| 学习时长统计 | `/study-timer` | `tools/tool-study-timer` → StudyTimer |
+| 单词记忆工具 | `/vocab-trainer` | `tools/tool-vocab-trainer` → VocabTrainer |
+| 错题本系统 | `/mistake-book` | `tools/tool-mistake-book` → MistakeBook |
+| 自动出题工具 | `/quiz-gen` | `tools/tool-quiz-gen` → QuizGen |
+| 选择题生成器 | `/mcq-gen` | `tools/tool-mcq-gen` → McqGen |
+| 知识对比工具 | `/knowledge-compare` | `tools/tool-knowledge-compare` → KnowledgeCompare |
+| 一句话讲清工具 | `/one-liner` | `tools/tool-one-liner` → OneLiner |
+| "像5岁小孩解释"工具 | `/eli5` | `tools/tool-eli5` → Eli5 |
+| 多角度解释 | `/multi-perspective` | `tools/tool-multi-perspective` → MultiPerspective |
 
 ---
 
