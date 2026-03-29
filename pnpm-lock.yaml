@@ -2203,6 +2203,138 @@ importers:
         specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-image-cropper:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-image-filter:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-image-rotator:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-image-stitcher:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-image-watermark:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-image-watermark-remover:
+    dependencies:
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-installment-calc:
     dependencies:
       '@toolbox/storage':
