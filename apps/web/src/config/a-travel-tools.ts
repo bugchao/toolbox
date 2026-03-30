@@ -13,6 +13,7 @@ export const TRAVEL_TOOLS: ToolEntry[] = [
   { path: '/travel-budget', nameKey: 'tools.travel_budget', icon: Wallet, categoryKey: 'travel', keywords: ['旅行', '预算', '费用', '旅游'], i18nNamespace: 'toolTravelBudget' },
   { path: '/split-bill', nameKey: 'tools.split_bill', icon: Percent, categoryKey: 'travel', keywords: ['aa', '分摊', '账单', '聚餐'], i18nNamespace: 'toolSplitBill' },
   { path: '/timezone-calc', nameKey: 'tools.timezone_calc', icon: Watch, categoryKey: 'travel', keywords: ['时差', '时区', '换算', '时间'], i18nNamespace: 'toolTimezoneCalc' },
+  { path: '/timezone-converter', nameKey: 'tools.timezone_converter', icon: Clock, categoryKey: 'travel', keywords: ['时区', '转换', '会议', '时间对比'], i18nNamespace: 'toolTimezoneConverter' },
   { path: '/distance-calc', nameKey: 'tools.distance_calc', icon: Milestone, categoryKey: 'travel', keywords: ['距离', '地图', '城市', '经纬度'], i18nNamespace: 'toolDistanceCalc' },
 
   // 旅行实用（5 个）
