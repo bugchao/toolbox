@@ -33,6 +33,13 @@
       "weather": "Weather",
       "todo_list": "Todo List",
       "github_info": "GitHub Info Reader",
+      "graphql_playground": "GraphQL Playground",
+      "postman_lite": "Postman Lite",
+      "rapid_tables": "Rapid Tables",
+      "text_cipher": "Text Cipher",
+      "text_stats": "Text Stats",
+      "github_repo": "GitHub Repo",
+      "github_user": "GitHub User",
       "ip_query": "IP Query",
       "ip_asn": "IP ASN",
       "dns_query": "DNS Query",
@@ -214,7 +221,14 @@
       "wooden_fish": "Tap the wooden fish, relax and de-stress, auto mode supported",
       "life_progress": "Visualize life progress and time to plan ahead",
       "meeting_minutes": "Bring in media or transcript files, refine the transcript, and extract summary, decisions, and action items",
-      "ui_generator": "Turn text prompts and sketch ratios into UI wireframes plus a React/Tailwind starter"
+      "ui_generator": "Turn text prompts and sketch ratios into UI wireframes plus a React/Tailwind starter",
+      "graphql_playground": "Test GraphQL queries, variables, and schema introspection in one place",
+      "postman_lite": "Send lightweight HTTP requests and inspect headers, params, and responses",
+      "rapid_tables": "Use common calculators and converters for quick development and daily tasks",
+      "text_cipher": "Encrypt, decrypt, and transform text for testing and demonstration scenarios",
+      "text_stats": "Count words, characters, lines, and reading time for content analysis",
+      "github_repo": "Inspect repository metadata, activity, and key GitHub signals",
+      "github_user": "Inspect GitHub profile data and public contribution signals"
     }
   },
   "colorPicker": {

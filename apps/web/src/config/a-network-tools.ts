@@ -11,7 +11,11 @@ import {
   SlidersHorizontal, BadgeCheck, Plug, Signal, LineChart, Target, Trash2, Skull,
   ScrollText, Scan, History, ScanSearch, Network, Cpu, Timer, Antenna, ToggleLeft,
   ChevronsLeftRight, Expand, TreePine, LayoutDashboard, Split, MemoryStick,
-  AlertOctagon, Calculator, CircuitBoard, Sigma
+  AlertOctagon, Calculator, CircuitBoard, Sigma, Link2, CircleX, Shield,
+  MailCheck, Key, MailWarning, Hourglass, Signpost, Telescope, Asterisk,
+  HeartPulse, MapPin, MapPinned, LocateFixed, Repeat2, Tag, Locate,
+  CircleOff, Settings, FileChartColumn, LayoutGrid, Package, PieChart,
+  Boxes, OctagonX, TriangleAlert, FileWarning, Trophy
 } from 'lucide-react'
 
 export const NETWORK_TOOLS: ToolEntry[] = [
@@ -31,7 +35,7 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/dns-loop-check', nameKey: 'tools.dns_loop_check', icon: RefreshCw, categoryKey: 'dns', keywords: ['dns', 'loop', '循环', 'cname'], i18nNamespace: 'toolDnsLoopCheck', mode: 'server' },
   { path: '/dns-ns', nameKey: 'tools.dns_ns', icon: Server, categoryKey: 'dns', keywords: ['dns', 'ns', '名称服务器', 'nameserver'], i18nNamespace: 'toolDnsNs', mode: 'server' },
   { path: '/dns-cname-chain', nameKey: 'tools.dns_cname_chain', icon: Link2, categoryKey: 'dns', keywords: ['dns', 'cname', '链', 'chain', '循环'], i18nNamespace: 'toolDnsCnameChain', mode: 'server' },
-  { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: XCircle, categoryKey: 'dns', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain', mode: 'server' },
+  { path: '/dns-nxdomain', nameKey: 'tools.dns_nxdomain', icon: CircleX, categoryKey: 'dns', keywords: ['dns', 'nxdomain', '域名', '不存在'], i18nNamespace: 'toolDnsNxdomain', mode: 'server' },
   { path: '/dns-latency', nameKey: 'tools.dns_latency', icon: Gauge, categoryKey: 'dns', keywords: ['dns', '延迟', '速度', '响应'], i18nNamespace: 'toolDnsLatency', mode: 'server' },
   { path: '/dns-authoritative', nameKey: 'tools.dns_authoritative', icon: Crown, categoryKey: 'dns', keywords: ['dns', '权威', 'ns', '一致性'], i18nNamespace: 'toolDnsAuthoritative', mode: 'server' },
   { path: '/dns-recursive', nameKey: 'tools.dns_recursive', icon: Shield, categoryKey: 'dns', keywords: ['dns', '递归', '开放', 'amplification'], i18nNamespace: 'toolDnsRecursive', mode: 'server' },
@@ -59,7 +63,7 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/ip-binary-hex', nameKey: 'tools.ip_binary_hex', icon: Cpu, categoryKey: 'ip', keywords: ['binary', 'hex', 'ip', '转换'], i18nNamespace: 'toolIpBinaryHex' },
   { path: '/ip-class', nameKey: 'tools.ip_class', icon: Tag, categoryKey: 'ip', keywords: ['class', 'private', 'public', '分类'], i18nNamespace: 'toolIpClass' },
   { path: '/ip-public', nameKey: 'tools.ip_public', icon: Locate, categoryKey: 'ip', keywords: ['public', '出口', '公网'], i18nNamespace: 'toolIpPublic' },
-  { path: '/ip-cdn-check', nameKey: 'tools.ip_cdn_check', icon: Globe2, categoryKey: 'ip', keywords: ['cdn', 'edge', 'ip', '节点'], i18nNamespace: 'toolIpCdnCheck', mode: 'server' },
+  { path: '/ip-cdn-check', nameKey: 'tools.ip_cdn_check', icon: Globe, categoryKey: 'ip', keywords: ['cdn', 'edge', 'ip', '节点'], i18nNamespace: 'toolIpCdnCheck', mode: 'server' },
   { path: '/ip-blacklist', nameKey: 'tools.ip_blacklist', icon: CircleOff, categoryKey: 'ip', keywords: ['ip', 'blacklist', 'dnsbl', '黑名单'], i18nNamespace: 'toolIpBlacklist', mode: 'server' },
 
   // HTTP/TCP/Ping 工具（9 个）
@@ -82,7 +86,7 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/dhcp-utilization', nameKey: 'tools.dhcp_utilization', icon: BarChart2, categoryKey: 'ipam', keywords: ['dhcp', '利用率', '地址池', '统计'], i18nNamespace: 'toolDhcpUtilization' },
   { path: '/dhcp-conflict', nameKey: 'tools.dhcp_conflict', icon: AlertTriangle, categoryKey: 'ipam', keywords: ['dhcp', '冲突', '重复', 'ip'], i18nNamespace: 'toolDhcpConflict' },
   { path: '/dhcp-discover-sim', nameKey: 'tools.dhcp_discover_sim', icon: Wifi, categoryKey: 'network', keywords: ['dhcp', 'discover', '握手', '模拟'], i18nNamespace: 'toolDhcpDiscoverSim' },
-  { path: '/dhcp-lease-analysis', nameKey: 'tools.dhcp_lease_analysis', icon: FileBarChart, categoryKey: 'network', keywords: ['dhcp', 'lease', '租约', '分析'], i18nNamespace: 'toolDhcpLeaseAnalysis' },
+  { path: '/dhcp-lease-analysis', nameKey: 'tools.dhcp_lease_analysis', icon: FileChartColumn, categoryKey: 'network', keywords: ['dhcp', 'lease', '租约', '分析'], i18nNamespace: 'toolDhcpLeaseAnalysis' },
   { path: '/dhcp-log-analysis', nameKey: 'tools.dhcp_log_analysis', icon: ScrollText, categoryKey: 'network', keywords: ['dhcp', '日志', '分析', 'syslog'], i18nNamespace: 'toolDhcpLogAnalysis' },
   { path: '/dhcp-scan', nameKey: 'tools.dhcp_scan', icon: Scan, categoryKey: 'network', keywords: ['dhcp', '扫描', '发现', 'rogue'], i18nNamespace: 'toolDhcpScan' },
 

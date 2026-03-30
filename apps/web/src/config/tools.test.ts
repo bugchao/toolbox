@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
+import i18n from '../i18n'
 import {
   TOOLS,
   TOOLS_BY_PATH,
@@ -32,6 +33,19 @@ describe('tools config', () => {
       const tool = getToolByPath('/json')!
       expect(getToolTitle(tool, t)).toBe('JSON 工具')
       expect(t).toHaveBeenCalledWith('toolJson:title')
+    })
+
+    it('falls back to nav nameKey when tool namespace is not loaded', () => {
+      const hasLoadedNamespaceSpy = vi.spyOn(i18n, 'hasLoadedNamespace').mockReturnValue(false)
+      const existsSpy = vi.spyOn(i18n, 'exists').mockReturnValue(false)
+      const t = vi.fn((key: string) => (key === 'tools.wooden_fish' ? '电子木鱼' : key))
+      const tool = getToolByPath('/wooden-fish')!
+
+      expect(getToolTitle(tool, t)).toBe('电子木鱼')
+      expect(t).toHaveBeenCalledWith('tools.wooden_fish')
+
+      hasLoadedNamespaceSpy.mockRestore()
+      existsSpy.mockRestore()
     })
 
     it('uses nameKey when no i18nNamespace', () => {

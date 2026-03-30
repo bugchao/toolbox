@@ -5,8 +5,8 @@ import type { ToolEntry } from './tools'
 import {
   Code, FileJson, Braces, CalendarClock, ExternalLink, Shuffle, Calendar,
   LockKeyhole, Binary, Terminal, Dices, SplitSquareHorizontal, RefreshCw,
-  FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GraphQLOrCode,
-  Send, Calculator, AlignLeft, Lock
+  FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GitGraph,
+  Send, Calculator, AlignLeft, Lock, Hash
 } from 'lucide-react'
 
 export const DEV_TOOLS: ToolEntry[] = [
@@ -25,7 +25,7 @@ export const DEV_TOOLS: ToolEntry[] = [
   { path: '/text-comparator', nameKey: 'tools.text_comparator', icon: SplitSquareHorizontal, categoryKey: 'dev', keywords: ['文本对比', 'diff'] },
 
   // 今日新增开发工具（5 个）
-  { path: '/graphql-playground', nameKey: 'tools.graphql_playground', icon: GraphQLOrCode, categoryKey: 'dev', keywords: ['graphql', 'api', '测试', 'schema'], i18nNamespace: 'toolGraphqlPlayground' },
+  { path: '/graphql-playground', nameKey: 'tools.graphql_playground', icon: GitGraph, categoryKey: 'dev', keywords: ['graphql', 'api', '测试', 'schema'], i18nNamespace: 'toolGraphqlPlayground' },
   { path: '/postman-lite', nameKey: 'tools.postman_lite', icon: Send, categoryKey: 'dev', keywords: ['http', 'api', '测试', '请求'], i18nNamespace: 'toolPostmanLite' },
   { path: '/rapid-tables', nameKey: 'tools.rapid_tables', icon: Calculator, categoryKey: 'dev', keywords: ['计算器', '数学', '单位转换'], i18nNamespace: 'toolRapidTables' },
   { path: '/text-cipher', nameKey: 'tools.text_cipher', icon: Lock, categoryKey: 'dev', keywords: ['加密', '解密', '编码'], i18nNamespace: 'toolTextCipher' },

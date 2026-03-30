@@ -1,10 +1,21 @@
 // 工具盒子 - 主配置文件
 // 引入各类型工具配置，合并为统一的 TOOLS 数组
 
-import type { ToolEntry } from './tools'
 import i18n from '../i18n'
 import { getToolManifestMetaByPath } from '../tooling/tool-manifests'
-import { Home, Star } from 'lucide-react'
+import { Home, Star, type LucideIcon } from 'lucide-react'
+
+export type ToolMode = 'client' | 'server' | 'hybrid'
+
+export interface ToolEntry {
+  path: string
+  nameKey: string
+  icon: LucideIcon
+  categoryKey?: string
+  mode?: ToolMode
+  keywords?: string[]
+  i18nNamespace?: string
+}
 
 // 引入分类型工具配置
 import { NETWORK_TOOLS } from './a-network-tools'
@@ -53,7 +64,11 @@ export function getToolTitle(
   if (manifestMeta?.title) return manifestMeta.title
   
   // 2. 回退到 i18n namespace（如果已加载）
-  if (tool.i18nNamespace) {
+  if (
+    tool.i18nNamespace &&
+    i18n.hasLoadedNamespace(tool.i18nNamespace) &&
+    i18n.exists('title', { ns: tool.i18nNamespace })
+  ) {
     const translated = t(`${tool.i18nNamespace}:title`)
     if (translated !== `${tool.i18nNamespace}:title`) return translated
   }
@@ -73,7 +88,11 @@ export function getToolDescription(
   if (manifestMeta?.description) return manifestMeta.description
   
   // 2. 回退到 i18n namespace（如果已加载）
-  if (tool.i18nNamespace) {
+  if (
+    tool.i18nNamespace &&
+    i18n.hasLoadedNamespace(tool.i18nNamespace) &&
+    i18n.exists('description', { ns: tool.i18nNamespace })
+  ) {
     const translated = t(`${tool.i18nNamespace}:description`)
     if (translated !== `${tool.i18nNamespace}:description`) return translated
   }
