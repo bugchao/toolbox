@@ -230,7 +230,7 @@ const TravelChecklist = lazy(() => import('@toolbox/tool-travel-checklist').then
 const TravelBudget = lazy(() => import('@toolbox/tool-travel-budget').then((m) => ({ default: m.default })))
 const SplitBill = lazy(() => import('@toolbox/tool-split-bill').then((m) => ({ default: m.default })))
 const TimezoneCalc = lazy(() => import('@toolbox/tool-timezone-calc').then((m) => ({ default: m.default })))
-const TimezoneConverter = lazy(() => import('@toolbox/tool-timezone-converter').then((m) => ({ default: m.default })))
+const TimezoneConverter = lazy(() => import('@toolbox/TimezoneConverter').then((m) => ({ default: m.default })))
 const DistanceCalc = lazy(() => import('@toolbox/tool-distance-calc').then((m) => ({ default: m.default })))
 const PackingList = lazy(() => import('@toolbox/tool-packing-list').then((m) => ({ default: m.default })))
 const RecipeFinder = lazy(() => import('@toolbox/tool-recipe-finder').then((m) => ({ default: m.default })))
