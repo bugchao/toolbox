@@ -297,7 +297,7 @@
 | ~~随机菜单生成器~~ | life | `/random-menu` | **已上线** | - | 今天吃什么 |
 | 家庭任务分配工具 | life | `/family-tasks` | 待开发 | P2 | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
-| 条形码识别 | utils | `/barcode-reader` | 待开发 | P1 | 条形码扫描与解析 |
+| 条形码识别 | utils | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
 | **── 实用：图像处理（已完成 6 个）──** | | | | | |
 | ~~图片水印~~ | utils | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
 | ~~图片裁剪~~ | utils | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
@@ -306,7 +306,7 @@
 | ~~图片拼接~~ | utils | `/image-stitcher` | **已上线** | - | 横向/纵向拼接，自定义间距 |
 | ~~图片去水印~~ | utils | `/image-watermark-remover` | **已上线** | - | 手动涂抹，AI 智能修复 |
 | **── 实用：图像处理（后续补充）──** | | | | | |
-| Canvas 图像工作台 | utils | `/image-canvas-lab` | 待开发 | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
+| Canvas 图像工作台 | utils | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
 | 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | 待开发 | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
 | 图像本地加载预览基座 | utils | `/image-local-preview` | 待开发 | P2 | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
 | 图像处理实验工作台 | utils | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
@@ -354,12 +354,12 @@
 | 专注模式 | learn | `/focus-mode` | **已上线** | P2 | 屏蔽干扰专注学习 |
 | ~~学习时长统计~~ | learn | `/study-timer` | **已上线** | - | 学习时间记录与统计 |
 | **── 学习：内容处理 ──** | | | | | |
-| 文本摘要工具 | learn | `/text-summary` | 待开发 | P1 | AI 文本自动摘要 |
-| PDF 总结工具 | learn | `/pdf-summary` | 待开发 | P1 | AI 总结 PDF 内容 |
+| 文本摘要工具 | learn | `/text-summary` | **已上线** | P1 | AI 文本自动摘要 |
+| PDF 总结工具 | learn | `/pdf-summary` | **已上线** | P1 | AI 总结 PDF 内容 |
 | 网页内容提取 | learn | `/web-extractor` | 待开发 | P2 | 提取网页正文内容 |
 | 笔记整理助手 | learn | `/note-organizer` | 待开发 | P2 | AI 辅助笔记整理 |
 | **── 学习：知识理解 ──** | | | | | |
-| 概念解释工具 | learn | `/concept-explainer` | 待开发 | P1 | AI 解释任意概念 |
+| 概念解释工具 | learn | `/concept-explainer` | **已上线** | P1 | AI 解释任意概念 |
 | 一句话讲清工具 | learn | `/one-liner` | **已上线** | P1 | 用一句话解释复杂概念 |
 | 术语词典生成 | learn | `/glossary-gen` | 待开发 | P2 | 自动生成术语词典 |
 | 知识图谱生成 | learn | `/knowledge-graph` | 待开发 | P2 | 可视化知识关系图 |
@@ -369,9 +369,9 @@
 | 编程题生成 | learn | `/coding-challenge` | 待开发 | P2 | AI 生成编程练习题 |
 | 错题本系统 | learn | `/mistake-book` | **已上线** | P2 | 错题收集与复习 |
 | **── 学习：编程学习 ──** | | | | | |
-| 代码解释器 | learn | `/code-explainer` | 待开发 | P1 | 输入代码 AI 逐行解释 |
-| Bug 分析工具 | learn | `/bug-analyzer` | 待开发 | P1 | AI 分析代码 Bug |
-| 项目结构生成器 | learn | `/project-scaffold` | 待开发 | P1 | 生成项目目录结构（Nx） |
+| 代码解释器 | learn | `/code-explainer` | **已上线** | P1 | 输入代码 AI 逐行解释 |
+| Bug 分析工具 | learn | `/bug-analyzer` | **已上线** | P1 | AI 分析代码 Bug |
+| 项目结构生成器 | learn | `/project-scaffold` | **已上线** | P1 | 生成项目目录结构（Nx） |
 | 前端面试题生成 | learn | `/frontend-interview` | 待开发 | P2 | 前端面试题库 + 生成 |
 | 系统设计练习工具 | learn | `/system-design` | 待开发 | P2 | 系统设计题练习 |
 | **── 学习：语言学习 ──** | | | | | |
