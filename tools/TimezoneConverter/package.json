@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/TimezoneConverter",
+  "name": "@toolbox/tool-timezone-converter",
   "version": "1.0.0",
   "description": "A React component for comparing multiple timezones and converting meeting times",
   "main": "src/index.tsx",
