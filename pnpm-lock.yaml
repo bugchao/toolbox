@@ -2264,6 +2264,31 @@ importers:
         specifier: ^15.1.0
         version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
 
+  tools/tool-id-photo:
+    dependencies:
+      lucide-react:
+        specifier: ^0.379.0
+        version: 0.379.0(react@18.3.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.66
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.22
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.9.3
+      vite:
+        specifier: ^5.2.11
+        version: 5.4.21(@types/node@25.5.0)
+
   tools/tool-image-cropper:
     dependencies:
       lucide-react:
