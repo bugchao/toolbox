@@ -273,7 +273,7 @@
 | ~~番茄钟 + 数据统计~~ | life | `/pomodoro` | **已上线** | - | 番茄工作法 + 专注时长统计 |
 | ~~习惯打卡 + 连续记录~~ | life | `/habit-tracker` | **已上线** | - | 习惯追踪 + 连续天数 |
 | ~~目标拆解工具（OKR mini）~~ | life | `/okr-planner` | **已上线** | - | OKR 目标拆解与追踪 |
-| 今日计划自动生成器 | life | `/daily-planner` | 待开发 | P2 | AI 生成每日计划 |
+| 今日计划自动生成器 | life | `/daily-planner` | **已上线** | P2 | AI 生成每日计划 |
 | 时间日志分析 | life | `/time-logger` | 待开发 | P2 | 时间花费分析「时间去哪了」 |
 | 拖延症评估 + 改进建议 | life | `/procrastination-test` | 待开发 | P2 | 拖延评估 + AI 建议 |
 | 每日复盘生成器 | life | `/daily-review` | 待开发 | P2 | AI 辅助每日复盘 |
@@ -286,7 +286,7 @@
 | 理财收益模拟器 | life | `/investment-sim` | 待开发 | P2 | 收益率模拟 |
 | **── 生活：健康 & 生活 ──** | | | | | |
 | ~~卡路里估算工具~~ | life | `/calorie-calc` | **已上线** | - | 食物热量估算 |
-| 睡眠质量记录 | life | `/sleep-tracker` | 待开发 | P2 | 睡眠时长 + 质量评分 |
+| 睡眠质量记录 | life | `/sleep-tracker` | **已上线** | P2 | 睡眠时长 + 质量评分 |
 | 饮水提醒工具 | life | `/water-reminder` | **已上线** | P2 | 每日饮水量追踪 |
 | 跑步数据分析 | life | `/running-tracker` | **已上线** | P2 | 配速/里程/趋势分析 |
 | 久坐提醒工具 | life | `/sedentary-reminder` | **已上线** | P2 | 久坐提醒 + 拉伸建议 |
@@ -307,7 +307,7 @@
 | ~~图片去水印~~ | utils | `/image-watermark-remover` | **已上线** | - | 手动涂抹，AI 智能修复 |
 | **── 实用：图像处理（后续补充）──** | | | | | |
 | Canvas 图像工作台 | utils | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
-| 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | 待开发 | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
+| 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | **已上线** | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
 | 图像本地加载预览基座 | utils | `/image-local-preview` | 待开发 | P2 | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
 | 图像处理实验工作台 | utils | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
 | **── 生活：开发者友好 ──** | | | | | |
