@@ -18,5 +18,7 @@ export function getToolManifestMetaByPath(
   const manifest = getToolManifestByPath(path)
   if (!manifest) return null
   const lang = language?.toLowerCase().startsWith('zh') ? 'zh' : 'en'
-  return manifest.meta[lang] || manifest.meta.zh || manifest.meta.en || null
+  const meta = manifest.meta
+  if (!meta || typeof meta !== 'object') return null
+  return meta[lang] || meta.zh || meta.en || null
 }
