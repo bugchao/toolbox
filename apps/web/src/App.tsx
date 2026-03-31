@@ -358,13 +358,6 @@ function App() {
           <Route path="/qrcode/beautifier" element={<QrCodeBeautifier />} />
           <Route path="/news" element={<HotNews />} />
           <Route path="/zipcode" element={<ZipCode />} />
-          {allManifests.map((manifest) => (
-            <Route
-              key={manifest.path}
-              path={manifest.path}
-              element={<ManifestToolRoute manifest={manifest} />}
-            />
-          ))}
           <Route path="/json" element={<JsonFormatter />} />
           <Route path="/github-info" element={<GithubInfo />} />
           <Route path="/base64" element={<Base64 />} />
@@ -569,6 +562,13 @@ function App() {
           <Route path="/meeting-scheduler" element={<MeetingScheduler />} />
           <Route path="/color-system" element={<ColorSystem />} />
           <Route path="/graphql-builder" element={<GraphqlBuilder />} />
+          {allManifests.map((manifest) => (
+            <Route
+              key={manifest.path}
+              path={manifest.path}
+              element={<ManifestToolRoute manifest={manifest} />}
+            />
+          ))}
         </Routes>
       </Suspense>
     </Layout>

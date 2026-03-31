@@ -1,5 +1,5 @@
 {
-  "name": "tool-id-photo",
+  "name": "@toolbox/tool-id-photo",
   "version": "1.0.0",
   "description": "证件照工具 - 标准尺寸生成和AI换底色",
   "main": "src/index.tsx",
