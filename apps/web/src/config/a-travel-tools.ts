@@ -4,7 +4,7 @@
 import type { ToolEntry } from './tools'
 import {
   Plane, Wallet, Percent, Watch, Milestone, Luggage, Navigation,
-  Stamp, Backpack, Compass, Languages, BookOpen, ClipboardCheck
+  Stamp, Backpack, Compass, Languages, BookOpen, ClipboardCheck, Clock
 } from 'lucide-react'
 
 export const TRAVEL_TOOLS: ToolEntry[] = [

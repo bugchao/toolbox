@@ -48,6 +48,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@toolbox/TimezoneConverter':
+        specifier: workspace:*
+        version: link:../../tools/TimezoneConverter
       '@toolbox/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -557,6 +560,31 @@ importers:
       '@toolbox/service-core':
         specifier: workspace:*
         version: link:../../packages/service-core
+
+  tools/TimezoneConverter:
+    dependencies:
+      lucide-react:
+        specifier: ^0.379.0
+        version: 0.379.0(react@18.3.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.66
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.22
+        version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.4.5
+        version: 5.9.3
+      vite:
+        specifier: ^5.2.11
+        version: 5.4.21(@types/node@25.5.0)
 
   tools/tool-api-availability:
     dependencies:
@@ -6169,6 +6197,11 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
+  lucide-react@0.379.0:
+    resolution: {integrity: sha512-KcdeVPqmhRldldAAgptb8FjIunM2x2Zy26ZBh1RsEUcdLIvsEmbcw7KpzFYUy5BbpGeWhPu9Z9J5YXfStiXwhg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+
   lucide-react@0.577.0:
     resolution: {integrity: sha512-4LjoFv2eEPwYDPg/CUdBJQSDfPyzXCRrVW1X7jrx/trgxnxkHFjnVZINbzvzxjN70dxychOfg+FTYwBiS3pQ5A==}
     peerDependencies:
@@ -9519,6 +9552,10 @@ snapshots:
       yallist: 3.1.1
 
   lucide-react@0.263.1(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  lucide-react@0.379.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 

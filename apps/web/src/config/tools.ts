@@ -3,6 +3,7 @@
 
 import i18n from '../i18n'
 import { getToolManifestMetaByPath } from '../tooling/tool-manifests'
+import { allManifests } from '../tooling/tool-manifests'
 import { Home, Star, type LucideIcon } from 'lucide-react'
 
 export type ToolMode = 'client' | 'server' | 'hybrid'
@@ -27,13 +28,9 @@ import { AI_TOOLS } from './a-ai-tools'
 import { QUERY_TOOLS } from './a-query-tools'
 import { LEARNING_TOOLS } from './a-learning-tools'
 
-// 合并所有工具配置
-export const TOOLS: ToolEntry[] = [
-  // 基础导航（2 个）
+const _staticTools: ToolEntry[] = [
   { path: '/', nameKey: 'home', icon: Home },
   { path: '/favorites', nameKey: 'favorites', icon: Star },
-  
-  // 各类型工具
   ...NETWORK_TOOLS,
   ...DEV_TOOLS,
   ...LIFE_TOOLS,
@@ -43,6 +40,21 @@ export const TOOLS: ToolEntry[] = [
   ...QUERY_TOOLS,
   ...LEARNING_TOOLS,
 ]
+
+const _staticPaths = new Set(_staticTools.map((t) => t.path))
+
+const _manifestTools: ToolEntry[] = allManifests
+  .filter((m) => m.categoryKey && m.icon && !_staticPaths.has(m.path))
+  .map((m) => ({
+    path: m.path,
+    nameKey: m.id,
+    icon: m.icon as LucideIcon,
+    categoryKey: m.categoryKey,
+    keywords: m.keywords,
+    i18nNamespace: m.namespace,
+  }))
+
+export const TOOLS: ToolEntry[] = [..._staticTools, ..._manifestTools]
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))
 

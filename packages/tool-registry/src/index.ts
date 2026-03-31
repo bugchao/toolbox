@@ -16,6 +16,8 @@ export interface ToolManifest {
   path: string
   namespace: string
   mode?: ToolMode
+  categoryKey?: string
+  icon?: ComponentType
   keywords?: string[]
   meta: Record<ToolLocaleCode, ToolManifestMeta>
   loadComponent: () => Promise<{ default: ComponentType }>
@@ -33,4 +35,3 @@ export function normalizeToolLocale(language?: string): ToolLocaleCode {
 export function getToolManifestMeta(manifest: ToolManifest, language?: string): ToolManifestMeta {
   return manifest.meta[normalizeToolLocale(language)] ?? manifest.meta.zh
 }
-

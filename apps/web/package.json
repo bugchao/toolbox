@@ -114,7 +114,8 @@
     "@toolbox/tool-http-debugger": "workspace:*",
     "@toolbox/tool-travel-cost-estimate": "workspace:*",
     "@toolbox/tool-multi-city-route": "workspace:*",
-    "@toolbox/tool-visa-info": "workspace:*"
+    "@toolbox/tool-visa-info": "workspace:*",
+    "@toolbox/TimezoneConverter": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

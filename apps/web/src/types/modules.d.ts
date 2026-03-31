@@ -29,3 +29,8 @@ declare module 'nanoid' {
   export function nanoid(size?: number): string
   export function customAlphabet(alphabet: string, defaultSize?: number): (size?: number) => string
 }
+
+declare module 'virtual:toolbox-manifests' {
+  import type { ToolManifest } from '@toolbox/tool-registry'
+  export const allManifests: ToolManifest[]
+}

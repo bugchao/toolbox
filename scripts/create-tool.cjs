@@ -88,12 +88,16 @@ export default ${pascal}
 `
 
 const manifestTs = `import { defineToolManifest } from '@toolbox/tool-registry'
+import { Wrench } from 'lucide-react'
 
 const tool${pascal}Manifest = defineToolManifest({
   id: 'tool-${name}',
   path: '/${name}',
   namespace: 'tool${pascal}',
   mode: 'client',
+  categoryKey: 'utility',   // TODO: change to: network | dev | life | travel | utility | ai | query | learning
+  icon: Wrench,             // TODO: change to appropriate lucide-react icon
+  keywords: ['${name}'],
   meta: {
     zh: {
       title: '${pascal}',
@@ -140,13 +144,10 @@ fs.writeFileSync(path.join(dir, 'tool.manifest.ts'), manifestTs, 'utf8')
 fs.writeFileSync(path.join(dir, 'src', 'locales', 'zh.json'), zhLocale, 'utf8')
 fs.writeFileSync(path.join(dir, 'src', 'locales', 'en.json'), enLocale, 'utf8')
 
-console.log(`Created: tools/tool-${name}/`)
-console.log('Next:')
+console.log(`✓ Created: tools/tool-${name}/`)
+console.log('Next steps:')
 console.log(`  1. pnpm install`)
-console.log(`  2. apps/web: add "@toolbox/tool-${name}": "workspace:*" and route in App.tsx`)
-console.log(`  3. apps/web/src/tooling/tool-manifests.ts: register tool.manifest.ts`)
-console.log(`  4. apps/web/vite.config.ts: add '@toolbox/tool-${name}' alias if this package is source-resolved`)
-console.log(`  5. config/tools.ts: register nav, category, keywords and mode`)
-console.log(`  6. If backend is needed, add a domain service module under services/* and mount it in api-gateway`)
-console.log(`  7. See docs/ARCHITECTURE_GRADUAL.md`)
+console.log(`  2. Edit tools/tool-${name}/src/${pascal}.tsx (replace TODOs with real implementation)`)
+console.log(`  3. Edit tools/tool-${name}/tool.manifest.ts (set categoryKey, icon, title, description, keywords)`)
+console.log(`  The tool will appear in routing and nav automatically.`)
 process.exit(0)
