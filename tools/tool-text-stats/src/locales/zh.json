@@ -1,0 +1,22 @@
+{
+  "title": "文本统计",
+  "description": "统计字符、词数、段落、句子和预估阅读时间",
+  "inputLabel": "输入文本",
+  "placeholder": "粘贴或输入需要分析的文本内容",
+  "summaryTitle": "统计概览",
+  "tipsTitle": "说明",
+  "stats": {
+    "characters": "字符数",
+    "charactersNoSpaces": "字符数（不含空格）",
+    "words": "词数",
+    "lines": "行数",
+    "sentences": "句子数",
+    "paragraphs": "段落数",
+    "readingMinutes": "预计阅读（分钟）"
+  },
+  "tips": [
+    "英文词数按空白分词统计，中文更适合关注字符和段落。",
+    "预计阅读时间按每分钟 220 词估算。",
+    "句子数会按中英文常见句末标点进行统计。"
+  ]
+}
