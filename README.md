@@ -153,8 +153,8 @@ export APP_NAME=toolbox
 export HOST_PORT=80
 export CONTAINER_PORT=3000
 export IMAGE_TAG=toolbox-manual-001
-export AWS_ACCOUNT_ID=123456789012
-export ECR_REGISTRY=123456789012.dkr.ecr.ap-southeast-1.amazonaws.com
+export AWS_ACCOUNT_ID=123456789712
+export ECR_REGISTRY=123456789712.dkr.ecr.ap-southeast-1.amazonaws.com
 ```
 
 ### 执行部署
