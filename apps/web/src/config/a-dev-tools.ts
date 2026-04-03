@@ -23,9 +23,14 @@ export const DEV_TOOLS: ToolEntry[] = [
   { path: '/code', nameKey: 'tools.code', icon: Terminal, categoryKey: 'dev', keywords: ['代码', '格式化'] },
   { path: '/uuid', nameKey: 'tools.uuid', icon: Dices, categoryKey: 'dev', keywords: ['uuid'] },
   { path: '/text-comparator', nameKey: 'tools.text_comparator', icon: SplitSquareHorizontal, categoryKey: 'dev', keywords: ['文本对比', 'diff'] },
+  { path: '/ascii-art', nameKey: 'tools.ascii_art', icon: Wand2, categoryKey: 'dev', keywords: ['ascii', '字符画', '文本图像'] },
+  { path: '/morse-code', nameKey: 'tools.morse_code', icon: Code, categoryKey: 'dev', keywords: ['摩斯', '编码', '解码'] },
+  { path: '/password-strength', nameKey: 'tools.password_strength', icon: LockKeyhole, categoryKey: 'dev', keywords: ['密码', '强度', '安全'] },
+  { path: '/word-count', nameKey: 'tools.word_count', icon: AlignLeft, categoryKey: 'dev', keywords: ['字数', '文本', '统计'] },
 
   // 今日新增开发工具（5 个）
   { path: '/graphql-playground', nameKey: 'tools.graphql_playground', icon: GitGraph, categoryKey: 'dev', keywords: ['graphql', 'api', '测试', 'schema'], i18nNamespace: 'toolGraphqlPlayground' },
+  { path: '/graphql-builder', nameKey: 'tools.graphql_builder', icon: GitGraph, categoryKey: 'dev', keywords: ['graphql', 'schema', 'query', 'builder'] },
   { path: '/postman-lite', nameKey: 'tools.postman_lite', icon: Send, categoryKey: 'dev', keywords: ['http', 'api', '测试', '请求'], i18nNamespace: 'toolPostmanLite' },
   { path: '/rapid-tables', nameKey: 'tools.rapid_tables', icon: Calculator, categoryKey: 'dev', keywords: ['计算器', '数学', '单位转换'], i18nNamespace: 'toolRapidTables' },
   { path: '/text-cipher', nameKey: 'tools.text_cipher', icon: Lock, categoryKey: 'dev', keywords: ['加密', '解密', '编码'], i18nNamespace: 'toolTextCipher' },

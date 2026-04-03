@@ -1,0 +1,70 @@
+{
+  "title": "拍照点推荐",
+  "description": "第一版以风格化机位建议为主，适合出发前快速定拍摄计划。",
+  "fields": {
+    "city": "目的地气质",
+    "style": "拍摄风格",
+    "light": "理想光线"
+  },
+  "options": {
+    "historic": "历史城区",
+    "coastal": "海边城市",
+    "mountain": "山地目的地",
+    "street": "街头记录",
+    "portrait": "人像出片",
+    "editorial": "杂志感",
+    "sunrise": "日出",
+    "sunset": "日落",
+    "bluehour": "蓝调时刻"
+  },
+  "styles": {
+    "street": "街头记录",
+    "portrait": "人像",
+    "editorial": "编辑感"
+  },
+  "lights": {
+    "sunrise": "日出光线",
+    "sunset": "日落光线",
+    "bluehour": "蓝调光线"
+  },
+  "recommendTitle": "建议优先勘景 3 个点位",
+  "recommendDescription": "已按 {{city}} 的常见出片逻辑给出第一版机位建议。",
+  "headers": {
+    "spot": "点位",
+    "best": "适合时间/风格",
+    "note": "构图提示"
+  },
+  "spots": {
+    "alley": "老街巷口",
+    "square": "中心广场边缘",
+    "rooftop": "高处露台",
+    "pier": "码头尽头",
+    "breakwater": "防波堤",
+    "cliff": "海崖步道",
+    "lookout": "山顶观景台",
+    "trail": "林间步道",
+    "cabin": "山间木屋"
+  },
+  "notes": {
+    "alley": "人少时段更适合拍纵深",
+    "square": "广场边缘比正中心更容易控背景",
+    "rooftop": "适合杂志感城市层次",
+    "pier": "日落逆光更有氛围",
+    "breakwater": "海浪强时更适合长焦压缩",
+    "cliff": "天气稳定时画面更干净",
+    "lookout": "晨雾和层次最加分",
+    "trail": "适合边走边拍故事感",
+    "cabin": "暖色灯光和冷色环境对比明显"
+  },
+  "angles": {
+    "leadingLines": "利用路面或建筑线条把人物带入画面中心。",
+    "framePeople": "让主体靠近画面边缘，留出环境叙事空间。",
+    "useLayering": "前景、中景、远景都留一点，层次会更强。",
+    "reflectiveWater": "借水面反射补充画面完整度。",
+    "longLens": "用长焦压缩海面和人物距离。",
+    "negativeSpace": "给天空或海面多一点留白。",
+    "depthFog": "顺着雾气或山脊线制造景深。",
+    "pathStory": "让道路成为叙事主线。",
+    "warmContrast": "利用暖色光源做人物和环境反差。"
+  }
+}

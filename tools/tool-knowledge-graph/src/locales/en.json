@@ -1,0 +1,18 @@
+{
+  "title": "Knowledge Graph",
+  "description": "This first version turns lightweight relationship syntax into a graph skeleton for study notes and reading maps.",
+  "inputTitle": "Relationship text",
+  "placeholder": "Example: Problem -> Cause : identifies",
+  "noticeTitle": "Graph skeleton created",
+  "noticeDescription": "{{nodes}} nodes and {{edges}} relationships were extracted.",
+  "stats": {
+    "nodes": "Nodes",
+    "edges": "Edges"
+  },
+  "headers": {
+    "from": "From",
+    "relation": "Relation",
+    "to": "To"
+  },
+  "defaultRelation": "relates to"
+}

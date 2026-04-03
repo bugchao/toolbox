@@ -1,0 +1,131 @@
+{
+  "title": "System Design",
+  "description": "Generate a system-design outline with phased thinking, core modules, and tradeoffs.",
+  "fields": {
+    "scenario": "Scenario",
+    "scale": "Target scale",
+    "priority": "Primary constraint"
+  },
+  "options": {
+    "feed": "Feed",
+    "chat": "Realtime chat",
+    "analytics": "Analytics",
+    "regional": "Regional",
+    "national": "National",
+    "global": "Global",
+    "latency": "Low latency",
+    "consistency": "Strong consistency",
+    "cost": "Cost efficiency"
+  },
+  "noticeTitle": "Design sketch ready",
+  "noticeDescription": "This version centers on {{scenario}}, targets {{scale}} scale, and prioritizes {{priority}}.",
+  "stats": {
+    "modules": "Core modules",
+    "scale": "Scale",
+    "priority": "Constraint"
+  },
+  "timelineTitle": "Suggested design sequence",
+  "headers": {
+    "module": "Module",
+    "role": "Responsibility",
+    "tradeoff": "Key tradeoff"
+  },
+  "phaseTimes": {
+    "0": "Phase 1",
+    "1": "Phase 2",
+    "2": "Phase 3",
+    "3": "Phase 4"
+  },
+  "phases": {
+    "0": {
+      "title": "Define the read/write path",
+      "description": "At {{scale}} scale, clarify the critical path before drawing more boxes."
+    },
+    "1": {
+      "title": "Add data and cache layers",
+      "description": "Define hot paths, cache hit strategy, and invalidation rules."
+    },
+    "2": {
+      "title": "Add reliability controls",
+      "description": "Cover rate limiting, degradation, retries, monitoring, and isolation."
+    },
+    "3": {
+      "title": "Close with an evolution plan",
+      "description": "Clarify what ships first and how the design grows later."
+    }
+  },
+  "modules": {
+    "feed": {
+      "0": {
+        "title": "Write gateway",
+        "role": "Handles content writes, validation, and idempotency."
+      },
+      "1": {
+        "title": "Timeline service",
+        "role": "Builds user-specific feed results with paging and ordering."
+      },
+      "2": {
+        "title": "Cache layer",
+        "role": "Caches hot home and timeline responses to reduce source pressure."
+      },
+      "3": {
+        "title": "Async fan-out",
+        "role": "Processes follower delivery, recommendation refresh, and stats backfill."
+      }
+    },
+    "chat": {
+      "0": {
+        "title": "Connection layer",
+        "role": "Maintains connections, auth, and session routing."
+      },
+      "1": {
+        "title": "Message storage",
+        "role": "Preserves durability, history replay, and ordering."
+      },
+      "2": {
+        "title": "Delivery service",
+        "role": "Handles online delivery, offline replay, and retries."
+      },
+      "3": {
+        "title": "State sync",
+        "role": "Synchronizes read state, unread counters, and conversation summaries."
+      }
+    },
+    "analytics": {
+      "0": {
+        "title": "Ingestion layer",
+        "role": "Receives events and batch imports in a unified path."
+      },
+      "1": {
+        "title": "Stream/batch processing",
+        "role": "Aggregates, cleans, and precomputes metrics."
+      },
+      "2": {
+        "title": "Query service",
+        "role": "Serves low-latency data queries for report dimensions."
+      },
+      "3": {
+        "title": "Visualization layer",
+        "role": "Manages chart configuration, export, and permissions."
+      }
+    },
+    "latency": {
+      "0": "Keep the critical path short and stable, even if some eventual consistency is deferred.",
+      "1": "Place cache close to the hottest path and be explicit about invalidation.",
+      "2": "Move fan-out or heavy computation off the request path whenever possible.",
+      "3": "Track P95 and P99, not only averages."
+    },
+    "consistency": {
+      "0": "Define the source of truth first so multi-writer drift does not spread.",
+      "1": "Be explicit about ordering, dedupe, and replay semantics.",
+      "2": "Cache hit rate is not the primary goal if correctness suffers.",
+      "3": "The failure plan must explain how state remains trustworthy."
+    },
+    "cost": {
+      "0": "Start simple and expand only where real bottlenecks appear.",
+      "1": "Avoid introducing high-maintenance components too early.",
+      "2": "Tiered storage and on-demand compute are often cheaper than keeping everything hot.",
+      "3": "Make capacity and eviction strategy explicit to prevent cost drift."
+    }
+  }
+}

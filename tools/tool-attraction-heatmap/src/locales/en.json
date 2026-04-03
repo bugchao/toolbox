@@ -1,0 +1,24 @@
+{
+  "title": "Attraction Heatmap",
+  "description": "The first version uses a rule-based model to estimate crowd heat so you can avoid obvious peaks.",
+  "fields": {
+    "scene": "Attraction type",
+    "dayType": "Day profile",
+    "arrival": "Planned arrival"
+  },
+  "options": {
+    "museum": "Museum / gallery",
+    "waterfront": "Waterfront / scenic point",
+    "market": "Market / shopping zone",
+    "weekday": "Weekday",
+    "weekend": "Weekend",
+    "holiday": "Holiday"
+  },
+  "recommendationTitle": "Best arrival window: {{hour}}",
+  "recommendationDescription": "Your current plan scores {{current}}, while the calmer window is about {{best}}.",
+  "stats": {
+    "bestSlot": "Lowest heat",
+    "arrivalHeat": "Planned heat",
+    "peakSlot": "Peak hour"
+  }
+}

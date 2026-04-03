@@ -1,0 +1,99 @@
+{
+  "title": "Frontend Interview",
+  "description": "Build a frontend interview set from focus area, candidate level, and number of rounds.",
+  "fields": {
+    "focus": "Focus area",
+    "level": "Candidate level",
+    "rounds": "Question count"
+  },
+  "options": {
+    "react": "React",
+    "css": "CSS & layout",
+    "performance": "Performance",
+    "architecture": "Architecture",
+    "junior": "Junior",
+    "mid": "Mid-level",
+    "senior": "Senior"
+  },
+  "roundCount": "{{count}} questions",
+  "coachTitle": "Interviewer note",
+  "coachDescription": "This set leans toward {{focus}} and follows the depth expected from a {{level}} candidate.",
+  "noticeTitle": "Interview pack ready",
+  "noticeDescription": "{{count}} questions generated, centered on {{focus}}.",
+  "stats": {
+    "focus": "Focus",
+    "level": "Level",
+    "rounds": "Count"
+  },
+  "headers": {
+    "category": "Category",
+    "question": "Primary question",
+    "followUp": "Follow-up"
+  },
+  "categories": {
+    "react": "Components & state",
+    "css": "Layout & styling",
+    "performance": "Loading & rendering",
+    "architecture": "Engineering & collaboration"
+  },
+  "questions": {
+    "react": {
+      "0": "How would you split component boundaries for a form page so state does not bounce across too many layers?",
+      "1": "When would you choose controlled inputs, and when would uncontrolled inputs be acceptable?",
+      "2": "How do you explain the real risk behind incorrect useEffect dependencies?",
+      "3": "If a list stutters on every keystroke, where would you investigate first?",
+      "4": "How would you reduce breakage when upgrading a shared component library?",
+      "5": "How would you design an accessible modal component for broad reuse?"
+    },
+    "css": {
+      "0": "When a design shifts heavily across screen sizes, how would you organize responsive rules?",
+      "1": "When do you reach for grid instead of flex?",
+      "2": "How do you avoid style leakage across deep component trees?",
+      "3": "How do you keep mixed text, image, and button layouts from overflowing across languages?",
+      "4": "How would you implement theme color, dark mode, and semantic color tokens?",
+      "5": "How do you shrink the search space when debugging a strange z-index issue?"
+    },
+    "performance": {
+      "0": "When first paint is slow, how do you separate network, script execution, and rendering bottlenecks?",
+      "1": "When does lazy loading create real value, and when does it only defer the problem?",
+      "2": "How would you monitor and explain long-task jank?",
+      "3": "When is memoization actually worth it in a React page?",
+      "4": "How do you balance image clarity and loading speed at scale?",
+      "5": "After shipping a performance optimization, how do you prove it helped?"
+    },
+    "architecture": {
+      "0": "In a shared frontend repository, how would you divide platform layers from product layers?",
+      "1": "What maintenance cost do you see when utility helpers grow without ownership?",
+      "2": "What minimum integration standard would you require for a new tool entering the app?",
+      "3": "When would you pull logic from a page into ui-kit or a shared runtime?",
+      "4": "How do you design a frontend architecture that supports gradual migration without slowing delivery?",
+      "5": "How do you tell whether an abstraction helps the team or only adds cognitive load?"
+    }
+  },
+  "followUps": {
+    "junior": {
+      "0": "Can you walk through a simple example?",
+      "1": "Do you have a bug you hit personally that illustrates this?",
+      "2": "If you had to fix a page now, what would your first step be?",
+      "3": "What would the user feel most directly if this went wrong?",
+      "4": "How would you verify your conclusion?",
+      "5": "How would you explain this more plainly to a teammate?"
+    },
+    "mid": {
+      "0": "How would the solution change if the constraints were a little messier?",
+      "1": "How do you balance maintainability with delivery speed here?",
+      "2": "If the team had multiple implementations already, how would you drive alignment?",
+      "3": "Where is this approach most likely to fail?",
+      "4": "How would you add monitoring or regression protection here?",
+      "5": "If this became a team standard, what would the most important rule be?"
+    },
+    "senior": {
+      "0": "If this needed to become platform capability, how would you draw the boundaries?",
+      "1": "How would you tackle this in a legacy system without a rewrite?",
+      "2": "What is the key tradeoff in this decision?",
+      "3": "If team bandwidth were limited, what would you solve first and why?",
+      "4": "How would you persuade product or management to invest here?",
+      "5": "From an org perspective, what mechanism really needs to be established behind this problem?"
+    }
+  }
+}

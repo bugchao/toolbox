@@ -1,0 +1,27 @@
+{
+  "title": "路线地图可视化",
+  "description": "第一版先解决排程问题：把停靠点和节奏整理成一条清晰的路线时间线。",
+  "fields": {
+    "stops": "停靠点列表",
+    "start": "出发时间",
+    "pace": "出行节奏"
+  },
+  "placeholders": {
+    "stops": "每行一个停靠点，例如：Hotel / Museum / Cafe / Riverfront"
+  },
+  "options": {
+    "fast": "紧凑",
+    "balanced": "均衡",
+    "relaxed": "宽松"
+  },
+  "summaryTitle": "路线总览",
+  "summaryDescription": "共 {{count}} 个停靠点，预计 {{start}} 出发，约在 {{end}} 进入最后一站。",
+  "stats": {
+    "stopCount": "停靠点数",
+    "firstDeparture": "出发时间",
+    "lastArrival": "末站时间"
+  },
+  "timelineTitle": "路线时间线",
+  "segmentDescription": "建议停留约 {{stayGap}} 分钟，转场约 {{moveGap}} 分钟。",
+  "lastStop": "最后一站，可作为收尾或晚餐安排。"
+}

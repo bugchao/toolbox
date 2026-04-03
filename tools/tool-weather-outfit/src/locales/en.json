@@ -1,0 +1,54 @@
+{
+  "title": "Weather Outfit",
+  "description": "Skip the forecast dependency and build an outfit suggestion from felt temperature, weather, and travel context.",
+  "fields": {
+    "temperature": "Feels-like temperature",
+    "weather": "Weather type",
+    "wind": "Wind",
+    "activity": "Activity"
+  },
+  "options": {
+    "sunny": "Sunny",
+    "cloudy": "Cloudy",
+    "rain": "Rainy",
+    "light": "Light",
+    "breezy": "Breezy",
+    "strong": "Strong",
+    "city": "City commute",
+    "walk": "Walking day",
+    "outdoor": "Outdoor activity"
+  },
+  "resultTitle": "Outfit suggestion",
+  "sections": {
+    "layering": "Layering",
+    "accessories": "Accessories"
+  },
+  "comfort": {
+    "hot": "It will feel warm, so keep fabrics light and breathable.",
+    "pleasant": "Comfortable conditions. Light layering should be enough.",
+    "cool": "There is a cool edge in the air, so choose easy on-off layers.",
+    "cold": "It is cold enough that warmth should win over style-first choices."
+  },
+  "items": {
+    "base_tee": "Breathable tee",
+    "light_top": "Light long-sleeve or sweatshirt",
+    "layer_knit": "Knit or sweatshirt base",
+    "light_jacket": "Light jacket",
+    "thermal_base": "Thermal base layer",
+    "coat": "Warm coat",
+    "umbrella": "Compact umbrella",
+    "sunglasses": "Sunglasses",
+    "compact_bag": "Compact day bag",
+    "wind_shell": "Wind shell",
+    "light_scarf": "Light scarf",
+    "sneakers": "Sneakers",
+    "sport_shoes": "Grip-friendly shoes",
+    "city_shoes": "City shoes"
+  },
+  "packingTitle": "Extra reminders",
+  "packingTips": [
+    "When indoor and outdoor temperatures differ a lot, removable middle layers matter most.",
+    "Rain and wind often change comfort more than the headline temperature.",
+    "If you will walk for hours, shoe comfort usually matters more than outerwear styling."
+  ]
+}

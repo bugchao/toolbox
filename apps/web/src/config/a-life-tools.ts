@@ -12,7 +12,9 @@ import {
 
 export const LIFE_TOOLS: ToolEntry[] = [
   // 健康生活（6 个）
+  { path: '/bmi', nameKey: 'tools.bmi', icon: Heart, categoryKey: 'life', keywords: ['bmi', '健康', '体重', '身高'] },
   { path: '/pomodoro', nameKey: 'tools.pomodoro', icon: TimerOff, categoryKey: 'life', keywords: ['番茄钟', '专注', '计时', 'pomodoro'], i18nNamespace: 'toolPomodoro' },
+  { path: '/pomodoro-pro', nameKey: 'tools.pomodoro_pro', icon: Timer, categoryKey: 'life', keywords: ['番茄钟', '进阶', '专注', '统计'] },
   { path: '/habit-tracker', nameKey: 'tools.habit_tracker', icon: CalendarCheck, categoryKey: 'life', keywords: ['习惯', '打卡', '连续', '追踪'], i18nNamespace: 'toolHabitTracker' },
   { path: '/calorie-calc', nameKey: 'tools.calorie_calc', icon: Flame, categoryKey: 'life', keywords: ['卡路里', '热量', '饮食', '营养'], i18nNamespace: 'toolCalorieCalc' },
   { path: '/water-reminder', nameKey: 'tools.water_reminder', icon: Droplets, categoryKey: 'life', keywords: ['饮水', '喝水', '健康', 'water'], i18nNamespace: 'toolWaterReminder' },
@@ -22,9 +24,12 @@ export const LIFE_TOOLS: ToolEntry[] = [
   // 财务工具（5 个）
   { path: '/salary-calc', nameKey: 'tools.salary_calc', icon: DollarSign, categoryKey: 'life', keywords: ['工资', '税后', '五险一金', '个税'], i18nNamespace: 'toolSalaryCalc' },
   { path: '/currency-converter', nameKey: 'tools.currency_converter', icon: ArrowLeftRight, categoryKey: 'life', keywords: ['汇率', '换算', '货币', '外汇'], i18nNamespace: 'toolCurrencyConverter' },
+  { path: '/currency-history', nameKey: 'tools.currency_history', icon: ArrowLeftRight, categoryKey: 'life', keywords: ['汇率', '历史', '趋势', '货币'] },
   { path: '/expense-tracker', nameKey: 'tools.expense_tracker', icon: Receipt, categoryKey: 'life', keywords: ['记账', '支出', '消费', '财务'], i18nNamespace: 'toolExpenseTracker' },
   { path: '/subscription-manager', nameKey: 'tools.subscription_manager', icon: CreditCard, categoryKey: 'life', keywords: ['订阅', 'netflix', 'ai', '费用'], i18nNamespace: 'toolSubscriptionManager' },
   { path: '/installment-calc', nameKey: 'tools.installment_calc', icon: Coins, categoryKey: 'life', keywords: ['分期', '贷款', '还款', '利率'], i18nNamespace: 'toolInstallmentCalc' },
+  { path: '/loan-calc', nameKey: 'tools.loan_calc', icon: Coins, categoryKey: 'life', keywords: ['贷款', '月供', '利率', '房贷'] },
+  { path: '/investment-sim', nameKey: 'tools.investment_sim', icon: Percent, categoryKey: 'life', keywords: ['投资', '复利', '收益', '模拟'] },
 
   // 生活实用（7 个）
   { path: '/random-menu', nameKey: 'tools.random_menu', icon: UtensilsCrossed, categoryKey: 'life', keywords: ['菜单', '吃什么', '随机', '美食'], i18nNamespace: 'toolRandomMenu' },
@@ -35,4 +40,7 @@ export const LIFE_TOOLS: ToolEntry[] = [
   { path: '/wooden-fish', nameKey: 'tools.wooden_fish', icon: HeartPulse, categoryKey: 'life', keywords: ['木鱼', '功德', '解压'], i18nNamespace: 'toolWoodenFish' },
   { path: '/life-progress', nameKey: 'tools.life_progress', icon: Timer, categoryKey: 'life', keywords: ['人生', '进度条', '生命'], i18nNamespace: 'toolLifeProgress' },
   { path: '/time-logger', nameKey: 'tools.time_logger', icon: Clock, categoryKey: 'life', keywords: ['时间', '日志', '分析', '效率'], i18nNamespace: 'toolTimeLogger' },
+  { path: '/expiry-reminder', nameKey: 'tools.expiry_reminder', icon: CalendarRange, categoryKey: 'life', keywords: ['到期', '提醒', '保质期', '日期'] },
+  { path: '/family-tasks', nameKey: 'tools.family_tasks', icon: ListChecks, categoryKey: 'life', keywords: ['家庭', '任务', '协作', '清单'] },
+  { path: '/fridge-inventory', nameKey: 'tools.fridge_inventory', icon: Backpack, categoryKey: 'life', keywords: ['冰箱', '库存', '食材', '过期'] },
 ]

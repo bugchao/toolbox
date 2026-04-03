@@ -1,0 +1,18 @@
+{
+  "title": "知识图谱生成",
+  "description": "目前用轻量文本语法生成关系图骨架，适合做课堂笔记和阅读提纲整理。",
+  "inputTitle": "输入关系文本",
+  "placeholder": "格式示例：Problem -> Cause : identifies",
+  "noticeTitle": "图谱骨架已建立",
+  "noticeDescription": "当前提取到 {{nodes}} 个节点，{{edges}} 条关系。",
+  "stats": {
+    "nodes": "节点数",
+    "edges": "关系数"
+  },
+  "headers": {
+    "from": "起点",
+    "relation": "关系",
+    "to": "终点"
+  },
+  "defaultRelation": "关联"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Note Organizer",
+  "description": "Turn a blob of raw notes into clearer blocks so later summarizing or AI work starts from structure.",
+  "inputTitle": "Raw notes",
+  "placeholder": "Paste meeting notes, study notes, or rough thoughts here…",
+  "noticeTitle": "Structure created",
+  "noticeDescription": "The current rule set prioritizes tasks, questions, and reusable insights.",
+  "stats": {
+    "tasks": "Tasks",
+    "questions": "Questions",
+    "insights": "Insights"
+  },
+  "sections": {
+    "tasks": "Action items",
+    "questions": "Open questions",
+    "insights": "Insights"
+  },
+  "empty": "Nothing detected yet"
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Route Map",
+  "description": "The first version focuses on scheduling clarity: turn your stops into a usable route timeline.",
+  "fields": {
+    "stops": "Stops",
+    "start": "Start time",
+    "pace": "Travel pace"
+  },
+  "placeholders": {
+    "stops": "One stop per line, for example: Hotel / Museum / Cafe / Riverfront"
+  },
+  "options": {
+    "fast": "Fast",
+    "balanced": "Balanced",
+    "relaxed": "Relaxed"
+  },
+  "summaryTitle": "Route overview",
+  "summaryDescription": "{{count}} stops planned. Start at {{start}} and expect the final stop around {{end}}.",
+  "stats": {
+    "stopCount": "Stops",
+    "firstDeparture": "Start",
+    "lastArrival": "Final stop"
+  },
+  "timelineTitle": "Route timeline",
+  "segmentDescription": "Plan about {{stayGap}} minutes on-site and {{moveGap}} minutes for transfers.",
+  "lastStop": "Final stop. Good candidate for dinner or a slow wrap-up."
+}

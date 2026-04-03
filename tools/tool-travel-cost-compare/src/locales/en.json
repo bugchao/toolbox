@@ -1,0 +1,23 @@
+{
+  "title": "Travel Cost Compare",
+  "description": "Compare transport, hotel, food, and local travel costs side by side before picking a destination.",
+  "inputTitle": "Destination budgets",
+  "addDestination": "Add destination",
+  "daysLabel": "Trip length (days)",
+  "cityPlaceholder": "City name",
+  "remove": "Remove",
+  "fields": {
+    "transport": "Transport",
+    "hotel": "Hotel",
+    "food": "Food",
+    "local": "Local transit"
+  },
+  "recommendationTitle": "Lowest budget right now: {{city}}",
+  "recommendationDescription": "Estimated total for {{days}} days is about {{total}}.",
+  "tableTitle": "Cost ranking",
+  "headers": {
+    "city": "Destination",
+    "daily": "Daily cost",
+    "total": "Total cost"
+  }
+}

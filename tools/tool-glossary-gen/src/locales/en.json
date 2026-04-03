@@ -1,0 +1,14 @@
+{
+  "title": "Glossary Generator",
+  "description": "The first version focuses on candidate extraction and starter definitions that you can refine later.",
+  "inputTitle": "Source material",
+  "placeholder": "Paste article text, notes, or study material…",
+  "noticeTitle": "Glossary created",
+  "noticeDescription": "{{count}} candidate terms were extracted from the current passage.",
+  "headers": {
+    "term": "Term",
+    "count": "Count",
+    "definition": "Starter definition"
+  },
+  "definitionTemplate": "A concept connected to “{{term}}”. Refine it with the source context for a sharper definition."
+}

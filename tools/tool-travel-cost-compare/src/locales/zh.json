@@ -1,0 +1,23 @@
+{
+  "title": "旅行成本对比",
+  "description": "输入交通、住宿、餐饮和本地交通预算，快速判断哪个目的地更适合当前预算。",
+  "inputTitle": "目的地预算输入",
+  "addDestination": "新增目的地",
+  "daysLabel": "旅行天数",
+  "cityPlaceholder": "城市名",
+  "remove": "删除",
+  "fields": {
+    "transport": "交通",
+    "hotel": "住宿",
+    "food": "餐饮",
+    "local": "本地交通"
+  },
+  "recommendationTitle": "当前最省预算：{{city}}",
+  "recommendationDescription": "按 {{days}} 天估算，总成本约 {{total}}。",
+  "tableTitle": "成本排名",
+  "headers": {
+    "city": "目的地",
+    "daily": "日均花费",
+    "total": "总成本"
+  }
+}

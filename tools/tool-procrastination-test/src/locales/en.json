@@ -1,0 +1,62 @@
+{
+  "title": "Procrastination Test",
+  "description": "Use six quick prompts to understand whether procrastination is driven by avoidance, planning gaps, or energy drain.",
+  "introTitle": "How the last week actually felt",
+  "intro": "Rate each statement from 1 to 5. Go with your first honest answer.",
+  "reset": "Reset",
+  "scoreTitle": "Procrastination risk",
+  "suggestionsTitle": "Recommended next moves",
+  "stats": {
+    "starting": "Starting resistance",
+    "planning": "Planning drift",
+    "energy": "Energy drain"
+  },
+  "resultBands": {
+    "low": {
+      "title": "Low procrastination risk",
+      "description": "Your rhythm looks stable. Delays seem more situational than structural."
+    },
+    "medium": {
+      "title": "Some procrastination patterns",
+      "description": "The issue is still manageable, but it is starting to weaken consistency."
+    },
+    "high": {
+      "title": "Procrastination is affecting delivery",
+      "description": "Without a workflow change, tasks will keep slipping later."
+    },
+    "critical": {
+      "title": "Procrastination load is high",
+      "description": "Focus first on task shrinkage, recovery, and a gentler execution rhythm."
+    }
+  },
+  "suggestions": {
+    "low": [
+      "Keep a fixed starting ritual, even if it is only a three-minute draft.",
+      "Reserve high-energy time for tasks that are hardest to begin.",
+      "End each day by defining tomorrow's first visible output."
+    ],
+    "medium": [
+      "Break work into 15-minute chunks and commit only to the first chunk.",
+      "Use a timer to reduce switching and early browsing drift.",
+      "Track when procrastination happens so the trigger becomes visible."
+    ],
+    "high": [
+      "Replace vague goals with one concrete deliverable per session.",
+      "Create an earlier checkpoint so urgency does not arrive all at once.",
+      "Limit active work to one main task and one backup task."
+    ],
+    "critical": [
+      "Rebuild basic recovery first. Low sleep and overload can look like procrastination.",
+      "Set just one must-do item per day before adding extras.",
+      "Add external accountability through check-ins, sharing progress, or review rituals."
+    ]
+  },
+  "questions": [
+    { "id": "taskStart", "label": "When an important task is waiting, I start with side chores instead.", "hint": "Formatting, inbox cleanup, desk tidying, and similar warmups." },
+    { "id": "distraction", "label": "Once work feels difficult, I get pulled into my phone or browser quickly.", "hint": "Especially in the first few minutes." },
+    { "id": "planning", "label": "I delay because I cannot see a clear first step.", "hint": "The task feels too large to enter." },
+    { "id": "deadline", "label": "My focus only spikes once the deadline becomes urgent.", "hint": "Before that, I keep pushing it back." },
+    { "id": "fatigue", "label": "Even when I know what matters, I feel too drained to start.", "hint": "This is more fatigue than lack of importance." },
+    { "id": "overwhelm", "label": "Too many open obligations make me freeze instead of act.", "hint": "Pressure rises and motion drops." }
+  ]
+}

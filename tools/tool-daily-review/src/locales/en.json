@@ -1,0 +1,41 @@
+{
+  "title": "Daily Review",
+  "description": "Capture wins, blockers, lessons, and gratitude, then turn them into a tighter next-day focus plan.",
+  "fields": {
+    "wins": "What went well today",
+    "blockers": "What got stuck",
+    "lesson": "Most important lesson",
+    "gratitude": "What you appreciate today",
+    "energy": "Overall energy"
+  },
+  "placeholders": {
+    "wins": "One item per line, such as: closed a tricky bug, clarified a blurry scope",
+    "blockers": "One item per line, such as: waiting on API confirmation, context switching",
+    "lesson": "For example: hardest task first in the morning worked better",
+    "gratitude": "For example: a teammate jumped in and validated the fix"
+  },
+  "energyScale": {
+    "1": "Very low",
+    "2": "Low",
+    "3": "Okay",
+    "4": "Good",
+    "5": "High"
+  },
+  "output": {
+    "summaryTitle": "Review summary",
+    "tomorrowTitle": "Three priorities for tomorrow",
+    "winCount": "Wins",
+    "blockerCount": "Blockers",
+    "energy": "Energy"
+  },
+  "generated": {
+    "summary": "You logged {{wins}} wins and {{blockers}} blockers today, with overall energy at “{{energy}}”. Keep the rhythm, then focus the next session on one visible step forward.",
+    "empty": "Add a few notes from today and this panel will shape them into an actionable review.",
+    "keepDoing": "Repeat what worked today: {{item}}",
+    "clearBlocker": "Remove one blocker early: {{item}}",
+    "applyLesson": "Turn today's lesson into tomorrow's action: {{item}}",
+    "keepRhythm": "Schedule one easy-to-start task first to create momentum",
+    "protectFocus": "Protect one uninterrupted block for the highest-value task",
+    "endWithPlan": "Close tomorrow with another five-minute review so the loop stays tight"
+  }
+}

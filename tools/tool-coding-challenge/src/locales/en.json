@@ -1,0 +1,106 @@
+{
+  "title": "Coding Challenge",
+  "description": "Generate a practical coding exercise from topic, difficulty, and available time.",
+  "fields": {
+    "topic": "Challenge topic",
+    "difficulty": "Difficulty",
+    "minutes": "Available time",
+    "constraints": "Extra constraints"
+  },
+  "placeholders": {
+    "constraints": "For example: no external state library, mobile-first, include retry handling."
+  },
+  "options": {
+    "frontend": "Frontend build",
+    "backend": "Backend API",
+    "algorithm": "Algorithms",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "minuteCount": "{{count}} min",
+  "constraintSummary": "Challenge constraints: {{constraints}}",
+  "tasksTitle": "Task breakdown",
+  "timelineTitle": "Suggested pacing",
+  "criteriaTitle": "Evaluation criteria",
+  "stats": {
+    "topic": "Topic",
+    "difficulty": "Difficulty",
+    "duration": "Duration"
+  },
+  "titles": {
+    "frontend": {
+      "beginner": "Build a task panel with clear UI state",
+      "intermediate": "Implement an extensible form workflow interface",
+      "advanced": "Design a collaborative UI with offline replay support"
+    },
+    "backend": {
+      "beginner": "Build a small but reliable REST task API",
+      "intermediate": "Design a notification service with retry and rate limits",
+      "advanced": "Build a multi-tenant async job system with idempotent writes"
+    },
+    "algorithm": {
+      "beginner": "Implement an interval merger with edge-case validation",
+      "intermediate": "Design a priority-aware task scheduling algorithm",
+      "advanced": "Implement a high-throughput cache eviction simulator"
+    }
+  },
+  "summaries": {
+    "frontend": "Use {{minutes}} minutes to ship a page with sound state handling and complete interaction details.",
+    "backend": "Use {{minutes}} minutes to define APIs, core data flow, and failure handling with clear reasoning.",
+    "algorithm": "Use {{minutes}} minutes to build a working solution and explain complexity, edge cases, and optimizations."
+  },
+  "tasks": {
+    "frontend": {
+      "0": "Sketch the page structure and core state first, then connect the primary user flow.",
+      "1": "Add loading, empty, error, and validation states instead of shipping only the happy path.",
+      "2": "Close with reusable components and explain why the split makes sense."
+    },
+    "backend": {
+      "0": "Clarify the resource model, key APIs, and state transitions first.",
+      "1": "Handle idempotency, retries, permission boundaries, and logs.",
+      "2": "Explain what breaks first if traffic grows by 10x."
+    },
+    "algorithm": {
+      "0": "Start with a correct baseline before reaching for optimization.",
+      "1": "Call out complexity, extreme inputs, and degradation paths.",
+      "2": "Explain how you would evolve the solution if constraints tightened."
+    }
+  },
+  "criteria": {
+    "beginner": {
+      "0": "The implementation is complete, clearly named, and usable end to end.",
+      "1": "Basic edge cases are covered rather than only sample input.",
+      "2": "The solution can be explained in simple, concrete language."
+    },
+    "intermediate": {
+      "0": "The structure is clean and appropriately abstracted.",
+      "1": "Error handling and state transitions show engineering discipline.",
+      "2": "Alternative options and tradeoffs can be explained."
+    },
+    "advanced": {
+      "0": "The solution balances design quality, performance, and extensibility.",
+      "1": "Risks are surfaced with a progressive evolution path.",
+      "2": "There is a clear answer for changing constraints, not just a static solution."
+    }
+  },
+  "timeline": {
+    "time": "{{minutes}} min",
+    "0": {
+      "title": "Scope fast",
+      "description": "Set the delivery boundary early so {{difficulty}} work does not drift."
+    },
+    "1": {
+      "title": "Finish the core path",
+      "description": "Get the main flow working before polishing support cases."
+    },
+    "2": {
+      "title": "Patch edges",
+      "description": "Handle validation, failure states, and recovery paths."
+    },
+    "3": {
+      "title": "Review and explain",
+      "description": "Use the last minutes to summarize tradeoffs, risks, and next steps."
+    }
+  }
+}

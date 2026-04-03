@@ -1,0 +1,54 @@
+{
+  "title": "天气穿搭建议",
+  "description": "不依赖外部天气服务，直接按体感温度和出行场景给你一套可执行穿搭方案。",
+  "fields": {
+    "temperature": "体感温度",
+    "weather": "天气类型",
+    "wind": "风力",
+    "activity": "出行场景"
+  },
+  "options": {
+    "sunny": "晴天",
+    "cloudy": "多云",
+    "rain": "雨天",
+    "light": "微风",
+    "breezy": "有风",
+    "strong": "强风",
+    "city": "城市通勤",
+    "walk": "步行逛街",
+    "outdoor": "户外活动"
+  },
+  "resultTitle": "今日穿搭建议",
+  "sections": {
+    "layering": "穿搭层次",
+    "accessories": "配件提醒"
+  },
+  "comfort": {
+    "hot": "今天偏热，建议轻薄透气，避免厚重叠穿。",
+    "pleasant": "体感舒适，适合轻量叠穿，留一点温差余量。",
+    "cool": "有凉意，建议外层可穿脱，别只穿单层。",
+    "cold": "偏冷，建议先保暖再考虑风格层次。"
+  },
+  "items": {
+    "base_tee": "速干或纯棉短袖",
+    "light_top": "长袖衬衫或薄卫衣",
+    "layer_knit": "针织/卫衣打底",
+    "light_jacket": "轻外套",
+    "thermal_base": "保暖内层",
+    "coat": "厚外套",
+    "umbrella": "折叠伞",
+    "sunglasses": "太阳镜",
+    "compact_bag": "轻便包",
+    "wind_shell": "防风层",
+    "light_scarf": "轻围巾",
+    "sneakers": "轻便运动鞋",
+    "sport_shoes": "防滑鞋",
+    "city_shoes": "通勤鞋"
+  },
+  "packingTitle": "补充提醒",
+  "packingTips": [
+    "如果室内外温差大，优先选择可随时脱下的中层。",
+    "雨天和强风更影响体感，配件常比主衣服更关键。",
+    "长时间步行时，鞋子舒适度比外套风格更重要。"
+  ]
+}

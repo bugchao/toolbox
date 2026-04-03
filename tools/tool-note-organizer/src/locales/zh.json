@@ -1,0 +1,19 @@
+{
+  "title": "笔记整理助手",
+  "description": "把一团原始记录先压成结构化块，后续无论是总结还是 AI 加工都会更轻松。",
+  "inputTitle": "原始笔记",
+  "placeholder": "把会议记录、学习笔记、碎片想法直接贴进来…",
+  "noticeTitle": "结构化已完成",
+  "noticeDescription": "当前规则会优先识别任务、问题和可复用洞察。",
+  "stats": {
+    "tasks": "任务",
+    "questions": "问题",
+    "insights": "洞察"
+  },
+  "sections": {
+    "tasks": "可执行任务",
+    "questions": "待追问问题",
+    "insights": "保留洞察"
+  },
+  "empty": "当前没有识别到内容"
+}

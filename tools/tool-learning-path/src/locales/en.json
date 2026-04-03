@@ -1,0 +1,35 @@
+{
+  "title": "Learning Path",
+  "description": "Breaking a goal into phases is usually more sustainable than collecting material without a route.",
+  "fields": {
+    "goal": "Learning goal",
+    "level": "Current level",
+    "weeks": "Time window"
+  },
+  "options": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "weekCount": "{{count}} weeks",
+  "noticeDescription": "This path is generated for {{level}} level over {{weeks}} weeks.",
+  "stats": {
+    "level": "Level",
+    "duration": "Duration",
+    "phases": "Phases"
+  },
+  "timelineTitle": "Phase plan",
+  "weekRange": "Week {{start}}-{{end}}",
+  "phases": {
+    "foundation": "Build the foundations ({{weeks}})",
+    "practice": "Targeted practice ({{weeks}})",
+    "integration": "Apply in real scenarios ({{weeks}})",
+    "showcase": "Ship and review ({{weeks}})"
+  },
+  "descriptions": {
+    "0": "Build terms, core ideas, and a minimum workable mental model.",
+    "1": "Practice around the sharpest weak spots and record mistakes.",
+    "2": "Transfer the knowledge into projects, cases, or real tasks.",
+    "3": "Lock the learning in with a share-out, artifact, or reflective summary."
+  }
+}

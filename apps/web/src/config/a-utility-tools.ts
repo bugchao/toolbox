@@ -23,9 +23,13 @@ export const UTILITY_TOOLS: ToolEntry[] = [
   { path: '/markdown', nameKey: 'tools.markdown', icon: FileCode, categoryKey: 'utils', keywords: ['markdown'] },
   { path: '/pdf-tools', nameKey: 'tools.pdf_tools', icon: File, categoryKey: 'utils', keywords: ['pdf'] },
   { path: '/sheet-editor', nameKey: 'tools.sheet_editor', icon: FileSpreadsheet, categoryKey: 'utils', keywords: ['csv', 'excel', '表格'] },
+  { path: '/id-card-parser', nameKey: 'tools.id_card_parser', icon: FileBadge, categoryKey: 'utils', keywords: ['身份证', 'OCR', '识别', '证件'] },
+  { path: '/text-to-speech', nameKey: 'tools.text_to_speech', icon: Waves, categoryKey: 'utils', keywords: ['语音', '朗读', 'tts', '文本'] },
 
   // 创意工具（5 个）
   { path: '/color-picker', nameKey: 'tools.color_picker', icon: Palette, categoryKey: 'utils', keywords: ['颜色'] },
+  { path: '/color-blind-sim', nameKey: 'tools.color_blind_sim', icon: Heart, categoryKey: 'utils', keywords: ['色盲', '无障碍', '模拟', '视觉'] },
+  { path: '/color-system', nameKey: 'tools.color_system', icon: Palette, categoryKey: 'utils', keywords: ['配色', '色板', '设计系统', '颜色'] },
   { path: '/unit-converter', nameKey: 'tools.unit_converter', icon: Waves, categoryKey: 'utils', keywords: ['单位换算'] },
   { path: '/short-link', nameKey: 'tools.short_link', icon: Scissors, categoryKey: 'utils', keywords: ['短链接'] },
   { path: '/resume-generator', nameKey: 'tools.resume', icon: FileBadge, categoryKey: 'utils', keywords: ['简历'] },

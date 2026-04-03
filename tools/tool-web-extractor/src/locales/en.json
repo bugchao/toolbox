@@ -1,0 +1,17 @@
+{
+  "title": "Web Extractor",
+  "description": "A front-end first version for pulling content structure from copied HTML or article text.",
+  "inputTitle": "Paste HTML or article content",
+  "placeholder": "Paste HTML, article text, or a snippet…",
+  "notice": "The current input has been reduced into title, headings, and a short excerpt.",
+  "stats": {
+    "headings": "Headings",
+    "sentences": "Excerpt lines",
+    "characters": "Body chars"
+  },
+  "sections": {
+    "headings": "Extracted headings",
+    "excerpt": "Excerpt"
+  },
+  "empty": "No extractable content yet"
+}

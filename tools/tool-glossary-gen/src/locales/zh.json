@@ -1,0 +1,14 @@
+{
+  "title": "术语词典生成",
+  "description": "第一版先做术语候选抽取和基础定义模板，适合作为后续人工润色或 AI 扩写的起点。",
+  "inputTitle": "输入学习材料",
+  "placeholder": "粘贴一段文章、笔记或教材内容…",
+  "noticeTitle": "术语表已生成",
+  "noticeDescription": "当前共识别 {{count}} 个高频词条候选。",
+  "headers": {
+    "term": "术语",
+    "count": "出现次数",
+    "definition": "基础定义"
+  },
+  "definitionTemplate": "与“{{term}}”相关的概念，建议结合上下文补充更准确的定义。"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "网页内容提取",
+  "description": "适合在纯前端环境下先做结构抽取，把网页内容压缩成可继续处理的骨架。",
+  "inputTitle": "输入网页源码或正文片段",
+  "placeholder": "粘贴 HTML、正文或网页片段…",
+  "notice": "已根据当前输入提取出标题、层级和摘要句。",
+  "stats": {
+    "headings": "标题层级",
+    "sentences": "摘要句数",
+    "characters": "正文字符"
+  },
+  "sections": {
+    "headings": "提取到的标题",
+    "excerpt": "摘要片段"
+  },
+  "empty": "当前没有可提取内容"
+}

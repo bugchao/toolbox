@@ -1,0 +1,15 @@
+{
+  "title": "Image Local Preview",
+  "description": "Read image content, dimensions, format, and last-updated metadata entirely in the browser.",
+  "uploadTitle": "Choose a local image",
+  "uploadDescription": "Common image formats are supported and files stay inside the browser.",
+  "emptyTitle": "Waiting for an image",
+  "emptyDescription": "Once you pick a file, metadata appears on the left and the preview renders on the right.",
+  "placeholder": "No image loaded yet. Start by choosing one from the left panel.",
+  "fields": {
+    "format": "File type",
+    "size": "File size",
+    "dimensions": "Pixel size",
+    "updated": "Last modified"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Crowd Forecast",
+  "description": "Use it for rough planning first: understand the crowd zone before you lock the trip schedule.",
+  "fields": {
+    "place": "Venue type",
+    "weather": "Weather",
+    "holiday": "Holiday period",
+    "groupSize": "Group size"
+  },
+  "options": {
+    "themepark": "Theme park",
+    "station": "Transit hub",
+    "shopping": "Shopping district",
+    "clear": "Stable weather",
+    "hot": "Hot and sticky",
+    "rain": "Rainy",
+    "no": "No",
+    "yes": "Yes"
+  },
+  "groupSizeValue": "{{count}} travelers",
+  "forecastTitle": "Crowd estimate",
+  "forecastDescription": "The crowd index is about {{score}}/100, so aim for around {{hour}} if possible.",
+  "stats": {
+    "crowdIndex": "Crowd index",
+    "bestHour": "Best hour",
+    "queueEstimate": "Queue estimate"
+  },
+  "minutes": "min"
+}

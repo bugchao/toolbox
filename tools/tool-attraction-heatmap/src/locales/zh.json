@@ -1,0 +1,24 @@
+{
+  "title": "景点热度分析",
+  "description": "第一版用规则模型估算热度，适合做出行时间判断和避峰安排。",
+  "fields": {
+    "scene": "景点类型",
+    "dayType": "日期类型",
+    "arrival": "计划到达时间"
+  },
+  "options": {
+    "museum": "博物馆/展馆",
+    "waterfront": "滨水/观景点",
+    "market": "集市/商圈",
+    "weekday": "工作日",
+    "weekend": "周末",
+    "holiday": "节假日"
+  },
+  "recommendationTitle": "建议优先在 {{hour}} 到达",
+  "recommendationDescription": "当前计划热度 {{current}}，最优时段热度约 {{best}}。",
+  "stats": {
+    "bestSlot": "低峰时段",
+    "arrivalHeat": "当前热度",
+    "peakSlot": "最挤时段"
+  }
+}

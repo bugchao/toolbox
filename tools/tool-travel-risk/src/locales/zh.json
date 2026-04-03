@@ -1,0 +1,38 @@
+{
+  "title": "旅行风险提醒",
+  "description": "先做粗粒度风险判断，再决定是否需要更详细的目的地信息核查。",
+  "fields": {
+    "destination": "目的地类型",
+    "season": "出行季节",
+    "healthNeed": "健康需求",
+    "tripStyle": "行程风格"
+  },
+  "options": {
+    "urban": "成熟城市",
+    "coastal": "海岛/滨海",
+    "remote": "偏远地区",
+    "shoulder": "平季",
+    "peak": "旺季",
+    "extreme": "极端天气期",
+    "standard": "标准成人",
+    "family": "家庭出行",
+    "sensitive": "敏感体质",
+    "balanced": "节奏均衡",
+    "budget": "预算优先",
+    "aggressive": "高密度行程"
+  },
+  "assessmentTitle": "风险综合判断",
+  "assessmentDescription": "当前综合风险分约 {{score}}/100，建议据此决定是否补做更细核查。",
+  "stats": {
+    "safety": "安全环境",
+    "health": "健康负担",
+    "logistics": "行程压力",
+    "weather": "天气扰动"
+  },
+  "checklistTitle": "出行前提醒",
+  "checklists": {
+    "success": ["提前存好离线地图和紧急联系人。", "把证件和支付工具分开放。", "出发前再看一次天气变化。"],
+    "warning": ["预留更多弹性时间，避免把景点安排得太满。", "检查常备药和补给是否方便获得。", "尽量提前锁定交通和住宿。"],
+    "danger": ["建议确认医疗、交通和天气的备用方案。", "减少跨城频率，把关键移动安排在白天。", "如有老人或儿童同行，先确认紧急求助资源。"]
+  }
+}

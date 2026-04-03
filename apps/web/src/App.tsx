@@ -6,6 +6,7 @@ import { ManifestToolRoute } from './tooling/ManifestToolRoute'
 import { allManifests } from './tooling/tool-manifests'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
+import Changelog from './pages/Changelog'
 import HotNews from './pages/HotNews'
 import ZipCode from './pages/ZipCode'
 import Base64 from './pages/Base64'
@@ -354,6 +355,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/changelog" element={<Changelog />} />
           <Route path="/qrcode/generate" element={<QrCodeGenerator />} />
           <Route path="/qrcode/read" element={<QrCodeReader />} />
           <Route path="/qrcode/beautifier" element={<QrCodeBeautifier />} />

@@ -8,7 +8,7 @@ import {
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
-  Radio, Shield, Database, Network,
+  Radio, Shield, Database, Network, ScrollText,
   Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
@@ -22,10 +22,21 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-const NAV_ITEMS = TOOLS.map((t) => ({
+const EXTRA_NAV_ITEMS = [
+  {
+    path: '/changelog',
+    href: '/changelog',
+    nameKey: 'changelog',
+    categoryKey: undefined,
+    icon: ScrollText,
+    mode: 'client' as const,
+  },
+]
+
+const NAV_ITEMS = [...EXTRA_NAV_ITEMS, ...TOOLS.map((t) => ({
   ...t,
   href: t.path,
-}))
+}))]
 
 const CATEGORIES = [
   { id: 'qrcode', nameKey: 'category_qrcode', icon: QrCode },
@@ -55,6 +66,7 @@ const MAX_TABS = 12
 function getBreadcrumb(path: string, t: (k: string) => string, getTitle: (path: string) => string): { href: string; label: string }[] {
   if (path === '/') return [{ href: '/', label: t('home') }]
   if (path === '/favorites') return [{ href: '/favorites', label: t('favorites') }]
+  if (path === '/changelog') return [{ href: '/changelog', label: t('changelog') }]
   const tool = getToolByPath(path)
   if (!tool) return [{ href: path, label: path }]
   const title = getTitle(path)
@@ -137,7 +149,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return acc
   }, {} as Record<string, (typeof NAV_ITEMS)[number][]>)
 
+  const getNavLabel = (item: (typeof NAV_ITEMS)[number]) => {
+    if (item.path === '/changelog') return t('changelog')
+    return getToolTitle(item as (typeof TOOLS)[number], t)
+  }
+
   const getTitleForPath = (path: string) => {
+    if (path === '/changelog') return t('changelog')
     const tool = getToolByPath(path)
     return tool ? getToolTitle(tool, t) : path
   }
@@ -225,7 +243,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               key={item.href}
               to={item.href}
               onClick={() => setSidebarOpen(false)}
-              title={sidebarCollapsed ? getToolTitle(item, t) : undefined}
+              title={sidebarCollapsed ? getNavLabel(item) : undefined}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-200'
@@ -233,7 +251,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               } ${sidebarCollapsed ? 'justify-center' : ''}`}
             >
               <Icon className="w-5 h-5 shrink-0" />
-              {!sidebarCollapsed && <span className="truncate">{getToolTitle(item, t)}</span>}
+              {!sidebarCollapsed && <span className="truncate">{getNavLabel(item)}</span>}
             </Link>
           )
         })}

@@ -1,0 +1,38 @@
+{
+  "title": "Travel Risk",
+  "description": "Use this as a coarse pre-check before you spend time on destination-specific detail research.",
+  "fields": {
+    "destination": "Destination profile",
+    "season": "Season",
+    "healthNeed": "Health needs",
+    "tripStyle": "Trip style"
+  },
+  "options": {
+    "urban": "Mature city",
+    "coastal": "Coastal / island",
+    "remote": "Remote area",
+    "shoulder": "Shoulder season",
+    "peak": "Peak season",
+    "extreme": "Extreme weather window",
+    "standard": "Standard adult",
+    "family": "Family trip",
+    "sensitive": "Sensitive condition",
+    "balanced": "Balanced pace",
+    "budget": "Budget first",
+    "aggressive": "Packed itinerary"
+  },
+  "assessmentTitle": "Overall risk reading",
+  "assessmentDescription": "Your current blended travel-risk score is about {{score}}/100.",
+  "stats": {
+    "safety": "Safety environment",
+    "health": "Health load",
+    "logistics": "Logistics pressure",
+    "weather": "Weather disruption"
+  },
+  "checklistTitle": "Pre-trip checklist",
+  "checklists": {
+    "success": ["Save offline maps and emergency contacts.", "Split documents and payment methods.", "Recheck the forecast shortly before departure."],
+    "warning": ["Leave more schedule slack and reduce overbooking.", "Check medication and supply availability in advance.", "Lock transport and stay earlier if possible."],
+    "danger": ["Confirm backup plans for health care, transport, and weather disruption.", "Reduce city-hopping and move key transfers into daylight.", "If children or seniors are joining, verify support resources first."]
+  }
+}

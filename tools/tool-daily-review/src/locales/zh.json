@@ -1,0 +1,41 @@
+{
+  "title": "每日复盘生成器",
+  "description": "把成就、阻碍、教训和感谢拆开记录，系统会帮你提炼出第二天最值得抓的三件事。",
+  "fields": {
+    "wins": "今天做成了什么",
+    "blockers": "今天卡住了什么",
+    "lesson": "今天最重要的教训",
+    "gratitude": "今天感谢什么",
+    "energy": "今天的总体能量"
+  },
+  "placeholders": {
+    "wins": "每行写一条，例如：完成首页改版、把一个难 bug 定位清楚",
+    "blockers": "每行写一条，例如：接口确认慢、需求范围反复变化",
+    "lesson": "例如：上午先做最难的一件事，效率明显更高",
+    "gratitude": "例如：同事及时帮我做了交叉验证"
+  },
+  "energyScale": {
+    "1": "很低",
+    "2": "偏低",
+    "3": "一般",
+    "4": "不错",
+    "5": "很高"
+  },
+  "output": {
+    "summaryTitle": "今日回看",
+    "tomorrowTitle": "明日三件事",
+    "winCount": "完成项",
+    "blockerCount": "阻碍项",
+    "energy": "能量状态"
+  },
+  "generated": {
+    "summary": "今天记录了 {{wins}} 项进展、{{blockers}} 个阻碍，整体能量处于「{{energy}}」。建议先稳住节奏，再聚焦一个最重要的推进点。",
+    "empty": "先写一点今天发生的事，右侧会自动整理成一份可执行复盘。",
+    "keepDoing": "继续放大今天有效的方法：{{item}}",
+    "clearBlocker": "优先拆掉一个阻碍：{{item}}",
+    "applyLesson": "把今天的教训转成明天的行动：{{item}}",
+    "keepRhythm": "先安排一个最容易启动的任务，建立开工惯性",
+    "protectFocus": "给明天上午预留一段不被打断的深度工作时间",
+    "endWithPlan": "明天下班前再做一次 5 分钟复盘，形成闭环"
+  }
+}

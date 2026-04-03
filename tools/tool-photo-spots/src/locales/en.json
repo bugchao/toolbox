@@ -1,0 +1,70 @@
+{
+  "title": "Photo Spots",
+  "description": "The first version is style-led: use it to build a fast location shortlist before your trip.",
+  "fields": {
+    "city": "Destination mood",
+    "style": "Shooting style",
+    "light": "Preferred light"
+  },
+  "options": {
+    "historic": "Historic district",
+    "coastal": "Coastal city",
+    "mountain": "Mountain destination",
+    "street": "Street documentary",
+    "portrait": "Portrait",
+    "editorial": "Editorial",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "bluehour": "Blue hour"
+  },
+  "styles": {
+    "street": "Street",
+    "portrait": "Portrait",
+    "editorial": "Editorial"
+  },
+  "lights": {
+    "sunrise": "Sunrise light",
+    "sunset": "Sunset light",
+    "bluehour": "Blue-hour light"
+  },
+  "recommendTitle": "Start with these three spot types",
+  "recommendDescription": "These first-pass spot ideas follow the visual rhythm of {{city}}.",
+  "headers": {
+    "spot": "Spot",
+    "best": "Best use",
+    "note": "Composition note"
+  },
+  "spots": {
+    "alley": "Old alley entrance",
+    "square": "Square edge",
+    "rooftop": "Rooftop terrace",
+    "pier": "Pier tip",
+    "breakwater": "Breakwater path",
+    "cliff": "Cliff walk",
+    "lookout": "Summit lookout",
+    "trail": "Forest trail",
+    "cabin": "Mountain cabin"
+  },
+  "notes": {
+    "alley": "Best when the lane is still quiet",
+    "square": "Edges are easier to control than the center",
+    "rooftop": "Strong for layered city-editorial frames",
+    "pier": "Best with backlit sunset atmosphere",
+    "breakwater": "Long lens compression works well here",
+    "cliff": "Clean weather keeps the frame minimal",
+    "lookout": "Mist and layered ridges add depth",
+    "trail": "Good for walk-through storytelling",
+    "cabin": "Warm lights against cool air make strong contrast"
+  },
+  "angles": {
+    "leadingLines": "Use lines in the lane to pull the subject into the center.",
+    "framePeople": "Keep the subject off-center so the place still tells the story.",
+    "useLayering": "Leave room for foreground, middle ground, and distance.",
+    "reflectiveWater": "Use water reflections to complete the frame.",
+    "longLens": "Compress the sea and subject with a longer lens.",
+    "negativeSpace": "Give the sky or sea more breathing room.",
+    "depthFog": "Let fog and ridge lines build depth.",
+    "pathStory": "Use the path as the narrative spine of the frame.",
+    "warmContrast": "Play warm light sources against cool surroundings."
+  }
+}

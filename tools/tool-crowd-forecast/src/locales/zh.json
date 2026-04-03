@@ -1,0 +1,29 @@
+{
+  "title": "人流预测",
+  "description": "适合先做行程判断：先知道拥挤度大概在哪个区间，再决定是否错峰。",
+  "fields": {
+    "place": "场所类型",
+    "weather": "天气情况",
+    "holiday": "是否节假日",
+    "groupSize": "同行人数"
+  },
+  "options": {
+    "themepark": "主题乐园",
+    "station": "交通枢纽",
+    "shopping": "商场/商业街",
+    "clear": "天气稳定",
+    "hot": "高温闷热",
+    "rain": "下雨",
+    "no": "否",
+    "yes": "是"
+  },
+  "groupSizeValue": "{{count}} 人同行",
+  "forecastTitle": "拥挤度预测",
+  "forecastDescription": "当前拥挤指数约 {{score}}/100，建议尽量在 {{hour}} 前后到达。",
+  "stats": {
+    "crowdIndex": "拥挤指数",
+    "bestHour": "建议时段",
+    "queueEstimate": "排队预估"
+  },
+  "minutes": "分钟"
+}

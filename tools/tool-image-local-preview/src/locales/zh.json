@@ -1,0 +1,15 @@
+{
+  "title": "本地图像预览",
+  "description": "基于浏览器本地能力读取图片内容、尺寸、格式与更新时间，适合后续图像工具联动。",
+  "uploadTitle": "选择本地图片",
+  "uploadDescription": "支持常见图片格式，文件只在当前浏览器中处理。",
+  "emptyTitle": "等待载入图片",
+  "emptyDescription": "选中图片后，左侧会显示元信息，右侧展示大图预览。",
+  "placeholder": "还没有图片，先从左侧选择一张吧。",
+  "fields": {
+    "format": "文件类型",
+    "size": "文件大小",
+    "dimensions": "像素尺寸",
+    "updated": "最后修改"
+  }
+}

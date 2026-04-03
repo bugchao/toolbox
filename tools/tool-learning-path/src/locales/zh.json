@@ -1,0 +1,35 @@
+{
+  "title": "学习路径规划",
+  "description": "先把目标拆成阶段，再决定每天学什么，比一上来堆资料更容易坚持。",
+  "fields": {
+    "goal": "学习目标",
+    "level": "当前水平",
+    "weeks": "总周期"
+  },
+  "options": {
+    "beginner": "入门",
+    "intermediate": "进阶",
+    "advanced": "强化"
+  },
+  "weekCount": "{{count}} 周",
+  "noticeDescription": "当前按 {{level}} 水平、{{weeks}} 周周期生成路线。",
+  "stats": {
+    "level": "当前水平",
+    "duration": "总周期",
+    "phases": "阶段数"
+  },
+  "timelineTitle": "阶段路线",
+  "weekRange": "第 {{start}}-{{end}} 周",
+  "phases": {
+    "foundation": "搭建基础理解（{{weeks}}）",
+    "practice": "做针对性练习（{{weeks}}）",
+    "integration": "串联到真实场景（{{weeks}}）",
+    "showcase": "输出成果与复盘（{{weeks}}）"
+  },
+  "descriptions": {
+    "0": "建立术语、核心原理和最小可操作框架。",
+    "1": "围绕关键薄弱点反复练习并记录错因。",
+    "2": "把知识迁移到项目、案例或真实任务里。",
+    "3": "用分享、作品或总结把知识固化下来。"
+  }
+}

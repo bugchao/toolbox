@@ -1,0 +1,80 @@
+{
+  "title": "Deep Dive Q&A",
+  "description": "Build layered questions and answer scaffolds for review, explanation, or teaching.",
+  "fields": {
+    "topic": "Topic",
+    "audience": "Audience",
+    "depth": "Depth"
+  },
+  "placeholders": {
+    "topic": "For example: React Server Components, vector databases, payment risk control"
+  },
+  "options": {
+    "team": "Team peers",
+    "stakeholder": "Business / leadership",
+    "learner": "Learners",
+    "quick": "Quick recap",
+    "deep": "Deep explanation",
+    "expert": "Expert mode"
+  },
+  "hintTitle": "Usage hint",
+  "hintDescription": "If you are explaining {{topic}} to {{audience}}, start with why it matters before how it works.",
+  "noticeTitle": "Question ladder ready",
+  "noticeDescription": "A {{depth}} question ladder has been generated around {{topic}}.",
+  "stats": {
+    "topic": "Topic",
+    "audience": "Audience",
+    "depth": "Depth"
+  },
+  "headers": {
+    "layer": "Layer",
+    "question": "Question",
+    "answer": "Answer scaffold"
+  },
+  "layers": {
+    "0": "Entry point",
+    "1": "Mechanism",
+    "2": "Tradeoff",
+    "3": "Adoption"
+  },
+  "questions": {
+    "quick": {
+      "0": "What core problem does {{topic}} actually solve?",
+      "1": "If we skipped it, where would the team likely pay the price first?",
+      "2": "What is the main cost of adopting it?",
+      "3": "What should the first pilot look like in a real project?"
+    },
+    "deep": {
+      "0": "What assumptions sit behind {{topic}}, and why do they hold?",
+      "1": "How does the core mechanism work, and how does data or state move through it?",
+      "2": "Compared with common alternatives, where is the real tradeoff?",
+      "3": "What boundaries and risks should be clarified before adopting it here?"
+    },
+    "expert": {
+      "0": "Which assumptions around {{topic}} break first when scale or constraints change?",
+      "1": "If the critical path runs into performance or consistency trouble, which signals would you inspect first?",
+      "2": "What migration strategy is most realistic in a legacy system?",
+      "3": "If this became platform capability, how would you define boundaries and ownership?"
+    }
+  },
+  "answers": {
+    "team": {
+      "0": "Start with the problem context, then show which repeated work or uncertainty it removes.",
+      "1": "Explain the core mechanism through one concrete data flow instead of jumping straight to abstraction.",
+      "2": "State the gains and the costs together so the team can judge whether it is worth adopting.",
+      "3": "Close with pilot scope, success metrics, and rollback conditions."
+    },
+    "stakeholder": {
+      "0": "Frame it first in terms of efficiency, stability, or cost before technical detail.",
+      "1": "Use one or two concrete business cases to show why the investment matters.",
+      "2": "Translate risk into time, quality, or resource cost so decisions are easier.",
+      "3": "Offer a staged path to show this is not a rewrite bet."
+    },
+    "learner": {
+      "0": "Start with a plain-language definition, then add an example they can picture.",
+      "1": "Break the mechanism into steps so too many new concepts do not arrive at once.",
+      "2": "Compare it to something familiar to lower the learning barrier.",
+      "3": "End with a small exercise they can validate on their own."
+    }
+  }
+}

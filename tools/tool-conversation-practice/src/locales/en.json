@@ -1,0 +1,101 @@
+{
+  "title": "Conversation Practice",
+  "description": "Generate reusable phrases and follow-up replies from scenario, tone, and fluency level.",
+  "fields": {
+    "scene": "Scene",
+    "tone": "Tone",
+    "level": "Fluency level"
+  },
+  "options": {
+    "travel": "Travel",
+    "meeting": "Work meeting",
+    "daily": "Daily conversation",
+    "friendly": "Friendly",
+    "professional": "Professional",
+    "calm": "Calm",
+    "beginner": "Basic",
+    "intermediate": "Intermediate",
+    "advanced": "Fluent"
+  },
+  "openingTitle": "Opening line",
+  "noticeTitle": "Practice set ready",
+  "noticeDescription": "This pack is tuned for {{scene}}, with a {{tone}} tone at {{level}} difficulty.",
+  "stats": {
+    "scene": "Scene",
+    "tone": "Tone",
+    "level": "Level"
+  },
+  "headers": {
+    "situation": "Situation",
+    "expression": "You can say",
+    "reply": "How to continue"
+  },
+  "openings": {
+    "travel": {
+      "friendly": "Hi, I want to make sure I take the fastest route to downtown today. Could you help me check?",
+      "professional": "Hello, I want to confirm the timing and arrangement for this trip. Could you help me verify it?",
+      "calm": "Hi, I want to ask about the route and timing."
+    },
+    "meeting": {
+      "friendly": "Hi everyone, let me quickly share the current progress and then we can align on next steps together.",
+      "professional": "Hello everyone, I will start with the current status and then outline the decisions we need.",
+      "calm": "I will cover the current status first, then the points that need support."
+    },
+    "daily": {
+      "friendly": "How have you been lately? I just thought of something and wanted to hear your take.",
+      "professional": "I have an idea and wanted to take a few minutes to confirm it with you.",
+      "calm": "I want to talk briefly about this."
+    }
+  },
+  "situations": {
+    "travel": {
+      "0": "Confirming a route or transfer",
+      "1": "Checking in or asking about facilities",
+      "2": "Ordering food or adjusting a request"
+    },
+    "meeting": {
+      "0": "Sharing progress",
+      "1": "Explaining risk",
+      "2": "Driving a decision"
+    },
+    "daily": {
+      "0": "Starting small talk",
+      "1": "Expressing disagreement",
+      "2": "Ending the conversation naturally"
+    }
+  },
+  "expressions": {
+    "friendly": {
+      "0": "I just want to confirm first whether we can handle it this way.",
+      "1": "If it is convenient, could you help me check this option one more time?",
+      "2": "That sounds good. I also want to add one small idea."
+    },
+    "professional": {
+      "0": "To keep us aligned, I want to confirm the current assumption first.",
+      "1": "There is a risk here, and I suggest we align on the handling approach first.",
+      "2": "Based on the current information, I lean toward the safer option."
+    },
+    "calm": {
+      "0": "I want to confirm one thing first.",
+      "1": "There may be an issue here.",
+      "2": "We can try this first."
+    }
+  },
+  "replies": {
+    "beginner": {
+      "0": "If the other person answers quickly, repeat the key word first to buy time.",
+      "1": "If you miss something, ask them to slow down or repeat it. Do not force it.",
+      "2": "Clarity matters more than complexity."
+    },
+    "intermediate": {
+      "0": "Repeat the key point before answering to sound more natural and steady.",
+      "1": "If they disagree, acknowledge it first and then explain your reasoning.",
+      "2": "Add one reason sentence to make the response feel complete."
+    },
+    "advanced": {
+      "0": "Use your answer to move the conversation toward the next step.",
+      "1": "In disagreement, use a clarifying question to bring the discussion back to facts.",
+      "2": "Close with a confirmation line so both sides leave with the same expectation."
+    }
+  }
+}
