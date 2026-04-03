@@ -7,7 +7,7 @@ import {
   CreditCard, Flame, UtensilsCrossed, Coins, Flag, ClipboardCheck, PlaneTakeoff,
   Percent, Watch, Milestone, Luggage, ChefHat, Moon, Droplets, Footprints,
   PersonStanding, Dumbbell, CalendarRange, Palette, Code2, HeartPulse,
-  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart
+  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock
 } from 'lucide-react'
 
 export const LIFE_TOOLS: ToolEntry[] = [

@@ -1,0 +1,26 @@
+{
+  "title": "Text Cipher",
+  "description": "Quick text transforms with Base64, ROT13, and Caesar shift",
+  "form": {
+    "mode": "Mode",
+    "direction": "Direction",
+    "encode": "Encode",
+    "decode": "Decode",
+    "shift": "Shift",
+    "input": "Input text",
+    "submit": "Transform"
+  },
+  "result": {
+    "label": "Result"
+  },
+  "notesTitle": "Notes",
+  "notes": [
+    "Base64 is an encoding format, not secure encryption.",
+    "ROT13 uses the same operation for encode and decode.",
+    "Caesar is best for demos and learning, with positive or negative shifts."
+  ],
+  "errors": {
+    "invalidShift": "Shift must be a number",
+    "failed": "Transform failed"
+  }
+}

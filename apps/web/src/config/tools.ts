@@ -54,7 +54,23 @@ const _manifestTools: ToolEntry[] = allManifests
     i18nNamespace: m.namespace,
   }))
 
-export const TOOLS: ToolEntry[] = [..._staticTools, ..._manifestTools]
+function dedupeToolsByPath(tools: ToolEntry[]): ToolEntry[] {
+  const seen = new Set<string>()
+
+  return tools.filter((tool) => {
+    if (seen.has(tool.path)) {
+      return false
+    }
+
+    seen.add(tool.path)
+    return true
+  })
+}
+
+export const TOOLS: ToolEntry[] = dedupeToolsByPath([
+  ..._staticTools,
+  ..._manifestTools,
+])
 
 export const TOOLS_BY_PATH = new Map(TOOLS.map((t) => [t.path, t]))
 

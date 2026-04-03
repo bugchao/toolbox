@@ -1,0 +1,27 @@
+{
+  "title": "GitHub Repo",
+  "description": "Inspect public repository metadata, popularity, and recent activity",
+  "form": {
+    "label": "Repository",
+    "placeholder": "For example: facebook/react or a full GitHub URL",
+    "submit": "Lookup Repo",
+    "loading": "Loading..."
+  },
+  "fields": {
+    "language": "Primary language",
+    "branch": "Default branch",
+    "visibility": "Visibility",
+    "license": "License",
+    "archived": "Archived",
+    "updated": "Last updated"
+  },
+  "stats": {
+    "stars": "Stars",
+    "forks": "Forks",
+    "watchers": "Watchers",
+    "issues": "Open issues"
+  },
+  "yes": "Yes",
+  "no": "No",
+  "errorFallback": "Lookup failed"
+}

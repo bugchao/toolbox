@@ -1,0 +1,30 @@
+{
+  "title": "GitHub 用户分析",
+  "description": "查询公开 GitHub 用户资料、关注数据和最近仓库",
+  "form": {
+    "label": "用户名",
+    "placeholder": "例如：octocat 或完整 GitHub URL",
+    "submit": "查询用户",
+    "loading": "查询中..."
+  },
+  "fields": {
+    "company": "公司",
+    "location": "地区",
+    "joined": "加入时间",
+    "repos": "公开仓库"
+  },
+  "stats": {
+    "followers": "关注者",
+    "following": "正在关注",
+    "repositories": "仓库数"
+  },
+  "repoColumns": {
+    "name": "仓库",
+    "language": "语言",
+    "stars": "Star",
+    "forks": "Fork",
+    "updated": "更新",
+    "empty": "暂无仓库数据"
+  },
+  "errorFallback": "查询失败"
+}

@@ -1,0 +1,27 @@
+{
+  "title": "GitHub 仓库分析",
+  "description": "查询公开仓库信息、热度和最近活跃情况",
+  "form": {
+    "label": "仓库",
+    "placeholder": "例如：facebook/react 或完整 GitHub URL",
+    "submit": "查询仓库",
+    "loading": "查询中..."
+  },
+  "fields": {
+    "language": "主要语言",
+    "branch": "默认分支",
+    "visibility": "可见性",
+    "license": "许可证",
+    "archived": "已归档",
+    "updated": "最近更新"
+  },
+  "stats": {
+    "stars": "Star",
+    "forks": "Fork",
+    "watchers": "Watchers",
+    "issues": "Open Issues"
+  },
+  "yes": "是",
+  "no": "否",
+  "errorFallback": "查询失败"
+}

@@ -1,0 +1,26 @@
+{
+  "title": "文本加密解密",
+  "description": "支持 Base64、ROT13 和 Caesar 位移的快速文本转换",
+  "form": {
+    "mode": "模式",
+    "direction": "方向",
+    "encode": "加密 / 编码",
+    "decode": "解密 / 解码",
+    "shift": "位移量",
+    "input": "输入文本",
+    "submit": "执行转换"
+  },
+  "result": {
+    "label": "结果"
+  },
+  "notesTitle": "说明",
+  "notes": [
+    "Base64 适合做编码与还原，不属于安全加密。",
+    "ROT13 编码和解码是同一个操作。",
+    "Caesar 适合做演示用途，位移量支持正负值。"
+  ],
+  "errors": {
+    "invalidShift": "位移量必须是数字",
+    "failed": "转换失败"
+  }
+}

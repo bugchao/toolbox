@@ -1,0 +1,30 @@
+{
+  "title": "GitHub User",
+  "description": "Inspect public GitHub profile data, social counts, and recent repositories",
+  "form": {
+    "label": "Username",
+    "placeholder": "For example: octocat or a full GitHub URL",
+    "submit": "Lookup User",
+    "loading": "Loading..."
+  },
+  "fields": {
+    "company": "Company",
+    "location": "Location",
+    "joined": "Joined",
+    "repos": "Public repos"
+  },
+  "stats": {
+    "followers": "Followers",
+    "following": "Following",
+    "repositories": "Repositories"
+  },
+  "repoColumns": {
+    "name": "Repository",
+    "language": "Language",
+    "stars": "Stars",
+    "forks": "Forks",
+    "updated": "Updated",
+    "empty": "No repository data"
+  },
+  "errorFallback": "Lookup failed"
+}

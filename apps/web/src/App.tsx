@@ -69,6 +69,7 @@ const MorseCode = lazy(() => import('@toolbox/tool-morse-code'))
 const AsciiArt = lazy(() => import('@toolbox/tool-ascii-art'))
 const PasswordStrength = lazy(() => import('@toolbox/tool-password-strength'))
 const BaseConverter = lazy(() => import('@toolbox/tool-base-converter'))
+const RapidTables = lazy(() => import('@toolbox/tool-rapid-tables'))
 const WordCount = lazy(() => import('@toolbox/tool-word-count'))
 const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
 const TimeLogger = lazy(() => import('@toolbox/tool-time-logger'))
@@ -514,6 +515,7 @@ function App() {
           <Route path="/color-generator" element={<ColorGenerator />} />
           <Route path="/meme-generator" element={<MemeGenerator />} />
           <Route path="/copywriting-generator" element={<CopywritingGenerator />} />
+          <Route path="/rapid-tables" element={<RapidTables />} />
           <Route path="/wooden-fish" element={<ElectronicWoodenFish />} />
           <Route path="/life-progress" element={<LifeProgressBar />} />
           <Route path="/meeting-minutes" element={<MeetingMinutes />} />

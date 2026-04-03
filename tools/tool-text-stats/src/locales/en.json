@@ -1,0 +1,22 @@
+{
+  "title": "Text Stats",
+  "description": "Count characters, words, paragraphs, sentences, and reading time",
+  "inputLabel": "Input text",
+  "placeholder": "Paste or type the text you want to analyze",
+  "summaryTitle": "Summary",
+  "tipsTitle": "Notes",
+  "stats": {
+    "characters": "Characters",
+    "charactersNoSpaces": "Characters (no spaces)",
+    "words": "Words",
+    "lines": "Lines",
+    "sentences": "Sentences",
+    "paragraphs": "Paragraphs",
+    "readingMinutes": "Reading time (min)"
+  },
+  "tips": [
+    "Word count is based on whitespace-separated tokens.",
+    "Reading time is estimated at 220 words per minute.",
+    "Sentence count is based on common Chinese and English sentence punctuation."
+  ]
+}
