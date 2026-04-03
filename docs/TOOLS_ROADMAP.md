@@ -26,7 +26,7 @@
 
 以下工具已上线，**不要再重复立项**。新增需求请在「三、待开发/调研」中登记。
 
-### 实用工具（23）
+### 实用工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -53,8 +53,10 @@
 | AI 文案生成器 | `/copywriting-generator` | `apps/web/src/pages/CopywritingGenerator.tsx` |
 | 电子木鱼 | `/wooden-fish` | `apps/web/src/pages/ElectronicWoodenFish.tsx` |
 | 人生进度条 | `/life-progress` | `apps/web/src/pages/LifeProgressBar.tsx` |
+| 翻译工作台 | `/translation-hub` | `tools/tool-translation-hub` → TranslationHub |
+| 图像本地加载预览基座 | `/image-local-preview` | `tools/tool-image-local-preview` → ImageLocalPreview |
 
-### 研发工具（12）
+### 研发工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -70,17 +72,25 @@
 | 代码美化 | `/code` | `apps/web/src/pages/CodeFormatter.tsx` |
 | UUID 生成器 | `/uuid` | `apps/web/src/pages/UuidGenerator.tsx` |
 | 文本对比 | `/text-comparator` | `apps/web/src/pages/TextComparator.tsx` |
+| GraphQL Playground | `/graphql-playground` | `tools/tool-graphql-playground` → GraphQLPlayground |
+| Postman Lite | `/postman-lite` | `tools/tool-postman-lite` → PostmanLite |
+| Rapid Tables 计算器 | `/rapid-tables` | `tools/tool-rapid-tables` → RapidTables |
+| 文本加密解密 | `/text-cipher` | `tools/tool-text-cipher` → TextCipher |
+| 文本统计 | `/text-stats` | `tools/tool-text-stats` → TextStats |
+| GitHub 信息读取 | `/github-info` | `tools/tool-github-info` → GithubInfo |
+| GitHub 仓库分析 | `/github-repo` | `tools/tool-github-repo` → GithubRepo |
+| GitHub 用户分析 | `/github-user` | `tools/tool-github-user` → GithubUser |
 
-### 查询工具（4）
+### 查询工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | 邮政编码查询 | `/zipcode` | `apps/web/src/pages/ZipCode.tsx` |
-| 天气查询 | `/weather` | `apps/web/src/pages/Weather.tsx` |
+| 天气查询 | `/weather` | `tools/tool-weather` → Weather |
 | IP 地址查询 | `/ip-query` | `apps/web/src/pages/IpQuery.tsx` |
 | 颜色拾取/调色板 | `/color-picker` | `apps/web/src/pages/ColorPicker.tsx` |
 
-### AI 工具（3）
+### AI 工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -88,7 +98,7 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 
-### 网络工具（56）
+### 网络工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -193,13 +203,13 @@
 | IP 地址变更记录 | `/ipam-changelog` | `tools/tool-ipam-changelog` → IpamChangelog |
 | IP 地址扫描 | `/ipam-scan` | `tools/tool-ipam-scan` → IpamScan |
 
-### 资讯工具（1）
+### 资讯工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | 每日热点新闻 | `/news` | `apps/web/src/pages/HotNews.tsx` |
 
-### 生活工具（21）
+### 生活工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -223,8 +233,14 @@
 | 地图距离计算 | `/distance-calc` | `tools/tool-distance-calc` → DistanceCalc |
 | 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
 | 学习时长统计 | `/study-timer` | `tools/tool-study-timer` → StudyTimer |
+| 拖延症评估 + 改进建议 | `/procrastination-test` | `tools/tool-procrastination-test` → ProcrastinationTest |
+| 每日复盘生成器 | `/daily-review` | `tools/tool-daily-review` → DailyReview |
+| 理财收益模拟器 | `/investment-sim` | `tools/tool-investment-sim` → InvestmentSim |
+| 冰箱库存管理 | `/fridge-inventory` | `tools/tool-fridge-inventory` → FridgeInventory |
+| 保质期提醒 | `/expiry-reminder` | `tools/tool-expiry-reminder` → ExpiryReminder |
+| 家庭任务分配工具 | `/family-tasks` | `tools/tool-family-tasks` → FamilyTasks |
 
-### 旅游工具（12）
+### 旅游工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -240,8 +256,15 @@
 | 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
 | 签证信息助手 | `/visa-info` | `tools/tool-visa-info` → VisaInfo |
 | 语言翻译助手（旅行场景） | `/travel-translator` | `tools/tool-travel-translator` → TravelTranslator |
+| 旅行成本对比工具 | `/travel-cost-compare` | `tools/tool-travel-cost-compare` → TravelCostCompare |
+| 景点热度分析 | `/attraction-heatmap` | `tools/tool-attraction-heatmap` → AttractionHeatmap |
+| 人流预测工具 | `/crowd-forecast` | `tools/tool-crowd-forecast` → CrowdForecast |
+| 天气 + 穿搭建议 | `/weather-outfit` | `tools/tool-weather-outfit` → WeatherOutfit |
+| 旅行风险提醒 | `/travel-risk` | `tools/tool-travel-risk` → TravelRisk |
+| 拍照点推荐 | `/photo-spots` | `tools/tool-photo-spots` → PhotoSpots |
+| 路线地图可视化 | `/route-map` | `tools/tool-route-map` → RouteMap |
 
-### 学习工具（12）
+### 学习工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
@@ -257,6 +280,16 @@
 | 一句话讲清工具 | `/one-liner` | `tools/tool-one-liner` → OneLiner |
 | "像5岁小孩解释"工具 | `/eli5` | `tools/tool-eli5` → Eli5 |
 | 多角度解释 | `/multi-perspective` | `tools/tool-multi-perspective` → MultiPerspective |
+| 网页内容提取 | `/web-extractor` | `tools/tool-web-extractor` → WebExtractor |
+| 笔记整理助手 | `/note-organizer` | `tools/tool-note-organizer` → NoteOrganizer |
+| 术语词典生成 | `/glossary-gen` | `tools/tool-glossary-gen` → GlossaryGen |
+| 知识图谱生成 | `/knowledge-graph` | `tools/tool-knowledge-graph` → KnowledgeGraph |
+| 编程题生成 | `/coding-challenge` | `tools/tool-coding-challenge` → CodingChallenge |
+| 前端面试题生成 | `/frontend-interview` | `tools/tool-frontend-interview` → FrontendInterview |
+| 系统设计练习工具 | `/system-design` | `tools/tool-system-design` → SystemDesign |
+| AI 对话练习 | `/conversation-practice` | `tools/tool-conversation-practice` → ConversationPractice |
+| 学习路径规划 | `/learning-path` | `tools/tool-learning-path` → LearningPath |
+| 问答 + 深挖 | `/deep-dive-qa` | `tools/tool-deep-dive-qa` → DeepDiveQa |
 
 ---
 
@@ -275,15 +308,15 @@
 | ~~目标拆解工具（OKR mini）~~ | life | `/okr-planner` | **已上线** | - | OKR 目标拆解与追踪 |
 | 今日计划自动生成器 | life | `/daily-planner` | **已上线** | P2 | AI 生成每日计划 |
 | 时间日志分析 | life | `/time-logger` | 待开发 | P2 | 时间花费分析「时间去哪了」 |
-| 拖延症评估 + 改进建议 | life | `/procrastination-test` | 待开发 | P2 | 拖延评估 + AI 建议 |
-| 每日复盘生成器 | life | `/daily-review` | 待开发 | P2 | AI 辅助每日复盘 |
+| ~~拖延症评估 + 改进建议~~ | life | `/procrastination-test` | **已上线** | - | 拖延评估 + AI 建议 |
+| ~~每日复盘生成器~~ | life | `/daily-review` | **已上线** | - | AI 辅助每日复盘 |
 | **── 生活：财务 & 消费 ──** | | | | | |
 | ~~记账工具~~ | life | `/expense-tracker` | **已上线** | - | 支持标签统计 |
 | ~~订阅费用管理~~ | life | `/subscription-manager` | **已上线** | - | Netflix/AI 等订阅管理 |
 | ~~分期计算器~~ | life | `/installment-calc` | **已上线** | - | 分期还款计算 |
 | ~~工资税后计算器~~ | life | `/salary-calc` | **已上线** | - | 五险一金 + 税后工资 |
 | ~~汇率换算工具~~ | life | `/currency-converter` | **已上线** | - | 实时汇率换算 |
-| 理财收益模拟器 | life | `/investment-sim` | 待开发 | P2 | 收益率模拟 |
+| ~~理财收益模拟器~~ | life | `/investment-sim` | **已上线** | - | 收益率模拟 |
 | **── 生活：健康 & 生活 ──** | | | | | |
 | ~~卡路里估算工具~~ | life | `/calorie-calc` | **已上线** | - | 食物热量估算 |
 | 睡眠质量记录 | life | `/sleep-tracker` | **已上线** | P2 | 睡眠时长 + 质量评分 |
@@ -292,10 +325,10 @@
 | 久坐提醒工具 | life | `/sedentary-reminder` | **已上线** | P2 | 久坐提醒 + 拉伸建议 |
 | **── 生活：日常工具 ──** | | | | | |
 | ~~菜谱推荐（根据食材）~~ | life | `/recipe-finder` | **已上线** | - | 输入食材推荐菜谱 |
-| 冰箱库存管理 | life | `/fridge-inventory` | 待开发 | P2 | 食材库存管理 |
-| 保质期提醒 | life | `/expiry-reminder` | 待开发 | P2 | 食品/药品过期提醒 |
+| ~~冰箱库存管理~~ | life | `/fridge-inventory` | **已上线** | - | 食材库存管理 |
+| ~~保质期提醒~~ | life | `/expiry-reminder` | **已上线** | - | 食品/药品过期提醒 |
 | ~~随机菜单生成器~~ | life | `/random-menu` | **已上线** | - | 今天吃什么 |
-| 家庭任务分配工具 | life | `/family-tasks` | 待开发 | P2 | 家务分配与追踪 |
+| ~~家庭任务分配工具~~ | life | `/family-tasks` | **已上线** | - | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
 | 条形码识别 | utils | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
 | **── 实用：图像处理（已完成 6 个）──** | | | | | |
@@ -308,7 +341,7 @@
 | **── 实用：图像处理（后续补充）──** | | | | | |
 | Canvas 图像工作台 | utils | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
 | 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | **已上线** | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
-| 图像本地加载预览基座 | utils | `/image-local-preview` | 待开发 | P2 | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
+| ~~图像本地加载预览基座~~ | utils | `/image-local-preview` | **已上线** | - | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
 | 图像处理实验工作台 | utils | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
 | **── 生活：开发者友好 ──** | | | | | |
 | ~~curl 转 fetch~~ | dev | `/curl-to-fetch` | **已上线** | - | curl 命令转 JS fetch 代码 |
@@ -324,11 +357,11 @@
 | ~~旅行预算计算器~~ | travel | `/travel-budget` | **已上线** | - | 交通/住宿/餐饮预算 |
 | ~~AA 分摊工具~~ | travel | `/split-bill` | **已上线** | - | 多人费用分摊 |
 | 汇率 + 消费估算 | travel | `/travel-cost-estimate` | **已上线** | P2 | 目的地消费水平 + 汇率 |
-| 旅行成本对比工具 | travel | `/travel-cost-compare` | 待开发 | P2 | 多目的地成本对比 |
+| ~~旅行成本对比工具~~ | travel | `/travel-cost-compare` | **已上线** | - | 多目的地成本对比 |
 | **── 旅游：导航 & 信息 ──** | | | | | |
-| 景点热度分析 | travel | `/attraction-heatmap` | 待开发 | P2 | 按时间段分析热度 |
-| 人流预测工具 | travel | `/crowd-forecast` | 待开发 | P3 | 简易人流预测 |
-| 天气 + 穿搭建议 | travel | `/weather-outfit` | 待开发 | P2 | 目的地天气 + 穿衣建议 |
+| ~~景点热度分析~~ | travel | `/attraction-heatmap` | **已上线** | - | 按时间段分析热度 |
+| ~~人流预测工具~~ | travel | `/crowd-forecast` | **已上线** | - | 简易人流预测 |
+| ~~天气 + 穿搭建议~~ | travel | `/weather-outfit` | **已上线** | - | 目的地天气 + 穿衣建议 |
 | ~~时差计算器~~ | travel | `/timezone-calc` | **已上线** | - | 多时区时差换算 |
 | ~~地图距离计算~~ | travel | `/distance-calc` | **已上线** | - | 两点间距离计算 |
 | **── 旅游：实用工具 ──** | | | | | |
@@ -336,12 +369,12 @@
 | 航班信息查询聚合 | travel | `/flight-search` | 待开发 | P2 | 航班信息聚合查询 |
 | 酒店价格趋势 | travel | `/hotel-trend` | 待开发 | P3 | 酒店历史价格趋势 |
 | 签证信息助手 | travel | `/visa-info` | **已上线** | P2 | 各国签证要求查询 |
-| 旅行风险提醒 | travel | `/travel-risk` | 待开发 | P2 | 目的地安全/健康风险 |
+| ~~旅行风险提醒~~ | travel | `/travel-risk` | **已上线** | - | 目的地安全/健康风险 |
 | **── 旅游：体验增强 ──** | | | | | |
-| 拍照点推荐 | travel | `/photo-spots` | 待开发 | P2 | 热门拍照机位推荐 |
+| ~~拍照点推荐~~ | travel | `/photo-spots` | **已上线** | - | 热门拍照机位推荐 |
 | 网红景点生成器 | travel | `/trending-spots` | 待开发 | P2 | 热门打卡点发现 |
 | 旅行故事生成 | travel | `/travel-story` | 待开发 | P2 | AI 生成旅行故事 |
-| 路线地图可视化 | travel | `/route-map` | 待开发 | P2 | 路线地图可视化展示 |
+| ~~路线地图可视化~~ | travel | `/route-map` | **已上线** | - | 路线地图可视化展示 |
 | **── 旅游：AI 增强 ──** | | | | | |
 | 餐厅推荐 | travel | `/restaurant-finder` | 待开发 | P2 | 结合时间/预算推荐餐厅 |
 | 语言翻译助手（旅行场景） | travel | `/travel-translator` | **已上线** | P1 | 旅行常用语翻译 |
@@ -356,35 +389,35 @@
 | **── 学习：内容处理 ──** | | | | | |
 | 文本摘要工具 | learn | `/text-summary` | **已上线** | P1 | AI 文本自动摘要 |
 | PDF 总结工具 | learn | `/pdf-summary` | **已上线** | P1 | AI 总结 PDF 内容 |
-| 网页内容提取 | learn | `/web-extractor` | 待开发 | P2 | 提取网页正文内容 |
-| 笔记整理助手 | learn | `/note-organizer` | 待开发 | P2 | AI 辅助笔记整理 |
+| ~~网页内容提取~~ | learn | `/web-extractor` | **已上线** | - | 提取网页正文内容 |
+| ~~笔记整理助手~~ | learn | `/note-organizer` | **已上线** | - | AI 辅助笔记整理 |
 | **── 学习：知识理解 ──** | | | | | |
 | 概念解释工具 | learn | `/concept-explainer` | **已上线** | P1 | AI 解释任意概念 |
 | 一句话讲清工具 | learn | `/one-liner` | **已上线** | P1 | 用一句话解释复杂概念 |
-| 术语词典生成 | learn | `/glossary-gen` | 待开发 | P2 | 自动生成术语词典 |
-| 知识图谱生成 | learn | `/knowledge-graph` | 待开发 | P2 | 可视化知识关系图 |
+| ~~术语词典生成~~ | learn | `/glossary-gen` | **已上线** | - | 自动生成术语词典 |
+| ~~知识图谱生成~~ | learn | `/knowledge-graph` | **已上线** | - | 可视化知识关系图 |
 | **── 学习：练习 & 测试 ──** | | | | | |
 | 自动出题工具 | learn | `/quiz-gen` | **已上线** | P1 | AI 根据内容自动出题 |
 | 选择题生成器 | learn | `/mcq-gen` | **已上线** | P1 | 生成选择题 |
-| 编程题生成 | learn | `/coding-challenge` | 待开发 | P2 | AI 生成编程练习题 |
+| ~~编程题生成~~ | learn | `/coding-challenge` | **已上线** | - | AI 生成编程练习题 |
 | 错题本系统 | learn | `/mistake-book` | **已上线** | P2 | 错题收集与复习 |
 | **── 学习：编程学习 ──** | | | | | |
 | 代码解释器 | learn | `/code-explainer` | **已上线** | P1 | 输入代码 AI 逐行解释 |
 | Bug 分析工具 | learn | `/bug-analyzer` | **已上线** | P1 | AI 分析代码 Bug |
 | 项目结构生成器 | learn | `/project-scaffold` | **已上线** | P1 | 生成项目目录结构（Nx） |
-| 前端面试题生成 | learn | `/frontend-interview` | 待开发 | P2 | 前端面试题库 + 生成 |
-| 系统设计练习工具 | learn | `/system-design` | 待开发 | P2 | 系统设计题练习 |
+| ~~前端面试题生成~~ | learn | `/frontend-interview` | **已上线** | - | 前端面试题库 + 生成 |
+| ~~系统设计练习工具~~ | learn | `/system-design` | **已上线** | - | 系统设计题练习 |
 | **── 学习：语言学习 ──** | | | | | |
 | 单词记忆工具 | learn | `/vocab-trainer` | **已上线** | P1 | 单词记忆 + 复习 |
 | 句子改写工具 | learn | `/sentence-rewriter` | **已上线** | P1 | AI 句子改写/润色 |
-| AI 对话练习 | learn | `/conversation-practice` | 待开发 | P2 | AI 口语对话练习 |
+| ~~AI 对话练习~~ | learn | `/conversation-practice` | **已上线** | - | AI 口语对话练习 |
 | 发音评估工具 | learn | `/pronunciation-eval` | 待开发 | P3 | 语音发音评估 |
 | **── 学习：AI 增强学习 ──** | | | | | |
 | "像5岁小孩解释"工具 | learn | `/eli5` | **已上线** | P1 | ELI5 简化解释 |
 | 多角度解释 | learn | `/multi-perspective` | **已上线** | P1 | 专家/小白多角度解释 |
 | 知识对比工具 | learn | `/knowledge-compare` | **已上线** | P1 | 概念/技术对比分析 |
-| 学习路径规划 | learn | `/learning-path` | 待开发 | P2 | 从0到专家的学习路径 |
-| 问答 + 深挖 | learn | `/deep-dive-qa` | 待开发 | P2 | 递进式深度学习问答 |
+| ~~学习路径规划~~ | learn | `/learning-path` | **已上线** | - | 从0到专家的学习路径 |
+| ~~问答 + 深挖~~ | learn | `/deep-dive-qa` | **已上线** | - | 递进式深度学习问答 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 
@@ -433,9 +466,9 @@
 
 ---
 
-### 后续计划：网络与 DNS 工具集（100 项，已立项）
+### 后续计划：网络与 DNS 工具集
 
-**上述 100 项已全部立项至上方「当前待办」**，分类 `network`，状态「待开发」，优先级 P2。下表保留作分类对照，开发/上线以「当前待办」行为准。
+**上述工具已完成立项，且已有相当一部分上线。** 分类 `network`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、DNS 查询工具（10）
 
@@ -593,9 +626,9 @@
 
 ---
 
-### 后续计划：生活工具集（27 项，已立项）
+### 后续计划：生活工具集
 
-**已全部立项至上方「当前待办」**，分类 `life`（部分归入 `utils`/`dev`），状态「待开发」。下表保留作分类对照，开发/上线以「当前待办」行为准。
+**已完成立项，且已有部分上线。** 分类 `life`（部分归入 `utils`/`dev`），实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、效率 & 习惯（7）
 
@@ -651,9 +684,9 @@
 
 ---
 
-### 后续计划：旅游工具集（28 项，已立项）
+### 后续计划：旅游工具集
 
-**已全部立项至上方「当前待办」**，分类 `travel`，状态「待开发」。下表保留作分类对照。
+**已完成立项，且已有部分上线。** 分类 `travel`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、行程规划（5）
 
@@ -715,9 +748,9 @@
 
 ---
 
-### 后续计划：学习工具集（30 项，已立项）
+### 后续计划：学习工具集
 
-**已全部立项至上方「当前待办」**，分类 `learn`，状态「待开发」。下表保留作分类对照。
+**已完成立项，且已有部分上线。** 分类 `learn`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、学习效率（4）
 
