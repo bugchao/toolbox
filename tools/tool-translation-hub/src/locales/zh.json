@@ -1,0 +1,216 @@
+{
+  "title": "AI 翻译工作台",
+  "description": "把文本、文档、OCR 和语音输入整合进一个可编辑的翻译平台，支持多版本输出、术语统一、历史沉淀和工作台级配置。",
+  "hero": {
+    "valueTitle": "不是单次翻译，而是一套可复用的语言工作流",
+    "valueDescription": "主翻译、文档翻译、历史、术语库和设置都收敛到一个界面里。我们把多输入、AI增强、可编辑段落和多服务对照组合起来，让翻译结果更像可以继续打磨的产物。"
+  },
+  "nav": {
+    "eyebrow": "Translation Studio",
+    "title": "五区翻译平台",
+    "description": "围绕实时翻译、长文档、一致性和沉淀能力设计的翻译工作流。",
+    "badges": {
+      "histories": "历史",
+      "glossary": "术语",
+      "memory": "TM"
+    }
+  },
+  "sections": {
+    "main": "主翻译页",
+    "documents": "文档翻译页",
+    "history": "历史记录页",
+    "glossary": "术语库管理",
+    "settings": "设置页"
+  },
+  "sectionDesc": {
+    "main": "实时输入、风格控制、逐句编辑、多版本对照。",
+    "documents": "导入 pdf/docx/txt/图片并抽取内容，进入统一翻译链路。",
+    "history": "沉淀每次翻译结果，支持收藏和恢复继续编辑。",
+    "glossary": "维护术语映射，保证长文一致性和企业词汇统一。",
+    "settings": "控制 API、网页工作台、多视图和后端接入方式。"
+  },
+  "metrics": {
+    "apiProviders": "已启用 API",
+    "historyCount": "历史记录",
+    "glossaryTerms": "术语条目",
+    "tmEntries": "翻译记忆"
+  },
+  "labels": {
+    "sourceLanguage": "源语言",
+    "targetLanguage": "目标语言",
+    "style": "翻译风格",
+    "tone": "语气控制",
+    "context": "上下文增强",
+    "sourceText": "待翻译内容",
+    "apiProvider": "API 服务选择",
+    "inputModes": "输入方式"
+  },
+  "languages": {
+    "auto": "自动检测",
+    "zh": "中文（简体）",
+    "en": "英语",
+    "ja": "日语",
+    "ko": "韩语",
+    "fr": "法语",
+    "de": "德语",
+    "es": "西班牙语",
+    "ru": "俄语",
+    "pt": "葡萄牙语",
+    "ar": "阿拉伯语",
+    "th": "泰语",
+    "vi": "越南语"
+  },
+  "styles": {
+    "standard": "标准",
+    "academic": "学术",
+    "business": "商务",
+    "localization": "本地化",
+    "technical": "技术",
+    "legal": "法律"
+  },
+  "tones": {
+    "formal": "正式",
+    "casual": "轻松",
+    "native": "母语化"
+  },
+  "variants": {
+    "literal": "直译版本",
+    "adaptive": "意译版本",
+    "localized": "本地化版本"
+  },
+  "inputModes": {
+    "text": "文本输入",
+    "file": "文档导入",
+    "ocr": "图片 OCR",
+    "voice": "语音转写"
+  },
+  "cards": {
+    "sourceWorkspace": "主输入工作区",
+    "simpleResult": "翻译结果",
+    "versionCompare": "多版本翻译",
+    "providerWorkbench": "多 API 对照",
+    "webWorkbench": "网页翻译工作台",
+    "documentImport": "文档抽取与导入",
+    "glossaryManager": "术语库管理",
+    "settings": "平台设置"
+  },
+  "actions": {
+    "translateNow": "立即翻译",
+    "advancedOptions": "高级选项",
+    "clear": "清空内容",
+    "upload": "导入文件或图片",
+    "startVoice": "开始语音输入",
+    "stopVoice": "停止语音输入",
+    "openInNewTab": "新标签打开",
+    "importing": "处理中",
+    "uploadDocument": "上传文档",
+    "importToMain": "导入主翻译页",
+    "importAndTranslate": "导入并翻译",
+    "favorite": "收藏",
+    "unfavorite": "取消收藏",
+    "restore": "恢复到工作台",
+    "addGlossary": "添加术语",
+    "remove": "删除",
+    "retranslate": "重翻译",
+    "optimizeNatural": "更自然",
+    "optimizeProfessional": "更专业"
+  },
+  "helper": {
+    "sourceIntro": "支持文本、文档、OCR 和语音输入。左侧输入，右侧直接看到多版本和多服务结果，逐句还可以继续编辑。",
+    "simpleIntro": "默认只保留输入和翻译结果。风格、语气、上下文、多服务和网页工作台都放进高级选项里。",
+    "realtimeOn": "输入即翻译已开启",
+    "realtimeOff": "当前为手动翻译",
+    "contextPlaceholder": "输入背景信息，例如：这是给海外开发者看的发布说明，需要技术准确但读起来自然。",
+    "shortcuts": "Cmd/Ctrl + Enter 立即翻译，Tab 切换单句版本",
+    "sourcePlaceholder": "输入文本，或导入文档 / 图片 / 语音。系统会按照风格、语气、上下文、术语库和翻译记忆生成多版本结果。",
+    "sourcePlaceholderSimple": "输入要翻译的内容，系统会优先给出一份可直接使用的译文。需要更细控制时，再展开高级选项。",
+    "resultIntro": "默认展示最适合直接使用的本地化译文。需要对比直译、意译或逐句编辑时，再展开下方高级区域。",
+    "versionCompare": "同一份输入会同时给出直译、意译和本地化三个版本，便于快速挑选或继续打磨。",
+    "providerWorkbench": "内置免费 API 结果会并排显示，便于比较不同服务的表达差异。",
+    "webWorkbench": "保留 Google、Bing、百度、DeepL 的网页工作台，适合和原站效果做交叉验证。",
+    "documentIntro": "适合长文档、扫描图片和 OCR 场景。文件抽取完成后，可以继续沿用术语库、TM 和记忆化编辑。",
+    "importReady": "{{fileName}} 已完成抽取（{{sourceType}}），内容已经同步进翻译工作台。若需要，可以直接进入主翻译页继续逐句优化。",
+    "glossarySourcePlaceholder": "源术语，例如 API gateway",
+    "glossaryTargetPlaceholder": "目标术语，例如 API 网关",
+    "glossaryNotePlaceholder": "术语说明或适用上下文"
+  },
+  "states": {
+    "emptyTranslation": "翻译完成后，这里会显示当前版本的整段结果。",
+    "emptyTranslationSimple": "开始输入后，这里会显示一份可直接使用的译文。",
+    "providerPending": "当前服务还没有返回结果，或当前语言组合不受此服务支持。",
+    "importFailed": "文件抽取失败",
+    "importReady": "导入成功",
+    "noSegmentsTitle": "还没有逐句结果",
+    "noSegmentsDescription": "输入一些内容，或者导入文档后，这里会生成可逐句编辑的翻译卡片。"
+  },
+  "errors": {
+    "autoDetectLimitedTitle": "自动检测下可用 API 有限制",
+    "autoDetectLimitedDescription": "MyMemory 不支持自动识别源语言。如果你想保留自动检测，请同时启用 LibreTranslate，或者手动指定源语言。"
+  },
+  "segment": {
+    "status": {
+      "idle": "未开始",
+      "loading": "处理中",
+      "ready": "已完成",
+      "error": "失败",
+      "disabled": "已禁用"
+    },
+    "memoryHit": "命中翻译记忆",
+    "suggestionTitle": "替换建议",
+    "noSuggestions": "当前没有更多可用建议。",
+    "providerTitle": "Provider 输出",
+    "noProviderOutput": "当前没有 provider 级输出。",
+    "explanationTitle": "AI 解释"
+  },
+  "providers": {
+    "google": "Google 翻译",
+    "bing": "Bing 翻译",
+    "baidu": "百度翻译",
+    "deepl": "DeepL"
+  },
+  "apiProviders": {
+    "mymemory": "MyMemory 免费 API",
+    "libretranslate": "LibreTranslate API"
+  },
+  "documents": {
+    "support": {
+      "pdf": "提取多页文本，适合报告、合同、白皮书等。",
+      "docx": "抽取可编辑正文，适合说明文档、方案和邮件素材。",
+      "txt": "轻量文本导入，适合快速翻译与批量整理。"
+    },
+    "previewTitle": "文档内容预览",
+    "actionsTitle": "文档工作流",
+    "consistencyTitle": "长文档一致性",
+    "consistencyDescription": "文档导入后会继续复用术语库和翻译记忆，保持整篇翻译的人称、术语和语气尽量一致。",
+    "emptyTitle": "先导入一个文档或图片",
+    "emptyDescription": "支持 pdf/docx/txt 和图片 OCR。导入成功后，可以把抽取结果送入主翻译页继续逐句打磨。"
+  },
+  "history": {
+    "emptyTitle": "还没有历史记录",
+    "emptyDescription": "每次翻译都会自动写入历史记录，后续可以收藏、恢复并继续编辑。",
+    "favorite": "已收藏",
+    "standard": "常规记录",
+    "noPreview": "当前记录暂无整段预览。",
+    "segmentCount": "句段数量"
+  },
+  "glossary": {
+    "description": "为常用术语、品牌名、行业词和固定表述建立映射，翻译时会优先复用，适合技术文档和企业场景。",
+    "emptyTitle": "术语库还是空的",
+    "emptyDescription": "添加术语后，系统会在翻译过程中优先做统一替换，帮助长文保持一致性。"
+  },
+  "settings": {
+    "enableRealtime": "开启输入即翻译",
+    "enableExplanations": "显示 AI 解释与语法说明",
+    "enableWebWorkbench": "显示网页翻译工作台",
+    "enableMultiView": "启用多视图模式",
+    "libreEndpointPlaceholder": "LibreTranslate 服务地址，例如 https://libretranslate.example.com",
+    "libreApiKeyPlaceholder": "可选 API Key，没有可留空",
+    "architectureTitle": "建议的前后端结构",
+    "architectureDescription": "前端保留工具内自管理的状态、文档输入和段落编辑；后端建议收敛成 translation-service，统一处理 LLM、OCR、TM、Glossary、文件解析和企业词库。",
+    "architectureBadge": "前后端协同"
+  },
+  "voice": {
+    "unsupportedTitle": "当前浏览器不支持语音识别",
+    "unsupportedDescription": "你仍然可以使用文本、文档和 OCR 输入。语音识别依赖浏览器原生 SpeechRecognition 能力。"
+  }
+}

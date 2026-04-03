@@ -1,0 +1,216 @@
+{
+  "title": "AI Translation Studio",
+  "description": "A translation platform that combines text, documents, OCR, and voice input with editable output, terminology control, translation memory, and a configurable workbench.",
+  "hero": {
+    "valueTitle": "Not just one-shot translation, but a reusable language workflow",
+    "valueDescription": "Main translation, document translation, history, glossary, and settings all live in one place. The result is closer to an editable production workflow than a basic text box."
+  },
+  "nav": {
+    "eyebrow": "Translation Studio",
+    "title": "Five-zone translation platform",
+    "description": "Designed around realtime translation, long-form consistency, and reusable language assets.",
+    "badges": {
+      "histories": "histories",
+      "glossary": "glossary",
+      "memory": "TM"
+    }
+  },
+  "sections": {
+    "main": "Main workspace",
+    "documents": "Document translation",
+    "history": "History",
+    "glossary": "Glossary",
+    "settings": "Settings"
+  },
+  "sectionDesc": {
+    "main": "Realtime input, style control, editable segments, and multi-version output.",
+    "documents": "Import pdf/docx/txt/images, extract content, and send it into the same workflow.",
+    "history": "Save every translation session and restore it for further editing.",
+    "glossary": "Manage term mappings for consistent language in technical and business content.",
+    "settings": "Control APIs, web workbench views, multi-view mode, and backend integration strategy."
+  },
+  "metrics": {
+    "apiProviders": "Active APIs",
+    "historyCount": "History records",
+    "glossaryTerms": "Glossary terms",
+    "tmEntries": "TM entries"
+  },
+  "labels": {
+    "sourceLanguage": "Source language",
+    "targetLanguage": "Target language",
+    "style": "Translation style",
+    "tone": "Tone control",
+    "context": "Context boost",
+    "sourceText": "Source text",
+    "apiProvider": "API provider selection",
+    "inputModes": "Input modes"
+  },
+  "languages": {
+    "auto": "Auto detect",
+    "zh": "Chinese (Simplified)",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "ru": "Russian",
+    "pt": "Portuguese",
+    "ar": "Arabic",
+    "th": "Thai",
+    "vi": "Vietnamese"
+  },
+  "styles": {
+    "standard": "Standard",
+    "academic": "Academic",
+    "business": "Business",
+    "localization": "Localization",
+    "technical": "Technical",
+    "legal": "Legal"
+  },
+  "tones": {
+    "formal": "Formal",
+    "casual": "Casual",
+    "native": "Native"
+  },
+  "variants": {
+    "literal": "Literal version",
+    "adaptive": "Adaptive version",
+    "localized": "Localized version"
+  },
+  "inputModes": {
+    "text": "Text",
+    "file": "File",
+    "ocr": "OCR",
+    "voice": "Voice"
+  },
+  "cards": {
+    "sourceWorkspace": "Source workspace",
+    "simpleResult": "Translation result",
+    "versionCompare": "Version compare",
+    "providerWorkbench": "API comparison",
+    "webWorkbench": "Web translation workbench",
+    "documentImport": "Document extraction and import",
+    "glossaryManager": "Glossary management",
+    "settings": "Studio settings"
+  },
+  "actions": {
+    "translateNow": "Translate now",
+    "advancedOptions": "Advanced options",
+    "clear": "Clear",
+    "upload": "Upload file or image",
+    "startVoice": "Start voice input",
+    "stopVoice": "Stop voice input",
+    "openInNewTab": "Open in new tab",
+    "importing": "Processing",
+    "uploadDocument": "Upload document",
+    "importToMain": "Import into main page",
+    "importAndTranslate": "Import and translate",
+    "favorite": "Favorite",
+    "unfavorite": "Unfavorite",
+    "restore": "Restore",
+    "addGlossary": "Add term",
+    "remove": "Remove",
+    "retranslate": "Retranslate",
+    "optimizeNatural": "Make natural",
+    "optimizeProfessional": "Make professional"
+  },
+  "helper": {
+    "sourceIntro": "Use text, documents, OCR, and voice inside one editable workflow. Input on the left, versions and provider outputs on the right, with sentence-level refinement below.",
+    "simpleIntro": "Default mode keeps only source input and the translated result. Style, tone, context, provider controls, and web workbench move into Advanced options.",
+    "realtimeOn": "Realtime translation enabled",
+    "realtimeOff": "Manual translation mode",
+    "contextPlaceholder": "Provide context, for example: this is a launch note for overseas developers and should stay accurate but natural.",
+    "shortcuts": "Cmd/Ctrl + Enter to translate, Tab to switch segment versions",
+    "sourcePlaceholder": "Type text or import a document, image, or voice transcript. The studio will combine style, tone, context, glossary rules, and translation memory.",
+    "sourcePlaceholderSimple": "Type the content you want to translate. The studio will first give you a ready-to-use translation, and advanced controls stay tucked away until you need them.",
+    "resultIntro": "The default panel shows the localized version first. If you need literal/adaptive comparison or sentence-level editing, open the advanced area below.",
+    "versionCompare": "Each input produces literal, adaptive, and localized versions so teams can pick faster and edit less.",
+    "providerWorkbench": "Built-in free APIs stay visible side by side so you can compare phrasing choices across providers.",
+    "webWorkbench": "Google, Bing, Baidu, and DeepL stay available as original web workbenches for cross-checking.",
+    "documentIntro": "Built for long-form documents, scanned images, and OCR-heavy workflows. Imported content still benefits from glossary enforcement and translation memory.",
+    "importReady": "{{fileName}} has been extracted as {{sourceType}} and synced into the studio. You can continue segment-level editing immediately.",
+    "glossarySourcePlaceholder": "Source term, for example API gateway",
+    "glossaryTargetPlaceholder": "Target term, for example API gateway",
+    "glossaryNotePlaceholder": "Usage note or context"
+  },
+  "states": {
+    "emptyTranslation": "The combined translation output will appear here after processing.",
+    "emptyTranslationSimple": "Start typing and a ready-to-use translation will appear here.",
+    "providerPending": "This provider has not returned output yet, or this language pair is not supported here.",
+    "importFailed": "Import failed",
+    "importReady": "Import complete",
+    "noSegmentsTitle": "No editable segments yet",
+    "noSegmentsDescription": "Enter some text or import a document to generate segment-level translation cards."
+  },
+  "errors": {
+    "autoDetectLimitedTitle": "Auto detection has limited API coverage",
+    "autoDetectLimitedDescription": "MyMemory does not support auto-detect for the source language. Keep LibreTranslate enabled for auto mode, or choose an explicit source language."
+  },
+  "segment": {
+    "status": {
+      "idle": "Idle",
+      "loading": "Processing",
+      "ready": "Ready",
+      "error": "Error",
+      "disabled": "Disabled"
+    },
+    "memoryHit": "TM hit",
+    "suggestionTitle": "Replacement suggestions",
+    "noSuggestions": "No extra suggestions are available right now.",
+    "providerTitle": "Provider output",
+    "noProviderOutput": "No provider-level output is available for this segment.",
+    "explanationTitle": "AI explanation"
+  },
+  "providers": {
+    "google": "Google Translate",
+    "bing": "Bing Translator",
+    "baidu": "Baidu Translate",
+    "deepl": "DeepL"
+  },
+  "apiProviders": {
+    "mymemory": "MyMemory free API",
+    "libretranslate": "LibreTranslate API"
+  },
+  "documents": {
+    "support": {
+      "pdf": "Extracts multi-page text from reports, contracts, whitepapers, and similar files.",
+      "docx": "Pulls editable body content for specs, plans, and draft copy.",
+      "txt": "Lightweight text import for quick translation and batch cleanup."
+    },
+    "previewTitle": "Document preview",
+    "actionsTitle": "Document workflow",
+    "consistencyTitle": "Long-document consistency",
+    "consistencyDescription": "Imported documents continue to reuse glossary rules and translation memory so terminology, tone, and phrasing stay more consistent across the whole text.",
+    "emptyTitle": "Import a document or image first",
+    "emptyDescription": "Supports pdf/docx/txt and image OCR. Once extracted, the content can move into the main workspace for sentence-level refinement."
+  },
+  "history": {
+    "emptyTitle": "No history yet",
+    "emptyDescription": "Every translation run is stored automatically so teams can restore, favorite, and continue editing later.",
+    "favorite": "Favorited",
+    "standard": "Standard",
+    "noPreview": "No preview is available for this record yet.",
+    "segmentCount": "Segments"
+  },
+  "glossary": {
+    "description": "Create reusable mappings for brand names, industry terms, and fixed wording. The studio will prefer them during translation to keep long-form content consistent.",
+    "emptyTitle": "Your glossary is empty",
+    "emptyDescription": "Add terms here so future translations stay aligned with your product language and domain vocabulary."
+  },
+  "settings": {
+    "enableRealtime": "Enable realtime translation",
+    "enableExplanations": "Show AI explanations and grammar notes",
+    "enableWebWorkbench": "Show web translation workbench",
+    "enableMultiView": "Enable multi-view mode",
+    "libreEndpointPlaceholder": "LibreTranslate endpoint, for example https://libretranslate.example.com",
+    "libreApiKeyPlaceholder": "Optional API key",
+    "architectureTitle": "Recommended frontend and backend structure",
+    "architectureDescription": "Keep input orchestration, document handling, and editable output inside the tool, while routing LLM, OCR, TM, glossary, file parsing, and enterprise providers through a dedicated translation-service.",
+    "architectureBadge": "Full-stack ready"
+  },
+  "voice": {
+    "unsupportedTitle": "Voice recognition is not available in this browser",
+    "unsupportedDescription": "Text, document, and OCR flows still work. Voice input depends on the browser SpeechRecognition capability."
+  }
+}

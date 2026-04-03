@@ -32,6 +32,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/changelog'],
       },
+      {
+        type: 'updated',
+        summary: {
+          zh: '翻译工作台升级为 AI 翻译平台，加入多输入、逐句编辑、多版本输出、术语库、历史记录和文档翻译结构。',
+          en: 'Upgraded the translation workbench into an AI translation platform with multi-input support, sentence editing, multi-version output, glossary, history, and document workflows.',
+        },
+        paths: ['/translation-hub'],
+      },
     ],
   },
   {
