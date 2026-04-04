@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-time-logger",
+  "name": "@toolbox/tool-restaurant-finder",
   "version": "1.0.0",
   "type": "module",
   "main": "./src/index.tsx",

@@ -1,22 +1,23 @@
-import { Clock } from 'lucide-react'
+import type { ToolManifest } from '../../../apps/web/src/types/tool';
 
-export default {
-  id: 'tools.time_logger',
+const manifest: ToolManifest = {
+  id: 'time-logger',
+  name: 'TimeLogger',
   path: '/time-logger',
-  title: '时间日志分析',
-  description: '时间花费分析「时间去哪了」',
   categoryKey: 'life',
-  icon: Clock,
-  keywords: ['时间', '日志', '分析', '效率'],
-  namespace: 'toolTimeLogger',
-  meta: {
-    zh: {
-      title: '时间日志分析',
-      description: '时间花费分析「时间去哪了」'
-    },
-    en: {
-      title: 'Time Logger',
-      description: 'Time spending analysis - "Where did my time go?"'
-    }
-  }
-}
+  icon: '⏱️',
+  title: {
+    zh: '时间日志分析',
+    en: 'Time Logger',
+  },
+  description: {
+    zh: '记录和分析你的时间都去哪了，优化时间分配',
+    en: 'Track and analyze where your time goes, optimize time allocation',
+  },
+  keywords: {
+    zh: ['时间管理', '时间追踪', '时间日志', '效率分析', '时间统计'],
+    en: ['time management', 'time tracking', 'time log', 'efficiency analysis', 'time statistics'],
+  },
+};
+
+export default manifest;

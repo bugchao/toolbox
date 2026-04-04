@@ -239,6 +239,7 @@
 | 冰箱库存管理 | `/fridge-inventory` | `tools/tool-fridge-inventory` → FridgeInventory |
 | 保质期提醒 | `/expiry-reminder` | `tools/tool-expiry-reminder` → ExpiryReminder |
 | 家庭任务分配工具 | `/family-tasks` | `tools/tool-family-tasks` → FamilyTasks |
+| 时间日志分析 | `/time-logger` | `tools/tool-time-logger` → TimeLogger |
 
 ### 旅游工具
 
@@ -257,6 +258,10 @@
 | 签证信息助手 | `/visa-info` | `tools/tool-visa-info` → VisaInfo |
 | 语言翻译助手（旅行场景） | `/travel-translator` | `tools/tool-travel-translator` → TravelTranslator |
 | 旅行成本对比工具 | `/travel-cost-compare` | `tools/tool-travel-cost-compare` → TravelCostCompare |
+| 航班信息查询 | `/flight-search` | `tools/tool-flight-search` → FlightSearch |
+| 网红景点生成器 | `/trending-spots` | `tools/tool-trending-spots` → TrendingSpots |
+| 旅行故事生成 | `/travel-story` | `tools/tool-travel-story` → TravelStory |
+| 餐厅推荐 | `/restaurant-finder` | `tools/tool-restaurant-finder` → RestaurantFinder |
 | 景点热度分析 | `/attraction-heatmap` | `tools/tool-attraction-heatmap` → AttractionHeatmap |
 | 人流预测工具 | `/crowd-forecast` | `tools/tool-crowd-forecast` → CrowdForecast |
 | 天气 + 穿搭建议 | `/weather-outfit` | `tools/tool-weather-outfit` → WeatherOutfit |
@@ -307,7 +312,7 @@
 | ~~习惯打卡 + 连续记录~~ | life | `/habit-tracker` | **已上线** | - | 习惯追踪 + 连续天数 |
 | ~~目标拆解工具（OKR mini）~~ | life | `/okr-planner` | **已上线** | - | OKR 目标拆解与追踪 |
 | 今日计划自动生成器 | life | `/daily-planner` | **已上线** | P2 | AI 生成每日计划 |
-| 时间日志分析 | life | `/time-logger` | 待开发 | P2 | 时间花费分析「时间去哪了」 |
+| ~~时间日志分析~~ | life | `/time-logger` | **已上线** | - | 时间花费分析「时间去哪了」 |
 | ~~拖延症评估 + 改进建议~~ | life | `/procrastination-test` | **已上线** | - | 拖延评估 + AI 建议 |
 | ~~每日复盘生成器~~ | life | `/daily-review` | **已上线** | - | AI 辅助每日复盘 |
 | **── 生活：财务 & 消费 ──** | | | | | |
@@ -366,17 +371,17 @@
 | ~~地图距离计算~~ | travel | `/distance-calc` | **已上线** | - | 两点间距离计算 |
 | **── 旅游：实用工具 ──** | | | | | |
 | ~~行李清单生成器~~ | travel | `/packing-list` | **已上线** | - | AI 生成行李清单 |
-| 航班信息查询聚合 | travel | `/flight-search` | 待开发 | P2 | 航班信息聚合查询 |
+| ~~航班信息查询聚合~~ | travel | `/flight-search` | **已上线** | - | 航班信息聚合查询 |
 | 酒店价格趋势 | travel | `/hotel-trend` | 待开发 | P3 | 酒店历史价格趋势 |
 | 签证信息助手 | travel | `/visa-info` | **已上线** | P2 | 各国签证要求查询 |
 | ~~旅行风险提醒~~ | travel | `/travel-risk` | **已上线** | - | 目的地安全/健康风险 |
 | **── 旅游：体验增强 ──** | | | | | |
 | ~~拍照点推荐~~ | travel | `/photo-spots` | **已上线** | - | 热门拍照机位推荐 |
-| 网红景点生成器 | travel | `/trending-spots` | 待开发 | P2 | 热门打卡点发现 |
-| 旅行故事生成 | travel | `/travel-story` | 待开发 | P2 | AI 生成旅行故事 |
+| ~~网红景点生成器~~ | travel | `/trending-spots` | **已上线** | - | 热门打卡点发现 |
+| ~~旅行故事生成~~ | travel | `/travel-story` | **已上线** | - | AI 生成旅行故事 |
 | ~~路线地图可视化~~ | travel | `/route-map` | **已上线** | - | 路线地图可视化展示 |
 | **── 旅游：AI 增强 ──** | | | | | |
-| 餐厅推荐 | travel | `/restaurant-finder` | 待开发 | P2 | 结合时间/预算推荐餐厅 |
+| ~~餐厅推荐~~ | travel | `/restaurant-finder` | **已上线** | - | 结合时间/预算推荐餐厅 |
 | 语言翻译助手（旅行场景） | travel | `/travel-translator` | **已上线** | P1 | 旅行常用语翻译 |
 | 旅行对话模拟 | travel | `/travel-conversation` | 待开发 | P2 | 旅行口语练习 |
 | 旅行攻略总结器 | travel | `/travel-guide-summary` | 待开发 | P2 | AI 总结旅行攻略 |

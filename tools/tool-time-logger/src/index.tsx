@@ -1,1 +1,1 @@
-export { default } from './TimeLogger'
+export { default } from './TimeLogger';
