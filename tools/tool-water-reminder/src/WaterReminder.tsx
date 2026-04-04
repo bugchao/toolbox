@@ -1,95 +1,250 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Droplets, RotateCcw } from 'lucide-react'
-import { PageHero, ProgressRing } from '@toolbox/ui-kit'
-import { useToolStorage } from '@toolbox/storage'
+import React, { useState, useEffect } from 'react';
 
-interface Log { time: string; amount: number }
-interface State { goal: number; todayDate: string; logs: Log[] }
-const DEFAULT: State = { goal: 2000, todayDate: '', logs: [] }
-
-const PRESETS = [150, 200, 250, 350, 500]
+interface WaterRecord {
+  id: string;
+  time: string;
+  amount: number;
+}
 
 export default function WaterReminder() {
-  const { t } = useTranslation('toolWaterReminder')
-  const { data, save } = useToolStorage<State>('water-reminder', 'data', DEFAULT)
-  const [custom, setCustom] = useState(200)
+  const [dailyGoal, setDailyGoal] = useState(2000);
+  const [records, setRecords] = useState<WaterRecord[]>([]);
+  const [customAmount, setCustomAmount] = useState(250);
+  const [reminderInterval, setReminderInterval] = useState(60);
+  const [reminderEnabled, setReminderEnabled] = useState(false);
 
-  const today = new Date().toISOString().slice(0, 10)
-  const logs = data.todayDate === today ? data.logs : []
-  const total = logs.reduce((s, l) => s + l.amount, 0)
-  const pct = Math.min(100, Math.round(total / data.goal * 100))
-  const remaining = Math.max(0, data.goal - total)
+  const totalToday = records.reduce((sum, r) => sum + r.amount, 0);
+  const progress = Math.min((totalToday / dailyGoal) * 100, 100);
 
   const addWater = (amount: number) => {
-    const time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
-    const newLogs = [...logs, { time, amount }]
-    save({ ...data, todayDate: today, logs: newLogs })
-  }
+    const newRecord: WaterRecord = {
+      id: Date.now().toString(),
+      time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
+      amount,
+    };
+    setRecords([newRecord, ...records]);
+  };
 
-  const reset = () => save({ ...data, todayDate: today, logs: [] })
+  const deleteRecord = (id: string) => {
+    setRecords(records.filter(r => r.id !== id));
+  };
+
+  const resetToday = () => {
+    if (confirm('确定要清空今日记录吗？')) {
+      setRecords([]);
+    }
+  };
+
+  useEffect(() => {
+    if (!reminderEnabled) return;
+
+    const interval = setInterval(() => {
+      if (totalToday < dailyGoal) {
+        if (Notification.permission === 'granted') {
+          new Notification('💧 该喝水啦！', {
+            body: `今日已喝 ${totalToday}ml，距离目标还差 ${dailyGoal - totalToday}ml`,
+            icon: '💧',
+          });
+        }
+      }
+    }, reminderInterval * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [reminderEnabled, reminderInterval, totalToday, dailyGoal]);
+
+  const requestNotificationPermission = async () => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      await Notification.requestPermission();
+    }
+    setReminderEnabled(true);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <PageHero title={t('title')} description={t('description')} icon={Droplets} />
-      <div className="max-w-md mx-auto px-4 py-6 space-y-4">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center gap-4">
-          <ProgressRing value={pct} size={140} label={`${total}ml`} />
-          <div className="text-center">
-            {pct >= 100
-              ? <p className="text-green-500 font-semibold">{t('completed')}</p>
-              : <p className="text-sm text-gray-500">{t('remaining')}: <strong className="text-indigo-600">{remaining}ml</strong></p>
-            }
-          </div>
-          <div className="w-full">
-            <label className="text-xs text-gray-400 mb-1 block">{t('goal')}</label>
-            <input type="range" min={500} max={4000} step={100} value={data.goal}
-              onChange={e => save({ ...data, goal: parseInt(e.target.value) })}
-              className="w-full h-1.5 accent-indigo-600" />
-            <div className="flex justify-between text-xs text-gray-400 mt-0.5">
-              <span>500ml</span><span className="text-indigo-600 font-medium">{data.goal}ml</span><span>4000ml</span>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8 px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">💧 饮水提醒工具</h1>
+          <p className="text-gray-600">记录每日饮水量，养成健康饮水习惯</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-          <div className="flex flex-wrap gap-2">
-            {PRESETS.map(ml => (
-              <button key={ml} onClick={() => addWater(ml)}
-                className="flex-1 min-w-[60px] py-3 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 text-blue-600 rounded-xl text-sm font-medium transition-colors">
-                +{ml}ml
+        {/* 进度卡片 */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <div className="text-sm text-gray-600 mb-1">今日饮水量</div>
+              <div className="text-4xl font-bold text-blue-600">{totalToday} ml</div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-gray-600 mb-1">目标</div>
+              <div className="text-2xl font-semibold text-gray-700">{dailyGoal} ml</div>
+            </div>
+          </div>
+
+          <div className="mb-2">
+            <div className="flex justify-between text-sm text-gray-600 mb-1">
+              <span>进度</span>
+              <span>{Math.round(progress)}%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div
+                className="bg-gradient-to-r from-blue-400 to-cyan-400 h-4 rounded-full transition-all duration-500"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+
+          {totalToday >= dailyGoal && (
+            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-center">
+              <span className="text-green-700 font-medium">🎉 恭喜！今日目标已达成</span>
+            </div>
+          )}
+        </div>
+
+        {/* 快捷添加 */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4">快捷记录</h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+            {[100, 200, 250, 500].map((amount) => (
+              <button
+                key={amount}
+                onClick={() => addWater(amount)}
+                className="bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-blue-200 text-blue-700 py-4 rounded-lg font-semibold transition-colors"
+              >
+                <div className="text-2xl mb-1">💧</div>
+                <div>{amount} ml</div>
               </button>
             ))}
           </div>
+
           <div className="flex gap-2">
-            <input type="number" value={custom} min={50} max={2000} step={50}
-              onChange={e => setCustom(parseInt(e.target.value) || 200)}
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none" />
-            <button onClick={() => addWater(custom)}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm">{t('add')}</button>
+            <input
+              type="number"
+              value={customAmount}
+              onChange={(e) => setCustomAmount(Number(e.target.value))}
+              placeholder="自定义毫升数"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <button
+              onClick={() => addWater(customAmount)}
+              className="px-6 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
+            >
+              添加
+            </button>
           </div>
         </div>
 
-        {logs.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('history')}</span>
-              <button onClick={reset} className="flex items-center gap-1 text-xs text-gray-400 hover:text-red-400">
-                <RotateCcw className="w-3 h-3" />{t('reset')}
+        {/* 设置 */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4">设置</h2>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                每日目标 (ml)
+              </label>
+              <input
+                type="number"
+                value={dailyGoal}
+                onChange={(e) => setDailyGoal(Number(e.target.value))}
+                step="100"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                提醒间隔 (分钟)
+              </label>
+              <input
+                type="number"
+                value={reminderInterval}
+                onChange={(e) => setReminderInterval(Number(e.target.value))}
+                min="15"
+                step="15"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-700">启用提醒</span>
+              <button
+                onClick={() => {
+                  if (!reminderEnabled) {
+                    requestNotificationPermission();
+                  } else {
+                    setReminderEnabled(false);
+                  }
+                }}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  reminderEnabled
+                    ? 'bg-green-500 text-white hover:bg-green-600'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {reminderEnabled ? '已启用' : '已关闭'}
               </button>
             </div>
-            <div className="space-y-1 max-h-40 overflow-y-auto">
-              {[...logs].reverse().map((l, i) => (
-                <div key={i} className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400 text-xs">{l.time}</span>
-                  <span className="text-blue-500 font-medium">+{l.amount}ml</span>
+          </div>
+        </div>
+
+        {/* 今日记录 */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">今日记录</h2>
+            {records.length > 0 && (
+              <button
+                onClick={resetToday}
+                className="text-sm text-red-500 hover:text-red-700"
+              >
+                清空记录
+              </button>
+            )}
+          </div>
+
+          {records.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">💧</div>
+              <p className="text-gray-500">还没有饮水记录</p>
+              <p className="text-sm text-gray-400 mt-2">点击上方按钮开始记录</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {records.map((record) => (
+                <div
+                  key={record.id}
+                  className="flex items-center justify-between p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl">💧</div>
+                    <div>
+                      <div className="font-medium text-gray-800">{record.amount} ml</div>
+                      <div className="text-sm text-gray-600">{record.time}</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => deleteRecord(record.id)}
+                    className="text-red-500 hover:text-red-700 text-sm"
+                  >
+                    删除
+                  </button>
                 </div>
               ))}
             </div>
-          </div>
-        )}
-        <p className="text-xs text-center text-gray-400">{t('tip')}</p>
+          )}
+        </div>
+
+        {/* 使用提示 */}
+        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-800 mb-2">💡 饮水建议</h3>
+          <ul className="text-sm text-blue-700 space-y-1">
+            <li>• 成年人建议每天饮水 1500-2000ml</li>
+            <li>• 少量多次饮水，避免一次性大量饮水</li>
+            <li>• 运动后、天气炎热时需要增加饮水量</li>
+            <li>• 晨起一杯温水有助于促进新陈代谢</li>
+          </ul>
+        </div>
       </div>
     </div>
-  )
+  );
 }

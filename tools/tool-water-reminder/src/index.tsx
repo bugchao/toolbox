@@ -1,1 +1,1 @@
-export { default } from './WaterReminder'
+export { default } from './WaterReminder';

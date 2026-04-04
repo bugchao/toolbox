@@ -1,1 +1,1 @@
-export { default } from './BarcodeReader'
+export { default } from './BarcodeReader';

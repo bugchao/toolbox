@@ -1,1 +1,1 @@
-export { default } from './SedentaryReminder'
+export { default } from './SedentaryReminder';

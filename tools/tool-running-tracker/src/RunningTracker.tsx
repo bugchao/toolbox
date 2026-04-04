@@ -1,132 +1,286 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Activity, Plus, Trash2 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
-import { useToolStorage } from '@toolbox/storage'
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
+import React, { useState } from 'react';
 
-interface Run { id: string; date: string; distance: number; duration: number; note: string }
-interface State { runs: Run[] }
-const DEFAULT: State = { runs: [] }
-
-function pace(distance: number, duration: number): string {
-  if (!distance) return '--'
-  const secPerKm = (duration * 60) / distance
-  const m = Math.floor(secPerKm / 60)
-  const s = Math.round(secPerKm % 60)
-  return `${m}'${String(s).padStart(2, '0')}'`
-}
-
-function calories(distance: number): number {
-  return Math.round(distance * 65)
+interface RunRecord {
+  id: string;
+  date: string;
+  distance: number;
+  duration: number;
+  pace: number;
+  calories: number;
+  notes: string;
 }
 
 export default function RunningTracker() {
-  const { t } = useTranslation('toolRunningTracker')
-  const { data, save } = useToolStorage<State>('running-tracker', 'data', DEFAULT)
-  const [form, setForm] = useState({ date: new Date().toISOString().slice(0, 10), distance: 5, duration: 30, note: '' })
-  const [adding, setAdding] = useState(false)
+  const [records, setRecords] = useState<RunRecord[]>([]);
+  const [distance, setDistance] = useState('');
+  const [duration, setDuration] = useState('');
+  const [notes, setNotes] = useState('');
+  const [showForm, setShowForm] = useState(false);
 
-  const add = () => {
-    save({ runs: [{ id: Date.now().toString(), ...form }, ...data.runs] })
-    setForm(f => ({ ...f, distance: 5, duration: 30, note: '' }))
-    setAdding(false)
-  }
+  const calculatePace = (dist: number, dur: number): number => {
+    if (dist === 0) return 0;
+    return Math.round((dur / dist) * 10) / 10;
+  };
 
-  const remove = (id: string) => save({ runs: data.runs.filter(r => r.id !== id) })
+  const calculateCalories = (dist: number): number => {
+    return Math.round(dist * 60);
+  };
 
-  const totalDist = data.runs.reduce((s, r) => s + r.distance, 0)
-  const avgPace = data.runs.length
-    ? pace(data.runs.reduce((s, r) => s + r.distance, 0), data.runs.reduce((s, r) => s + r.duration, 0))
-    : '--'
+  const addRecord = () => {
+    const dist = parseFloat(distance);
+    const dur = parseFloat(duration);
 
-  const chartData = [...data.runs].reverse().slice(-14).map(r => ({
-    date: r.date.slice(5),
-    distance: r.distance,
-  }))
+    if (!dist || !dur || dist <= 0 || dur <= 0) {
+      alert('请输入有效的距离和时长');
+      return;
+    }
+
+    const pace = calculatePace(dist, dur);
+    const calories = calculateCalories(dist);
+
+    const newRecord: RunRecord = {
+      id: Date.now().toString(),
+      date: new Date().toISOString().split('T')[0],
+      distance: dist,
+      duration: dur,
+      pace,
+      calories,
+      notes,
+    };
+
+    setRecords([newRecord, ...records]);
+    setDistance('');
+    setDuration('');
+    setNotes('');
+    setShowForm(false);
+  };
+
+  const deleteRecord = (id: string) => {
+    setRecords(records.filter(r => r.id !== id));
+  };
+
+  const totalDistance = records.reduce((sum, r) => sum + r.distance, 0);
+  const totalDuration = records.reduce((sum, r) => sum + r.duration, 0);
+  const totalCalories = records.reduce((sum, r) => sum + r.calories, 0);
+  const avgPace = records.length > 0
+    ? Math.round((records.reduce((sum, r) => sum + r.pace, 0) / records.length) * 10) / 10
+    : 0;
+
+  const getPaceLevel = (pace: number) => {
+    if (pace < 5) return { label: '极快', color: 'text-red-600 bg-red-50' };
+    if (pace < 6) return { label: '快速', color: 'text-orange-600 bg-orange-50' };
+    if (pace < 7) return { label: '良好', color: 'text-green-600 bg-green-50' };
+    if (pace < 8) return { label: '一般', color: 'text-blue-600 bg-blue-50' };
+    return { label: '慢跑', color: 'text-gray-600 bg-gray-50' };
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <PageHero title={t('title')} description={t('description')} icon={Activity} />
-      <div className="max-w-xl mx-auto px-4 py-6 space-y-4">
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { label: t('totalDistance'), value: `${totalDist.toFixed(1)} km`, color: 'text-indigo-600' },
-            { label: t('totalRuns'), value: `${data.runs.length} 次`, color: 'text-emerald-600' },
-            { label: t('avgPace'), value: avgPace, color: 'text-amber-600' },
-          ].map(s => (
-            <div key={s.label} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 text-center">
-              <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
-              <div className="text-xs text-gray-400 mt-0.5">{s.label}</div>
-            </div>
-          ))}
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">🏃 跑步数据分析</h1>
+          <p className="text-gray-600">记录跑步数据，分析配速和趋势</p>
         </div>
 
-        <div className="flex justify-end">
-          <button onClick={() => setAdding(v => !v)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm">
-            <Plus className="w-3.5 h-3.5" />{t('addRun')}
-          </button>
-        </div>
-
-        {adding && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
-            <div className="grid grid-cols-3 gap-3">
-              {[['date', form.date, 'date', 'date'], ['distance', form.distance, 'number', 'distance'], ['duration', form.duration, 'number', 'duration']].map(([key, val, type, label]) => (
-                <div key={String(key)}>
-                  <label className="text-xs text-gray-500 mb-1 block">{t(String(label))}</label>
-                  <input type={String(type)} value={String(val)} min={type === 'number' ? 0 : undefined}
-                    onChange={e => setForm(f => ({ ...f, [key]: type === 'number' ? parseFloat(e.target.value) || 0 : e.target.value }))}
-                    className="w-full px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none" />
-                </div>
-              ))}
+        {/* 统计卡片 */}
+        {records.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-1">总次数</div>
+              <div className="text-3xl font-bold text-orange-600">{records.length}</div>
+              <div className="text-xs text-gray-500 mt-1">次</div>
             </div>
-            <input value={form.note} onChange={e => setForm(f => ({ ...f, note: e.target.value }))}
-              placeholder="备注（可选）"
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none" />
-            <div className="flex gap-2 justify-end">
-              <button onClick={() => setAdding(false)} className="px-4 py-2 text-sm text-gray-500">取消</button>
-              <button onClick={add} className="px-4 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg">{t('save')}</button>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-1">总里程</div>
+              <div className="text-3xl font-bold text-red-600">{totalDistance.toFixed(1)}</div>
+              <div className="text-xs text-gray-500 mt-1">公里</div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-1">总时长</div>
+              <div className="text-3xl font-bold text-blue-600">{totalDuration.toFixed(0)}</div>
+              <div className="text-xs text-gray-500 mt-1">分钟</div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-1">平均配速</div>
+              <div className="text-3xl font-bold text-purple-600">{avgPace}</div>
+              <div className="text-xs text-gray-500 mt-1">分钟/公里</div>
             </div>
           </div>
         )}
 
-        {chartData.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('trend')}</p>
-            <ResponsiveContainer width="100%" height={160}>
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="date" tick={{ fontSize: 10 }} />
-                <YAxis tick={{ fontSize: 10 }} unit="km" width={40} />
-                <Tooltip formatter={(v: number) => [`${v} km`]} />
-                <Line type="monotone" dataKey="distance" stroke="#6366f1" strokeWidth={2} dot={{ r: 3 }} />
-              </LineChart>
-            </ResponsiveContainer>
+        {/* 添加记录按钮 */}
+        {!showForm && (
+          <div className="mb-6">
+            <button
+              onClick={() => setShowForm(true)}
+              className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-colors shadow-lg"
+            >
+              + 添加跑步记录
+            </button>
           </div>
         )}
 
-        {data.runs.length === 0 && !adding && (
-          <div className="text-center py-10 text-gray-400 text-sm">{t('empty')}</div>
-        )}
+        {/* 添加表单 */}
+        {showForm && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4">记录跑步数据</h2>
 
-        <div className="space-y-2">
-          {data.runs.slice(0, 10).map(r => (
-            <div key={r.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3">
-              <div className="text-2xl">🏃</div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{r.distance} km</span>
-                  <span className="text-xs text-indigo-500">{pace(r.distance, r.duration)}/km</span>
-                  <span className="text-xs text-amber-500">{calories(r.distance)} kcal</span>
-                </div>
-                <div className="text-xs text-gray-400">{r.date} · {r.duration} 分钟{r.note ? ` · ${r.note}` : ''}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  距离 (公里) *
+                </label>
+                <input
+                  type="number"
+                  value={distance}
+                  onChange={(e) => setDistance(e.target.value)}
+                  placeholder="例如：5.0"
+                  step="0.1"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                />
               </div>
-              <button onClick={() => remove(r.id)} className="text-gray-300 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  时长 (分钟) *
+                </label>
+                <input
+                  type="number"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                  placeholder="例如：30"
+                  step="0.1"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                />
+              </div>
             </div>
-          ))}
+
+            {distance && duration && parseFloat(distance) > 0 && parseFloat(duration) > 0 && (
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="p-3 bg-orange-50 rounded-lg">
+                  <div className="text-sm text-gray-600 mb-1">配速</div>
+                  <div className="text-2xl font-bold text-orange-600">
+                    {calculatePace(parseFloat(distance), parseFloat(duration))}
+                  </div>
+                  <div className="text-xs text-gray-500">分钟/公里</div>
+                </div>
+
+                <div className="p-3 bg-red-50 rounded-lg">
+                  <div className="text-sm text-gray-600 mb-1">消耗热量</div>
+                  <div className="text-2xl font-bold text-red-600">
+                    {calculateCalories(parseFloat(distance))}
+                  </div>
+                  <div className="text-xs text-gray-500">千卡</div>
+                </div>
+              </div>
+            )}
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">备注</label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="记录天气、路线、感受等..."
+                rows={3}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+              />
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={addRecord}
+                className="flex-1 bg-orange-500 text-white py-2 rounded-lg font-medium hover:bg-orange-600 transition-colors"
+              >
+                保存记录
+              </button>
+              <button
+                onClick={() => setShowForm(false)}
+                className="px-6 bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              >
+                取消
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* 记录列表 */}
+        <div className="space-y-4">
+          {records.length === 0 ? (
+            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+              <div className="text-6xl mb-4">🏃</div>
+              <p className="text-gray-500">还没有跑步记录</p>
+              <p className="text-sm text-gray-400 mt-2">点击上方按钮添加第一条记录</p>
+            </div>
+          ) : (
+            records.map((record) => {
+              const paceLevel = getPaceLevel(record.pace);
+              return (
+                <div key={record.id} className="bg-white rounded-xl shadow-lg p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <div className="text-lg font-semibold text-gray-800">{record.date}</div>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${paceLevel.color}`}>
+                          {paceLevel.label}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => deleteRecord(record.id)}
+                      className="text-red-500 hover:text-red-700 text-sm"
+                    >
+                      删除
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div className="bg-orange-50 p-3 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">距离</div>
+                      <div className="text-xl font-bold text-orange-600">{record.distance} km</div>
+                    </div>
+
+                    <div className="bg-blue-50 p-3 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">时长</div>
+                      <div className="text-xl font-bold text-blue-600">{record.duration} min</div>
+                    </div>
+
+                    <div className="bg-purple-50 p-3 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">配速</div>
+                      <div className="text-xl font-bold text-purple-600">{record.pace} min/km</div>
+                    </div>
+
+                    <div className="bg-red-50 p-3 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">热量</div>
+                      <div className="text-xl font-bold text-red-600">{record.calories} kcal</div>
+                    </div>
+                  </div>
+
+                  {record.notes && (
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">备注</div>
+                      <div className="text-sm text-gray-700">{record.notes}</div>
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* 使用提示 */}
+        <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
+          <h3 className="font-semibold text-orange-800 mb-2">💡 跑步建议</h3>
+          <ul className="text-sm text-orange-700 space-y-1">
+            <li>• 初学者建议配速 7-8 分钟/公里，循序渐进</li>
+            <li>• 跑前热身 5-10 分钟，跑后拉伸放松</li>
+            <li>• 每周跑步 3-4 次，每次 30-60 分钟</li>
+            <li>• 注意补充水分，选择合适的跑鞋</li>
+          </ul>
         </div>
       </div>
     </div>
-  )
+  );
 }

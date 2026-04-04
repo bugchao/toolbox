@@ -1,1 +1,1 @@
-export { default } from './SleepTracker'
+export { default } from './SleepTracker';

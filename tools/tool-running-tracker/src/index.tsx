@@ -1,1 +1,1 @@
-export { default } from './RunningTracker'
+export { default } from './RunningTracker';

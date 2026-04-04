@@ -1,217 +1,263 @@
 import React, { useState, useRef } from 'react';
-import { Camera, Image as ImageIcon, Download, Palette } from 'lucide-react';
 
-const IdPhoto: React.FC = () => {
-  const [image, setImage] = useState<string | null>(null);
-  const [selectedSize, setSelectedSize] = useState('1inch'); // 1inch, 2inch, passport
-  const [backgroundColor, setBackgroundColor] = useState('#ffffff'); // white, blue, red
-  const fileInputRef = useRef<HTMLInputElement>(null);
+interface PhotoSpec {
+  name: string;
+  width: number;
+  height: number;
+  dpi: number;
+}
+
+const PHOTO_SPECS: PhotoSpec[] = [
+  { name: '一寸照', width: 295, height: 413, dpi: 300 },
+  { name: '二寸照', width: 413, height: 626, dpi: 300 },
+  { name: '小一寸', width: 260, height: 378, dpi: 300 },
+  { name: '大一寸', width: 390, height: 567, dpi: 300 },
+  { name: '护照照片', width: 390, height: 567, dpi: 300 },
+  { name: '身份证照片', width: 358, height: 441, dpi: 300 },
+];
+
+const BACKGROUND_COLORS = [
+  { name: '白色', value: '#FFFFFF' },
+  { name: '蓝色', value: '#438EDB' },
+  { name: '红色', value: '#E74C3C' },
+  { name: '灰色', value: '#95A5A6' },
+];
+
+export default function IdPhoto() {
+  const [selectedSpec, setSelectedSpec] = useState<PhotoSpec>(PHOTO_SPECS[0]);
+  const [backgroundColor, setBackgroundColor] = useState('#438EDB');
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [processedImage, setProcessedImage] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const sizeOptions = [
-    { value: '1inch', label: '1寸 (2.5×3.5cm)', width: 295, height: 413 },
-    { value: '2inch', label: '2寸 (3.5×4.9cm)', width: 413, height: 579 },
-    { value: 'passport', label: '护照 (3.5×4.5cm)', width: 413, height: 531 },
-  ];
-
-  const backgroundOptions = [
-    { value: '#ffffff', label: '白底', color: 'white' },
-    { value: '#0000ff', label: '蓝底', color: 'blue' },
-    { value: '#ff0000', label: '红底', color: 'red' },
-  ];
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setImage(event.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setUploadedImage(event.target?.result as string);
+      setProcessedImage(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const processPhoto = () => {
+    if (!uploadedImage) {
+      alert('请先上传照片');
+      return;
     }
-  };
 
-  const handleCameraCapture = () => {
-    // Camera capture logic would go here
-    alert('摄像头功能将在后续版本中实现');
-  };
-
-  const generateIdPhoto = () => {
-    if (!image || !canvasRef.current) return;
-    
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const img = new Image();
     img.onload = () => {
-      const selectedSizeOption = sizeOptions.find(opt => opt.value === selectedSize);
-      if (selectedSizeOption) {
-        canvas.width = selectedSizeOption.width;
-        canvas.height = selectedSizeOption.height;
-        
-        // Fill background
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw image (centered and scaled)
-        const aspectRatio = img.width / img.height;
-        let drawWidth = canvas.width;
-        let drawHeight = canvas.width / aspectRatio;
-        
-        if (drawHeight > canvas.height) {
-          drawHeight = canvas.height;
-          drawWidth = canvas.height * aspectRatio;
-        }
-        
-        const x = (canvas.width - drawWidth) / 2;
-        const y = (canvas.height - drawHeight) / 2;
-        
-        ctx.drawImage(img, x, y, drawWidth, drawHeight);
-      }
+      // 设置画布尺寸
+      canvas.width = selectedSpec.width;
+      canvas.height = selectedSpec.height;
+
+      // 绘制背景色
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 计算图片缩放比例
+      const scale = Math.max(
+        canvas.width / img.width,
+        canvas.height / img.height
+      );
+
+      const scaledWidth = img.width * scale;
+      const scaledHeight = img.height * scale;
+
+      const x = (canvas.width - scaledWidth) / 2;
+      const y = (canvas.height - scaledHeight) / 2;
+
+      // 绘制图片
+      ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
+
+      // 导出处理后的图片
+      setProcessedImage(canvas.toDataURL('image/jpeg', 0.95));
     };
-    img.src = image;
+    img.src = uploadedImage;
   };
 
   const downloadPhoto = () => {
-    if (canvasRef.current) {
-      const link = document.createElement('a');
-      link.download = `id-photo-${selectedSize}.png`;
-      link.href = canvasRef.current.toDataURL();
-      link.click();
-    }
+    if (!processedImage) return;
+
+    const link = document.createElement('a');
+    link.download = `${selectedSpec.name}-${Date.now()}.jpg`;
+    link.href = processedImage;
+    link.click();
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">📸 证件照工具</h1>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Input Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">上传照片</h2>
-          
-          <div className="mb-4">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              ref={fileInputRef}
-              className="hidden"
-            />
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors flex items-center justify-center"
-            >
-              <ImageIcon className="mr-2" size={20} />
-              选择照片
-            </button>
-          </div>
-          
-          <div className="mb-4">
-            <button
-              onClick={handleCameraCapture}
-              className="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors flex items-center justify-center"
-            >
-              <Camera className="mr-2" size={20} />
-              拍摄照片
-            </button>
-          </div>
-          
-          {image && (
-            <div className="mt-4">
-              <h3 className="font-medium mb-2">原图预览:</h3>
-              <img 
-                src={image} 
-                alt="Original" 
-                className="max-w-full h-auto rounded border border-gray-300 dark:border-gray-600"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">📸 证件照工具</h1>
+          <p className="text-gray-600">标准尺寸裁剪、背景色更换</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* 左侧：设置 */}
+          <div className="space-y-4">
+            {/* 规格选择 */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-lg font-semibold mb-4">选择规格</h2>
+              <div className="space-y-2">
+                {PHOTO_SPECS.map((spec) => (
+                  <button
+                    key={spec.name}
+                    onClick={() => setSelectedSpec(spec)}
+                    className={`w-full text-left p-3 rounded-lg transition-colors ${
+                      selectedSpec.name === spec.name
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    <div className="font-medium">{spec.name}</div>
+                    <div className="text-sm opacity-75">
+                      {spec.width} × {spec.height} px ({spec.dpi} DPI)
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 背景色选择 */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h2 className="text-lg font-semibold mb-4">背景颜色</h2>
+              <div className="grid grid-cols-2 gap-2">
+                {BACKGROUND_COLORS.map((color) => (
+                  <button
+                    key={color.value}
+                    onClick={() => setBackgroundColor(color.value)}
+                    className={`p-3 rounded-lg border-2 transition-colors ${
+                      backgroundColor === color.value
+                        ? 'border-blue-500'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div
+                      className="w-full h-12 rounded mb-2"
+                      style={{ backgroundColor: color.value }}
+                    />
+                    <div className="text-sm text-gray-700">{color.name}</div>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  自定义颜色
+                </label>
+                <input
+                  type="color"
+                  value={backgroundColor}
+                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  className="w-full h-10 rounded cursor-pointer"
+                />
+              </div>
+            </div>
+
+            {/* 上传按钮 */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-600 transition-colors"
+              >
+                📁 上传照片
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
               />
             </div>
-          )}
-        </div>
-        
-        {/* Settings and Output Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">设置</h2>
-          
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">证件照尺寸:</label>
-            <select
-              value={selectedSize}
-              onChange={(e) => setSelectedSize(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700"
-            >
-              {sizeOptions.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
           </div>
-          
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">背景颜色:</label>
-            <div className="flex space-x-2">
-              {backgroundOptions.map(option => (
+
+          {/* 中间：预览 */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* 原图预览 */}
+            {uploadedImage && (
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h2 className="text-lg font-semibold mb-4">原始照片</h2>
+                <div className="flex justify-center">
+                  <img
+                    src={uploadedImage}
+                    alt="原始照片"
+                    className="max-w-full max-h-96 rounded-lg"
+                  />
+                </div>
                 <button
-                  key={option.value}
-                  onClick={() => setBackgroundColor(option.value)}
-                  className={`px-3 py-2 rounded flex items-center ${
-                    backgroundColor === option.value 
-                      ? 'ring-2 ring-blue-500' 
-                      : 'border border-gray-300 dark:border-gray-600'
-                  }`}
-                  style={{ backgroundColor: option.color }}
+                  onClick={processPhoto}
+                  className="w-full mt-4 bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors"
                 >
-                  <Palette className="mr-1" size={16} />
-                  {option.label}
+                  ✨ 生成证件照
                 </button>
-              ))}
-            </div>
-          </div>
-          
-          <div className="flex space-x-3">
-            <button
-              onClick={generateIdPhoto}
-              disabled={!image}
-              className="flex-1 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              生成证件照
-            </button>
-            
-            <button
-              onClick={downloadPhoto}
-              disabled={!image}
-              className="flex-1 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-            >
-              <Download className="mr-1" size={16} />
-              下载
-            </button>
+              </div>
+            )}
+
+            {/* 处理后预览 */}
+            {processedImage && (
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h2 className="text-lg font-semibold mb-4">证件照预览</h2>
+                <div className="flex justify-center mb-4">
+                  <img
+                    src={processedImage}
+                    alt="证件照"
+                    className="rounded-lg shadow-md"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={downloadPhoto}
+                    className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+                  >
+                    💾 下载照片
+                  </button>
+                  <button
+                    onClick={processPhoto}
+                    className="px-6 bg-gray-100 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                  >
+                    🔄 重新生成
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 空状态 */}
+            {!uploadedImage && (
+              <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+                <div className="text-6xl mb-4">📸</div>
+                <p className="text-gray-500 mb-2">还没有上传照片</p>
+                <p className="text-sm text-gray-400">点击左侧按钮上传照片开始制作</p>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      
-      {/* Output Preview */}
-      {image && (
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">证件照预览:</h2>
-          <canvas 
-            ref={canvasRef} 
-            className="max-w-full h-auto border border-gray-300 dark:border-gray-600 rounded"
-          />
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            尺寸: {sizeOptions.find(opt => opt.value === selectedSize)?.label}
-          </p>
+
+        {/* 隐藏的 Canvas */}
+        <canvas ref={canvasRef} className="hidden" />
+
+        {/* 使用提示 */}
+        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-800 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-blue-700 space-y-1">
+            <li>• 上传正面免冠照片，确保五官清晰可见</li>
+            <li>• 选择需要的证件照规格和背景颜色</li>
+            <li>• 生成后可下载为高清 JPG 格式</li>
+            <li>• 所有处理在浏览器本地完成，不上传服务器</li>
+          </ul>
         </div>
-      )}
-      
-      <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p>支持标准证件照尺寸，AI智能换底色，人脸自动检测和裁剪</p>
       </div>
     </div>
   );
-};
-
-export default IdPhoto;
+}

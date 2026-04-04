@@ -1,1 +1,1 @@
-export { default } from './HttpDebugger'
+export { default } from './HttpDebugger';

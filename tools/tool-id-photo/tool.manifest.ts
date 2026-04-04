@@ -1,29 +1,23 @@
-import { ImageIcon } from 'lucide-react'
-import { defineToolManifest } from '@toolbox/tool-registry'
+import type { ToolManifest } from '../../../apps/web/src/types/tool';
 
-const toolIdPhotoManifest = defineToolManifest({
-  id: 'tool-id-photo',
+const manifest: ToolManifest = {
+  id: 'id-photo',
+  name: 'IdPhoto',
   path: '/id-photo',
-  namespace: 'toolIdPhoto',
-  mode: 'client',
   categoryKey: 'utils',
-  icon: ImageIcon,
-  keywords: ['证件照', '换底色', '照片', '身份证', '护照', 'id photo'],
-  meta: {
-    zh: {
-      title: '证件照工具',
-      description: '标准证件照尺寸生成和智能换底色',
-    },
-    en: {
-      title: 'ID Photo Tool',
-      description: 'Generate standard ID photos with smart background replacement',
-    },
+  icon: '📸',
+  title: {
+    zh: '证件照工具',
+    en: 'ID Photo Tool',
   },
-  loadComponent: () => import('./src/IdPhoto'),
-  loadMessages: {
-    zh: () => import('./src/locales/zh.json'),
-    en: () => import('./src/locales/en.json'),
+  description: {
+    zh: '标准尺寸裁剪、背景色更换',
+    en: 'Standard size cropping and background color replacement',
   },
-})
+  keywords: {
+    zh: ['证件照', '背景更换', '标准尺寸', '照片处理', '一寸照'],
+    en: ['ID photo', 'background replacement', 'standard size', 'photo processing', 'passport photo'],
+  },
+};
 
-export default toolIdPhotoManifest
+export default manifest;
