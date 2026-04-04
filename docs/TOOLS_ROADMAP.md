@@ -262,6 +262,10 @@
 | 网红景点生成器 | `/trending-spots` | `tools/tool-trending-spots` → TrendingSpots |
 | 旅行故事生成 | `/travel-story` | `tools/tool-travel-story` → TravelStory |
 | 餐厅推荐 | `/restaurant-finder` | `tools/tool-restaurant-finder` → RestaurantFinder |
+| 旅行对话模拟 | `/travel-conversation` | `tools/tool-travel-conversation` → TravelConversation |
+| 旅行攻略总结器 | `/travel-guide-summary` | `tools/tool-travel-guide-summary` → TravelGuideSummary |
+| 游记自动生成 | `/travel-journal` | `tools/tool-travel-journal` → TravelJournal |
+| 酒店价格趋势 | `/hotel-trend` | `tools/tool-hotel-trend` → HotelTrend |
 | 景点热度分析 | `/attraction-heatmap` | `tools/tool-attraction-heatmap` → AttractionHeatmap |
 | 人流预测工具 | `/crowd-forecast` | `tools/tool-crowd-forecast` → CrowdForecast |
 | 天气 + 穿搭建议 | `/weather-outfit` | `tools/tool-weather-outfit` → WeatherOutfit |
@@ -295,6 +299,7 @@
 | AI 对话练习 | `/conversation-practice` | `tools/tool-conversation-practice` → ConversationPractice |
 | 学习路径规划 | `/learning-path` | `tools/tool-learning-path` → LearningPath |
 | 问答 + 深挖 | `/deep-dive-qa` | `tools/tool-deep-dive-qa` → DeepDiveQa |
+| 发音评估工具 | `/pronunciation-eval` | `tools/tool-pronunciation-eval` → PronunciationEval |
 
 ---
 
@@ -372,7 +377,7 @@
 | **── 旅游：实用工具 ──** | | | | | |
 | ~~行李清单生成器~~ | travel | `/packing-list` | **已上线** | - | AI 生成行李清单 |
 | ~~航班信息查询聚合~~ | travel | `/flight-search` | **已上线** | - | 航班信息聚合查询 |
-| 酒店价格趋势 | travel | `/hotel-trend` | 待开发 | P3 | 酒店历史价格趋势 |
+| ~~酒店价格趋势~~ | travel | `/hotel-trend` | **已上线** | - | 酒店历史价格趋势 |
 | 签证信息助手 | travel | `/visa-info` | **已上线** | P2 | 各国签证要求查询 |
 | ~~旅行风险提醒~~ | travel | `/travel-risk` | **已上线** | - | 目的地安全/健康风险 |
 | **── 旅游：体验增强 ──** | | | | | |
@@ -383,9 +388,9 @@
 | **── 旅游：AI 增强 ──** | | | | | |
 | ~~餐厅推荐~~ | travel | `/restaurant-finder` | **已上线** | - | 结合时间/预算推荐餐厅 |
 | 语言翻译助手（旅行场景） | travel | `/travel-translator` | **已上线** | P1 | 旅行常用语翻译 |
-| 旅行对话模拟 | travel | `/travel-conversation` | 待开发 | P2 | 旅行口语练习 |
-| 旅行攻略总结器 | travel | `/travel-guide-summary` | 待开发 | P2 | AI 总结旅行攻略 |
-| 游记自动生成 | travel | `/travel-journal` | 待开发 | P2 | AI 生成游记文章 |
+| ~~旅行对话模拟~~ | travel | `/travel-conversation` | **已上线** | - | 旅行口语练习 |
+| ~~旅行攻略总结器~~ | travel | `/travel-guide-summary` | **已上线** | - | AI 总结旅行攻略 |
+| ~~游记自动生成~~ | travel | `/travel-journal` | **已上线** | - | AI 生成游记文章 |
 | **── 学习：学习效率 ──** | | | | | |
 | 学习计划生成器 | learn | `/study-planner` | **已上线** | P1 | AI 生成学习计划 |
 | 记忆曲线复习提醒 | learn | `/spaced-repetition` | **已上线** | P1 | Anki lite 版 |
@@ -416,7 +421,7 @@
 | 单词记忆工具 | learn | `/vocab-trainer` | **已上线** | P1 | 单词记忆 + 复习 |
 | 句子改写工具 | learn | `/sentence-rewriter` | **已上线** | P1 | AI 句子改写/润色 |
 | ~~AI 对话练习~~ | learn | `/conversation-practice` | **已上线** | - | AI 口语对话练习 |
-| 发音评估工具 | learn | `/pronunciation-eval` | 待开发 | P3 | 语音发音评估 |
+| ~~发音评估工具~~ | learn | `/pronunciation-eval` | **已上线** | - | 语音发音评估 |
 | **── 学习：AI 增强学习 ──** | | | | | |
 | "像5岁小孩解释"工具 | learn | `/eli5` | **已上线** | P1 | ELI5 简化解释 |
 | 多角度解释 | learn | `/multi-perspective` | **已上线** | P1 | 专家/小白多角度解释 |
