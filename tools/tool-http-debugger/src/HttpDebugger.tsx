@@ -240,7 +240,7 @@ export default function HttpDebugger() {
                 {Object.entries(response.headers).map(([key, value]) => (
                   <div key={key} className="mb-1">
                     <span className="text-cyan-600">{key}:</span>{' '}
-                    <span className="text-gray-700">{value}</span>
+                    <span className="text-gray-700">{String(value)}</span>
                   </div>
                 ))}
               </div>
