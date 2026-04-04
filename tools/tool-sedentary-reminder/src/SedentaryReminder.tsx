@@ -25,7 +25,7 @@ export default function SedentaryReminder() {
   useEffect(() => {
     if (!isActive) return;
 
-    const timer: ReturnType<typeof setInterval> = setInterval(() => {
+    const timer = window.setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           showNotification();
@@ -36,7 +36,7 @@ export default function SedentaryReminder() {
       });
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => window.clearInterval(timer);
   }, [isActive, interval]);
 
   const showNotification = () => {
