@@ -19,6 +19,7 @@ export default function RunningTracker() {
   const [duration, setDuration] = useState('');
   const [notes, setNotes] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 从 localStorage 加载数据
   useEffect(() => {
@@ -29,17 +30,21 @@ export default function RunningTracker() {
       }
     } catch (error) {
       console.error('Failed to load running records:', error);
+    } finally {
+      setIsLoaded(true);
     }
   }, []);
 
-  // 保存数据到 localStorage
+  // 保存数据到 localStorage（仅在加载完成后）
   useEffect(() => {
+    if (!isLoaded) return;
+    
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     } catch (error) {
       console.error('Failed to save running records:', error);
     }
-  }, [records]);
+  }, [records, isLoaded]);
 
   const calculatePace = (dist: number, dur: number): number => {
     if (dist === 0) return 0;

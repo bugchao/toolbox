@@ -16,6 +16,7 @@ export default function WaterReminder() {
   const [customAmount, setCustomAmount] = useState(250);
   const [reminderInterval, setReminderInterval] = useState(60);
   const [reminderEnabled, setReminderEnabled] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 从 localStorage 加载数据
   useEffect(() => {
@@ -34,17 +35,21 @@ export default function WaterReminder() {
       }
     } catch (error) {
       console.error('Failed to load water reminder data:', error);
+    } finally {
+      setIsLoaded(true);
     }
   }, []);
 
-  // 保存记录到 localStorage
+  // 保存记录到 localStorage（仅在加载完成后）
   useEffect(() => {
+    if (!isLoaded) return;
+    
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     } catch (error) {
       console.error('Failed to save water records:', error);
     }
-  }, [records]);
+  }, [records, isLoaded]);
 
   // 保存设置到 localStorage
   useEffect(() => {

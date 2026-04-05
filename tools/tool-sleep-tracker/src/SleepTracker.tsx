@@ -23,6 +23,7 @@ export default function SleepTracker() {
   const [quality, setQuality] = useState(3);
   const [notes, setNotes] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 从 localStorage 加载数据
   useEffect(() => {
@@ -33,17 +34,21 @@ export default function SleepTracker() {
       }
     } catch (error) {
       console.error('Failed to load sleep records:', error);
+    } finally {
+      setIsLoaded(true);
     }
   }, []);
 
-  // 保存数据到 localStorage
+  // 保存数据到 localStorage（仅在加载完成后）
   useEffect(() => {
+    if (!isLoaded) return;
+    
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     } catch (error) {
       console.error('Failed to save sleep records:', error);
     }
-  }, [records]);
+  }, [records, isLoaded]);
 
   const calculateDuration = (bed: string, wake: string): number => {
     if (!bed || !wake) return 0;

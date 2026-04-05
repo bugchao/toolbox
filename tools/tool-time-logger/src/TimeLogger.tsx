@@ -34,6 +34,7 @@ export default function TimeLogger() {
   const [currentEntry, setCurrentEntry] = useState<TimeEntry | null>(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [viewMode, setViewMode] = useState<'day' | 'week' | 'month'>('day');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('timeLoggerEntries');
@@ -45,13 +46,13 @@ export default function TimeLogger() {
         endTime: e.endTime ? new Date(e.endTime) : undefined,
       })));
     }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (entries.length > 0) {
-      localStorage.setItem('timeLoggerEntries', JSON.stringify(entries));
-    }
-  }, [entries]);
+    if (!isLoaded) return;
+    localStorage.setItem('timeLoggerEntries', JSON.stringify(entries));
+  }, [entries, isLoaded]);
 
   const startTracking = () => {
     if (!activity.trim()) return;
