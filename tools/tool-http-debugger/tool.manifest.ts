@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { Network } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'http-debugger',
-  name: 'HttpDebugger',
+const toolHttpDebuggerManifest = defineToolManifest({
+  id: 'tool-http-debugger',
   path: '/http-debugger',
+  namespace: 'toolHttpDebugger',
+  mode: 'client',
   categoryKey: 'dev',
-  icon: '🔧',
-  title: {
-    zh: 'HTTP 请求调试器',
-    en: 'HTTP Request Debugger',
+  icon: Network,
+  keywords: ['HTTP', 'debugger', 'API', 'testing', 'HTTP调试', 'API测试', '请求调试', '接口测试'],
+  meta: {
+    zh: {
+      title: 'HTTP 请求调试器',
+      description: '在线发送 HTTP 请求，调试 API 接口',
+    },
+    en: {
+      title: 'HTTP Request Debugger',
+      description: 'Send HTTP requests online and debug API endpoints',
+    },
   },
-  description: {
-    zh: '在线发送 HTTP 请求，调试 API 接口',
-    en: 'Send HTTP requests online and debug API endpoints',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['HTTP调试', 'API测试', '请求调试', '接口测试', '开发工具'],
-    en: ['HTTP debugger', 'API testing', 'request debugging', 'endpoint testing', 'dev tools'],
-  },
-};
+})
 
-export default manifest;
+export default toolHttpDebuggerManifest

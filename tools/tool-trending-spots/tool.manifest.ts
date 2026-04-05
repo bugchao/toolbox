@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { TrendingUp } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'trending-spots',
-  name: 'TrendingSpots',
+const toolTrendingSpotsManifest = defineToolManifest({
+  id: 'tool-trending-spots',
   path: '/trending-spots',
+  namespace: 'toolTrendingSpots',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '📸',
-  title: {
-    zh: '网红景点生成器',
-    en: 'Trending Spots Generator',
+  icon: TrendingUp,
+  keywords: ['trending', 'spots', 'travel', 'popular', '网红景点', '打卡地', '旅游推荐', '热门景点'],
+  meta: {
+    zh: {
+      title: '网红景点生成器',
+      description: '发现热门打卡点，记录美好瞬间',
+    },
+    en: {
+      title: 'Trending Spots Generator',
+      description: 'Discover popular check-in spots and capture beautiful moments',
+    },
   },
-  description: {
-    zh: '发现热门打卡点，记录美好瞬间',
-    en: 'Discover popular check-in spots and capture beautiful moments',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['网红景点', '打卡地', '旅游推荐', '热门景点', '拍照圣地'],
-    en: ['trending spots', 'check-in places', 'travel recommendations', 'popular attractions', 'photo spots'],
-  },
-};
+})
 
-export default manifest;
+export default toolTrendingSpotsManifest

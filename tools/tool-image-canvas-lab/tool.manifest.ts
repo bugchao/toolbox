@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { Layers } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'image-canvas-lab',
-  name: 'ImageCanvasLab',
+const toolImageCanvasLabManifest = defineToolManifest({
+  id: 'tool-image-canvas-lab',
   path: '/image-canvas-lab',
+  namespace: 'toolImageCanvasLab',
+  mode: 'client',
   categoryKey: 'utils',
-  icon: '🎨',
-  title: {
-    zh: 'Canvas 图像工作台',
-    en: 'Image Canvas Lab',
+  icon: Layers,
+  keywords: ['canvas', 'image', 'layer', 'watermark', 'Canvas', '图像合成', '多图层', '水印添加'],
+  meta: {
+    zh: {
+      title: 'Canvas 图像工作台',
+      description: '多图层合成、水印添加、像素级处理',
+    },
+    en: {
+      title: 'Image Canvas Lab',
+      description: 'Multi-layer composition, watermark addition, pixel-level processing',
+    },
   },
-  description: {
-    zh: '多图层合成、水印添加、像素级处理',
-    en: 'Multi-layer composition, watermark addition, pixel-level processing',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['Canvas', '图像合成', '多图层', '水印添加', '图像处理'],
-    en: ['Canvas', 'image composition', 'multi-layer', 'watermark', 'image processing'],
-  },
-};
+})
 
-export default manifest;
+export default toolImageCanvasLabManifest

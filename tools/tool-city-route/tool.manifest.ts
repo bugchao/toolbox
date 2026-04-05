@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { Map } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'city-route',
-  name: 'CityRoute',
+const toolCityRouteManifest = defineToolManifest({
+  id: 'tool-city-route',
   path: '/city-route',
+  namespace: 'toolCityRoute',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '🗺️',
-  title: {
-    zh: '城市游玩路线生成',
-    en: 'City Route Generator',
+  icon: Map,
+  keywords: ['city', 'route', 'travel', 'planning', '城市路线', '景点规划', '路线生成', '旅游路线'],
+  meta: {
+    zh: {
+      title: '城市游玩路线生成',
+      description: '智能规划单城市景点路线',
+    },
+    en: {
+      title: 'City Route Generator',
+      description: 'Intelligently plan single-city attraction routes',
+    },
   },
-  description: {
-    zh: '智能规划单城市景点路线',
-    en: 'Intelligently plan single-city attraction routes',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['城市路线', '景点规划', '路线生成', '旅游路线', '行程优化'],
-    en: ['city route', 'attraction planning', 'route generation', 'travel route', 'itinerary optimization'],
-  },
-};
+})
 
-export default manifest;
+export default toolCityRouteManifest

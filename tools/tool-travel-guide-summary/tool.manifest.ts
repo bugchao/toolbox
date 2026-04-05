@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { FileText } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'travel-guide-summary',
-  name: 'TravelGuideSummary',
+const toolTravelGuideSummaryManifest = defineToolManifest({
+  id: 'tool-travel-guide-summary',
   path: '/travel-guide-summary',
+  namespace: 'toolTravelGuideSummary',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '📋',
-  title: {
-    zh: '旅行攻略总结器',
-    en: 'Travel Guide Summarizer',
+  icon: FileText,
+  keywords: ['travel', 'guide', 'summary', 'AI', '旅行攻略', '攻略总结', 'AI总结', '旅游规划'],
+  meta: {
+    zh: {
+      title: '旅行攻略总结器',
+      description: 'AI 提取攻略要点，生成结构化总结',
+    },
+    en: {
+      title: 'Travel Guide Summarizer',
+      description: 'AI extracts key points from guides and generates structured summaries',
+    },
   },
-  description: {
-    zh: 'AI 提取攻略要点，生成结构化总结',
-    en: 'AI extracts key points from guides and generates structured summaries',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['旅行攻略', '攻略总结', 'AI总结', '旅游规划', '攻略提取'],
-    en: ['travel guide', 'guide summary', 'AI summary', 'travel planning', 'guide extraction'],
-  },
-};
+})
 
-export default manifest;
+export default toolTravelGuideSummaryManifest

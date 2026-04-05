@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { BookOpen } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'travel-journal',
-  name: 'TravelJournal',
+const toolTravelJournalManifest = defineToolManifest({
+  id: 'tool-travel-journal',
   path: '/travel-journal',
+  namespace: 'toolTravelJournal',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '📖',
-  title: {
-    zh: '游记自动生成',
-    en: 'Travel Journal Generator',
+  icon: BookOpen,
+  keywords: ['travel', 'journal', 'diary', 'generator', '游记生成', '旅行日记', '自动生成', '旅行记录'],
+  meta: {
+    zh: {
+      title: '游记自动生成',
+      description: '记录每一天的旅行，自动生成精美游记',
+    },
+    en: {
+      title: 'Travel Journal Generator',
+      description: 'Record each day of travel and automatically generate beautiful journals',
+    },
   },
-  description: {
-    zh: '记录每一天的旅行，自动生成精美游记',
-    en: 'Record each day of travel and automatically generate beautiful journals',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['游记生成', '旅行日记', '自动生成', '旅行记录', '游记写作'],
-    en: ['journal generator', 'travel diary', 'auto generate', 'travel log', 'journal writing'],
-  },
-};
+})
 
-export default manifest;
+export default toolTravelJournalManifest

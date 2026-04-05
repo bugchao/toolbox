@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { ScanBarcode } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'barcode-reader',
-  name: 'BarcodeReader',
+const toolBarcodeReaderManifest = defineToolManifest({
+  id: 'tool-barcode-reader',
   path: '/barcode-reader',
+  namespace: 'toolBarcodeReader',
+  mode: 'client',
   categoryKey: 'utils',
-  icon: '📷',
-  title: {
-    zh: '条形码识别',
-    en: 'Barcode Reader',
+  icon: ScanBarcode,
+  keywords: ['barcode', 'scanner', 'reader', 'QR', '条形码识别', '条形码扫描', '商品查询', '图片识别'],
+  meta: {
+    zh: {
+      title: '条形码识别',
+      description: '上传图片或手动输入，快速识别条形码',
+    },
+    en: {
+      title: 'Barcode Reader',
+      description: 'Upload image or manual input to quickly recognize barcodes',
+    },
   },
-  description: {
-    zh: '上传图片或手动输入，快速识别条形码',
-    en: 'Upload image or manual input to quickly recognize barcodes',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['条形码识别', '条形码扫描', '商品查询', '条码解析', '图片识别'],
-    en: ['barcode reader', 'barcode scanner', 'product lookup', 'barcode parser', 'image recognition'],
-  },
-};
+})
 
-export default manifest;
+export default toolBarcodeReaderManifest

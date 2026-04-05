@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { MapPin } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'trip-planner',
-  name: 'TripPlanner',
+const toolTripPlannerManifest = defineToolManifest({
+  id: 'tool-trip-planner',
   path: '/trip-planner',
+  namespace: 'toolTripPlanner',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '✈️',
-  title: {
-    zh: 'AI 行程规划器',
-    en: 'AI Trip Planner',
+  icon: MapPin,
+  keywords: ['trip', 'planner', 'travel', 'AI', '行程规划', '旅行计划', 'AI规划', '旅游攻略'],
+  meta: {
+    zh: {
+      title: 'AI 行程规划器',
+      description: '输入预算和天数，AI 生成个性化旅行计划',
+    },
+    en: {
+      title: 'AI Trip Planner',
+      description: 'Enter budget and days, AI generates personalized travel plans',
+    },
   },
-  description: {
-    zh: '输入预算和天数，AI 生成个性化旅行计划',
-    en: 'Enter budget and days, AI generates personalized travel plans',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['行程规划', '旅行计划', 'AI规划', '旅游攻略', '行程安排'],
-    en: ['trip planner', 'travel plan', 'AI planning', 'travel guide', 'itinerary'],
-  },
-};
+})
 
-export default manifest;
+export default toolTripPlannerManifest

@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { PenTool } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'travel-story',
-  name: 'TravelStory',
+const toolTravelStoryManifest = defineToolManifest({
+  id: 'tool-travel-story',
   path: '/travel-story',
+  namespace: 'toolTravelStory',
+  mode: 'client',
   categoryKey: 'travel',
-  icon: '✍️',
-  title: {
-    zh: '旅行故事生成',
-    en: 'Travel Story Generator',
+  icon: PenTool,
+  keywords: ['travel', 'story', 'writing', 'AI', '旅行故事', '游记生成', 'AI写作', '旅行记录'],
+  meta: {
+    zh: {
+      title: '旅行故事生成',
+      description: 'AI 帮你把旅行经历变成精彩故事',
+    },
+    en: {
+      title: 'Travel Story Generator',
+      description: 'AI helps you turn travel experiences into wonderful stories',
+    },
   },
-  description: {
-    zh: 'AI 帮你把旅行经历变成精彩故事',
-    en: 'AI helps you turn travel experiences into wonderful stories',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['旅行故事', '游记生成', 'AI写作', '旅行记录', '故事创作'],
-    en: ['travel story', 'travel journal', 'AI writing', 'travel log', 'story creation'],
-  },
-};
+})
 
-export default manifest;
+export default toolTravelStoryManifest
