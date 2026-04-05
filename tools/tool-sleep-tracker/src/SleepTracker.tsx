@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface SleepRecord {
   id: string;
@@ -116,6 +117,21 @@ export default function SleepTracker() {
     URL.revokeObjectURL(url);
   };
 
+  // 准备图表数据（最近7天）
+  const getChartData = () => {
+    return records
+      .slice(0, 7)
+      .reverse()
+      .map(record => ({
+        date: record.date.slice(5), // MM-DD
+        睡眠时长: record.duration,
+        深度睡眠: record.deepSleep || 0,
+        浅度睡眠: record.lightSleep || 0,
+        REM睡眠: record.remSleep || 0,
+        质量评分: record.quality,
+      }));
+  };
+
   const getQualityLabel = (q: number) => {
     const labels = ['很差', '较差', '一般', '良好', '优秀'];
     return labels[q - 1] || '一般';
@@ -163,6 +179,60 @@ export default function SleepTracker() {
               <div className="text-sm text-gray-600 mb-1">平均睡眠质量</div>
               <div className="text-3xl font-bold text-purple-600">{avgQuality}</div>
               <div className="text-xs text-gray-500 mt-1">/ 5.0</div>
+            </div>
+          </div>
+        )}
+
+        {/* 图表展示 */}
+        {records.length >= 2 && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4">📊 睡眠趋势（最近7天）</h2>
+            
+            {/* 睡眠时长趋势 */}
+            <div className="mb-8">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">睡眠时长趋势</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="睡眠时长" stroke="#6366f1" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* 睡眠阶段分布 */}
+            <div className="mb-8">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">睡眠阶段分布</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="深度睡眠" stackId="a" fill="#3b82f6" />
+                  <Bar dataKey="浅度睡眠" stackId="a" fill="#8b5cf6" />
+                  <Bar dataKey="REM睡眠" stackId="a" fill="#ec4899" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* 睡眠质量趋势 */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">睡眠质量评分</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis domain={[0, 5]} />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="质量评分" stroke="#10b981" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </div>
         )}

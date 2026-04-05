@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 
 interface WaterRecord {
   id: string;
@@ -100,6 +101,23 @@ export default function WaterReminder() {
     URL.revokeObjectURL(url);
   };
 
+  // 准备图表数据（按小时统计）
+  const getChartData = () => {
+    const hourlyData: { [key: string]: number } = {};
+    
+    records.forEach(record => {
+      const hour = record.time.split(':')[0];
+      hourlyData[hour] = (hourlyData[hour] || 0) + record.amount;
+    });
+
+    return Object.entries(hourlyData)
+      .map(([hour, amount]) => ({
+        时间: `${hour}:00`,
+        饮水量: amount,
+      }))
+      .sort((a, b) => parseInt(a.时间) - parseInt(b.时间));
+  };
+
   useEffect(() => {
     if (!reminderEnabled) return;
 
@@ -164,6 +182,30 @@ export default function WaterReminder() {
             </div>
           )}
         </div>
+
+        {/* 饮水趋势图表 */}
+        {records.length > 0 && getChartData().length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 className="text-lg font-semibold mb-4">📊 今日饮水分布</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={getChartData()}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="时间" />
+                <YAxis label={{ value: 'ml', angle: -90, position: 'insideLeft' }} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="饮水量" fill="#3b82f6">
+                  {getChartData().map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={`hsl(${200 + index * 10}, 70%, 50%)`} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="text-sm text-gray-500 text-center mt-2">
+              每小时饮水量统计
+            </p>
+          </div>
+        )}
 
         {/* 快捷添加 */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">

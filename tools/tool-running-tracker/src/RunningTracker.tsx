@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface RunRecord {
   id: string;
@@ -102,6 +103,20 @@ export default function RunningTracker() {
     URL.revokeObjectURL(url);
   };
 
+  // 准备图表数据（最近10次）
+  const getChartData = () => {
+    return records
+      .slice(0, 10)
+      .reverse()
+      .map(record => ({
+        日期: record.date.slice(5), // MM-DD
+        距离: record.distance,
+        配速: record.pace,
+        时长: record.duration,
+        卡路里: record.calories,
+      }));
+  };
+
   const totalDistance = records.reduce((sum, r) => sum + r.distance, 0);
   const totalDuration = records.reduce((sum, r) => sum + r.duration, 0);
   const totalCalories = records.reduce((sum, r) => sum + r.calories, 0);
@@ -181,6 +196,58 @@ export default function RunningTracker() {
             >
               🗑️ 清空数据
             </button>
+          </div>
+        )}
+
+        {/* 跑步数据图表 */}
+        {records.length >= 2 && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 className="text-xl font-semibold mb-4">📊 跑步数据分析（最近10次）</h2>
+            
+            {/* 距离趋势 */}
+            <div className="mb-8">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">距离趋势</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="日期" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="距离" stroke="#ef4444" strokeWidth={2} unit=" km" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* 配速分析 */}
+            <div className="mb-8">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">配速分析</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="日期" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="配速" fill="#8b5cf6" unit=" 分/km" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* 卡路里消耗 */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">卡路里消耗</h3>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={getChartData()}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="日期" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="卡路里" fill="#f59e0b" unit=" kcal" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         )}
 
