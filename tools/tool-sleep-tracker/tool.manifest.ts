@@ -1,23 +1,29 @@
-import type { ToolManifest } from '../../../apps/web/src/types/tool';
+import { defineToolManifest } from '@toolbox/tool-registry'
+import { Moon } from 'lucide-react'
 
-const manifest: ToolManifest = {
-  id: 'sleep-tracker',
-  name: 'SleepTracker',
+const toolSleepTrackerManifest = defineToolManifest({
+  id: 'tool-sleep-tracker',
   path: '/sleep-tracker',
+  namespace: 'toolSleepTracker',
+  mode: 'client',
   categoryKey: 'life',
-  icon: '😴',
-  title: {
-    zh: '睡眠质量记录',
-    en: 'Sleep Quality Tracker',
+  icon: Moon,
+  keywords: ['sleep', 'tracker', 'quality', 'health', '睡眠记录', '睡眠质量', '睡眠追踪', '健康管理'],
+  meta: {
+    zh: {
+      title: '睡眠质量记录',
+      description: '记录每日睡眠，追踪睡眠质量',
+    },
+    en: {
+      title: 'Sleep Quality Tracker',
+      description: 'Record daily sleep and track sleep quality',
+    },
   },
-  description: {
-    zh: '记录每日睡眠，追踪睡眠质量',
-    en: 'Record daily sleep and track sleep quality',
+  loadComponent: () => import('./src/index'),
+  loadMessages: {
+    zh: () => import('./src/locales/zh.json'),
+    en: () => import('./src/locales/en.json'),
   },
-  keywords: {
-    zh: ['睡眠记录', '睡眠质量', '睡眠追踪', '睡眠分析', '健康管理'],
-    en: ['sleep tracker', 'sleep quality', 'sleep tracking', 'sleep analysis', 'health management'],
-  },
-};
+})
 
-export default manifest;
+export default toolSleepTrackerManifest
