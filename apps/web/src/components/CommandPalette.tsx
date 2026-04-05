@@ -26,7 +26,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose })
     return TOOLS.filter((tool) => {
       const name = getToolTitle(tool, t).toLowerCase()
       const path = tool.path.toLowerCase()
-      const keywords = (tool.keywords ?? []).join(' ').toLowerCase()
+      
+      // 处理 keywords 的两种格式：数组或对象
+      let keywords = ''
+      if (tool.keywords) {
+        if (Array.isArray(tool.keywords)) {
+          keywords = tool.keywords.join(' ').toLowerCase()
+        } else if (typeof tool.keywords === 'object') {
+          const kw = tool.keywords as { zh?: string[]; en?: string[] }
+          keywords = [...(kw.zh || []), ...(kw.en || [])].join(' ').toLowerCase()
+        }
+      }
+      
       return name.includes(q) || path.includes(q) || keywords.includes(q)
     })
   }, [query, t])
