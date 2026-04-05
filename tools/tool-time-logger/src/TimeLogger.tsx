@@ -106,7 +106,27 @@ export default function TimeLogger() {
   };
 
   const deleteEntry = (id: string) => {
-    setEntries(entries.filter(e => e.id !== id));
+    if (confirm('确定要删除这条记录吗？')) {
+      setEntries(entries.filter(e => e.id !== id));
+    }
+  };
+
+  const clearAllEntries = () => {
+    if (confirm('确定要清空所有记录吗？此操作不可恢复！')) {
+      setEntries([]);
+      localStorage.removeItem('timeLoggerEntries');
+    }
+  };
+
+  const exportData = () => {
+    const dataStr = JSON.stringify(entries, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `time-log-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   const getFilteredEntries = () => {
@@ -255,6 +275,22 @@ export default function TimeLogger() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold">📊 时间统计</h2>
             <div className="flex gap-2">
+              {entries.length > 0 && (
+                <>
+                  <button
+                    onClick={exportData}
+                    className="px-3 py-1 text-sm bg-white text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors"
+                  >
+                    导出
+                  </button>
+                  <button
+                    onClick={clearAllEntries}
+                    className="px-3 py-1 text-sm bg-white text-red-600 border border-red-500 rounded-lg hover:bg-red-50 transition-colors"
+                  >
+                    清空
+                  </button>
+                </>
+              )}
               <button
                 onClick={() => setViewMode('day')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${

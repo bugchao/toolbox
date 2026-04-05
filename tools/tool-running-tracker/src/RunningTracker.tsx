@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface RunRecord {
   id: string;
@@ -10,12 +10,35 @@ interface RunRecord {
   notes: string;
 }
 
+const STORAGE_KEY = 'running-tracker-records';
+
 export default function RunningTracker() {
   const [records, setRecords] = useState<RunRecord[]>([]);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [notes, setNotes] = useState('');
   const [showForm, setShowForm] = useState(false);
+
+  // 从 localStorage 加载数据
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        setRecords(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.error('Failed to load running records:', error);
+    }
+  }, []);
+
+  // 保存数据到 localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (error) {
+      console.error('Failed to save running records:', error);
+    }
+  }, [records]);
 
   const calculatePace = (dist: number, dur: number): number => {
     if (dist === 0) return 0;
@@ -56,7 +79,27 @@ export default function RunningTracker() {
   };
 
   const deleteRecord = (id: string) => {
-    setRecords(records.filter(r => r.id !== id));
+    if (confirm('确定要删除这条记录吗？')) {
+      setRecords(records.filter(r => r.id !== id));
+    }
+  };
+
+  const clearAllRecords = () => {
+    if (confirm('确定要清空所有记录吗？此操作不可恢复！')) {
+      setRecords([]);
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  };
+
+  const exportData = () => {
+    const dataStr = JSON.stringify(records, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `running-records-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   const totalDistance = records.reduce((sum, r) => sum + r.distance, 0);
@@ -119,6 +162,24 @@ export default function RunningTracker() {
               className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-colors shadow-lg"
             >
               + 添加跑步记录
+            </button>
+          </div>
+        )}
+
+        {/* 数据管理按钮 */}
+        {records.length > 0 && (
+          <div className="flex gap-2 mb-6">
+            <button
+              onClick={exportData}
+              className="flex-1 bg-white text-orange-600 border-2 border-orange-500 py-2 rounded-lg font-medium hover:bg-orange-50 transition-colors"
+            >
+              📥 导出数据
+            </button>
+            <button
+              onClick={clearAllRecords}
+              className="flex-1 bg-white text-red-600 border-2 border-red-500 py-2 rounded-lg font-medium hover:bg-red-50 transition-colors"
+            >
+              🗑️ 清空数据
             </button>
           </div>
         )}

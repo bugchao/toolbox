@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface SleepRecord {
   id: string;
@@ -13,6 +13,8 @@ interface SleepRecord {
   remSleep?: number;
 }
 
+const STORAGE_KEY = 'sleep-tracker-records';
+
 export default function SleepTracker() {
   const [records, setRecords] = useState<SleepRecord[]>([]);
   const [bedTime, setBedTime] = useState('');
@@ -20,6 +22,27 @@ export default function SleepTracker() {
   const [quality, setQuality] = useState(3);
   const [notes, setNotes] = useState('');
   const [showForm, setShowForm] = useState(false);
+
+  // 从 localStorage 加载数据
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        setRecords(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.error('Failed to load sleep records:', error);
+    }
+  }, []);
+
+  // 保存数据到 localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (error) {
+      console.error('Failed to save sleep records:', error);
+    }
+  }, [records]);
 
   const calculateDuration = (bed: string, wake: string): number => {
     if (!bed || !wake) return 0;
@@ -70,7 +93,27 @@ export default function SleepTracker() {
   };
 
   const deleteRecord = (id: string) => {
-    setRecords(records.filter(r => r.id !== id));
+    if (confirm('确定要删除这条记录吗？')) {
+      setRecords(records.filter(r => r.id !== id));
+    }
+  };
+
+  const clearAllRecords = () => {
+    if (confirm('确定要清空所有记录吗？此操作不可恢复！')) {
+      setRecords([]);
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  };
+
+  const exportData = () => {
+    const dataStr = JSON.stringify(records, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `sleep-records-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   const getQualityLabel = (q: number) => {
@@ -132,6 +175,24 @@ export default function SleepTracker() {
               className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-600 transition-colors shadow-lg"
             >
               + 添加睡眠记录
+            </button>
+          </div>
+        )}
+
+        {/* 数据管理按钮 */}
+        {records.length > 0 && (
+          <div className="flex gap-2 mb-6">
+            <button
+              onClick={exportData}
+              className="flex-1 bg-white text-indigo-600 border-2 border-indigo-500 py-2 rounded-lg font-medium hover:bg-indigo-50 transition-colors"
+            >
+              📥 导出数据
+            </button>
+            <button
+              onClick={clearAllRecords}
+              className="flex-1 bg-white text-red-600 border-2 border-red-500 py-2 rounded-lg font-medium hover:bg-red-50 transition-colors"
+            >
+              🗑️ 清空数据
             </button>
           </div>
         )}

@@ -6,12 +6,58 @@ interface WaterRecord {
   amount: number;
 }
 
+const STORAGE_KEY = 'water-reminder-records';
+const SETTINGS_KEY = 'water-reminder-settings';
+
 export default function WaterReminder() {
   const [dailyGoal, setDailyGoal] = useState(2000);
   const [records, setRecords] = useState<WaterRecord[]>([]);
   const [customAmount, setCustomAmount] = useState(250);
   const [reminderInterval, setReminderInterval] = useState(60);
   const [reminderEnabled, setReminderEnabled] = useState(false);
+
+  // 从 localStorage 加载数据
+  useEffect(() => {
+    try {
+      const savedRecords = localStorage.getItem(STORAGE_KEY);
+      if (savedRecords) {
+        setRecords(JSON.parse(savedRecords));
+      }
+
+      const savedSettings = localStorage.getItem(SETTINGS_KEY);
+      if (savedSettings) {
+        const settings = JSON.parse(savedSettings);
+        setDailyGoal(settings.dailyGoal || 2000);
+        setReminderInterval(settings.reminderInterval || 60);
+        setReminderEnabled(settings.reminderEnabled || false);
+      }
+    } catch (error) {
+      console.error('Failed to load water reminder data:', error);
+    }
+  }, []);
+
+  // 保存记录到 localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (error) {
+      console.error('Failed to save water records:', error);
+    }
+  }, [records]);
+
+  // 保存设置到 localStorage
+  useEffect(() => {
+    try {
+      const settings = {
+        dailyGoal,
+        reminderInterval,
+        reminderEnabled,
+      };
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    } catch (error) {
+      console.error('Failed to save settings:', error);
+    }
+  }, [dailyGoal, reminderInterval, reminderEnabled]);
 
   const totalToday = records.reduce((sum, r) => sum + r.amount, 0);
   const progress = Math.min((totalToday / dailyGoal) * 100, 100);
@@ -26,13 +72,32 @@ export default function WaterReminder() {
   };
 
   const deleteRecord = (id: string) => {
-    setRecords(records.filter(r => r.id !== id));
+    if (confirm('确定要删除这条记录吗？')) {
+      setRecords(records.filter(r => r.id !== id));
+    }
   };
 
   const resetToday = () => {
     if (confirm('确定要清空今日记录吗？')) {
       setRecords([]);
+      localStorage.removeItem(STORAGE_KEY);
     }
+  };
+
+  const exportData = () => {
+    const data = {
+      records,
+      settings: { dailyGoal, reminderInterval },
+      exportDate: new Date().toISOString(),
+    };
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `water-records-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   useEffect(() => {
@@ -192,14 +257,24 @@ export default function WaterReminder() {
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold">今日记录</h2>
-            {records.length > 0 && (
-              <button
-                onClick={resetToday}
-                className="text-sm text-red-500 hover:text-red-700"
-              >
-                清空记录
-              </button>
-            )}
+            <div className="flex gap-2">
+              {records.length > 0 && (
+                <>
+                  <button
+                    onClick={exportData}
+                    className="text-sm text-blue-500 hover:text-blue-700"
+                  >
+                    导出
+                  </button>
+                  <button
+                    onClick={resetToday}
+                    className="text-sm text-red-500 hover:text-red-700"
+                  >
+                    清空记录
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           {records.length === 0 ? (
