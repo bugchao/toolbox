@@ -74,6 +74,7 @@ const RapidTables = lazy(() => import('@toolbox/tool-rapid-tables'))
 const WordCount = lazy(() => import('@toolbox/tool-word-count'))
 const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
 const TimeLogger = lazy(() => import('@toolbox/tool-time-logger'))
+const AnalogClock = lazy(() => import('@toolbox/tool-analog-clock'))
 const InvestmentSim = lazy(() => import('@toolbox/tool-investment-sim'))
 const SleepTracker = lazy(() => import('@toolbox/tool-sleep-tracker'))
 const WaterReminder = lazy(() => import('@toolbox/tool-water-reminder'))
@@ -520,6 +521,7 @@ function App() {
           <Route path="/rapid-tables" element={<RapidTables />} />
           <Route path="/wooden-fish" element={<ElectronicWoodenFish />} />
           <Route path="/life-progress" element={<LifeProgressBar />} />
+          <Route path="/analog-clock" element={<AnalogClock />} />
           <Route path="/meeting-minutes" element={<MeetingMinutes />} />
           <Route path="/ui-generator" element={<UIGenerator />} />
           <Route path="/ppt-generator" element={<PptGenerator />} />

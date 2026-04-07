@@ -39,6 +39,7 @@ export const LIFE_TOOLS: ToolEntry[] = [
   { path: '/meeting-scheduler', nameKey: 'tools.meeting_scheduler', icon: CalendarRange, categoryKey: 'life', keywords: ['会议', '时区', '时间', 'meeting'], i18nNamespace: 'toolMeetingScheduler' },
   { path: '/wooden-fish', nameKey: 'tools.wooden_fish', icon: HeartPulse, categoryKey: 'life', keywords: ['木鱼', '功德', '解压'], i18nNamespace: 'toolWoodenFish' },
   { path: '/life-progress', nameKey: 'tools.life_progress', icon: Timer, categoryKey: 'life', keywords: ['人生', '进度条', '生命'], i18nNamespace: 'toolLifeProgress' },
+  { path: '/analog-clock', nameKey: 'tools.analog_clock', icon: Watch, categoryKey: 'life', keywords: ['时钟', '机械表', '全屏', '主题'] },
   { path: '/time-logger', nameKey: 'tools.time_logger', icon: Clock, categoryKey: 'life', keywords: ['时间', '日志', '分析', '效率'], i18nNamespace: 'toolTimeLogger' },
   { path: '/expiry-reminder', nameKey: 'tools.expiry_reminder', icon: CalendarRange, categoryKey: 'life', keywords: ['到期', '提醒', '保质期', '日期'] },
   { path: '/family-tasks', nameKey: 'tools.family_tasks', icon: ListChecks, categoryKey: 'life', keywords: ['家庭', '任务', '协作', '清单'] },
