@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Plus, Trash2, Plane } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Plus, Trash2, Plane, Download, Upload, RotateCcw } from 'lucide-react'
 
 interface BudgetItem {
   id: string
@@ -13,6 +13,9 @@ const CATEGORIES = ['交通', '住宿', '餐饮', '景点门票', '购物', '通
 const CAT_EMOJI: Record<string, string> = {
   交通: '✈️', 住宿: '🏨', 餐饮: '🍜', 景点门票: '🎫', 购物: '🛍️', 通讯: '📱', 保险: '🛡️', 其他: '📦'
 }
+
+const STORAGE_KEY = 'travel-budget-data'
+const SETTINGS_KEY = 'travel-budget-settings'
 
 let uid = 0
 const nid = () => String(++uid + Date.now())
@@ -37,10 +40,58 @@ const AmtInput = ({ value, onChange, placeholder }: { value: number; onChange: (
 )
 
 export function TravelBudget() {
-  const [items, setItems] = useState<BudgetItem[]>(SAMPLE)
+  const [items, setItems] = useState<BudgetItem[]>([])
   const [form, setForm] = useState({ category: '交通', name: '', planned: 0, actual: 0 })
   const [currency, setCurrency] = useState('CNY')
   const [days, setDays] = useState(7)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // 从 localStorage 加载数据
+  useEffect(() => {
+    try {
+      const savedItems = localStorage.getItem(STORAGE_KEY)
+      if (savedItems) {
+        setItems(JSON.parse(savedItems))
+      } else {
+        // 首次使用，加载示例数据
+        setItems(SAMPLE)
+      }
+
+      const savedSettings = localStorage.getItem(SETTINGS_KEY)
+      if (savedSettings) {
+        const settings = JSON.parse(savedSettings)
+        setCurrency(settings.currency || 'CNY')
+        setDays(settings.days || 7)
+      }
+    } catch (error) {
+      console.error('Failed to load travel budget data:', error)
+      setItems(SAMPLE)
+    } finally {
+      setIsLoaded(true)
+    }
+  }, [])
+
+  // 保存数据到 localStorage（仅在加载完成后）
+  useEffect(() => {
+    if (!isLoaded) return
+    
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    } catch (error) {
+      console.error('Failed to save travel budget data:', error)
+    }
+  }, [items, isLoaded])
+
+  // 保存设置到 localStorage
+  useEffect(() => {
+    if (!isLoaded) return
+    
+    try {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify({ currency, days }))
+    } catch (error) {
+      console.error('Failed to save settings:', error)
+    }
+  }, [currency, days, isLoaded])
 
   const add = () => {
     if (!form.name.trim() || !form.planned) return
@@ -50,6 +101,64 @@ export function TravelBudget() {
 
   const remove = (id: string) => setItems(prev => prev.filter(i => i.id !== id))
   const updateActual = (id: string, actual: number) => setItems(prev => prev.map(i => i.id === id ? { ...i, actual } : i))
+
+  const clearAll = () => {
+    if (confirm('确定要清空所有预算项吗？此操作不可恢复！')) {
+      setItems([])
+      localStorage.removeItem(STORAGE_KEY)
+    }
+  }
+
+  const resetToSample = () => {
+    if (confirm('确定要重置为示例数据吗？当前数据将被覆盖！')) {
+      setItems(SAMPLE)
+    }
+  }
+
+  const exportData = () => {
+    const data = {
+      items,
+      settings: { currency, days },
+      exportDate: new Date().toISOString(),
+    }
+    const dataStr = JSON.stringify(data, null, 2)
+    const dataBlob = new Blob([dataStr], { type: 'application/json' })
+    const url = URL.createObjectURL(dataBlob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `travel-budget-${new Date().toISOString().split('T')[0]}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importData = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (!file) return
+      
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string)
+          if (data.items) {
+            setItems(data.items)
+          }
+          if (data.settings) {
+            setCurrency(data.settings.currency || 'CNY')
+            setDays(data.settings.days || 7)
+          }
+          alert('导入成功！')
+        } catch (error) {
+          alert('导入失败：文件格式错误')
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }
 
   const totalPlanned = items.reduce((s, i) => s + i.planned, 0)
   const totalActual = items.reduce((s, i) => s + i.actual, 0)
@@ -63,8 +172,30 @@ export function TravelBudget() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">旅行预算计算器</h1>
-      <p className="text-gray-500 dark:text-gray-400">规划旅行各项费用，对比预算与实际花销</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">旅行预算计算器</h1>
+          <p className="text-gray-500 dark:text-gray-400">规划旅行各项费用，对比预算与实际花销</p>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={exportData} title="导出数据"
+            className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-colors">
+            <Download className="w-5 h-5" />
+          </button>
+          <button onClick={importData} title="导入数据"
+            className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors">
+            <Upload className="w-5 h-5" />
+          </button>
+          <button onClick={resetToSample} title="重置为示例"
+            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors">
+            <RotateCcw className="w-5 h-5" />
+          </button>
+          <button onClick={clearAll} title="清空所有"
+            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
 
       {/* 基本设置 */}
       <div className="flex gap-3">

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Plus, Trash2, CheckSquare, Square, RotateCcw } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Plus, Trash2, CheckSquare, Square, RotateCcw, Download, Upload } from 'lucide-react'
 
 interface CheckItem {
   id: string
@@ -26,6 +26,8 @@ const CAT_COLORS: Record<string, string> = {
   其他: 'bg-gray-100 dark:bg-gray-700 text-gray-600',
 }
 
+const STORAGE_KEY = 'travel-checklist-items'
+
 let uid = 0
 const nid = () => String(++uid + Date.now())
 
@@ -42,14 +44,99 @@ const ItemInput = ({ value, onChange, onAdd }: { value: string; onChange: (v: st
 )
 
 export function TravelChecklist() {
-  const [items, setItems] = useState<CheckItem[]>(buildFromTemplate)
+  const [items, setItems] = useState<CheckItem[]>([])
   const [newText, setNewText] = useState('')
   const [newCat, setNewCat] = useState('其他')
   const [filterCat, setFilterCat] = useState('全部')
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // 从 localStorage 加载数据
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved) {
+        setItems(JSON.parse(saved))
+      } else {
+        // 首次使用，加载模板数据
+        setItems(buildFromTemplate())
+      }
+    } catch (error) {
+      console.error('Failed to load travel checklist:', error)
+      setItems(buildFromTemplate())
+    } finally {
+      setIsLoaded(true)
+    }
+  }, [])
+
+  // 保存数据到 localStorage（仅在加载完成后）
+  useEffect(() => {
+    if (!isLoaded) return
+    
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    } catch (error) {
+      console.error('Failed to save travel checklist:', error)
+    }
+  }, [items, isLoaded])
 
   const toggle = (id: string) => setItems(prev => prev.map(i => i.id === id ? { ...i, checked: !i.checked } : i))
   const remove = (id: string) => setItems(prev => prev.filter(i => i.id !== id))
   const reset = () => setItems(prev => prev.map(i => ({ ...i, checked: false })))
+
+  const resetToTemplate = () => {
+    if (confirm('确定要重置为模板数据吗？当前数据将被覆盖！')) {
+      setItems(buildFromTemplate())
+    }
+  }
+
+  const clearAll = () => {
+    if (confirm('确定要清空所有项目吗？此操作不可恢复！')) {
+      setItems([])
+      localStorage.removeItem(STORAGE_KEY)
+    }
+  }
+
+  const exportData = () => {
+    const data = {
+      items,
+      exportDate: new Date().toISOString(),
+    }
+    const dataStr = JSON.stringify(data, null, 2)
+    const dataBlob = new Blob([dataStr], { type: 'application/json' })
+    const url = URL.createObjectURL(dataBlob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `travel-checklist-${new Date().toISOString().split('T')[0]}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importData = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (!file) return
+      
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string)
+          if (data.items) {
+            setItems(data.items)
+            alert('导入成功！')
+          } else {
+            alert('导入失败：文件格式错误')
+          }
+        } catch (error) {
+          alert('导入失败：文件格式错误')
+        }
+      }
+      reader.readAsText(file)
+    }
+    input.click()
+  }
 
   const add = () => {
     if (!newText.trim()) return
@@ -65,8 +152,30 @@ export function TravelChecklist() {
 
   return (
     <div className="max-w-xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">旅行 Checklist</h1>
-      <p className="text-gray-500 dark:text-gray-400">出发前必备清单，确保不遗漏重要物品</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">旅行 Checklist</h1>
+          <p className="text-gray-500 dark:text-gray-400">出发前必备清单，确保不遗漏重要物品</p>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={exportData} title="导出数据"
+            className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-colors">
+            <Download className="w-5 h-5" />
+          </button>
+          <button onClick={importData} title="导入数据"
+            className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors">
+            <Upload className="w-5 h-5" />
+          </button>
+          <button onClick={resetToTemplate} title="重置为模板"
+            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors">
+            <RotateCcw className="w-5 h-5" />
+          </button>
+          <button onClick={clearAll} title="清空所有"
+            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
 
       {/* 进度 */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
