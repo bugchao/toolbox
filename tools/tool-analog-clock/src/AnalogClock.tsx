@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Maximize2, Minimize2, Palette } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
+import { Maximize2, Minimize2, Palette, ExternalLink } from 'lucide-react'
 
 // 10种主题配置
 const themes = [
@@ -136,10 +137,15 @@ const themes = [
 ]
 
 export default function AnalogClock() {
+  const location = useLocation()
   const [time, setTime] = useState(new Date())
   const [themeIndex, setThemeIndex] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [showThemes, setShowThemes] = useState(false)
+
+  // 检测是否为独立模式
+  const searchParams = new URLSearchParams(location.search)
+  const isStandalone = searchParams.get('standalone') === 'true'
 
   const theme = themes[themeIndex]
 
@@ -278,6 +284,19 @@ export default function AnalogClock() {
         {/* 控制按钮 */}
         {!isFullscreen && (
           <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 flex gap-3">
+            {!isStandalone && (
+              <button
+                onClick={() => {
+                  const url = `${window.location.origin}${location.pathname}?standalone=true`
+                  window.open(url, '_blank', 'noopener,noreferrer')
+                }}
+                className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
+                title="在新窗口中独立打开"
+              >
+                <ExternalLink className="w-4 h-4" />
+                独立打开
+              </button>
+            )}
             <button
               onClick={() => setShowThemes(!showThemes)}
               className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
@@ -298,6 +317,19 @@ export default function AnalogClock() {
         {/* 全屏模式下的控制按钮 */}
         {isFullscreen && (
           <div className="fixed top-8 right-8 flex gap-3 z-50">
+            {!isStandalone && (
+              <button
+                onClick={() => {
+                  const url = `${window.location.origin}${location.pathname}?standalone=true`
+                  window.open(url, '_blank', 'noopener,noreferrer')
+                }}
+                className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
+                title="在新窗口中独立打开"
+              >
+                <ExternalLink className="w-5 h-5" />
+                独立打开
+              </button>
+            )}
             <button
               onClick={() => setShowThemes(!showThemes)}
               className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"

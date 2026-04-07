@@ -91,6 +91,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate()
   const location = useLocation()
 
+  // 检测是否为独立模式
+  const searchParams = new URLSearchParams(location.search)
+  const isStandalone = searchParams.get('standalone') === 'true'
+
+  // 独立模式下直接返回内容，不显示导航和 Header
+  if (isStandalone) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        {children}
+      </div>
+    )
+  }
+
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     try {
       if (typeof window === 'undefined') return false
