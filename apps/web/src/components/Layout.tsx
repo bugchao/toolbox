@@ -9,7 +9,7 @@ import {
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
   Radio, Shield, Database, Network, ScrollText,
-  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed
+  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
@@ -432,6 +432,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </nav>
           </div>
           <div className="flex items-center gap-1 shrink-0">
+            {/* 独立打开按钮 - 仅在工具页面显示 */}
+            {location.pathname !== '/' && location.pathname !== '/favorites' && location.pathname !== '/changelog' && (
+              <button
+                type="button"
+                onClick={() => {
+                  const url = `${window.location.origin}${location.pathname}?standalone=true`
+                  window.open(url, '_blank', 'noopener,noreferrer')
+                }}
+                className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                title="在新窗口中独立打开当前工具"
+              >
+                <ExternalLink className="w-5 h-5" />
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setCommandPaletteOpen(true)}
