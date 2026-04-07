@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Maximize2, Minimize2, Palette, ExternalLink } from 'lucide-react'
 
-// 10种主题配置
+// 12种主题配置
 const themes = [
   {
     id: 'classic',
@@ -16,6 +16,38 @@ const themes = [
     secondHand: 'bg-red-500',
     center: 'bg-gray-900',
     marks: 'bg-gray-400',
+    style: 'modern',
+  },
+  {
+    id: 'vintage',
+    name: '复古表盘',
+    bg: 'bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50',
+    face: 'bg-gradient-to-br from-amber-100 via-yellow-100 to-orange-100',
+    border: 'border-amber-800',
+    numbers: 'text-amber-900',
+    hourHand: 'bg-gradient-to-r from-amber-900 to-amber-800',
+    minuteHand: 'bg-gradient-to-r from-amber-800 to-amber-700',
+    secondHand: 'bg-red-700',
+    center: 'bg-amber-900',
+    marks: 'bg-amber-600',
+    style: 'vintage',
+    shadow: 'shadow-[inset_0_2px_20px_rgba(0,0,0,0.3)]',
+  },
+  {
+    id: 'mechanical',
+    name: '机械表盘',
+    bg: 'bg-gradient-to-br from-slate-800 via-gray-800 to-zinc-800',
+    face: 'bg-gradient-to-br from-slate-700 via-gray-700 to-zinc-700',
+    border: 'border-slate-400',
+    numbers: 'text-slate-200',
+    hourHand: 'bg-gradient-to-r from-slate-300 to-slate-400',
+    minuteHand: 'bg-gradient-to-r from-slate-300 to-slate-400',
+    secondHand: 'bg-orange-500',
+    center: 'bg-slate-300',
+    marks: 'bg-slate-400',
+    style: 'mechanical',
+    shadow: 'shadow-[inset_0_2px_15px_rgba(0,0,0,0.5)]',
+    metallic: true,
   },
   {
     id: 'luxury',
@@ -29,6 +61,7 @@ const themes = [
     secondHand: 'bg-amber-500',
     center: 'bg-amber-700',
     marks: 'bg-amber-400',
+    style: 'modern',
   },
   {
     id: 'ocean',
@@ -42,6 +75,7 @@ const themes = [
     secondHand: 'bg-cyan-500',
     center: 'bg-blue-700',
     marks: 'bg-blue-400',
+    style: 'modern',
   },
   {
     id: 'forest',
@@ -55,6 +89,7 @@ const themes = [
     secondHand: 'bg-emerald-500',
     center: 'bg-green-800',
     marks: 'bg-green-500',
+    style: 'modern',
   },
   {
     id: 'sunset',
@@ -68,6 +103,7 @@ const themes = [
     secondHand: 'bg-red-500',
     center: 'bg-orange-700',
     marks: 'bg-orange-400',
+    style: 'modern',
   },
   {
     id: 'purple',
@@ -81,6 +117,7 @@ const themes = [
     secondHand: 'bg-pink-500',
     center: 'bg-purple-700',
     marks: 'bg-purple-400',
+    style: 'modern',
   },
   {
     id: 'dark',
@@ -94,6 +131,7 @@ const themes = [
     secondHand: 'bg-blue-400',
     center: 'bg-gray-200',
     marks: 'bg-gray-500',
+    style: 'modern',
   },
   {
     id: 'rose',
@@ -107,6 +145,7 @@ const themes = [
     secondHand: 'bg-pink-500',
     center: 'bg-rose-600',
     marks: 'bg-rose-300',
+    style: 'modern',
   },
   {
     id: 'mint',
@@ -120,6 +159,7 @@ const themes = [
     secondHand: 'bg-cyan-500',
     center: 'bg-teal-700',
     marks: 'bg-teal-400',
+    style: 'modern',
   },
   {
     id: 'silver',
@@ -133,6 +173,7 @@ const themes = [
     secondHand: 'bg-blue-500',
     center: 'bg-slate-700',
     marks: 'bg-slate-400',
+    style: 'modern',
   },
 ]
 
@@ -193,11 +234,86 @@ export default function AnalogClock() {
         {/* 时钟容器 */}
         <div className={`${clockSize} relative transition-all duration-300`}>
           {/* 表盘 */}
-          <div className={`w-full h-full rounded-full ${theme.face} border-8 ${theme.border} shadow-2xl relative`}>
+          <div className={`w-full h-full rounded-full ${theme.face} border-8 ${theme.border} ${theme.shadow || 'shadow-2xl'} relative ${theme.style === 'vintage' ? 'shadow-[0_8px_32px_rgba(0,0,0,0.3)]' : ''} ${theme.metallic ? 'shadow-[0_8px_32px_rgba(0,0,0,0.6)]' : ''}`}>
+            {/* 复古主题：添加纹理效果 */}
+            {theme.style === 'vintage' && (
+              <div className="absolute inset-0 rounded-full opacity-20" style={{
+                backgroundImage: 'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.1) 100%), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)'
+              }} />
+            )}
+            
+            {/* 机械主题：添加金属纹理和螺丝 */}
+            {theme.metallic && (
+              <>
+                <div className="absolute inset-0 rounded-full opacity-30" style={{
+                  backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.2) 100%)'
+                }} />
+                {/* 四个角的螺丝 */}
+                {[45, 135, 225, 315].map((angle) => {
+                  const x = 50 + 42 * Math.cos((angle * Math.PI) / 180)
+                  const y = 50 + 42 * Math.sin((angle * Math.PI) / 180)
+                  return (
+                    <div
+                      key={angle}
+                      className="absolute w-3 h-3 rounded-full bg-slate-500 shadow-inner"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: 'translate(-50%, -50%)'
+                      }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-2 h-0.5 bg-slate-700 rounded" />
+                      </div>
+                    </div>
+                  )
+                })}
+              </>
+            )}
             {/* 刻度线 */}
             {[...Array(60)].map((_, i) => {
               const angle = i * 6
               const isHour = i % 5 === 0
+              
+              // 复古主题：使用粗壮的刻度
+              if (theme.style === 'vintage') {
+                const length = isHour ? '10%' : '5%'
+                const width = isHour ? '4px' : '2px'
+                return (
+                  <div
+                    key={i}
+                    className={`absolute top-1/2 left-1/2 origin-left ${theme.marks} rounded-full`}
+                    style={{
+                      width: length,
+                      height: width,
+                      transform: `rotate(${angle}deg) translateX(-50%)`,
+                      transformOrigin: 'left center',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                    }}
+                  />
+                )
+              }
+              
+              // 机械主题：使用金属感刻度
+              if (theme.metallic) {
+                const length = isHour ? '9%' : '4%'
+                const width = isHour ? '3px' : '1.5px'
+                return (
+                  <div
+                    key={i}
+                    className={`absolute top-1/2 left-1/2 origin-left ${theme.marks}`}
+                    style={{
+                      width: length,
+                      height: width,
+                      transform: `rotate(${angle}deg) translateX(-50%)`,
+                      transformOrigin: 'left center',
+                      boxShadow: isHour ? '0 1px 3px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3)' : '0 1px 2px rgba(0,0,0,0.3)'
+                    }}
+                  />
+                )
+              }
+              
+              // 默认样式
               const length = isHour ? '8%' : '4%'
               const width = isHour ? '3px' : '1px'
               return (
@@ -220,52 +336,71 @@ export default function AnalogClock() {
               const radius = isFullscreen ? 38 : 38
               const x = 50 + radius * Math.sin((angle * Math.PI) / 180)
               const y = 50 - radius * Math.cos((angle * Math.PI) / 180)
+              
+              // 复古主题：使用罗马数字
+              const romanNumerals = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI']
+              const displayNum = theme.style === 'vintage' ? romanNumerals[i] : num
+              
               return (
                 <div
                   key={num}
-                  className={`absolute ${theme.numbers} font-bold ${isFullscreen ? 'text-6xl' : 'text-2xl'}`}
+                  className={`absolute ${theme.numbers} font-bold ${isFullscreen ? 'text-6xl' : 'text-2xl'} ${theme.style === 'vintage' ? 'font-serif' : ''} ${theme.metallic ? 'drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]' : ''}`}
                   style={{
                     left: `${x}%`,
                     top: `${y}%`,
                     transform: 'translate(-50%, -50%)',
+                    textShadow: theme.style === 'vintage' ? '2px 2px 4px rgba(0,0,0,0.3)' : 'none'
                   }}
                 >
-                  {num}
+                  {displayNum}
                 </div>
               )
             })}
 
             {/* 时针 */}
             <div
-              className={`absolute top-1/2 left-1/2 origin-left ${theme.hourHand} rounded-full shadow-lg transition-transform duration-1000`}
+              className={`absolute top-1/2 left-1/2 origin-left ${theme.hourHand} shadow-lg transition-transform duration-1000 ${
+                theme.style === 'vintage' ? 'rounded-sm' : theme.metallic ? '' : 'rounded-full'
+              }`}
               style={{
                 width: isFullscreen ? '25%' : '25%',
                 height: isFullscreen ? '8px' : '6px',
                 transform: `rotate(${hourAngle}deg) translateX(-15%)`,
                 transformOrigin: 'left center',
+                clipPath: theme.style === 'vintage' ? 'polygon(0 50%, 85% 30%, 100% 50%, 85% 70%)' : 
+                         theme.metallic ? 'polygon(0 50%, 90% 20%, 100% 50%, 90% 80%)' : 'none',
+                boxShadow: theme.metallic ? '0 2px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3)' : undefined
               }}
             />
 
             {/* 分针 */}
             <div
-              className={`absolute top-1/2 left-1/2 origin-left ${theme.minuteHand} rounded-full shadow-lg transition-transform duration-1000`}
+              className={`absolute top-1/2 left-1/2 origin-left ${theme.minuteHand} shadow-lg transition-transform duration-1000 ${
+                theme.style === 'vintage' ? 'rounded-sm' : theme.metallic ? '' : 'rounded-full'
+              }`}
               style={{
                 width: isFullscreen ? '35%' : '35%',
                 height: isFullscreen ? '6px' : '4px',
                 transform: `rotate(${minuteAngle}deg) translateX(-15%)`,
                 transformOrigin: 'left center',
+                clipPath: theme.style === 'vintage' ? 'polygon(0 50%, 90% 35%, 100% 50%, 90% 65%)' : 
+                         theme.metallic ? 'polygon(0 50%, 92% 25%, 100% 50%, 92% 75%)' : 'none',
+                boxShadow: theme.metallic ? '0 2px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3)' : undefined
               }}
             />
 
             {/* 秒针 */}
             <div
-              className={`absolute top-1/2 left-1/2 origin-left ${theme.secondHand} rounded-full shadow-lg`}
+              className={`absolute top-1/2 left-1/2 origin-left ${theme.secondHand} shadow-lg ${
+                theme.metallic ? 'rounded-sm' : 'rounded-full'
+              }`}
               style={{
                 width: isFullscreen ? '40%' : '40%',
                 height: isFullscreen ? '3px' : '2px',
                 transform: `rotate(${secondAngle}deg) translateX(-15%)`,
                 transformOrigin: 'left center',
                 transition: seconds === 0 ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)',
+                boxShadow: theme.metallic ? '0 1px 4px rgba(0,0,0,0.5)' : undefined
               }}
             />
 
@@ -276,8 +411,22 @@ export default function AnalogClock() {
                 width: isFullscreen ? '24px' : '16px',
                 height: isFullscreen ? '24px' : '16px',
                 transform: 'translate(-50%, -50%)',
+                boxShadow: theme.metallic ? '0 2px 8px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.3)' : undefined
               }}
             />
+            
+            {/* 机械主题：中心螺丝纹理 */}
+            {theme.metallic && (
+              <div
+                className="absolute top-1/2 left-1/2 rounded-full"
+                style={{
+                  width: isFullscreen ? '12px' : '8px',
+                  height: isFullscreen ? '12px' : '8px',
+                  transform: 'translate(-50%, -50%)',
+                  background: 'linear-gradient(135deg, rgba(0,0,0,0.3) 0%, transparent 50%, rgba(255,255,255,0.2) 100%)'
+                }}
+              />
+            )}
           </div>
         </div>
 
