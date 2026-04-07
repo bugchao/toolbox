@@ -378,9 +378,12 @@ export default function AnalogClock() {
         {/* 数字时间显示 */}
         <div className={`${
           isFullscreen 
-            ? 'fixed bottom-8 left-1/2 transform -translate-x-1/2' 
+            ? 'fixed left-1/2 transform -translate-x-1/2' 
             : 'absolute -top-20 left-1/2 transform -translate-x-1/2'
-        } text-center whitespace-nowrap`}>
+        } text-center whitespace-nowrap`}
+        style={isFullscreen ? {
+          top: 'calc(50% + min(40vh, 40vw) + 20px)'
+        } : undefined}>
           <div className={`${isFullscreen ? 'text-5xl' : 'text-3xl'} font-bold ${theme.numbers} transition-all`}>
             {time.toLocaleTimeString('zh-CN', { hour12: false })}
           </div>
