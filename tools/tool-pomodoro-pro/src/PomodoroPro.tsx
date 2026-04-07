@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Timer, Play, Pause, RotateCcw, SkipForward, Plus, Trash2, Check } from 'lucide-react'
+import { Timer, Play, Pause, RotateCcw, SkipForward, Plus, Trash2, Check, TrendingUp } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 
 type Phase = 'work' | 'shortBreak' | 'longBreak'
 interface Task { id: string; text: string; done: boolean; pomodoros: number }
-interface Stats { today: number; total: number; totalMinutes: number }
+interface DailyStats { date: string; pomodoros: number; minutes: number }
+interface Stats { today: number; total: number; totalMinutes: number; history: DailyStats[] }
 interface PomData { tasks: Task[]; stats: Stats }
-const DEFAULT: PomData = { tasks: [], stats: { today: 0, total: 0, totalMinutes: 0 } }
+const DEFAULT: PomData = { tasks: [], stats: { today: 0, total: 0, totalMinutes: 0, history: [] } }
 
 const DURATIONS: Record<Phase, number> = { work: 25 * 60, shortBreak: 5 * 60, longBreak: 15 * 60 }
 const PHASE_COLORS: Record<Phase, string> = {
@@ -42,10 +44,17 @@ export default function PomodoroPro() {
   const completePom = useCallback(() => {
     const next = pomCount + 1
     setPomCount(next)
+    const today = new Date().toISOString().split('T')[0]
+    const history = data.stats.history || []
+    const todayIndex = history.findIndex(h => h.date === today)
+    const newHistory = todayIndex >= 0
+      ? history.map((h, i) => i === todayIndex ? { ...h, pomodoros: h.pomodoros + 1, minutes: h.minutes + 25 } : h)
+      : [...history, { date: today, pomodoros: 1, minutes: 25 }]
     const newStats = {
       today: data.stats.today + 1,
       total: data.stats.total + 1,
       totalMinutes: data.stats.totalMinutes + 25,
+      history: newHistory.slice(-30), // 只保留最近30天
     }
     const newTasks = activeTask
       ? data.tasks.map(t => t.id === activeTask ? { ...t, pomodoros: t.pomodoros + 1 } : t)
@@ -87,6 +96,25 @@ export default function PomodoroPro() {
     save({ ...data, tasks: data.tasks.filter(t => t.id !== id) })
     if (activeTask === id) setActiveTask(null)
   }
+
+  // 生成7天历史图表数据
+  const chartData = useMemo(() => {
+    const history = data.stats.history || []
+    const result = []
+    const today = new Date()
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today)
+      date.setDate(date.getDate() - i)
+      const dateStr = date.toISOString().split('T')[0]
+      const record = history.find(h => h.date === dateStr)
+      result.push({
+        date: `${date.getMonth() + 1}/${date.getDate()}`,
+        番茄数: record?.pomodoros || 0,
+        专注时长: record?.minutes || 0,
+      })
+    }
+    return result
+  }, [data.stats.history])
 
   const circumference = 2 * Math.PI * 54
 
@@ -179,6 +207,31 @@ export default function PomodoroPro() {
             </div>
           ))}
         </div>
+
+        {/* 7天历史趋势图表 */}
+        {data.stats.history && data.stats.history.length > 0 && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-rose-500" />
+              近7天专注趋势
+            </h3>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={chartData}>
+                <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+                <YAxis yAxisId="left" tick={{ fontSize: 11 }} />
+                <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11 }} />
+                <Tooltip />
+                <Legend />
+                <Bar yAxisId="left" dataKey="番茄数" fill="#f43f5e" />
+                <Bar yAxisId="right" dataKey="专注时长" fill="#6366f1" />
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="text-xs text-center text-gray-400">
+              红色：番茄数 | 蓝色：专注时长（分钟）
+            </p>
+          </div>
+        )}
+
         <p className="text-xs text-center text-gray-400">{t('autoSave')}</p>
       </div>
     </div>

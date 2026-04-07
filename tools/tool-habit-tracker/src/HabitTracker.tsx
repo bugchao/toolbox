@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Plus, Trash2, Check, TrendingUp, Calendar, Award, Flame } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 interface Habit {
   id: string;
@@ -153,6 +154,24 @@ const HabitTracker: React.FC = () => {
     h.completedDates.includes(formatDate(new Date()))
   ).length;
 
+  // 生成30天完成趋势数据
+  const chartData = useMemo(() => {
+    const data = [];
+    const today = new Date();
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = formatDate(date);
+      const completions = habits.filter(h => h.completedDates.includes(dateStr)).length;
+      data.push({
+        date: `${date.getMonth() + 1}/${date.getDate()}`,
+        完成数: completions,
+        目标数: habits.length,
+      });
+    }
+    return data;
+  }, [habits]);
+
   return (
     <div className="max-w-6xl mx-auto p-6">
       <div className="mb-8">
@@ -196,6 +215,46 @@ const HabitTracker: React.FC = () => {
           <div className="text-2xl font-bold text-purple-700">{habits.length}</div>
         </div>
       </div>
+
+      {/* 30天完成趋势图表 */}
+      {habits.length > 0 && (
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-blue-500" />
+            30天完成趋势
+          </h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={chartData}>
+              <XAxis 
+                dataKey="date" 
+                tick={{ fontSize: 11 }} 
+                interval={Math.floor(chartData.length / 6)}
+              />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Legend />
+              <Line 
+                type="monotone" 
+                dataKey="完成数" 
+                stroke="#10b981" 
+                strokeWidth={2}
+                dot={{ r: 3 }}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="目标数" 
+                stroke="#94a3b8" 
+                strokeWidth={1}
+                strokeDasharray="5 5"
+                dot={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+          <p className="text-xs text-gray-500 text-center mt-2">
+            绿线：每日完成习惯数 | 灰线：习惯总数（目标）
+          </p>
+        </div>
+      )}
 
       {/* Add New Habit */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
