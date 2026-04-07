@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Plus, Trash2, CheckSquare, Square, RotateCcw, Download, Upload } from 'lucide-react'
+import { Plus, Trash2, CheckSquare, Square, RotateCcw, Download, Upload, Check, X } from 'lucide-react'
 
 interface CheckItem {
   id: string
@@ -49,6 +49,8 @@ export function TravelChecklist() {
   const [newCat, setNewCat] = useState('其他')
   const [filterCat, setFilterCat] = useState('全部')
   const [isLoaded, setIsLoaded] = useState(false)
+  const [batchMode, setBatchMode] = useState(false)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
 
   // 从 localStorage 加载数据
   useEffect(() => {
@@ -82,6 +84,47 @@ export function TravelChecklist() {
   const toggle = (id: string) => setItems(prev => prev.map(i => i.id === id ? { ...i, checked: !i.checked } : i))
   const remove = (id: string) => setItems(prev => prev.filter(i => i.id !== id))
   const reset = () => setItems(prev => prev.map(i => ({ ...i, checked: false })))
+
+  // 批量操作函数
+  const toggleBatchMode = () => {
+    setBatchMode(!batchMode)
+    setSelectedIds(new Set())
+  }
+
+  const toggleSelect = (id: string) => {
+    const newSelected = new Set(selectedIds)
+    if (newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+    setSelectedIds(newSelected)
+  }
+
+  const selectAll = () => {
+    setSelectedIds(new Set(filtered.map(i => i.id)))
+  }
+
+  const deselectAll = () => {
+    setSelectedIds(new Set())
+  }
+
+  const batchCheck = () => {
+    setItems(prev => prev.map(i => selectedIds.has(i.id) ? { ...i, checked: true } : i))
+    setSelectedIds(new Set())
+  }
+
+  const batchUncheck = () => {
+    setItems(prev => prev.map(i => selectedIds.has(i.id) ? { ...i, checked: false } : i))
+    setSelectedIds(new Set())
+  }
+
+  const batchDelete = () => {
+    if (confirm(`确定要删除选中的 ${selectedIds.size} 项吗？`)) {
+      setItems(prev => prev.filter(i => !selectedIds.has(i.id)))
+      setSelectedIds(new Set())
+    }
+  }
 
   const resetToTemplate = () => {
     if (confirm('确定要重置为模板数据吗？当前数据将被覆盖！')) {
@@ -158,6 +201,14 @@ export function TravelChecklist() {
           <p className="text-gray-500 dark:text-gray-400">出发前必备清单，确保不遗漏重要物品</p>
         </div>
         <div className="flex gap-2">
+          <button onClick={toggleBatchMode} title="批量操作"
+            className={`p-2 rounded-lg transition-colors ${
+              batchMode 
+                ? 'bg-indigo-600 text-white' 
+                : 'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20'
+            }`}>
+            <CheckSquare className="w-5 h-5" />
+          </button>
           <button onClick={exportData} title="导出数据"
             className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-colors">
             <Download className="w-5 h-5" />
@@ -203,6 +254,42 @@ export function TravelChecklist() {
         ))}
       </div>
 
+      {/* 批量操作工具栏 */}
+      {batchMode && (
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
+                已选择 {selectedIds.size} 项
+              </span>
+              <button onClick={selectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                全选
+              </button>
+              <button onClick={deselectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                取消
+              </button>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={batchCheck} disabled={selectedIds.size === 0}
+                className="px-3 py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                <Check className="w-3.5 h-3.5" />
+                标记完成
+              </button>
+              <button onClick={batchUncheck} disabled={selectedIds.size === 0}
+                className="px-3 py-1.5 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                <X className="w-3.5 h-3.5" />
+                取消完成
+              </button>
+              <button onClick={batchDelete} disabled={selectedIds.size === 0}
+                className="px-3 py-1.5 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                <Trash2 className="w-3.5 h-3.5" />
+                删除
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 添加 */}
       <div className="flex gap-2">
         <ItemInput value={newText} onChange={setNewText} onAdd={add} />
@@ -220,8 +307,18 @@ export function TravelChecklist() {
         {filtered.map(item => (
           <div key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
             item.checked ? 'bg-gray-50 dark:bg-gray-700/30 border-gray-100 dark:border-gray-700' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
+          } ${
+            batchMode && selectedIds.has(item.id) ? 'ring-2 ring-indigo-500' : ''
           }`}>
-            <button onClick={() => toggle(item.id)} className="shrink-0">
+            {batchMode && (
+              <input
+                type="checkbox"
+                checked={selectedIds.has(item.id)}
+                onChange={() => toggleSelect(item.id)}
+                className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+              />
+            )}
+            <button onClick={() => !batchMode && toggle(item.id)} className="shrink-0" disabled={batchMode}>
               {item.checked
                 ? <CheckSquare className="w-5 h-5 text-green-500" />
                 : <Square className="w-5 h-5 text-gray-300 dark:text-gray-600" />}
@@ -230,9 +327,11 @@ export function TravelChecklist() {
               item.checked ? 'line-through text-gray-400' : 'text-gray-700 dark:text-gray-300'
             }`}>{item.text}</span>
             <span className={`px-1.5 py-0.5 rounded text-xs ${CAT_COLORS[item.category] || CAT_COLORS['其他']}`}>{item.category}</span>
-            <button onClick={() => remove(item.id)} className="text-gray-200 hover:text-red-400 transition-colors">
-              <Trash2 className="w-4 h-4" />
-            </button>
+            {!batchMode && (
+              <button onClick={() => remove(item.id)} className="text-gray-200 hover:text-red-400 transition-colors">
+                <Trash2 className="w-4 h-4" />
+              </button>
+            )}
           </div>
         ))}
       </div>

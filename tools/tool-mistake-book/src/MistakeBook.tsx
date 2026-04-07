@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Plus, Trash2, ChevronDown, ChevronRight, BookMarked } from 'lucide-react'
+import { Plus, Trash2, ChevronDown, ChevronRight, BookMarked, CheckSquare, Check, X } from 'lucide-react'
 import { PageHero, TagInput, StatusBadge } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 
@@ -25,6 +25,8 @@ export default function MistakeBook() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
   const [adding, setAdding] = useState(false)
   const [form, setForm] = useState({ question: '', answer: '', analysis: '', tags: [] as string[] })
+  const [batchMode, setBatchMode] = useState(false)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
 
   const { items } = state
   const set = (i: Mistake[]) => save({ items: i })
@@ -50,6 +52,47 @@ export default function MistakeBook() {
   const remove = (id: string) => set(items.filter(m => m.id !== id))
   const toggleExpand = (id: string) => setExpanded(e => ({ ...e, [id]: !e[id] }))
 
+  // 批量操作函数
+  const toggleBatchMode = () => {
+    setBatchMode(!batchMode)
+    setSelectedIds(new Set())
+  }
+
+  const toggleSelect = (id: string) => {
+    const newSelected = new Set(selectedIds)
+    if (newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+    setSelectedIds(newSelected)
+  }
+
+  const selectAll = () => {
+    setSelectedIds(new Set(filtered.map(m => m.id)))
+  }
+
+  const deselectAll = () => {
+    setSelectedIds(new Set())
+  }
+
+  const batchMaster = () => {
+    set(items.map(m => selectedIds.has(m.id) ? { ...m, mastered: true } : m))
+    setSelectedIds(new Set())
+  }
+
+  const batchUnmaster = () => {
+    set(items.map(m => selectedIds.has(m.id) ? { ...m, mastered: false } : m))
+    setSelectedIds(new Set())
+  }
+
+  const batchDelete = () => {
+    if (confirm(`确定要删除选中的 ${selectedIds.size} 道题吗？`)) {
+      set(items.filter(m => !selectedIds.has(m.id)))
+      setSelectedIds(new Set())
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <PageHero title={t('title')} description={t('description')} icon={BookMarked} />
@@ -58,6 +101,14 @@ export default function MistakeBook() {
         {/* 统计 + 筛选 */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-sm text-gray-500">共 {items.length} 题 · 已掌握 <span className="text-green-500 font-medium">{masteredCount}</span></span>
+          <button onClick={toggleBatchMode} title="批量操作"
+            className={`ml-2 p-1.5 rounded-lg transition-colors ${
+              batchMode 
+                ? 'bg-indigo-600 text-white' 
+                : 'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/20'
+            }`}>
+            <CheckSquare className="w-4 h-4" />
+          </button>
           <div className="ml-auto flex gap-2 flex-wrap">
             {(['all','unmastered','mastered'] as const).map(f => (
               <button key={f} onClick={() => setFilter(f)}
@@ -81,6 +132,42 @@ export default function MistakeBook() {
                   tagFilter === tag ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-500'
                 }`}>{tag}</button>
             ))}
+          </div>
+        )}
+
+        {/* 批量操作工具栏 */}
+        {batchMode && (
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-3">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
+                  已选择 {selectedIds.size} 题
+                </span>
+                <button onClick={selectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                  全选
+                </button>
+                <button onClick={deselectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                  取消
+                </button>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={batchMaster} disabled={selectedIds.size === 0}
+                  className="px-3 py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                  <Check className="w-3.5 h-3.5" />
+                  标记掌握
+                </button>
+                <button onClick={batchUnmaster} disabled={selectedIds.size === 0}
+                  className="px-3 py-1.5 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                  <X className="w-3.5 h-3.5" />
+                  取消掌握
+                </button>
+                <button onClick={batchDelete} disabled={selectedIds.size === 0}
+                  className="px-3 py-1.5 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                  <Trash2 className="w-3.5 h-3.5" />
+                  删除
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
@@ -114,9 +201,19 @@ export default function MistakeBook() {
         {filtered.length === 0 && <div className="text-center py-12 text-gray-400 text-sm">{t('empty')}</div>}
         <div className="space-y-2">
           {filtered.map(m => (
-            <div key={m.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div key={m.id} className={`bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden ${
+              batchMode && selectedIds.has(m.id) ? 'ring-2 ring-indigo-500' : ''
+            }`}>
               <div className="flex items-start gap-3 p-3">
-                <button onClick={() => toggleExpand(m.id)} className="mt-0.5 text-gray-400">
+                {batchMode && (
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(m.id)}
+                    onChange={() => toggleSelect(m.id)}
+                    className="mt-1 w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+                  />
+                )}
+                <button onClick={() => !batchMode && toggleExpand(m.id)} className="mt-0.5 text-gray-400" disabled={batchMode}>
                   {expanded[m.id] ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                 </button>
                 <div className="flex-1 min-w-0">
@@ -127,13 +224,15 @@ export default function MistakeBook() {
                     <span className="text-xs text-gray-400 ml-auto">{m.createdAt}</span>
                   </div>
                 </div>
-                <div className="flex gap-1 shrink-0">
-                  <button onClick={() => toggleMastered(m.id)}
-                    className={`px-2 py-1 text-xs rounded-lg transition-colors ${
-                      m.mastered ? 'bg-green-100 text-green-600' : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
-                    }`}>{m.mastered ? '已掌握' : '标记掌握'}</button>
-                  <button onClick={() => remove(m.id)} className="text-gray-300 hover:text-red-400 p-1"><Trash2 className="w-3.5 h-3.5" /></button>
-                </div>
+                {!batchMode && (
+                  <div className="flex gap-1 shrink-0">
+                    <button onClick={() => toggleMastered(m.id)}
+                      className={`px-2 py-1 text-xs rounded-lg transition-colors ${
+                        m.mastered ? 'bg-green-100 text-green-600' : 'bg-gray-100 dark:bg-gray-700 text-gray-500'
+                      }`}>{m.mastered ? '已掌握' : '标记掌握'}</button>
+                    <button onClick={() => remove(m.id)} className="text-gray-300 hover:text-red-400 p-1"><Trash2 className="w-3.5 h-3.5" /></button>
+                  </div>
+                )}
               </div>
               {expanded[m.id] && (
                 <div className="px-4 pb-4 space-y-2 border-t border-gray-100 dark:border-gray-700 pt-3">
