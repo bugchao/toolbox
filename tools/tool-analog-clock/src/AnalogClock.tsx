@@ -182,7 +182,7 @@ export default function AnalogClock() {
   const clockSize = isFullscreen ? 'w-[80vh] h-[80vh]' : 'w-96 h-96'
 
   return (
-    <div className={`min-h-screen flex items-center justify-center ${theme.bg} transition-colors duration-500`}>
+    <div className={`${isFullscreen ? 'fixed inset-0 overflow-hidden' : 'min-h-screen'} flex items-center justify-center ${theme.bg} transition-colors duration-500`}>
       <div className="relative">
         {/* 时钟容器 */}
         <div className={`${clockSize} relative transition-all duration-300`}>
@@ -280,14 +280,14 @@ export default function AnalogClock() {
           <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 flex gap-3">
             <button
               onClick={() => setShowThemes(!showThemes)}
-              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <Palette className="w-4 h-4" />
               主题
             </button>
             <button
               onClick={toggleFullscreen}
-              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <Maximize2 className="w-4 h-4" />
               全屏
@@ -297,17 +297,17 @@ export default function AnalogClock() {
 
         {/* 全屏模式下的控制按钮 */}
         {isFullscreen && (
-          <div className="fixed top-8 right-8 flex gap-3">
+          <div className="fixed top-8 right-8 flex gap-3 z-50">
             <button
               onClick={() => setShowThemes(!showThemes)}
-              className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg"
+              className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
             >
               <Palette className="w-5 h-5" />
               主题
             </button>
             <button
               onClick={toggleFullscreen}
-              className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg"
+              className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
             >
               <Minimize2 className="w-5 h-5" />
               退出全屏
@@ -317,7 +317,11 @@ export default function AnalogClock() {
 
         {/* 主题选择器 */}
         {showThemes && (
-          <div className={`${isFullscreen ? 'fixed top-24 right-8' : 'absolute -bottom-32 left-1/2 transform -translate-x-1/2'} bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-2xl p-4 ${isFullscreen ? 'w-80' : 'w-96'} z-50`}>
+          <div className={`${
+            isFullscreen 
+              ? 'fixed top-24 right-8 w-96' 
+              : 'absolute -bottom-36 left-1/2 transform -translate-x-1/2 w-[500px]'
+          } bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-2xl p-4 z-50`}>
             <div className="grid grid-cols-2 gap-2">
               {themes.map((t, i) => (
                 <button
@@ -326,7 +330,7 @@ export default function AnalogClock() {
                     setThemeIndex(i)
                     setShowThemes(false)
                   }}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
                     i === themeIndex
                       ? 'bg-indigo-600 text-white shadow-lg'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -340,11 +344,15 @@ export default function AnalogClock() {
         )}
 
         {/* 数字时间显示 */}
-        <div className={`${isFullscreen ? 'fixed bottom-12' : 'absolute -top-16'} left-1/2 transform -translate-x-1/2 text-center`}>
+        <div className={`${
+          isFullscreen 
+            ? 'fixed bottom-20 left-1/2 transform -translate-x-1/2' 
+            : 'absolute -top-20 left-1/2 transform -translate-x-1/2'
+        } text-center whitespace-nowrap`}>
           <div className={`${isFullscreen ? 'text-6xl' : 'text-3xl'} font-bold ${theme.numbers} transition-all`}>
             {time.toLocaleTimeString('zh-CN', { hour12: false })}
           </div>
-          <div className={`${isFullscreen ? 'text-2xl' : 'text-sm'} ${theme.numbers} opacity-60 mt-1`}>
+          <div className={`${isFullscreen ? 'text-2xl' : 'text-sm'} ${theme.numbers} opacity-60 mt-1 whitespace-nowrap`}>
             {time.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}
           </div>
         </div>
