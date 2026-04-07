@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Plus, RotateCcw, BookOpen } from 'lucide-react'
+import { Plus, RotateCcw, BookOpen, CheckSquare, Check, X, Trash2 } from 'lucide-react'
 import { PageHero, ProgressRing } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 
@@ -30,6 +30,8 @@ export default function VocabTrainer() {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({})
   const [current, setCurrent] = useState(0)
   const [mode, setMode] = useState<'list' | 'card'>('card')
+  const [batchMode, setBatchMode] = useState(false)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
 
   const { words } = state
   const set = (w: Word[]) => save({ words: w })
@@ -51,6 +53,48 @@ export default function VocabTrainer() {
   const removeWord = (id: string) => set(words.filter(w => w.id !== id))
   const resetAll = () => set(words.map(w => ({ ...w, mastered: false })))
   const toggleFlip = (id: string) => setFlipped(f => ({ ...f, [id]: !f[id] }))
+
+  // 批量操作函数
+  const toggleBatchMode = () => {
+    setBatchMode(!batchMode)
+    setSelectedIds(new Set())
+    if (mode === 'card') setMode('list') // 批量模式强制切换到列表模式
+  }
+
+  const toggleSelect = (id: string) => {
+    const newSelected = new Set(selectedIds)
+    if (newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+    setSelectedIds(newSelected)
+  }
+
+  const selectAll = () => {
+    setSelectedIds(new Set(filtered.map(w => w.id)))
+  }
+
+  const deselectAll = () => {
+    setSelectedIds(new Set())
+  }
+
+  const batchMaster = () => {
+    set(words.map(w => selectedIds.has(w.id) ? { ...w, mastered: true } : w))
+    setSelectedIds(new Set())
+  }
+
+  const batchUnmaster = () => {
+    set(words.map(w => selectedIds.has(w.id) ? { ...w, mastered: false } : w))
+    setSelectedIds(new Set())
+  }
+
+  const batchDelete = () => {
+    if (confirm(`确定要删除选中的 ${selectedIds.size} 个单词吗？`)) {
+      set(words.filter(w => !selectedIds.has(w.id)))
+      setSelectedIds(new Set())
+    }
+  }
 
   const cardWord = filtered[current]
 
@@ -74,8 +118,17 @@ export default function VocabTrainer() {
             </div>
           </div>
           <div className="ml-auto flex gap-2">
-            <button onClick={() => setMode(m => m === 'card' ? 'list' : 'card')}
-              className="px-3 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg text-gray-500 hover:border-indigo-400">
+            <button onClick={toggleBatchMode} title="批量操作"
+              className={`px-3 py-1.5 text-xs rounded-lg transition-colors flex items-center gap-1 ${
+                batchMode 
+                  ? 'bg-indigo-600 text-white' 
+                  : 'border border-gray-200 dark:border-gray-600 text-gray-500 hover:border-indigo-400'
+              }`}>
+              <CheckSquare className="w-3.5 h-3.5" />
+              {batchMode ? '退出批量' : '批量操作'}
+            </button>
+            <button onClick={() => setMode(m => m === 'card' ? 'list' : 'card')} disabled={batchMode}
+              className="px-3 py-1.5 text-xs border border-gray-200 dark:border-gray-600 rounded-lg text-gray-500 hover:border-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed">
               {mode === 'card' ? '列表' : '卡片'}
             </button>
             <button onClick={resetAll} className="text-gray-400 hover:text-gray-600"><RotateCcw className="w-4 h-4" /></button>
@@ -137,23 +190,72 @@ export default function VocabTrainer() {
 
         {/* 列表模式 */}
         {mode === 'list' && (
-          <div className="space-y-2">
-            {filtered.map(w => (
-              <div key={w.id} className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
-                w.mastered ? 'bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
-              }`}>
-                <button onClick={() => toggleMastered(w.id)}
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
-                    w.mastered ? 'bg-green-500 border-green-500 text-white' : 'border-gray-300'
-                  }`}>{w.mastered && '✓'}</button>
-                <div className="flex-1 min-w-0">
-                  <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">{w.word}</div>
-                  <div className="text-xs text-gray-500 truncate">{w.meaning}</div>
+          <>
+            {/* 批量操作工具栏 */}
+            {batchMode && (
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
+                      已选择 {selectedIds.size} 个单词
+                    </span>
+                    <button onClick={selectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                      全选
+                    </button>
+                    <button onClick={deselectAll} className="text-xs text-indigo-600 hover:text-indigo-700 underline">
+                      取消
+                    </button>
+                  </div>
+                  <div className="flex gap-2">
+                    <button onClick={batchMaster} disabled={selectedIds.size === 0}
+                      className="px-3 py-1.5 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                      <Check className="w-3.5 h-3.5" />
+                      标记掌握
+                    </button>
+                    <button onClick={batchUnmaster} disabled={selectedIds.size === 0}
+                      className="px-3 py-1.5 bg-gray-600 hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                      <X className="w-3.5 h-3.5" />
+                      取消掌握
+                    </button>
+                    <button onClick={batchDelete} disabled={selectedIds.size === 0}
+                      className="px-3 py-1.5 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
+                      <Trash2 className="w-3.5 h-3.5" />
+                      删除
+                    </button>
+                  </div>
                 </div>
-                <button onClick={() => removeWord(w.id)} className="text-gray-300 hover:text-red-400 text-xs">✕</button>
               </div>
-            ))}
-          </div>
+            )}
+            <div className="space-y-2">
+              {filtered.map(w => (
+                <div key={w.id} className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
+                  w.mastered ? 'bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
+                } ${
+                  batchMode && selectedIds.has(w.id) ? 'ring-2 ring-indigo-500' : ''
+                }`}>
+                  {batchMode && (
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.has(w.id)}
+                      onChange={() => toggleSelect(w.id)}
+                      className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+                    />
+                  )}
+                  <button onClick={() => !batchMode && toggleMastered(w.id)} disabled={batchMode}
+                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                      w.mastered ? 'bg-green-500 border-green-500 text-white' : 'border-gray-300'
+                    }`}>{w.mastered && '✓'}</button>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-gray-900 dark:text-gray-100 text-sm">{w.word}</div>
+                    <div className="text-xs text-gray-500 truncate">{w.meaning}</div>
+                  </div>
+                  {!batchMode && (
+                    <button onClick={() => removeWord(w.id)} className="text-gray-300 hover:text-red-400 text-xs">✕</button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         <p className="text-xs text-center text-gray-400">{t('autoSave')}</p>
