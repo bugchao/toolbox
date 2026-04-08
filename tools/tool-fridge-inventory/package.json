@@ -4,8 +4,8 @@
   "main": "src/index.tsx",
   "types": "src/index.tsx",
   "dependencies": {
-    "@toolbox/ui-kit": "workspace:*",
     "@toolbox/storage": "workspace:*",
+    "@toolbox/ui-kit": "workspace:*",
     "lucide-react": "*",
     "react-i18next": "*"
   },
@@ -14,8 +14,8 @@
     "react-dom": "*"
   },
   "devDependencies": {
-    "typescript": "*",
-    "@types/react": "*",
-    "@types/react-dom": "*"
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "*"
   }
 }

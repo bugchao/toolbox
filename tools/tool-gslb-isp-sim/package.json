@@ -4,15 +4,19 @@
   "type": "module",
   "main": "src/index.tsx",
   "dependencies": {
+    "@toolbox/storage": "workspace:*",
+    "@toolbox/ui-kit": "workspace:*",
+    "lucide-react": "^0.577.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^15.4.1",
-    "lucide-react": "^0.577.0",
-    "@toolbox/ui-kit": "workspace:*",
-    "@toolbox/storage": "workspace:*"
+    "react-i18next": "^15.4.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7"
   }
 }
