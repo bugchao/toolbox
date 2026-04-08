@@ -141,7 +141,7 @@ export function IpamReclaim() {
               <span className="font-mono text-sm text-gray-900 dark:text-gray-100 w-32 shrink-0">{r.ip}</span>
               <span className="text-sm text-gray-600 dark:text-gray-400 flex-1 truncate">{r.label}</span>
               <span className="text-xs text-gray-400 w-24 shrink-0">{r.lastSeen}</span>
-              <span className={`text-xs font-medium w-32 shrink-0 ${r.color}`}>{r.label_}</span>
+              <span className={`text-xs font-medium w-32 shrink-0 ${r.color}`}>{r.label}</span>
               <span className={`text-xs font-medium shrink-0 ${r.color}`}>{r.canReclaim ? '建议回收' : r.status === 'active' ? '活跃' : `闲置${r.days}天`}</span>
               <button onClick={() => remove(r.id)} className="text-gray-300 hover:text-red-500 transition-colors shrink-0">
                 <Trash2 className="w-3.5 h-3.5" />
