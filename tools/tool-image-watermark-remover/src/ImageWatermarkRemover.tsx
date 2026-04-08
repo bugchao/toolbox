@@ -26,6 +26,13 @@ interface CanvasImageLayout {
   offsetY: number;
 }
 
+interface NormalizedMaskPoint {
+  x: number;
+  y: number;
+  radius: number;
+  start?: boolean;
+}
+
 type RepairMode = 'standard' | 'fine' | 'large';
 
 interface RepairModeConfig {
@@ -85,9 +92,15 @@ const ImageWatermarkRemover: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [maskPoints, setMaskPoints] = useState<MaskPoint[]>([]);
+  const [imageMasks, setImageMasks] = useState<Record<string, MaskPoint[]>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
   const lastPointRef = useRef<MaskPoint | null>(null);
   const canvasLayoutRef = useRef<CanvasImageLayout | null>(null);
+
+  const patchImageState = (id: string, patch: Partial<WatermarkImage>) => {
+    setImages((prev) => prev.map((image) => (image.id === id ? { ...image, ...patch } : image)));
+    setSelectedImage((prev) => (prev && prev.id === id ? { ...prev, ...patch } : prev));
+  };
 
   const toPreviewPoint = (point: MaskPoint) => {
     const layout = canvasLayoutRef.current;
@@ -129,7 +142,7 @@ const ImageWatermarkRemover: React.FC = () => {
     ctx.restore();
   };
 
-  const drawImageToCanvas = (imageUrl: string) => {
+  const drawImageToCanvas = (imageUrl: string, points: MaskPoint[] = []) => {
     if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
@@ -155,6 +168,14 @@ const ImageWatermarkRemover: React.FC = () => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+      let previousPoint: MaskPoint | null = null;
+      points.forEach((point) => {
+        const previewPoint = toPreviewPoint(point);
+        const previousPreviewPoint = previousPoint ? toPreviewPoint(previousPoint) : null;
+        paintMaskStroke(ctx, previewPoint, previousPreviewPoint, 'rgba(255, 0, 0, 0.5)');
+        previousPoint = point;
+      });
     };
     img.src = imageUrl;
   };
@@ -186,13 +207,16 @@ const ImageWatermarkRemover: React.FC = () => {
   };
 
   const handleImageSelect = (image: WatermarkImage) => {
+    if (selectedImage) {
+      setImageMasks((prev) => ({ ...prev, [selectedImage.id]: maskPoints }));
+    }
     setSelectedImage(image);
-    setMaskPoints([]);
+    setMaskPoints(imageMasks[image.id] ?? []);
   };
 
   useEffect(() => {
     if (!selectedImage) return;
-    drawImageToCanvas(selectedImage.previewUrl);
+    drawImageToCanvas(selectedImage.previewUrl, maskPoints);
   }, [selectedImage]);
 
   const getCanvasCoordinates = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -244,7 +268,13 @@ const ImageWatermarkRemover: React.FC = () => {
 
     setIsDrawing(true);
     const point = { ...nextPoint, start: true };
-    setMaskPoints(prev => [...prev, point]);
+    setMaskPoints(prev => {
+      const nextMaskPoints = [...prev, point];
+      if (selectedImage) {
+        setImageMasks((current) => ({ ...current, [selectedImage.id]: nextMaskPoints }));
+      }
+      return nextMaskPoints;
+    });
     lastPointRef.current = point;
 
     if (!canvasRef.current) return;
@@ -260,7 +290,13 @@ const ImageWatermarkRemover: React.FC = () => {
     
     const point = getCanvasCoordinates(e);
     if (!point) return;
-    setMaskPoints(prev => [...prev, point]);
+    setMaskPoints(prev => {
+      const nextMaskPoints = [...prev, point];
+      if (selectedImage) {
+        setImageMasks((current) => ({ ...current, [selectedImage.id]: nextMaskPoints }));
+      }
+      return nextMaskPoints;
+    });
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -277,127 +313,86 @@ const ImageWatermarkRemover: React.FC = () => {
     lastPointRef.current = null;
   };
 
-  const handleRemoveWatermark = async () => {
-    if (!selectedImage || maskPoints.length === 0) return;
+  const repairImage = async (
+    image: WatermarkImage,
+    incomingMaskPoints: MaskPoint[] | NormalizedMaskPoint[],
+    maskSpace: 'pixel' | 'normalized' = 'pixel',
+  ) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = image.previewUrl;
+    });
 
-    setIsProcessing(true);
-    setSelectedImage(prev => prev ? { ...prev, status: 'processing' } : null);
+    const activeMaskPoints =
+      maskSpace === 'normalized'
+        ? (incomingMaskPoints as NormalizedMaskPoint[]).map((point) => ({
+            x: point.x * img.width,
+            y: point.y * img.height,
+            radius: point.radius * ((img.width + img.height) / 2),
+            start: point.start,
+          }))
+        : (incomingMaskPoints as MaskPoint[]);
 
-    try {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-        img.src = selectedImage.previewUrl;
-      });
+    if (!activeMaskPoints.length) {
+      throw new Error('没有可用的标记区域');
+    }
 
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Canvas not supported');
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas not supported');
 
-      // Draw original image
-      ctx.drawImage(img, 0, 0);
+    // Draw original image
+    ctx.drawImage(img, 0, 0);
 
-      // Get image data
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
+    // Get image data
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
 
-      // Simple inpainting algorithm - replace marked areas with surrounding pixels
-      const maskCanvas = document.createElement('canvas');
-      maskCanvas.width = canvas.width;
-      maskCanvas.height = canvas.height;
-      const maskCtx = maskCanvas.getContext('2d');
-      if (!maskCtx) throw new Error('Mask canvas failed');
-      const modeConfig = REPAIR_MODE_CONFIGS[repairMode];
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = canvas.width;
+    maskCanvas.height = canvas.height;
+    const maskCtx = maskCanvas.getContext('2d');
+    if (!maskCtx) throw new Error('Mask canvas failed');
+    const modeConfig = REPAIR_MODE_CONFIGS[repairMode];
 
-      // Draw a continuous mask so fast strokes do not leave unpainted gaps.
-      let previousPoint: MaskPoint | null = null;
-      maskPoints.forEach(point => {
-        paintMaskStroke(maskCtx, { ...point, radius: point.radius * modeConfig.maskExpansion }, previousPoint, 'white');
-        previousPoint = point.start ? point : point;
-      });
+    // Draw a continuous mask so fast strokes do not leave unpainted gaps.
+    let previousPoint: MaskPoint | null = null;
+    activeMaskPoints.forEach(point => {
+      paintMaskStroke(maskCtx, { ...point, radius: point.radius * modeConfig.maskExpansion }, previousPoint, 'white');
+      previousPoint = point;
+    });
 
-      const maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+    const maskData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
 
-      const pixelCount = canvas.width * canvas.height;
-      const pendingMask = new Uint8Array(pixelCount);
-      const originalMask = new Uint8Array(pixelCount);
+    const pixelCount = canvas.width * canvas.height;
+    const pendingMask = new Uint8Array(pixelCount);
+    const originalMask = new Uint8Array(pixelCount);
 
-      for (let i = 0; i < pixelCount; i++) {
-        const alpha = maskData.data[i * 4 + 3];
-        if (alpha > 0) {
-          pendingMask[i] = 1;
-          originalMask[i] = 1;
-        }
+    for (let i = 0; i < pixelCount; i++) {
+      const alpha = maskData.data[i * 4 + 3];
+      if (alpha > 0) {
+        pendingMask[i] = 1;
+        originalMask[i] = 1;
       }
+    }
 
-      const maxRadius = Math.max(...maskPoints.map((point) => point.radius), brushSize / 2);
-      const passBudget = Math.max(Math.round(maxRadius * modeConfig.passFactor), modeConfig.minPasses);
-      const nextPass = new Uint8ClampedArray(data.length);
-      const resolvedIndexes: number[] = [];
+    const maxRadius = Math.max(...activeMaskPoints.map((point) => point.radius), brushSize / 2);
+    const passBudget = Math.max(Math.round(maxRadius * modeConfig.passFactor), modeConfig.minPasses);
+    const nextPass = new Uint8ClampedArray(data.length);
+    const resolvedIndexes: number[] = [];
 
-      // Grow color from the watermark boundary inward. This behaves much better than
-      // a single average pass when the user marks a larger logo or text block.
-      for (let pass = 0; pass < passBudget; pass++) {
-        resolvedIndexes.length = 0;
-        nextPass.set(data);
+    // Grow color from the watermark boundary inward. This behaves much better than
+    // a single average pass when the user marks a larger logo or text block.
+    for (let pass = 0; pass < passBudget; pass++) {
+      resolvedIndexes.length = 0;
+      nextPass.set(data);
 
-        for (let y = 0; y < canvas.height; y++) {
-          for (let x = 0; x < canvas.width; x++) {
-            const pixelIndex = y * canvas.width + x;
-            if (pendingMask[pixelIndex] === 0) continue;
-
-            let sumR = 0;
-            let sumG = 0;
-            let sumB = 0;
-            let weightTotal = 0;
-
-            for (let dy = -modeConfig.neighborRadius; dy <= modeConfig.neighborRadius; dy++) {
-              for (let dx = -modeConfig.neighborRadius; dx <= modeConfig.neighborRadius; dx++) {
-                if (dx === 0 && dy === 0) continue;
-
-                const nx = x + dx;
-                const ny = y + dy;
-                if (nx < 0 || nx >= canvas.width || ny < 0 || ny >= canvas.height) continue;
-
-                const neighborIndex = ny * canvas.width + nx;
-                if (pendingMask[neighborIndex] === 1) continue;
-
-                const rgbaIndex = neighborIndex * 4;
-                const distance = Math.hypot(dx, dy);
-                const weight = distance === 0 ? 1 : 1 / distance;
-                sumR += data[rgbaIndex] * weight;
-                sumG += data[rgbaIndex + 1] * weight;
-                sumB += data[rgbaIndex + 2] * weight;
-                weightTotal += weight;
-              }
-            }
-
-            if (weightTotal > 0) {
-              const rgbaIndex = pixelIndex * 4;
-              nextPass[rgbaIndex] = Math.round(sumR / weightTotal);
-              nextPass[rgbaIndex + 1] = Math.round(sumG / weightTotal);
-              nextPass[rgbaIndex + 2] = Math.round(sumB / weightTotal);
-              resolvedIndexes.push(pixelIndex);
-            }
-          }
-        }
-
-        if (resolvedIndexes.length === 0) break;
-
-        data.set(nextPass);
-        resolvedIndexes.forEach((pixelIndex) => {
-          pendingMask[pixelIndex] = 0;
-        });
-      }
-
-      // If some pixels still remain unresolved after diffusion, fill them from a
-      // wider neighborhood so large solid logos do not stay untouched.
-      const fallbackRadius = Math.max(Math.round(maxRadius * modeConfig.fallbackRadiusFactor), 18);
       for (let y = 0; y < canvas.height; y++) {
         for (let x = 0; x < canvas.width; x++) {
           const pixelIndex = y * canvas.width + x;
@@ -408,8 +403,10 @@ const ImageWatermarkRemover: React.FC = () => {
           let sumB = 0;
           let weightTotal = 0;
 
-          for (let dy = -fallbackRadius; dy <= fallbackRadius; dy++) {
-            for (let dx = -fallbackRadius; dx <= fallbackRadius; dx++) {
+          for (let dy = -modeConfig.neighborRadius; dy <= modeConfig.neighborRadius; dy++) {
+            for (let dx = -modeConfig.neighborRadius; dx <= modeConfig.neighborRadius; dx++) {
+              if (dx === 0 && dy === 0) continue;
+
               const nx = x + dx;
               const ny = y + dy;
               if (nx < 0 || nx >= canvas.width || ny < 0 || ny >= canvas.height) continue;
@@ -417,11 +414,9 @@ const ImageWatermarkRemover: React.FC = () => {
               const neighborIndex = ny * canvas.width + nx;
               if (pendingMask[neighborIndex] === 1) continue;
 
-              const distance = Math.hypot(dx, dy);
-              if (distance === 0 || distance > fallbackRadius) continue;
-
               const rgbaIndex = neighborIndex * 4;
-              const weight = 1 / distance;
+              const distance = Math.hypot(dx, dy);
+              const weight = distance === 0 ? 1 : 1 / distance;
               sumR += data[rgbaIndex] * weight;
               sumG += data[rgbaIndex + 1] * weight;
               sumB += data[rgbaIndex + 2] * weight;
@@ -431,62 +426,154 @@ const ImageWatermarkRemover: React.FC = () => {
 
           if (weightTotal > 0) {
             const rgbaIndex = pixelIndex * 4;
-            data[rgbaIndex] = Math.round(sumR / weightTotal);
-            data[rgbaIndex + 1] = Math.round(sumG / weightTotal);
-            data[rgbaIndex + 2] = Math.round(sumB / weightTotal);
+            nextPass[rgbaIndex] = Math.round(sumR / weightTotal);
+            nextPass[rgbaIndex + 1] = Math.round(sumG / weightTotal);
+            nextPass[rgbaIndex + 2] = Math.round(sumB / weightTotal);
+            resolvedIndexes.push(pixelIndex);
           }
         }
       }
 
-      // Blend the repaired area once more to soften visible seams on text/logo edges.
-      for (let smoothPass = 0; smoothPass < modeConfig.smoothPasses; smoothPass++) {
-        nextPass.set(data);
-        for (let y = 1; y < canvas.height - 1; y++) {
-          for (let x = 1; x < canvas.width - 1; x++) {
-            const pixelIndex = y * canvas.width + x;
-            if (originalMask[pixelIndex] === 0) continue;
+      if (resolvedIndexes.length === 0) break;
 
-            let sumR = 0;
-            let sumG = 0;
-            let sumB = 0;
-            let count = 0;
+      data.set(nextPass);
+      resolvedIndexes.forEach((pixelIndex) => {
+        pendingMask[pixelIndex] = 0;
+      });
+    }
 
-            for (let dy = -1; dy <= 1; dy++) {
-              for (let dx = -1; dx <= 1; dx++) {
-                const neighborIndex = (y + dy) * canvas.width + (x + dx);
-                const rgbaIndex = neighborIndex * 4;
-                sumR += data[rgbaIndex];
-                sumG += data[rgbaIndex + 1];
-                sumB += data[rgbaIndex + 2];
-                count++;
-              }
+    // If some pixels still remain unresolved after diffusion, fill them from a
+    // wider neighborhood so large solid logos do not stay untouched.
+    const fallbackRadius = Math.max(Math.round(maxRadius * modeConfig.fallbackRadiusFactor), 18);
+    for (let y = 0; y < canvas.height; y++) {
+      for (let x = 0; x < canvas.width; x++) {
+        const pixelIndex = y * canvas.width + x;
+        if (pendingMask[pixelIndex] === 0) continue;
+
+        let sumR = 0;
+        let sumG = 0;
+        let sumB = 0;
+        let weightTotal = 0;
+
+        for (let dy = -fallbackRadius; dy <= fallbackRadius; dy++) {
+          for (let dx = -fallbackRadius; dx <= fallbackRadius; dx++) {
+            const nx = x + dx;
+            const ny = y + dy;
+            if (nx < 0 || nx >= canvas.width || ny < 0 || ny >= canvas.height) continue;
+
+            const neighborIndex = ny * canvas.width + nx;
+            if (pendingMask[neighborIndex] === 1) continue;
+
+            const distance = Math.hypot(dx, dy);
+            if (distance === 0 || distance > fallbackRadius) continue;
+
+            const rgbaIndex = neighborIndex * 4;
+            const weight = 1 / distance;
+            sumR += data[rgbaIndex] * weight;
+            sumG += data[rgbaIndex + 1] * weight;
+            sumB += data[rgbaIndex + 2] * weight;
+            weightTotal += weight;
+          }
+        }
+
+        if (weightTotal > 0) {
+          const rgbaIndex = pixelIndex * 4;
+          data[rgbaIndex] = Math.round(sumR / weightTotal);
+          data[rgbaIndex + 1] = Math.round(sumG / weightTotal);
+          data[rgbaIndex + 2] = Math.round(sumB / weightTotal);
+        }
+      }
+    }
+
+    // Blend the repaired area once more to soften visible seams on text/logo edges.
+    for (let smoothPass = 0; smoothPass < modeConfig.smoothPasses; smoothPass++) {
+      nextPass.set(data);
+      for (let y = 1; y < canvas.height - 1; y++) {
+        for (let x = 1; x < canvas.width - 1; x++) {
+          const pixelIndex = y * canvas.width + x;
+          if (originalMask[pixelIndex] === 0) continue;
+
+          let sumR = 0;
+          let sumG = 0;
+          let sumB = 0;
+          let count = 0;
+
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const neighborIndex = (y + dy) * canvas.width + (x + dx);
+              const rgbaIndex = neighborIndex * 4;
+              sumR += data[rgbaIndex];
+              sumG += data[rgbaIndex + 1];
+              sumB += data[rgbaIndex + 2];
+              count++;
             }
-
-            const rgbaIndex = pixelIndex * 4;
-            nextPass[rgbaIndex] = Math.round((data[rgbaIndex] * (1 - modeConfig.smoothBlend)) + (sumR / count) * modeConfig.smoothBlend);
-            nextPass[rgbaIndex + 1] = Math.round((data[rgbaIndex + 1] * (1 - modeConfig.smoothBlend)) + (sumG / count) * modeConfig.smoothBlend);
-            nextPass[rgbaIndex + 2] = Math.round((data[rgbaIndex + 2] * (1 - modeConfig.smoothBlend)) + (sumB / count) * modeConfig.smoothBlend);
           }
+
+          const rgbaIndex = pixelIndex * 4;
+          nextPass[rgbaIndex] = Math.round((data[rgbaIndex] * (1 - modeConfig.smoothBlend)) + (sumR / count) * modeConfig.smoothBlend);
+          nextPass[rgbaIndex + 1] = Math.round((data[rgbaIndex + 1] * (1 - modeConfig.smoothBlend)) + (sumG / count) * modeConfig.smoothBlend);
+          nextPass[rgbaIndex + 2] = Math.round((data[rgbaIndex + 2] * (1 - modeConfig.smoothBlend)) + (sumB / count) * modeConfig.smoothBlend);
         }
-        data.set(nextPass);
       }
+      data.set(nextPass);
+    }
 
-      ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, 0, 0);
 
-      const processedUrl = canvas.toDataURL(selectedImage.originalFile.type, 0.95);
-      
-      setImages(prev => prev.map(img => 
-        img.id === selectedImage.id 
-          ? { ...img, processedUrl, status: 'done' }
-          : img
-      ));
-      setSelectedImage(prev => prev ? { ...prev, processedUrl, status: 'done' } : null);
+    return canvas.toDataURL(image.originalFile.type, 0.95);
+  };
+
+  const handleRemoveWatermark = async () => {
+    if (!selectedImage || maskPoints.length === 0) return;
+
+    setIsProcessing(true);
+    patchImageState(selectedImage.id, { status: 'processing', error: undefined });
+
+    try {
+      const processedUrl = await repairImage(selectedImage, maskPoints, 'pixel');
+      patchImageState(selectedImage.id, { processedUrl, status: 'done', error: undefined });
     } catch (error) {
-      setSelectedImage(prev => prev ? { 
-        ...prev, 
-        status: 'error', 
-        error: '处理失败：' + (error as Error).message 
-      } : null);
+      patchImageState(selectedImage.id, {
+        status: 'error',
+        error: '处理失败：' + (error as Error).message,
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleBatchRemoveWatermark = async () => {
+    if (!selectedImage || images.length < 2) return;
+
+    const activeMaskPoints = imageMasks[selectedImage.id] ?? maskPoints;
+    if (activeMaskPoints.length === 0) return;
+
+    const layout = canvasLayoutRef.current;
+    if (!layout) return;
+
+    setIsProcessing(true);
+    const baseScale = (layout.imageWidth + layout.imageHeight) / 2;
+    const normalizedMaskPoints: NormalizedMaskPoint[] = activeMaskPoints.map((point) => ({
+      x: point.x / layout.imageWidth,
+      y: point.y / layout.imageHeight,
+      radius: point.radius / baseScale,
+      start: point.start,
+    }));
+    const batchImages = [...images];
+
+    try {
+      for (const image of batchImages) {
+        patchImageState(image.id, { status: 'processing', error: undefined });
+        try {
+          const processedUrl = await repairImage(image, normalizedMaskPoints, 'normalized');
+          patchImageState(image.id, { processedUrl, status: 'done', error: undefined });
+        } catch (error) {
+          patchImageState(image.id, {
+            status: 'error',
+            error: '批量处理失败：' + (error as Error).message,
+          });
+        }
+      }
     } finally {
       setIsProcessing(false);
     }
@@ -505,7 +592,10 @@ const ImageWatermarkRemover: React.FC = () => {
 
   const handleClearMask = () => {
     setMaskPoints([]);
-    if (selectedImage) drawImageToCanvas(selectedImage.previewUrl);
+    if (selectedImage) {
+      setImageMasks((prev) => ({ ...prev, [selectedImage.id]: [] }));
+      drawImageToCanvas(selectedImage.previewUrl, []);
+    }
   };
 
   const removeImage = (id: string) => {
@@ -519,8 +609,16 @@ const ImageWatermarkRemover: React.FC = () => {
       }
       return prev.filter(img => img.id !== id);
     });
+    setImageMasks((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
     if (selectedImage?.id === id) {
-      setSelectedImage(null);
+      const remainingImages = images.filter((image) => image.id !== id);
+      const nextImage = remainingImages[0] ?? null;
+      setSelectedImage(nextImage);
+      setMaskPoints(nextImage ? (imageMasks[nextImage.id] ?? []) : []);
     }
   };
 
@@ -534,6 +632,7 @@ const ImageWatermarkRemover: React.FC = () => {
     setImages([]);
     setSelectedImage(null);
     setMaskPoints([]);
+    setImageMasks({});
   };
 
   return (
@@ -666,7 +765,20 @@ const ImageWatermarkRemover: React.FC = () => {
                   <Eraser className="w-4 h-4" />
                   {isProcessing ? '处理中...' : '去除水印'}
                 </button>
+                <button
+                  onClick={handleBatchRemoveWatermark}
+                  disabled={maskPoints.length === 0 || isProcessing || images.length < 2}
+                  className="w-full px-4 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600 disabled:bg-gray-400 flex items-center justify-center gap-2"
+                >
+                  <Upload className="w-4 h-4" />
+                  {isProcessing ? '批量处理中...' : '批量处理全部'}
+                </button>
               </div>
+              {images.length > 1 ? (
+                <p className="mt-3 text-xs text-gray-500">
+                  批量模式会将当前图片上的涂抹区域按相对位置应用到全部图片，适合同一批同位置水印素材。
+                </p>
+              ) : null}
             </div>
           )}
         </div>
