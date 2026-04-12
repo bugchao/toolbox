@@ -1,0 +1,56 @@
+{
+  "title": "SSL Format Converter",
+  "description": "Convert certificate bundles and keys across PFX, JKS, PEM, and PKCS8 with downloadable outputs.",
+  "fields": {
+    "sourceFormat": "Source format",
+    "targetFormat": "Target format",
+    "sourceFile": "Source file",
+    "sourceFileHelp": "For PFX / JKS, uploading the keystore file is usually the most reliable path.",
+    "bundleContent": "Certificate / bundle content",
+    "keyContent": "Private key content (optional)",
+    "keyFileHelp": "Upload a PEM / KEY / PKCS8 text private key file, or paste the key content directly.",
+    "sourcePassword": "Source password",
+    "targetPassword": "Target password",
+    "alias": "Alias"
+  },
+  "placeholders": {
+    "bundleContent": "Paste a certificate chain or PEM bundle that contains certificate and key...",
+    "keyContent": "If the key is separate from the certificate, paste it here...",
+    "password": "Leave empty to keep default behavior"
+  },
+  "actions": {
+    "upload": "Upload file",
+    "convert": "Convert",
+    "loading": "Converting...",
+    "clear": "Clear",
+    "download": "Download"
+  },
+  "notes": {
+    "title": "Conversion note",
+    "description": "JKS / PFX conversions typically require a private-key entry in the source keystore. A truststore alone cannot produce a PKCS8 or PEM private key."
+  },
+  "summary": {
+    "source": "Source format",
+    "target": "Target format",
+    "certificate": "Includes certificate",
+    "privateKey": "Includes private key"
+  },
+  "sections": {
+    "summary": "Conversion summary",
+    "outputs": "Output files"
+  },
+  "states": {
+    "yes": "Yes",
+    "no": "No",
+    "binaryReady": "This output is binary and ready to download.",
+    "selectedFile": "Selected file: {{name}}"
+  },
+  "empty": {
+    "title": "Choose source and target formats to start",
+    "description": "The default flow stays simple, while passwords, alias, and extra key input can be provided only when needed."
+  },
+  "errors": {
+    "title": "Conversion failed",
+    "requestFailed": "Certificate conversion failed. Please verify passwords, key material, and input content."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "title": "CSR Viewer",
+  "description": "Inspect subject, SAN, signature algorithm, and public-key details from a certificate signing request.",
+  "fields": {
+    "content": "CSR content",
+    "help": "Paste PEM text directly or upload a .csr / .pem file."
+  },
+  "placeholders": {
+    "content": "Paste a CSR, for example -----BEGIN CERTIFICATE REQUEST----- ..."
+  },
+  "actions": {
+    "upload": "Upload CSR",
+    "inspect": "Inspect CSR",
+    "loading": "Inspecting...",
+    "clear": "Clear"
+  },
+  "notes": {
+    "title": "When to use this",
+    "description": "Validate SANs, key size, and signature algorithm before sending the request to a CA to avoid mis-issued certificates."
+  },
+  "summary": {
+    "verified": "Signature check",
+    "publicKeyAlgorithm": "Public-key algorithm",
+    "publicKeyBits": "Key size",
+    "signatureAlgorithm": "Signature algorithm"
+  },
+  "sections": {
+    "overview": "Overview",
+    "raw": "OpenSSL output"
+  },
+  "detail": {
+    "subject": "Subject",
+    "san": "Subject Alternative Name",
+    "keyUsage": "Key Usage",
+    "extendedKeyUsage": "Extended Key Usage"
+  },
+  "states": {
+    "valid": "Passed",
+    "invalid": "Failed",
+    "empty": "No data yet"
+  },
+  "empty": {
+    "title": "Paste or upload a CSR to start",
+    "description": "The right side focuses on the fields people usually verify before certificate issuance, while keeping the complete OpenSSL text."
+  },
+  "errors": {
+    "title": "Inspection failed",
+    "requestFailed": "CSR inspection failed. Please verify the input format."
+  }
+}

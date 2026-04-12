@@ -1,0 +1,54 @@
+{
+  "title": "Certificate Viewer",
+  "description": "Inspect subject, issuer, validity, fingerprint, SANs, and OpenSSL details from an X.509 certificate.",
+  "fields": {
+    "content": "Certificate content",
+    "help": "Paste PEM content or upload .crt / .cer / .pem / .der files."
+  },
+  "placeholders": {
+    "content": "Paste certificate content, for example -----BEGIN CERTIFICATE----- ..."
+  },
+  "actions": {
+    "upload": "Upload certificate",
+    "inspect": "Inspect certificate",
+    "loading": "Inspecting...",
+    "clear": "Clear"
+  },
+  "notes": {
+    "title": "When to use this",
+    "description": "Useful when you want to verify exactly which certificate is deployed, confirm validity windows, or check SAN coverage before release."
+  },
+  "summary": {
+    "fingerprint": "SHA256 fingerprint",
+    "algorithm": "Public-key algorithm",
+    "keySize": "Key size",
+    "blocks": "Certificate blocks"
+  },
+  "sections": {
+    "overview": "Overview",
+    "raw": "OpenSSL output"
+  },
+  "detail": {
+    "subject": "Subject",
+    "issuer": "Issuer",
+    "serialNumber": "Serial number",
+    "signatureAlgorithm": "Signature algorithm",
+    "notBefore": "Not before",
+    "notAfter": "Not after",
+    "san": "Subject Alternative Name",
+    "keyUsage": "Key Usage",
+    "extendedKeyUsage": "Extended Key Usage",
+    "basicConstraints": "Basic Constraints"
+  },
+  "states": {
+    "empty": "No data yet"
+  },
+  "empty": {
+    "title": "Paste or upload a certificate to start",
+    "description": "The right side highlights the certificate fields people check most often and keeps the full OpenSSL output for deeper inspection."
+  },
+  "errors": {
+    "title": "Inspection failed",
+    "requestFailed": "Certificate inspection failed. Please verify the input format."
+  }
+}

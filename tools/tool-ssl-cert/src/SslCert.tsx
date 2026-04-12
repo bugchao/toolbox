@@ -46,8 +46,24 @@ export default function SslCert() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ domain: input }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+
+      const raw = await res.text();
+      let data: CertResult | { error?: string } | null = null;
+
+      try {
+        data = raw ? JSON.parse(raw) : null;
+      } catch {
+        throw new Error('服务返回了非 JSON 响应，请检查接口是否可用');
+      }
+
+      if (!res.ok) {
+        throw new Error((data && 'error' in data && data.error) || '请求失败');
+      }
+
+      if (!data || !('certInfo' in data)) {
+        throw new Error('服务返回了空响应，请稍后重试');
+      }
+
       setResult(data);
     } catch (e) {
       setError(e instanceof Error ? e.message : '请求失败');

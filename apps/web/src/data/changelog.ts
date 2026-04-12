@@ -18,6 +18,29 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-04-13',
+    title: {
+      zh: 'DNS 与证书工具补齐',
+      en: 'DNS and certificate utilities added',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '补齐域名注册信息、CSR 查看、证书内容查看、证书格式转换和中文域名转换 5 个独立工具。',
+          en: 'Added five standalone tools for WHOIS lookup, CSR inspection, certificate viewing, certificate format conversion, and IDN conversion.',
+        },
+        paths: [
+          '/whois-lookup',
+          '/cert-csr-viewer',
+          '/cert-content-viewer',
+          '/ssl-format-converter',
+          '/idn-converter',
+        ],
+      },
+    ],
+  },
+  {
     date: '2026-04-10',
     title: {
       zh: 'SBTI 人格测试上线',

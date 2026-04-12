@@ -30,6 +30,8 @@ import { registerServerLatencyApiRoutes } from '../../../tools/tool-server-laten
 import { registerApiAvailabilityApiRoutes } from '../../../tools/tool-api-availability/server/api-availability-api.js'
 import { registerSecurityDomainHijackApiRoutes } from '../../../tools/tool-security-domain-hijack/server/domain-hijack-api.js'
 import { registerStoreApiRoutes } from '../../../server/store-api.js'
+import { registerWhoisLookupApiRoutes } from '../../../tools/tool-whois-lookup/server/whois-lookup-api.js'
+import { registerCertToolsApiRoutes } from '../../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
 
 function readNewsFallback(rootDir) {
   const candidates = [
@@ -92,6 +94,8 @@ export const legacyToolsService = defineServiceModule({
     registerServerLatencyApiRoutes(app)
     registerApiAvailabilityApiRoutes(app)
     registerSecurityDomainHijackApiRoutes(app)
+    registerWhoisLookupApiRoutes(app)
+    registerCertToolsApiRoutes(app)
     registerIpOpsApiRoutes(app)
     await registerStoreApiRoutes(app).catch((error) => {
       console.warn('[store-api] init error:', error.message)

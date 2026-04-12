@@ -4,6 +4,9 @@ import react from '@vitejs/plugin-react'
 import { createDomainSuiteApiMiddleware } from '../../tools/tool-domain-suite/server/domain-suite-api.js'
 import { createIpOpsApiMiddleware } from '../../tools/tool-ip-ops-suite/server/ip-ops-api.js'
 import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/server/security-api.js'
+import { createWhoisLookupApiMiddleware } from '../../tools/tool-whois-lookup/server/whois-lookup-api.js'
+import { createCertToolsApiMiddleware } from '../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
+import { createSslCertApiMiddleware } from '../../tools/tool-ssl-cert/server/ssl-cert-api.js'
 import fs from 'fs'
 
 const root = path.resolve(__dirname, '../..')
@@ -104,6 +107,24 @@ export default defineConfig({
         server.middlewares.use(createIpOpsApiMiddleware())
       },
     },
+    {
+      name: 'toolbox-whois-lookup-api',
+      configureServer(server) {
+        server.middlewares.use(createWhoisLookupApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-cert-tools-api',
+      configureServer(server) {
+        server.middlewares.use(createCertToolsApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-ssl-cert-api',
+      configureServer(server) {
+        server.middlewares.use(createSslCertApiMiddleware())
+      },
+    },
   ],
   test: {
     environment: 'jsdom',
@@ -119,6 +140,9 @@ export default defineConfig({
       '@toolbox/tool-registry': path.join(root, 'packages/tool-registry/src/index.ts'),
       '@toolbox/ui-kit': path.join(root, 'packages/ui-kit/src/index.ts'),
       '@toolbox/storage': path.join(root, 'packages/storage/src/index.ts'),
+      react: path.join(root, 'apps/web/node_modules/react'),
+      'react-dom': path.join(root, 'apps/web/node_modules/react-dom'),
+      'lucide-react': path.join(root, 'apps/web/node_modules/lucide-react'),
       'react-i18next': path.join(root, 'apps/web/node_modules/react-i18next'),
       '@toolbox/TimezoneConverter': path.join(root, 'tools/TimezoneConverter'),
       // 自动扫描的工具包 alias

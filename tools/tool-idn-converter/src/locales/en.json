@@ -1,0 +1,32 @@
+{
+  "title": "IDN Converter",
+  "description": "Convert between Unicode domains and Punycode with per-label inspection for validation.",
+  "fields": {
+    "domain": "Domain input",
+    "unicode": "Unicode",
+    "ascii": "Punycode / ASCII",
+    "label": "Label"
+  },
+  "placeholders": {
+    "domain": "Enter a Unicode domain, internationalized domain, or punycode host"
+  },
+  "summary": {
+    "unicode": "Unicode result",
+    "ascii": "ASCII result",
+    "labels": "Label count",
+    "url": "HTTPS URL"
+  },
+  "sections": {
+    "labels": "Per-label output"
+  },
+  "notes": {
+    "title": "Why this matters",
+    "description": "Useful when registering domains, setting certificate SAN entries, or validating the ASCII hostname used by DNS and web server configs."
+  },
+  "examples": {
+    "title": "Quick examples"
+  },
+  "states": {
+    "empty": "Enter a domain to inspect the conversion"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "中文域名转换",
+  "description": "在 Unicode 域名和 Punycode 之间双向转换，并拆解每个标签方便核对。",
+  "fields": {
+    "domain": "域名输入",
+    "unicode": "Unicode",
+    "ascii": "Punycode / ASCII",
+    "label": "标签"
+  },
+  "placeholders": {
+    "domain": "输入中文域名、国际化域名或 punycode 域名"
+  },
+  "summary": {
+    "unicode": "Unicode 结果",
+    "ascii": "ASCII 结果",
+    "labels": "标签数量",
+    "url": "HTTPS 地址"
+  },
+  "sections": {
+    "labels": "逐标签结果"
+  },
+  "notes": {
+    "title": "使用说明",
+    "description": "适合在注册域名、配置证书 SAN、写 Nginx / DNS 规则前核对真实生效的 ASCII 域名。"
+  },
+  "examples": {
+    "title": "快捷示例"
+  },
+  "states": {
+    "empty": "请输入域名查看转换结果"
+  }
+}

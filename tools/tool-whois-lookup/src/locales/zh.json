@@ -1,0 +1,63 @@
+{
+  "title": "WHOIS 查询",
+  "description": "查询域名或 IP 的注册信息、生命周期、名称服务器和原始 WHOIS 文本。",
+  "fields": {
+    "query": "域名或 IP"
+  },
+  "placeholders": {
+    "query": "例如 example.com、cloudflare.com、8.8.8.8"
+  },
+  "actions": {
+    "lookup": "开始查询",
+    "loading": "查询中..."
+  },
+  "notes": {
+    "title": "使用说明",
+    "description": "默认走系统 WHOIS 查询，适合注册信息核验、到期时间排查和名称服务器审计。"
+  },
+  "examples": {
+    "title": "快捷示例"
+  },
+  "queryTypes": {
+    "domain": "域名 WHOIS",
+    "ip": "IP WHOIS"
+  },
+  "summary": {
+    "queryType": "查询类型",
+    "source": "数据源",
+    "nameserverCount": "名称服务器",
+    "statusCount": "状态条目"
+  },
+  "sections": {
+    "parsed": "解析结果",
+    "nameservers": "名称服务器",
+    "statuses": "状态",
+    "raw": "原始 WHOIS 文本"
+  },
+  "domain": {
+    "registrar": "注册商",
+    "registrant": "注册实体",
+    "country": "国家 / 地区",
+    "creationDate": "创建时间",
+    "updatedDate": "更新时间",
+    "expirationDate": "到期时间"
+  },
+  "ip": {
+    "organization": "所属组织",
+    "country": "国家 / 地区",
+    "cidr": "CIDR / Route",
+    "handle": "Handle",
+    "abuseEmail": "滥用联系邮箱"
+  },
+  "states": {
+    "empty": "暂无数据"
+  },
+  "empty": {
+    "title": "输入域名或 IP 开始查询",
+    "description": "右侧会整理出可直接阅读的注册信息，并保留完整 WHOIS 原文。"
+  },
+  "errors": {
+    "title": "查询失败",
+    "requestFailed": "WHOIS 查询失败，请稍后重试。"
+  }
+}

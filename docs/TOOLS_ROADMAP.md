@@ -160,6 +160,11 @@
 | 网络规划生成器 | `/network-planner` | `tools/tool-subnet-suite` → NetworkPlanner |
 | HTTP Header 检测 | `/http-headers` | `tools/tool-http-headers` → HttpHeaders |
 | SSL 证书检测 | `/ssl-cert` | `tools/tool-ssl-cert` → SslCert |
+| WHOIS 查询 | `/whois-lookup` | `tools/tool-whois-lookup` → WhoisLookup |
+| 查看证书 CSR | `/cert-csr-viewer` | `tools/tool-cert-csr-viewer` → CertCsrViewer |
+| 查看证书内容 | `/cert-content-viewer` | `tools/tool-cert-content-viewer` → CertContentViewer |
+| SSL 证书格式转换 | `/ssl-format-converter` | `tools/tool-cert-format-converter` → CertFormatConverter |
+| 中文域名转换 | `/idn-converter` | `tools/tool-idn-converter` → IdnConverter |
 | HTTP 状态检测 | `/http-status` | `tools/tool-http-status` → HttpStatus |
 | TCP 端口检测 | `/tcp-port-check` | `tools/tool-tcp-port` → TcpPortCheck |
 | Ping 测试 | `/ping` | `tools/tool-ping` → Ping |
@@ -602,7 +607,7 @@
 | 9 | 多节点流量预测 | `/gslb-traffic-predict` | 流量预测 |
 | 10 | GSLB 规则验证 | `/gslb-rule-validate` | 规则校验 |
 
-#### 九、网络运维工具（10）
+#### 九、网络运维工具（15）
 
 | 序号 | 工具名称 | 建议路径（待定） | 备注 |
 |------|----------|------------------|------|
@@ -611,11 +616,16 @@
 | 3 | TCP 端口检测 | `/tcp-port-check` | 端口连通性 |
 | 4 | HTTP Header 检测 | `/http-headers` | 响应头查看 |
 | 5 | SSL 证书检测 | `/ssl-cert` | 证书链与有效期 |
-| 6 | CDN 检测 | `/cdn-check` | CDN 识别 |
-| 7 | HTTP 状态检测 | `/http-status` | 状态码与可用性 |
-| 8 | Web 服务可用性检测 | `/web-availability` | 可用性监控 |
-| 9 | 服务器延迟测试 | `/server-latency` | 延迟测试 |
-| 10 | API 可用性测试 | `/api-availability` | API 可用性 |
+| 6 | WHOIS 查询 | `/whois-lookup` | 域名 / IP 注册信息 |
+| 7 | 查看证书 CSR | `/cert-csr-viewer` | CSR 核对与 SAN 检查 |
+| 8 | 查看证书内容 | `/cert-content-viewer` | 证书详情与指纹 |
+| 9 | SSL 证书格式转换 | `/ssl-format-converter` | PFX/JKS/PEM/PKCS8 转换 |
+| 10 | 中文域名转换 | `/idn-converter` | Unicode / Punycode 双向转换 |
+| 11 | CDN 检测 | `/cdn-check` | CDN 识别 |
+| 12 | HTTP 状态检测 | `/http-status` | 状态码与可用性 |
+| 13 | Web 服务可用性检测 | `/web-availability` | 可用性监控 |
+| 14 | 服务器延迟测试 | `/server-latency` | 延迟测试 |
+| 15 | API 可用性测试 | `/api-availability` | API 可用性 |
 
 #### 十、安全与诊断工具（10）
 

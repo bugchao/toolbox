@@ -1,0 +1,50 @@
+{
+  "title": "查看证书 CSR",
+  "description": "解析证书签名请求中的主体、SAN、签名算法和公钥信息，适合发证前核对。",
+  "fields": {
+    "content": "CSR 内容",
+    "help": "支持直接粘贴 PEM 文本，或上传 .csr / .pem 文件。"
+  },
+  "placeholders": {
+    "content": "粘贴 CSR 内容，例如 -----BEGIN CERTIFICATE REQUEST----- ..."
+  },
+  "actions": {
+    "upload": "上传 CSR",
+    "inspect": "开始解析",
+    "loading": "解析中...",
+    "clear": "清空"
+  },
+  "notes": {
+    "title": "适用场景",
+    "description": "提交给 CA 之前先确认 SAN、公钥位数和签名算法是否符合预期，能减少发错证书的返工。"
+  },
+  "summary": {
+    "verified": "签名校验",
+    "publicKeyAlgorithm": "公钥算法",
+    "publicKeyBits": "公钥位数",
+    "signatureAlgorithm": "签名算法"
+  },
+  "sections": {
+    "overview": "摘要",
+    "raw": "OpenSSL 解析文本"
+  },
+  "detail": {
+    "subject": "Subject",
+    "san": "Subject Alternative Name",
+    "keyUsage": "Key Usage",
+    "extendedKeyUsage": "Extended Key Usage"
+  },
+  "states": {
+    "valid": "通过",
+    "invalid": "未通过",
+    "empty": "暂无数据"
+  },
+  "empty": {
+    "title": "上传或粘贴 CSR 后开始解析",
+    "description": "右侧会给出发证前最常核对的字段，并保留完整 OpenSSL 输出。"
+  },
+  "errors": {
+    "title": "解析失败",
+    "requestFailed": "CSR 解析失败，请检查内容格式。"
+  }
+}

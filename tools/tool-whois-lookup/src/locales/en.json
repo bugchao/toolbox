@@ -1,0 +1,63 @@
+{
+  "title": "WHOIS Lookup",
+  "description": "Inspect registration details, lifecycle dates, name servers, and raw WHOIS text for a domain or IP.",
+  "fields": {
+    "query": "Domain or IP"
+  },
+  "placeholders": {
+    "query": "Try example.com, cloudflare.com, or 8.8.8.8"
+  },
+  "actions": {
+    "lookup": "Run lookup",
+    "loading": "Looking up..."
+  },
+  "notes": {
+    "title": "How it works",
+    "description": "This tool uses system WHOIS output so it is useful for registrar checks, expiration triage, and name server audits."
+  },
+  "examples": {
+    "title": "Quick examples"
+  },
+  "queryTypes": {
+    "domain": "Domain WHOIS",
+    "ip": "IP WHOIS"
+  },
+  "summary": {
+    "queryType": "Query type",
+    "source": "Source",
+    "nameserverCount": "Name servers",
+    "statusCount": "Status entries"
+  },
+  "sections": {
+    "parsed": "Parsed details",
+    "nameservers": "Name servers",
+    "statuses": "Statuses",
+    "raw": "Raw WHOIS text"
+  },
+  "domain": {
+    "registrar": "Registrar",
+    "registrant": "Registrant",
+    "country": "Country / region",
+    "creationDate": "Created at",
+    "updatedDate": "Updated at",
+    "expirationDate": "Expires at"
+  },
+  "ip": {
+    "organization": "Organization",
+    "country": "Country / region",
+    "cidr": "CIDR / Route",
+    "handle": "Handle",
+    "abuseEmail": "Abuse email"
+  },
+  "states": {
+    "empty": "No data yet"
+  },
+  "empty": {
+    "title": "Enter a domain or IP to get started",
+    "description": "The right side will summarize the key registration fields and keep the complete WHOIS text available."
+  },
+  "errors": {
+    "title": "Lookup failed",
+    "requestFailed": "WHOIS lookup failed. Please try again."
+  }
+}

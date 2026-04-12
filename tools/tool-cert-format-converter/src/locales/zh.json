@@ -1,0 +1,56 @@
+{
+  "title": "SSL 证书格式转换",
+  "description": "支持 PFX、JKS、PEM、PKCS8 之间的证书与私钥转换，并输出可下载结果。",
+  "fields": {
+    "sourceFormat": "输入格式",
+    "targetFormat": "输出格式",
+    "sourceFile": "源文件",
+    "sourceFileHelp": "PFX / JKS 建议直接上传文件，系统会按密码和别名进行转换。",
+    "bundleContent": "证书 / Bundle 内容",
+    "keyContent": "私钥内容（可选）",
+    "keyFileHelp": "支持上传 PEM / KEY / PKCS8 文本私钥文件，也可以直接粘贴内容。",
+    "sourcePassword": "源密码",
+    "targetPassword": "目标密码",
+    "alias": "Alias"
+  },
+  "placeholders": {
+    "bundleContent": "粘贴证书链或包含证书+私钥的 PEM 内容...",
+    "keyContent": "如果证书和私钥是分开的，可在这里单独粘贴私钥...",
+    "password": "留空则按原格式或默认方式处理"
+  },
+  "actions": {
+    "upload": "上传文件",
+    "convert": "开始转换",
+    "loading": "转换中...",
+    "clear": "清空",
+    "download": "下载"
+  },
+  "notes": {
+    "title": "转换说明",
+    "description": "JKS / PFX 转换通常要求源文件里包含私钥条目；如果只是 truststore，无法生成 PKCS8 或 PEM 私钥。"
+  },
+  "summary": {
+    "source": "输入格式",
+    "target": "输出格式",
+    "certificate": "包含证书",
+    "privateKey": "包含私钥"
+  },
+  "sections": {
+    "summary": "转换摘要",
+    "outputs": "输出文件"
+  },
+  "states": {
+    "yes": "是",
+    "no": "否",
+    "binaryReady": "这是二进制结果，已准备好下载。",
+    "selectedFile": "已选择文件：{{name}}"
+  },
+  "empty": {
+    "title": "选择输入和输出格式开始转换",
+    "description": "默认保留简单流程，证书链、私钥、密码和 alias 都按需要展开填写。"
+  },
+  "errors": {
+    "title": "转换失败",
+    "requestFailed": "证书格式转换失败，请检查密码、私钥和输入内容。"
+  }
+}

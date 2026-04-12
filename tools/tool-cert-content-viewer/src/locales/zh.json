@@ -1,0 +1,54 @@
+{
+  "title": "查看证书内容",
+  "description": "查看 X.509 证书的主题、颁发者、有效期、指纹、SAN 和 OpenSSL 详情。",
+  "fields": {
+    "content": "证书内容",
+    "help": "支持粘贴 PEM 文本，也支持上传 .crt / .cer / .pem / .der 文件。"
+  },
+  "placeholders": {
+    "content": "粘贴证书内容，例如 -----BEGIN CERTIFICATE----- ..."
+  },
+  "actions": {
+    "upload": "上传证书",
+    "inspect": "开始查看",
+    "loading": "解析中...",
+    "clear": "清空"
+  },
+  "notes": {
+    "title": "适用场景",
+    "description": "适合排查证书内容是否正确、证书链里拿到的是哪张证书，以及发版前核对有效期与 SAN。"
+  },
+  "summary": {
+    "fingerprint": "SHA256 指纹",
+    "algorithm": "公钥算法",
+    "keySize": "公钥位数",
+    "blocks": "证书块"
+  },
+  "sections": {
+    "overview": "摘要",
+    "raw": "OpenSSL 解析文本"
+  },
+  "detail": {
+    "subject": "Subject",
+    "issuer": "Issuer",
+    "serialNumber": "序列号",
+    "signatureAlgorithm": "签名算法",
+    "notBefore": "生效时间",
+    "notAfter": "过期时间",
+    "san": "Subject Alternative Name",
+    "keyUsage": "Key Usage",
+    "extendedKeyUsage": "Extended Key Usage",
+    "basicConstraints": "Basic Constraints"
+  },
+  "states": {
+    "empty": "暂无数据"
+  },
+  "empty": {
+    "title": "上传或粘贴证书后开始查看",
+    "description": "右侧会整理出最常核对的证书字段，并保留完整 OpenSSL 输出方便深入排查。"
+  },
+  "errors": {
+    "title": "解析失败",
+    "requestFailed": "证书解析失败，请检查内容格式。"
+  }
+}
