@@ -18,6 +18,23 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-04-10',
+    title: {
+      zh: 'SBTI 人格测试上线',
+      en: 'SBTI personality assessment released',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 SBTI 人格测试工具，扩展为 50 题正式提交流，提交后自动保存到本地历史记录。',
+          en: 'Added the SBTI personality assessment with a 50-question submit flow and automatic local history saving.',
+        },
+        paths: ['/sbti-personality'],
+      },
+    ],
+  },
+  {
     date: '2026-04-04',
     title: {
       zh: '更新日志页面上线',

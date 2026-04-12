@@ -1,0 +1,198 @@
+{
+  "title": "SBTI Personality Test",
+  "description": "Use 50 questions to map your social drive, boldness, thinking structure, and independent momentum. Results are generated on submit and saved locally.",
+  "loading": "Loading the assessment...",
+  "disclaimerTitle": "A quick note",
+  "disclaimer": "This is a lightweight self-reflection tool, not a clinical assessment. It is best used to understand how you work, communicate, and move decisions forward.",
+  "introTitle": "50 questions, 4 personality signals",
+  "intro": "Go with the answer that feels most natural, not the answer that sounds ideal. Results stay hidden until you complete and submit the full test.",
+  "durationHint": "Usually takes about 6–8 minutes",
+  "completion": "Completion",
+  "answered": "{{count}} / {{total}} answered",
+  "questionLabel": "Question {{index}}",
+  "reverseHint": "Reverse scored",
+  "reset": "Clear answers",
+  "submit": "Submit to view results",
+  "retake": "Start a new test",
+  "resultTitle": "Assessment result",
+  "blendTitle": "Signal blend",
+  "strengthsTitle": "Strengths and fit",
+  "growthTitle": "Watch-out:",
+  "historyTitle": "Local history",
+  "historyDescription": "Submitted results are automatically saved in localStorage so you can revisit them later.",
+  "clearHistory": "Clear",
+  "emptyHistory": "No saved result yet. Complete all 50 questions and submit to create one.",
+  "incompleteTitle": "Finish the remaining questions",
+  "incompleteDescription": "The test is not ready to submit yet. Complete every question for a full result.",
+  "readyTitle": "Ready to submit",
+  "readyDescription": "All questions are complete. Submit now to generate your profile and save it to local history.",
+  "savedTitle": "Saved automatically",
+  "savedDescription": "This result has been written to browser local storage, so you can reopen it later.",
+  "assessmentTitle": "Full assessment",
+  "assessmentHeadline": "Your profile appears after all 50 answers",
+  "assessmentDescription": "We keep the result hidden until the end so the earlier scores do not bias how you answer the remaining questions.",
+  "resultSummaryTitle": "Result summary",
+  "viewResult": "View",
+  "summary": {
+    "questionCount": "Question count",
+    "questionCountValue": "{{count}} questions",
+    "status": "Submit status",
+    "ready": "Ready",
+    "pending": "In progress",
+    "dominant": "Dominant signal",
+    "supporting": "Supporting signal",
+    "watch": "Watch signal"
+  },
+  "scaleLabels": [
+    "Not like me at all",
+    "Slightly unlike me",
+    "Neutral / unsure",
+    "Mostly like me",
+    "Very much like me"
+  ],
+  "dimensions": {
+    "s": {
+      "short": "S",
+      "name": "Social drive",
+      "description": "How much energy you gain from interaction, expression, and connection.",
+      "highLabel": "Expressive and outward",
+      "lowLabel": "Quiet and restorative"
+    },
+    "b": {
+      "short": "B",
+      "name": "Bold action",
+      "description": "Whether you naturally move first or hold for more certainty.",
+      "highLabel": "Moves early",
+      "lowLabel": "Waits and watches"
+    },
+    "t": {
+      "short": "T",
+      "name": "Thinking structure",
+      "description": "How strongly you rely on logic, frameworks, and evidence.",
+      "highLabel": "Structured and clear",
+      "lowLabel": "Intuitive and fluid"
+    },
+    "i": {
+      "short": "I",
+      "name": "Independent drive",
+      "description": "How well you self-start and hold momentum without outside structure.",
+      "highLabel": "Self-directed",
+      "lowLabel": "Needs external rhythm"
+    }
+  },
+  "questions": [
+    { "id": "q1", "axis": "s", "prompt": "In unfamiliar settings, I am usually willing to start the conversation first.", "hint": "Think first meetings, workshops, or new collaborations." },
+    { "id": "q2", "axis": "s", "prompt": "In group discussions, I tend to voice ideas early instead of polishing them privately for a long time.", "hint": "Notice your natural speaking rhythm." },
+    { "id": "q3", "axis": "s", "prompt": "If I spend too much time alone, my energy noticeably drops.", "hint": "Do interactions help you recharge?" },
+    { "id": "q4", "axis": "s", "prompt": "After meetings, I often remember shifts in attitude and tone, not just the outcome.", "hint": "How strongly do you track emotional and relational signals?" },
+    { "id": "q5", "axis": "s", "prompt": "I like to feel people out through conversation before jumping straight into tasks.", "hint": "Do you naturally create connection before execution?" },
+    { "id": "q6", "axis": "s", "prompt": "When a room feels quiet or awkward, I naturally want to warm it up.", "hint": "For example by asking questions, bridging topics, or adding energy." },
+    { "id": "q7", "axis": "s", "prompt": "When conflict happens, I care first about whether the relationship still feels okay.", "hint": "Do you protect connection before pushing the point?" },
+    { "id": "q8", "axis": "s", "prompt": "When I need long stretches of solo work, I usually feel more comfortable than I do in constant collaboration.", "hint": "A higher score means solo time feels easier for you.", "reverse": true },
+    { "id": "q9", "axis": "s", "prompt": "I am happy to bring unfinished ideas into conversation instead of waiting for them to be complete.", "hint": "Do you use conversation to shape your thinking?" },
+    { "id": "q10", "axis": "s", "prompt": "After dense social interaction, I usually need a long time to feel quiet again.", "hint": "A higher score means social energy drains you faster.", "reverse": true },
+    { "id": "q11", "axis": "s", "prompt": "With strangers, I can usually find common ground fairly quickly.", "hint": "Notice how fast you build a bridge." },
+    { "id": "q12", "axis": "s", "prompt": "I prefer thinking out loud with people more than thinking everything through before I speak.", "hint": "Is expression itself part of your thinking process?" },
+    { "id": "q13", "axis": "s", "prompt": "If a whole day passes with very little human interaction, I usually do not mind much.", "hint": "A higher score means you need less social stimulation.", "reverse": true },
+
+    { "id": "q14", "axis": "b", "prompt": "When a task is still fuzzy, I usually make a first pass and learn from that.", "hint": "Do you move through uncertainty by testing?" },
+    { "id": "q15", "axis": "b", "prompt": "Under time pressure, I would rather ship an 80% version and improve it than wait for perfect confidence.", "hint": "Notice your tolerance for iteration." },
+    { "id": "q16", "axis": "b", "prompt": "I often wait to see how others approach something before deciding whether to act.", "hint": "A higher score means you prefer to observe first.", "reverse": true },
+    { "id": "q17", "axis": "b", "prompt": "When there is no clear precedent, I am still comfortable being the first to try.", "hint": "Especially when others are unsure." },
+    { "id": "q18", "axis": "b", "prompt": "I can accept acting first and correcting later instead of needing certainty from the start.", "hint": "How much do you trust calibration through motion?" },
+    { "id": "q19", "axis": "b", "prompt": "If the downside is manageable, I usually start fairly quickly.", "hint": "What counts as 'safe enough' for you?" },
+    { "id": "q20", "axis": "b", "prompt": "Even without a clear process, I will often push things one step forward.", "hint": "Do you create momentum for yourself?" },
+    { "id": "q21", "axis": "b", "prompt": "I often delay starting because I am worried about making mistakes.", "hint": "A higher score means caution slows you down more often.", "reverse": true },
+    { "id": "q22", "axis": "b", "prompt": "Once the direction is mostly clear, I do not need every detail before moving.", "hint": "How much missing information can you tolerate?" },
+    { "id": "q23", "axis": "b", "prompt": "I would rather learn from fast feedback than spend a long time predicting everything upfront.", "hint": "Do you trust short loops more than long forecasts?" },
+    { "id": "q24", "axis": "b", "prompt": "Once I decide to move, I can usually enter execution mode very quickly.", "hint": "Is there much lag between decision and motion?" },
+    { "id": "q25", "axis": "b", "prompt": "With new tools or methods, I usually want to try them directly instead of watching first.", "hint": "Notice whether novelty pulls you into exploration or caution." },
+    { "id": "q26", "axis": "b", "prompt": "Before important work, I want every likely risk rehearsed before I begin.", "hint": "A higher score means you lean heavily toward preparation before action.", "reverse": true },
+
+    { "id": "q27", "axis": "t", "prompt": "Before deciding, I usually break the problem into smaller judgment points.", "hint": "Criteria, variables, trade-offs, and priorities." },
+    { "id": "q28", "axis": "t", "prompt": "With complex information, I prefer to build a framework first and then add details.", "hint": "Do you naturally create structure?" },
+    { "id": "q29", "axis": "t", "prompt": "In discussions, I care whether everyone is using the same definitions.", "hint": "Do you naturally align boundaries and meaning?" },
+    { "id": "q30", "axis": "t", "prompt": "If an idea sounds right but the logic chain feels incomplete, I do not fully trust it.", "hint": "How much do you need a clean reasoning loop?" },
+    { "id": "q31", "axis": "t", "prompt": "I like turning experience into reusable methods instead of only remembering the outcome.", "hint": "Do you naturally build models from examples?" },
+    { "id": "q32", "axis": "t", "prompt": "When people give advice, I first want to know the basis behind it.", "hint": "Evidence, pattern, experience, or guess?" },
+    { "id": "q33", "axis": "t", "prompt": "I often judge by feel and do not really want to map the logic in detail.", "hint": "A higher score means intuition leads more than structure.", "reverse": true },
+    { "id": "q34", "axis": "t", "prompt": "When tackling work, I prefer to define the success standard before deciding how to start.", "hint": "What counts as done, good, urgent, or sufficient?" },
+    { "id": "q35", "axis": "t", "prompt": "I naturally separate facts, guesses, and conclusions.", "hint": "Do you mentally layer information?" },
+    { "id": "q36", "axis": "t", "prompt": "In retrospectives, I look for system causes more than emotional snapshots.", "hint": "Do you place issues back into structure?" },
+    { "id": "q37", "axis": "t", "prompt": "When there is too much information, I tend to sketch a map, list, or structure for myself.", "hint": "Do you need visible organization to think clearly?" },
+    { "id": "q38", "axis": "t", "prompt": "I think 'close enough' is usually more useful than trying to define things precisely.", "hint": "A higher score means precision matters less to you.", "reverse": true },
+
+    { "id": "q39", "axis": "i", "prompt": "Even without reminders, I can keep a plan moving forward.", "hint": "Think about unsupervised work." },
+    { "id": "q40", "axis": "i", "prompt": "On important choices, I prefer to form my own first draft of judgment before inviting outside opinions.", "hint": "Not ignoring feedback, just building your own base first." },
+    { "id": "q41", "axis": "i", "prompt": "When nobody assigns the task, I will still set my own pace and next step.", "hint": "Can you create structure out of blank space?" },
+    { "id": "q42", "axis": "i", "prompt": "In long projects, I usually do not need much external supervision.", "hint": "Can internal momentum carry you?" },
+    { "id": "q43", "axis": "i", "prompt": "If feedback is delayed, I can still keep working instead of stalling.", "hint": "How dependent are you on outside response?" },
+    { "id": "q44", "axis": "i", "prompt": "On key decisions, I can rely too heavily on other people's confirmation.", "hint": "A higher score means outside validation matters more.", "reverse": true },
+    { "id": "q45", "axis": "i", "prompt": "I am better at exploring a path myself first and then bringing others in.", "hint": "Do you naturally build the first route on your own?" },
+    { "id": "q46", "axis": "i", "prompt": "When the rules are unclear, I usually wait for someone else to define the direction first.", "hint": "A higher score means you lean more on external framing.", "reverse": true },
+    { "id": "q47", "axis": "i", "prompt": "I can prioritize work for myself instead of always waiting for outside ranking.", "hint": "Do you have a stable inner sorting system?" },
+    { "id": "q48", "axis": "i", "prompt": "When working independently, I usually enter focus more easily.", "hint": "Notice how your attention behaves in solo mode." },
+    { "id": "q49", "axis": "i", "prompt": "Even if the team rhythm is messy, I can usually protect my own momentum.", "hint": "How much does outside disorder shake your progress?" },
+    { "id": "q50", "axis": "i", "prompt": "When I hit resistance, I usually need other people to keep pushing me so I stay in motion.", "hint": "A higher score means you depend more on external drive.", "reverse": true }
+  ],
+  "archetypes": {
+    "s": {
+      "title": "Atmosphere Connector",
+      "description": "You naturally shape momentum through conversation, tone, and human connection. You are often the person who turns a room into a working team.",
+      "strengths": [
+        "Starts conversations and builds trust quickly",
+        "Reads shifts in group energy well",
+        "Strong fit for alignment, coordination, and relationship-heavy roles"
+      ],
+      "caution": "Make sure speed of response does not replace depth of thought. Leave yourself enough room to process before committing.",
+      "environment": "Great fit for kickoffs, cross-functional syncs, community work, client conversations, and collaborative launches."
+    },
+    "b": {
+      "title": "Momentum Driver",
+      "description": "You carry natural forward motion. When conditions are messy, you are still able to create the next step and get things unstuck.",
+      "strengths": [
+        "Moves under uncertainty without freezing",
+        "Turns ideas into action quickly",
+        "Strong fit for pilots, launches, and fast-moving execution work"
+      ],
+      "caution": "Keep some space for others to process the direction, so the team is not only following pace but actually aligned.",
+      "environment": "Best in experiments, growth work, high-pressure sprints, new initiatives, and recovery situations."
+    },
+    "t": {
+      "title": "Systems Thinker",
+      "description": "You naturally look for structure, evidence, and patterns. You are often strongest when a fuzzy situation needs a clear model.",
+      "strengths": [
+        "Keeps clarity under complexity",
+        "Builds frameworks and decision logic well",
+        "Strong fit for diagnosis, planning, design, and strategic review"
+      ],
+      "caution": "Do not let the desire for a perfect model delay momentum. Small experiments can sharpen your thinking, not weaken it.",
+      "environment": "Best in planning, retrospectives, system design, product reasoning, and ambiguous problem-solving."
+    },
+    "i": {
+      "title": "Independent Builder",
+      "description": "You trust your own rhythm and can carry motion without much outside pressure. Self-directed progress is one of your core strengths.",
+      "strengths": [
+        "Keeps moving without supervision",
+        "Builds personal paths in ambiguous situations",
+        "Strong fit for research, solo ownership, and early exploration"
+      ],
+      "caution": "Independent does not mean isolated. Add intentional checkpoints so your path stays sharp and does not narrow too early.",
+      "environment": "Best in exploration, long-form work, independent projects, and contexts where you must set the rhythm yourself."
+    }
+  },
+  "blends": {
+    "sb": "You can energize people and move them into action. Strong fit for early-stage leadership and kickoff moments.",
+    "st": "You translate complex thinking into human language. Strong fit for alignment, teaching, and shared understanding.",
+    "si": "You build trust and hold steady motion. Strong fit for long-term relationship work and supportive leadership.",
+    "bs": "You tend to pull teams out of hesitation and into movement. Strong fit for execution under pressure.",
+    "bt": "You balance action with judgment, which makes you strong in high-stakes execution and decision-heavy work.",
+    "bi": "You have a natural starter engine. Strong fit for building from zero or taking ownership quickly.",
+    "ts": "You bring structure into communication. Strong fit for explanation, planning reviews, and converting logic into alignment.",
+    "tb": "You design the frame and then push it into reality. Strong fit for steering direction and execution together.",
+    "ti": "You are a classic quiet strategist. Strong fit for depth, design, and independent complex problem-solving.",
+    "is": "You combine self-direction with relational steadiness. Strong fit for calm leadership and guided ownership.",
+    "ib": "You bring both self-starting energy and forward momentum. Strong fit for high-autonomy, high-accountability work.",
+    "it": "You solve deeply and steadily. Strong fit for thoughtful execution where clarity matters more than noise."
+  }
+}
