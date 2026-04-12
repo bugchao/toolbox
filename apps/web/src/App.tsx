@@ -81,6 +81,8 @@ const WaterReminder = lazy(() => import('@toolbox/tool-water-reminder'))
 const RunningTracker = lazy(() => import('@toolbox/tool-running-tracker'))
 const SedentaryReminder = lazy(() => import('@toolbox/tool-sedentary-reminder'))
 const HttpDebugger = lazy(() => import('@toolbox/tool-http-debugger'))
+const AiTokenCost = lazy(() => import('@toolbox/tool-ai-token-cost'))
+const ProxySpeedTest = lazy(() => import('@toolbox/tool-proxy-speed-test'))
 const TravelCostEstimate = lazy(() => import('@toolbox/tool-travel-cost-estimate'))
 const MultiCityRoute = lazy(() => import('@toolbox/tool-multi-city-route'))
 const VisaInfo = lazy(() => import('@toolbox/tool-visa-info'))
@@ -561,6 +563,8 @@ function App() {
           <Route path="/running-tracker" element={<RunningTracker />} />
           <Route path="/sedentary-reminder" element={<SedentaryReminder />} />
           <Route path="/http-debugger" element={<HttpDebugger />} />
+          <Route path="/ai-token-cost" element={<AiTokenCost />} />
+          <Route path="/proxy-speed-test" element={<ProxySpeedTest />} />
           <Route path="/travel-cost-estimate" element={<TravelCostEstimate />} />
           <Route path="/multi-city-route" element={<MultiCityRoute />} />
           <Route path="/visa-info" element={<VisaInfo />} />

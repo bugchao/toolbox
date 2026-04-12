@@ -151,7 +151,9 @@
       "image_rotator": "Image Rotator",
       "image_filter": "Image Filter",
       "image_stitcher": "Image Stitcher",
-      "image_watermark_remover": "Image Watermark Remover"
+      "image_watermark_remover": "Image Watermark Remover",
+      "ai_token_cost": "AI Token Cost Estimator",
+      "proxy_speed_test": "Proxy Speed Test"
     },
     "category_dns": "DNS Tools",
     "category_domain": "Domain Tools",
@@ -277,7 +279,9 @@
       "text_cipher": "Encrypt, decrypt, and transform text for testing and demonstration scenarios",
       "text_stats": "Count words, characters, lines, and reading time for content analysis",
       "github_repo": "Inspect repository metadata, activity, and key GitHub signals",
-      "github_user": "Inspect GitHub profile data and public contribution signals"
+      "github_user": "Inspect GitHub profile data and public contribution signals",
+      "ai_token_cost": "Estimate LLM usage cost from per-model token pricing with multi-model comparison",
+      "proxy_speed_test": "Batch-test HTTP/HTTPS/SOCKS5 proxies for latency and throughput"
     }
   },
   "colorPicker": {

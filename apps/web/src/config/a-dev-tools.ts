@@ -6,7 +6,7 @@ import {
   Code, FileJson, Braces, CalendarClock, ExternalLink, Shuffle, Calendar,
   LockKeyhole, Binary, Terminal, Dices, SplitSquareHorizontal, RefreshCw,
   FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GitGraph,
-  Send, Calculator, AlignLeft, Lock, Hash
+  Send,   Calculator, AlignLeft, Lock, Hash, Coins
 } from 'lucide-react'
 
 export const DEV_TOOLS: ToolEntry[] = [
@@ -47,4 +47,5 @@ export const DEV_TOOLS: ToolEntry[] = [
   { path: '/base-converter', nameKey: 'tools.base_converter', icon: Hash, categoryKey: 'dev', keywords: ['进制', '二进制', '十六进制', 'base'], i18nNamespace: 'toolBaseConverter' },
   { path: '/project-scaffold', nameKey: 'tools.project_scaffold', icon: FileCode, categoryKey: 'dev', keywords: ['项目结构', '脚手架', 'scaffold', '目录树'], i18nNamespace: 'toolProjectScaffold' },
   { path: '/http-debugger', nameKey: 'tools.http_debugger', icon: Wand2, categoryKey: 'dev', keywords: ['HTTP', 'API', '调试', 'request'], i18nNamespace: 'toolHttpDebugger' },
+  { path: '/ai-token-cost', nameKey: 'tools.ai_token_cost', icon: Coins, categoryKey: 'dev', keywords: ['token', 'LLM', '定价', '成本', 'OpenAI'] },
 ]
