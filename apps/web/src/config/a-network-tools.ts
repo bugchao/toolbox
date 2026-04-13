@@ -15,7 +15,7 @@ import {
   MailCheck, Key, MailWarning, Hourglass, Signpost, Telescope, Asterisk,
   HeartPulse, MapPin, MapPinned, LocateFixed, Repeat2, Tag, Locate,
   CircleOff, Settings, FileChartColumn, LayoutGrid, Package, PieChart,
-  Boxes, OctagonX, TriangleAlert, FileWarning, Trophy
+  Boxes, OctagonX, TriangleAlert, FileWarning, Trophy, Zap
 } from 'lucide-react'
 
 export const NETWORK_TOOLS: ToolEntry[] = [
@@ -78,6 +78,7 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/web-availability', nameKey: 'tools.web_availability', icon: MonitorCheck, categoryKey: 'network', keywords: ['http', '可用性', '监控', '状态'], i18nNamespace: 'toolWebAvailability', mode: 'server' },
   { path: '/api-availability', nameKey: 'tools.api_availability', icon: Plug, categoryKey: 'network', keywords: ['api', '可用性', '健康检查', 'http'], i18nNamespace: 'toolApiAvailability', mode: 'server' },
   { path: '/cdn-check', nameKey: 'tools.cdn_check', icon: Cloud, categoryKey: 'network', keywords: ['cdn', '检测', 'cloudflare', '阿里云'], i18nNamespace: 'toolCdnCheck', mode: 'server' },
+  { path: '/proxy-speed-test', nameKey: 'tools.proxy_speed_test', icon: Zap, categoryKey: 'network', keywords: ['proxy', '代理', '速度', '测试', 'latency'], i18nNamespace: 'toolProxySpeedTest' },
 
   // DHCP 工具（12 个）
   { path: '/dhcp-pool-calc', nameKey: 'tools.dhcp_pool_calc', icon: Database, categoryKey: 'ipam', keywords: ['dhcp', '地址池', '计算', 'ip'], i18nNamespace: 'toolDhcpPoolCalc' },
