@@ -45,17 +45,13 @@ import MeetingMinutes from './pages/MeetingMinutes'
 import UIGenerator from './pages/UIGenerator'
 const VocabTrainer = lazy(() => import('@toolbox/tool-vocab-trainer'))
 const MistakeBook = lazy(() => import('@toolbox/tool-mistake-book'))
-const DailyPlanner = lazy(() => import('@toolbox/tool-daily-planner'))
 const FridgeInventory = lazy(() => import('@toolbox/tool-fridge-inventory'))
 const ExpiryReminder = lazy(() => import('@toolbox/tool-expiry-reminder'))
 const FamilyTasks = lazy(() => import('@toolbox/tool-family-tasks'))
-const BarcodeReader = lazy(() => import('@toolbox/tool-barcode-reader'))
 const QuizGen = lazy(() => import('@toolbox/tool-quiz-gen'))
-const TripPlanner = lazy(() => import('@toolbox/tool-trip-planner'))
 const DayTrip = lazy(() => import('@toolbox/tool-day-trip'))
 const SpacedRepetition = lazy(() => import('@toolbox/tool-spaced-repetition'))
 const TravelTranslator = lazy(() => import('@toolbox/tool-travel-translator'))
-const ProjectScaffold = lazy(() => import('@toolbox/tool-project-scaffold'))
 const KnowledgeCompare = lazy(() => import('@toolbox/tool-knowledge-compare'))
 const LoanCalc = lazy(() => import('@toolbox/tool-loan-calc'))
 const IdCardParser = lazy(() => import('@toolbox/tool-id-card-parser'))
@@ -73,14 +69,8 @@ const BaseConverter = lazy(() => import('@toolbox/tool-base-converter'))
 const RapidTables = lazy(() => import('@toolbox/tool-rapid-tables'))
 const WordCount = lazy(() => import('@toolbox/tool-word-count'))
 const PomodoroPro = lazy(() => import('@toolbox/tool-pomodoro-pro'))
-const TimeLogger = lazy(() => import('@toolbox/tool-time-logger'))
 const AnalogClock = lazy(() => import('@toolbox/tool-analog-clock'))
 const InvestmentSim = lazy(() => import('@toolbox/tool-investment-sim'))
-const SleepTracker = lazy(() => import('@toolbox/tool-sleep-tracker'))
-const WaterReminder = lazy(() => import('@toolbox/tool-water-reminder'))
-const RunningTracker = lazy(() => import('@toolbox/tool-running-tracker'))
-const SedentaryReminder = lazy(() => import('@toolbox/tool-sedentary-reminder'))
-const HttpDebugger = lazy(() => import('@toolbox/tool-http-debugger'))
 const AiTokenCost = lazy(() => import('@toolbox/tool-ai-token-cost'))
 const ProxySpeedTest = lazy(() => import('@toolbox/tool-proxy-speed-test'))
 const TravelCostEstimate = lazy(() => import('@toolbox/tool-travel-cost-estimate'))
@@ -221,13 +211,8 @@ const DhcpScan = lazy(() => import('@toolbox/tool-dhcp-scan').then((m) => ({ def
 const IpamChangelog = lazy(() => import('@toolbox/tool-ipam-changelog').then((m) => ({ default: m.default })))
 const IpamScan = lazy(() => import('@toolbox/tool-ipam-scan').then((m) => ({ default: m.default })))
 const Pomodoro = lazy(() => import('@toolbox/tool-pomodoro').then((m) => ({ default: m.default })))
-const SalaryCalc = lazy(() => import('@toolbox/tool-salary-calc').then((m) => ({ default: m.default })))
-const CurrencyConverter = lazy(() => import('@toolbox/tool-currency-converter').then((m) => ({ default: m.default })))
-const JwtDecoder = lazy(() => import('@toolbox/tool-jwt-decoder').then((m) => ({ default: m.default })))
 const ExpenseTracker = lazy(() => import('@toolbox/tool-expense-tracker').then((m) => ({ default: m.default })))
 const SubscriptionManager = lazy(() => import('@toolbox/tool-subscription-manager').then((m) => ({ default: m.default })))
-const CalorieCalc = lazy(() => import('@toolbox/tool-calorie-calc').then((m) => ({ default: m.default })))
-const RandomMenu = lazy(() => import('@toolbox/tool-random-menu').then((m) => ({ default: m.default })))
 const CurlToFetch = lazy(() => import('@toolbox/tool-curl-to-fetch').then((m) => ({ default: m.default })))
 const InstallmentCalc = lazy(() => import('@toolbox/tool-installment-calc').then((m) => ({ default: m.default })))
 const OkrPlanner = lazy(() => import('@toolbox/tool-okr-planner').then((m) => ({ default: m.default })))
@@ -455,13 +440,8 @@ function App() {
           <Route path="/ipam-scan" element={<IpamScan />} />
           <Route path="/pomodoro" element={<Pomodoro />} />
           <Route path="/habit-tracker" element={<HabitTracker />} />
-          <Route path="/salary-calc" element={<SalaryCalc />} />
-          <Route path="/currency-converter" element={<CurrencyConverter />} />
-          <Route path="/jwt-decoder" element={<JwtDecoder />} />
           <Route path="/expense-tracker" element={<ExpenseTracker />} />
           <Route path="/subscription-manager" element={<SubscriptionManager />} />
-          <Route path="/calorie-calc" element={<CalorieCalc />} />
-          <Route path="/random-menu" element={<RandomMenu />} />
           <Route path="/curl-to-fetch" element={<CurlToFetch />} />
           <Route path="/installment-calc" element={<InstallmentCalc />} />
           <Route path="/okr-planner" element={<OkrPlanner />} />
@@ -529,17 +509,13 @@ function App() {
           <Route path="/ppt-generator" element={<PptGenerator />} />
           <Route path="/vocab-trainer" element={<VocabTrainer />} />
           <Route path="/mistake-book" element={<MistakeBook />} />
-          <Route path="/daily-planner" element={<DailyPlanner />} />
           <Route path="/fridge-inventory" element={<FridgeInventory />} />
           <Route path="/expiry-reminder" element={<ExpiryReminder />} />
           <Route path="/family-tasks" element={<FamilyTasks />} />
-          <Route path="/barcode-reader" element={<BarcodeReader />} />
           <Route path="/quiz-gen" element={<QuizGen />} />
-          <Route path="/trip-planner" element={<TripPlanner />} />
           <Route path="/day-trip" element={<DayTrip />} />
           <Route path="/spaced-repetition" element={<SpacedRepetition />} />
           <Route path="/travel-translator" element={<TravelTranslator />} />
-          <Route path="/project-scaffold" element={<ProjectScaffold />} />
           <Route path="/knowledge-compare" element={<KnowledgeCompare />} />
           <Route path="/loan-calc" element={<LoanCalc />} />
           <Route path="/id-card-parser" element={<IdCardParser />} />
@@ -556,13 +532,7 @@ function App() {
           <Route path="/base-converter" element={<BaseConverter />} />
           <Route path="/word-count" element={<WordCount />} />
           <Route path="/pomodoro-pro" element={<PomodoroPro />} />
-          <Route path="/time-logger" element={<TimeLogger />} />
           <Route path="/investment-sim" element={<InvestmentSim />} />
-          <Route path="/sleep-tracker" element={<SleepTracker />} />
-          <Route path="/water-reminder" element={<WaterReminder />} />
-          <Route path="/running-tracker" element={<RunningTracker />} />
-          <Route path="/sedentary-reminder" element={<SedentaryReminder />} />
-          <Route path="/http-debugger" element={<HttpDebugger />} />
           <Route path="/ai-token-cost" element={<AiTokenCost />} />
           <Route path="/proxy-speed-test" element={<ProxySpeedTest />} />
           <Route path="/travel-cost-estimate" element={<TravelCostEstimate />} />

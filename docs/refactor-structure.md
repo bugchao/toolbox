@@ -20,6 +20,7 @@ pnpm dev
 | `pnpm dev:full` | 同时启动前端和网关 |
 | `pnpm build` | 构建前端 |
 | `pnpm build:backend` | 构建 `api-gateway` |
+| `pnpm check:consistency` | 校验路由、导航配置、manifest 与 `TOOLS_ROADMAP` 是否一致 |
 | `pnpm test` | 前端单测 |
 | `pnpm test:e2e` | E2E 测试 |
 

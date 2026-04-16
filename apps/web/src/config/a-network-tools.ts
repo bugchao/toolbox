@@ -74,7 +74,6 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/ping', nameKey: 'tools.ping', icon: Radar, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing', mode: 'server' },
   { path: '/traceroute', nameKey: 'tools.traceroute', icon: GitFork, categoryKey: 'network', keywords: ['traceroute', '路由', '追踪', '网络'], i18nNamespace: 'toolTraceroute', mode: 'server' },
   { path: '/server-latency', nameKey: 'tools.server_latency', icon: Timer, categoryKey: 'network', keywords: ['延迟', '测速', '服务器', 'ping'], i18nNamespace: 'toolServerLatency', mode: 'server' },
-  { path: '/proxy-speed-test', nameKey: 'tools.proxy_speed_test', icon: Gauge, categoryKey: 'network', keywords: ['代理', 'proxy', '测速', 'socks5', 'http'] },
   { path: '/web-availability', nameKey: 'tools.web_availability', icon: MonitorCheck, categoryKey: 'network', keywords: ['http', '可用性', '监控', '状态'], i18nNamespace: 'toolWebAvailability', mode: 'server' },
   { path: '/api-availability', nameKey: 'tools.api_availability', icon: Plug, categoryKey: 'network', keywords: ['api', '可用性', '健康检查', 'http'], i18nNamespace: 'toolApiAvailability', mode: 'server' },
   { path: '/cdn-check', nameKey: 'tools.cdn_check', icon: Cloud, categoryKey: 'network', keywords: ['cdn', '检测', 'cloudflare', '阿里云'], i18nNamespace: 'toolCdnCheck', mode: 'server' },

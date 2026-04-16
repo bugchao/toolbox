@@ -152,6 +152,7 @@
       "image_filter": "Image Filter",
       "image_stitcher": "Image Stitcher",
       "image_watermark_remover": "Image Watermark Remover",
+      "timezone_converter": "Timezone Converter",
       "ai_token_cost": "AI Token Cost Estimator",
       "proxy_speed_test": "Proxy Speed Test"
     },
@@ -280,6 +281,7 @@
       "text_stats": "Count words, characters, lines, and reading time for content analysis",
       "github_repo": "Inspect repository metadata, activity, and key GitHub signals",
       "github_user": "Inspect GitHub profile data and public contribution signals",
+      "timezone_converter": "Compare current times across cities and convert a meeting time into each selected timezone",
       "ai_token_cost": "Estimate LLM usage cost from per-model token pricing with multi-model comparison",
       "proxy_speed_test": "Batch-test HTTP/HTTPS/SOCKS5 proxies for latency and throughput"
     }
@@ -314,6 +316,33 @@
     "exportScss": "SCSS Variables",
     "exportTailwind": "Tailwind Config",
     "exportJson": "JSON"
+  },
+  "toolTimezoneConverter": {
+    "title": "Timezone Converter",
+    "description": "Compare current times across cities and convert a meeting time into each selected timezone.",
+    "currentTimeTitle": "Current Time Comparison",
+    "currentTimeDescription": "See multiple cities at once and spot the best collaboration window quickly.",
+    "meetingTitle": "Meeting Time Converter",
+    "meetingDescription": "Enter a meeting time in your local timezone and convert it across all selected zones.",
+    "meetingLabel": "Enter meeting time (your local timezone)",
+    "meetingResults": "Meeting time across selected timezones",
+    "meetingPlaceholder": "Choose a meeting time and the converted times will appear here automatically.",
+    "addTimezone": "Add timezone",
+    "compareLimit": "You can compare up to 5 timezones at once.",
+    "invalidTimezone": "Invalid timezone",
+    "removeTimezone": "Remove timezone",
+    "footerNote": "Useful for cross-timezone meetings, remote collaboration, and travel planning.",
+    "timezoneOptions": {
+      "utc": "UTC (Coordinated Universal Time)",
+      "newYork": "New York (EST/EDT)",
+      "losAngeles": "Los Angeles (PST/PDT)",
+      "london": "London (GMT/BST)",
+      "paris": "Paris (CET/CEST)",
+      "tokyo": "Tokyo (JST)",
+      "shanghai": "Shanghai (CST)",
+      "singapore": "Singapore (SGT)",
+      "sydney": "Sydney (AEST/AEDT)"
+    }
   },
   "footer": {
     "copyright": "© 2026 Bug Tide · Always updating"

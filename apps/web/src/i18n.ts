@@ -180,8 +180,6 @@ import toolVocabTrainerZh from '@toolbox/tool-vocab-trainer/locales/zh-CN.json'
 import toolVocabTrainerEn from '@toolbox/tool-vocab-trainer/locales/en-US.json'
 import toolMistakeBookZh from '@toolbox/tool-mistake-book/locales/zh-CN.json'
 import toolMistakeBookEn from '@toolbox/tool-mistake-book/locales/en-US.json'
-import toolDailyPlannerZh from '@toolbox/tool-daily-planner/locales/zh-CN.json'
-import toolDailyPlannerEn from '@toolbox/tool-daily-planner/locales/en-US.json'
 import toolFridgeInventoryZh from '@toolbox/tool-fridge-inventory/locales/zh-CN.json'
 import toolFridgeInventoryEn from '@toolbox/tool-fridge-inventory/locales/en-US.json'
 import toolExpiryReminderZh from '@toolbox/tool-expiry-reminder/locales/zh-CN.json'
@@ -200,8 +198,6 @@ import toolSpacedRepetitionZh from '@toolbox/tool-spaced-repetition/locales/zh-C
 import toolSpacedRepetitionEn from '@toolbox/tool-spaced-repetition/locales/en-US.json'
 import toolTravelTranslatorZh from '@toolbox/tool-travel-translator/locales/zh-CN.json'
 import toolTravelTranslatorEn from '@toolbox/tool-travel-translator/locales/en-US.json'
-import toolProjectScaffoldZh from '@toolbox/tool-project-scaffold/locales/zh-CN.json'
-import toolProjectScaffoldEn from '@toolbox/tool-project-scaffold/locales/en-US.json'
 import toolKnowledgeCompareZh from '@toolbox/tool-knowledge-compare/locales/zh-CN.json'
 import toolKnowledgeCompareEn from '@toolbox/tool-knowledge-compare/locales/en-US.json'
 import toolLoanCalcZh from '@toolbox/tool-loan-calc/locales/zh-CN.json'
@@ -306,6 +302,7 @@ export const resources = {
     changelogPage: zh.changelogPage,
     home: zh.home,
     colorPicker: zh.colorPicker,
+    toolTimezoneConverter: zh.toolTimezoneConverter,
     toolJson: toolJsonZh as Record<string, string>,
     toolGithubInfo: toolGithubInfoZh as unknown as Record<string, string>,
     toolIpQuery: toolIpQueryZh as Record<string, string>,
@@ -396,7 +393,6 @@ export const resources = {
     toolFocusMode: toolFocusModeZh as unknown as Record<string, string>,
     toolVocabTrainer: toolVocabTrainerZh as Record<string, string>,
     toolMistakeBook: toolMistakeBookZh as Record<string, string>,
-    toolDailyPlanner: toolDailyPlannerZh as Record<string, string>,
     toolFridgeInventory: toolFridgeInventoryZh as Record<string, string>,
     toolExpiryReminder: toolExpiryReminderZh as Record<string, string>,
     toolFamilyTasks: toolFamilyTasksZh as Record<string, string>,
@@ -406,7 +402,6 @@ export const resources = {
     toolDayTrip: toolDayTripZh as Record<string, string>,
     toolSpacedRepetition: toolSpacedRepetitionZh as Record<string, string>,
     toolTravelTranslator: toolTravelTranslatorZh as Record<string, string>,
-    toolProjectScaffold: toolProjectScaffoldZh as Record<string, string>,
     toolKnowledgeCompare: toolKnowledgeCompareZh as Record<string, string>,
     toolLoanCalc: toolLoanCalcZh as Record<string, string>,
     toolIdCardParser: toolIdCardParserZh as Record<string, string>,
@@ -460,6 +455,7 @@ export const resources = {
     changelogPage: en.changelogPage,
     home: en.home,
     colorPicker: en.colorPicker,
+    toolTimezoneConverter: en.toolTimezoneConverter,
     toolJson: toolJsonEn as Record<string, string>,
     toolGithubInfo: toolGithubInfoEn as unknown as Record<string, string>,
     toolIpQuery: toolIpQueryEn as Record<string, string>,
@@ -550,7 +546,6 @@ export const resources = {
     toolFocusMode: toolFocusModeEn as unknown as Record<string, string>,
     toolVocabTrainer: toolVocabTrainerEn as Record<string, string>,
     toolMistakeBook: toolMistakeBookEn as Record<string, string>,
-    toolDailyPlanner: toolDailyPlannerEn as Record<string, string>,
     toolFridgeInventory: toolFridgeInventoryEn as Record<string, string>,
     toolExpiryReminder: toolExpiryReminderEn as Record<string, string>,
     toolFamilyTasks: toolFamilyTasksEn as Record<string, string>,
@@ -560,7 +555,6 @@ export const resources = {
     toolDayTrip: toolDayTripEn as Record<string, string>,
     toolSpacedRepetition: toolSpacedRepetitionEn as Record<string, string>,
     toolTravelTranslator: toolTravelTranslatorEn as Record<string, string>,
-    toolProjectScaffold: toolProjectScaffoldEn as Record<string, string>,
     toolKnowledgeCompare: toolKnowledgeCompareEn as Record<string, string>,
     toolLoanCalc: toolLoanCalcEn as Record<string, string>,
     toolIdCardParser: toolIdCardParserEn as Record<string, string>,

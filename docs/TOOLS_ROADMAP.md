@@ -87,7 +87,6 @@
 |----------|----------|----------|
 | 邮政编码查询 | `/zipcode` | `apps/web/src/pages/ZipCode.tsx` |
 | 天气查询 | `/weather` | `tools/tool-weather` → Weather |
-| IP 地址查询 | `/ip-query` | `apps/web/src/pages/IpQuery.tsx` |
 | 颜色拾取/调色板 | `/color-picker` | `apps/web/src/pages/ColorPicker.tsx` |
 
 ### AI 工具
@@ -231,13 +230,6 @@
 | 随机菜单生成器 | `/random-menu` | `tools/tool-random-menu` → RandomMenu |
 | curl 转 fetch | `/curl-to-fetch` | `tools/tool-curl-to-fetch` → CurlToFetch |
 | JWT 解析工具 | `/jwt-decoder` | `tools/tool-jwt-decoder` → JwtDecoder |
-| 旅行 Checklist 生成 | `/travel-checklist` | `tools/tool-travel-checklist` → TravelChecklist |
-| 旅行预算计算器 | `/travel-budget` | `tools/tool-travel-budget` → TravelBudget |
-| AA 分摊工具 | `/split-bill` | `tools/tool-split-bill` → SplitBill |
-| 时差计算器 | `/timezone-calc` | `tools/tool-timezone-calc` → TimezoneCalc |
-| 地图距离计算 | `/distance-calc` | `tools/tool-distance-calc` → DistanceCalc |
-| 行李清单生成器 | `/packing-list` | `tools/tool-packing-list` → PackingList |
-| 学习时长统计 | `/study-timer` | `tools/tool-study-timer` → StudyTimer |
 | 拖延症评估 + 改进建议 | `/procrastination-test` | `tools/tool-procrastination-test` → ProcrastinationTest |
 | 每日复盘生成器 | `/daily-review` | `tools/tool-daily-review` → DailyReview |
 | 理财收益模拟器 | `/investment-sim` | `tools/tool-investment-sim` → InvestmentSim |

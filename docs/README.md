@@ -13,6 +13,7 @@
 | [README.md](../README.md) | 项目入口、启动方式、核心文档导航 | 入口 |
 | [TOOLS_ROADMAP.md](./TOOLS_ROADMAP.md) | 已开发 / 待开发 / 调研中的工具总清单 | 是 |
 | [ROADMAP_CONVENTION.md](./ROADMAP_CONVENTION.md) | 如何新增规划、如何更新状态、如何避免重复 | 是 |
+| [SUPERPOWERS_PLAN.md](./SUPERPOWERS_PLAN.md) | P0-P2 分层执行计划与当前迭代进度 | 是 |
 | [refactor-structure.md](./refactor-structure.md) | 开发命令、目录职责、当前开发流程 | 是 |
 | [TOOL_LANDING.md](./TOOL_LANDING.md) | 新工具按现有标准落地的结构和清单 | 是 |
 | [MIGRATION_GUIDE.md](../MIGRATION_GUIDE.md) | 老模块迁移到新标准时的入口说明 | 入口 |

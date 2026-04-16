@@ -152,6 +152,7 @@
       "image_filter": "图片滤镜",
       "image_stitcher": "图片拼接",
       "image_watermark_remover": "图片去水印",
+      "timezone_converter": "时区转换器",
       "ai_token_cost": "AI Token 费用估算",
       "proxy_speed_test": "代理测速"
     },
@@ -280,6 +281,7 @@
       "text_stats": "统计字数、词数、字符数和阅读时间，适合写作和内容分析",
       "github_repo": "查看 GitHub 仓库的基础信息、活跃度与关键指标",
       "github_user": "查看 GitHub 用户资料、公开数据与贡献概览",
+      "timezone_converter": "对比多个城市当前时间，并将会议时间同步换算到已选时区",
       "ai_token_cost": "按模型单价估算输入输出 token 费用，支持多模型对比与导出",
       "proxy_speed_test": "批量测试 HTTP/HTTPS/SOCKS5 代理延迟与吞吐，辅助挑选可用节点"
     },
@@ -320,6 +322,33 @@
     "exportScss": "SCSS Variables",
     "exportTailwind": "Tailwind Config",
     "exportJson": "JSON"
+  },
+  "toolTimezoneConverter": {
+    "title": "时区转换器",
+    "description": "对比多个城市当前时间，并将会议时间同步换算到已选时区。",
+    "currentTimeTitle": "当前时间对照",
+    "currentTimeDescription": "同时查看多个城市当前时间，快速判断沟通窗口。",
+    "meetingTitle": "会议时间换算",
+    "meetingDescription": "输入你的本地会议时间，自动换算到已选时区。",
+    "meetingLabel": "输入会议时间（按你的本地时区）",
+    "meetingResults": "已选时区中的会议时间",
+    "meetingPlaceholder": "选择会议时间后，这里会自动给出所有时区对应时间。",
+    "addTimezone": "添加时区",
+    "compareLimit": "最多同时对比 5 个时区。",
+    "invalidTimezone": "无效时区",
+    "removeTimezone": "移除时区",
+    "footerNote": "适合跨时区会议安排、远程协作和旅行前时间确认。",
+    "timezoneOptions": {
+      "utc": "UTC（协调世界时）",
+      "newYork": "纽约（EST/EDT）",
+      "losAngeles": "洛杉矶（PST/PDT）",
+      "london": "伦敦（GMT/BST）",
+      "paris": "巴黎（CET/CEST）",
+      "tokyo": "东京（JST）",
+      "shanghai": "上海（CST）",
+      "singapore": "新加坡（SGT）",
+      "sydney": "悉尼（AEST/AEDT）"
+    }
   },
   "footer": {
     "copyright": "© 2026 Bug 潮 · 持续更新中"

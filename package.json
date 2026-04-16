@@ -10,6 +10,7 @@
     "dev:full": "pnpm --parallel --filter @toolbox/web --filter @toolbox/api-gateway dev",
     "build": "pnpm -C apps/web build",
     "build:backend": "pnpm -C apps/api-gateway build",
+    "check:consistency": "node scripts/check-tool-consistency.cjs",
     "lint": "pnpm -C apps/web lint",
     "preview": "pnpm -C apps/web preview",
     "start": "node server.js",
