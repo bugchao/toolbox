@@ -5,7 +5,10 @@ import {
   findFirstExistingDirectory,
   registerServiceModules,
 } from '@toolbox/service-core'
+import { dnsService } from '@toolbox/dns-service'
+import { ipService } from '@toolbox/ip-service'
 import { legacyToolsService } from '@toolbox/legacy-tools-service'
+import { securityService } from '@toolbox/security-service'
 
 export async function createApiGatewayApp({ rootDir }) {
   const app = express()
@@ -13,7 +16,11 @@ export async function createApiGatewayApp({ rootDir }) {
   app.use(createRequestContextMiddleware())
   app.use(express.json({ limit: '1mb' }))
 
-  const services = await registerServiceModules(app, [legacyToolsService], { rootDir })
+  const services = await registerServiceModules(
+    app,
+    [dnsService, ipService, securityService, legacyToolsService],
+    { rootDir }
+  )
 
   app.get('/health', (req, res) => {
     res.json({
@@ -65,4 +72,3 @@ export async function createApiGatewayApp({ rootDir }) {
     staticDir,
   }
 }
-

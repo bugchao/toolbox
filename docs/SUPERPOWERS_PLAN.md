@@ -63,7 +63,7 @@
 
 ### P0-3 从兼容桥中拆出首批领域服务骨架
 
-- 状态：`planned`
+- 状态：`done`
 - 问题：
   - `apps/api-gateway` 已经是入口，但当前仍只注册 `legacy-tools-service`
   - 服务边界已经有目标方案，但还没真正开始拆
@@ -178,5 +178,21 @@
   - 已通过 `pnpm check:consistency` 与 `pnpm -C apps/web build` 验证
 - 下一步：
   - 进入 `P0-3`，开始把兼容桥中的后端能力拆出首批领域服务骨架
+
+### Iteration 3
+
+- 主题：`P0-3 领域服务骨架`
+- 当前状态：`done`
+- 已完成：
+  - 新增 `@toolbox/dns-service`、`@toolbox/ip-service`、`@toolbox/security-service`
+  - `api-gateway` 已同时注册三类领域服务和 `legacy-tools-service`
+  - 已把 DNS、IP、Security 相关路由注册从兼容桥迁出到独立服务模块
+  - `legacy-tools-service` 收缩为新闻、邮编、store、whois、证书工具和少量遗留接口承载层
+- 验收结果：
+  - `api-gateway` 已不再只注册单一兼容桥
+  - 首批真实接口已通过领域服务接线承载
+- 下一步：
+  - 继续缩小 legacy bridge 中剩余的遗留接口
+  - 给服务清单增加更细粒度的健康信息与分类说明
 
 后续每完成一个阶段，就在这里追加一条迭代记录。

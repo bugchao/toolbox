@@ -11,7 +11,10 @@
     "start:dist": "node dist/main.js"
   },
   "dependencies": {
+    "@toolbox/dns-service": "workspace:*",
+    "@toolbox/ip-service": "workspace:*",
     "@toolbox/legacy-tools-service": "workspace:*",
+    "@toolbox/security-service": "workspace:*",
     "@toolbox/service-core": "workspace:*",
     "express": "^4.18.2"
   }

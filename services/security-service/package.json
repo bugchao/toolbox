@@ -1,0 +1,9 @@
+{
+  "name": "@toolbox/security-service",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@toolbox/service-core": "workspace:*"
+  }
+}

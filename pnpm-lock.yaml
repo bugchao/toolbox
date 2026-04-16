@@ -36,9 +36,18 @@ importers:
 
   apps/api-gateway:
     dependencies:
+      '@toolbox/dns-service':
+        specifier: workspace:*
+        version: link:../../services/dns-service
+      '@toolbox/ip-service':
+        specifier: workspace:*
+        version: link:../../services/ip-service
       '@toolbox/legacy-tools-service':
         specifier: workspace:*
         version: link:../../services/legacy-tools-service
+      '@toolbox/security-service':
+        specifier: workspace:*
+        version: link:../../services/security-service
       '@toolbox/service-core':
         specifier: workspace:*
         version: link:../../packages/service-core
@@ -579,7 +588,25 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  services/dns-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
+  services/ip-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
   services/legacy-tools-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
+  services/security-service:
     dependencies:
       '@toolbox/service-core':
         specifier: workspace:*
