@@ -8,7 +8,7 @@
 
 | 分类 ID | 分类名称     | 说明 |
 |--------|--------------|------|
-| `utils` | 实用工具     | 日常效率：图片/文档/表格/格式转换、生成器等 |
+| `utility` | 实用工具     | 日常效率：图片/文档/表格/格式转换、生成器等 |
 | `dev`   | 研发工具     | 开发调试：编解码、正则、时间戳、哈希、代码格式化等 |
 | `query` | 查询工具     | 信息查询：邮编、天气、IP、颜色等 |
 | `news`  | 资讯工具     | 资讯聚合、热点等 |
@@ -16,7 +16,7 @@
 | `network` | 网络与基础设施 | DNS/IP/子网/DHCP/IPAM/GSLB/运维/安全诊断等，见「三、后续计划：网络工具集」 |
 | `life`    | 生活工具       | 效率习惯、财务消费、健康生活、日常工具等 |
 | `travel`  | 旅游工具       | 行程规划、预算成本、导航信息、旅行实用等 |
-| `learn`   | 学习工具       | 学习效率、内容处理、知识理解、编程学习、语言学习等 |
+| `learning`   | 学习工具       | 学习效率、内容处理、知识理解、编程学习、语言学习等 |
 
 新增规划时，**必须**指定上述其一作为「分类」。
 
@@ -345,19 +345,19 @@
 | ~~随机菜单生成器~~ | life | `/random-menu` | **已上线** | - | 今天吃什么 |
 | ~~家庭任务分配工具~~ | life | `/family-tasks` | **已上线** | - | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
-| 条形码识别 | utils | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
+| 条形码识别 | utility | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
 | **── 实用：图像处理（已完成 6 个）──** | | | | | |
-| ~~图片水印~~ | utils | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
-| ~~图片裁剪~~ | utils | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
-| ~~图片旋转/翻转~~ | utils | `/image-rotator` | **已上线** | - | 任意角度旋转，水平垂直翻转 |
-| ~~图片滤镜~~ | utils | `/image-filter` | **已上线** | - | 12 种预设滤镜，8 个高级参数 |
-| ~~图片拼接~~ | utils | `/image-stitcher` | **已上线** | - | 横向/纵向拼接，自定义间距 |
-| ~~图片去水印~~ | utils | `/image-watermark-remover` | **已上线** | - | 手动涂抹，AI 智能修复 |
+| ~~图片水印~~ | utility | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
+| ~~图片裁剪~~ | utility | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
+| ~~图片旋转/翻转~~ | utility | `/image-rotator` | **已上线** | - | 任意角度旋转，水平垂直翻转 |
+| ~~图片滤镜~~ | utility | `/image-filter` | **已上线** | - | 12 种预设滤镜，8 个高级参数 |
+| ~~图片拼接~~ | utility | `/image-stitcher` | **已上线** | - | 横向/纵向拼接，自定义间距 |
+| ~~图片去水印~~ | utility | `/image-watermark-remover` | **已上线** | - | 手动涂抹，AI 智能修复 |
 | **── 实用：图像处理（后续补充）──** | | | | | |
-| Canvas 图像工作台 | utils | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
-| 证件照工具（标准尺寸 + 换底） | utils | `/id-photo` | **已上线** | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
-| ~~图像本地加载预览基座~~ | utils | `/image-local-preview` | **已上线** | - | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
-| 图像处理实验工作台 | utils | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
+| Canvas 图像工作台 | utility | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
+| 证件照工具（标准尺寸 + 换底） | utility | `/id-photo` | **已上线** | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
+| ~~图像本地加载预览基座~~ | utility | `/image-local-preview` | **已上线** | - | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
+| 图像处理实验工作台 | utility | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
 | **── 生活：开发者友好 ──** | | | | | |
 | ~~curl 转 fetch~~ | dev | `/curl-to-fetch` | **已上线** | - | curl 命令转 JS fetch 代码 |
 | ~~JWT 解析工具~~ | dev | `/jwt-decoder` | **已上线** | - | JWT Token 解码与验证 |
@@ -397,42 +397,42 @@
 | ~~旅行攻略总结器~~ | travel | `/travel-guide-summary` | **已上线** | - | AI 总结旅行攻略 |
 | ~~游记自动生成~~ | travel | `/travel-journal` | **已上线** | - | AI 生成游记文章 |
 | **── 学习：学习效率 ──** | | | | | |
-| 学习计划生成器 | learn | `/study-planner` | **已上线** | P1 | AI 生成学习计划 |
-| 记忆曲线复习提醒 | learn | `/spaced-repetition` | **已上线** | P1 | Anki lite 版 |
-| 专注模式 | learn | `/focus-mode` | **已上线** | P2 | 屏蔽干扰专注学习 |
-| ~~学习时长统计~~ | learn | `/study-timer` | **已上线** | - | 学习时间记录与统计 |
+| 学习计划生成器 | learning | `/study-planner` | **已上线** | P1 | AI 生成学习计划 |
+| 记忆曲线复习提醒 | learning | `/spaced-repetition` | **已上线** | P1 | Anki lite 版 |
+| 专注模式 | learning | `/focus-mode` | **已上线** | P2 | 屏蔽干扰专注学习 |
+| ~~学习时长统计~~ | learning | `/study-timer` | **已上线** | - | 学习时间记录与统计 |
 | **── 学习：内容处理 ──** | | | | | |
-| 文本摘要工具 | learn | `/text-summary` | **已上线** | P1 | AI 文本自动摘要 |
-| PDF 总结工具 | learn | `/pdf-summary` | **已上线** | P1 | AI 总结 PDF 内容 |
-| ~~网页内容提取~~ | learn | `/web-extractor` | **已上线** | - | 提取网页正文内容 |
-| ~~笔记整理助手~~ | learn | `/note-organizer` | **已上线** | - | AI 辅助笔记整理 |
+| 文本摘要工具 | learning | `/text-summary` | **已上线** | P1 | AI 文本自动摘要 |
+| PDF 总结工具 | learning | `/pdf-summary` | **已上线** | P1 | AI 总结 PDF 内容 |
+| ~~网页内容提取~~ | learning | `/web-extractor` | **已上线** | - | 提取网页正文内容 |
+| ~~笔记整理助手~~ | learning | `/note-organizer` | **已上线** | - | AI 辅助笔记整理 |
 | **── 学习：知识理解 ──** | | | | | |
-| 概念解释工具 | learn | `/concept-explainer` | **已上线** | P1 | AI 解释任意概念 |
-| 一句话讲清工具 | learn | `/one-liner` | **已上线** | P1 | 用一句话解释复杂概念 |
-| ~~术语词典生成~~ | learn | `/glossary-gen` | **已上线** | - | 自动生成术语词典 |
-| ~~知识图谱生成~~ | learn | `/knowledge-graph` | **已上线** | - | 可视化知识关系图 |
+| 概念解释工具 | learning | `/concept-explainer` | **已上线** | P1 | AI 解释任意概念 |
+| 一句话讲清工具 | learning | `/one-liner` | **已上线** | P1 | 用一句话解释复杂概念 |
+| ~~术语词典生成~~ | learning | `/glossary-gen` | **已上线** | - | 自动生成术语词典 |
+| ~~知识图谱生成~~ | learning | `/knowledge-graph` | **已上线** | - | 可视化知识关系图 |
 | **── 学习：练习 & 测试 ──** | | | | | |
-| 自动出题工具 | learn | `/quiz-gen` | **已上线** | P1 | AI 根据内容自动出题 |
-| 选择题生成器 | learn | `/mcq-gen` | **已上线** | P1 | 生成选择题 |
-| ~~编程题生成~~ | learn | `/coding-challenge` | **已上线** | - | AI 生成编程练习题 |
-| 错题本系统 | learn | `/mistake-book` | **已上线** | P2 | 错题收集与复习 |
+| 自动出题工具 | learning | `/quiz-gen` | **已上线** | P1 | AI 根据内容自动出题 |
+| 选择题生成器 | learning | `/mcq-gen` | **已上线** | P1 | 生成选择题 |
+| ~~编程题生成~~ | learning | `/coding-challenge` | **已上线** | - | AI 生成编程练习题 |
+| 错题本系统 | learning | `/mistake-book` | **已上线** | P2 | 错题收集与复习 |
 | **── 学习：编程学习 ──** | | | | | |
-| 代码解释器 | learn | `/code-explainer` | **已上线** | P1 | 输入代码 AI 逐行解释 |
-| Bug 分析工具 | learn | `/bug-analyzer` | **已上线** | P1 | AI 分析代码 Bug |
-| 项目结构生成器 | learn | `/project-scaffold` | **已上线** | P1 | 生成项目目录结构（Nx） |
-| ~~前端面试题生成~~ | learn | `/frontend-interview` | **已上线** | - | 前端面试题库 + 生成 |
-| ~~系统设计练习工具~~ | learn | `/system-design` | **已上线** | - | 系统设计题练习 |
+| 代码解释器 | learning | `/code-explainer` | **已上线** | P1 | 输入代码 AI 逐行解释 |
+| Bug 分析工具 | learning | `/bug-analyzer` | **已上线** | P1 | AI 分析代码 Bug |
+| 项目结构生成器 | learning | `/project-scaffold` | **已上线** | P1 | 生成项目目录结构（Nx） |
+| ~~前端面试题生成~~ | learning | `/frontend-interview` | **已上线** | - | 前端面试题库 + 生成 |
+| ~~系统设计练习工具~~ | learning | `/system-design` | **已上线** | - | 系统设计题练习 |
 | **── 学习：语言学习 ──** | | | | | |
-| 单词记忆工具 | learn | `/vocab-trainer` | **已上线** | P1 | 单词记忆 + 复习 |
-| 句子改写工具 | learn | `/sentence-rewriter` | **已上线** | P1 | AI 句子改写/润色 |
-| ~~AI 对话练习~~ | learn | `/conversation-practice` | **已上线** | - | AI 口语对话练习 |
-| ~~发音评估工具~~ | learn | `/pronunciation-eval` | **已上线** | - | 语音发音评估 |
+| 单词记忆工具 | learning | `/vocab-trainer` | **已上线** | P1 | 单词记忆 + 复习 |
+| 句子改写工具 | learning | `/sentence-rewriter` | **已上线** | P1 | AI 句子改写/润色 |
+| ~~AI 对话练习~~ | learning | `/conversation-practice` | **已上线** | - | AI 口语对话练习 |
+| ~~发音评估工具~~ | learning | `/pronunciation-eval` | **已上线** | - | 语音发音评估 |
 | **── 学习：AI 增强学习 ──** | | | | | |
-| "像5岁小孩解释"工具 | learn | `/eli5` | **已上线** | P1 | ELI5 简化解释 |
-| 多角度解释 | learn | `/multi-perspective` | **已上线** | P1 | 专家/小白多角度解释 |
-| 知识对比工具 | learn | `/knowledge-compare` | **已上线** | P1 | 概念/技术对比分析 |
-| ~~学习路径规划~~ | learn | `/learning-path` | **已上线** | - | 从0到专家的学习路径 |
-| ~~问答 + 深挖~~ | learn | `/deep-dive-qa` | **已上线** | - | 递进式深度学习问答 |
+| "像5岁小孩解释"工具 | learning | `/eli5` | **已上线** | P1 | ELI5 简化解释 |
+| 多角度解释 | learning | `/multi-perspective` | **已上线** | P1 | 专家/小白多角度解释 |
+| 知识对比工具 | learning | `/knowledge-compare` | **已上线** | P1 | 概念/技术对比分析 |
+| ~~学习路径规划~~ | learning | `/learning-path` | **已上线** | - | 从0到专家的学习路径 |
+| ~~问答 + 深挖~~ | learning | `/deep-dive-qa` | **已上线** | - | 递进式深度学习问答 |
 
 **状态约定**：`调研中` | `待开发` | `开发中` | （上线后移入「二、已开发」）
 
@@ -443,9 +443,9 @@
 | 方向/暂定描述 | 分类 | 建议路径（待定） | 备注 |
 |---------------|------|------------------|------|
 | 工具开发脚手架 | dev | 待定 | 一键生成新工具模板，提升开发效率 |
-| PWA / 离线可用 | utils | 待定 | 全站或关键工具离线使用 |
+| PWA / 离线可用 | utility | 待定 | 全站或关键工具离线使用 |
 | 移动端适配增强 | - | - | 响应式或独立 H5，非单点工具 |
-| 工具协作功能 | utils | 待定 | 多人在线协作使用同一工具（待细化） |
+| 工具协作功能 | utility | 待定 | 多人在线协作使用同一工具（待细化） |
 | AI 助手集成 | ai | `/ai-assistant` 或待定 | 站内通用 AI 问答/辅助 |
 | 企业版能力 | - | 待定 | 权限、审计、私有部署等（待细化） |
 | 工具市场 / 第三方提交 | - | 待定 | 发现与安装第三方工具（平台能力） |
@@ -648,7 +648,7 @@
 
 ### 后续计划：生活工具集
 
-**已完成立项，且已有部分上线。** 分类 `life`（部分归入 `utils`/`dev`），实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**已完成立项，且已有部分上线。** 分类 `life`（部分归入 `utility` / `dev`），实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、效率 & 习惯（7）
 
@@ -697,7 +697,7 @@
 
 | 序号 | 工具名称 | 建议路径 | 备注 |
 |------|----------|----------|------|
-| 1 | 条形码识别 | `/barcode-reader` | 条形码扫描与解析（分类 `utils`） |
+| 1 | 条形码识别 | `/barcode-reader` | 条形码扫描与解析（分类 `utility`） |
 | 2 | curl 转 fetch | `/curl-to-fetch` | curl 转 JS fetch（分类 `dev`） |
 | 3 | JWT 解析工具 | `/jwt-decoder` | JWT Token 解码验证（分类 `dev`） |
 | 4 | HTTP 请求调试器 | `/http-debugger` | 在线 HTTP 请求调试（分类 `dev`） |
@@ -770,7 +770,7 @@
 
 ### 后续计划：学习工具集
 
-**已完成立项，且已有部分上线。** 分类 `learn`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**已完成立项，且已有部分上线。** 分类 `learning`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
 
 #### 一、学习效率（4）
 
@@ -851,7 +851,7 @@
 3. **上线后**  
    - 在「二、已开发」对应分类表里增加一行（路由 + 代码位置）。  
    - 在「三、待开发/调研工具」里删除该行。  
-   - 同步更新 [TOOLS_LIST.md](../TOOLS_LIST.md) 的已上线表格与统计，以及 [apps/web 的 Layout/Home](../apps/web/src/components/Layout.tsx)、[App 路由](../apps/web/src/App.tsx)。
+   - 同步更新主应用接线与导航配置；如需补充概览说明，再更新 [README.md](../README.md) 或 [TOOLS_LIST.md](../TOOLS_LIST.md) 的入口描述，不再维护独立统计表。
 
 4. **给 AI 的说明**  
    后续只需说「按 TOOLS_ROADMAP 规划」或「在 TOOLS_ROADMAP 里加一个待开发：xxx」，即表示以本文档为准；新增/调整规划都改 **docs/TOOLS_ROADMAP.md**，已开发清单也以本文档「二」为准，避免重复开发。
@@ -863,6 +863,7 @@
 | 文档 | 用途 |
 |------|------|
 | 本文档 `docs/TOOLS_ROADMAP.md` | 已开发落位 + 待开发/调研清单 + 分类与更新规范 |
+| [docs/README.md](README.md) | 文档总索引，说明哪些文档持续维护、哪些已经归档 |
 | [docs/TOOL_LANDING.md](TOOL_LANDING.md) | 工具规划落地目录、Monorepo 规范、独立开发/部署、create:tool |
 | [docs/ROADMAP_CONVENTION.md](ROADMAP_CONVENTION.md) | 规划约定（怎么提、怎么填、怎么给 AI） |
-| [TOOLS_LIST.md](../TOOLS_LIST.md) | 对外/产品向工具清单与统计（与本文档同步） |
+| [TOOLS_LIST.md](../TOOLS_LIST.md) | 对外/产品向工具目录入口与概览说明 |

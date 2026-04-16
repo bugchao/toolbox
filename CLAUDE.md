@@ -1,90 +1,119 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file gives collaboration guidance to Claude Code and similar coding agents working in this repository.
 
-## Commands
+## Core Commands
 
-All commands must be run from the repo root using pnpm.
+Run all commands from the repo root with `pnpm`.
 
 ```bash
-pnpm install          # Install all workspace dependencies
-pnpm dev              # Dev server at http://localhost:3000 (hot-reloads tools/* too)
-pnpm build            # Production build → apps/web/dist
-pnpm preview          # Preview production build locally
-pnpm start            # Serve production build (requires build first)
-pnpm lint             # ESLint on web app
-pnpm test             # Vitest unit tests (single run via apps/web test:run)
-pnpm -C apps/web test # Vitest unit tests (watch mode)
-pnpm test:e2e         # Playwright E2E tests (chromium)
-pnpm test:e2e:ui      # Playwright E2E with UI mode
-pnpm crawl:news       # Scrape news → apps/web/public/news.json
-pnpm create:tool <name>  # Scaffold a new tool package under tools/
+pnpm install              # Install workspace dependencies
+pnpm dev                  # Start the web app only
+pnpm dev:api              # Start api-gateway only
+pnpm dev:full             # Start web + api-gateway together
+pnpm build                # Build apps/web
+pnpm build:backend        # Build apps/api-gateway
+pnpm preview              # Preview the web build locally
+pnpm start                # Start production server.js compatibility entry
+pnpm start:api            # Start the api-gateway runtime
+pnpm create:tool <name>   # Scaffold a new manifest-first tool package
+pnpm lint                 # Lint apps/web
+pnpm test                 # Run web unit tests once
+pnpm test:e2e             # Run Playwright E2E tests
 ```
 
-## Architecture
+## Current Architecture
 
-This is a **pnpm monorepo** (workspaces: `apps/*`, `packages/*`, `services/*`, `tools/*`) built with React 18 + TypeScript + Vite + Tailwind CSS.
+This repository is a `pnpm` monorepo. The current architecture is:
 
-### Key layers
+- `apps/web/`
+  - Main SPA shell
+  - Owns layout, route shell, theme, favorites, homepage, and shell i18n
+- `apps/api-gateway/`
+  - Backend gateway entry
+  - Receives `/api/*` requests in the new architecture
+- `tools/tool-*/`
+  - Independent tools
+  - New tools should default to this structure
+- `packages/ui-kit/`
+  - Shared UI components
+  - External UI libraries should be wrapped here before tool usage
+- `packages/tool-registry/`
+  - Tool manifest types and helpers
+- `packages/i18n-runtime/`
+  - Tool-level lazy i18n loading support
+- `packages/service-core/`
+  - Shared backend service abstractions
+- `services/legacy-tools-service/`
+  - Compatibility bridge for older server-side tool handlers
 
-- **`apps/web/`** — Main SPA. Entry point for dev and build. Contains routing (`App.tsx`), layout/nav (`components/Layout.tsx`), pages not yet extracted (`src/pages/`), i18n config (`src/i18n.ts`), and locale files (`src/locales/zh.json`, `en.json`).
-- **`apps/api-gateway/`** — Express API backend (security, domain-suite, ip-ops tools).
-- **`packages/core/`** — Shared types and `ToolLoader` interface.
-- **`packages/ui-kit/`** — Shared React components (Button, Card, Input, etc.) with Tailwind dark-mode support. Prefer these over custom components.
-- **`tools/tool-xxx/`** — 163 independent tool packages, each with their own `package.json` and `src/index.tsx`. Heavy/unique dependencies live here, not in `apps/web`.
+`server.js` still exists as a compatibility entry, but new backend work should align with `apps/api-gateway/` and service modules.
 
-### Tool loading
+## Tool Development Standard
 
-Tools are lazy-loaded in `apps/web/src/App.tsx`:
-```tsx
-const MyTool = lazy(() => import('@toolbox/tool-xxx'))
-```
-Vite resolves `@toolbox/*` aliases by auto-scanning the `tools/` directory (configured in `apps/web/vite.config.ts`). Every new tool package must also be added to `optimizeDeps.exclude` in that config.
+### Default rule
 
-### Adding a new tool
+New tools should follow the current standard:
 
-Navigation and homepage cards are driven by `apps/web/src/config/tools.ts`, which aggregates per-category files (`a-travel-tools.ts`, `a-dev-tools.ts`, etc.). Do **not** edit `Layout.tsx` or `Home.tsx` directly for tool entries.
+1. `pnpm create:tool <name>`
+2. Implement inside `tools/tool-<name>/`
+3. Keep tool i18n inside the tool package
+4. Reuse `@toolbox/ui-kit` before adding custom shared UI
+5. Let routing/nav come from tool manifests and tool config integration
 
-**Method A — simple page (no unique deps):**
-1. Add component to `apps/web/src/pages/MyTool.tsx`
-2. Register route in `apps/web/src/App.tsx`
-3. Add an entry to the relevant `apps/web/src/config/a-*.ts` category file (`{ path, nameKey, icon, categoryKey, keywords, i18nNamespace }`)
-4. Update `TOOLS_LIST.md`
+### Tool package expectations
 
-**Method B — independent package (unique deps):**
-1. `pnpm create:tool <name>` → creates `tools/tool-xxx/`
-2. Add `"@toolbox/tool-xxx": "workspace:*"` to `apps/web/package.json` dependencies
-3. Register lazy route in `apps/web/src/App.tsx`
-4. Add `'@toolbox/tool-xxx'` to `optimizeDeps.exclude` in `apps/web/vite.config.ts`
-5. Add an entry to the relevant `apps/web/src/config/a-*.ts` category file
-6. If the tool includes a `tool.manifest.ts`, import and register it in `apps/web/src/tooling/tool-manifests.ts`
-7. `pnpm install` then update `TOOLS_LIST.md`
+Each new tool should normally include:
 
-### Dependency rules
+- `tools/tool-<name>/package.json`
+- `tools/tool-<name>/tool.manifest.ts`
+- `tools/tool-<name>/src/index.tsx`
+- `tools/tool-<name>/src/<Component>.tsx`
+- `tools/tool-<name>/src/locales/zh.json`
+- `tools/tool-<name>/src/locales/en.json`
 
-- `apps/web/package.json` — only main app and non-extracted page deps (no jspdf, qrcode, pdf-lib, etc.)
-- `tools/tool-xxx/package.json` — all deps specific to that tool
-- Root `package.json` — only scripts, `express` (for `server.js`), and `@playwright/test`
+### Routing and registration
 
-### i18n
+- Manifest-based tools are discovered through the Vite manifest pipeline and loaded via `apps/web/src/tooling/ManifestToolRoute.tsx`.
+- Navigation and homepage metadata still need the appropriate entry in `apps/web/src/config/a-*.ts`.
+- Do not manually edit layout rendering for tool entries.
 
-Uses i18next with namespaces. All user-facing strings go in `apps/web/src/locales/zh.json` and `en.json`. Namespaces must be registered in `apps/web/src/i18n.ts`. In components: `const { t } = useTranslation('namespace')`.
+### Internationalization
 
-### Theme
+- Shell-level text lives in `apps/web/src/locales/`.
+- Tool-specific text should live inside the tool package.
+- Avoid pushing new tool-specific UI copy into the shell locale files unless the shell itself needs it.
 
-`packages/ui-kit` components use Tailwind `dark:` classes. The app toggles `dark` class on `document.documentElement` via `ThemeContext`. User preference is persisted in localStorage.
+### Shared UI
 
-## Key files
+- Prefer `@toolbox/ui-kit`.
+- If you need a third-party UI primitive, wrap it in `packages/ui-kit` first.
+- Do not import external UI libraries directly into many tools unless there is a strong reason.
 
-| File | Purpose |
-|------|---------|
-| `apps/web/src/App.tsx` | All routes + lazy imports |
-| `apps/web/src/config/tools.ts` | Aggregates all tool entries from `a-*.ts` category files |
-| `apps/web/src/config/a-*.ts` | Per-category tool entry lists (add new tools here) |
-| `apps/web/src/tooling/tool-manifests.ts` | Manifest registry for tools with `tool.manifest.ts` |
-| `apps/web/src/i18n.ts` | i18n initialization and namespace registry |
-| `apps/web/vite.config.ts` | Aliases, API middleware, `optimizeDeps.exclude` |
-| `server.js` | Production static + API server |
-| `docs/refactor-structure.md` | Detailed developer guide |
-| `docs/TOOLS_ROADMAP.md` | Tool planning and implementation status |
-| `TOOLS_LIST.md` | Complete tool inventory (keep in sync) |
+## Documentation Rules
+
+Use the current document hierarchy consistently:
+
+- [README.md](README.md)
+  - Project entry and command overview
+- [docs/README.md](docs/README.md)
+  - Documentation index and active-vs-archive boundaries
+- [docs/TOOLS_ROADMAP.md](docs/TOOLS_ROADMAP.md)
+  - Authoritative developed / planned tool list
+- [docs/ROADMAP_CONVENTION.md](docs/ROADMAP_CONVENTION.md)
+  - How to add or update planning items
+- [docs/TOOL_LANDING.md](docs/TOOL_LANDING.md)
+  - New tool landing standard
+- [docs/refactor-structure.md](docs/refactor-structure.md)
+  - Current dev workflow and directory responsibilities
+
+Do not treat `TOOLS_LIST.md` as an exact inventory document. It is now only a high-level product-facing entry page.
+
+Temporary reports, snapshots, and dated one-off notes should go to `docs/archive/`, not the active docs root.
+
+## Practical Guardrails
+
+- Do not add new long-lived process docs at the repo root unless they are true entry documents.
+- Do not maintain duplicated “exact counts” across multiple markdown files.
+- When a tool ships, update `docs/TOOLS_ROADMAP.md` first.
+- When a doc becomes a dated snapshot or a one-off report, archive it instead of keeping it in active docs.

@@ -1,167 +1,33 @@
-# 工具盒子 - 架构演进规划
+# 架构总览
 
-## 🎯 目标
-支撑1000+工具的规模化建设，实现插件化、可扩展、高性能的在线工具平台。
+这份文档只保留架构入口信息。当前项目的详细架构设计与迁移阶段，请分别查看：
 
-## 🏗️ 当前架构问题
-1. **单仓单应用架构**：所有工具耦合在同一个React应用中
-2. **构建体积膨胀**：新增工具会导致整体包体积增大，影响加载速度
-3. **部署耦合**：单个工具更新需要全量构建部署
-4. **缺乏后端能力**：所有工具都是纯前端，无法实现需要后端支持的功能
-5. **没有动态加载能力**：用户必须加载所有工具代码，哪怕只使用一个工具
+- [docs/ARCHITECTURE_GRADUAL.md](docs/ARCHITECTURE_GRADUAL.md)
+- [docs/ARCHITECTURE_STATES.md](docs/ARCHITECTURE_STATES.md)
+- [docs/TRANSLATION_STUDIO_ARCHITECTURE.md](docs/TRANSLATION_STUDIO_ARCHITECTURE.md)
 
-## 🚀 未来架构规划 (v2.0)
+## 当前架构
 
-### 1. 架构模式：Monorepo + 微前端 + 插件化
-```
-toolbox/
-├── apps/                    # 应用层
-│   ├── portal/              # 主门户应用（导航、用户、配置）
-│   ├── tool-runtime/        # 工具运行时容器
-│   └── admin/               # 管理后台
-├── packages/                # 公共包
-│   ├── ui-kit/              # 通用UI组件库
-│   ├── core/                # 核心SDK（工具注册、通信、权限）
-│   ├── utils/               # 通用工具函数
-│   └── api-client/          # API客户端
-├── tools/                   # 工具集合（独立插件）
-│   ├── image-compressor/    # 图片压缩工具
-│   ├── markdown-converter/  # Markdown转换工具
-│   ├── json-formatter/      # JSON格式化工具
-│   └── ...                  # 1000+工具，每个独立目录
-└── services/                # 后端服务
-    ├── gateway/             # API网关
-    ├── tool-manager/        # 工具管理服务
-    ├── user-service/        # 用户服务
-    └── tool-services/       # 工具专属后端服务
-        ├── pdf-processor/
-        ├── image-processor/
-        └── ...
-```
+- 前端入口：`apps/web`
+- 新后端入口：`apps/api-gateway`
+- 老服务兼容桥：`services/legacy-tools-service`
+- 新工具标准：
+  - `tool.manifest.ts`
+  - 工具内 `src/locales/zh.json` / `en.json`
+  - UI 通过 `packages/ui-kit`
+  - 国际化通过 `packages/i18n-runtime`
+- 新增工具默认走 `tools/tool-xxx/`，由 manifest 驱动接入
 
-### 2. 核心特性
+## 当前原则
 
-#### 🔌 插件化工具体系
-- **工具独立开发**：每个工具是独立的NPM包，有自己的依赖、构建、测试流程
-- **标准接口规范**：所有工具实现统一的生命周期接口
-  ```typescript
-  interface ToolPlugin {
-    id: string;
-    name: string;
-    description: string;
-    category: string;
-    icon: string;
-    version: string;
-    author?: string;
-    homepage?: string;
-    // 生命周期
-    mount: (container: HTMLElement, config: ToolConfig) => Promise<void>;
-    unmount: () => Promise<void>;
-    update?: (config: ToolConfig) => Promise<void>;
-    // 能力声明
-    capabilities: {
-      needBackend?: boolean;
-      supportOffline?: boolean;
-      requiredPermissions?: string[];
-    };
-  }
-  ```
-- **动态注册发现**：工具注册到工具仓库，主应用自动发现加载
-- **版本管理**：支持多版本共存，灰度发布，回滚机制
+1. `pnpm dev` 仍然只启动前端，保持日常开发简单。
+2. 后端能力逐步从根 `server.js` 迁到 `api-gateway + 领域服务`。
+3. 新工具按新标准开发，老工具渐进迁移，不做一次性重写。
+4. 文档与规范优先服务“持续开发”，不再保留会快速失真的平行清单。
 
-#### ⚡ 微前端运行时
-- **按需加载**：用户访问某个工具时才加载对应工具的代码
-- **独立运行**：工具之间隔离，互不影响
-- **共享依赖**：React、UI组件库等公共依赖统一提供，避免重复加载
-- **热更新**：工具更新无需重启主应用，动态生效
+## 推荐阅读顺序
 
-#### 🌐 后端架构
-- **Serverless优先**：大部分工具后端采用Serverless函数，按需调用，降低成本
-- **微服务拆分**：通用能力下沉为公共服务，工具专属能力独立服务
-- **API网关统一入口**：认证、限流、缓存、监控统一处理
-- **数据隔离**：用户数据、工具配置数据独立存储
-
-#### 📦 部署架构
-```
-┌─────────────────┐     ┌───────────────┐     ┌─────────────────┐
-│  CDN (静态资源)  │────▶│  API Gateway  │────▶│  工具运行时容器  │
-└─────────────────┘     └───────────────┘     └─────────────────┘
-                               │
-                               ▼
-        ┌───────────────────────────────────┐
-        │             服务集群               │
-        ├─────────────┬──────────┬──────────┤
-        │ 工具管理服务 │ 用户服务 │ 工具服务 │
-        └─────────────┴──────────┴──────────┘
-                               │
-                               ▼
-        ┌───────────────────────────────────┐
-        │              存储层                │
-        ├──────────┬──────────┬────────────┤
-        │ 关系型DB │  对象存储 │  缓存集群  │
-        └──────────┴──────────┴────────────┘
-```
-
-- **静态资源CDN**：所有前端资源、工具打包后上传到CDN
-- **灰度发布**：支持按用户、按地区灰度发布新工具
-- **滚动部署**：工具更新不影响用户使用
-- **弹性扩缩容**：根据访问量自动扩缩容后端服务
-
-### 3. 分阶段实施路线图
-
-#### 🚩 阶段1：Monorepo改造（进行中）
-- [x] 调整项目结构为 Monorepo（pnpm workspace：`apps/*`、`packages/*`、`tools/*`）
-- [x] 拆分公共 UI 组件库到 `packages/ui-kit`
-- [x] 抽取核心 SDK 到 `packages/core`，定义工具类型与 ToolLoader
-- [x] 主应用迁至 `apps/web`，部分工具拆为独立包（`tools/tool-resume`、`tool-pdf`、`tool-qrcode`），主应用通过 React.lazy 按需加载
-- [x] 根目录瘦身，工具专属依赖仅写在对应 `tools/tool-xxx`
-- **收益**：工具可独立开发、独立依赖，主应用构建不携带未用工具的重依赖  
-- **开发与扩展说明**：[docs/refactor-structure.md](docs/refactor-structure.md)
-
-#### 🚩 阶段2：微前端运行时 (2-3周)
-- [ ] 实现工具运行时容器
-- [ ] 支持工具按需动态加载
-- [ ] 实现共享依赖机制
-- [ ] 工具沙箱隔离
-- [ ] 错误边界处理，单个工具崩溃不影响整体
-- **收益**：首屏加载速度提升80%，支持工具独立部署
-
-#### 🚩 阶段3：后端服务建设 (3-4周)
-- [ ] 工具管理服务（注册、发现、版本管理）
-- [ ] 用户系统（收藏、历史、自定义配置）
-- [ ] API网关（认证、限流、监控）
-- [ ] 基础后端服务（文件处理、数据存储）
-- **收益**：支持需要后端能力的复杂工具
-
-#### 🚩 阶段4：生态建设 (长期)
-- [ ] 工具开发脚手架，一键生成新工具模板
-- [ ] 工具市场，支持第三方开发者提交工具
-- [ ] 自动化审核、测试、发布流水线
-- [ ] 数据分析、用户反馈系统
-- **收益**：形成工具生态，支撑1000+工具规模
-
-### 4. 性能优化目标
-- 首屏加载时间 < 1s
-- 工具首次加载时间 < 2s
-- 支持10万+日活用户
-- 99.9% 可用性
-- 构建时间 < 5分钟（全量），< 1分钟（单个工具）
-
-### 5. 技术栈选型
-| 层级 | 技术选型 | 说明 |
-|------|----------|------|
-| 前端框架 | React 18 + TypeScript | 保持现有技术栈，降低迁移成本 |
-| 构建工具 | Vite | 快速度构建，支持库模式 |
-| Monorepo | pnpm + Turborepo | 高效的依赖管理和任务调度 |
-| 微前端 | 自定义运行时 + Module Federation | 按需加载，共享依赖 |
-| UI组件库 | 内部UI Kit + Tailwind CSS | 统一设计语言 |
-| 后端框架 | NestJS + Serverless | 高性能，支持Serverless部署 |
-| 数据库 | PostgreSQL + Redis + S3 | 关系型数据、缓存、对象存储 |
-| CI/CD | GitHub Actions | 自动化构建、测试、部署 |
-| 监控 | Sentry + Prometheus + Grafana | 错误监控、性能监控 |
-
-## 📋 近期优先级任务
-1. 先完成现有10个工具的开发，上线验证
-2. 启动Monorepo架构改造
-3. 定义工具开发规范
-4. 开发工具脚手架，提升后续开发效率
+1. [docs/ARCHITECTURE_STATES.md](docs/ARCHITECTURE_STATES.md)
+2. [docs/ARCHITECTURE_GRADUAL.md](docs/ARCHITECTURE_GRADUAL.md)
+3. [docs/refactor-structure.md](docs/refactor-structure.md)
+4. [docs/TOOL_LANDING.md](docs/TOOL_LANDING.md)
