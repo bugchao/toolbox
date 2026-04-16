@@ -25,6 +25,7 @@
     "category_travel": "Travel Tools",
     "category_learn": "Learning Tools",
     "category_news": "News",
+    "category_blockchain": "Blockchain",
     "tools": {
       "qrcode_generate": "QR Generate",
       "qrcode_read": "QR Read",

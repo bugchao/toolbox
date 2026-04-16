@@ -1,0 +1,64 @@
+{
+  "title": "加密货币转账",
+  "description": "通过 MetaMask / Phantom 钱包一键完成 ETH、SOL 链上转账，支持主网与测试网",
+  "chain": {
+    "eth": "Ethereum (ETH)",
+    "sol": "Solana (SOL)"
+  },
+  "wallet": {
+    "connect": "连接钱包",
+    "connecting": "连接中…",
+    "connected": "已连接",
+    "disconnect": "断开",
+    "reconnect": "重新连接",
+    "switchAccount": "切换账户",
+    "copy": "复制地址",
+    "notConnected": "尚未连接",
+    "notInstalled": "未检测到 {{wallet}} 插件",
+    "install": "去安装",
+    "network": "网络",
+    "cluster": "Solana 网络"
+  },
+  "hint": {
+    "walletMapping": "ETH 转账走 MetaMask(管理以太坊账户),SOL 转账走 Phantom(管理 Solana 账户)。上方卡片展示的就是当前将用于签名的完整地址,请在转账前核对一下。",
+    "notMetaMask": "注意:当前的 ETH 钱包似乎不是 MetaMask(可能是 Phantom/其他钱包的以太坊模式)。如果想用 MetaMask,请在浏览器扩展中停用其它 ETH 钱包后刷新。"
+  },
+  "rpc": {
+    "toggle": "自定义 RPC",
+    "custom": "已自定义",
+    "description": "公共 Solana 主网 RPC (包括官方 api.mainnet-beta.solana.com) 通常拒绝 dApp 浏览器流量。建议在 Helius、QuickNode、Alchemy 或 drpc.org 免费申请一个 RPC URL 粘贴到这里,仅保存在本地浏览器。",
+    "defaults": "默认尝试顺序"
+  },
+  "form": {
+    "to": "收款地址",
+    "amount": "转账金额 ({{symbol}})",
+    "cluster": "Solana 网络",
+    "send": "发起转账",
+    "sending": "交易发送中…",
+    "connectFirst": "请先连接钱包"
+  },
+  "result": {
+    "success": "交易已广播",
+    "txHash": "交易哈希",
+    "viewOnExplorer": "在区块浏览器查看"
+  },
+  "errors": {
+    "missingFields": "请填写收款地址与金额",
+    "sendFailed": "交易失败,请稍后重试",
+    "userRejected": "用户在钱包中取消了签名",
+    "code": {
+      "wallet-not-installed": "未检测到钱包插件",
+      "wallet-not-connected": "请先连接钱包",
+      "empty-address": "请填写收款地址",
+      "invalid-address": "收款地址格式不正确,请检查是否完整复制",
+      "empty-amount": "请填写转账金额",
+      "invalid-amount": "金额格式不正确,请输入有效的数字(例如 0.01)",
+      "amount-not-positive": "转账金额必须大于 0",
+      "sol-rpc-forbidden": "Solana RPC 返回 403(Access forbidden)。公共端点通常禁止 dApp 浏览器访问,请在下方 RPC 设置里填入自己的 RPC(Helius/QuickNode/Alchemy 等)后重试",
+      "sol-rpc-unreachable": "所有 Solana RPC 端点都连接失败,请检查网络或改用自定义 RPC"
+    }
+  },
+  "footer": {
+    "note": "所有签名均在本地钱包中完成,本工具不会接触您的私钥。请先在测试网验证流程后再使用主网。"
+  }
+}

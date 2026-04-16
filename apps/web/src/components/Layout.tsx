@@ -9,7 +9,7 @@ import {
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
   Radio, Shield, Database, Network, ScrollText,
-  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink
+  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
@@ -54,6 +54,7 @@ const CATEGORIES = [
   { id: 'travel', nameKey: 'category_travel', icon: Plane },
   { id: 'learn', nameKey: 'category_learn', icon: BookOpen },
   { id: 'news', nameKey: 'category_news', icon: Newspaper },
+  { id: 'blockchain', nameKey: 'category_blockchain', icon: Coins },
 ] as const
 
 const SIDEBAR_WIDTH = 260

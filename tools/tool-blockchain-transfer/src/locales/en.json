@@ -1,0 +1,64 @@
+{
+  "title": "Crypto Transfer",
+  "description": "Send ETH and SOL transfers in one click via MetaMask / Phantom wallets, with mainnet and testnet support",
+  "chain": {
+    "eth": "Ethereum (ETH)",
+    "sol": "Solana (SOL)"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connecting": "Connecting…",
+    "connected": "Connected",
+    "disconnect": "Disconnect",
+    "reconnect": "Reconnect",
+    "switchAccount": "Switch Account",
+    "copy": "Copy Address",
+    "notConnected": "Not connected",
+    "notInstalled": "{{wallet}} extension not detected",
+    "install": "Install",
+    "network": "Network",
+    "cluster": "Solana Network"
+  },
+  "hint": {
+    "walletMapping": "ETH transfers go through MetaMask (your Ethereum account) and SOL transfers through Phantom (your Solana account). The card below shows the exact address that will sign the transaction — please verify before sending.",
+    "notMetaMask": "Heads up: the current ETH provider does not look like MetaMask (likely Phantom or another wallet in Ethereum mode). If you intended MetaMask, disable the other ETH wallet in your browser extensions and reload."
+  },
+  "rpc": {
+    "toggle": "Custom RPC",
+    "custom": "Custom",
+    "description": "Public Solana mainnet RPCs (including the official api.mainnet-beta.solana.com) typically block dApp browser traffic. Grab a free RPC URL from Helius, QuickNode, Alchemy, or drpc.org and paste it here. It is saved only in your browser's localStorage.",
+    "defaults": "Default fallback order"
+  },
+  "form": {
+    "to": "Recipient Address",
+    "amount": "Amount ({{symbol}})",
+    "cluster": "Solana Network",
+    "send": "Send Transfer",
+    "sending": "Broadcasting…",
+    "connectFirst": "Please connect wallet first"
+  },
+  "result": {
+    "success": "Transaction broadcasted",
+    "txHash": "Transaction hash",
+    "viewOnExplorer": "View on explorer"
+  },
+  "errors": {
+    "missingFields": "Please fill in the recipient address and amount",
+    "sendFailed": "Transaction failed, please try again",
+    "userRejected": "Signature rejected in the wallet",
+    "code": {
+      "wallet-not-installed": "Wallet extension not detected",
+      "wallet-not-connected": "Please connect a wallet first",
+      "empty-address": "Recipient address is required",
+      "invalid-address": "Invalid recipient address, please make sure it is copied in full",
+      "empty-amount": "Amount is required",
+      "invalid-amount": "Invalid amount, please enter a valid number (e.g. 0.01)",
+      "amount-not-positive": "Amount must be greater than 0",
+      "sol-rpc-forbidden": "Solana RPC returned 403 (Access forbidden). Public endpoints usually block dApp browser traffic. Paste your own RPC URL (Helius/QuickNode/Alchemy, etc.) below and try again.",
+      "sol-rpc-unreachable": "All Solana RPC endpoints failed to connect. Check your network or configure a custom RPC."
+    }
+  },
+  "footer": {
+    "note": "All signing happens locally in your wallet. This tool never touches your private keys. Please verify the flow on a testnet before using mainnet."
+  }
+}

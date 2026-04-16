@@ -25,6 +25,7 @@
     "category_travel": "旅行工具",
     "category_learn": "学习工具",
     "category_news": "资讯工具",
+    "category_blockchain": "区块链工具",
     "tools": {
       "qrcode_generate": "二维码生成",
       "qrcode_read": "二维码解析",
