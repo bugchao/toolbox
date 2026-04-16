@@ -4,8 +4,6 @@ import { exec } from 'node:child_process'
 import { defineServiceModule } from '@toolbox/service-core'
 import { registerHttpStatusApiRoutes } from '../../../tools/tool-http-status/server/http-status-api.js'
 import { registerStoreApiRoutes } from '../../../server/store-api.js'
-import { registerWhoisLookupApiRoutes } from '../../../tools/tool-whois-lookup/server/whois-lookup-api.js'
-import { registerCertToolsApiRoutes } from '../../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
 
 function readNewsFallback(rootDir) {
   const candidates = [
@@ -35,8 +33,6 @@ export const legacyToolsService = defineServiceModule({
     'store-api',
     'news-api',
     'zipcode-api',
-    'whois-api',
-    'cert-api',
     'http-status-api',
     'legacy-bridge-api',
   ],
@@ -44,8 +40,6 @@ export const legacyToolsService = defineServiceModule({
     const { rootDir } = context
 
     registerHttpStatusApiRoutes(app)
-    registerWhoisLookupApiRoutes(app)
-    registerCertToolsApiRoutes(app)
     await registerStoreApiRoutes(app).catch((error) => {
       console.warn('[store-api] init error:', error.message)
     })

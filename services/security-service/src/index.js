@@ -6,13 +6,14 @@ import { registerSecurityDnsDdosApiRoutes } from '../../../tools/tool-security-d
 import { registerSecurityDomainHijackApiRoutes } from '../../../tools/tool-security-domain-hijack/server/domain-hijack-api.js'
 import { registerSslCertApiRoutes } from '../../../tools/tool-ssl-cert/server/ssl-cert-api.js'
 import { registerHttpHeadersApiRoutes } from '../../../tools/tool-http-headers/server/http-headers-api.js'
+import { registerCertToolsApiRoutes } from '../../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
 
 export const securityService = defineServiceModule({
   id: 'security-service',
   name: 'Security Service',
   version: '1.0.0',
   kind: 'domain',
-  capabilities: ['security-api', 'ssl-api', 'http-security-api'],
+  capabilities: ['security-api', 'ssl-api', 'http-security-api', 'cert-api'],
   async register(app) {
     registerSecurityApiRoutes(app)
     registerSecurityDomainScoreApiRoutes(app)
@@ -21,5 +22,6 @@ export const securityService = defineServiceModule({
     registerSecurityDomainHijackApiRoutes(app)
     registerSslCertApiRoutes(app)
     registerHttpHeadersApiRoutes(app)
+    registerCertToolsApiRoutes(app)
   },
 })

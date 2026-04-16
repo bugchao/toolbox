@@ -187,7 +187,8 @@
   - 新增 `@toolbox/dns-service`、`@toolbox/ip-service`、`@toolbox/security-service`
   - `api-gateway` 已同时注册三类领域服务和 `legacy-tools-service`
   - 已把 DNS、IP、Security 相关路由注册从兼容桥迁出到独立服务模块
-  - `legacy-tools-service` 收缩为新闻、邮编、store、whois、证书工具和少量遗留接口承载层
+  - 已进一步把 `whois` 归入 `dns-service`，把证书工具归入 `security-service`
+  - `legacy-tools-service` 收缩为新闻、邮编、store、HTTP 状态码和少量遗留接口承载层
 - 验收结果：
   - `api-gateway` 已不再只注册单一兼容桥
   - 首批真实接口已通过领域服务接线承载

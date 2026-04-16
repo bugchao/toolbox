@@ -10,13 +10,14 @@ import { registerDnsAuthoritativeApiRoutes } from '../../../tools/tool-dns-autho
 import { registerDnsRecursiveApiRoutes } from '../../../tools/tool-dns-recursive/server/dns-recursive-api.js'
 import { registerDnsPathVizApiRoutes } from '../../../tools/tool-dns-path-viz/server/dns-path-viz-api.js'
 import { registerDnsTunnelApiRoutes } from '../../../tools/tool-dns-tunnel/server/dns-tunnel-api.js'
+import { registerWhoisLookupApiRoutes } from '../../../tools/tool-whois-lookup/server/whois-lookup-api.js'
 
 export const dnsService = defineServiceModule({
   id: 'dns-service',
   name: 'DNS Service',
   version: '1.0.0',
   kind: 'domain',
-  capabilities: ['dns-api', 'domain-api'],
+  capabilities: ['dns-api', 'domain-api', 'whois-api'],
   async register(app) {
     registerDnsNsApiRoutes(app)
     registerDnsCnameChainApiRoutes(app)
@@ -29,5 +30,6 @@ export const dnsService = defineServiceModule({
     registerDnsRecursiveApiRoutes(app)
     registerDnsPathVizApiRoutes(app)
     registerDnsTunnelApiRoutes(app)
+    registerWhoisLookupApiRoutes(app)
   },
 })
