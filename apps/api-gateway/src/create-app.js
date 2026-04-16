@@ -23,10 +23,15 @@ export async function createApiGatewayApp({ rootDir }) {
   )
 
   app.get('/health', (req, res) => {
+    const readyServices = services.filter((service) => service.status === 'ready')
     res.json({
-      ok: true,
+      ok: readyServices.length === services.length,
       gateway: 'api-gateway',
-      services: services.length,
+      services: {
+        total: services.length,
+        ready: readyServices.length,
+        failed: services.length - readyServices.length,
+      },
       now: new Date().toISOString(),
     })
   })
@@ -43,8 +48,17 @@ export async function createApiGatewayApp({ rootDir }) {
   })
 
   app.get('/api/system/services', (req, res) => {
+    const byKind = services.reduce((acc, service) => {
+      acc[service.kind] = (acc[service.kind] || 0) + 1
+      return acc
+    }, {})
+
     res.json({
       gateway: 'api-gateway',
+      summary: {
+        total: services.length,
+        byKind,
+      },
       services,
     })
   })

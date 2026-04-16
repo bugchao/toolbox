@@ -29,12 +29,19 @@ export const legacyToolsService = defineServiceModule({
   name: 'Legacy Tools Bridge',
   version: '1.0.0',
   kind: 'bridge',
+  summary: 'Temporary bridge for store, news, zipcode, and remaining legacy APIs.',
   capabilities: [
     'store-api',
     'news-api',
     'zipcode-api',
     'http-status-api',
     'legacy-bridge-api',
+  ],
+  routePrefixes: [
+    '/api/store',
+    '/api/news',
+    '/api/zipcode',
+    '/api/http-status',
   ],
   async register(app, context) {
     const { rootDir } = context

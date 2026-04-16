@@ -27,6 +27,8 @@ export async function registerServiceModules(app, modules, context, options = {}
         version: service.version ?? '1.0.0',
         kind: service.kind ?? 'domain',
         capabilities: service.capabilities ?? [],
+        summary: service.summary ?? '',
+        routePrefixes: service.routePrefixes ?? [],
         status: 'ready',
       })
     } catch (error) {
@@ -36,6 +38,8 @@ export async function registerServiceModules(app, modules, context, options = {}
         version: service.version ?? '1.0.0',
         kind: service.kind ?? 'domain',
         capabilities: service.capabilities ?? [],
+        summary: service.summary ?? '',
+        routePrefixes: service.routePrefixes ?? [],
         status: 'failed',
         error: error instanceof Error ? error.message : String(error),
       })
@@ -50,4 +54,3 @@ export async function registerServiceModules(app, modules, context, options = {}
 export function findFirstExistingDirectory(candidates) {
   return candidates.find((candidate) => fs.existsSync(candidate)) ?? null
 }
-

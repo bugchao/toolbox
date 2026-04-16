@@ -13,7 +13,14 @@ export const securityService = defineServiceModule({
   name: 'Security Service',
   version: '1.0.0',
   kind: 'domain',
+  summary: 'Security scoring, DNS security, SSL, headers, and certificate APIs.',
   capabilities: ['security-api', 'ssl-api', 'http-security-api', 'cert-api'],
+  routePrefixes: [
+    '/api/security',
+    '/api/ssl',
+    '/api/http-headers',
+    '/api/cert-tools',
+  ],
   async register(app) {
     registerSecurityApiRoutes(app)
     registerSecurityDomainScoreApiRoutes(app)

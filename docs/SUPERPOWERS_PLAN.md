@@ -196,4 +196,20 @@
   - 继续缩小 legacy bridge 中剩余的遗留接口
   - 给服务清单增加更细粒度的健康信息与分类说明
 
+### Iteration 4
+
+- 主题：`P0-3 服务清单可观测性`
+- 当前状态：`done`
+- 已完成：
+  - `service-core` 现在会为每个服务输出 `summary` 和 `routePrefixes`
+  - `dns-service`、`ip-service`、`security-service`、`legacy-tools-bridge` 都补齐了职责说明与路由前缀
+  - `/health` 现在会返回 ready / failed 汇总
+  - `/api/system/services` 现在会返回按 `kind` 聚合的摘要和更细粒度的服务信息
+- 验收结果：
+  - 网关侧已能直接看出每个服务负责什么、挂了哪些前缀
+  - 后续继续拆 bridge 时，边界变化可以通过系统接口直接观察
+- 下一步：
+  - 继续收缩 `legacy-tools-bridge`
+  - 为服务增加更细的初始化失败原因和可选健康探针
+
 后续每完成一个阶段，就在这里追加一条迭代记录。

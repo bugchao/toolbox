@@ -13,7 +13,18 @@ export const ipService = defineServiceModule({
   name: 'IP Service',
   version: '1.0.0',
   kind: 'domain',
+  summary: 'IP lookup, connectivity diagnostics, and availability APIs.',
   capabilities: ['ip-api', 'network-diagnostics-api'],
+  routePrefixes: [
+    '/api/ip-ops',
+    '/api/ping',
+    '/api/tcp-port',
+    '/api/traceroute',
+    '/api/cdn-check',
+    '/api/server-latency',
+    '/api/api-availability',
+    '/api/web-availability',
+  ],
   async register(app) {
     registerIpOpsApiRoutes(app)
     registerPingApiRoutes(app)

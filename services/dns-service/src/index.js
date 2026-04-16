@@ -17,7 +17,13 @@ export const dnsService = defineServiceModule({
   name: 'DNS Service',
   version: '1.0.0',
   kind: 'domain',
+  summary: 'DNS, domain record, and WHOIS related APIs.',
   capabilities: ['dns-api', 'domain-api', 'whois-api'],
+  routePrefixes: [
+    '/api/dns',
+    '/api/domain',
+    '/api/whois',
+  ],
   async register(app) {
     registerDnsNsApiRoutes(app)
     registerDnsCnameChainApiRoutes(app)
