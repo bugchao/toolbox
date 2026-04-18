@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Heart, Activity, Scale, Ruler, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface HealthData {
   height: number; // cm
@@ -17,6 +18,7 @@ interface HealthData {
 }
 
 const BMICalculator: React.FC = () => {
+  const { t } = useTranslation();
   const [height, setHeight] = useState<string>('175');
   const [weight, setWeight] = useState<string>('65');
   const [age, setAge] = useState<string>('25');
@@ -26,11 +28,11 @@ const BMICalculator: React.FC = () => {
   const [unitSystem, setUnitSystem] = useState<'metric' | 'imperial'>('metric');
 
   const activityLevels = [
-    { value: 1.2, label: '久坐不动', description: '几乎不运动，办公室工作' },
-    { value: 1.375, label: '轻度活动', description: '每周1-3次轻度运动' },
-    { value: 1.55, label: '中度活动', description: '每周3-5次中等强度运动' },
-    { value: 1.725, label: '高度活动', description: '每周6-7次高强度运动' },
-    { value: 1.9, label: '极高活动', description: '体力工作+每日高强度运动' },
+    { value: 1.2, label: t('bmiCalculator.activityLevels.sedentary'), description: t('bmiCalculator.activityLevels.sedentaryDesc') },
+    { value: 1.375, label: t('bmiCalculator.activityLevels.light'), description: t('bmiCalculator.activityLevels.lightDesc') },
+    { value: 1.55, label: t('bmiCalculator.activityLevels.moderate'), description: t('bmiCalculator.activityLevels.moderateDesc') },
+    { value: 1.725, label: t('bmiCalculator.activityLevels.active'), description: t('bmiCalculator.activityLevels.activeDesc') },
+    { value: 1.9, label: t('bmiCalculator.activityLevels.veryActive'), description: t('bmiCalculator.activityLevels.veryActiveDesc') },
   ];
 
   const calculateBMI = () => {
@@ -54,16 +56,16 @@ const BMICalculator: React.FC = () => {
     let bmiColor: string;
     
     if (bmi < 18.5) {
-      bmiCategory = '体重偏轻';
+      bmiCategory = t('bmiCalculator.bmiCategories.underweight');
       bmiColor = 'text-blue-600';
     } else if (bmi < 24) {
-      bmiCategory = '体重正常';
+      bmiCategory = t('bmiCalculator.bmiCategories.normal');
       bmiColor = 'text-green-600';
     } else if (bmi < 28) {
-      bmiCategory = '体重超重';
+      bmiCategory = t('bmiCalculator.bmiCategories.overweight');
       bmiColor = 'text-yellow-600';
     } else {
-      bmiCategory = '肥胖';
+      bmiCategory = t('bmiCalculator.bmiCategories.obese');
       bmiColor = 'text-red-600';
     }
 
@@ -89,26 +91,17 @@ const BMICalculator: React.FC = () => {
     const healthTips: string[] = [];
     
     if (bmi < 18.5) {
-      healthTips.push('建议适当增加营养摄入，保证优质蛋白质和热量的供应');
-      healthTips.push('可以进行适量的力量训练，增加肌肉量');
-      healthTips.push('保持规律的作息，避免过度劳累');
+      healthTips.push(...t('bmiCalculator.tips.underweight', { returnObjects: true }) as string[]);
     } else if (bmi < 24) {
-      healthTips.push('🎉 恭喜！你的体重在正常范围内，请继续保持');
-      healthTips.push('坚持均衡饮食，多吃蔬菜水果，少吃高油高盐食物');
-      healthTips.push('保持规律的运动习惯，每周至少150分钟中等强度运动');
+      healthTips.push(...t('bmiCalculator.tips.normal', { returnObjects: true }) as string[]);
     } else if (bmi < 28) {
-      healthTips.push('建议适当控制饮食，减少高热量食物摄入');
-      healthTips.push('增加有氧运动，每周4-5次，每次30分钟以上');
-      healthTips.push('保证充足睡眠，避免熬夜，熬夜会影响新陈代谢');
+      healthTips.push(...t('bmiCalculator.tips.overweight', { returnObjects: true }) as string[]);
     } else {
-      healthTips.push('建议在医生或营养师指导下制定科学的减重计划');
-      healthTips.push('控制每日总热量摄入，逐步减重，每月减重2-4斤为宜');
-      healthTips.push('运动要循序渐进，避免关节损伤，游泳、快走都是很好的选择');
-      healthTips.push('定期体检，关注血压、血糖、血脂等指标');
+      healthTips.push(...t('bmiCalculator.tips.obese', { returnObjects: true }) as string[]);
     }
 
     if (parseInt(age) >= 40) {
-      healthTips.push('建议定期进行体检，关注心血管健康');
+      healthTips.push(t('bmiCalculator.tips.age40Plus'));
     }
 
     setHealthData({
@@ -140,8 +133,8 @@ const BMICalculator: React.FC = () => {
   };
 
   const unitLabels = {
-    height: unitSystem === 'metric' ? '厘米' : '英寸',
-    weight: unitSystem === 'metric' ? '公斤' : '磅',
+    height: unitSystem === 'metric' ? t('bmiCalculator.units.cm') : t('bmiCalculator.units.inch'),
+    weight: unitSystem === 'metric' ? t('bmiCalculator.units.kg') : t('bmiCalculator.units.lb'),
   };
 
   return (
@@ -149,10 +142,10 @@ const BMICalculator: React.FC = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
           <Calculator className="h-8 w-8 text-indigo-600" />
-          BMI健康计算器
+          {t('bmiCalculator.title')}
         </h1>
         <p className="text-gray-600">
-          计算身体质量指数，了解健康状况，获取个性化建议
+          {t('bmiCalculator.description')}
         </p>
       </div>
 
@@ -161,12 +154,12 @@ const BMICalculator: React.FC = () => {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <User className="h-5 w-5 text-indigo-600" />
-            基本信息
+            {t('bmiCalculator.basicInfo')}
           </h2>
 
           {/* 单位切换 */}
           <div className="flex items-center justify-between mb-6">
-            <span className="text-sm font-medium text-gray-700">单位制</span>
+            <span className="text-sm font-medium text-gray-700">{t('bmiCalculator.unitSystem')}</span>
             <div className="flex border border-gray-300 rounded-md overflow-hidden">
               <button
                 onClick={() => setUnitSystem('metric')}
@@ -176,7 +169,7 @@ const BMICalculator: React.FC = () => {
                     : 'bg-white text-gray-700 hover:bg-gray-50'
                 }`}
               >
-                公制
+                {t('bmiCalculator.metric')}
               </button>
               <button
                 onClick={() => setUnitSystem('imperial')}
@@ -186,7 +179,7 @@ const BMICalculator: React.FC = () => {
                     : 'bg-white text-gray-700 hover:bg-gray-50'
                 }`}
               >
-                英制
+                {t('bmiCalculator.imperial')}
               </button>
             </div>
           </div>
@@ -195,7 +188,7 @@ const BMICalculator: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                 <Ruler className="h-4 w-4" />
-                身高 ({unitLabels.height})
+                {t('bmiCalculator.height')} ({unitLabels.height})
               </label>
               <input
                 type="number"
@@ -211,7 +204,7 @@ const BMICalculator: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                 <Scale className="h-4 w-4" />
-                体重 ({unitLabels.weight})
+                {t('bmiCalculator.weight')} ({unitLabels.weight})
               </label>
               <input
                 type="number"
@@ -226,7 +219,7 @@ const BMICalculator: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                年龄
+                {t('bmiCalculator.age')}
               </label>
               <input
                 type="number"
@@ -240,7 +233,7 @@ const BMICalculator: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                性别
+                {t('bmiCalculator.gender')}
               </label>
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -251,7 +244,7 @@ const BMICalculator: React.FC = () => {
                     onChange={(e) => setGender(e.target.value as 'male')}
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                   />
-                  <span>男</span>
+                  <span>{t('bmiCalculator.male')}</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -261,7 +254,7 @@ const BMICalculator: React.FC = () => {
                     onChange={(e) => setGender(e.target.value as 'female')}
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                   />
-                  <span>女</span>
+                  <span>{t('bmiCalculator.female')}</span>
                 </label>
               </div>
             </div>
@@ -269,7 +262,7 @@ const BMICalculator: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                 <Activity className="h-4 w-4" />
-                活动水平
+                {t('bmiCalculator.activityLevel')}
               </label>
               <div className="space-y-2">
                 {activityLevels.map((level) => (
@@ -301,7 +294,7 @@ const BMICalculator: React.FC = () => {
               onClick={handleReset}
               className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors"
             >
-              重置
+              {t('common.reset')}
             </button>
           </div>
         </div>
@@ -310,7 +303,7 @@ const BMICalculator: React.FC = () => {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Heart className="h-5 w-5 text-red-500" />
-            健康评估
+            {t('bmiCalculator.healthAssessment')}
           </h2>
 
           {healthData && (
@@ -324,31 +317,31 @@ const BMICalculator: React.FC = () => {
                   {healthData.bmiCategory}
                 </div>
                 <div className="text-sm text-gray-500">
-                  正常范围: 18.5 - 23.9
+                  {t('bmiCalculator.normalRange')}
                 </div>
               </div>
 
               {/* 健康数据卡片 */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-500 mb-1">理想体重范围</div>
+                  <div className="text-sm text-gray-500 mb-1">{t('bmiCalculator.idealWeightRange')}</div>
                   <div className="text-lg font-semibold">
                     {healthData.idealWeightRange[0]} - {healthData.idealWeightRange[1]} {unitLabels.weight}
                   </div>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-500 mb-1">基础代谢率 (BMR)</div>
+                  <div className="text-sm text-gray-500 mb-1">{t('bmiCalculator.bmr')}</div>
                   <div className="text-lg font-semibold">
-                    {healthData.bmr} 千卡/天
+                    {healthData.bmr} {t('bmiCalculator.caloriesPerDay')}
                   </div>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg col-span-2">
-                  <div className="text-sm text-gray-500 mb-1">每日总热量消耗 (TDEE)</div>
+                  <div className="text-sm text-gray-500 mb-1">{t('bmiCalculator.tdee')}</div>
                   <div className="text-lg font-semibold">
-                    {healthData.tdee} 千卡/天
+                    {healthData.tdee} {t('bmiCalculator.caloriesPerDay')}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
-                    维持当前体重每日需要摄入的热量
+                    {t('bmiCalculator.tdeeDesc')}
                   </div>
                 </div>
               </div>
@@ -367,17 +360,17 @@ const BMICalculator: React.FC = () => {
                 </div>
               </div>
               <div className="flex justify-between text-xs text-gray-500">
-                <span>偏瘦</span>
-                <span>正常</span>
-                <span>超重</span>
-                <span>肥胖</span>
+                <span>{t('bmiCalculator.bmiScale.thin')}</span>
+                <span>{t('bmiCalculator.bmiScale.normal')}</span>
+                <span>{t('bmiCalculator.bmiScale.overweight')}</span>
+                <span>{t('bmiCalculator.bmiScale.obese')}</span>
               </div>
 
               {/* 健康建议 */}
               <div className="bg-blue-50 p-4 rounded-lg">
                 <h3 className="text-sm font-medium text-blue-800 mb-2 flex items-center gap-1">
                   <Heart className="h-4 w-4" />
-                  健康建议
+                  {t('bmiCalculator.healthTips')}
                 </h3>
                 <ul className="space-y-1 text-sm text-blue-700">
                   {healthData.healthTips.map((tip, index) => (
@@ -391,11 +384,11 @@ const BMICalculator: React.FC = () => {
 
               {/* 健康小知识 */}
               <div className="border-t pt-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">健康小知识</h3>
+                <h3 className="text-sm font-medium text-gray-700 mb-2">{t('bmiCalculator.healthKnowledge')}</h3>
                 <div className="text-xs text-gray-600 space-y-1">
-                  <p>• BMI（身体质量指数）是国际通用的衡量人体胖瘦程度以及是否健康的标准</p>
-                  <p>• 本计算器仅供参考，具体健康状况请咨询专业医生</p>
-                  <p>• 建议每周至少进行150分钟中等强度有氧运动，保持健康生活方式</p>
+                  <p>• {t('bmiCalculator.knowledgeItems.bmiDefinition')}</p>
+                  <p>• {t('bmiCalculator.knowledgeItems.disclaimer')}</p>
+                  <p>• {t('bmiCalculator.knowledgeItems.exerciseRecommendation')}</p>
                 </div>
               </div>
             </div>
