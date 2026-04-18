@@ -1,7 +1,9 @@
 import { useState, useRef } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function ElectronicWoodenFish() {
+  const { t } = useTranslation();
   const [merit, setMerit] = useState(0);
   const [autoMode, setAutoMode] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
@@ -9,16 +11,7 @@ export default function ElectronicWoodenFish() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const blessings = [
-    '功德+1',
-    '心想事成',
-    '万事如意',
-    '平安喜乐',
-    '福慧双修',
-    '六时吉祥',
-    '诸事顺遂',
-    '身心安康'
-  ];
+  const blessings = t('woodenFish.blessings', { returnObjects: true }) as string[];
 
   const playSound = () => {
     if (soundEnabled && audioRef.current) {
@@ -95,14 +88,14 @@ export default function ElectronicWoodenFish() {
 
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-amber-900 mb-2">🪵 电子木鱼</h1>
-          <p className="text-amber-700">敲木鱼，积功德，放松身心</p>
+          <h1 className="text-4xl font-bold text-amber-900 mb-2">🪵 {t('woodenFish.title')}</h1>
+          <p className="text-amber-700">{t('woodenFish.description')}</p>
         </div>
 
         {/* 功德计数器 */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-6 text-center">
           <div className="text-6xl font-bold text-amber-600 mb-2">{merit}</div>
-          <div className="text-xl text-amber-800">功德</div>
+          <div className="text-xl text-amber-800">{t('woodenFish.merit')}</div>
         </div>
 
         {/* 木鱼 */}
@@ -119,7 +112,7 @@ export default function ElectronicWoodenFish() {
         {/* 控制面板 */}
         <div className="bg-white rounded-2xl shadow-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">自动敲击</span>
+            <span className="text-gray-700 font-medium">{t('woodenFish.autoMode')}</span>
             <button
               onClick={toggleAutoMode}
               className={`px-6 py-2 rounded-lg font-medium transition-colors ${
@@ -128,14 +121,14 @@ export default function ElectronicWoodenFish() {
                   : 'bg-amber-500 hover:bg-amber-600 text-white'
               }`}
             >
-              {autoMode ? '停止' : '开始'}
+              {autoMode ? t('common.close') : t('common.open')}
             </button>
           </div>
 
           {autoMode && (
             <div>
               <label className="block text-gray-700 font-medium mb-2">
-                敲击速度: {(1000 / speed).toFixed(1)} 次/秒
+                {t('woodenFish.speed')}: {(1000 / speed).toFixed(1)} {t('common.times')}/s
               </label>
               <input
                 type="range"
@@ -150,7 +143,7 @@ export default function ElectronicWoodenFish() {
           )}
 
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">音效</span>
+            <span className="text-gray-700 font-medium">{t('woodenFish.soundEnabled')}</span>
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
               className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -167,7 +160,7 @@ export default function ElectronicWoodenFish() {
             onClick={resetMerit}
             className="w-full py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
-            重置功德
+            {t('woodenFish.resetMerit')}
           </button>
         </div>
 

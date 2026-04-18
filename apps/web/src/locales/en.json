@@ -71,7 +71,8 @@
     "ok": "OK",
     "apply": "Apply",
     "undo": "Undo",
-    "redo": "Redo"
+    "redo": "Redo",
+    "times": "times"
   },
   "nav": {
     "home": "Home",
@@ -198,5 +199,71 @@
       "overweight": "Overweight",
       "obese": "Obese"
     }
+  },
+  "hotNews": {
+    "title": "Hot News",
+    "description": "Real-time hot news aggregation",
+    "allCategories": "All",
+    "categories": {
+      "tech": "Tech",
+      "sports": "Sports",
+      "ai": "AI",
+      "openclaw": "OpenClaw",
+      "mcp": "MCP",
+      "international": "International"
+    },
+    "source": "Source",
+    "time": "Time",
+    "viewDetails": "View Details",
+    "fetchError": "Failed to fetch news",
+    "noNews": "No news available"
+  },
+  "woodenFish": {
+    "title": "Electronic Wooden Fish",
+    "description": "Knock the wooden fish, accumulate merit, relax your mind",
+    "merit": "Merit",
+    "knock": "Knock",
+    "autoMode": "Auto Mode",
+    "speed": "Speed",
+    "soundEnabled": "Sound",
+    "resetMerit": "Reset Merit",
+    "blessings": [
+      "Merit +1",
+      "Wishes Come True",
+      "All the Best",
+      "Peace and Joy",
+      "Wisdom and Fortune",
+      "Auspicious Times",
+      "Everything Goes Well",
+      "Health and Wellness"
+    ],
+    "speedLevels": {
+      "slow": "Slow",
+      "normal": "Normal",
+      "fast": "Fast"
+    }
+  },
+  "imageBackgroundRemover": {
+    "title": "Background Remover",
+    "description": "AI-powered background removal",
+    "uploadImage": "Upload Image",
+    "dragOrClick": "Drag image here or click to upload",
+    "supportedFormats": "Supports JPG, PNG, WebP formats",
+    "originalImage": "Original",
+    "processedImage": "Processed",
+    "removeBackground": "Remove Background",
+    "processing": "Processing...",
+    "downloadImage": "Download Image",
+    "copyImage": "Copy Image",
+    "copied": "Copied",
+    "reset": "Upload New",
+    "tips": {
+      "title": "Usage Tips",
+      "tip1": "Supports JPG, PNG, WebP and other common image formats",
+      "tip2": "For best results, upload images with clear subjects and simple backgrounds",
+      "tip3": "Processed images are in PNG format with transparent background support",
+      "tip4": "This is a demo version. Production projects can integrate professional AI background removal APIs"
+    },
+    "copyFailed": "Copy failed, please download manually"
   }
 }

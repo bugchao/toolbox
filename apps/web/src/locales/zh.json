@@ -71,7 +71,8 @@
     "ok": "确定",
     "apply": "应用",
     "undo": "撤销",
-    "redo": "重做"
+    "redo": "重做",
+    "times": "次"
   },
   "nav": {
     "home": "首页",
@@ -198,5 +199,71 @@
       "overweight": "超重",
       "obese": "肥胖"
     }
+  },
+  "hotNews": {
+    "title": "热点新闻",
+    "description": "实时热点新闻聚合",
+    "allCategories": "全部",
+    "categories": {
+      "tech": "科技",
+      "sports": "体育",
+      "ai": "AI",
+      "openclaw": "OpenClaw",
+      "mcp": "MCP",
+      "international": "国际"
+    },
+    "source": "来源",
+    "time": "时间",
+    "viewDetails": "查看详情",
+    "fetchError": "获取新闻失败",
+    "noNews": "暂无新闻"
+  },
+  "woodenFish": {
+    "title": "电子木鱼",
+    "description": "敲木鱼，积功德，放松身心",
+    "merit": "功德",
+    "knock": "敲木鱼",
+    "autoMode": "自动模式",
+    "speed": "速度",
+    "soundEnabled": "音效",
+    "resetMerit": "重置功德",
+    "blessings": [
+      "功德+1",
+      "心想事成",
+      "万事如意",
+      "平安喜乐",
+      "福慧双修",
+      "六时吉祥",
+      "诸事顺遂",
+      "身心安康"
+    ],
+    "speedLevels": {
+      "slow": "慢速",
+      "normal": "正常",
+      "fast": "快速"
+    }
+  },
+  "imageBackgroundRemover": {
+    "title": "图片去背景",
+    "description": "AI智能去除图片背景",
+    "uploadImage": "上传图片",
+    "dragOrClick": "拖拽图片到此处或点击上传",
+    "supportedFormats": "支持 JPG、PNG、WebP 格式",
+    "originalImage": "原图",
+    "processedImage": "处理后",
+    "removeBackground": "去除背景",
+    "processing": "处理中...",
+    "downloadImage": "下载图片",
+    "copyImage": "复制图片",
+    "copied": "已复制",
+    "reset": "重新上传",
+    "tips": {
+      "title": "使用提示",
+      "tip1": "支持 JPG、PNG、WebP 等常见图片格式",
+      "tip2": "建议上传主体清晰、背景单一的图片，效果更佳",
+      "tip3": "处理后的图片为 PNG 格式，支持透明背景",
+      "tip4": "当前为演示版本，实际项目可接入专业 AI 去背景 API"
+    },
+    "copyFailed": "复制失败，请手动下载"
   }
 }

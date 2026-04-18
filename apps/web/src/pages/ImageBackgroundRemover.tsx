@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Copy, RefreshCw, Image as ImageIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ImageBackgroundRemover: React.FC = () => {
+  const { t } = useTranslation();
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -94,8 +96,8 @@ const ImageBackgroundRemover: React.FC = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      console.error('复制失败:', error);
-      alert('复制失败，请手动下载');
+      console.error(t('imageBackgroundRemover.copyFailed'), error);
+      alert(t('imageBackgroundRemover.copyFailed'));
     }
   };
 
@@ -110,14 +112,14 @@ const ImageBackgroundRemover: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">图片去背景工具</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">{t('imageBackgroundRemover.title')}</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 左侧上传区 */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Upload className="w-5 h-5 text-blue-600" /> 上传图片
+              <Upload className="w-5 h-5 text-blue-600" /> {t('imageBackgroundRemover.uploadImage')}
             </h2>
             
             <div
@@ -128,17 +130,17 @@ const ImageBackgroundRemover: React.FC = () => {
                 <div className="space-y-4">
                   <img
                     src={originalImage}
-                    alt="原始图片"
+                    alt={t('imageBackgroundRemover.originalImage')}
                     className="max-h-64 mx-auto rounded"
                   />
-                  <p className="text-sm text-gray-500">点击更换图片</p>
+                  <p className="text-sm text-gray-500">{t('imageBackgroundRemover.reset')}</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   <ImageIcon className="w-16 h-16 mx-auto text-gray-400" />
                   <div>
-                    <p className="text-lg font-medium text-gray-700">点击或拖拽上传图片</p>
-                    <p className="text-sm text-gray-500 mt-1">支持 JPG、PNG 格式，建议背景为纯色</p>
+                    <p className="text-lg font-medium text-gray-700">{t('imageBackgroundRemover.dragOrClick')}</p>
+                    <p className="text-sm text-gray-500 mt-1">{t('imageBackgroundRemover.supportedFormats')}</p>
                   </div>
                 </div>
               )}
@@ -161,12 +163,12 @@ const ImageBackgroundRemover: React.FC = () => {
                   {isProcessing ? (
                     <>
                       <RefreshCw className="w-5 h-5 animate-spin" />
-                      处理中...
+                      {t('imageBackgroundRemover.processing')}
                     </>
                   ) : (
                     <>
                       <RefreshCw className="w-5 h-5" />
-                      一键去除背景
+                      {t('imageBackgroundRemover.removeBackground')}
                     </>
                   )}
                 </button>
@@ -175,23 +177,23 @@ const ImageBackgroundRemover: React.FC = () => {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">💡 使用说明</h2>
+            <h2 className="text-xl font-semibold mb-4">{t('imageBackgroundRemover.tips.title')}</h2>
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 font-bold">•</span>
-                <span>上传背景为纯色的图片，去除效果最佳</span>
+                <span>{t('imageBackgroundRemover.tips.tip1')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 font-bold">•</span>
-                <span>目前支持白色背景自动去除，复杂背景请使用专业AI工具</span>
+                <span>{t('imageBackgroundRemover.tips.tip2')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 font-bold">•</span>
-                <span>处理后的图片为透明背景的PNG格式，可直接下载使用</span>
+                <span>{t('imageBackgroundRemover.tips.tip3')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 font-bold">•</span>
-                <span>所有处理均在本地完成，不会上传到服务器，保障隐私安全</span>
+                <span>{t('imageBackgroundRemover.tips.tip4')}</span>
               </li>
             </ul>
           </div>
@@ -207,7 +209,7 @@ const ImageBackgroundRemover: React.FC = () => {
         {/* 右侧结果区 */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">处理结果</h2>
+            <h2 className="text-xl font-semibold mb-4">{t('imageBackgroundRemover.processedImage')}</h2>
             
             <div 
               className="border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIi8+PHJlY3QgeD0iMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIvPjxyZWN0IHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiLz48L2c+PC9zdmc+')] bg-[length:20px_20px]"
@@ -216,15 +218,15 @@ const ImageBackgroundRemover: React.FC = () => {
               {processedImage ? (
                 <img
                   src={processedImage}
-                  alt="处理后图片"
+                  alt={t('imageBackgroundRemover.processedImage')}
                   className="max-h-64 mx-auto rounded"
                 />
               ) : processed ? (
-                <div className="text-gray-500">处理失败，请重试</div>
+                <div className="text-gray-500">{t('common.operationFailed')}</div>
               ) : originalImage ? (
-                <div className="text-gray-500">点击左侧按钮开始处理</div>
+                <div className="text-gray-500">{t('imageBackgroundRemover.processing')}</div>
               ) : (
-                <div className="text-gray-500">请先上传图片</div>
+                <div className="text-gray-500">{t('imageBackgroundRemover.uploadImage')}</div>
               )}
             </div>
 
@@ -235,7 +237,7 @@ const ImageBackgroundRemover: React.FC = () => {
                   className="flex-1 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
                 >
                   <Download className="w-5 h-5" />
-                  下载PNG
+                  {t('imageBackgroundRemover.downloadImage')}
                 </button>
                 <button
                   onClick={copyToClipboard}
@@ -244,7 +246,7 @@ const ImageBackgroundRemover: React.FC = () => {
                   } text-white rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center gap-2`}
                 >
                   <Copy className="w-5 h-5" />
-                  {copied ? '已复制' : '复制到剪贴板'}
+                  {copied ? t('imageBackgroundRemover.copied') : t('imageBackgroundRemover.copyImage')}
                 </button>
               </div>
             )}
@@ -255,7 +257,7 @@ const ImageBackgroundRemover: React.FC = () => {
                   onClick={reset}
                   className="w-full py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  重新上传
+                  {t('imageBackgroundRemover.reset')}
                 </button>
               </div>
             )}

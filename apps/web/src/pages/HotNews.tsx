@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { RefreshCw, ExternalLink } from 'lucide-react'
 import { NewsItem } from '../types'
+import { useTranslation } from 'react-i18next'
 
 const HotNews: React.FC = () => {
+  const { t } = useTranslation();
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   const categories = [
-    { value: 'all', label: '全部' },
-    { value: '科技', label: '科技' },
-    { value: '体育', label: '体育' },
-    { value: 'AI', label: 'AI' },
-    { value: 'OpenClaw', label: 'OpenClaw' },
-    { value: 'MCP', label: 'MCP' },
-    { value: '国际', label: '国际' },
+    { value: 'all', label: t('hotNews.allCategories') },
+    { value: '科技', label: t('hotNews.categories.tech') },
+    { value: '体育', label: t('hotNews.categories.sports') },
+    { value: 'AI', label: t('hotNews.categories.ai') },
+    { value: 'OpenClaw', label: t('hotNews.categories.openclaw') },
+    { value: 'MCP', label: t('hotNews.categories.mcp') },
+    { value: '国际', label: t('hotNews.categories.international') },
   ]
 
   const fetchNews = async () => {
@@ -71,7 +73,7 @@ const HotNews: React.FC = () => {
         ])
       }
     } catch (err) {
-      console.error('获取新闻失败:', err)
+      console.error(t('hotNews.fetchError'), err)
       // 使用模拟数据
       setNews([
         {
@@ -128,14 +130,14 @@ const HotNews: React.FC = () => {
     <div className="max-w-4xl mx-auto">
       <div className="card">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">每日热点</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t('hotNews.title')}</h1>
           <button
             onClick={fetchNews}
             disabled={loading}
             className="btn btn-primary flex items-center"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            {loading ? '刷新中...' : '刷新'}
+            {loading ? t('common.loading') : t('common.refresh')}
           </button>
         </div>
 
@@ -193,7 +195,7 @@ const HotNews: React.FC = () => {
             ))
           ) : (
             <div className="text-center py-12 text-gray-500">
-              暂无新闻数据，请点击刷新按钮
+              {t('hotNews.noNews')}
             </div>
           )}
         </div>
