@@ -265,5 +265,50 @@
       "tip4": "This is a demo version. Production projects can integrate professional AI background removal APIs"
     },
     "copyFailed": "Copy failed, please download manually"
+  },
+  "imageRotator": {
+    "title": "Image Rotator",
+    "description": "Rotate and flip images, batch processing supported",
+    "uploadImages": "Upload Images",
+    "dragOrClick": "Drag images here or click to upload",
+    "supportMultiple": "Multiple selection supported, batch processing",
+    "rotation": "Rotation Angle",
+    "flipHorizontal": "Flip Horizontal",
+    "flipVertical": "Flip Vertical",
+    "customAngle": "Custom Angle",
+    "processAll": "Process All Images",
+    "downloadAll": "Download All",
+    "clearAll": "Clear All",
+    "originalSize": "Original Size",
+    "processedSize": "Processed",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "done": "Done",
+      "error": "Error"
+    }
+  },
+  "imageCompressor": {
+    "title": "Image Compressor",
+    "description": "Compress image size while maintaining quality",
+    "quality": "Quality",
+    "outputFormat": "Output Format",
+    "sameAsOriginal": "Same as Original",
+    "preserveExif": "Preserve EXIF Data",
+    "compressionRate": "Compression Rate",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed"
+  },
+  "imageCropper": {
+    "title": "Image Cropper",
+    "description": "Crop images with multiple aspect ratios",
+    "aspectRatio": "Aspect Ratio",
+    "free": "Free",
+    "cropArea": "Crop Area",
+    "applyCrop": "Apply Crop",
+    "resetCrop": "Reset Crop",
+    "rotate": "Rotate",
+    "flipH": "Flip Horizontal",
+    "flipV": "Flip Vertical"
   }
 }

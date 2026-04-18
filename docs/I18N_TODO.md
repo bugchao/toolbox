@@ -54,10 +54,10 @@
 
 这批优先级最高，因为页面里仍是整块硬编码 UI。
 
-- [apps/web/src/pages/BMICalculator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/BMICalculator.tsx)
-- [apps/web/src/pages/ElectronicWoodenFish.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ElectronicWoodenFish.tsx)
-- [apps/web/src/pages/HotNews.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/HotNews.tsx)
-- [apps/web/src/pages/ImageBackgroundRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageBackgroundRemover.tsx)
+- ~~[apps/web/src/pages/BMICalculator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/BMICalculator.tsx)~~ ✅ 已完成
+- ~~[apps/web/src/pages/ElectronicWoodenFish.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ElectronicWoodenFish.tsx)~~ ✅ 已完成
+- ~~[apps/web/src/pages/HotNews.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/HotNews.tsx)~~ ✅ 已完成
+- ~~[apps/web/src/pages/ImageBackgroundRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageBackgroundRemover.tsx)~~ ✅ 已完成
 - [apps/web/src/pages/ImageCompressor.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCompressor.tsx)
 - [apps/web/src/pages/ImageCropper.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCropper.tsx)
 - [apps/web/src/pages/ImageFilter.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageFilter.tsx)

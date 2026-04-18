@@ -265,5 +265,50 @@
       "tip4": "当前为演示版本，实际项目可接入专业 AI 去背景 API"
     },
     "copyFailed": "复制失败，请手动下载"
+  },
+  "imageRotator": {
+    "title": "图片旋转/翻转",
+    "description": "旋转、翻转图片，支持批量处理",
+    "uploadImages": "上传图片",
+    "dragOrClick": "拖拽图片到此处或点击上传",
+    "supportMultiple": "支持多选，批量处理",
+    "rotation": "旋转角度",
+    "flipHorizontal": "水平翻转",
+    "flipVertical": "垂直翻转",
+    "customAngle": "自定义角度",
+    "processAll": "处理所有图片",
+    "downloadAll": "下载所有",
+    "clearAll": "清空列表",
+    "originalSize": "原始大小",
+    "processedSize": "处理后",
+    "status": {
+      "pending": "待处理",
+      "processing": "处理中",
+      "done": "完成",
+      "error": "错误"
+    }
+  },
+  "imageCompressor": {
+    "title": "图片压缩",
+    "description": "压缩图片大小，保持画质",
+    "quality": "质量",
+    "outputFormat": "输出格式",
+    "sameAsOriginal": "与原图相同",
+    "preserveExif": "保留EXIF信息",
+    "compressionRate": "压缩率",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后"
+  },
+  "imageCropper": {
+    "title": "图片裁剪",
+    "description": "裁剪图片，支持多种比例",
+    "aspectRatio": "裁剪比例",
+    "free": "自由",
+    "cropArea": "裁剪区域",
+    "applyCrop": "应用裁剪",
+    "resetCrop": "重置裁剪",
+    "rotate": "旋转",
+    "flipH": "水平翻转",
+    "flipV": "垂直翻转"
   }
 }
