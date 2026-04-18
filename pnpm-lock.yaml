@@ -36,21 +36,27 @@ importers:
 
   apps/api-gateway:
     dependencies:
+      '@toolbox/content-service':
+        specifier: workspace:*
+        version: link:../../services/content-service
       '@toolbox/dns-service':
         specifier: workspace:*
         version: link:../../services/dns-service
       '@toolbox/ip-service':
         specifier: workspace:*
         version: link:../../services/ip-service
-      '@toolbox/legacy-tools-service':
-        specifier: workspace:*
-        version: link:../../services/legacy-tools-service
       '@toolbox/security-service':
         specifier: workspace:*
         version: link:../../services/security-service
       '@toolbox/service-core':
         specifier: workspace:*
         version: link:../../packages/service-core
+      '@toolbox/storage-service':
+        specifier: workspace:*
+        version: link:../../services/storage-service
+      '@toolbox/utility-service':
+        specifier: workspace:*
+        version: link:../../services/utility-service
       express:
         specifier: ^4.18.2
         version: 4.22.1
@@ -588,6 +594,12 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  services/content-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
   services/dns-service:
     dependencies:
       '@toolbox/service-core':
@@ -607,6 +619,18 @@ importers:
         version: link:../../packages/service-core
 
   services/security-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
+  services/storage-service:
+    dependencies:
+      '@toolbox/service-core':
+        specifier: workspace:*
+        version: link:../../packages/service-core
+
+  services/utility-service:
     dependencies:
       '@toolbox/service-core':
         specifier: workspace:*

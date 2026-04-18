@@ -212,4 +212,35 @@
   - 继续收缩 `legacy-tools-bridge`
   - 为服务增加更细的初始化失败原因和可选健康探针
 
+### Iteration 5
+
+- 主题：`P0-3 继续缩小 legacy bridge`
+- 当前状态：`done`
+- 已完成：
+  - 新增 `@toolbox/content-service`，承接 `/api/news`
+  - 新增 `@toolbox/utility-service`，承接 `/api/zipcode` 与 `/api/http-status`
+  - `api-gateway` 已同时注册 `content-service` 与 `utility-service`
+  - `legacy-tools-bridge` 进一步收缩，仅保留 `store-api` 和最终遗留职责
+- 验收结果：
+  - `news / zipcode / http-status` 已从 bridge 迁出
+  - `legacy-tools-bridge` 已不再承载内容聚合和通用查询接口
+- 下一步：
+  - 为 `store-api` 设计单独归属，完成 bridge 最后一轮收缩
+  - 给各服务补更细的就绪探针
+
+### Iteration 6
+
+- 主题：`P0-3 完成 legacy bridge 退场`
+- 当前状态：`done`
+- 已完成：
+  - 新增 `@toolbox/storage-service`，承接 `/api/store`
+  - `api-gateway` 已改为直接注册 `storage-service`
+  - `legacy-tools-bridge` 已从 gateway 注册链路中移除
+- 验收结果：
+  - 网关当前由真实领域服务直接组成，不再依赖桥接服务承接线上入口
+  - bridge 已降级为历史兼容代码，而不是运行时主路径的一部分
+- 下一步：
+  - 评估是否保留 `legacy-tools-service` 包作为兼容层，或进入归档阶段
+  - 给各服务补更细的就绪探针和失败原因
+
 后续每完成一个阶段，就在这里追加一条迭代记录。
