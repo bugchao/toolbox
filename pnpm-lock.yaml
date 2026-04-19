@@ -666,6 +666,9 @@ importers:
 
   tools/tool-ai-token-cost:
     dependencies:
+      i18next:
+        specifier: ^23.16.0
+        version: 23.16.8
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@18.3.1)
@@ -675,6 +678,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^15.7.4
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
     devDependencies:
       '@types/react':
         specifier: ^18.3.0
@@ -688,6 +694,9 @@ importers:
 
   tools/tool-analog-clock:
     dependencies:
+      i18next:
+        specifier: ^23.16.0
+        version: 23.16.8
       lucide-react:
         specifier: ^0.344.0
         version: 0.344.0(react@18.3.1)
@@ -697,6 +706,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^15.7.4
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       react-router-dom:
         specifier: ^7.13.1
         version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4526,6 +4538,9 @@ importers:
 
   tools/tool-proxy-speed-test:
     dependencies:
+      i18next:
+        specifier: ^23.16.0
+        version: 23.16.8
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@18.3.1)
@@ -4535,6 +4550,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^15.7.4
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
     devDependencies:
       '@types/react':
         specifier: ^18.3.0
@@ -4548,6 +4566,9 @@ importers:
 
   tools/tool-qrcode:
     dependencies:
+      i18next:
+        specifier: ^23.16.0
+        version: 23.16.8
       jsqr:
         specifier: ^1.4.0
         version: 1.4.0
@@ -4563,6 +4584,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^15.7.4
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
     devDependencies:
       '@types/qrcode':
         specifier: ^1.5.6
@@ -4638,6 +4662,9 @@ importers:
 
   tools/tool-rapid-tables:
     dependencies:
+      i18next:
+        specifier: ^23.16.0
+        version: 23.16.8
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@18.3.1)
@@ -4647,6 +4674,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-i18next:
+        specifier: ^15.7.4
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
     devDependencies:
       '@types/react':
         specifier: ^18.3.0
