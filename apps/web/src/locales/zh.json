@@ -389,5 +389,30 @@
     "daysLived": "已经历的天数",
     "daysRemaining": "剩余天数",
     "calculate": "计算"
+  },
+  "imageWatermarkRemover": {
+    "title": "图片去水印",
+    "description": "智能去除图片水印",
+    "brushSize": "画笔大小",
+    "markWatermark": "标记水印区域",
+    "removeWatermark": "去除水印"
+  },
+  "zipCode": {
+    "title": "邮编查询",
+    "description": "查询地址对应的邮政编码",
+    "searchPlaceholder": "输入地址或邮编",
+    "province": "省份",
+    "city": "城市",
+    "district": "区县",
+    "address": "地址",
+    "postalCode": "邮政编码"
+  },
+  "shortLinkRedirect": {
+    "title": "短链接跳转",
+    "redirecting": "跳转中...",
+    "notFound": "链接不存在",
+    "expired": "链接已过期",
+    "disabled": "链接已禁用",
+    "backToHome": "返回首页"
   }
 }

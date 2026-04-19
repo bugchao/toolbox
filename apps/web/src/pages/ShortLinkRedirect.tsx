@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Link2, AlertCircle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const STORAGE_KEY = 'shortLinks'
 
@@ -16,6 +17,7 @@ interface ShortLinkRecord {
 }
 
 const ShortLinkRedirect: React.FC = () => {
+  const { t } = useTranslation();
   const { code } = useParams<{ code: string }>()
   const [status, setStatus] = useState<'redirecting' | 'not_found' | 'expired' | 'disabled' | null>(null)
 

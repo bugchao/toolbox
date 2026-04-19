@@ -389,5 +389,30 @@
     "daysLived": "Days Lived",
     "daysRemaining": "Days Remaining",
     "calculate": "Calculate"
+  },
+  "imageWatermarkRemover": {
+    "title": "Watermark Remover",
+    "description": "Intelligently remove image watermarks",
+    "brushSize": "Brush Size",
+    "markWatermark": "Mark Watermark Area",
+    "removeWatermark": "Remove Watermark"
+  },
+  "zipCode": {
+    "title": "Zip Code Lookup",
+    "description": "Find postal codes for addresses",
+    "searchPlaceholder": "Enter address or zip code",
+    "province": "Province",
+    "city": "City",
+    "district": "District",
+    "address": "Address",
+    "postalCode": "Postal Code"
+  },
+  "shortLinkRedirect": {
+    "title": "Short Link Redirect",
+    "redirecting": "Redirecting...",
+    "notFound": "Link not found",
+    "expired": "Link expired",
+    "disabled": "Link disabled",
+    "backToHome": "Back to Home"
   }
 }

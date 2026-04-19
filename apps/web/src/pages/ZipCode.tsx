@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Search } from 'lucide-react'
 import { ZipCodeInfo } from '../types'
+import { useTranslation } from 'react-i18next'
 
 const ZipCode: React.FC = () => {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('')
   const [result, setResult] = useState<ZipCodeInfo | null>(null)
   const [loading, setLoading] = useState(false)

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Eraser, X, Plus, Circle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface WatermarkImage {
   id: string;
@@ -11,6 +12,7 @@ interface WatermarkImage {
 }
 
 const ImageWatermarkRemover: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<WatermarkImage[]>([]);
   const [selectedImage, setSelectedImage] = useState<WatermarkImage | null>(null);
   const [brushSize, setBrushSize] = useState(30);
