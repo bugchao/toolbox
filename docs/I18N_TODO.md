@@ -75,9 +75,9 @@
 
 这批工具包同时缺少 locale 资源，并且页面组件没有使用 `useTranslation`。
 
-- [tools/tool-ai-token-cost](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-ai-token-cost)
-- [tools/tool-analog-clock](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-analog-clock)
-- [tools/tool-proxy-speed-test](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-proxy-speed-test)
+- ~~[tools/tool-ai-token-cost](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-ai-token-cost)~~ ✅ 已完成
+- ~~[tools/tool-analog-clock](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-analog-clock)~~ ✅ 已完成
+- ~~[tools/tool-proxy-speed-test](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-proxy-speed-test)~~ ✅ 已完成
 - [tools/tool-qrcode](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-qrcode)
 - [tools/tool-rapid-tables](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-rapid-tables)
 
