@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, LayoutGrid, Columns, Rows, X, Plus, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface StitchImage {
   id: string;
@@ -10,6 +11,7 @@ interface StitchImage {
 }
 
 const ImageStitcher: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<StitchImage[]>([]);
   const [direction, setDirection] = useState<'horizontal' | 'vertical'>('horizontal');
   const [gap, setGap] = useState(0);

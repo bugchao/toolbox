@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Sparkles, X, Plus, Sliders } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface FilterImage {
   id: string;
@@ -76,6 +77,7 @@ const PRESET_FILTERS: { name: string; settings: FilterSettings }[] = [
 ];
 
 const ImageFilter: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<FilterImage[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<string>('原图');
   const [settings, setSettings] = useState<FilterSettings>(PRESET_FILTERS[0].settings);

@@ -315,5 +315,49 @@
     "rotate": "旋转",
     "flipH": "水平翻转",
     "flipV": "垂直翻转"
+  },
+  "imageWatermark": {
+    "title": "图片水印",
+    "description": "添加文字或Logo水印",
+    "textWatermark": "文字水印",
+    "logoWatermark": "Logo水印",
+    "watermarkText": "水印文字",
+    "fontSize": "字体大小",
+    "fontColor": "字体颜色",
+    "opacity": "透明度",
+    "position": "位置",
+    "rotation": "旋转角度"
+  },
+  "imageStitcher": {
+    "title": "图片拼接",
+    "description": "将多张图片拼接成一张",
+    "horizontal": "水平拼接",
+    "vertical": "垂直拼接",
+    "gap": "间距",
+    "backgroundColor": "背景颜色",
+    "stitch": "开始拼接"
+  },
+  "imageFilter": {
+    "title": "图片滤镜",
+    "description": "应用各种滤镜效果",
+    "presetFilters": "预设滤镜",
+    "customSettings": "自定义设置",
+    "brightness": "亮度",
+    "contrast": "对比度",
+    "saturation": "饱和度",
+    "filters": {
+      "original": "原图",
+      "vivid": "鲜艳",
+      "soft": "柔和",
+      "vintage": "复古",
+      "blackWhite": "黑白",
+      "sepia": "棕褐色",
+      "cool": "冷色",
+      "warm": "暖色",
+      "dream": "梦幻",
+      "film": "胶片",
+      "negative": "负片",
+      "hazy": "朦胧"
+    }
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Type, Image as ImageIcon, X, Plus, Trash2, Settings } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface WatermarkImage {
   id: string;
@@ -35,6 +36,7 @@ interface LogoConfig {
 }
 
 const ImageWatermark: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<WatermarkImage[]>([]);
   const [watermarkType, setWatermarkType] = useState<'text' | 'logo'>('text');
   const [textConfig, setTextConfig] = useState<WatermarkConfig>({

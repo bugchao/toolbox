@@ -315,5 +315,49 @@
     "rotate": "Rotate",
     "flipH": "Flip Horizontal",
     "flipV": "Flip Vertical"
+  },
+  "imageWatermark": {
+    "title": "Image Watermark",
+    "description": "Add text or logo watermark",
+    "textWatermark": "Text Watermark",
+    "logoWatermark": "Logo Watermark",
+    "watermarkText": "Watermark Text",
+    "fontSize": "Font Size",
+    "fontColor": "Font Color",
+    "opacity": "Opacity",
+    "position": "Position",
+    "rotation": "Rotation"
+  },
+  "imageStitcher": {
+    "title": "Image Stitcher",
+    "description": "Stitch multiple images into one",
+    "horizontal": "Horizontal",
+    "vertical": "Vertical",
+    "gap": "Gap",
+    "backgroundColor": "Background Color",
+    "stitch": "Start Stitching"
+  },
+  "imageFilter": {
+    "title": "Image Filter",
+    "description": "Apply various filter effects",
+    "presetFilters": "Preset Filters",
+    "customSettings": "Custom Settings",
+    "brightness": "Brightness",
+    "contrast": "Contrast",
+    "saturation": "Saturation",
+    "filters": {
+      "original": "Original",
+      "vivid": "Vivid",
+      "soft": "Soft",
+      "vintage": "Vintage",
+      "blackWhite": "Black & White",
+      "sepia": "Sepia",
+      "cool": "Cool",
+      "warm": "Warm",
+      "dream": "Dream",
+      "film": "Film",
+      "negative": "Negative",
+      "hazy": "Hazy"
+    }
   }
 }
