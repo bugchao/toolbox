@@ -85,16 +85,16 @@
 
 这批不一定是“完全没做国际化”，但还没有按当前工具标准做成独立 locale 资源。
 
-- [tools/TimezoneConverter](/Users/dyck/workspaces/ai/toolbox-codex/tools/TimezoneConverter)
-- [tools/tool-ai-token-cost](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-ai-token-cost)
-- [tools/tool-analog-clock](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-analog-clock)
-- [tools/tool-base64](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-base64)
-- [tools/tool-pdf](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-pdf)
-- [tools/tool-proxy-speed-test](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-proxy-speed-test)
-- [tools/tool-qrcode](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-qrcode)
-- [tools/tool-rapid-tables](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-rapid-tables)
-- [tools/tool-resume](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-resume)
-- [tools/tool-timestamp](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-timestamp)
+- ~~[tools/TimezoneConverter](/Users/dyck/workspaces/ai/toolbox-codex/tools/TimezoneConverter)~~ ✅ 已完成（tool-timezone-calc）
+- ~~[tools/tool-ai-token-cost](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-ai-token-cost)~~ ✅ 已完成
+- ~~[tools/tool-analog-clock](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-analog-clock)~~ ✅ 已完成
+- ~~[tools/tool-base64](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-base64)~~ ✅ 已完成
+- ~~[tools/tool-pdf](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-pdf)~~ ✅ 已完成
+- ~~[tools/tool-proxy-speed-test](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-proxy-speed-test)~~ ✅ 已完成
+- ~~[tools/tool-qrcode](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-qrcode)~~ ✅ 已完成
+- ~~[tools/tool-rapid-tables](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-rapid-tables)~~ ✅ 已完成
+- ~~[tools/tool-resume](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-resume)~~ ✅ 已完成
+- ~~[tools/tool-timestamp](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-timestamp)~~ ✅ 已完成
 
 ## P1：老页面已接 i18n，但仍有大量硬编码中文
 
