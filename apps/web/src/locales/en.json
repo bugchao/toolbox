@@ -72,7 +72,8 @@
     "apply": "Apply",
     "undo": "Undo",
     "redo": "Redo",
-    "times": "times"
+    "times": "times",
+    "current": "Current"
   },
   "nav": {
     "home": "Home",

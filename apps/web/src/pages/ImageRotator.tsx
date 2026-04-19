@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, RotateCw, FlipHorizontal, FlipVertical, X, Plus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface RotateImage {
   id: string;
@@ -14,6 +15,7 @@ interface RotateImage {
 }
 
 const ImageRotator: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<RotateImage[]>([]);
   const [rotation, setRotation] = useState(0);
   const [flipH, setFlipH] = useState(false);
@@ -81,7 +83,7 @@ const ImageRotator: React.FC = () => {
               resolve({
                 ...image,
                 status: 'error',
-                error: '处理失败',
+                error: t('imageRotator.status.error'),
               });
               return;
             }
@@ -103,7 +105,7 @@ const ImageRotator: React.FC = () => {
         resolve({
           ...image,
           status: 'error',
-          error: '加载图片失败',
+          error: t('common.error'),
         });
       };
 
@@ -175,20 +177,20 @@ const ImageRotator: React.FC = () => {
     <div className="max-w-6xl mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">图片旋转/翻转工具</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('imageRotator.title')}</h1>
         <p className="text-gray-600">
-          支持 90° 倍旋转、任意角度旋转、水平/垂直翻转，批量处理
+          {t('imageRotator.description')}
         </p>
       </div>
 
       {/* Controls */}
       <div className="mb-6 bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">旋转设置</h2>
+        <h2 className="text-lg font-semibold mb-4">{t('imageRotator.rotation')}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Quick Rotate */}
           <div>
-            <label className="block text-sm font-medium mb-3">快速旋转</label>
+            <label className="block text-sm font-medium mb-3">{t('imageRotator.rotation')}</label>
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={() => setRotation(prev => prev - 90)}
@@ -226,14 +228,14 @@ const ImageRotator: React.FC = () => {
                 onClick={handleReset}
                 className="px-3 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg"
               >
-                重置
+                {t('common.reset')}
               </button>
             </div>
           </div>
 
           {/* Custom Angle */}
           <div>
-            <label className="block text-sm font-medium mb-3">自定义角度</label>
+            <label className="block text-sm font-medium mb-3">{t('imageRotator.customAngle')}</label>
             <div className="space-y-3">
               <input
                 type="range"
@@ -257,13 +259,13 @@ const ImageRotator: React.FC = () => {
                 }}
                 className="w-full px-4 py-2 border rounded-lg"
               />
-              <p className="text-sm text-gray-500 text-center">当前：{rotation}°</p>
+              <p className="text-sm text-gray-500 text-center">{t('common.current')}: {rotation}°</p>
             </div>
           </div>
 
           {/* Flip */}
           <div>
-            <label className="block text-sm font-medium mb-3">翻转</label>
+            <label className="block text-sm font-medium mb-3">{t('imageRotator.flipHorizontal')} / {t('imageRotator.flipVertical')}</label>
             <div className="space-y-3">
               <button
                 onClick={() => setFlipH(!flipH)}
@@ -272,7 +274,7 @@ const ImageRotator: React.FC = () => {
                 }`}
               >
                 <FlipHorizontal className="w-5 h-5" />
-                水平翻转
+                {t('imageRotator.flipHorizontal')}
               </button>
               <button
                 onClick={() => setFlipV(!flipV)}
@@ -281,7 +283,7 @@ const ImageRotator: React.FC = () => {
                 }`}
               >
                 <FlipVertical className="w-5 h-5" />
-                垂直翻转
+                {t('imageRotator.flipVertical')}
               </button>
             </div>
           </div>
@@ -290,9 +292,9 @@ const ImageRotator: React.FC = () => {
         {/* Current Settings */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <p className="text-sm text-gray-600">
-            当前设置：旋转 <span className="font-medium">{rotation}°</span>
-            {flipH && <span className="ml-2">| 水平翻转</span>}
-            {flipV && <span className="ml-2">| 垂直翻转</span>}
+            {t('common.current')}: {t('imageRotator.rotation')} <span className="font-medium">{rotation}°</span>
+            {flipH && <span className="ml-2">| {t('imageRotator.flipHorizontal')}</span>}
+            {flipV && <span className="ml-2">| {t('imageRotator.flipVertical')}</span>}
           </p>
         </div>
       </div>
@@ -304,8 +306,8 @@ const ImageRotator: React.FC = () => {
           className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
           <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-700 mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-gray-500">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <p className="text-lg font-medium text-gray-700 mb-2">{t('imageRotator.dragOrClick')}</p>
+          <p className="text-sm text-gray-500">{t('imageRotator.supportMultiple')}</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -325,7 +327,7 @@ const ImageRotator: React.FC = () => {
             className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            应用旋转 ({images.length}张)
+            {t('imageRotator.processAll')} ({images.length})
           </button>
           
           {images.some(img => img.status === 'done') && (
@@ -334,7 +336,7 @@ const ImageRotator: React.FC = () => {
               className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
-              下载全部
+              {t('imageRotator.downloadAll')}
             </button>
           )}
           
@@ -343,7 +345,7 @@ const ImageRotator: React.FC = () => {
             className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-2"
           >
             <X className="w-5 h-5" />
-            清空
+            {t('imageRotator.clearAll')}
           </button>
         </div>
       )}
@@ -380,9 +382,9 @@ const ImageRotator: React.FC = () => {
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
                 <div className="flex justify-between text-sm text-gray-600">
-                  <span>原始：{formatFileSize(image.originalSize || image.originalFile.size)}</span>
+                  <span>{t('imageRotator.originalSize')}: {formatFileSize(image.originalSize || image.originalFile.size)}</span>
                   {image.processedSize && (
-                    <span>处理后：{formatFileSize(image.processedSize)}</span>
+                    <span>{t('imageRotator.processedSize')}: {formatFileSize(image.processedSize)}</span>
                   )}
                 </div>
                 {image.status === 'done' && (
@@ -391,7 +393,7 @@ const ImageRotator: React.FC = () => {
                     className="mt-3 w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    下载
+                    {t('common.download')}
                   </button>
                 )}
                 {image.status === 'error' && (
