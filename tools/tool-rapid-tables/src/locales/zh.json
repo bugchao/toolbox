@@ -1,0 +1,12 @@
+{
+  "rapidTables": {
+    "title": "快速计算器",
+    "description": "多功能计算器集合",
+    "calculator": "计算器",
+    "scientific": "科学计算器",
+    "programmer": "程序员计算器",
+    "unit": "单位转换",
+    "percentage": "百分比计算",
+    "fraction": "分数计算"
+  }
+}

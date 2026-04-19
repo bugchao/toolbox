@@ -1,0 +1,15 @@
+{
+  "timestamp": {
+    "title": "Timestamp Converter",
+    "description": "Convert between Unix timestamp and datetime",
+    "currentTimestamp": "Current Timestamp",
+    "timestampToDate": "Timestamp to Date",
+    "dateToTimestamp": "Date to Timestamp",
+    "timestamp": "Timestamp",
+    "datetime": "Datetime",
+    "convert": "Convert",
+    "copy": "Copy",
+    "milliseconds": "Milliseconds",
+    "seconds": "Seconds"
+  }
+}

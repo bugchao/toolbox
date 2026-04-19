@@ -1,0 +1,12 @@
+{
+  "rapidTables": {
+    "title": "Rapid Calculator",
+    "description": "Multi-function calculator collection",
+    "calculator": "Calculator",
+    "scientific": "Scientific Calculator",
+    "programmer": "Programmer Calculator",
+    "unit": "Unit Converter",
+    "percentage": "Percentage Calculator",
+    "fraction": "Fraction Calculator"
+  }
+}

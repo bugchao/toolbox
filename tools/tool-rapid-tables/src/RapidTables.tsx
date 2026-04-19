@@ -14,6 +14,7 @@ import {
   Ruler,
   X,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 type CalculatorType = 'basic' | 'scientific' | 'unit' | 'date' | 'percentage' | 'base';
 type ScientificOperation = 'sin' | 'cos' | 'tan' | 'sqrt' | 'log' | 'ln' | 'exp' | 'abs';
@@ -88,6 +89,7 @@ function sanitizeBaseInput(value: string, base: string) {
 }
 
 const RapidTables: React.FC = () => {
+  const { t } = useTranslation();
   const [activeCalculator, setActiveCalculator] = useState<CalculatorType>('basic');
 
   const [basicExpr, setBasicExpr] = useState('');

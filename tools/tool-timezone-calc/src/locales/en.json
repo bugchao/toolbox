@@ -1,0 +1,11 @@
+{
+  "timezoneCalc": {
+    "title": "Timezone Calculator",
+    "description": "Calculate time across different timezones",
+    "selectTimezone": "Select Timezone",
+    "currentTime": "Current Time",
+    "convert": "Convert",
+    "addTimezone": "Add Timezone",
+    "removeTimezone": "Remove Timezone"
+  }
+}

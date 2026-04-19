@@ -1,0 +1,15 @@
+{
+  "timestamp": {
+    "title": "时间戳转换",
+    "description": "Unix 时间戳与日期时间互转",
+    "currentTimestamp": "当前时间戳",
+    "timestampToDate": "时间戳转日期",
+    "dateToTimestamp": "日期转时间戳",
+    "timestamp": "时间戳",
+    "datetime": "日期时间",
+    "convert": "转换",
+    "copy": "复制",
+    "milliseconds": "毫秒",
+    "seconds": "秒"
+  }
+}

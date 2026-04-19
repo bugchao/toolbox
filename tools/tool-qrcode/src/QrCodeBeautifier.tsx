@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Download, Copy, Upload, Palette, Layers, Image as ImageIcon } from 'lucide-react';
 import QRCode from 'qrcode';
+import { useTranslation } from 'react-i18next';
 
 const QrCodeBeautifier: React.FC = () => {
+  const { t } = useTranslation();
   const [text, setText] = useState('https://example.com');
   const [qrSize, setQrSize] = useState(300);
   const [errorCorrection, setErrorCorrection] = useState<'L' | 'M' | 'Q' | 'H'>('M');

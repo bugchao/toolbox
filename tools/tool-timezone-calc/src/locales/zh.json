@@ -1,0 +1,11 @@
+{
+  "timezoneCalc": {
+    "title": "时区计算器",
+    "description": "计算不同时区的时间",
+    "selectTimezone": "选择时区",
+    "currentTime": "当前时间",
+    "convert": "转换",
+    "addTimezone": "添加时区",
+    "removeTimezone": "移除时区"
+  }
+}

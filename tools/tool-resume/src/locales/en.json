@@ -1,0 +1,14 @@
+{
+  "resume": {
+    "title": "Resume Generator",
+    "description": "Create professional resumes online",
+    "personalInfo": "Personal Information",
+    "education": "Education",
+    "experience": "Work Experience",
+    "skills": "Skills",
+    "projects": "Projects",
+    "preview": "Preview",
+    "download": "Download",
+    "template": "Template"
+  }
+}

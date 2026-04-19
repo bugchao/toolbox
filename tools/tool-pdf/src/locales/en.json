@@ -1,0 +1,13 @@
+{
+  "pdf": {
+    "title": "PDF Tools",
+    "description": "PDF merge, split, compress and more",
+    "merge": "Merge",
+    "split": "Split",
+    "compress": "Compress",
+    "convert": "Convert",
+    "selectFiles": "Select Files",
+    "download": "Download",
+    "processing": "Processing..."
+  }
+}

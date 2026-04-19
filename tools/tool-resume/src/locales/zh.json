@@ -1,0 +1,14 @@
+{
+  "resume": {
+    "title": "简历生成器",
+    "description": "在线制作专业简历",
+    "personalInfo": "个人信息",
+    "education": "教育经历",
+    "experience": "工作经历",
+    "skills": "技能特长",
+    "projects": "项目经验",
+    "preview": "预览",
+    "download": "下载",
+    "template": "模板"
+  }
+}

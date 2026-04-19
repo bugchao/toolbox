@@ -1,0 +1,13 @@
+{
+  "pdf": {
+    "title": "PDF 工具集",
+    "description": "PDF 合并、拆分、压缩等工具",
+    "merge": "合并",
+    "split": "拆分",
+    "compress": "压缩",
+    "convert": "转换",
+    "selectFiles": "选择文件",
+    "download": "下载",
+    "processing": "处理中..."
+  }
+}

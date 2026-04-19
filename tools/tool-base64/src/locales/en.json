@@ -1,0 +1,14 @@
+{
+  "base64": {
+    "title": "Base64 Encoder/Decoder",
+    "description": "Base64 encoding and decoding tool",
+    "encode": "Encode",
+    "decode": "Decode",
+    "input": "Input",
+    "output": "Output",
+    "copy": "Copy",
+    "clear": "Clear",
+    "encodeFile": "Encode File",
+    "decodeToFile": "Decode to File"
+  }
+}

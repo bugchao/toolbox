@@ -1,0 +1,15 @@
+{
+  "qrcode": {
+    "title": "QR Code Tools",
+    "description": "Generate and scan QR codes",
+    "generate": "Generate QR Code",
+    "scan": "Scan QR Code",
+    "beautify": "Beautify QR Code",
+    "content": "Content",
+    "size": "Size",
+    "color": "Color",
+    "backgroundColor": "Background Color",
+    "logo": "Logo",
+    "download": "Download"
+  }
+}

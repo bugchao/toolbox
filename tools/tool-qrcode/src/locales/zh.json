@@ -1,0 +1,15 @@
+{
+  "qrcode": {
+    "title": "二维码工具",
+    "description": "生成和识别二维码",
+    "generate": "生成二维码",
+    "scan": "扫描二维码",
+    "beautify": "美化二维码",
+    "content": "内容",
+    "size": "大小",
+    "color": "颜色",
+    "backgroundColor": "背景色",
+    "logo": "Logo",
+    "download": "下载"
+  }
+}
