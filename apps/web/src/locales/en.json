@@ -298,7 +298,11 @@
     "preserveExif": "Preserve EXIF Data",
     "compressionRate": "Compression Rate",
     "originalSize": "Original Size",
-    "compressedSize": "Compressed"
+    "compressedSize": "Compressed",
+    "uploadImages": "Select Images",
+    "processAll": "Start Processing",
+    "downloadAll": "Download All",
+    "clearAll": "Clear All"
   },
   "imageCropper": {
     "title": "Image Cropper",

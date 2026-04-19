@@ -298,7 +298,11 @@
     "preserveExif": "保留EXIF信息",
     "compressionRate": "压缩率",
     "originalSize": "原始大小",
-    "compressedSize": "压缩后"
+    "compressedSize": "压缩后",
+    "uploadImages": "选择图片",
+    "processAll": "开始处理",
+    "downloadAll": "下载全部",
+    "clearAll": "清空列表"
   },
   "imageCropper": {
     "title": "图片裁剪",

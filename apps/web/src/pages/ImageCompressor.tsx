@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Settings, Image as ImageIcon, X, FileImage } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface ProcessedImage {
   id: string;
@@ -15,6 +16,7 @@ interface ProcessedImage {
 }
 
 const ImageCompressor: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<ProcessedImage[]>([]);
   const [quality, setQuality] = useState(80);
   const [outputFormat, setOutputFormat] = useState('same');

@@ -58,10 +58,10 @@
 - ~~[apps/web/src/pages/ElectronicWoodenFish.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ElectronicWoodenFish.tsx)~~ ✅ 已完成
 - ~~[apps/web/src/pages/HotNews.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/HotNews.tsx)~~ ✅ 已完成
 - ~~[apps/web/src/pages/ImageBackgroundRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageBackgroundRemover.tsx)~~ ✅ 已完成
-- [apps/web/src/pages/ImageCompressor.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCompressor.tsx)
+- ~~[apps/web/src/pages/ImageCompressor.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCompressor.tsx)~~ ✅ 部分完成（已添加 i18n hook）
 - [apps/web/src/pages/ImageCropper.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCropper.tsx)
 - [apps/web/src/pages/ImageFilter.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageFilter.tsx)
-- [apps/web/src/pages/ImageRotator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageRotator.tsx)
+- ~~[apps/web/src/pages/ImageRotator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageRotator.tsx)~~ ✅ 已完成
 - [apps/web/src/pages/ImageStitcher.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageStitcher.tsx)
 - [apps/web/src/pages/ImageWatermark.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageWatermark.tsx)
 - [apps/web/src/pages/ImageWatermarkRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageWatermarkRemover.tsx)
