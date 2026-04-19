@@ -288,6 +288,26 @@ import toolGraphqlBuilderZh from '@toolbox/tool-graphql-builder/locales/zh-CN.js
 import toolGraphqlBuilderEn from '@toolbox/tool-graphql-builder/locales/en-US.json'
 import toolWaterReminderZh from '@toolbox/tool-water-reminder/locales/zh-CN.json'
 import toolWaterReminderEn from '@toolbox/tool-water-reminder/locales/en-US.json'
+import toolCertFormatConverterZh from '@toolbox/tool-cert-format-converter/src/locales/zh.json'
+import toolCertFormatConverterEn from '@toolbox/tool-cert-format-converter/src/locales/en.json'
+import toolCertContentViewerZh from '@toolbox/tool-cert-content-viewer/src/locales/zh.json'
+import toolCertContentViewerEn from '@toolbox/tool-cert-content-viewer/src/locales/en.json'
+import toolCertCsrViewerZh from '@toolbox/tool-cert-csr-viewer/src/locales/zh.json'
+import toolCertCsrViewerEn from '@toolbox/tool-cert-csr-viewer/src/locales/en.json'
+import toolIdnConverterZh from '@toolbox/tool-idn-converter/src/locales/zh.json'
+import toolIdnConverterEn from '@toolbox/tool-idn-converter/src/locales/en.json'
+import toolGraphqlPlaygroundZh from '@toolbox/tool-graphql-playground/src/locales/zh.json'
+import toolGraphqlPlaygroundEn from '@toolbox/tool-graphql-playground/src/locales/en.json'
+import toolPostmanLiteZh from '@toolbox/tool-postman-lite/src/locales/zh.json'
+import toolPostmanLiteEn from '@toolbox/tool-postman-lite/src/locales/en.json'
+import toolAttractionHeatmapZh from '@toolbox/tool-attraction-heatmap/src/locales/zh.json'
+import toolAttractionHeatmapEn from '@toolbox/tool-attraction-heatmap/src/locales/en.json'
+import toolFlightSearchZh from '@toolbox/tool-flight-search/src/locales/zh.json'
+import toolFlightSearchEn from '@toolbox/tool-flight-search/src/locales/en.json'
+import toolHotelTrendZh from '@toolbox/tool-hotel-trend/src/locales/zh.json'
+import toolHotelTrendEn from '@toolbox/tool-hotel-trend/src/locales/en.json'
+import toolPhotoSpotsZh from '@toolbox/tool-photo-spots/src/locales/zh.json'
+import toolPhotoSpotsEn from '@toolbox/tool-photo-spots/src/locales/en.json'
 
 const STORAGE_KEY = 'toolbox-lang'
 
@@ -431,7 +451,17 @@ export const resources = {
     toolFitnessPlanner: toolFitnessPlannerZh as Record<string, string>,
     toolMeetingScheduler: toolMeetingSchedulerZh as Record<string, string>,
     toolColorSystem: toolColorSystemZh as Record<string, string>,
-    toolGraphqlBuilder: toolGraphqlBuilderZh as Record<string, string>,
+    toolGraphqlBuilder: toolGraphqlBuilderZh as unknown as Record<string, string>,
+    toolCertFormatConverter: toolCertFormatConverterZh as unknown as Record<string, string>,
+    toolCertContentViewer: toolCertContentViewerZh as unknown as Record<string, string>,
+    toolCertCsrViewer: toolCertCsrViewerZh as unknown as Record<string, string>,
+    toolIdnConverter: toolIdnConverterZh as unknown as Record<string, string>,
+    toolGraphqlPlayground: toolGraphqlPlaygroundZh as unknown as Record<string, string>,
+    toolPostmanLite: toolPostmanLiteZh as unknown as Record<string, string>,
+    toolAttractionHeatmap: toolAttractionHeatmapZh as unknown as Record<string, string>,
+    toolFlightSearch: toolFlightSearchZh as unknown as Record<string, string>,
+    toolHotelTrend: toolHotelTrendZh as unknown as Record<string, string>,
+    toolPhotoSpots: toolPhotoSpotsZh as unknown as Record<string, string>,
     ...(domainSuiteZh as unknown as Record<string, Record<string, string>>),
     ...(ipOpsZh as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreZh as unknown as Record<string, string>,
@@ -584,7 +614,17 @@ export const resources = {
     toolFitnessPlanner: toolFitnessPlannerEn as Record<string, string>,
     toolMeetingScheduler: toolMeetingSchedulerEn as Record<string, string>,
     toolColorSystem: toolColorSystemEn as Record<string, string>,
-    toolGraphqlBuilder: toolGraphqlBuilderEn as Record<string, string>,
+    toolGraphqlBuilder: toolGraphqlBuilderEn as unknown as Record<string, string>,
+    toolCertFormatConverter: toolCertFormatConverterEn as unknown as Record<string, string>,
+    toolCertContentViewer: toolCertContentViewerEn as unknown as Record<string, string>,
+    toolCertCsrViewer: toolCertCsrViewerEn as unknown as Record<string, string>,
+    toolIdnConverter: toolIdnConverterEn as unknown as Record<string, string>,
+    toolGraphqlPlayground: toolGraphqlPlaygroundEn as unknown as Record<string, string>,
+    toolPostmanLite: toolPostmanLiteEn as unknown as Record<string, string>,
+    toolAttractionHeatmap: toolAttractionHeatmapEn as unknown as Record<string, string>,
+    toolFlightSearch: toolFlightSearchEn as unknown as Record<string, string>,
+    toolHotelTrend: toolHotelTrendEn as unknown as Record<string, string>,
+    toolPhotoSpots: toolPhotoSpotsEn as unknown as Record<string, string>,
     ...(domainSuiteEn as unknown as Record<string, Record<string, string>>),
     ...(ipOpsEn as unknown as Record<string, Record<string, string>>),
     toolSecurityIpScore: toolSecurityIpScoreEn as unknown as Record<string, string>,
