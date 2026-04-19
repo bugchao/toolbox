@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Copy, Download, Eye, Edit, Code, Check, Palette, Clipboard } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { remark } from 'remark';
 import html from 'remark-html';
 import gfm from 'remark-gfm';

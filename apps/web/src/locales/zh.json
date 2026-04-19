@@ -359,5 +359,35 @@
       "negative": "负片",
       "hazy": "朦胧"
     }
+  },
+  "unitConverter": {
+    "title": "单位转换",
+    "description": "各种单位快速转换",
+    "category": "类别",
+    "from": "从",
+    "to": "到",
+    "value": "数值",
+    "result": "结果"
+  },
+  "markdownConverter": {
+    "title": "Markdown转换器",
+    "description": "Markdown转HTML/公众号格式",
+    "preview": "预览",
+    "copyHtml": "复制HTML",
+    "template": "模板",
+    "defaultStyle": "默认样式",
+    "wechatStyle": "微信公众号"
+  },
+  "lifeProgressBar": {
+    "title": "人生进度条",
+    "description": "看看你的人生进度",
+    "birthDate": "出生日期",
+    "lifeExpectancy": "预期寿命",
+    "age": "年龄",
+    "yearsLived": "已经历的年数",
+    "yearsRemaining": "剩余年数",
+    "daysLived": "已经历的天数",
+    "daysRemaining": "剩余天数",
+    "calculate": "计算"
   }
 }

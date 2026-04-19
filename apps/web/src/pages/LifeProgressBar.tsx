@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Heart, Clock, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface LifeStats {
   age: number;
@@ -14,6 +15,7 @@ interface LifeStats {
 }
 
 export default function LifeProgressBar() {
+  const { t } = useTranslation();
   const [birthDate, setBirthDate] = useState('');
   const [lifeExpectancy, setLifeExpectancy] = useState(80);
   const [stats, setStats] = useState<LifeStats | null>(null);

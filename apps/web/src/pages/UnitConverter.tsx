@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Unit {
   name: string;
@@ -14,6 +15,7 @@ interface Category {
 }
 
 const UnitConverter: React.FC = () => {
+  const { t } = useTranslation();
   const categories: Category[] = [
     {
       name: '长度',

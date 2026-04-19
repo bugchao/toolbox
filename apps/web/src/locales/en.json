@@ -359,5 +359,35 @@
       "negative": "Negative",
       "hazy": "Hazy"
     }
+  },
+  "unitConverter": {
+    "title": "Unit Converter",
+    "description": "Quick conversion between various units",
+    "category": "Category",
+    "from": "From",
+    "to": "To",
+    "value": "Value",
+    "result": "Result"
+  },
+  "markdownConverter": {
+    "title": "Markdown Converter",
+    "description": "Convert Markdown to HTML/WeChat format",
+    "preview": "Preview",
+    "copyHtml": "Copy HTML",
+    "template": "Template",
+    "defaultStyle": "Default Style",
+    "wechatStyle": "WeChat Style"
+  },
+  "lifeProgressBar": {
+    "title": "Life Progress Bar",
+    "description": "See your life progress",
+    "birthDate": "Birth Date",
+    "lifeExpectancy": "Life Expectancy",
+    "age": "Age",
+    "yearsLived": "Years Lived",
+    "yearsRemaining": "Years Remaining",
+    "daysLived": "Days Lived",
+    "daysRemaining": "Days Remaining",
+    "calculate": "Calculate"
   }
 }
