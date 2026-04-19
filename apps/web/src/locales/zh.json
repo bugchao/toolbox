@@ -123,6 +123,9 @@
       "image_rotator": "图片旋转",
       "image_filter": "图片滤镜",
       "image_watermark": "图片水印",
+      "image_stitcher": "图片拼接",
+      "image_watermark_remover": "图片去水印",
+      "image_bg_remover": "图片背景移除",
       "pdf": "PDF 工具集",
       "resume": "简历生成器",
       "timezone_converter": "时区转换器"

@@ -123,6 +123,9 @@
       "image_rotator": "Image Rotator",
       "image_filter": "Image Filter",
       "image_watermark": "Image Watermark",
+      "image_stitcher": "Image Stitcher",
+      "image_watermark_remover": "Watermark Remover",
+      "image_bg_remover": "Background Remover",
       "pdf": "PDF Tools",
       "resume": "Resume Generator",
       "timezone_converter": "Timezone Converter"
