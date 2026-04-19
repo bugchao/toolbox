@@ -414,5 +414,44 @@
     "expired": "Link expired",
     "disabled": "Link disabled",
     "backToHome": "Back to Home"
+  },
+  "dnsQuery": {
+    "title": "DNS Query",
+    "description": "Query DNS records for domains",
+    "domain": "Domain",
+    "domainPlaceholder": "Enter domain, e.g.: example.com",
+    "recordType": "Record Type",
+    "query": "Query",
+    "querying": "Querying...",
+    "result": "Query Result",
+    "copyJson": "Copy JSON",
+    "copied": "Copied",
+    "status": "Status",
+    "statusSuccess": "Success",
+    "statusNxdomain": "NXDOMAIN",
+    "statusError": "Error",
+    "queryInfo": "Query",
+    "name": "Name",
+    "type": "Type",
+    "ttl": "TTL",
+    "data": "Data",
+    "answer": "Answer",
+    "authority": "Authority",
+    "noRecords": "No records returned for this query.",
+    "recordTypes": {
+      "a": "A (IPv4)",
+      "aaaa": "AAAA (IPv6)",
+      "mx": "MX (Mail)",
+      "txt": "TXT",
+      "cname": "CNAME",
+      "ns": "NS",
+      "soa": "SOA"
+    },
+    "errors": {
+      "emptyDomain": "Please enter a domain to query",
+      "invalidDomain": "Please enter a valid domain",
+      "networkError": "Network request failed, please check your connection or try again later",
+      "dnsError": "DNS returned status code"
+    }
   }
 }

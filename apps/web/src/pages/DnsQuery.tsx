@@ -8,7 +8,7 @@ const DOH_URL = 'https://cloudflare-dns.com/dns-query'
 const RECORD_TYPES = [
   { value: 'A', label: 'A (IPv4)' },
   { value: 'AAAA', label: 'AAAA (IPv6)' },
-  { value: 'MX', label: 'MX (邮件)' },
+  { value: 'MX', label: 'MX' },
   { value: 'TXT', label: 'TXT' },
   { value: 'CNAME', label: 'CNAME' },
   { value: 'NS', label: 'NS' },
@@ -62,6 +62,7 @@ function formatSoaData(data: string): string {
 const DnsQuery: React.FC = () => {
   const { t } = useTranslation('nav')
   const { t: tHome } = useTranslation('home')
+  const { t: tDns } = useTranslation('dnsQuery')
   const [domain, setDomain] = useState('')
   const [recordType, setRecordType] = useState<string>('A')
   const [result, setResult] = useState<DnsResponse | null>(null)
@@ -78,12 +79,12 @@ const DnsQuery: React.FC = () => {
     e.preventDefault()
     const name = normalizeDomain(domain)
     if (!name) {
-      setError('请输入要查询的域名')
+      setError(tDns('errors.emptyDomain'))
       return
     }
     const hostnameRegex = /^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)*[a-z0-9]([a-z0-9-]*[a-z0-9])?$/i
     if (!hostnameRegex.test(name)) {
-      setError('请输入有效的域名')
+      setError(tDns('errors.invalidDomain'))
       return
     }
     const qname = name.endsWith('.') ? name : name
@@ -97,10 +98,10 @@ const DnsQuery: React.FC = () => {
       const data: DnsResponse = await res.json()
       setResult(data)
       if (data.Status !== 0 && data.Status !== 3) {
-        setError(data.Comment || `DNS 返回状态码 ${data.Status}`)
+        setError(data.Comment || `${tDns('errors.dnsError')} ${data.Status}`)
       }
     } catch (err) {
-      setError('网络请求失败，请检查网络或稍后重试')
+      setError(tDns('errors.networkError'))
     } finally {
       setLoading(false)
     }
@@ -143,7 +144,7 @@ const DnsQuery: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <label htmlFor="dns-domain" className="block text-sm font-medium text-gray-700 mb-2">
-                域名
+                {tDns('domain')}
               </label>
               <div className="relative">
                 <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -152,14 +153,14 @@ const DnsQuery: React.FC = () => {
                   id="dns-domain"
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
-                  placeholder="example.com"
+                  placeholder={tDns('domainPlaceholder')}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
             </div>
             <div className="w-full sm:w-40">
               <label htmlFor="dns-type" className="block text-sm font-medium text-gray-700 mb-2">
-                记录类型
+                {tDns('recordType')}
               </label>
               <select
                 id="dns-type"
@@ -189,7 +190,7 @@ const DnsQuery: React.FC = () => {
             ) : (
               <Search className="w-5 h-5 mr-2" />
             )}
-            查询
+            {tDns('query')}
           </button>
         </form>
       </div>
@@ -197,7 +198,7 @@ const DnsQuery: React.FC = () => {
       {loading && (
         <div className="card text-center py-12">
           <Loader2 className="w-12 h-12 text-indigo-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">正在查询 DNS…</p>
+          <p className="text-gray-600">{tDns('querying')}</p>
         </div>
       )}
 
@@ -206,7 +207,7 @@ const DnsQuery: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-indigo-900 flex items-center">
               <Server className="w-5 h-5 mr-2" />
-              查询结果
+              {tDns('result')}
             </h3>
             <button
               type="button"
@@ -214,22 +215,22 @@ const DnsQuery: React.FC = () => {
               className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center"
             >
               {copied ? <Check className="w-4 h-4 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
-              {copied ? '已复制' : '复制 JSON'}
+              {copied ? tDns('copied') : tDns('copyJson')}
             </button>
           </div>
           <div className="text-sm text-gray-600 mb-3">
-            状态: {result.Status === 0 ? '成功' : result.Status === 3 ? 'NXDOMAIN' : `错误 (${result.Status})`}
-            {result.Question?.length ? ` · 查询: ${result.Question.map((q) => `${q.name} ${TYPE_NAMES[q.type] || q.type}`).join(', ')}` : ''}
+            {tDns('status')}: {result.Status === 0 ? tDns('statusSuccess') : result.Status === 3 ? tDns('statusNxdomain') : `${tDns('statusError')} (${result.Status})`}
+            {result.Question?.length ? ` · ${tDns('queryInfo')}: ${result.Question.map((q) => `${q.name} ${TYPE_NAMES[q.type] || q.type}`).join(', ')}` : ''}
           </div>
           {(result.Answer?.length ?? 0) > 0 && (
             <div className="overflow-x-auto rounded-lg border border-indigo-100 bg-white">
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-indigo-50 text-gray-700">
-                    <th className="py-2 px-3 text-sm font-medium">名称</th>
-                    <th className="py-2 px-3 text-sm font-medium">类型</th>
-                    <th className="py-2 px-3 text-sm font-medium">TTL</th>
-                    <th className="py-2 px-3 text-sm font-medium">数据</th>
+                    <th className="py-2 px-3 text-sm font-medium">{tDns('name')}</th>
+                    <th className="py-2 px-3 text-sm font-medium">{tDns('type')}</th>
+                    <th className="py-2 px-3 text-sm font-medium">{tDns('ttl')}</th>
+                    <th className="py-2 px-3 text-sm font-medium">{tDns('data')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -240,15 +241,15 @@ const DnsQuery: React.FC = () => {
           )}
           {(result.Authority?.length ?? 0) > 0 && (
             <>
-              <h4 className="text-sm font-medium text-gray-700 mt-4 mb-2">权威记录 (Authority)</h4>
+              <h4 className="text-sm font-medium text-gray-700 mt-4 mb-2">{tDns('authority')}</h4>
               <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
                 <table className="w-full text-left">
                   <thead>
                     <tr className="bg-gray-50 text-gray-600">
-                      <th className="py-2 px-3 text-sm font-medium">名称</th>
-                      <th className="py-2 px-3 text-sm font-medium">类型</th>
-                      <th className="py-2 px-3 text-sm font-medium">TTL</th>
-                      <th className="py-2 px-3 text-sm font-medium">数据</th>
+                      <th className="py-2 px-3 text-sm font-medium">{tDns('name')}</th>
+                      <th className="py-2 px-3 text-sm font-medium">{tDns('type')}</th>
+                      <th className="py-2 px-3 text-sm font-medium">{tDns('ttl')}</th>
+                      <th className="py-2 px-3 text-sm font-medium">{tDns('data')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -259,7 +260,7 @@ const DnsQuery: React.FC = () => {
             </>
           )}
           {(!result.Answer?.length && !result.Authority?.length) && result.Status === 0 && (
-            <p className="text-gray-500 text-sm">该查询无记录返回。</p>
+            <p className="text-gray-500 text-sm">{tDns('noRecords')}</p>
           )}
           {result.Status === 3 && (
             <p className="text-amber-700 text-sm">域名不存在 (NXDOMAIN)。</p>

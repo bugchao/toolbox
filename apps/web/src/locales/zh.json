@@ -414,5 +414,44 @@
     "expired": "链接已过期",
     "disabled": "链接已禁用",
     "backToHome": "返回首页"
+  },
+  "dnsQuery": {
+    "title": "DNS 查询",
+    "description": "查询域名的 DNS 记录",
+    "domain": "域名",
+    "domainPlaceholder": "请输入域名，例如：example.com",
+    "recordType": "记录类型",
+    "query": "查询",
+    "querying": "查询中...",
+    "result": "查询结果",
+    "copyJson": "复制 JSON",
+    "copied": "已复制",
+    "status": "状态",
+    "statusSuccess": "成功",
+    "statusNxdomain": "NXDOMAIN",
+    "statusError": "错误",
+    "queryInfo": "查询",
+    "name": "名称",
+    "type": "类型",
+    "ttl": "TTL",
+    "data": "数据",
+    "answer": "应答",
+    "authority": "权威",
+    "noRecords": "该查询无记录返回。",
+    "recordTypes": {
+      "a": "A (IPv4)",
+      "aaaa": "AAAA (IPv6)",
+      "mx": "MX (邮件)",
+      "txt": "TXT",
+      "cname": "CNAME",
+      "ns": "NS",
+      "soa": "SOA"
+    },
+    "errors": {
+      "emptyDomain": "请输入要查询的域名",
+      "invalidDomain": "请输入有效的域名",
+      "networkError": "网络请求失败，请检查网络或稍后重试",
+      "dnsError": "DNS 返回状态码"
+    }
   }
 }
