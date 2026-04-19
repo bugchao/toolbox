@@ -1,0 +1,22 @@
+{
+  "proxySpeedTest": {
+    "title": "Proxy Speed Test",
+    "description": "Batch test proxy server speed and latency",
+    "proxyList": "Proxy List",
+    "protocol": "Protocol",
+    "testSize": "Test Size",
+    "startTest": "Start Test",
+    "clearResults": "Clear Results",
+    "exportResults": "Export Results",
+    "proxy": "Proxy",
+    "status": "Status",
+    "latency": "Latency",
+    "downloadSpeed": "Download Speed",
+    "uploadSpeed": "Upload Speed",
+    "pending": "Pending",
+    "testing": "Testing",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "One proxy per line, e.g.:\n192.168.1.1:8080\n10.0.0.1:3128"
+  }
+}

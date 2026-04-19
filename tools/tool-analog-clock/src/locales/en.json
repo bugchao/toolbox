@@ -1,0 +1,23 @@
+{
+  "analogClock": {
+    "title": "Analog Clock",
+    "description": "Beautiful analog clock with multiple themes",
+    "theme": "Theme",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit Fullscreen",
+    "themes": {
+      "classic": "Classic",
+      "vintage": "Vintage",
+      "mechanical": "Mechanical",
+      "luxury": "Luxury Gold",
+      "ocean": "Ocean Blue",
+      "forest": "Forest Green",
+      "sunset": "Sunset Orange",
+      "midnight": "Midnight Blue",
+      "rose": "Rose Gold",
+      "mint": "Mint Green",
+      "lavender": "Lavender",
+      "minimal": "Minimal White"
+    }
+  }
+}

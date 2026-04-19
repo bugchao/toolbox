@@ -1,0 +1,21 @@
+{
+  "aiTokenCost": {
+    "title": "AI Token Cost Calculator",
+    "description": "Calculate token usage costs for mainstream AI models",
+    "inputTokens": "Input Tokens",
+    "outputTokens": "Output Tokens",
+    "totalTokens": "Total Tokens",
+    "inputCost": "Input Cost",
+    "outputCost": "Output Cost",
+    "totalCost": "Total Cost",
+    "model": "Model",
+    "provider": "Provider",
+    "contextWindow": "Context Window",
+    "calculate": "Calculate",
+    "addModel": "Add Model",
+    "customModel": "Custom Model",
+    "modelName": "Model Name",
+    "inputPrice": "Input Price (per 1K tokens)",
+    "outputPrice": "Output Price (per 1K tokens)"
+  }
+}

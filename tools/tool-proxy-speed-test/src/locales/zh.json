@@ -1,0 +1,22 @@
+{
+  "proxySpeedTest": {
+    "title": "代理速度测试",
+    "description": "批量测试代理服务器速度和延迟",
+    "proxyList": "代理列表",
+    "protocol": "协议",
+    "testSize": "测试大小",
+    "startTest": "开始测试",
+    "clearResults": "清空结果",
+    "exportResults": "导出结果",
+    "proxy": "代理",
+    "status": "状态",
+    "latency": "延迟",
+    "downloadSpeed": "下载速度",
+    "uploadSpeed": "上传速度",
+    "pending": "等待中",
+    "testing": "测试中",
+    "success": "成功",
+    "failed": "失败",
+    "placeholder": "每行一个代理地址，例如：\n192.168.1.1:8080\n10.0.0.1:3128"
+  }
+}

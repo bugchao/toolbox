@@ -1,0 +1,21 @@
+{
+  "aiTokenCost": {
+    "title": "AI Token 费用计算器",
+    "description": "计算主流 AI 模型的 Token 使用费用",
+    "inputTokens": "输入 Tokens",
+    "outputTokens": "输出 Tokens",
+    "totalTokens": "总 Tokens",
+    "inputCost": "输入费用",
+    "outputCost": "输出费用",
+    "totalCost": "总费用",
+    "model": "模型",
+    "provider": "提供商",
+    "contextWindow": "上下文窗口",
+    "calculate": "计算",
+    "addModel": "添加模型",
+    "customModel": "自定义模型",
+    "modelName": "模型名称",
+    "inputPrice": "输入价格（每1K tokens）",
+    "outputPrice": "输出价格（每1K tokens）"
+  }
+}

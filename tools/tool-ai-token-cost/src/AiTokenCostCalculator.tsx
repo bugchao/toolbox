@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { Copy, Download, Plus, Trash2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface AiModel {
   id: string
@@ -117,6 +118,7 @@ const defaultModels: AiModel[] = [
 ]
 
 const AiTokenCostCalculator: React.FC = () => {
+  const { t } = useTranslation();
   const [models, setModels] = useState<AiModel[]>(defaultModels)
   const [inputTokens, setInputTokens] = useState<string>('1000')
   const [outputTokens, setOutputTokens] = useState<string>('500')

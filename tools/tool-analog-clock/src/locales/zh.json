@@ -1,0 +1,23 @@
+{
+  "analogClock": {
+    "title": "模拟时钟",
+    "description": "精美的模拟时钟，多种主题可选",
+    "theme": "主题",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "themes": {
+      "classic": "经典黑白",
+      "vintage": "复古表盘",
+      "mechanical": "机械表盘",
+      "luxury": "奢华金色",
+      "ocean": "海洋蓝",
+      "forest": "森林绿",
+      "sunset": "日落橙",
+      "midnight": "午夜蓝",
+      "rose": "玫瑰金",
+      "mint": "薄荷绿",
+      "lavender": "薰衣草紫",
+      "minimal": "极简白"
+    }
+  }
+}

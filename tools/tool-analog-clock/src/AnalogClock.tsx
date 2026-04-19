@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Maximize2, Minimize2, Palette, ExternalLink } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 // 12种主题配置
 const themes = [
@@ -178,6 +179,7 @@ const themes = [
 ]
 
 export default function AnalogClock() {
+  const { t } = useTranslation();
   const location = useLocation()
   const [time, setTime] = useState(new Date())
   const [themeIndex, setThemeIndex] = useState(0)

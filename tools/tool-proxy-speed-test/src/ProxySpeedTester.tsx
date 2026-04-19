@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Play, Trash2, Download } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface ProxyTest {
   id: string
@@ -13,6 +14,7 @@ interface ProxyTest {
 }
 
 const ProxySpeedTester: React.FC = () => {
+  const { t } = useTranslation();
   const [proxyList, setProxyList] = useState<string>('')
   const [protocol, setProtocol] = useState<'http' | 'https' | 'socks5'>('http')
   const [testResults, setTestResults] = useState<ProxyTest[]>([])
