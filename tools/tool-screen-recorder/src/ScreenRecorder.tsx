@@ -1,21 +1,100 @@
-import React from 'react'
-import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PageHero } from '@toolbox/ui-kit'
+import { useScreenRecorder } from './hooks/useScreenRecorder'
+import IdlePanel from './components/IdlePanel'
+import RecordingPanel from './components/RecordingPanel'
+import FinishedPanel from './components/FinishedPanel'
+import ErrorPanel from './components/ErrorPanel'
 
 const ScreenRecorder: React.FC = () => {
   const { t } = useTranslation('toolScreenRecorder')
+  const {
+    state,
+    errorType,
+    elapsedSeconds,
+    estimatedSizeBytes,
+    videoUrl,
+    finalSizeBytes,
+    finalDurationSeconds,
+    startRecording,
+    pauseRecording,
+    resumeRecording,
+    stopRecording,
+    reset,
+  } = useScreenRecorder()
 
-  return (
-    <div className="relative min-h-[60vh]">
-      {/* 粒子背景，受应用层 BackgroundVisibilityProvider 全局开关控制 */}
-      <ParticlesBackground preset="minimal" className="absolute inset-0" />
-      <div className="relative z-10 space-y-6">
+  // Feature detection on mount
+  useEffect(() => {
+    if (!navigator.mediaDevices?.getDisplayMedia) {
+      // Hook will handle unsupported state
+    }
+  }, [])
+
+  // Check browser support
+  if (!navigator.mediaDevices?.getDisplayMedia) {
+    return (
+      <div className="container mx-auto px-4 py-8">
         <PageHero
           title={t('title')}
           description={t('description')}
         />
-        {/* TODO: 实现工具内容 */}
+        <ErrorPanel
+          errorType="unsupported"
+          onRetry={reset}
+          onBack={reset}
+        />
       </div>
+    )
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <PageHero
+        title={t('title')}
+        description={t('description')}
+      />
+
+      {state === 'idle' && (
+        <IdlePanel onStart={startRecording} />
+      )}
+
+      {state === 'requesting' && (
+        <div className="max-w-md mx-auto p-6 text-center">
+          <p className="text-gray-500 dark:text-gray-400">
+            {t('idle.hint')}
+          </p>
+        </div>
+      )}
+
+      {(state === 'recording' || state === 'paused') && (
+        <RecordingPanel
+          state={state}
+          elapsedSeconds={elapsedSeconds}
+          estimatedSizeBytes={estimatedSizeBytes}
+          onPause={pauseRecording}
+          onResume={resumeRecording}
+          onStop={stopRecording}
+        />
+      )}
+
+      {state === 'finished' && videoUrl && (
+        <FinishedPanel
+          videoUrl={videoUrl}
+          durationSeconds={finalDurationSeconds}
+          sizeBytes={finalSizeBytes}
+          mimeType="video/webm"
+          onRestart={reset}
+        />
+      )}
+
+      {state === 'error' && errorType && (
+        <ErrorPanel
+          errorType={errorType}
+          onRetry={reset}
+          onBack={reset}
+        />
+      )}
     </div>
   )
 }
