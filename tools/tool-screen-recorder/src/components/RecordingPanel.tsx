@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Card, Button } from '@toolbox/ui-kit'
+import { Card, Button, formatBytes } from '@toolbox/ui-kit'
 import { Pause, Play, Square, AlertTriangle } from 'lucide-react'
 import { formatDuration } from '../lib/formatDuration'
 
@@ -8,24 +8,24 @@ interface RecordingPanelProps {
   state: 'recording' | 'paused'
   elapsedSeconds: number
   estimatedSizeBytes: number
+  warningDismissed: boolean
   onPause: () => void
   onResume: () => void
   onStop: () => void
+  onDismissWarning: () => void
 }
 
 const RecordingPanel: React.FC<RecordingPanelProps> = ({
   state,
   elapsedSeconds,
   estimatedSizeBytes,
+  warningDismissed,
   onPause,
   onResume,
   onStop,
+  onDismissWarning,
 }) => {
   const { t } = useTranslation('toolScreenRecorder')
-  const [warningDismissed, setWarningDismissed] = useState(false)
-
-  const sizeInMB = (estimatedSizeBytes / (1024 * 1024)).toFixed(2)
-  const sizeInGB = (estimatedSizeBytes / (1024 * 1024 * 1024)).toFixed(2)
   const showWarning = estimatedSizeBytes > 1024 * 1024 * 1024 && !warningDismissed
 
   return (
@@ -42,9 +42,7 @@ const RecordingPanel: React.FC<RecordingPanelProps> = ({
 
         <div className="flex items-center justify-between">
           <span className="text-sm">{t('recording.sizeLabel')}</span>
-          <span className="font-mono text-sm">
-            {estimatedSizeBytes > 1024 * 1024 * 1024 ? `${sizeInGB} GB` : `${sizeInMB} MB`}
-          </span>
+          <span className="font-mono text-sm">{formatBytes(estimatedSizeBytes)}</span>
         </div>
 
         {showWarning && (
@@ -56,7 +54,7 @@ const RecordingPanel: React.FC<RecordingPanelProps> = ({
               </p>
             </div>
             <button
-              onClick={() => setWarningDismissed(true)}
+              onClick={onDismissWarning}
               className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
             >
               ×

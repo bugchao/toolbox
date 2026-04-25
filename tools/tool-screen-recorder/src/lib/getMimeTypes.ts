@@ -16,8 +16,8 @@ export function getDefaultMimeType(): string | null {
 }
 
 export function getExtensionForMime(mime: string | null): string {
-  if (!mime) return 'webm'  // Safe default
+  if (!mime) return 'webm'
   if (mime.startsWith('video/webm')) return 'webm'
   if (mime.startsWith('video/mp4')) return 'mp4'
-  return 'webm'  // Valid fallback instead of 'video'
+  return 'webm'
 }

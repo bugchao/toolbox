@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Card, Button } from '@toolbox/ui-kit'
+import { Card, Button, formatBytes } from '@toolbox/ui-kit'
 import { Download, RotateCcw } from 'lucide-react'
 import { formatDuration } from '../lib/formatDuration'
 import { getExtensionForMime } from '../lib/getMimeTypes'
@@ -21,10 +21,6 @@ const FinishedPanel: React.FC<FinishedPanelProps> = ({
   onRestart,
 }) => {
   const { t } = useTranslation('toolScreenRecorder')
-
-  const sizeInMB = (sizeBytes / (1024 * 1024)).toFixed(2)
-  const sizeInGB = (sizeBytes / (1024 * 1024 * 1024)).toFixed(2)
-  const displaySize = sizeBytes > 1024 * 1024 * 1024 ? `${sizeInGB} GB` : `${sizeInMB} MB`
 
   const handleDownload = () => {
     const now = new Date()
@@ -56,7 +52,7 @@ const FinishedPanel: React.FC<FinishedPanelProps> = ({
           </div>
           <div>
             <span className="text-gray-500 dark:text-gray-400">{t('finished.sizeLabel')}: </span>
-            <span className="font-mono">{displaySize}</span>
+            <span className="font-mono">{formatBytes(sizeBytes)}</span>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PageHero } from '@toolbox/ui-kit'
 import { useScreenRecorder } from './hooks/useScreenRecorder'
@@ -17,21 +17,15 @@ const ScreenRecorder: React.FC = () => {
     videoUrl,
     finalSizeBytes,
     finalDurationSeconds,
+    warningDismissed,
     startRecording,
     pauseRecording,
     resumeRecording,
     stopRecording,
     reset,
+    dismissWarning,
   } = useScreenRecorder()
 
-  // Feature detection on mount
-  useEffect(() => {
-    if (!navigator.mediaDevices?.getDisplayMedia) {
-      // Hook will handle unsupported state
-    }
-  }, [])
-
-  // Check browser support
   if (!navigator.mediaDevices?.getDisplayMedia) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -72,9 +66,11 @@ const ScreenRecorder: React.FC = () => {
           state={state}
           elapsedSeconds={elapsedSeconds}
           estimatedSizeBytes={estimatedSizeBytes}
+          warningDismissed={warningDismissed}
           onPause={pauseRecording}
           onResume={resumeRecording}
           onStop={stopRecording}
+          onDismissWarning={dismissWarning}
         />
       )}
 

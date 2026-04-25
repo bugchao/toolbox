@@ -41,6 +41,7 @@ export { default as Switch } from './Switch'
 export type { SwitchProps } from './Switch'
 export { theme } from './theme'
 export { cn } from './lib/cn'
+export { formatBytes } from './lib/formatBytes'
 
 export { FadeIn, StaggerChildren } from './animations'
 export type { FadeInProps, StaggerChildrenProps } from './animations'
