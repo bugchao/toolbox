@@ -1,5 +1,5 @@
 ---
-description: 端到端开发一个新工具：PRD → openspec → superpowers → 实现 → codex review → 截图人工确认 → 单测 → PR
+description: 端到端开发一个新工具：PRD → 规划 → 实现(TDD) → 审查 → 截图 → PR
 argument-hint: <工具名称>
 ---
 
@@ -7,7 +7,7 @@ argument-hint: <工具名称>
 
 你正在编排此 monorepo 中新工具的端到端创建流程。工具名称在 `$ARGUMENTS` 中（kebab-case 格式，例如 `dns-query`）。如果 `$ARGUMENTS` 为空，在执行任何操作之前先询问用户工具名称。
 
-这是一个**长期运行的多阶段工作流，包含三个人工审核关卡**。不要跳过阶段，不要跳过关卡。每个阶段结束后，简要告诉用户刚刚发生了什么以及接下来要做什么。
+这是一个**长期运行的多阶段工作流，包含一个人工审核关卡**。不要跳过阶段。每个阶段结束后，简要告诉用户刚刚发生了什么以及接下来要做什么。
 
 使用 `TaskCreate` 跟踪各个阶段，以便用户可以看到进度。在开始每个阶段时将其标记为 `in_progress`，完成时标记为 `completed`。
 
@@ -44,7 +44,7 @@ argument-hint: <工具名称>
 
 ---
 
-## 阶段 2 — PRD
+## 阶段 2 — PRD + 实现规划
 
 生成 `docs/tools/$ARGUMENTS/PRD.md`，结构如下（使用中文 — 仓库语言是双语的，但 PRD 默认为中文）：
 
@@ -71,56 +71,76 @@ argument-hint: <工具名称>
 ## 7. i18n 关键词清单
 ## 8. 验收标准
 ## 9. 参考工具
+## 10. 实现任务分解
+   - 按 TDD 原则分解的实现任务清单
+   - 每个任务包含：功能点、测试要点、验收标准
 ```
 
-写完后，向用户显示文件路径并要求他们阅读。
+写完 PRD 后，基于 PRD 创建 OpenSpec 变更提案：
 
-### 🧑 人工关卡 1 — PRD 审阅
+1. 运行 `openspec change add add-$ARGUMENTS-tool`
+2. 在 `openspec/changes/add-$ARGUMENTS-tool/` 下编写变更规范，涵盖：正在添加的能力、设计说明、验证标准
+3. 运行 `openspec validate add-$ARGUMENTS-tool` 并修复任何错误
 
-停止并明确询问用户：**"PRD 已生成在 `docs/tools/$ARGUMENTS/PRD.md`，请审阅。通过 / 需要修改 / 重做？"**
+完成后，向用户显示 PRD 路径和 OpenSpec 变更路径。
+
+### 🧑 人工关卡 — PRD 和规划审阅
+
+停止并明确询问用户：**"PRD 和实现规划已生成：
+- PRD: `docs/tools/$ARGUMENTS/PRD.md`
+- OpenSpec: `openspec/changes/add-$ARGUMENTS-tool/`
+
+请审阅。通过 / 需要修改？"**
 
 在用户明确表示批准之前不要继续。如果他们想要更改，编辑并重新确认。
 
 ---
 
-## 阶段 3 — OpenSpec 变更提案
+## 阶段 3 — 实现（TDD + 并行子代理）
 
-运行 `openspec change add add-$ARGUMENTS-tool`（检查 `openspec --help` 以获取当前子命令语法 — 如果不同则调整）。然后：
+**调用 `toolbox-tool-dev` 技能**（此仓库的项目级技能）以获取约定。
 
-1. 基于 PRD 在 `openspec/changes/add-$ARGUMENTS-tool/` 下编写变更规范。涵盖：正在添加的能力、设计说明、验证标准。
-2. 运行 `openspec validate add-$ARGUMENTS-tool` 并在继续之前修复任何错误。
-
-### 🧑 人工关卡 2 — 变更提案审阅
-
-向用户显示变更文件夹内容并询问：**"openspec change 已生成并通过 validate，请审阅。通过 / 修改？"**
-
-等待明确批准。
-
----
-
-## 阶段 4 — Superpowers 规划
-
-调用 `superpowers` 技能（或其 brainstorm/planner 子技能 — 检查 `~/.claude/plugins/cache/.../superpowers/` 以获取当前入口点）。将 PRD 和 openspec 变更作为上下文提供给它。目标：生成下一阶段将执行的 TDD 风格实现计划。
-
-将计划输出作为注释捕获到相关的 TaskCreate 项中，以便它持久化。
-
----
-
-## 阶段 5 — 实现
-
-**调用 `toolbox-tool-dev` 技能**（此仓库的项目级技能）以获取约定。然后：
+**步骤 3.1 — 脚手架和配置**
 
 1. `pnpm create:tool $ARGUMENTS` — 脚手架
 2. `pnpm install` — 链接新的工作区包
 3. 编辑 `tools/tool-$ARGUMENTS/tool.manifest.ts` — 设置真实的 `categoryKey`、`icon`（选择有意义的 `lucide-react` 图标，而不是默认的 `Wrench`）、`keywords`、`meta.zh`/`meta.en`、`mode`
-4. 实现 `tools/tool-$ARGUMENTS/src/<Pascal>.tsx` — 根据 PRD 的实际 UI。首先从 `@toolbox/ui-kit` 中提取；如果缺少所需的原语，将其添加到 `packages/ui-kit` 而不是直接导入第三方库。
-5. 填写 `src/locales/zh.json` 和 `src/locales/en.json` — 每个 UI 字符串都有键；两个文件保持同步。
-6. **如果需要后端**：在 `apps/api-gateway/src/` 下添加路由，将领域逻辑推送到 `services/<domain>-service/` 下的新模块或现有模块中。不要将逻辑放在路由处理程序中。
-7. 不要为 manifest 工具手动编辑 `apps/web/src/config/a-*.ts` — 发现是自动的。
+
+**步骤 3.2 — 分析任务并行性**
+
+从 PRD 的"实现任务分解"中分析任务：
+- 识别可以并行执行的独立任务（例如：UI 组件、工具函数、后端接口）
+- 识别必须串行执行的依赖任务（例如：基础类型定义 → 使用该类型的组件）
+
+**步骤 3.3 — 并行派遣子代理实现**
+
+对于可并行的任务组，在**单个消息中派遣多个子代理**并行执行：
+
+每个子代理应该：
+1. 遵循 TDD 原则：先写测试，再实现，后重构
+2. 实现分配的功能点
+3. 编写对应的单元测试
+4. 运行 `pnpm test` 确保测试通过
+5. 报告完成状态
+
+**示例并行任务分配：**
+- 子代理 A：实现工具函数 + 测试（如 formatDuration、getMimeTypes）
+- 子代理 B：实现 UI 组件 + 测试（如 IdlePanel、RecordingPanel）
+- 子代理 C：实现后端接口 + 测试（如果需要）
+- 子代理 D：编写 i18n 文件（zh.json + en.json）
+
+等待所有并行子代理完成后，再处理依赖任务。
+
+**步骤 3.4 — 集成和验证**
+
+1. 实现主组件 `tools/tool-$ARGUMENTS/src/<Pascal>.tsx`，集成所有子组件
+2. 确保从 `@toolbox/ui-kit` 中提取共享组件；如果缺少所需的原语，将其添加到 `packages/ui-kit`
+3. 验证 i18n 文件完整且两个语言版本同步
+4. 不要为 manifest 工具手动编辑 `apps/web/src/config/a-*.ts` — 发现是自动的
 
 ---
 
-## 阶段 6 — 质量关卡（构建 + lint + 测试）
+## 阶段 4 — 质量关卡（构建 + lint + 测试）
 
 运行所有这些，只有在全部通过时才继续：
 
@@ -131,106 +151,38 @@ pnpm -C apps/web build
 pnpm test
 ```
 
-如果任何失败，就地修复。如果失败看起来不简单，提前跳到阶段 7 的审查循环。
+如果任何失败，就地修复。如果失败看起来不简单，提前跳到阶段 5 的审查循环。
 
 ---
 
-## 阶段 7 — 审查循环（self-clean → codex）
+## 阶段 5 — 代码审查
 
-**重要：为每个审查步骤使用子代理以避免上下文爆炸。**
-
-按成本递增顺序运行审查器，以便每个工具看到前一个已经清理过的代码。这最小化了往返次数。
-
-**步骤 7.1 — 自清理通道（免费、快速）：**
+**重要：使用子代理进行审查以避免上下文爆炸。**
 
 派遣一个子代理在此工具的 diff 上调用 `simplify` 技能。子代理应该：
 1. 使用参数 `main...feat/tool-$ARGUMENTS` 运行 simplify 技能
 2. 应用所有发现（重用、死代码、冗余抽象）
-3. 重新运行阶段 6 质量关卡（consistency、lint、build、test）
-4. 使用消息 "refactor(tool-$ARGUMENTS): apply simplify review fixes" 提交修复
+3. 重新运行阶段 4 质量关卡（consistency、lint、build、test）
+4. 使用消息 "refactor(tool-$ARGUMENTS): apply code review fixes" 提交修复
 5. 报告修复内容的摘要
 
-**步骤 7.2 — Codex 审查循环：**
-
-派遣一个子代理运行 codex 审查迭代。子代理应该：
-1. 在新代码上运行 `/codex:review`
-2. 如果报告了问题：
-   - **简单/清晰的修复**：就地修复，重新运行阶段 6，然后重新运行 `/codex:review`
-   - **复杂/不清楚**：使用问题上下文调用 `/codex:rescue`
-3. 循环直到 `/codex:review` 报告干净。上限为 5 次迭代
-4. 如果 5 次迭代后仍不干净，报告剩余问题
-5. 使用消息 "fix(tool-$ARGUMENTS): address codex review findings" 提交任何修复
-
-**步骤 7.3 — 对抗性通道（最终）：**
-
-派遣一个子代理运行对抗性审查。子代理应该：
-1. 运行一次 `/codex:adversarial-review`
-2. 修复它发现的任何问题
-3. 重新运行阶段 6 质量关卡
-4. 使用消息 "fix(tool-$ARGUMENTS): address adversarial review findings" 提交修复
-5. 报告摘要
-
 ---
 
-## 阶段 8 — 通过 chrome-dev-mcp 或手动截图
+## 阶段 6 — 归档 + PR
 
-**重要：派遣一个子代理来处理截图捕获。**
+**步骤 6.1 — 归档 OpenSpec 变更**
 
-派遣一个子代理来捕获截图。子代理应该：
-1. 验证开发服务器正在 http://localhost:5173 上运行
-2. 使用 chrome-dev-mcp 或 Playwright 导航到 `/$ARGUMENTS`
-3. 等待页面完全加载
-4. 截图并保存到 `docs/tools/$ARGUMENTS/screenshots/idle.png`
-5. 如果工具有多个状态，捕获额外的截图
-6. 验证截图已成功创建
-7. 报告截图路径
+派遣一个子代理归档 openspec 变更：
+1. 运行 `openspec archive add-$ARGUMENTS-tool --yes`
+2. 验证变更已移动到 archive 并更新了主规范
+3. 运行 `openspec validate --strict` 确认
+4. 提交归档更改
 
-如果 chrome-dev-mcp 不可用，子代理应该：
-- 编写一个简单的 Playwright 脚本来捕获截图
-- 或指示用户手动捕获截图
+**步骤 6.2 — 创建 PR**
 
-### 🧑 人工关卡 3 — 视觉确认
-
-告诉用户截图目录并询问：**"效果图已输出到 `docs/tools/$ARGUMENTS/screenshots/`，请查看。通过 / 需要 UI 调整？"**
-
-如果他们想要更改，跳回阶段 5，然后重新运行 6 → 7 → 8。否则继续。
-
----
-
-## 阶段 9 — 单元测试
-
-为工具添加的任何非平凡逻辑（解析、格式化、验证）生成 Vitest 单元测试。遵循的模式：
-
-- 作为 `tools/tool-$ARGUMENTS/src/<thing>.test.ts` 共同定位
-- 或者，如果逻辑是共享的，在相关的 `packages/*/src/` 测试中
-- 使用 `apps/web/src/config/tools.test.ts` 的风格
-
-纯展示工具可能不需要新的单元测试 — 明确说明而不是填充。
-
-运行：
-
-```bash
-pnpm test
-```
-
-循环直到通过。
-
----
-
-## 阶段 10 — 归档 openspec 变更
-
-```bash
-openspec archive add-$ARGUMENTS-tool
-```
-
-这会将变更移动到归档规范中并更新主规范集。
-
----
-
-## 阶段 11 — 提交 + PR
-
+派遣一个子代理创建 PR：
 1. `git status` — 确认暂存的内容
-2. `git add` 特定文件（工具目录、locale 更改、任何后端文件、测试、文档、openspec 更改）。避免 `git add -A`。
+2. `git add` 特定文件（工具目录、locale 更改、任何后端文件、测试、文档）。避免 `git add -A`。
 3. 使用单个常规消息提交：
    ```
    feat(tool-$ARGUMENTS): <PRD 中的一句话摘要>
@@ -239,9 +191,8 @@ openspec archive add-$ARGUMENTS-tool
 5. `gh pr create --title "feat(tool-$ARGUMENTS): <摘要>" --body "<HEREDOC body>"`，正文包含：
    - 摘要（最多 3 个要点）
    - PRD 链接
-   - 截图嵌入（相对路径）
    - 测试计划检查清单
-6. 向用户报告 PR URL。
+6. 报告 PR URL
 
 GitHub Actions 在合并时处理部署。
 
@@ -250,7 +201,25 @@ GitHub Actions 在合并时处理部署。
 ## 此工作流的操作原则
 
 - **一次一个阶段。** 在完成当前阶段之前不要提前开始下一个阶段。
-- **在每个关卡显示差异。** 在要求用户批准时，显示实际的文件路径并让他们检查。
-- **不要静默跳过。** 如果你跳过一个阶段（例如不需要后端，不需要单元测试），明确说明。
+- **智能并行化。** 在阶段 3 实现时，自动识别可并行的独立任务，在单个消息中派遣多个子代理并行执行，最大化效率。
+- **不要静默跳过。** 如果你跳过一个阶段（例如不需要后端），明确说明。
 - **失败 = 停止 + 询问。** 如果一个关卡在一次修复尝试后失败，在重试之前询问用户 — 不要浪费迭代。
 - **工具名称在任何地方都保持一致。** `tool-$ARGUMENTS`（目录）、`/$ARGUMENTS`（路径）、`tool<Pascal>`（命名空间）、`<Pascal>`（组件）— 永远不要让这些漂移。
+
+## 优化后的流程总结
+
+**完整流程（7 个阶段 + 1 个关卡）：**
+```
+0.预检 → 1.需求收集 → 2.PRD+OpenSpec规划[关卡] → 3.实现(TDD+并行子代理) → 
+4.质量关卡 → 5.代码审查(simplify) → 6.归档+PR
+```
+
+**关键优化点：**
+- 合并了 OpenSpec 和 Superpowers 规划阶段
+- 移除了关卡 2 和关卡 3，只保留 PRD 审阅关卡
+- 移除了截图阶段
+- 实现阶段采用智能并行化，自动派遣多个子代理
+- 简化了审查流程，只保留 simplify
+- 合并了归档和 PR 创建阶段
+
+**预计时间节省：** 相比原流程减少约 40-50% 的执行时间。
