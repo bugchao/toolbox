@@ -135,50 +135,59 @@ If any fail, fix in place. If a failure looks non-trivial, jump to Stage 7's rev
 
 ---
 
-## Stage 7 — Review loop (self-clean → security → codex)
+## Stage 7 — Review loop (self-clean → codex)
+
+**IMPORTANT: Use subagents for each review step to avoid context explosion.**
 
 Run reviewers in escalating cost order so each tool sees code the previous one already cleaned. This minimizes round-trips.
 
 **Step 7.1 — Self-clean pass (free, fast):**
 
-Invoke the `simplify` skill on the diff for this tool. Apply its findings (reuse, dead code, redundant abstractions). Re-run Stage 6 quality gate. This step exists to strip obvious noise before paid reviewers see it.
+Dispatch a subagent to invoke the `simplify` skill on the diff for this tool. The subagent should:
+1. Run the simplify skill with argument `main...feat/tool-$ARGUMENTS`
+2. Apply all findings (reuse, dead code, redundant abstractions)
+3. Re-run Stage 6 quality gate (consistency, lint, build, test)
+4. Commit fixes with message "refactor(tool-$ARGUMENTS): apply simplify review fixes"
+5. Report summary of what was fixed
 
-**Step 7.2 — Security pass:**
+**Step 7.2 — Codex review loop:**
 
-Invoke the `security-review` skill on the pending changes. Pay special attention if the tool touches:
-- Crypto / signing / private keys (e.g. blockchain-* tools)
-- DNS / network reconnaissance
-- User-supplied URLs, file paths, or shell input
-- Auth / session handling
-- External API credentials
-
-Fix every finding before moving on — security issues do not get deferred.
-
-**Step 7.3 — Codex review loop:**
-
-1. Run `/codex:review` on the new code.
+Dispatch a subagent to run codex review iterations. The subagent should:
+1. Run `/codex:review` on the new code
 2. If issues reported:
-   - **Trivial / clear fix**: fix in place, re-run Stage 6, then re-run `/codex:review`.
-   - **Complex / unclear**: invoke `/codex:rescue` with the issue context.
-3. Loop until `/codex:review` reports clean. Cap at 5 iterations.
-4. If still not clean after 5 iterations, surface remaining issues to the user and ask how to proceed.
+   - **Trivial / clear fix**: fix in place, re-run Stage 6, then re-run `/codex:review`
+   - **Complex / unclear**: invoke `/codex:rescue` with the issue context
+3. Loop until `/codex:review` reports clean. Cap at 5 iterations
+4. If still not clean after 5 iterations, report remaining issues
+5. Commit any fixes with message "fix(tool-$ARGUMENTS): address codex review findings"
 
-**Step 7.4 — Adversarial pass (final):**
+**Step 7.3 — Adversarial pass (final):**
 
-Run `/codex:adversarial-review` once before moving on. Fix anything it surfaces, then re-run Stage 6 once more.
+Dispatch a subagent to run adversarial review. The subagent should:
+1. Run `/codex:adversarial-review` once
+2. Fix anything it surfaces
+3. Re-run Stage 6 quality gate
+4. Commit fixes with message "fix(tool-$ARGUMENTS): address adversarial review findings"
+5. Report summary
 
 ---
 
-## Stage 8 — Screenshot via Playwright
+## Stage 8 — Screenshot via chrome-dev-mcp or manual
 
-1. Write `tests/$ARGUMENTS.spec.ts` based on the pattern in `tests/zipcode.spec.ts`. The spec should:
-   - Navigate to `/$ARGUMENTS`
-   - Assert the title is visible
-   - Exercise the golden-path interaction once
-   - Take a screenshot at each meaningful state via `page.screenshot({ path: 'docs/tools/$ARGUMENTS/screenshots/<state>.png', fullPage: true })`
-2. Ensure browsers are installed: `pnpm test:e2e:ui:install` (no-op if already installed).
-3. Run: `pnpm test:e2e tests/$ARGUMENTS.spec.ts`
-4. Confirm screenshots landed in `docs/tools/$ARGUMENTS/screenshots/`.
+**IMPORTANT: Dispatch a subagent to handle screenshot capture.**
+
+Dispatch a subagent to capture screenshots. The subagent should:
+1. Verify dev server is running on http://localhost:5173
+2. Use chrome-dev-mcp or Playwright to navigate to `/$ARGUMENTS`
+3. Wait for page to load completely
+4. Take screenshot and save to `docs/tools/$ARGUMENTS/screenshots/idle.png`
+5. If the tool has multiple states, capture additional screenshots
+6. Verify screenshots were created successfully
+7. Report screenshot paths
+
+If chrome-dev-mcp is not available, the subagent should:
+- Write a simple Playwright script to capture screenshots
+- Or instruct the user to manually capture screenshots
 
 ### 🧑 Human Gate 3 — visual confirmation
 
