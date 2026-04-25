@@ -46,3 +46,6 @@ toolbox-store.db
 toolbox-store.db-shm
 toolbox-store.db-wal
 
+# Git worktrees
+.worktrees/
+
