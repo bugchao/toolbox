@@ -1,5 +1,5 @@
 ---
-description: 端到端开发一个新工具：PRD → 规划 → 实现(TDD) → 审查 → 截图 → PR
+description: 端到端开发一个新工具：需求 → OpenSpec → 任务规划(并行分析) → 实现 → 审查 → PR
 argument-hint: <工具名称>
 ---
 
@@ -20,10 +20,9 @@ argument-hint: <工具名称>
 1. **工具名称有效性**：必须匹配 `^[a-z0-9]+(-[a-z0-9]+)*$`。如果不匹配，中止并给出清晰的错误提示。
 2. **名称冲突**：检查 `tools/tool-$ARGUMENTS/` 是否不存在；检查是否没有 manifest 已经使用路径 `/$ARGUMENTS`。如果冲突，询问用户是选择不同的名称还是在现有工具上工作。
 3. **必需的 CLI**：确认 `openspec` 可用（`which openspec`）。如果缺失，告诉用户运行 `npm i -g @fission-ai/openspec` 并停止。
-4. **必需的插件**：检查 `superpowers` 插件是否已安装（`/plugin list` 风格 — 查看 `~/.claude/plugins/installed_plugins.json`）。如果缺失，告诉用户运行 `/plugin install superpowers@claude-plugins-official` 并停止。
-5. **工作树**：运行 `git status --porcelain`。如果有未提交的更改，询问用户是继续（未提交的工作将被打包到 PR 中）还是先 stash。
-6. **分支**：如果当前在 `main` 上，创建并切换到特性分支 `feat/tool-$ARGUMENTS`。否则保持在当前分支但警告用户。
-7. **openspec 初始化**：如果仓库根目录不存在 `openspec/` 目录，在继续之前运行 `openspec init`（是的，在这个仓库中）。
+4. **工作树**：运行 `git status --porcelain`。如果有未提交的更改，询问用户是继续（未提交的工作将被打包到 PR 中）还是先 stash。
+5. **分支**：如果当前在 `main` 上，创建并切换到特性分支 `feat/tool-$ARGUMENTS`。否则保持在当前分支但警告用户。
+6. **openspec 初始化**：如果仓库根目录不存在 `openspec/` 目录，在继续之前运行 `openspec init`（是的，在这个仓库中）。
 
 预检后，总结你发现的内容并在继续之前与用户确认。
 
@@ -44,94 +43,86 @@ argument-hint: <工具名称>
 
 ---
 
-## 阶段 2 — PRD + 实现规划
+## 阶段 2 — OpenSpec 变更提案
 
-生成 `docs/tools/$ARGUMENTS/PRD.md`，结构如下（使用中文 — 仓库语言是双语的，但 PRD 默认为中文）：
-
-```markdown
-# PRD: <工具显示名称>
-
-- 工具 ID: tool-$ARGUMENTS
-- 路径: /$ARGUMENTS
-- 分类: <category>
-- 模式: <client | server | hybrid>
-- 创建日期: <today>
-
-## 1. 背景与目标
-## 2. 目标用户与场景
-## 3. 功能范围
-   ### 3.1 必须有 (P0)
-   ### 3.2 应该有 (P1)
-   ### 3.3 不做
-## 4. 输入与输出
-## 5. UI 草图（文字描述）
-## 6. 后端能力（如需）
-   - 接口路径、入参、出参
-   - 复用/新建的 service 模块
-## 7. i18n 关键词清单
-## 8. 验收标准
-## 9. 参考工具
-## 10. 实现任务分解
-   - 按 TDD 原则分解的实现任务清单
-   - 每个任务包含：功能点、测试要点、验收标准
-```
-
-写完 PRD 后，基于 PRD 创建 OpenSpec 变更提案：
+基于需求收集的信息创建 OpenSpec 变更提案：
 
 1. 运行 `openspec change add add-$ARGUMENTS-tool`
-2. 在 `openspec/changes/add-$ARGUMENTS-tool/` 下编写变更规范，涵盖：正在添加的能力、设计说明、验证标准
+2. 在 `openspec/changes/add-$ARGUMENTS-tool/` 下编写变更规范：
+   - `proposal.md`：能力描述、设计说明、验收标准
+   - `specs/<capability>/spec.md`：具体的需求和场景
+   - `tasks.md`：初步的任务清单（下一阶段会由 superpowers 细化）
 3. 运行 `openspec validate add-$ARGUMENTS-tool` 并修复任何错误
 
-完成后，向用户显示 PRD 路径和 OpenSpec 变更路径。
+完成后，向用户显示 OpenSpec 变更路径。
 
-### 🧑 人工关卡 — PRD 和规划审阅
+### 🧑 人工关卡 — OpenSpec 审阅
 
-停止并明确询问用户：**"PRD 和实现规划已生成：
-- PRD: `docs/tools/$ARGUMENTS/PRD.md`
-- OpenSpec: `openspec/changes/add-$ARGUMENTS-tool/`
-
-请审阅。通过 / 需要修改？"**
+停止并明确询问用户：**"OpenSpec 变更提案已生成在 `openspec/changes/add-$ARGUMENTS-tool/`，请审阅。通过 / 需要修改？"**
 
 在用户明确表示批准之前不要继续。如果他们想要更改，编辑并重新确认。
 
 ---
 
-## 阶段 3 — 实现（TDD + 并行子代理）
+## 阶段 3 — Superpowers 任务规划（含并行分析）
+
+调用 `superpowers:writing-plans` 技能，基于 OpenSpec 变更提案生成详细的实现计划。
+
+**关键要求：**
+1. 将 OpenSpec 的 tasks.md 细化为具体的实现任务
+2. **分析任务依赖关系和并行性**：
+   - 标记可以并行执行的独立任务组（例如：UI 组件、工具函数、后端接口、i18n）
+   - 标记必须串行执行的依赖任务（例如：类型定义 → 使用该类型的组件）
+   - 为每个并行组分配优先级
+3. 每个任务包含：功能点、TDD 测试要点、验收标准
+4. 将计划写入 `openspec/changes/add-$ARGUMENTS-tool/tasks.md`
+
+**任务分组示例：**
+```markdown
+## 并行组 1（基础设施）
+- [ ] Task 1.1: 脚手架和配置
+- [ ] Task 1.2: 类型定义
+
+## 并行组 2（独立功能 - 可并行）
+- [ ] Task 2.1: 工具函数 A + 测试
+- [ ] Task 2.2: 工具函数 B + 测试
+- [ ] Task 2.3: UI 组件 X + 测试
+- [ ] Task 2.4: UI 组件 Y + 测试
+- [ ] Task 2.5: i18n 文件（zh + en）
+
+## 并行组 3（集成 - 依赖组 2）
+- [ ] Task 3.1: 主组件集成
+- [ ] Task 3.2: 端到端测试
+```
+
+---
+
+## 阶段 4 — 实现（TDD + 智能并行）
 
 **调用 `toolbox-tool-dev` 技能**（此仓库的项目级技能）以获取约定。
 
-**步骤 3.1 — 脚手架和配置**
+**步骤 4.1 — 脚手架和配置**
 
 1. `pnpm create:tool $ARGUMENTS` — 脚手架
 2. `pnpm install` — 链接新的工作区包
 3. 编辑 `tools/tool-$ARGUMENTS/tool.manifest.ts` — 设置真实的 `categoryKey`、`icon`（选择有意义的 `lucide-react` 图标，而不是默认的 `Wrench`）、`keywords`、`meta.zh`/`meta.en`、`mode`
 
-**步骤 3.2 — 分析任务并行性**
+**步骤 4.2 — 按并行组执行任务**
 
-从 PRD 的"实现任务分解"中分析任务：
-- 识别可以并行执行的独立任务（例如：UI 组件、工具函数、后端接口）
-- 识别必须串行执行的依赖任务（例如：基础类型定义 → 使用该类型的组件）
+根据阶段 3 生成的任务分组，按顺序处理每个并行组：
 
-**步骤 3.3 — 并行派遣子代理实现**
+**对于每个并行组：**
+- 如果组内只有 1 个任务，直接执行
+- 如果组内有 2+ 个独立任务，在**单个消息中派遣多个子代理**并行执行
 
-对于可并行的任务组，在**单个消息中派遣多个子代理**并行执行：
-
-每个子代理应该：
+**每个子代理应该：**
 1. 遵循 TDD 原则：先写测试，再实现，后重构
 2. 实现分配的功能点
 3. 编写对应的单元测试
 4. 运行 `pnpm test` 确保测试通过
 5. 报告完成状态
 
-**示例并行任务分配：**
-- 子代理 A：实现工具函数 + 测试（如 formatDuration、getMimeTypes）
-- 子代理 B：实现 UI 组件 + 测试（如 IdlePanel、RecordingPanel）
-- 子代理 C：实现后端接口 + 测试（如果需要）
-- 子代理 D：编写 i18n 文件（zh.json + en.json）
-
-等待所有并行子代理完成后，再处理依赖任务。
-
-**步骤 3.4 — 集成和验证**
+**步骤 4.3 — 集成和验证**
 
 1. 实现主组件 `tools/tool-$ARGUMENTS/src/<Pascal>.tsx`，集成所有子组件
 2. 确保从 `@toolbox/ui-kit` 中提取共享组件；如果缺少所需的原语，将其添加到 `packages/ui-kit`
@@ -140,7 +131,7 @@ argument-hint: <工具名称>
 
 ---
 
-## 阶段 4 — 质量关卡（构建 + lint + 测试）
+## 阶段 5 — 质量关卡（构建 + lint + 测试）
 
 运行所有这些，只有在全部通过时才继续：
 
@@ -151,26 +142,26 @@ pnpm -C apps/web build
 pnpm test
 ```
 
-如果任何失败，就地修复。如果失败看起来不简单，提前跳到阶段 5 的审查循环。
+如果任何失败，就地修复。如果失败看起来不简单，提前跳到阶段 6 的审查循环。
 
 ---
 
-## 阶段 5 — 代码审查
+## 阶段 6 — 代码审查
 
 **重要：使用子代理进行审查以避免上下文爆炸。**
 
 派遣一个子代理在此工具的 diff 上调用 `simplify` 技能。子代理应该：
 1. 使用参数 `main...feat/tool-$ARGUMENTS` 运行 simplify 技能
 2. 应用所有发现（重用、死代码、冗余抽象）
-3. 重新运行阶段 4 质量关卡（consistency、lint、build、test）
+3. 重新运行阶段 5 质量关卡（consistency、lint、build、test）
 4. 使用消息 "refactor(tool-$ARGUMENTS): apply code review fixes" 提交修复
 5. 报告修复内容的摘要
 
 ---
 
-## 阶段 6 — 归档 + PR
+## 阶段 7 — 归档 + PR
 
-**步骤 6.1 — 归档 OpenSpec 变更**
+**步骤 7.1 — 归档 OpenSpec 变更**
 
 派遣一个子代理归档 openspec 变更：
 1. 运行 `openspec archive add-$ARGUMENTS-tool --yes`
@@ -178,19 +169,19 @@ pnpm test
 3. 运行 `openspec validate --strict` 确认
 4. 提交归档更改
 
-**步骤 6.2 — 创建 PR**
+**步骤 7.2 — 创建 PR**
 
 派遣一个子代理创建 PR：
 1. `git status` — 确认暂存的内容
 2. `git add` 特定文件（工具目录、locale 更改、任何后端文件、测试、文档）。避免 `git add -A`。
 3. 使用单个常规消息提交：
    ```
-   feat(tool-$ARGUMENTS): <PRD 中的一句话摘要>
+   feat(tool-$ARGUMENTS): <OpenSpec proposal 中的一句话摘要>
    ```
 4. 推送：`git push -u origin feat/tool-$ARGUMENTS`
 5. `gh pr create --title "feat(tool-$ARGUMENTS): <摘要>" --body "<HEREDOC body>"`，正文包含：
    - 摘要（最多 3 个要点）
-   - PRD 链接
+   - OpenSpec 变更链接
    - 测试计划检查清单
 6. 报告 PR URL
 
@@ -201,24 +192,23 @@ GitHub Actions 在合并时处理部署。
 ## 此工作流的操作原则
 
 - **一次一个阶段。** 在完成当前阶段之前不要提前开始下一个阶段。
-- **智能并行化。** 在阶段 3 实现时，自动识别可并行的独立任务，在单个消息中派遣多个子代理并行执行，最大化效率。
+- **智能并行化。** 在阶段 3 由 superpowers 分析任务依赖关系，在阶段 4 按并行组派遣多个子代理并行执行，最大化效率。
 - **不要静默跳过。** 如果你跳过一个阶段（例如不需要后端），明确说明。
 - **失败 = 停止 + 询问。** 如果一个关卡在一次修复尝试后失败，在重试之前询问用户 — 不要浪费迭代。
 - **工具名称在任何地方都保持一致。** `tool-$ARGUMENTS`（目录）、`/$ARGUMENTS`（路径）、`tool<Pascal>`（命名空间）、`<Pascal>`（组件）— 永远不要让这些漂移。
 
 ## 优化后的流程总结
 
-**完整流程（7 个阶段 + 1 个关卡）：**
+**完整流程（8 个阶段 + 1 个关卡）：**
 ```
-0.预检 → 1.需求收集 → 2.PRD+OpenSpec规划[关卡] → 3.实现(TDD+并行子代理) → 
-4.质量关卡 → 5.代码审查(simplify) → 6.归档+PR
+0.预检 → 1.需求收集 → 2.OpenSpec[关卡] → 3.Superpowers任务规划(并行分析) → 
+4.实现(TDD+智能并行) → 5.质量关卡 → 6.代码审查(simplify) → 7.归档+PR
 ```
 
 **关键优化点：**
-- 合并了 OpenSpec 和 Superpowers 规划阶段
-- 移除了关卡 2 和关卡 3，只保留 PRD 审阅关卡
-- 移除了截图阶段
-- 实现阶段采用智能并行化，自动派遣多个子代理
+- 取消 PRD，直接生成 OpenSpec（更结构化、可验证）
+- Superpowers 负责任务细化和并行性分析
+- 实现阶段按并行组自动派遣多个子代理
 - 简化了审查流程，只保留 simplify
 - 合并了归档和 PR 创建阶段
 
