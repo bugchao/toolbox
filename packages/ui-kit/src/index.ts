@@ -37,6 +37,8 @@ export { default as StatusBadge } from './StatusBadge'
 export type { StatusBadgeProps, StatusLevel } from './StatusBadge'
 export { default as Timeline } from './Timeline'
 export type { TimelineProps, TimelineItem } from './Timeline'
+export { default as Switch } from './Switch'
+export type { SwitchProps } from './Switch'
 export { theme } from './theme'
 export { cn } from './lib/cn'
 
