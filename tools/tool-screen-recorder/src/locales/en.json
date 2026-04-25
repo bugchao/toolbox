@@ -1,4 +1,36 @@
 {
-  "title": "ScreenRecorder",
-  "description": "TODO: Add an English description"
+  "title": "Screen Recorder Studio",
+  "description": "Record screen/window/tab in-browser with system audio + mic, fully local with zero uploads",
+  "idle": {
+    "title": "Recording Options",
+    "includeSystemAudio": "Include system audio",
+    "includeMic": "Include microphone",
+    "mimeType": "Output format",
+    "startButton": "Start Recording",
+    "hint": "Browser will show a picker to select the source"
+  },
+  "recording": {
+    "statusRecording": "Recording",
+    "statusPaused": "Paused",
+    "sizeLabel": "Size",
+    "sizeWarning": "Recording exceeds 1 GB",
+    "pauseButton": "Pause",
+    "resumeButton": "Resume",
+    "stopButton": "Stop"
+  },
+  "finished": {
+    "previewLabel": "Preview",
+    "durationLabel": "Duration",
+    "sizeLabel": "Size",
+    "downloadButton": "Download",
+    "restartButton": "Record Again"
+  },
+  "error": {
+    "unsupported": "Your browser does not support screen recording",
+    "permissionDenied": "Screen share permission denied. Please retry and allow access.",
+    "deviceError": "No recording device found",
+    "recordingFailed": "An error occurred during recording",
+    "retryButton": "Retry",
+    "backButton": "Back"
+  }
 }
