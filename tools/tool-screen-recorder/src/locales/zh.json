@@ -1,0 +1,36 @@
+{
+  "title": "屏幕录制 Studio",
+  "description": "浏览器内录制屏幕/窗口/标签，支持系统音+麦克风，完全本地无上传",
+  "idle": {
+    "title": "录制选项",
+    "includeSystemAudio": "包含系统音",
+    "includeMic": "包含麦克风",
+    "mimeType": "输出格式",
+    "startButton": "开始录制",
+    "hint": "浏览器会弹出选择器，选择要录制的源"
+  },
+  "recording": {
+    "statusRecording": "录制中",
+    "statusPaused": "已暂停",
+    "sizeLabel": "大小",
+    "sizeWarning": "录制文件已超过 1 GB",
+    "pauseButton": "暂停",
+    "resumeButton": "继续",
+    "stopButton": "停止"
+  },
+  "finished": {
+    "previewLabel": "预览",
+    "durationLabel": "时长",
+    "sizeLabel": "大小",
+    "downloadButton": "下载",
+    "restartButton": "再录一段"
+  },
+  "error": {
+    "unsupported": "您的浏览器不支持屏幕录制功能",
+    "permissionDenied": "您拒绝了屏幕共享授权，请重试并允许访问",
+    "deviceError": "未找到可用的录制设备",
+    "recordingFailed": "录制过程中发生错误",
+    "retryButton": "重试",
+    "backButton": "返回"
+  }
+}
