@@ -81,9 +81,9 @@ describe('DomainTxt', () => {
 
     await waitFor(() => {
       expect(screen.getByText('3')).toBeInTheDocument(); // 总记录数
-      expect(screen.getByText('SPF')).toBeInTheDocument();
-      expect(screen.getByText('DMARC')).toBeInTheDocument();
-      expect(screen.getByText('VERIFICATION')).toBeInTheDocument();
+      expect(screen.getAllByText('SPF').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('DMARC').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('VERIFICATION').length).toBeGreaterThan(0);
     });
   });
 

@@ -145,6 +145,8 @@ export default defineConfig({
       'react-dom': path.join(root, 'apps/web/node_modules/react-dom'),
       'lucide-react': path.join(root, 'apps/web/node_modules/lucide-react'),
       'react-i18next': path.join(root, 'apps/web/node_modules/react-i18next'),
+      '@testing-library/react': path.join(root, 'apps/web/node_modules/@testing-library/react'),
+      'i18next': path.join(root, 'apps/web/node_modules/i18next'),
       '@toolbox/TimezoneConverter': path.join(root, 'tools/TimezoneConverter'),
       // 自动扫描的工具包 alias
       ...toolAliases,

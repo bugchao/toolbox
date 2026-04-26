@@ -1,0 +1,60 @@
+{
+  "title": "AI 聊天中心",
+  "description": "同时与多个 AI（ChatGPT、Gemini、DeepSeek、Grok）对话并对比回答",
+  "providers": {
+    "chatgpt": "ChatGPT",
+    "gemini": "Gemini",
+    "deepseek": "DeepSeek",
+    "grok": "Grok",
+    "selectProvider": "选择 AI 提供商",
+    "configureKey": "配置 API 密钥",
+    "configured": "已配置",
+    "notConfigured": "未配置"
+  },
+  "buttons": {
+    "send": "发送",
+    "configure": "配置",
+    "save": "保存",
+    "delete": "删除",
+    "retry": "重试",
+    "cancel": "取消"
+  },
+  "messages": {
+    "selectAI": "请至少选择一个 AI 提供商",
+    "configureKey": "请为选中的提供商配置 API 密钥",
+    "loading": "加载中...",
+    "requestFailed": "请求失败",
+    "enterPrompt": "输入您的消息...",
+    "noResponse": "暂无回复",
+    "thinking": "思考中...",
+    "streaming": "接收回复中..."
+  },
+  "errors": {
+    "invalidApiKey": "API 密钥无效",
+    "networkError": "网络错误，请检查您的连接",
+    "rateLimitExceeded": "超出速率限制，请稍后重试",
+    "requestTimeout": "请求超时",
+    "unknownError": "发生未知错误",
+    "configurationError": "配置错误"
+  },
+  "viewModes": {
+    "grid": "平铺视图",
+    "tab": "标签视图",
+    "switchToGrid": "切换到平铺视图",
+    "switchToTab": "切换到标签视图"
+  },
+  "config": {
+    "title": "API 密钥配置",
+    "apiKeyLabel": "API 密钥",
+    "apiKeyPlaceholder": "请输入您的 API 密钥",
+    "saveSuccess": "API 密钥保存成功",
+    "deleteSuccess": "API 密钥删除成功",
+    "deleteConfirm": "确定要删除此 API 密钥吗？",
+    "baseURL": "API 端点",
+    "baseURLPlaceholder": "可选，留空使用默认端点",
+    "baseURLSaved": "API 端点保存成功",
+    "baseURLDeleted": "API 端点已删除",
+    "baseURLInvalid": "URL 格式不正确，必须以 http:// 或 https:// 开头",
+    "baseURLDeleteConfirm": "确定要删除此 API 端点吗？"
+  }
+}

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
-import DnsNs from '../src/DnsNs';
+import DnsNs from '../DnsNs';
 
 // Mock i18n
 i18n.init({

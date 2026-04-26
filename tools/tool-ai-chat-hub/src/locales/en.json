@@ -1,0 +1,60 @@
+{
+  "title": "AI Chat Hub",
+  "description": "Chat with multiple AIs (ChatGPT, Gemini, DeepSeek, Grok) simultaneously and compare responses",
+  "providers": {
+    "chatgpt": "ChatGPT",
+    "gemini": "Gemini",
+    "deepseek": "DeepSeek",
+    "grok": "Grok",
+    "selectProvider": "Select AI Provider",
+    "configureKey": "Configure API Key",
+    "configured": "Configured",
+    "notConfigured": "Not Configured"
+  },
+  "buttons": {
+    "send": "Send",
+    "configure": "Configure",
+    "save": "Save",
+    "delete": "Delete",
+    "retry": "Retry",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "selectAI": "Please select at least one AI provider",
+    "configureKey": "Please configure API key for selected providers",
+    "loading": "Loading...",
+    "requestFailed": "Request failed",
+    "enterPrompt": "Enter your message...",
+    "noResponse": "No response yet",
+    "thinking": "Thinking...",
+    "streaming": "Receiving response..."
+  },
+  "errors": {
+    "invalidApiKey": "Invalid API key",
+    "networkError": "Network error, please check your connection",
+    "rateLimitExceeded": "Rate limit exceeded, please try again later",
+    "requestTimeout": "Request timeout",
+    "unknownError": "Unknown error occurred",
+    "configurationError": "Configuration error"
+  },
+  "viewModes": {
+    "grid": "Grid View",
+    "tab": "Tab View",
+    "switchToGrid": "Switch to Grid View",
+    "switchToTab": "Switch to Tab View"
+  },
+  "config": {
+    "title": "API Key Configuration",
+    "apiKeyLabel": "API Key",
+    "apiKeyPlaceholder": "Enter your API key",
+    "saveSuccess": "API key saved successfully",
+    "deleteSuccess": "API key deleted successfully",
+    "deleteConfirm": "Are you sure you want to delete this API key?",
+    "baseURL": "API Endpoint",
+    "baseURLPlaceholder": "Optional, leave empty for default endpoint",
+    "baseURLSaved": "API endpoint saved successfully",
+    "baseURLDeleted": "API endpoint deleted",
+    "baseURLInvalid": "Invalid URL format, must start with http:// or https://",
+    "baseURLDeleteConfirm": "Are you sure you want to delete this API endpoint?"
+  }
+}
