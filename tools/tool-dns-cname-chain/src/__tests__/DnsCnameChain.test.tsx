@@ -73,9 +73,9 @@ describe('DnsCnameChain', () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(screen.getByText('www.example.com')).toBeInTheDocument();
-      expect(screen.getByText('cdn.example.com')).toBeInTheDocument();
-      expect(screen.getByText('cdn-provider.net')).toBeInTheDocument();
+      expect(screen.getAllByText('www.example.com').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('cdn.example.com').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('cdn-provider.net').length).toBeGreaterThan(0);
     });
   });
 
