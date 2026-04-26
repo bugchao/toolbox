@@ -21,7 +21,10 @@ i18n.init({
 vi.mock('../utils/storage', () => ({
   saveApiKey: vi.fn(),
   getApiKey: vi.fn(),
-  deleteApiKey: vi.fn()
+  deleteApiKey: vi.fn(),
+  saveBaseURL: vi.fn(),
+  getBaseURL: vi.fn(),
+  deleteBaseURL: vi.fn()
 }))
 
 describe('ApiKeyConfig', () => {
@@ -198,6 +201,164 @@ describe('ApiKeyConfig', () => {
     await waitFor(() => {
       expect(mockSaveApiKey).toHaveBeenCalled()
       expect(screen.getByText(/saved successfully|保存成功/i)).toBeInTheDocument()
+    })
+  })
+
+  describe('BaseURL configuration', () => {
+    beforeEach(() => {
+      vi.mocked(storage.getApiKey).mockReturnValue(null)
+      vi.mocked(storage.getBaseURL).mockReturnValue(null)
+    })
+
+    it('should render BaseURL input for all providers', () => {
+      renderComponent()
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      expect(baseURLInputs).toHaveLength(4)
+    })
+
+    it('should save BaseURL when save button is clicked', async () => {
+      const mockSaveBaseURL = vi.mocked(storage.saveBaseURL)
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: 'https://api.example.com' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      const baseURLSaveButton = saveButtons[1] // Second save button is for BaseURL
+      fireEvent.click(baseURLSaveButton)
+
+      await waitFor(() => {
+        expect(mockSaveBaseURL).toHaveBeenCalledWith('chatgpt', 'https://api.example.com')
+      })
+    })
+
+    it('should display saved BaseURL', () => {
+      vi.mocked(storage.getBaseURL).mockImplementation((provider) => {
+        if (provider === 'chatgpt') return 'https://api.example.com'
+        return null
+      })
+
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      expect(baseURLInputs[0]).toHaveValue('https://api.example.com')
+    })
+
+    it('should show delete button for configured BaseURL', () => {
+      vi.mocked(storage.getBaseURL).mockImplementation((provider) => {
+        if (provider === 'chatgpt') return 'https://api.example.com'
+        return null
+      })
+
+      renderComponent()
+
+      const deleteButtons = screen.getAllByText(/Delete|删除/)
+      expect(deleteButtons.length).toBeGreaterThan(0)
+    })
+
+    it('should delete BaseURL after confirmation', async () => {
+      const mockDeleteBaseURL = vi.mocked(storage.deleteBaseURL)
+      vi.mocked(storage.getBaseURL).mockImplementation((provider) => {
+        if (provider === 'chatgpt') return 'https://api.example.com'
+        return null
+      })
+
+      const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true)
+
+      renderComponent()
+
+      const deleteButtons = screen.getAllByText(/Delete|删除/)
+      fireEvent.click(deleteButtons[0])
+
+      await waitFor(() => {
+        expect(confirmSpy).toHaveBeenCalled()
+        expect(mockDeleteBaseURL).toHaveBeenCalledWith('chatgpt')
+      })
+
+      confirmSpy.mockRestore()
+    })
+
+    it('should not delete BaseURL if user cancels', async () => {
+      const mockDeleteBaseURL = vi.mocked(storage.deleteBaseURL)
+      vi.mocked(storage.getBaseURL).mockImplementation((provider) => {
+        if (provider === 'chatgpt') return 'https://api.example.com'
+        return null
+      })
+
+      const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false)
+
+      renderComponent()
+
+      const deleteButtons = screen.getAllByText(/Delete|删除/)
+      fireEvent.click(deleteButtons[0])
+
+      await waitFor(() => {
+        expect(confirmSpy).toHaveBeenCalled()
+        expect(mockDeleteBaseURL).not.toHaveBeenCalled()
+      })
+
+      confirmSpy.mockRestore()
+    })
+
+    it('should validate BaseURL format - valid HTTPS', () => {
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: 'https://api.example.com' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      const baseURLSaveButton = saveButtons[1]
+      expect(baseURLSaveButton).not.toBeDisabled()
+    })
+
+    it('should validate BaseURL format - valid HTTP', () => {
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: 'http://localhost:8080' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      const baseURLSaveButton = saveButtons[1]
+      expect(baseURLSaveButton).not.toBeDisabled()
+    })
+
+    it('should validate BaseURL format - empty string is valid', () => {
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: '' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      const baseURLSaveButton = saveButtons[1]
+      expect(baseURLSaveButton).not.toBeDisabled()
+    })
+
+    it('should validate BaseURL format - invalid format', () => {
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: 'invalid-url' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      const baseURLSaveButton = saveButtons[1]
+      expect(baseURLSaveButton).toBeDisabled()
+      expect(screen.getByText(/Invalid URL format|URL 格式不正确/i)).toBeInTheDocument()
+    })
+
+    it('should display success message after saving BaseURL', async () => {
+      const mockSaveBaseURL = vi.mocked(storage.saveBaseURL)
+      renderComponent()
+
+      const baseURLInputs = screen.getAllByPlaceholderText(/Optional, leave empty for default endpoint|可选，留空使用默认端点/i)
+      fireEvent.change(baseURLInputs[0], { target: { value: 'https://api.example.com' } })
+
+      const saveButtons = screen.getAllByText(/Save|保存/)
+      fireEvent.click(saveButtons[1])
+
+      await waitFor(() => {
+        expect(mockSaveBaseURL).toHaveBeenCalled()
+        expect(screen.getByText(/endpoint saved successfully|端点保存成功/i)).toBeInTheDocument()
+      })
     })
   })
 })

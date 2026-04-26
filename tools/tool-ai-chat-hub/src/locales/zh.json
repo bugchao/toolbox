@@ -49,6 +49,12 @@
     "apiKeyPlaceholder": "请输入您的 API 密钥",
     "saveSuccess": "API 密钥保存成功",
     "deleteSuccess": "API 密钥删除成功",
-    "deleteConfirm": "确定要删除此 API 密钥吗？"
+    "deleteConfirm": "确定要删除此 API 密钥吗？",
+    "baseURL": "API 端点",
+    "baseURLPlaceholder": "可选，留空使用默认端点",
+    "baseURLSaved": "API 端点保存成功",
+    "baseURLDeleted": "API 端点已删除",
+    "baseURLInvalid": "URL 格式不正确，必须以 http:// 或 https:// 开头",
+    "baseURLDeleteConfirm": "确定要删除此 API 端点吗？"
   }
 }

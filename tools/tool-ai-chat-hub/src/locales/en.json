@@ -49,6 +49,12 @@
     "apiKeyPlaceholder": "Enter your API key",
     "saveSuccess": "API key saved successfully",
     "deleteSuccess": "API key deleted successfully",
-    "deleteConfirm": "Are you sure you want to delete this API key?"
+    "deleteConfirm": "Are you sure you want to delete this API key?",
+    "baseURL": "API Endpoint",
+    "baseURLPlaceholder": "Optional, leave empty for default endpoint",
+    "baseURLSaved": "API endpoint saved successfully",
+    "baseURLDeleted": "API endpoint deleted",
+    "baseURLInvalid": "Invalid URL format, must start with http:// or https://",
+    "baseURLDeleteConfirm": "Are you sure you want to delete this API endpoint?"
   }
 }

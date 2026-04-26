@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, Card } from '@toolbox/ui-kit'
 import { Eye, EyeOff, X } from 'lucide-react'
 import type { AIProvider } from '../types'
-import { saveApiKey, getApiKey, deleteApiKey } from '../utils/storage'
+import { saveApiKey, getApiKey, deleteApiKey, saveBaseURL, getBaseURL, deleteBaseURL } from '../utils/storage'
 
 interface ApiKeyConfigProps {
   isOpen: boolean
@@ -20,6 +20,18 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
     deepseek: '',
     grok: ''
   })
+  const [baseURLs, setBaseURLs] = useState<Record<AIProvider, string>>({
+    chatgpt: '',
+    gemini: '',
+    deepseek: '',
+    grok: ''
+  })
+  const [baseURLErrors, setBaseURLErrors] = useState<Record<AIProvider, string>>({
+    chatgpt: '',
+    gemini: '',
+    deepseek: '',
+    grok: ''
+  })
   const [showPassword, setShowPassword] = useState<Record<AIProvider, boolean>>({
     chatgpt: false,
     gemini: false,
@@ -31,6 +43,7 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       loadApiKeys()
+      loadBaseURLs()
     }
   }, [isOpen])
 
@@ -50,6 +63,24 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
     })
 
     setApiKeys(keys)
+  }
+
+  const loadBaseURLs = () => {
+    const urls: Record<AIProvider, string> = {
+      chatgpt: '',
+      gemini: '',
+      deepseek: '',
+      grok: ''
+    }
+
+    PROVIDERS.forEach(provider => {
+      const url = getBaseURL(provider)
+      if (url) {
+        urls[provider] = url
+      }
+    })
+
+    setBaseURLs(urls)
   }
 
   const maskApiKey = (key: string): string => {
@@ -92,6 +123,43 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
     setApiKeys(prev => ({ ...prev, [provider]: value }))
   }
 
+  const validateBaseURL = (url: string): boolean => {
+    if (url === '') return true
+    return url.startsWith('http://') || url.startsWith('https://')
+  }
+
+  const handleBaseURLChange = (provider: AIProvider, value: string) => {
+    setBaseURLs(prev => ({ ...prev, [provider]: value }))
+
+    if (value && !validateBaseURL(value)) {
+      setBaseURLErrors(prev => ({ ...prev, [provider]: t('config.baseURLInvalid') }))
+    } else {
+      setBaseURLErrors(prev => ({ ...prev, [provider]: '' }))
+    }
+  }
+
+  const handleSaveBaseURL = (provider: AIProvider) => {
+    const url = baseURLs[provider]
+    if (!validateBaseURL(url)) return
+
+    saveBaseURL(provider, url)
+    showSuccessMessage(t('config.baseURLSaved'))
+  }
+
+  const handleDeleteBaseURL = (provider: AIProvider) => {
+    const confirmed = window.confirm(t('config.baseURLDeleteConfirm'))
+    if (!confirmed) return
+
+    deleteBaseURL(provider)
+    setBaseURLs(prev => ({ ...prev, [provider]: '' }))
+    showSuccessMessage(t('config.baseURLDeleted'))
+  }
+
+  const isBaseURLConfigured = (provider: AIProvider): boolean => {
+    const url = getBaseURL(provider)
+    return !!url && url !== ''
+  }
+
   const isConfigured = (provider: AIProvider): boolean => {
     return !!getApiKey(provider)
   }
@@ -126,6 +194,9 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
               const configured = isConfigured(provider)
               const inputValue = apiKeys[provider]
               const showPass = showPassword[provider]
+              const baseURLValue = baseURLs[provider]
+              const baseURLError = baseURLErrors[provider]
+              const baseURLConfigured = isBaseURLConfigured(provider)
 
               return (
                 <div key={provider} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
@@ -133,46 +204,96 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
                     {t(`providers.${provider}`)}
                   </h3>
 
-                  <div className="space-y-3">
-                    <div className="flex gap-2">
-                      <div className="flex-1 relative">
-                        <input
-                          type={showPass ? 'text' : 'password'}
-                          value={inputValue}
-                          onChange={(e) => handleInputChange(provider, e.target.value)}
-                          placeholder={t('config.apiKeyPlaceholder')}
-                          className="w-full px-4 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => togglePasswordVisibility(provider)}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                          aria-label="toggle password visibility"
+                  <div className="space-y-4">
+                    {/* API Key Section */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('config.apiKeyLabel')}
+                      </label>
+                      <div className="flex gap-2">
+                        <div className="flex-1 relative">
+                          <input
+                            type={showPass ? 'text' : 'password'}
+                            value={inputValue}
+                            onChange={(e) => handleInputChange(provider, e.target.value)}
+                            placeholder={t('config.apiKeyPlaceholder')}
+                            className="w-full px-4 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility(provider)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                            aria-label="toggle password visibility"
+                          >
+                            {showPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2 mt-2">
+                        <Button
+                          onClick={() => handleSave(provider)}
+                          variant="primary"
+                          size="sm"
+                          disabled={!inputValue || inputValue.includes('***')}
                         >
-                          {showPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                        </button>
+                          {t('buttons.save')}
+                        </Button>
+
+                        {configured && (
+                          <Button
+                            onClick={() => handleDelete(provider)}
+                            variant="danger"
+                            size="sm"
+                          >
+                            {t('buttons.delete')}
+                          </Button>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={() => handleSave(provider)}
-                        variant="primary"
-                        size="sm"
-                        disabled={!inputValue || inputValue.includes('***')}
-                      >
-                        {t('buttons.save')}
-                      </Button>
+                    {/* BaseURL Section */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('config.baseURL')}
+                      </label>
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+                          <input
+                            type="text"
+                            value={baseURLValue}
+                            onChange={(e) => handleBaseURLChange(provider, e.target.value)}
+                            placeholder={t('config.baseURLPlaceholder')}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
+                          />
+                          {baseURLError && (
+                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                              {baseURLError}
+                            </p>
+                          )}
+                        </div>
+                      </div>
 
-                      {configured && (
+                      <div className="flex gap-2 mt-2">
                         <Button
-                          onClick={() => handleDelete(provider)}
-                          variant="danger"
+                          onClick={() => handleSaveBaseURL(provider)}
+                          variant="primary"
                           size="sm"
+                          disabled={!!baseURLError}
                         >
-                          {t('buttons.delete')}
+                          {t('buttons.save')}
                         </Button>
-                      )}
+
+                        {baseURLConfigured && (
+                          <Button
+                            onClick={() => handleDeleteBaseURL(provider)}
+                            variant="danger"
+                            size="sm"
+                          >
+                            {t('buttons.delete')}
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

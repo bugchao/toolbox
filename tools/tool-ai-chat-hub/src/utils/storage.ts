@@ -1,6 +1,7 @@
 import type { AIProvider, ViewMode } from '../types'
 
 const STORAGE_KEY_PREFIX = 'ai-chat-hub:api-key:'
+const BASE_URL_KEY_PREFIX = 'ai-chat-hub:base-url:'
 const PREFERENCES_KEY = 'ai-chat-hub:preferences'
 
 export function saveApiKey(provider: AIProvider, apiKey: string): void {
@@ -13,6 +14,18 @@ export function getApiKey(provider: AIProvider): string | null {
 
 export function deleteApiKey(provider: AIProvider): void {
   localStorage.removeItem(`${STORAGE_KEY_PREFIX}${provider}`)
+}
+
+export function saveBaseURL(provider: AIProvider, baseURL: string): void {
+  localStorage.setItem(`${BASE_URL_KEY_PREFIX}${provider}`, baseURL)
+}
+
+export function getBaseURL(provider: AIProvider): string | null {
+  return localStorage.getItem(`${BASE_URL_KEY_PREFIX}${provider}`)
+}
+
+export function deleteBaseURL(provider: AIProvider): void {
+  localStorage.removeItem(`${BASE_URL_KEY_PREFIX}${provider}`)
 }
 
 export function getAllApiKeys(): Record<string, string> {
