@@ -8,9 +8,11 @@ import type { AIProvider, ResponseStatus } from '../types'
 // Mock i18n
 i18n.init({
   lng: 'en',
+  ns: ['toolAiChatHub'],
+  defaultNS: 'toolAiChatHub',
   resources: {
     en: {
-      translation: {
+      toolAiChatHub: {
         providers: {
           chatgpt: 'ChatGPT',
           gemini: 'Gemini',

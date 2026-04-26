@@ -9,9 +9,11 @@ import * as storage from '../utils/storage'
 // Mock i18n
 i18n.init({
   lng: 'zh',
+  ns: ['toolAiChatHub'],
+  defaultNS: 'toolAiChatHub',
   resources: {
     zh: {
-      translation: {
+      toolAiChatHub: {
         providers: {
           chatgpt: 'ChatGPT',
           gemini: 'Gemini',

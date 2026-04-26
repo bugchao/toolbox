@@ -8,9 +8,11 @@ import type { ViewMode } from '../types'
 // Mock i18n
 i18n.init({
   lng: 'zh',
+  ns: ['toolAiChatHub'],
+  defaultNS: 'toolAiChatHub',
   resources: {
     zh: {
-      translation: {
+      toolAiChatHub: {
         viewModes: {
           grid: '平铺视图',
           tab: '标签视图'

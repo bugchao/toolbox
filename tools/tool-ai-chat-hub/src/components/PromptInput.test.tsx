@@ -7,9 +7,11 @@ import PromptInput from './PromptInput'
 // Mock i18n
 i18n.init({
   lng: 'zh',
+  ns: ['toolAiChatHub'],
+  defaultNS: 'toolAiChatHub',
   resources: {
     zh: {
-      translation: {
+      toolAiChatHub: {
         messages: {
           enterPrompt: '输入您的消息...'
         },

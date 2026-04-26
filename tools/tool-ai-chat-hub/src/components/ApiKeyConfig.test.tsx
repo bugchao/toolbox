@@ -10,9 +10,11 @@ import zhTranslations from '../locales/zh.json'
 i18n.init({
   lng: 'en',
   fallbackLng: 'en',
+  ns: ['toolAiChatHub'],
+  defaultNS: 'toolAiChatHub',
   resources: {
-    en: { translation: enTranslations },
-    zh: { translation: zhTranslations }
+    en: { toolAiChatHub: enTranslations },
+    zh: { toolAiChatHub: zhTranslations }
   }
 })
 
