@@ -19,7 +19,7 @@ const ResponsePanel: React.FC<ResponsePanelProps> = ({
   error,
   onRetry,
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('toolAiChatHub')
   const contentRef = useRef<HTMLDivElement>(null)
 
   // Auto-scroll when content updates

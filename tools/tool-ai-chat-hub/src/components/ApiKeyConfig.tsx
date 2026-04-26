@@ -13,7 +13,7 @@ interface ApiKeyConfigProps {
 const PROVIDERS: AIProvider[] = ['chatgpt', 'gemini', 'deepseek', 'grok']
 
 const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('toolAiChatHub')
   const [apiKeys, setApiKeys] = useState<Record<AIProvider, string>>({
     chatgpt: '',
     gemini: '',

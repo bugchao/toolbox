@@ -8,7 +8,7 @@ export interface PromptInputProps {
 }
 
 const PromptInput: React.FC<PromptInputProps> = ({ onSend, disabled = false }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('toolAiChatHub')
   const [prompt, setPrompt] = useState('')
 
   const handleSend = () => {

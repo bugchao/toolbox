@@ -14,7 +14,7 @@ export interface ViewModeToggleProps {
  * Allows switching between grid and tab view modes
  */
 const ViewModeToggle: React.FC<ViewModeToggleProps> = ({ currentMode, onChange }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('toolAiChatHub')
 
   return (
     <div className="inline-flex rounded-lg shadow-sm" role="group">

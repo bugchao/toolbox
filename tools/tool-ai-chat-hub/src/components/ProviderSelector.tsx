@@ -13,7 +13,7 @@ interface ProviderSelectorProps {
 const PROVIDERS: AIProvider[] = ['chatgpt', 'gemini', 'deepseek', 'grok']
 
 const ProviderSelector: React.FC<ProviderSelectorProps> = ({ selectedProviders, onChange }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('toolAiChatHub')
 
   const providerConfigs = useMemo(() => {
     return PROVIDERS.map(provider => ({
