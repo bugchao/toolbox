@@ -1,601 +1,232 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Ticket, RotateCcw, Play } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
-import { useToolStorage } from '@toolbox/storage'
-import {
-  Ticket,
-  Plus,
-  Trash2,
-  Download,
-  Upload,
-  Sparkles,
-  History,
-  Settings,
-  Edit2,
-  Check,
-  X,
-  Copy,
-} from 'lucide-react'
-
-interface LotteryOption {
-  id: string
-  text: string
-  weight: number
-}
-
-interface DrawResult {
-  id: string
-  options: string[]
-  timestamp: number
-  mode: DrawMode
-}
-
-type DrawMode = 'single' | 'multiple' | 'noRepeat'
-
-interface LotteryState {
-  options: LotteryOption[]
-  drawCount: number
-  mode: DrawMode
-  enableWeight: boolean
-  history: DrawResult[]
-}
-
-const DEFAULT_STATE: LotteryState = {
-  options: [],
-  drawCount: 1,
-  mode: 'single',
-  enableWeight: false,
-  history: [],
-}
-
-const TEMPLATES = {
-  numbers1to100: Array.from({ length: 100 }, (_, i) => `${i + 1}`),
-  lettersAtoZ: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),
-}
 
 export default function Lottery() {
   const { t } = useTranslation('toolLottery')
-  const { data: state, save } = useToolStorage<LotteryState>('lottery', 'data', DEFAULT_STATE)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [options, setOptions] = useState('选项1\n选项2\n选项3\n选项4\n选项5')
+  const [count, setCount] = useState(1)
+  const [allowDuplicate, setAllowDuplicate] = useState(false)
+  const [isDrawing, setIsDrawing] = useState(false)
+  const [results, setResults] = useState<string[]>([])
+  const [animatingIndex, setAnimatingIndex] = useState<number | null>(null)
+  const [currentOption, setCurrentOption] = useState('')
 
-  const [inputText, setInputText] = useState('')
-  const [drawing, setDrawing] = useState(false)
-  const [result, setResult] = useState<string[]>([])
-  const [editingId, setEditingId] = useState<string | null>(null)
-  const [editText, setEditText] = useState('')
+  const optionList = options.split('\n').filter(o => o.trim())
+  const maxCount = allowDuplicate ? 100 : optionList.length
 
-  const { options, drawCount, mode, enableWeight, history } = state
-  const set = (patch: Partial<LotteryState>) => save({ ...state, ...patch })
+  useEffect(() => {
+    if (count > maxCount) {
+      setCount(maxCount)
+    }
+  }, [maxCount, count])
 
-  // 添加选项
-  const addOptions = useCallback(() => {
-    if (!inputText.trim()) return
-    const lines = inputText.split('\n').filter(line => line.trim())
-    const newOptions: LotteryOption[] = lines.map(line => ({
-      id: `${Date.now()}-${Math.random()}`,
-      text: line.trim(),
-      weight: 1,
-    }))
-    set({ options: [...options, ...newOptions] })
-    setInputText('')
-  }, [inputText, options, set])
+  const startDraw = () => {
+    if (optionList.length === 0) return
+    if (count < 1 || count > maxCount) return
 
-  // 删除选项
-  const deleteOption = useCallback((id: string) => {
-    set({ options: options.filter(opt => opt.id !== id) })
-  }, [options, set])
+    setIsDrawing(true)
+    setResults([])
+    setAnimatingIndex(0)
 
-  // 编辑选项
-  const startEdit = useCallback((option: LotteryOption) => {
-    setEditingId(option.id)
-    setEditText(option.text)
-  }, [])
+    const selected: string[] = []
+    const pool = [...optionList]
 
-  const saveEdit = useCallback(() => {
-    if (!editingId || !editText.trim()) return
-    set({
-      options: options.map(opt =>
-        opt.id === editingId ? { ...opt, text: editText.trim() } : opt
-      ),
-    })
-    setEditingId(null)
-    setEditText('')
-  }, [editingId, editText, options, set])
-
-  const cancelEdit = useCallback(() => {
-    setEditingId(null)
-    setEditText('')
-  }, [])
-
-  // 更新权重
-  const updateWeight = useCallback((id: string, weight: number) => {
-    set({
-      options: options.map(opt =>
-        opt.id === id ? { ...opt, weight: Math.max(1, weight) } : opt
-      ),
-    })
-  }, [options, set])
-
-  // 清空选项
-  const clearOptions = useCallback(() => {
-    set({ options: [] })
-    setResult([])
-  }, [set])
-
-  // 使用模板
-  const useTemplate = useCallback((template: keyof typeof TEMPLATES) => {
-    const templateOptions: LotteryOption[] = TEMPLATES[template].map(text => ({
-      id: `${Date.now()}-${Math.random()}`,
-      text,
-      weight: 1,
-    }))
-    set({ options: templateOptions })
-  }, [set])
-
-  // 导入选项
-  const importOptions = useCallback(() => {
-    fileInputRef.current?.click()
-  }, [])
-
-  const handleFileImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      try {
-        const text = event.target?.result as string
-        const lines = text.split(/[\r\n]+/).filter(line => line.trim())
-        const importedOptions: LotteryOption[] = lines.map(line => ({
-          id: `${Date.now()}-${Math.random()}`,
-          text: line.trim(),
-          weight: 1,
-        }))
-        set({ options: [...options, ...importedOptions] })
-      } catch (error) {
-        console.error('Import failed:', error)
+    // 逐个抽取，带动画
+    let currentIndex = 0
+    const drawNext = () => {
+      if (currentIndex >= count) {
+        setIsDrawing(false)
+        setAnimatingIndex(null)
+        return
       }
-    }
-    reader.readAsText(file)
-    e.target.value = ''
-  }, [options, set])
 
-  // 导出选项
-  const exportOptions = useCallback(() => {
-    const text = options.map(opt => opt.text).join('\n')
-    const blob = new Blob([text], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `lottery-options-${Date.now()}.txt`
-    a.click()
-    URL.revokeObjectURL(url)
-  }, [options])
+      setAnimatingIndex(currentIndex)
 
-  // 加权随机抽取
-  const weightedRandom = useCallback((opts: LotteryOption[]): LotteryOption => {
-    const totalWeight = opts.reduce((sum, opt) => sum + opt.weight, 0)
-    let random = Math.random() * totalWeight
-    for (const opt of opts) {
-      random -= opt.weight
-      if (random <= 0) return opt
-    }
-    return opts[opts.length - 1]
-  }, [])
+      // 动画效果：快速滚动
+      let animationCount = 0
+      const animationInterval = setInterval(() => {
+        const randomOption = pool[Math.floor(Math.random() * pool.length)]
+        setCurrentOption(randomOption)
+        animationCount++
 
-  // 开始抽签
-  const startDraw = useCallback(() => {
-    if (options.length === 0) {
-      alert(t('optionRequired'))
-      return
-    }
+        if (animationCount >= 15) {
+          clearInterval(animationInterval)
 
-    if (drawCount <= 0) {
-      alert(t('drawCountInvalid'))
-      return
-    }
-
-    if (mode !== 'single' && drawCount > options.length) {
-      alert(t('drawCountExceed'))
-      return
-    }
-
-    setDrawing(true)
-    setResult([])
-
-    // 动画效果
-    let count = 0
-    const maxCount = 20
-    const interval = setInterval(() => {
-      if (mode === 'single') {
-        const randomOpt = enableWeight
-          ? weightedRandom(options)
-          : options[Math.floor(Math.random() * options.length)]
-        setResult([randomOpt.text])
-      } else {
-        const tempResult: string[] = []
-        const availableOpts = [...options]
-        for (let i = 0; i < Math.min(drawCount, availableOpts.length); i++) {
-          const randomOpt = enableWeight
-            ? weightedRandom(availableOpts)
-            : availableOpts[Math.floor(Math.random() * availableOpts.length)]
-          tempResult.push(randomOpt.text)
-          if (mode === 'noRepeat') {
-            const index = availableOpts.findIndex(opt => opt.id === randomOpt.id)
-            availableOpts.splice(index, 1)
+          // 真正抽取
+          const availablePool = allowDuplicate ? optionList : pool
+          const randomIndex = Math.floor(Math.random() * availablePool.length)
+          const picked = availablePool[randomIndex]
+          
+          if (!allowDuplicate) {
+            pool.splice(pool.indexOf(picked), 1)
           }
+
+          selected.push(picked)
+          setResults([...selected])
+          setCurrentOption('')
+
+          currentIndex++
+          setTimeout(drawNext, 300)
         }
-        setResult(tempResult)
-      }
+      }, 50)
+    }
 
-      count++
-      if (count >= maxCount) {
-        clearInterval(interval)
-        
-        // 最终结果
-        let finalResult: string[]
-        if (mode === 'single') {
-          const randomOpt = enableWeight
-            ? weightedRandom(options)
-            : options[Math.floor(Math.random() * options.length)]
-          finalResult = [randomOpt.text]
-        } else {
-          finalResult = []
-          const availableOpts = [...options]
-          for (let i = 0; i < Math.min(drawCount, availableOpts.length); i++) {
-            const randomOpt = enableWeight
-              ? weightedRandom(availableOpts)
-              : availableOpts[Math.floor(Math.random() * availableOpts.length)]
-            finalResult.push(randomOpt.text)
-            if (mode === 'noRepeat') {
-              const index = availableOpts.findIndex(opt => opt.id === randomOpt.id)
-              availableOpts.splice(index, 1)
-            }
-          }
-        }
+    drawNext()
+  }
 
-        setResult(finalResult)
-        setDrawing(false)
-
-        // 保存历史
-        const newHistory: DrawResult = {
-          id: `${Date.now()}`,
-          options: finalResult,
-          timestamp: Date.now(),
-          mode,
-        }
-        set({ history: [newHistory, ...history].slice(0, 20) })
-      }
-    }, 80)
-  }, [options, drawCount, mode, enableWeight, history, set, t, weightedRandom])
-
-  // 清空历史
-  const clearHistory = useCallback(() => {
-    set({ history: [] })
-  }, [set])
-
-  // 删除历史记录
-  const deleteHistory = useCallback((id: string) => {
-    set({ history: history.filter(h => h.id !== id) })
-  }, [history, set])
-
-  // 复制结果
-  const copyResult = useCallback((text: string) => {
-    navigator.clipboard.writeText(text).then(
-      () => alert(t('copySuccess')),
-      () => alert(t('copyFailed'))
-    )
-  }, [t])
+  const reset = () => {
+    setResults([])
+    setAnimatingIndex(null)
+    setCurrentOption('')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <PageHero
-        title={t('title')}
-        description={t('description')}
-        icon={Ticket}
-      />
-      <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
-        {/* 选项输入 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <Settings className="w-5 h-5" />
-              {t('options')}
-            </h3>
-            <div className="flex gap-2">
-              <button
-                onClick={importOptions}
-                className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-1"
-              >
-                <Upload className="w-4 h-4" />
-                {t('importOptions')}
-              </button>
-              <button
-                onClick={exportOptions}
-                disabled={options.length === 0}
-                className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Download className="w-4 h-4" />
-                {t('exportOptions')}
-              </button>
-              <button
-                onClick={clearOptions}
-                disabled={options.length === 0}
-                className="px-3 py-1.5 text-sm bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Trash2 className="w-4 h-4" />
-                {t('clearOptions')}
-              </button>
-            </div>
+      <PageHero title={t('title')} description={t('description')} icon={Ticket} />
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+
+        {/* 输入区 */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+              {t('optionsLabel')}
+            </label>
+            <textarea
+              value={options}
+              onChange={e => setOptions(e.target.value)}
+              rows={8}
+              placeholder={t('optionsPlaceholder')}
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+              disabled={isDrawing}
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              {t('totalOptions', { count: optionList.length })}
+            </p>
           </div>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".txt,.csv"
-            onChange={handleFileImport}
-            className="hidden"
-          />
-
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <textarea
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder={t('optionsPlaceholder')}
-                className="w-full h-32 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              />
-              <button
-                onClick={addOptions}
-                disabled={!inputText.trim()}
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Plus className="w-4 h-4" />
-                {t('addOption')}
-              </button>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {t('templates')}
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                {t('drawCount')}
               </label>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => useTemplate('numbers1to100')}
-                  className="px-3 py-1.5 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
-                >
-                  {t('numbers1to100')}
-                </button>
-                <button
-                  onClick={() => useTemplate('lettersAtoZ')}
-                  className="px-3 py-1.5 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
-                >
-                  {t('lettersAtoZ')}
-                </button>
-              </div>
+              <input
+                type="number"
+                value={count}
+                onChange={e => setCount(Math.max(1, Math.min(maxCount, Number(e.target.value))))}
+                min={1}
+                max={maxCount}
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                disabled={isDrawing}
+              />
             </div>
 
-            {options.length > 0 && (
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t('option')} ({options.length})
-                  </label>
-                  <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                    <input
-                      type="checkbox"
-                      checked={enableWeight}
-                      onChange={(e) => set({ enableWeight: e.target.checked })}
-                      className="rounded border-gray-300 dark:border-gray-600"
-                    />
-                    {t('enableWeight')}
-                  </label>
-                </div>
-                <div className="max-h-64 overflow-y-auto space-y-2">
-                  {options.map((option) => (
-                    <div
-                      key={option.id}
-                      className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
-                    >
-                      {editingId === option.id ? (
-                        <>
-                          <input
-                            type="text"
-                            value={editText}
-                            onChange={(e) => setEditText(e.target.value)}
-                            className="flex-1 px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            autoFocus
-                          />
-                          <button
-                            onClick={saveEdit}
-                            className="p-1.5 text-green-600 hover:bg-green-100 dark:hover:bg-green-900/30 rounded"
-                          >
-                            <Check className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={cancelEdit}
-                            className="p-1.5 text-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <span className="flex-1 text-gray-900 dark:text-white">
-                            {option.text}
-                          </span>
-                          {enableWeight && (
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm text-gray-600 dark:text-gray-400">
-                                {t('weight')}:
-                              </span>
-                              <input
-                                type="number"
-                                min="1"
-                                value={option.weight}
-                                onChange={(e) =>
-                                  updateWeight(option.id, parseInt(e.target.value) || 1)
-                                }
-                                className="w-16 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                              />
-                            </div>
-                          )}
-                          <button
-                            onClick={() => startEdit(option)}
-                            className="p-1.5 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded"
-                          >
-                            <Edit2 className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => deleteOption(option.id)}
-                            className="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* 抽签设置 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            {t('mode')}
-          </h3>
-          <div className="space-y-4">
-            <div className="flex gap-2">
-              {(['single', 'multiple', 'noRepeat'] as DrawMode[]).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => set({ mode: m })}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    mode === m
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
-                >
-                  {t(m === 'single' ? 'singleDraw' : m === 'multiple' ? 'multipleDraw' : 'noRepeat')}
-                </button>
-              ))}
-            </div>
-
-            {mode !== 'single' && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('drawCount')}
-                </label>
-                <input
-                  type="number"
-                  min="1"
-                  max={options.length}
-                  value={drawCount}
-                  onChange={(e) => set({ drawCount: parseInt(e.target.value) || 1 })}
-                  className="w-32 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                />
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* 抽签按钮 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-          <button
-            onClick={startDraw}
-            disabled={drawing || options.length === 0}
-            className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Sparkles className={`w-5 h-5 ${drawing ? 'animate-spin' : ''}`} />
-            {drawing ? t('drawing') : t('startDraw')}
-          </button>
-        </div>
-
-        {/* 抽签结果 */}
-        {result.length > 0 && (
-          <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
-            <div className="text-center">
-              <div className="text-sm opacity-80 mb-4">{t('result')}</div>
-              <div className="space-y-3">
-                {result.map((item, index) => (
-                  <div
-                    key={index}
-                    className="text-4xl font-bold bg-white/20 rounded-xl p-4 backdrop-blur-sm"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                {t('allowDuplicate')}
+              </label>
               <button
-                onClick={() => copyResult(result.join('\n'))}
-                className="mt-4 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors flex items-center gap-2 mx-auto"
+                onClick={() => setAllowDuplicate(!allowDuplicate)}
+                disabled={isDrawing}
+                className={`w-full py-2 text-sm rounded-lg font-medium transition-colors ${
+                  allowDuplicate
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                } disabled:opacity-50`}
               >
-                <Copy className="w-4 h-4" />
-                {t('exportResult')}
+                {allowDuplicate ? t('yes') : t('no')}
               </button>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={startDraw}
+              disabled={isDrawing || optionList.length === 0 || count < 1}
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Play className="w-4 h-4" />
+              {isDrawing ? t('drawing') : t('startDraw')}
+            </button>
+
+            {results.length > 0 && (
+              <button
+                onClick={reset}
+                disabled={isDrawing}
+                className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium transition-colors disabled:opacity-50"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* 动画区 */}
+        {isDrawing && animatingIndex !== null && (
+          <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-8 text-center">
+            <div className="text-white/60 text-sm mb-2">
+              {t('drawingNumber', { current: animatingIndex + 1, total: count })}
+            </div>
+            <div className="text-white text-3xl font-bold animate-pulse min-h-[3rem] flex items-center justify-center">
+              {currentOption || '...'}
             </div>
           </div>
         )}
 
-        {/* 历史记录 */}
-        {history.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                <History className="w-5 h-5" />
-                {t('history')}
-              </h3>
-              <button
-                onClick={clearHistory}
-                className="px-3 py-1.5 text-sm bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
-              >
-                {t('clearHistory')}
-              </button>
-            </div>
-            <div className="space-y-2 max-h-96 overflow-y-auto">
-              {history.map((item) => (
+        {/* 结果区 */}
+        {results.length > 0 && !isDrawing && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+              {t('results')}
+            </h3>
+            <div className="space-y-2">
+              {results.map((result, index) => (
                 <div
-                  key={item.id}
-                  className="flex items-start justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+                  key={index}
+                  className="flex items-center gap-3 p-3 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800 animate-fadeIn"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="flex-1">
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {item.options.map((opt, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-sm font-medium"
-                        >
-                          {opt}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {new Date(item.timestamp).toLocaleString()} · {t(item.mode === 'single' ? 'singleDraw' : item.mode === 'multiple' ? 'multipleDraw' : 'noRepeat')}
-                    </div>
+                  <div className="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                    {index + 1}
                   </div>
-                  <div className="flex gap-2 ml-4">
-                    <button
-                      onClick={() => copyResult(item.options.join('\n'))}
-                      className="p-1.5 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 rounded"
-                    >
-                      <Copy className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => deleteHistory(item.id)}
-                      className="p-1.5 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                  <div className="flex-1 text-gray-900 dark:text-gray-100 font-medium">
+                    {result}
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
+
+        {/* 说明 */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 text-sm text-blue-800 dark:text-blue-200">
+          <p className="font-medium mb-2">{t('howToUse')}</p>
+          <ul className="space-y-1 list-disc list-inside text-blue-700 dark:text-blue-300">
+            <li>{t('tip1')}</li>
+            <li>{t('tip2')}</li>
+            <li>{t('tip3')}</li>
+            <li>{t('tip4')}</li>
+          </ul>
+        </div>
       </div>
+
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
     </div>
   )
 }

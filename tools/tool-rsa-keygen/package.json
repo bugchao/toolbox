@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-lottery",
+  "name": "@toolbox/tool-rsa-keygen",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.tsx",

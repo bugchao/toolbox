@@ -1,0 +1,20 @@
+{
+  "title": "Lottery Tool",
+  "description": "Randomly draw options with customizable lists and rules",
+  "optionsLabel": "Options List (one per line)",
+  "optionsPlaceholder": "Enter options, one per line\nFor example:\nOption 1\nOption 2\nOption 3",
+  "totalOptions": "Total {{count}} options",
+  "drawCount": "Draw Count",
+  "allowDuplicate": "Allow Duplicates",
+  "yes": "Yes",
+  "no": "No",
+  "startDraw": "Start Draw",
+  "drawing": "Drawing...",
+  "drawingNumber": "Drawing {{current}}/{{total}}",
+  "results": "Results",
+  "howToUse": "How to Use",
+  "tip1": "Enter one option per line",
+  "tip2": "Set the number of items to draw",
+  "tip3": "Choose whether to allow duplicate draws",
+  "tip4": "Click start to draw and watch the animation"
+}

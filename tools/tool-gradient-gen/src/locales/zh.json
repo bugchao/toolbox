@@ -1,0 +1,19 @@
+{
+  "title": "渐变色生成器",
+  "description": "生成漂亮的CSS渐变色，支持多种渐变模式和颜色调整",
+  "gradientType": "渐变类型",
+  "linear": "线性渐变",
+  "radial": "径向渐变",
+  "conic": "锥形渐变",
+  "angle": "角度",
+  "colorStops": "颜色节点",
+  "add": "添加节点",
+  "position": "位置",
+  "color": "颜色",
+  "cssCode": "CSS 代码",
+  "copyCSS": "复制 CSS",
+  "copied": "已复制",
+  "exportImage": "导出图片",
+  "2d": "2D",
+  "a": "A"
+}

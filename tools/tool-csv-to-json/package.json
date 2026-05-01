@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-lottery",
+  "name": "@toolbox/tool-csv-to-json",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.tsx",
