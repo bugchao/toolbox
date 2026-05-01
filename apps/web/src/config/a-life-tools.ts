@@ -7,7 +7,7 @@ import {
   CreditCard, Flame, UtensilsCrossed, Coins, Flag, ClipboardCheck, PlaneTakeoff,
   Percent, Watch, Milestone, Luggage, ChefHat, Moon, Droplets, Footprints,
   PersonStanding, Dumbbell, CalendarRange, Palette, Code2, HeartPulse,
-  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock
+  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock, Ticket
 } from 'lucide-react'
 
 export const LIFE_TOOLS: ToolEntry[] = [
@@ -31,7 +31,8 @@ export const LIFE_TOOLS: ToolEntry[] = [
   { path: '/loan-calc', nameKey: 'tools.loan_calc', icon: Coins, categoryKey: 'life', keywords: ['贷款', '月供', '利率', '房贷'] },
   { path: '/investment-sim', nameKey: 'tools.investment_sim', icon: Percent, categoryKey: 'life', keywords: ['投资', '复利', '收益', '模拟'] },
 
-  // 生活实用（7 个）
+  // 生活实用（8 个）
+  { path: '/lottery', nameKey: 'tools.lottery', icon: Ticket, categoryKey: 'life', keywords: ['抽签', '抽奖', '随机', 'lottery'], i18nNamespace: 'toolLottery' },
   { path: '/random-menu', nameKey: 'tools.random_menu', icon: UtensilsCrossed, categoryKey: 'life', keywords: ['菜单', '吃什么', '随机', '美食'], i18nNamespace: 'toolRandomMenu' },
   { path: '/recipe-finder', nameKey: 'tools.recipe_finder', icon: ChefHat, categoryKey: 'life', keywords: ['菜谱', '食材', '烹饪', '推荐'], i18nNamespace: 'toolRecipeFinder' },
   { path: '/okr-planner', nameKey: 'tools.okr_planner', icon: Flag, categoryKey: 'life', keywords: ['okr', '目标', '计划', '季度'], i18nNamespace: 'toolOkrPlanner' },
