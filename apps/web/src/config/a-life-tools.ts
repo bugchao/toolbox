@@ -7,7 +7,7 @@ import {
   CreditCard, Flame, UtensilsCrossed, Coins, Flag, ClipboardCheck, PlaneTakeoff,
   Percent, Watch, Milestone, Luggage, ChefHat, Moon, Droplets, Footprints,
   PersonStanding, Dumbbell, CalendarRange, Palette, Code2, HeartPulse,
-  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock, Ticket
+  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock, Ticket, Home
 } from 'lucide-react'
 
 export const LIFE_TOOLS: ToolEntry[] = [
@@ -29,6 +29,7 @@ export const LIFE_TOOLS: ToolEntry[] = [
   { path: '/subscription-manager', nameKey: 'tools.subscription_manager', icon: CreditCard, categoryKey: 'life', keywords: ['订阅', 'netflix', 'ai', '费用'], i18nNamespace: 'toolSubscriptionManager' },
   { path: '/installment-calc', nameKey: 'tools.installment_calc', icon: Coins, categoryKey: 'life', keywords: ['分期', '贷款', '还款', '利率'], i18nNamespace: 'toolInstallmentCalc' },
   { path: '/loan-calc', nameKey: 'tools.loan_calc', icon: Coins, categoryKey: 'life', keywords: ['贷款', '月供', '利率', '房贷'] },
+  { path: '/mortgage-calc', nameKey: 'tools.mortgage_calc', icon: Home, categoryKey: 'life', keywords: ['房贷', '商业贷款', '公积金', '组合贷款', '月供'], i18nNamespace: 'toolMortgageCalc' },
   { path: '/investment-sim', nameKey: 'tools.investment_sim', icon: Percent, categoryKey: 'life', keywords: ['投资', '复利', '收益', '模拟'] },
 
   // 生活实用（8 个）
