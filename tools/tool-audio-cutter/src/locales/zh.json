@@ -1,0 +1,20 @@
+{
+  "title": "音频剪辑",
+  "description": "在线音频裁剪工具，支持多种音频格式，可视化波形编辑",
+  "uploadPrompt": "点击或拖拽音频文件到这里",
+  "supportedFormats": "支持 MP3、WAV、AAC、OGG 等格式",
+  "invalidFormat": "不支持的音频格式",
+  "startTime": "开始时间（秒）",
+  "endTime": "结束时间（秒）",
+  "selectedDuration": "选中时长",
+  "cutAndDownload": "剪辑并下载",
+  "processing": "处理中...",
+  "cutFailed": "剪辑失败，请重试",
+  "reset": "重置",
+  "features": "功能特点",
+  "feature1": "支持多种音频格式（MP3/WAV/AAC/OGG）",
+  "feature2": "音频波形可视化显示",
+  "feature3": "拖拽选择裁剪区域",
+  "feature4": "精确时间输入控制",
+  "feature5": "纯前端处理，数据不上传"
+}
