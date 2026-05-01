@@ -1,0 +1,21 @@
+{
+  "title": "Code Diff",
+  "description": "Compare code differences with syntax highlighting and visual diff display",
+  "language": "Language",
+  "showLineNumbers": "Show Line Numbers",
+  "collapseUnchanged": "Collapse Unchanged",
+  "copy": "Copy Diff",
+  "copied": "Copied",
+  "download": "Export Diff",
+  "clear": "Clear",
+  "original": "Original Code",
+  "modified": "Modified Code",
+  "pasteOriginal": "Paste original code...",
+  "pasteModified": "Paste modified code...",
+  "diffResult": "Diff Result",
+  "additions": "Additions",
+  "deletions": "Deletions",
+  "unchanged": "Unchanged",
+  "total": "Total",
+  "expandLines": "Expand {{count}} unchanged lines"
+}
