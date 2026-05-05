@@ -6,7 +6,7 @@ const toolLogoGeneratorManifest = defineToolManifest({
   path: '/logo-generator',
   namespace: 'toolLogoGenerator',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Palette,
   keywords: ['logo', 'generator', 'design', 'brand', 'ai'],
   meta: {

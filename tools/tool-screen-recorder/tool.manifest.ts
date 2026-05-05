@@ -6,7 +6,7 @@ const toolScreenRecorderManifest = defineToolManifest({
   path: '/screen-recorder',
   namespace: 'toolScreenRecorder',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Video,
   keywords: [
     'screen recorder',

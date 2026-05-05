@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { Video } from 'lucide-react'
 
 const toolVideoCompressorManifest = defineToolManifest({
   id: 'tool-video-compressor',
   path: '/video-compressor',
   namespace: 'toolVideoCompressor',
   mode: 'client',
+  categoryKey: 'utils',
+  icon: Video,
+  keywords: ['video', 'compressor', 'compression', 'media', 'mp4', 'webm', '视频', '压缩', '媒体'],
   meta: {
     zh: {
       title: '视频压缩',

@@ -6,7 +6,7 @@ const toolOcrTextManifest = defineToolManifest({
   path: '/ocr-text',
   namespace: 'toolOcrText',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: ScanText,
   keywords: ['ocr', 'text', 'recognition', '文字识别', '图片识别', '提取文字'],
   meta: {

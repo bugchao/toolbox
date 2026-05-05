@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { Scissors } from 'lucide-react'
 
 const toolAudioCutterManifest = defineToolManifest({
   id: 'tool-audio-cutter',
   path: '/audio-cutter',
   namespace: 'toolAudioCutter',
   mode: 'client',
+  categoryKey: 'utils',
+  icon: Scissors,
+  keywords: ['audio', 'cutter', 'trim', 'waveform', 'mp3', 'wav', '音频', '剪辑', '裁剪'],
   meta: {
     zh: {
       title: '音频剪辑',

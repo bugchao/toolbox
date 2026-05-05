@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { KeyRound } from 'lucide-react'
 
 const toolRsaKeygenManifest = defineToolManifest({
   id: 'tool-rsa-keygen',
   path: '/rsa-keygen',
   namespace: 'toolRsaKeygen',
   mode: 'client',
+  categoryKey: 'dev',
+  icon: KeyRound,
+  keywords: ['rsa', 'key', 'keygen', 'public key', 'private key', '密钥', '公钥', '私钥', '加密'],
   meta: {
     zh: {
       title: 'RSA 密钥生成',

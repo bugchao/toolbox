@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { Files } from 'lucide-react'
 
 const toolDocMergerManifest = defineToolManifest({
   id: 'tool-doc-merger',
   path: '/doc-merger',
   namespace: 'toolDocMerger',
   mode: 'client',
+  categoryKey: 'utils',
+  icon: Files,
+  keywords: ['document', 'merge', 'pdf', 'file', 'combine', '文档', '合并', 'PDF'],
   meta: {
     zh: {
       title: '文档合并工具',

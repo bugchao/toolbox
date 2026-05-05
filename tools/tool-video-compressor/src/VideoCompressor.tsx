@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Video, Upload, Download, X, AlertCircle, Loader2 } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
-import { fetchFile, toBlobURL } from '@ffmpeg/util'
+import { fetchFile } from '@ffmpeg/util'
 
 type CompressionQuality = 'high' | 'medium' | 'low'
 
@@ -12,6 +12,61 @@ interface VideoInfo {
   url: string
   size: number
   duration?: number
+}
+
+const FFMPEG_CORE_BASE_URLS = [
+  'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.9/dist/umd',
+  'https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd',
+]
+const FFMPEG_LOAD_TIMEOUT_MS = 60000
+
+async function fetchAsBlobURL(
+  url: string,
+  mimeType: string,
+  onProgress?: (loaded: number, total: number | null) => void
+): Promise<string> {
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), FFMPEG_LOAD_TIMEOUT_MS)
+
+  try {
+    const response = await fetch(url, { signal: controller.signal })
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}: ${response.status}`)
+    }
+
+    const total = Number(response.headers.get('content-length')) || null
+    const reader = response.body?.getReader()
+    let buffer: BlobPart
+
+    if (reader) {
+      const chunks: Uint8Array[] = []
+      let loaded = 0
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        chunks.push(value)
+        loaded += value.byteLength
+        onProgress?.(loaded, total)
+      }
+
+      const bytes = new Uint8Array(loaded)
+      let offset = 0
+      for (const chunk of chunks) {
+        bytes.set(chunk, offset)
+        offset += chunk.byteLength
+      }
+      buffer = bytes
+    } else {
+      buffer = await response.arrayBuffer()
+      onProgress?.(buffer.byteLength, total ?? buffer.byteLength)
+    }
+
+    return URL.createObjectURL(new Blob([buffer], { type: mimeType }))
+  } finally {
+    window.clearTimeout(timeout)
+  }
 }
 
 export default function VideoCompressor() {
@@ -25,40 +80,96 @@ export default function VideoCompressor() {
   const [targetSize, setTargetSize] = useState('')
   const [compressing, setCompressing] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [loadProgress, setLoadProgress] = useState(0)
+  const [loadStage, setLoadStage] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [estimatedTime, setEstimatedTime] = useState<number | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dragCounter = useRef(0)
+  const loadPromiseRef = useRef<Promise<boolean> | null>(null)
   const [isDragging, setIsDragging] = useState(false)
 
   useEffect(() => {
-    loadFFmpeg()
+    return () => {
+      ffmpeg.terminate()
+    }
   }, [])
 
-  const loadFFmpeg = async () => {
-    try {
+  const loadFFmpeg = (): Promise<boolean> => {
+    if (loaded || ffmpeg.loaded) return Promise.resolve(true)
+    if (loadPromiseRef.current) return loadPromiseRef.current
+
+    loadPromiseRef.current = (async () => {
       setLoading(true)
-      const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-      })
-      
-      ffmpeg.on('progress', ({ progress: p, time }) => {
-        setProgress(Math.round(p * 100))
-        if (p > 0 && time > 0) {
-          const estimated = (time / p) - time
-          setEstimatedTime(Math.round(estimated / 1000000))
+      setError(null)
+      setLoadProgress(0)
+      setLoadStage(t('loadingFFmpegCore'))
+
+      try {
+        let lastError: unknown
+
+        for (const baseURL of FFMPEG_CORE_BASE_URLS) {
+          const createdUrls: string[] = []
+
+          try {
+            const coreURL = await fetchAsBlobURL(
+              `${baseURL}/ffmpeg-core.js`,
+              'text/javascript',
+              (loaded, total) => {
+                if (total) setLoadProgress(Math.min(35, Math.round((loaded / total) * 35)))
+              }
+            )
+            setLoadProgress(35)
+            setLoadStage(t('loadingFFmpegWasm'))
+
+            const wasmURL = await fetchAsBlobURL(
+              `${baseURL}/ffmpeg-core.wasm`,
+              'application/wasm',
+              (loaded, total) => {
+                if (total) setLoadProgress(35 + Math.min(50, Math.round((loaded / total) * 50)))
+              }
+            )
+            createdUrls.push(coreURL, wasmURL)
+            setLoadProgress(85)
+            setLoadStage(t('initializingFFmpeg'))
+
+            await ffmpeg.load({ coreURL, wasmURL })
+
+            ffmpeg.on('progress', ({ progress: p, time }) => {
+              setProgress(Math.round(p * 100))
+              if (p > 0 && time > 0) {
+                const estimated = (time / p) - time
+                setEstimatedTime(Math.round(estimated / 1000000))
+              }
+            })
+
+            setLoaded(true)
+            setLoadProgress(100)
+            setLoadStage(t('ready'))
+            return true
+          } catch (err) {
+            lastError = err
+            ffmpeg.terminate()
+          } finally {
+            createdUrls.forEach(url => URL.revokeObjectURL(url))
+          }
         }
-      })
-      
-      setLoaded(true)
-    } catch (err) {
-      console.error('Failed to load FFmpeg:', err)
-      setError(t('errorMessage'))
-    } finally {
-      setLoading(false)
-    }
+
+        throw lastError
+      } catch (err) {
+        console.error('Failed to load FFmpeg:', err)
+        setLoaded(false)
+        setLoadProgress(0)
+        setLoadStage('')
+        setError(t('ffmpegLoadFailed'))
+        return false
+      } finally {
+        setLoading(false)
+        loadPromiseRef.current = null
+      }
+    })()
+
+    return loadPromiseRef.current
   }
 
   const handleFileSelect = (file: File) => {
@@ -76,6 +187,8 @@ export default function VideoCompressor() {
     setError(null)
     setCompressedVideo(null)
     setProgress(0)
+    setLoadProgress(0)
+    setLoadStage('')
     setEstimatedTime(null)
 
     const url = URL.createObjectURL(file)
@@ -133,18 +246,22 @@ export default function VideoCompressor() {
   }
 
   const compressVideo = async () => {
-    if (!originalVideo || !loaded) return
+    if (!originalVideo) return
+
+    const ready = await loadFFmpeg()
+    if (!ready) return
 
     try {
       setCompressing(true)
       setError(null)
-      setProgress(0)
+      setProgress(1)
       setEstimatedTime(null)
 
       const inputName = 'input' + originalVideo.file.name.substring(originalVideo.file.name.lastIndexOf('.'))
       const outputName = 'output.mp4'
 
       await ffmpeg.writeFile(inputName, await fetchFile(originalVideo.file))
+      setProgress(3)
 
       const args = [
         '-i', inputName,
@@ -185,6 +302,8 @@ export default function VideoCompressor() {
   }
 
   const cancelCompression = () => {
+    ffmpeg.terminate()
+    setLoaded(false)
     setCompressing(false)
     setProgress(0)
     setEstimatedTime(null)
@@ -208,6 +327,8 @@ export default function VideoCompressor() {
     setOriginalVideo(null)
     setCompressedVideo(null)
     setProgress(0)
+    setLoadProgress(0)
+    setLoadStage('')
     setError(null)
     setEstimatedTime(null)
     if (fileInputRef.current) {
@@ -237,16 +358,8 @@ export default function VideoCompressor() {
       <PageHero title={t('title')} description={t('description')} icon={Video} />
       <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
 
-        {/* Loading State */}
-        {loading && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 text-center">
-            <Loader2 className="w-12 h-12 mx-auto mb-4 text-indigo-600 animate-spin" />
-            <p className="text-gray-600 dark:text-gray-400">{t('loadingFFmpeg')}</p>
-          </div>
-        )}
-
         {/* Upload Area */}
-        {!loading && !originalVideo && (
+        {!originalVideo && (
           <div
             onDrop={handleDrop}
             onDragOver={handleDragOver}
@@ -291,10 +404,45 @@ export default function VideoCompressor() {
             <div className="flex-1">
               <p className="text-sm font-medium text-red-800 dark:text-red-200">{t('error')}</p>
               <p className="text-sm text-red-600 dark:text-red-400 mt-1">{error}</p>
+              {error === t('ffmpegLoadFailed') && (
+                <button
+                  onClick={loadFFmpeg}
+                  disabled={loading}
+                  className="mt-3 inline-flex items-center gap-2 rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                >
+                  {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {t('retryLoad')}
+                </button>
+              )}
             </div>
             <button onClick={() => setError(null)} className="text-red-600 dark:text-red-400 hover:text-red-800">
               <X size={18} />
             </button>
+          </div>
+        )}
+
+        {/* FFmpeg Loading Progress */}
+        {loading && originalVideo && !compressing && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 space-y-4">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {t('loadingFFmpeg')}
+                </h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  {loadStage || t('loading')}
+                </p>
+              </div>
+              <div className="text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+                {loadProgress}%
+              </div>
+            </div>
+            <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-indigo-600 transition-all duration-300"
+                style={{ width: `${loadProgress}%` }}
+              />
+            </div>
           </div>
         )}
 
@@ -337,10 +485,17 @@ export default function VideoCompressor() {
             <div className="flex gap-3">
               <button
                 onClick={compressVideo}
-                disabled={!loaded}
+                disabled={loading}
                 className="flex-1 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {t('startCompress')}
+                {loading ? (
+                  <span className="inline-flex items-center justify-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {t('loadingFFmpeg')} {loadProgress}%
+                  </span>
+                ) : (
+                  t('startCompress')
+                )}
               </button>
               <button
                 onClick={reset}

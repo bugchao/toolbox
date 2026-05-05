@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { Palette } from 'lucide-react'
 
 const toolGradientGenManifest = defineToolManifest({
   id: 'tool-gradient-gen',
   path: '/gradient-gen',
   namespace: 'toolGradientGen',
   mode: 'client',
+  categoryKey: 'utils',
+  icon: Palette,
+  keywords: ['gradient', 'css', 'color', 'palette', 'design', '渐变', '颜色', 'CSS', '设计'],
   meta: {
     zh: {
       title: '渐变色生成器',
