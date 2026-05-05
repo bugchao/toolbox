@@ -1,0 +1,15 @@
+{
+  "title": "Mock API Generator",
+  "description": "Quickly generate test data with various data types and custom structures",
+  "schemaEditor": "Schema Editor",
+  "addField": "Add Field",
+  "fieldName": "Field Name",
+  "array": "Array",
+  "dataCount": "Data Count",
+  "generate": "Generate Data",
+  "preview": "Preview",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "noData": "Click 'Generate Data' button to start generating mock data"
+}

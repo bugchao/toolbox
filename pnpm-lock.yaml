@@ -820,34 +820,6 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
-  tools/tool-audio-cutter:
-    dependencies:
-      '@toolbox/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
-      '@toolbox/ui-kit':
-        specifier: workspace:*
-        version: link:../../packages/ui-kit
-      lucide-react:
-        specifier: ^0.577.0
-        version: 0.577.0(react@18.3.1)
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-i18next:
-        specifier: ^15.1.0
-        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
-      wavesurfer.js:
-        specifier: ^7.8.2
-        version: 7.12.6
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.28
-        version: 18.3.28
-      '@types/react-dom':
-        specifier: ^18.3.7
-        version: 18.3.7(@types/react@18.3.28)
-
   tools/tool-barcode-reader:
     dependencies:
       lucide-react:
@@ -4118,6 +4090,37 @@ importers:
         specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.28)
 
+  tools/tool-logo-generator:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-lottery:
     dependencies:
       '@toolbox/storage':
@@ -4219,6 +4222,40 @@ importers:
         version: 18.3.7(@types/react@18.3.28)
       typescript:
         specifier: '*'
+        version: 5.9.3
+
+  tools/tool-mock-api:
+    dependencies:
+      '@faker-js/faker':
+        specifier: ^9.3.0
+        version: 9.9.0
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
         version: 5.9.3
 
   tools/tool-morse-code:
@@ -6928,6 +6965,10 @@ packages:
   '@eslint/plugin-kit@0.6.1':
     resolution: {integrity: sha512-iH1B076HoAshH1mLpHMgwdGeTs0CYwL0SPMkGuSebZrwBp16v415e9NZXg2jtrqPVQjf6IANe2Vtlr5KswtcZQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@faker-js/faker@9.9.0':
+    resolution: {integrity: sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@ffmpeg/ffmpeg@0.12.15':
     resolution: {integrity: sha512-1C8Obr4GsN3xw+/1Ww6PFM84wSQAGsdoTuTWPOj2OizsRDLT4CXTaVjPhkw6ARyDus1B9X/L2LiXHqYYsGnRFw==}
@@ -10029,9 +10070,6 @@ packages:
   wasm-feature-detect@1.8.0:
     resolution: {integrity: sha512-zksaLKM2fVlnB5jQQDqKXXwYHLQUVH9es+5TOOHwGOVJOCeRBCiPjwSg+3tN2AdTCzjgli4jijCH290kXb/zWQ==}
 
-  wavesurfer.js@7.12.6:
-    resolution: {integrity: sha512-zSxPgOFprtyJ31ppHQF0+E9jAmjAhi1rR36yIW6h1GOYdpRxDe6mbkYtlChqLK0Iz8ROBweiEFw2zus7tDFibA==}
-
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
@@ -10514,6 +10552,8 @@ snapshots:
     dependencies:
       '@eslint/core': 1.1.1
       levn: 0.4.1
+
+  '@faker-js/faker@9.9.0': {}
 
   '@ffmpeg/ffmpeg@0.12.15':
     dependencies:
@@ -14093,8 +14133,6 @@ snapshots:
       xml-name-validator: 5.0.0
 
   wasm-feature-detect@1.8.0: {}
-
-  wavesurfer.js@7.12.6: {}
 
   web-namespaces@2.0.1: {}
 
