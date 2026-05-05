@@ -1,0 +1,18 @@
+{
+  "title": "CSV to JSON",
+  "description": "Convert CSV data to JSON format with custom delimiter and formatting options",
+  "delimiter": "Delimiter",
+  "custom": "Custom",
+  "options": "Options",
+  "firstRowAsKeys": "First Row as Keys",
+  "prettify": "Prettify",
+  "uploadFile": "Upload File",
+  "chooseFile": "Choose File",
+  "csvInput": "CSV Input",
+  "csvPlaceholder": "Paste CSV data or upload a file...\n\nExample:\nname,age,city\nAlice,25,Beijing\nBob,30,Shanghai",
+  "jsonOutput": "JSON Output",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "emptyResult": "Conversion result will appear here after inputting CSV data"
+}

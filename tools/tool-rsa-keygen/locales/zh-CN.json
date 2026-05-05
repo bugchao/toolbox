@@ -1,0 +1,23 @@
+{
+  "title": "RSA 密钥生成",
+  "description": "生成 RSA 公钥和私钥对，支持多种密钥长度和输出格式",
+  "keySize": "密钥长度",
+  "keySizeWarning1024": "⚠️ 1024 位密钥安全性较低，不推荐用于生产环境",
+  "keySizeRecommended": "✓ 推荐用于大多数场景",
+  "keySizeHighSecurity": "✓ 高安全性，适用于敏感数据",
+  "outputFormat": "输出格式",
+  "formatDescription": "PKCS#1 是传统格式，PKCS#8 是现代标准格式",
+  "generate": "生成密钥对",
+  "generating": "生成中...",
+  "generateError": "密钥生成失败，请重试",
+  "securityWarningTitle": "安全提示",
+  "securityWarning1": "私钥是敏感信息，请妥善保管，不要泄露给他人",
+  "securityWarning2": "建议将私钥存储在安全的位置，并设置适当的文件权限",
+  "securityWarning3": "此工具在浏览器本地生成密钥，不会上传到服务器",
+  "fingerprint": "密钥指纹 (SHA-256)",
+  "publicKey": "公钥 (Public Key)",
+  "privateKey": "私钥 (Private Key) - 请妥善保管",
+  "copy": "复制",
+  "copied": "已复制",
+  "download": "下载"
+}
