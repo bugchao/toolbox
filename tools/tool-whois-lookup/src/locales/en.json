@@ -13,7 +13,7 @@
   },
   "notes": {
     "title": "How it works",
-    "description": "This tool uses system WHOIS output so it is useful for registrar checks, expiration triage, and name server audits."
+    "description": "The tool prefers the site WHOIS API and automatically falls back to RDAP when a static deployment has no backend route."
   },
   "examples": {
     "title": "Quick examples"

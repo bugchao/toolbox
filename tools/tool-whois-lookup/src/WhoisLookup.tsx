@@ -27,6 +27,111 @@ interface WhoisLookupResult {
   timestamp: string
 }
 
+interface RdapEntity {
+  roles?: string[]
+  vcardArray?: unknown[]
+  entities?: RdapEntity[]
+}
+
+interface RdapNameServer {
+  ldhName?: string
+  unicodeName?: string
+}
+
+interface RdapEvent {
+  eventAction?: string
+  eventDate?: string
+}
+
+interface RdapResult {
+  objectClassName?: string
+  handle?: string
+  name?: string
+  ldhName?: string
+  startAddress?: string
+  endAddress?: string
+  country?: string
+  status?: string[]
+  nameservers?: RdapNameServer[]
+  events?: RdapEvent[]
+  entities?: RdapEntity[]
+}
+
+function looksLikeIp(query: string): boolean {
+  return /^(\d{1,3}\.){3}\d{1,3}$/.test(query) || /^[a-f0-9:]+$/i.test(query)
+}
+
+function isJsonResponse(response: Response): boolean {
+  return response.headers.get('content-type')?.toLowerCase().includes('application/json') ?? false
+}
+
+function getVcardValue(entity: RdapEntity | undefined, key: string): string {
+  const entries = Array.isArray(entity?.vcardArray?.[1]) ? entity.vcardArray[1] as unknown[] : []
+  for (const entry of entries) {
+    if (!Array.isArray(entry) || entry[0] !== key) continue
+    const value = entry[3]
+    if (Array.isArray(value)) return value.join(', ')
+    if (typeof value === 'string') return value
+  }
+
+  return ''
+}
+
+function findEntity(entities: RdapEntity[] | undefined, role: string): RdapEntity | undefined {
+  if (!entities) return undefined
+  for (const entity of entities) {
+    if (entity.roles?.includes(role)) return entity
+    const nested = findEntity(entity.entities, role)
+    if (nested) return nested
+  }
+
+  return undefined
+}
+
+function getEventDate(events: RdapEvent[] | undefined, actions: string[]): string {
+  return events?.find((event) => event.eventAction && actions.includes(event.eventAction))?.eventDate ?? ''
+}
+
+function buildRdapRawText(data: RdapResult): string {
+  return JSON.stringify(data, null, 2)
+}
+
+function parseRdapResult(query: string, data: RdapResult): WhoisLookupResult {
+  const isIp = looksLikeIp(query) || data.objectClassName === 'ip network'
+  const registrar = findEntity(data.entities, 'registrar')
+  const registrant = findEntity(data.entities, 'registrant')
+  const abuse = findEntity(data.entities, 'abuse')
+
+  return {
+    query,
+    source: 'rdap.org',
+    parsed: isIp
+      ? {
+          queryType: 'ip',
+          organization: getVcardValue(registrant, 'fn') || getVcardValue(findEntity(data.entities, 'administrative'), 'fn'),
+          country: data.country || '',
+          cidr: [data.startAddress, data.endAddress].filter(Boolean).join(' - '),
+          handle: data.handle || '',
+          abuseEmail: getVcardValue(abuse, 'email'),
+          nameservers: [],
+          statuses: data.status || [],
+        }
+      : {
+          queryType: 'domain',
+          registrar: getVcardValue(registrar, 'fn'),
+          registrant: getVcardValue(registrant, 'fn') || getVcardValue(registrant, 'org'),
+          country: data.country || '',
+          creationDate: getEventDate(data.events, ['registration']),
+          expirationDate: getEventDate(data.events, ['expiration']),
+          updatedDate: getEventDate(data.events, ['last changed', 'last update of RDAP database']),
+          nameservers: data.nameservers?.map((server) => server.ldhName || server.unicodeName || '').filter(Boolean) || [],
+          statuses: data.status || [],
+        },
+    rawText: buildRdapRawText(data),
+    timestamp: new Date().toISOString(),
+  }
+}
+
 export default function WhoisLookup() {
   const { t } = useTranslation('toolWhoisLookup')
   const [query, setQuery] = useState('')
@@ -45,23 +150,56 @@ export default function WhoisLookup() {
     ]
   }, [result, t])
 
+  const lookupViaApi = async (normalized: string): Promise<WhoisLookupResult> => {
+    const response = await fetch('/api/whois/lookup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: normalized }),
+    })
+
+    if (!isJsonResponse(response)) {
+      throw new Error('WHOIS API is unavailable')
+    }
+
+    const data = await response.json()
+    if (!response.ok) {
+      throw new Error(data?.error || t('errors.requestFailed'))
+    }
+
+    return data
+  }
+
+  const lookupViaRdap = async (normalized: string): Promise<WhoisLookupResult> => {
+    const type = looksLikeIp(normalized) ? 'ip' : 'domain'
+    const response = await fetch(`https://rdap.org/${type}/${encodeURIComponent(normalized)}`, {
+      headers: { Accept: 'application/rdap+json, application/json' },
+    })
+
+    if (!isJsonResponse(response)) {
+      throw new Error(t('errors.requestFailed'))
+    }
+
+    const data = await response.json()
+    if (!response.ok) {
+      throw new Error(data?.description || data?.title || t('errors.requestFailed'))
+    }
+
+    return parseRdapResult(normalized, data)
+  }
+
   const handleLookup = async () => {
-    const normalized = query.trim()
+    const normalized = query.trim().toLowerCase()
     if (!normalized) return
 
     setLoading(true)
     setError('')
 
     try {
-      const response = await fetch('/api/whois/lookup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: normalized }),
-      })
-
-      const data = await response.json()
-      if (!response.ok) {
-        throw new Error(data?.error || t('errors.requestFailed'))
+      let data: WhoisLookupResult
+      try {
+        data = await lookupViaApi(normalized)
+      } catch {
+        data = await lookupViaRdap(normalized)
       }
 
       setResult(data)
