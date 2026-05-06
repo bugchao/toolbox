@@ -1,0 +1,19 @@
+{
+  "name": "@toolbox/tool-video-compressor",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@toolbox/storage": "workspace:*",
+    "@toolbox/ui-kit": "workspace:*",
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1",
+    "lucide-react": "^0.577.0",
+    "react": "^18.3.1",
+    "react-i18next": "^15.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7"
+  }
+}

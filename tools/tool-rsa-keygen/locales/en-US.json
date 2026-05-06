@@ -1,0 +1,23 @@
+{
+  "title": "RSA Key Generator",
+  "description": "Generate RSA public and private key pairs with multiple key sizes and output formats",
+  "keySize": "Key Size",
+  "keySizeWarning1024": "⚠️ 1024-bit keys have lower security, not recommended for production",
+  "keySizeRecommended": "✓ Recommended for most scenarios",
+  "keySizeHighSecurity": "✓ High security, suitable for sensitive data",
+  "outputFormat": "Output Format",
+  "formatDescription": "PKCS#1 is the traditional format, PKCS#8 is the modern standard",
+  "generate": "Generate Key Pair",
+  "generating": "Generating...",
+  "generateError": "Key generation failed, please try again",
+  "securityWarningTitle": "Security Notice",
+  "securityWarning1": "Private keys are sensitive information, keep them secure and never share",
+  "securityWarning2": "Store private keys in a secure location with appropriate file permissions",
+  "securityWarning3": "This tool generates keys locally in your browser, nothing is uploaded",
+  "fingerprint": "Key Fingerprint (SHA-256)",
+  "publicKey": "Public Key",
+  "privateKey": "Private Key - Keep Secure",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download"
+}

@@ -4,6 +4,7 @@ import { Card, PageHero, StatusBadge } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { CHANGELOG_ENTRIES, getLocalizedChangeText } from '../data/changelog'
 import { getToolByPath, getToolTitle } from '../config/tools'
+import { getToolManifestMetaByPath } from '../tooling/tool-manifests'
 
 function ItemPill({ label }: { label: string }) {
   return (
@@ -74,7 +75,8 @@ export default function Changelog() {
                     .map((path) => {
                       if (path === '/changelog') return tNav('changelog')
                       const tool = getToolByPath(path)
-                      return tool ? getToolTitle(tool, tNav) : path
+                      const manifestMeta = getToolManifestMetaByPath(path, language)
+                      return tool ? getToolTitle(tool, tNav) : manifestMeta?.title || path
                     })
                     .filter(Boolean)
 

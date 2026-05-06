@@ -18,6 +18,55 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-01',
+    title: {
+      zh: '13 个新工具集中上线',
+      en: 'Thirteen new tools released',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增渐变色生成、CSV 转 JSON、RSA 密钥生成、房贷计算和抽签工具，补齐设计、数据转换、安全与生活计算场景。',
+          en: 'Added Gradient Generator, CSV to JSON, RSA Key Generator, Mortgage Calculator, and Lottery Tool for design, data conversion, security, and daily calculation workflows.',
+        },
+        paths: [
+          '/gradient-gen',
+          '/csv-to-json',
+          '/rsa-keygen',
+          '/mortgage-calc',
+          '/lottery',
+        ],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 OCR 文字识别、视频压缩、文档合并和音频剪辑工具，覆盖图片文字提取、媒体压缩与文档处理流程。',
+          en: 'Added OCR Text Recognition, Video Compressor, Document Merger, and Audio Cutter for image text extraction, media compression, and document processing workflows.',
+        },
+        paths: [
+          '/ocr-text',
+          '/video-compressor',
+          '/doc-merger',
+          '/audio-cutter',
+        ],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 Logo 生成器、Mock API 生成器、代码差异对比和 API 文档生成器，完善创作、测试数据、代码审阅与接口文档能力。',
+          en: 'Added Logo Generator, Mock API Generator, Code Diff, and API Doc Generator to improve creation, test data, code review, and API documentation workflows.',
+        },
+        paths: [
+          '/logo-generator',
+          '/mock-api',
+          '/code-diff',
+          '/api-doc-gen',
+        ],
+      },
+    ],
+  },
+  {
     date: '2026-04-13',
     title: {
       zh: 'DNS 与证书工具补齐',

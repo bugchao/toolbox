@@ -1,0 +1,20 @@
+{
+  "title": "Audio Cutter",
+  "description": "Online audio trimming tool with waveform visualization and multiple format support",
+  "uploadPrompt": "Click or drag audio file here",
+  "supportedFormats": "Supports MP3, WAV, AAC, OGG and more",
+  "invalidFormat": "Unsupported audio format",
+  "startTime": "Start Time (seconds)",
+  "endTime": "End Time (seconds)",
+  "selectedDuration": "Selected Duration",
+  "cutAndDownload": "Cut & Download",
+  "processing": "Processing...",
+  "cutFailed": "Cut failed, please try again",
+  "reset": "Reset",
+  "features": "Features",
+  "feature1": "Support multiple audio formats (MP3/WAV/AAC/OGG)",
+  "feature2": "Audio waveform visualization",
+  "feature3": "Drag to select trim region",
+  "feature4": "Precise time input control",
+  "feature5": "Client-side processing, no upload"
+}

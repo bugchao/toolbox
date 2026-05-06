@@ -1,0 +1,15 @@
+{
+  "title": "Mock API 生成器",
+  "description": "快速生成测试数据，支持多种数据类型和自定义结构",
+  "schemaEditor": "数据结构编辑器",
+  "addField": "添加字段",
+  "fieldName": "字段名称",
+  "array": "数组",
+  "dataCount": "生成数量",
+  "generate": "生成数据",
+  "preview": "数据预览",
+  "copy": "复制",
+  "copied": "已复制",
+  "download": "下载",
+  "noData": "点击“生成数据”按钮开始生成 Mock 数据"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "CSV 转 JSON",
+  "description": "将 CSV 数据转换为 JSON 格式，支持自定义分隔符和格式化输出",
+  "delimiter": "分隔符",
+  "custom": "自定义",
+  "options": "选项",
+  "firstRowAsKeys": "首行作为键名",
+  "prettify": "格式化输出",
+  "uploadFile": "上传文件",
+  "chooseFile": "选择文件",
+  "csvInput": "CSV 输入",
+  "csvPlaceholder": "粘贴 CSV 数据或上传文件...\n\n示例：\nname,age,city\nAlice,25,Beijing\nBob,30,Shanghai",
+  "jsonOutput": "JSON 输出",
+  "copy": "复制",
+  "copied": "已复制",
+  "download": "下载",
+  "emptyResult": "输入 CSV 数据后将显示转换结果"
+}

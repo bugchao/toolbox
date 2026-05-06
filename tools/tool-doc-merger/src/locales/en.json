@@ -1,0 +1,30 @@
+{
+  "title": "Document Merger",
+  "description": "Merge multiple PDF documents into one file",
+  "uploadArea": {
+    "title": "Upload PDF Files",
+    "description": "Click or drag PDF files here",
+    "hint": "Support multiple files, drag to reorder"
+  },
+  "fileList": {
+    "title": "File List",
+    "empty": "No files yet",
+    "pages": "pages",
+    "dragHint": "Drag to reorder"
+  },
+  "actions": {
+    "merge": "Merge Documents",
+    "merging": "Merging...",
+    "download": "Download Merged Document",
+    "clear": "Clear List",
+    "remove": "Remove"
+  },
+  "messages": {
+    "uploadSuccess": "File uploaded successfully",
+    "mergeSuccess": "Documents merged successfully",
+    "mergeError": "Merge failed",
+    "invalidFile": "Please upload PDF files",
+    "minFiles": "At least 2 files required to merge",
+    "processing": "Processing, please wait..."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "title": "CSV to JSON",
+  "description": "Convert CSV to JSON with custom delimiter and header detection",
+  "csvInput": "CSV Input",
+  "csvPlaceholder": "Paste CSV data or upload a file...",
+  "uploadFile": "Upload File",
+  "chooseFile": "Choose File",
+  "options": "Options",
+  "delimiter": "Delimiter",
+  "comma": "Comma (,)",
+  "semicolon": "Semicolon (;)",
+  "tab": "Tab",
+  "custom": "Custom",
+  "firstRowAsKeys": "First Row as Keys",
+  "prettify": "Prettify Output",
+  "jsonOutput": "JSON Output",
+  "emptyResult": "Please enter CSV data",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "\n": "\n",
+  "a": "a"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "代码差异对比",
+  "description": "对比两段代码的差异，支持多种编程语言语法高亮和差异可视化",
+  "language": "编程语言",
+  "showLineNumbers": "显示行号",
+  "collapseUnchanged": "折叠未变化部分",
+  "copy": "复制差异",
+  "copied": "已复制",
+  "download": "导出差异",
+  "clear": "清空",
+  "original": "原始代码",
+  "modified": "修改后代码",
+  "pasteOriginal": "粘贴原始代码...",
+  "pasteModified": "粘贴修改后的代码...",
+  "diffResult": "差异对比结果",
+  "additions": "新增",
+  "deletions": "删除",
+  "unchanged": "未变化",
+  "total": "总计",
+  "expandLines": "展开 {{count}} 行未变化的代码"
+}

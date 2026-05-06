@@ -1,0 +1,19 @@
+{
+  "title": "Gradient Generator",
+  "description": "Generate beautiful CSS gradients with multiple modes and color adjustments",
+  "gradientType": "Gradient Type",
+  "linear": "Linear",
+  "radial": "Radial",
+  "conic": "Conic",
+  "angle": "Angle",
+  "colorStops": "Color Stops",
+  "add": "Add Stop",
+  "position": "Position",
+  "color": "Color",
+  "cssCode": "CSS Code",
+  "copyCSS": "Copy CSS",
+  "copied": "Copied",
+  "exportImage": "Export Image",
+  "2d": "2D",
+  "a": "A"
+}

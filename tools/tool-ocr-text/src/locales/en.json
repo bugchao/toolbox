@@ -1,0 +1,26 @@
+{
+  "title": "OCR Text Recognition",
+  "description": "Extract text from images, supports Chinese and English",
+  "language": {
+    "label": "Recognition Language",
+    "auto": "Auto Detect (Chinese & English)",
+    "chinese": "Chinese",
+    "english": "English",
+    "both": "Chinese & English"
+  },
+  "upload": {
+    "title": "Drag images here, or click to upload",
+    "subtitle": "Supports JPG, PNG, WebP formats, batch upload available",
+    "button": "Select Images"
+  },
+  "processing": "Processing",
+  "confidence": "Confidence",
+  "copy": "Copy",
+  "copied": "Copied",
+  "noText": "No text detected",
+  "error": {
+    "title": "Recognition Failed",
+    "unknown": "Unknown error",
+    "invalidFile": "Please select image files"
+  }
+}
