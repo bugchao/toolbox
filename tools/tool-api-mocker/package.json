@@ -1,5 +1,5 @@
 {
-  "name": "@toolbox/tool-habit-tracker",
+  "name": "@toolbox/tool-api-mocker",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.tsx",

@@ -1,0 +1,14 @@
+{
+  "name": "API 响应模拟器",
+  "path": "/api-mocker",
+  "description": "快速创建 Mock API 接口，支持自定义响应和延迟",
+  "category": "开发工具",
+  "tags": ["API", "Mock", "测试", "开发"],
+  "features": [
+    "创建 Mock 接口",
+    "自定义状态码",
+    "响应延迟设置",
+    "JSON 格式化",
+    "快速模板"
+  ]
+}
