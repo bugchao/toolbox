@@ -1,7 +1,7 @@
 {
-  "name": "@toolbox/tool-pomodoro-timer",
+  "name": "@toolbox/tool-quick-notes",
   "version": "1.0.0",
-  "description": "番茄钟计时器 - 番茄工作法计时器",
+  "description": "快速笔记工具 - 简洁的笔记工具",
   "main": "src/index.tsx",
   "scripts": {
     "dev": "vite",
