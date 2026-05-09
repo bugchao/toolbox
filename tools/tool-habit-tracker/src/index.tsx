@@ -1,2 +1,1 @@
-export { default } from './HabitTracker'
-export { default as HabitTracker } from './HabitTracker'
+export { HabitTracker as default } from './HabitTracker';

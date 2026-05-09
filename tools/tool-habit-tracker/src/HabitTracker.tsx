@@ -1,429 +1,240 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Plus, Trash2, Check, TrendingUp, Calendar, Award, Flame } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import React, { useState, useEffect } from 'react';
+import './HabitTracker.css';
 
 interface Habit {
   id: string;
   name: string;
-  icon: string;
+  description: string;
   color: string;
-  completedDates: string[]; // ISO date strings
-  createdAt: string;
+  createdAt: number;
+  completedDates: string[];
 }
 
-const habitIcons = ['📚', '💪', '🏃', '💧', '🥗', '😴', '🧘', '✍️', '🎯', '💰'];
-const habitColors = [
-  'bg-red-500',
-  'bg-orange-500',
-  'bg-yellow-500',
-  'bg-green-500',
-  'bg-blue-500',
-  'bg-purple-500',
-  'bg-pink-500',
-];
+const COLORS = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#e67e22', '#34495e'];
 
-const HabitTracker: React.FC = () => {
-  const [habits, setHabits] = useState<Habit[]>(() => {
-    const saved = localStorage.getItem('habits');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return [];
-      }
-    }
-    return [];
-  });
-
-  const [newHabitName, setNewHabitName] = useState('');
-  const [selectedIcon, setSelectedIcon] = useState(habitIcons[0]);
-  const [selectedColor, setSelectedColor] = useState(habitColors[0]);
-  const [currentWeekStart, setCurrentWeekStart] = useState(() => {
-    const now = new Date();
-    const day = now.getDay();
-    const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(now.setDate(diff));
-  });
+export const HabitTracker: React.FC = () => {
+  const [habits, setHabits] = useState<Habit[]>([]);
+  const [showAddModal, setShowAddModal] = useState<boolean>(false);
+  const [newHabit, setNewHabit] = useState({ name: '', description: '', color: COLORS[0] });
 
   useEffect(() => {
-    localStorage.setItem('habits', JSON.stringify(habits));
+    loadHabits();
+  }, []);
+
+  useEffect(() => {
+    saveHabits();
   }, [habits]);
 
-  const getWeekDays = () => {
-    const days = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(currentWeekStart);
-      day.setDate(day.getDate() + i);
-      days.push(day);
+  const loadHabits = () => {
+    const saved = localStorage.getItem('habit-tracker');
+    if (saved) {
+      setHabits(JSON.parse(saved));
     }
-    return days;
   };
 
-  const formatDate = (date: Date) => {
-    return date.toISOString().split('T')[0];
-  };
-
-  const isToday = (date: Date) => {
-    const today = new Date();
-    return formatDate(date) === formatDate(today);
+  const saveHabits = () => {
+    localStorage.setItem('habit-tracker', JSON.stringify(habits));
   };
 
   const addHabit = () => {
-    if (!newHabitName.trim()) return;
+    if (!newHabit.name.trim()) {
+      alert('请输入习惯名称');
+      return;
+    }
 
-    const newHabit: Habit = {
+    const habit: Habit = {
       id: Date.now().toString(),
-      name: newHabitName.trim(),
-      icon: selectedIcon,
-      color: selectedColor,
+      name: newHabit.name,
+      description: newHabit.description,
+      color: newHabit.color,
+      createdAt: Date.now(),
       completedDates: [],
-      createdAt: formatDate(new Date()),
     };
 
-    setHabits([...habits, newHabit]);
-    setNewHabitName('');
-    setSelectedIcon(habitIcons[0]);
-    setSelectedColor(habitColors[0]);
+    setHabits([...habits, habit]);
+    setNewHabit({ name: '', description: '', color: COLORS[0] });
+    setShowAddModal(false);
   };
 
   const deleteHabit = (id: string) => {
-    if (confirm('确定要删除这个习惯吗？')) {
+    if (confirm('确定删除这个习惯吗？')) {
       setHabits(habits.filter(h => h.id !== id));
     }
   };
 
-  const toggleHabit = (habitId: string, date: Date) => {
-    const dateStr = formatDate(date);
+  const toggleHabit = (id: string, date: string) => {
     setHabits(habits.map(habit => {
-      if (habit.id === habitId) {
-        const completed = habit.completedDates.includes(dateStr);
+      if (habit.id === id) {
+        const completed = habit.completedDates.includes(date);
         return {
           ...habit,
           completedDates: completed
-            ? habit.completedDates.filter(d => d !== dateStr)
-            : [...habit.completedDates, dateStr],
+            ? habit.completedDates.filter(d => d !== date)
+            : [...habit.completedDates, date],
         };
       }
       return habit;
     }));
   };
 
-  const getStreak = (habit: Habit) => {
+  const getDateString = (daysAgo: number): string => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return date.toISOString().split('T')[0];
+  };
+
+  const getDayLabel = (daysAgo: number): string => {
+    if (daysAgo === 0) return '今天';
+    if (daysAgo === 1) return '昨天';
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  };
+
+  const getStreak = (habit: Habit): number => {
     let streak = 0;
-    const today = new Date();
-    
     for (let i = 0; i < 365; i++) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = formatDate(date);
-      
-      if (habit.completedDates.includes(dateStr)) {
+      const date = getDateString(i);
+      if (habit.completedDates.includes(date)) {
         streak++;
-      } else if (i > 0) {
+      } else {
         break;
       }
     }
-    
     return streak;
   };
 
-  const getCompletionRate = (habit: Habit) => {
-    const daysSinceCreation = Math.floor(
-      (new Date().getTime() - new Date(habit.createdAt).getTime()) / (1000 * 60 * 60 * 24)
-    ) + 1;
-    
-    if (daysSinceCreation === 0) return 0;
-    
-    return Math.round((habit.completedDates.length / daysSinceCreation) * 100);
-  };
-
-  const weekDays = getWeekDays();
-  const weekStartStr = currentWeekStart.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
-  const weekEnd = new Date(currentWeekStart);
-  weekEnd.setDate(weekEnd.getDate() + 6);
-  const weekEndStr = weekEnd.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
-
-  const changeWeek = (direction: number) => {
-    const newWeekStart = new Date(currentWeekStart);
-    newWeekStart.setDate(newWeekStart.getDate() + direction * 7);
-    setCurrentWeekStart(newWeekStart);
-  };
-
-  const totalCompletions = habits.reduce((sum, h) => sum + h.completedDates.length, 0);
-  const todayCompletions = habits.filter(h => 
-    h.completedDates.includes(formatDate(new Date()))
-  ).length;
-
-  // 生成30天完成趋势数据
-  const chartData = useMemo(() => {
-    const data = [];
-    const today = new Date();
-    for (let i = 29; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const dateStr = formatDate(date);
-      const completions = habits.filter(h => h.completedDates.includes(dateStr)).length;
-      data.push({
-        date: `${date.getMonth() + 1}/${date.getDate()}`,
-        完成数: completions,
-        目标数: habits.length,
-      });
+  const getCompletionRate = (habit: Habit, days: number): number => {
+    let completed = 0;
+    for (let i = 0; i < days; i++) {
+      const date = getDateString(i);
+      if (habit.completedDates.includes(date)) {
+        completed++;
+      }
     }
-    return data;
-  }, [habits]);
+    return Math.round((completed / days) * 100);
+  };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">习惯追踪器</h1>
-        <p className="text-gray-600">建立好习惯，打破坏习惯，每天进步一点点</p>
+    <div className="habit-tracker">
+      <div className="tool-header">
+        <h1>✅ 习惯追踪器</h1>
+        <p>养成好习惯，记录每一天的进步</p>
       </div>
 
-      {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Calendar className="w-5 h-5 text-blue-600" />
-            <span className="text-sm text-blue-600 font-medium">今日完成</span>
-          </div>
-          <div className="text-2xl font-bold text-blue-700">{todayCompletions}/{habits.length}</div>
-        </div>
-
-        <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Check className="w-5 h-5 text-green-600" />
-            <span className="text-sm text-green-600 font-medium">总完成次数</span>
-          </div>
-          <div className="text-2xl font-bold text-green-700">{totalCompletions}</div>
-        </div>
-
-        <div className="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Flame className="w-5 h-5 text-orange-600" />
-            <span className="text-sm text-orange-600 font-medium">最佳连胜</span>
-          </div>
-          <div className="text-2xl font-bold text-orange-700">
-            {habits.length > 0 ? Math.max(...habits.map(getStreak)) : 0} 天
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Award className="w-5 h-5 text-purple-600" />
-            <span className="text-sm text-purple-600 font-medium">习惯总数</span>
-          </div>
-          <div className="text-2xl font-bold text-purple-700">{habits.length}</div>
-        </div>
-      </div>
-
-      {/* 30天完成趋势图表 */}
-      {habits.length > 0 && (
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-blue-500" />
-            30天完成趋势
-          </h2>
-          <ResponsiveContainer width="100%" height={250}>
-            <LineChart data={chartData}>
-              <XAxis 
-                dataKey="date" 
-                tick={{ fontSize: 11 }} 
-                interval={Math.floor(chartData.length / 6)}
-              />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip />
-              <Legend />
-              <Line 
-                type="monotone" 
-                dataKey="完成数" 
-                stroke="#10b981" 
-                strokeWidth={2}
-                dot={{ r: 3 }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="目标数" 
-                stroke="#94a3b8" 
-                strokeWidth={1}
-                strokeDasharray="5 5"
-                dot={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          <p className="text-xs text-gray-500 text-center mt-2">
-            绿线：每日完成习惯数 | 灰线：习惯总数（目标）
-          </p>
-        </div>
-      )}
-
-      {/* Add New Habit */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Plus className="w-5 h-5 text-green-500" />
-          添加新习惯
-        </h2>
-        
-        <div className="flex flex-col md:flex-row gap-4">
-          <input
-            type="text"
-            value={newHabitName}
-            onChange={(e) => setNewHabitName(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && addHabit()}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            placeholder="例如：每天阅读 30 分钟、每天喝 8 杯水..."
-          />
-          
-          <div className="flex gap-2">
-            {habitIcons.slice(0, 5).map(icon => (
-              <button
-                key={icon}
-                onClick={() => setSelectedIcon(icon)}
-                className={`w-10 h-10 rounded-lg text-xl transition ${
-                  selectedIcon === icon ? 'bg-green-100 ring-2 ring-green-500' : 'bg-gray-100'
-                }`}
-              >
-                {icon}
-              </button>
-            ))}
-          </div>
-          
-          <div className="flex gap-2">
-            {habitColors.slice(0, 4).map(color => (
-              <button
-                key={color}
-                onClick={() => setSelectedColor(color)}
-                className={`w-10 h-10 rounded-lg transition ${color} ${
-                  selectedColor === color ? 'ring-2 ring-offset-2 ring-green-500' : ''
-                }`}
-              />
-            ))}
-          </div>
-          
-          <button
-            onClick={addHabit}
-            className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold"
-          >
-            添加
+      <div className="tracker-container">
+        <div className="header-actions">
+          <button className="add-habit-btn" onClick={() => setShowAddModal(true)}>
+            ➕ 添加习惯
           </button>
-        </div>
-      </div>
-
-      {/* Week Navigation */}
-      <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={() => changeWeek(-1)}
-          className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
-        >
-          ← 上周
-        </button>
-        <div className="text-lg font-semibold">
-          {weekStartStr} - {weekEndStr}
-        </div>
-        <button
-          onClick={() => changeWeek(1)}
-          className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
-        >
-          下周 →
-        </button>
-      </div>
-
-      {/* Habits Grid */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="grid grid-cols-8 gap-0 border-b">
-          <div className="p-4 font-semibold text-gray-700 border-r bg-gray-50">习惯</div>
-          {weekDays.map((day, index) => (
-            <div
-              key={index}
-              className={`p-3 text-center border-r last:border-r-0 ${
-                isToday(day) ? 'bg-blue-50' : ''
-              }`}
-            >
-              <div className="text-xs text-gray-500">
-                {day.toLocaleDateString('zh-CN', { weekday: 'short' })}
-              </div>
-              <div className={`text-sm font-medium ${isToday(day) ? 'text-blue-600' : ''}`}>
-                {day.getDate()}
-              </div>
-            </div>
-          ))}
         </div>
 
         {habits.length === 0 ? (
-          <div className="p-12 text-center text-gray-400">
-            <TrendingUp className="w-16 h-16 mx-auto mb-4 opacity-50" />
-            <div className="text-lg font-medium mb-2">还没有习惯</div>
-            <div className="text-sm">添加第一个习惯，开始你的成长之旅</div>
+          <div className="empty-state">
+            <p>还没有添加习惯，点击上方按钮开始吧！</p>
           </div>
         ) : (
-          habits.map(habit => {
-            const streak = getStreak(habit);
-            const rate = getCompletionRate(habit);
-            
-            return (
-              <div key={habit.id} className="grid grid-cols-8 gap-0 border-b last:border-b-0 hover:bg-gray-50">
-                <div className="p-4 border-r flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg ${habit.color} flex items-center justify-center text-xl`}>
-                    {habit.icon}
+          <div className="habits-list">
+            {habits.map(habit => (
+              <div key={habit.id} className="habit-card" style={{ borderLeftColor: habit.color }}>
+                <div className="habit-header">
+                  <div className="habit-info">
+                    <h3>{habit.name}</h3>
+                    {habit.description && <p className="habit-description">{habit.description}</p>}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium truncate">{habit.name}</div>
-                    <div className="text-xs text-gray-500 flex items-center gap-2">
-                      <span>🔥 {streak}天连胜</span>
-                      <span>📊 {rate}% 完成率</span>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => deleteHabit(habit.id)}
-                    className="p-2 text-gray-400 hover:text-red-500 transition"
-                  >
-                    <Trash2 className="w-4 h-4" />
+                  <button className="delete-btn" onClick={() => deleteHabit(habit.id)}>
+                    🗑️
                   </button>
                 </div>
-                
-                {weekDays.map((day, index) => {
-                  const dateStr = formatDate(day);
-                  const completed = habit.completedDates.includes(dateStr);
-                  const isFuture = day > new Date();
-                  
-                  return (
-                    <div
-                      key={index}
-                      className={`p-3 border-r last:border-r-0 flex items-center justify-center ${
-                        isToday(day) ? 'bg-blue-50' : ''
-                      }`}
-                    >
-                      <button
-                        onClick={() => !isFuture && toggleHabit(habit.id, day)}
-                        disabled={isFuture}
-                        className={`w-8 h-8 rounded-lg transition flex items-center justify-center ${
-                          completed
-                            ? `${habit.color} text-white`
-                            : isFuture
-                            ? 'bg-gray-100 cursor-not-allowed'
-                            : 'bg-gray-100 hover:bg-gray-200'
-                        }`}
+
+                <div className="habit-stats">
+                  <div className="stat-item">
+                    <div className="stat-value">{getStreak(habit)}</div>
+                    <div className="stat-label">连续天数</div>
+                  </div>
+                  <div className="stat-item">
+                    <div className="stat-value">{getCompletionRate(habit, 7)}%</div>
+                    <div className="stat-label">7天完成率</div>
+                  </div>
+                  <div className="stat-item">
+                    <div className="stat-value">{getCompletionRate(habit, 30)}%</div>
+                    <div className="stat-label">30天完成率</div>
+                  </div>
+                </div>
+
+                <div className="habit-calendar">
+                  {Array.from({ length: 7 }).map((_, i) => {
+                    const date = getDateString(i);
+                    const completed = habit.completedDates.includes(date);
+                    return (
+                      <div
+                        key={i}
+                        className={`calendar-day ${completed ? 'completed' : ''}`}
+                        style={{ background: completed ? habit.color : undefined }}
+                        onClick={() => toggleHabit(habit.id, date)}
                       >
-                        {completed && <Check className="w-5 h-5" />}
-                      </button>
-                    </div>
-                  );
-                })}
+                        <div className="day-label">{getDayLabel(i)}</div>
+                        <div className="day-check">{completed ? '✓' : ''}</div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            );
-          })
+            ))}
+          </div>
         )}
       </div>
 
-      {/* Tips */}
-      <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
-        <h3 className="font-semibold text-green-800 mb-2">💡 习惯养成小贴士</h3>
-        <ul className="text-sm text-green-700 space-y-1 list-disc list-inside">
-          <li><strong>从小开始：</strong>习惯越小越容易坚持，比如"每天读 1 页书"而不是"每天读 1 小时"</li>
-          <li><strong>固定时间：</strong>在每天的同一时间执行习惯，形成条件反射</li>
-          <li><strong>视觉提示：</strong>把习惯放在显眼的地方，比如把书放在床头</li>
-          <li><strong>不要中断：</strong>连续 2 天以上不执行会大大降低成功率，实在忙也要做最小版本</li>
-          <li><strong>21 天法则：</strong>一个习惯平均需要 21 天才能初步养成，66 天才能自动化</li>
-          <li><strong>追踪进度：</strong>看着连胜记录增长会很有成就感，这是最好的激励</li>
+      {showAddModal && (
+        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h3>添加新习惯</h3>
+            <div className="form-group">
+              <label>习惯名称</label>
+              <input
+                type="text"
+                value={newHabit.name}
+                onChange={e => setNewHabit({ ...newHabit, name: e.target.value })}
+                placeholder="例如：每天阅读30分钟"
+              />
+            </div>
+            <div className="form-group">
+              <label>描述（可选）</label>
+              <textarea
+                value={newHabit.description}
+                onChange={e => setNewHabit({ ...newHabit, description: e.target.value })}
+                placeholder="添加一些描述..."
+                rows={3}
+              />
+            </div>
+            <div className="form-group">
+              <label>颜色</label>
+              <div className="color-picker">
+                {COLORS.map(color => (
+                  <button
+                    key={color}
+                    className={`color-btn ${newHabit.color === color ? 'active' : ''}`}
+                    style={{ background: color }}
+                    onClick={() => setNewHabit({ ...newHabit, color })}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button onClick={() => setShowAddModal(false)}>取消</button>
+              <button className="primary" onClick={addHabit}>添加</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="info-section">
+        <h3>💡 使用提示</h3>
+        <ul>
+          <li>点击日期方块标记完成</li>
+          <li>连续完成可以增加连续天数</li>
+          <li>数据保存在浏览器本地</li>
+          <li>坚持21天养成一个习惯</li>
         </ul>
       </div>
     </div>
