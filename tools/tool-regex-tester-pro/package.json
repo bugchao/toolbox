@@ -1,0 +1,22 @@
+{
+  "name": "@toolbox/tool-regex-tester-pro",
+  "version": "1.0.0",
+  "description": "正则表达式测试器增强版 - 带常用正则模板",
+  "main": "src/index.tsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.3.0"
+  }
+}
