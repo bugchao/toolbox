@@ -1,17 +1,7 @@
 {
   "name": "@toolbox/tool-sql-formatter",
   "version": "1.0.0",
-<<<<<<< HEAD
   "private": true,
-  "main": "src/index.tsx",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
-=======
   "description": "SQL 格式化工具 - SQL 代码格式化和美化",
   "main": "src/index.tsx",
   "scripts": {
@@ -30,6 +20,5 @@
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.0",
     "vite": "^4.3.0"
->>>>>>> origin/feat/batch-tools-27
   }
 }
