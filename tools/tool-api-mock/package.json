@@ -1,0 +1,24 @@
+{
+  "name": "@toolbox/tool-api-mock",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API 响应模拟器 - Mock API 响应数据",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "dependencies": {
+    "@toolbox/tool-registry": "workspace:*",
+    "lucide-react": "^0.577.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

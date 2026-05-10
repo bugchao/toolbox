@@ -1,0 +1,24 @@
+{
+  "name": "@toolbox/tool-quick-notes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "快速笔记工具 - 简洁的笔记工具",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
+  "dependencies": {
+    "@toolbox/tool-registry": "workspace:*",
+    "lucide-react": "^0.577.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.0.0"
+  }
+}

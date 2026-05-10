@@ -1,0 +1,4 @@
+{
+  "title": "API Response Mock",
+  "description": "REST response template gallery with status code, delay, and headers config; generates local mock URLs and curl commands"
+}

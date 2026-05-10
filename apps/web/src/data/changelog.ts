@@ -18,6 +18,47 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-11',
+    title: {
+      zh: 'PDF 总结新增 + 12 个工具接入导航',
+      en: 'PDF Summary launched + 12 tools wired into navigation',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 PDF 总结工具：纯前端解析 PDF 全文，生成关键摘要与高频术语列表，文件不上传到服务器。',
+          en: 'New PDF Summary: client-side PDF text extraction with key-point summary and top keywords, no upload.',
+        },
+        paths: ['/pdf-summary'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '研发工具 3 个上线：SQL 格式化、正则测试器（增强版）、API 响应模拟器（与 Mock 数据生成器并存覆盖不同场景）。',
+          en: 'Three dev tools available: SQL Formatter, Regex Tester Pro, and API Response Mock (coexists with Mock API Generator for distinct use cases).',
+        },
+        paths: ['/sql-formatter', '/regex-tester-pro', '/api-mock'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '生活与学习工具 4 个上线：习惯打卡、句子改写、快速笔记、极简番茄计时器（与 /pomodoro 和 /pomodoro-pro 三者并存覆盖不同场景）。',
+          en: 'Four life & learning tools available: Habit Tracker, Sentence Rewriter, Quick Notes, and minimal Pomodoro Timer (coexists with /pomodoro and /pomodoro-pro).',
+        },
+        paths: ['/habit-tracker', '/sentence-rewriter', '/quick-notes', '/pomodoro-timer'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '实用工具 4 个进入导航：配色方案生成器、随机名字生成器、抽签工具、渐变色生成器（修补此前路径已注册但导航不可见的问题）。',
+          en: 'Four utility tools now reachable from navigation: Color Scheme Generator, Name Generator, Lottery, and Gradient Generator (fixes earlier issue where routes existed but were hidden from nav).',
+        },
+        paths: ['/color-scheme-generator', '/name-generator', '/lottery', '/gradient-gen'],
+      },
+    ],
+  },
+  {
     date: '2026-05-01',
     title: {
       zh: '13 个新工具集中上线',

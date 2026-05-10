@@ -1,0 +1,286 @@
+.pomodoro-timer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.tool-header {
+  margin-bottom: 40px;
+}
+
+.tool-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.tool-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.timer-container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.mode-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.mode-work .mode-label { color: #e74c3c; }
+.mode-shortBreak .mode-label { color: #3498db; }
+.mode-longBreak .mode-label { color: #2ecc71; }
+
+.timer-display {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 40px;
+}
+
+.time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  font-weight: 700;
+  font-family: 'Monaco', monospace;
+}
+
+.mode-work .time { color: #e74c3c; }
+.mode-shortBreak .time { color: #3498db; }
+.mode-longBreak .time { color: #2ecc71; }
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-ring circle:last-child {
+  transition: stroke-dashoffset 1s linear;
+}
+
+.mode-work .progress-ring circle:last-child { stroke: #e74c3c; }
+.mode-shortBreak .progress-ring circle:last-child { stroke: #3498db; }
+.mode-longBreak .progress-ring circle:last-child { stroke: #2ecc71; }
+
+.timer-controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.control-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.control-btn.start {
+  background: #007bff;
+  color: white;
+}
+
+.control-btn.start:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.control-btn.reset {
+  background: #6c757d;
+  color: white;
+}
+
+.control-btn.reset:hover {
+  background: #5a6268;
+}
+
+.mode-switcher {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.mode-switcher button {
+  padding: 10px 20px;
+  background: #f8f9fa;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.mode-switcher button:hover {
+  background: #e9ecef;
+}
+
+.mode-switcher button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.stats {
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.stat-item {
+  display: inline-block;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.settings-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 12px 20px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.settings-btn:hover {
+  background: #f8f9fa;
+  transform: scale(1.05);
+}
+
+.settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.settings-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.settings-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.setting-item {
+  margin-bottom: 20px;
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.setting-item input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.settings-content button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.settings-content button:hover {
+  background: #0056b3;
+}
+
+.info-section {
+  background: #e7f3ff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.info-section h3 {
+  margin-top: 0;
+  color: #004085;
+}
+
+.info-section ul {
+  margin: 10px 0 0 20px;
+  color: #004085;
+}
+
+.info-section li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .timer-display {
+    width: 250px;
+    height: 250px;
+  }
+
+  .time {
+    font-size: 3rem;
+  }
+
+  .timer-controls {
+    flex-direction: column;
+  }
+
+  .control-btn {
+    width: 100%;
+  }
+
+  .mode-switcher {
+    flex-direction: column;
+  }
+
+  .mode-switcher button {
+    width: 100%;
+  }
+}

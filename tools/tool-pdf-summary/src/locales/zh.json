@@ -1,0 +1,48 @@
+{
+  "title": "PDF 总结工具",
+  "description": "提取 PDF 全文，生成关键信息摘要与高频术语列表（纯前端处理，文件不上传）",
+  "upload": {
+    "drop": "拖入 PDF 文件，或点击选择",
+    "limit": "最大 50MB，单文件，纯本地解析",
+    "select": "选择文件",
+    "replace": "替换文件",
+    "clear": "清除"
+  },
+  "fields": {
+    "length": "摘要长度",
+    "lengthShort": "短（约 2 句）",
+    "lengthMedium": "中（约 4 句）",
+    "lengthLong": "长（约 8 句）"
+  },
+  "actions": {
+    "summarize": "生成摘要",
+    "extracting": "提取 PDF 文本…",
+    "summarizing": "生成摘要中…",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "result": {
+    "summary": "摘要结果",
+    "keywords": "高频关键词",
+    "stats": "统计",
+    "pages": "{{count}} 页",
+    "chars": "{{count}} 字",
+    "compression": "压缩 {{rate}}%",
+    "readingTime": "约 {{min}} 分钟阅读",
+    "empty": "上传 PDF 后点击生成摘要"
+  },
+  "errors": {
+    "notPdf": "请选择 PDF 文件",
+    "tooLarge": "文件超过 50MB",
+    "parseFailed": "PDF 解析失败：{{message}}",
+    "emptyText": "未提取到可读文本（PDF 可能是扫描件）"
+  },
+  "tips": {
+    "title": "使用提示",
+    "items": [
+      "纯前端处理，文件不会上传到服务器",
+      "扫描型 PDF 缺少文本层，需要先 OCR",
+      "摘要算法基于关键词频率与句子位置，不调用外部 AI"
+    ]
+  }
+}

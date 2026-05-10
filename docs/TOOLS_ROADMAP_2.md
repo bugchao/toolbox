@@ -2,6 +2,21 @@
 
 本文档是**第二期 100 个新工具**的规划清单，基于现有 208 个工具进行扩展。
 
+> **⚠️ 文档状态校对（2026-05-11）**
+>
+> 创建时（2026-05-01）的"100 个待开发"列表与现状已经脱节。
+> 全表已逐条核对 `tools/` 与 `apps/web/src/App.tsx`：
+>
+> | 状态 | 数量 | 说明 |
+> |------|-----:|------|
+> | **已上线** | 16 | 已完整接入路由（见 ROADMAP.md「二、已开发」）；本文表格已就地标注 `已上线` + 落位包名 |
+> | **真空白** | 84 | 确认无对应代码包，仍需要从零开发 |
+>
+> **🛑 给 AI / 协作者的硬规则**：
+> 1. 推荐"开发什么"之前**必须**先扫 `tools/tool-<name>/` 目录，不要单看本表的"待开发"标签
+> 2. 实施前再核 `apps/web/src/App.tsx` 路由 + `tool.manifest.ts` 是否已存在
+> 3. 若发现新一批已上线条目，请直接就地标 `**已上线**` + 备注落位
+
 ---
 
 ## 一、分类目录（固定，后续规划按此填写）
@@ -33,16 +48,16 @@
 |----------|----------|------|--------|------|
 | Word 转 PDF | `/word-to-pdf` | 待开发 | P1 | 在线 Word 文档转 PDF |
 | PPT 转图片 | `/ppt-to-images` | 待开发 | P1 | PPT 每页导出为图片 |
-| 文档合并工具 | `/doc-merger` | 待开发 | P0 | 合并多个 PDF/Word 文档 |
+| 文档合并工具 | `/doc-merger` | **已上线** | - | 合并多个 PDF/Word 文档（落位 `tools/tool-doc-merger`） |
 | 文档拆分工具 | `/doc-splitter` | 待开发 | P1 | 按页数或章节拆分文档 |
-| OCR 文字识别 | `/ocr-text` | 待开发 | P0 | 图片提取文字（中英文） |
+| OCR 文字识别 | `/ocr-text` | **已上线** | - | 图片提取文字（落位 `tools/tool-ocr-text`） |
 
 #### 音视频处理（5 个）
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 视频压缩 | `/video-compressor` | 待开发 | P0 | 在线视频压缩 |
-| 音频剪辑 | `/audio-cutter` | 待开发 | P0 | 在线音频裁剪 |
+| 视频压缩 | `/video-compressor` | **已上线** | - | 在线视频压缩（落位 `tools/tool-video-compressor`） |
+| 音频剪辑 | `/audio-cutter` | **已上线** | - | 在线音频裁剪（落位 `tools/tool-audio-cutter`） |
 | 视频转 GIF | `/video-to-gif` | 待开发 | P1 | 视频片段转 GIF |
 | 音频格式转换 | `/audio-converter` | 待开发 | P1 | MP3/WAV/AAC 互转 |
 | 视频字幕提取 | `/subtitle-extractor` | 待开发 | P2 | 提取视频字幕文件 |
@@ -61,7 +76,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| Logo 生成器 | `/logo-generator` | 待开发 | P0 | AI 生成 Logo |
+| Logo 生成器 | `/logo-generator` | **已上线** | - | AI 生成 Logo（落位 `tools/tool-logo-generator`） |
 | 名片生成器 | `/business-card` | 待开发 | P1 | 在线名片设计 |
 | 海报生成器 | `/poster-maker` | 待开发 | P2 | 快速生成海报 |
 | 签名设计 | `/signature-design` | 待开发 | P2 | 艺术签名生成 |
@@ -73,8 +88,8 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| Mock API 生成器 | `/mock-api` | 待开发 | P0 | 快速生成 Mock 数据 |
-| API 文档生成器 | `/api-doc-gen` | 待开发 | P0 | 根据接口生成文档 |
+| Mock API 生成器 | `/mock-api` | **已上线** | - | 快速生成 Mock 数据（落位 `tools/tool-mock-api`，faker.js + 字段 schema 批量生成）；REST 响应模板模拟器另在 `/api-mock`（`tools/tool-api-mock`） |
+| API 文档生成器 | `/api-doc-gen` | **已上线** | - | 根据接口生成文档（落位 `tools/tool-api-doc-gen`） |
 | Webhook 测试工具 | `/webhook-tester` | 待开发 | P1 | 测试 Webhook 回调 |
 | gRPC 测试工具 | `/grpc-tester` | 待开发 | P2 | gRPC 接口测试 |
 | OpenAPI 编辑器 | `/openapi-editor` | 待开发 | P2 | Swagger/OpenAPI 编辑 |
@@ -83,8 +98,8 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 代码差异对比 | `/code-diff` | 待开发 | P0 | 代码版本对比 |
-| SQL 格式化 | `/sql-formatter` | 待开发 | P1 | SQL 语句格式化 |
+| 代码差异对比 | `/code-diff` | **已上线** | - | 代码版本对比（落位 `tools/tool-code-diff`） |
+| SQL 格式化 | `/sql-formatter` | **已上线** | - | SQL 语句格式化（落位 `tools/tool-sql-formatter`） |
 | Markdown 表格生成器 | `/md-table-gen` | 待开发 | P2 | 快速生成 Markdown 表格 |
 | Git Commit 生成器 | `/git-commit-gen` | 待开发 | P1 | AI 生成 Commit 信息 |
 | 代码行数统计 | `/code-counter` | 待开发 | P2 | 统计项目代码行数 |
@@ -93,7 +108,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| CSV 转 JSON | `/csv-to-json` | 待开发 | P0 | CSV 与 JSON 互转 |
+| CSV 转 JSON | `/csv-to-json` | **已上线** | - | CSV 与 JSON 互转（落位 `tools/tool-csv-to-json`） |
 | XML 格式化 | `/xml-formatter` | 待开发 | P2 | XML 格式化与校验 |
 | 数据脱敏工具 | `/data-masking` | 待开发 | P1 | 敏感数据脱敏 |
 | 随机数据生成器 | `/fake-data-gen` | 待开发 | P2 | 生成测试数据 |
@@ -103,9 +118,9 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| RSA 密钥生成 | `/rsa-keygen` | 待开发 | P0 | RSA 公私钥生成 |
+| RSA 密钥生成 | `/rsa-keygen` | **已上线** | - | RSA 公私钥生成（落位 `tools/tool-rsa-keygen`） |
 | AES 加密解密 | `/aes-cipher` | 待开发 | P1 | AES 加密解密工具 |
-| 密码强度检测 | `/password-strength` | 待开发 | P1 | 密码安全评分 |
+| 密码强度检测 | `/password-strength` | **已上线** | - | 密码安全评分（落位 `tools/tool-password-strength`） |
 | HMAC 签名工具 | `/hmac-sign` | 待开发 | P2 | HMAC 签名生成与验证 |
 | 证书解析工具 | `/cert-parser` | 待开发 | P2 | X.509 证书解析 |
 
@@ -135,7 +150,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 房贷计算器 | `/mortgage-calc` | 待开发 | P0 | 房贷月供计算 |
+| 房贷计算器 | `/mortgage-calc` | **已上线** | - | 房贷月供计算（落位 `tools/tool-mortgage-calc`） |
 | 个税计算器 | `/tax-calc` | 待开发 | P1 | 个人所得税计算 |
 | 退休金计算器 | `/pension-calc` | 待开发 | P2 | 退休金估算 |
 | 基金收益计算 | `/fund-calc` | 待开发 | P2 | 基金收益计算 |
@@ -147,7 +162,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 渐变色生成器 | `/gradient-gen` | 待开发 | P0 | CSS 渐变色生成 |
+| 渐变色生成器 | `/gradient-gen` | **已上线** | - | CSS 渐变色生成（落位 `tools/tool-gradient-gen`） |
 | 色盲模拟器 | `/colorblind-sim` | 待开发 | P1 | 色盲视角模拟 |
 | 品牌色提取 | `/brand-color` | 待开发 | P2 | 从 Logo 提取品牌色 |
 
@@ -196,7 +211,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 抽签工具 | `/lottery` | 待开发 | P0 | 随机抽签/抽奖 |
+| 抽签工具 | `/lottery` | **已上线** | - | 随机抽签/抽奖（落位 `tools/tool-lottery`） |
 | 骰子模拟器 | `/dice-roller` | 待开发 | P1 | 多面骰子模拟 |
 | 真心话大冒险 | `/truth-dare` | 待开发 | P1 | 随机真心话大冒险 |
 | 猜数字游戏 | `/guess-number` | 待开发 | P2 | 猜数字小游戏 |
@@ -232,7 +247,7 @@
 | 矩阵计算器 | `/matrix-calc` | 待开发 | P1 | 矩阵运算 |
 | 函数图像绘制 | `/function-plot` | 待开发 | P2 | 函数图像可视化 |
 | 几何图形计算 | `/geometry-calc` | 待开发 | P2 | 面积周长计算 |
-| 进制转换器 | `/base-converter` | 待开发 | P2 | 2/8/10/16 进制转换 |
+| 进制转换器 | `/base-converter` | **已上线** | - | 2/8/10/16 进制转换（落位 `tools/tool-base-converter`） |
 
 ### 商务工具（Business）- 5 个
 

@@ -1,0 +1,14 @@
+{
+  "name": "SQL 格式化工具",
+  "path": "/sql-formatter",
+  "description": "美化和压缩 SQL 语句，提高代码可读性",
+  "category": "开发工具",
+  "tags": ["SQL", "格式化", "美化", "压缩"],
+  "features": [
+    "SQL 格式化美化",
+    "SQL 压缩",
+    "关键字大写",
+    "自定义缩进",
+    "一键复制"
+  ]
+}
