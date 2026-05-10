@@ -80,6 +80,8 @@
 | GitHub 信息读取 | `/github-info` | `tools/tool-github-info` → GithubInfo |
 | GitHub 仓库分析 | `/github-repo` | `tools/tool-github-repo` → GithubRepo |
 | GitHub 用户分析 | `/github-user` | `tools/tool-github-user` → GithubUser |
+| 代理速度测试 | `/proxy-speed-test` | `tools/tool-proxy-speed-test` → ProxySpeedTest |
+| AI Token 费用计算器 | `/ai-token-cost` | `tools/tool-ai-token-cost` → AITokenCost |
 
 ### 查询工具
 
