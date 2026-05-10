@@ -73,7 +73,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| Mock API 生成器 | `/mock-api` | 待开发 | P0 | 快速生成 Mock 数据 |
+| Mock API 生成器 | `/mock-api` | **已上线** | - | 快速生成 Mock 数据（落位 `tools/tool-mock-api`，faker.js + 字段 schema 批量生成）；REST 响应模板模拟器另在 `/api-mock`（`tools/tool-api-mock`） |
 | API 文档生成器 | `/api-doc-gen` | 待开发 | P0 | 根据接口生成文档 |
 | Webhook 测试工具 | `/webhook-tester` | 待开发 | P1 | 测试 Webhook 回调 |
 | gRPC 测试工具 | `/grpc-tester` | 待开发 | P2 | gRPC 接口测试 |

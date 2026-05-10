@@ -88,6 +88,8 @@
 | AI Token 费用计算器 | `/ai-token-cost` | `tools/tool-ai-token-cost` → AITokenCost |
 | 正则表达式测试器（增强版） | `/regex-tester-pro` | `tools/tool-regex-tester-pro` → RegexTesterPro |
 | SQL 格式化工具 | `/sql-formatter` | `tools/tool-sql-formatter` → SqlFormatter |
+| Mock API 数据生成器（faker schema） | `/mock-api` | `tools/tool-mock-api` → MockApi |
+| API 响应模拟器（REST 模板 + curl） | `/api-mock` | `tools/tool-api-mock` → ApiMock |
 
 ### 查询工具
 

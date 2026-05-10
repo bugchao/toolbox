@@ -1,0 +1,4 @@
+{
+  "title": "API 响应模拟器",
+  "description": "REST 响应模板库 + 状态码/延迟/headers 配置，生成本地 Mock URL 与 curl 命令"
+}

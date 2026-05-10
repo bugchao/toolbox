@@ -803,6 +803,12 @@ importers:
 
   tools/tool-api-mock:
     dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -816,15 +822,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.3.7(@types/react@18.3.28)
-      '@vitejs/plugin-react':
-        specifier: ^4.0.0
-        version: 4.7.0(vite@4.5.14(@types/node@25.5.0))
       typescript:
         specifier: ^5.0.0
         version: 5.9.3
-      vite:
-        specifier: ^4.3.0
-        version: 4.5.14(@types/node@25.5.0)
 
   tools/tool-api-mocker:
     dependencies:
