@@ -2,9 +2,11 @@
   "name": "@toolbox/tool-lottery",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "main": "src/index.tsx",
   "dependencies": {
     "@toolbox/storage": "workspace:*",
+    "@toolbox/tool-registry": "workspace:*",
     "@toolbox/ui-kit": "workspace:*",
     "lucide-react": "^0.577.0",
     "react": "^18.3.1",

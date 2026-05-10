@@ -2,23 +2,24 @@
   "name": "@toolbox/tool-sql-formatter",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "SQL 格式化工具 - SQL 代码格式化和美化",
   "main": "src/index.tsx",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
+  "types": "src/index.tsx",
   "dependencies": {
+    "@toolbox/tool-registry": "workspace:*",
+    "lucide-react": "^0.577.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sql-formatter": "^15.0.0"
   },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "typescript": "^5.0.0",
-    "vite": "^4.3.0"
+    "typescript": "^5.0.0"
   }
 }

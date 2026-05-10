@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 
 type NameType = 'chinese' | 'english' | 'japanese' | 'fantasy' | 'tech' | 'pet';
@@ -233,6 +232,3 @@ const NameGenerator: React.FC = () => {
 };
 
 export default NameGenerator;
-=======
-export { NameGenerator as default } from './NameGenerator';
->>>>>>> origin/feat/batch-tools-27

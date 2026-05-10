@@ -55,6 +55,10 @@
 | 人生进度条 | `/life-progress` | `apps/web/src/pages/LifeProgressBar.tsx` |
 | 翻译工作台 | `/translation-hub` | `tools/tool-translation-hub` → TranslationHub |
 | 图像本地加载预览基座 | `/image-local-preview` | `tools/tool-image-local-preview` → ImageLocalPreview |
+| 配色方案生成器 | `/color-scheme-generator` | `tools/tool-color-scheme-generator` → ColorSchemeGenerator |
+| 渐变色生成器 | `/gradient-gen` | `tools/tool-gradient-gen` → GradientGen |
+| 随机名字生成器 | `/name-generator` | `tools/tool-name-generator` → NameGenerator |
+| 抽签工具 | `/lottery` | `tools/tool-lottery` → Lottery |
 
 ### 研发工具
 
@@ -82,6 +86,8 @@
 | GitHub 用户分析 | `/github-user` | `tools/tool-github-user` → GithubUser |
 | 代理速度测试 | `/proxy-speed-test` | `tools/tool-proxy-speed-test` → ProxySpeedTest |
 | AI Token 费用计算器 | `/ai-token-cost` | `tools/tool-ai-token-cost` → AITokenCost |
+| 正则表达式测试器（增强版） | `/regex-tester-pro` | `tools/tool-regex-tester-pro` → RegexTesterPro |
+| SQL 格式化工具 | `/sql-formatter` | `tools/tool-sql-formatter` → SqlFormatter |
 
 ### 查询工具
 
@@ -220,6 +226,8 @@
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
 | 番茄钟 | `/pomodoro` | `tools/tool-pomodoro` → Pomodoro |
+| 番茄钟（专业版） | `/pomodoro-pro` | `tools/tool-pomodoro-pro` → PomodoroPro |
+| 番茄钟（极简计时器） | `/pomodoro-timer` | `tools/tool-pomodoro-timer` → PomodoroTimer |
 | 习惯打卡 | `/habit-tracker` | `tools/tool-habit-tracker` → HabitTracker |
 | OKR 规划器 | `/okr-planner` | `tools/tool-okr-planner` → OkrPlanner |
 | 记账工具 | `/expense-tracker` | `tools/tool-expense-tracker` → ExpenseTracker |
@@ -239,6 +247,7 @@
 | 保质期提醒 | `/expiry-reminder` | `tools/tool-expiry-reminder` → ExpiryReminder |
 | 家庭任务分配工具 | `/family-tasks` | `tools/tool-family-tasks` → FamilyTasks |
 | 时间日志分析 | `/time-logger` | `tools/tool-time-logger` → TimeLogger |
+| 快速笔记 | `/quick-notes` | `tools/tool-quick-notes` → QuickNotes |
 
 ### 旅游工具
 
@@ -299,10 +308,13 @@
 | 学习路径规划 | `/learning-path` | `tools/tool-learning-path` → LearningPath |
 | 问答 + 深挖 | `/deep-dive-qa` | `tools/tool-deep-dive-qa` → DeepDiveQa |
 | 发音评估工具 | `/pronunciation-eval` | `tools/tool-pronunciation-eval` → PronunciationEval |
+| 句子改写工具 | `/sentence-rewriter` | `tools/tool-sentence-rewriter` → SentenceRewriter |
 
 ---
 
 ## 三、待开发 / 调研工具
+
+> **🛑 给 AI / 协作者的硬规则**：在推荐"该开发什么工具"之前，**必须先读「二、已开发」全表 + `apps/web/src/App.tsx` 路由**确认目标工具是否已经存在。本章后半部分（"网络与 DNS / 生活 / 旅游 / 学习 工具集"等小节）是**分类对照表**，列出的条目大多已通过 suite 聚合包（如 `tool-domain-suite`、`tool-ip-ops-suite`、`tool-subnet-suite`、`tool-security-suite`、`tool-ipam-suite`）实现。**只看这些表会得到错误结论。**
 
 **新增规划时**：在本节按分类添加一行，填写「工具名称、分类、路由（建议）、状态、优先级、备注」。  
 **上线后**：把该行移到「二、已开发」对应分类表，并补上「代码位置」和路由。
@@ -477,7 +489,7 @@
 
 ### 后续计划：网络与 DNS 工具集
 
-**上述工具已完成立项，且已有相当一部分上线。** 分类 `network`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**⚠️ 本节是分类对照表，不是待开发清单。** 表中绝大多数工具均已通过 `tool-domain-suite` / `tool-ip-ops-suite` / `tool-subnet-suite` / `tool-security-suite` / `tool-ipam-suite` 等聚合包落地。**判断"是否已实现"请直接以「二、已开发」与 `apps/web/src/App.tsx` 路由为准**，不要从本节读出"待开发"结论。
 
 #### 一、DNS 查询工具（10）
 
@@ -642,7 +654,7 @@
 
 ### 后续计划：生活工具集
 
-**已完成立项，且已有部分上线。** 分类 `life`（部分归入 `utility` / `dev`），实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**⚠️ 本节是分类对照表，不是待开发清单。** 实际开发状态请以「二、已开发」为准。
 
 #### 一、效率 & 习惯（7）
 
@@ -700,7 +712,7 @@
 
 ### 后续计划：旅游工具集
 
-**已完成立项，且已有部分上线。** 分类 `travel`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**⚠️ 本节是分类对照表，不是待开发清单。** 实际开发状态请以「二、已开发」为准。
 
 #### 一、行程规划（5）
 
@@ -764,7 +776,7 @@
 
 ### 后续计划：学习工具集
 
-**已完成立项，且已有部分上线。** 分类 `learning`，实际开发状态以上方「二、已开发」与「三、当前待办」为准。下表保留作分类对照。
+**⚠️ 本节是分类对照表，不是待开发清单。** 实际开发状态请以「二、已开发」为准。
 
 #### 一、学习效率（4）
 

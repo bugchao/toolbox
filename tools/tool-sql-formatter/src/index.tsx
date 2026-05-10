@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 
 const SQLFormatter: React.FC = () => {
@@ -153,6 +152,3 @@ const SQLFormatter: React.FC = () => {
 };
 
 export default SQLFormatter;
-=======
-export { SqlFormatter as default } from './SqlFormatter';
->>>>>>> origin/feat/batch-tools-27

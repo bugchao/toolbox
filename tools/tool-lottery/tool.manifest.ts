@@ -1,10 +1,14 @@
 import { defineToolManifest } from '@toolbox/tool-registry'
+import { Ticket } from 'lucide-react'
 
 const toolLotteryManifest = defineToolManifest({
   id: 'tool-lottery',
   path: '/lottery',
   namespace: 'toolLottery',
   mode: 'client',
+  categoryKey: 'utils',
+  icon: Ticket,
+  keywords: ['lottery', 'draw', 'random', 'raffle', '抽签', '抽奖', '随机'],
   meta: {
     zh: {
       title: '抽签工具',
