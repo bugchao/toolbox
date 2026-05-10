@@ -1,1 +1,1 @@
-export { default } from './ProxySpeedTester'
+export { ProxySpeedTest as default } from './ProxySpeedTest';
