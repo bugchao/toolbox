@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 
 interface Habit {
@@ -128,3 +129,6 @@ const HabitTracker: React.FC = () => {
 };
 
 export default HabitTracker;
+=======
+export { HabitTracker as default } from './HabitTracker';
+>>>>>>> origin/feat/batch-tools-27

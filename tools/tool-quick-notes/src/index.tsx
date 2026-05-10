@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 
 interface Note {
@@ -135,3 +136,6 @@ const QuickNotes: React.FC = () => {
 };
 
 export default QuickNotes;
+=======
+export { QuickNotes as default } from './QuickNotes';
+>>>>>>> origin/feat/batch-tools-27

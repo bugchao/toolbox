@@ -1,31 +1,22 @@
 {
-  "name": "@toolbox/tool-habit-tracker",
+  "name": "@toolbox/tool-api-mock",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "private": true,
-  "main": "src/index.tsx",
-=======
-  "description": "习惯追踪器 - 帮助养成好习惯",
+  "description": "API 响应模拟器 - Mock API 响应数据",
   "main": "src/index.tsx",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
->>>>>>> origin/feat/batch-tools-27
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-<<<<<<< HEAD
-    "@types/react-dom": "^18.2.0"
-=======
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.0",
     "vite": "^4.3.0"
->>>>>>> origin/feat/batch-tools-27
   }
 }
