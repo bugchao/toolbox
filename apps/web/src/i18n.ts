@@ -137,8 +137,6 @@ import toolIpamChangelogEn from '@toolbox/tool-ipam-changelog/locales/en-US.json
 import toolIpamScanZh from '@toolbox/tool-ipam-scan/locales/zh-CN.json'
 import toolPomodoroZh from '@toolbox/tool-pomodoro/locales/zh-CN.json'
 import toolPomodoroEn from '@toolbox/tool-pomodoro/locales/en-US.json'
-import toolHabitTrackerZh from '@toolbox/tool-habit-tracker/locales/zh-CN.json'
-import toolHabitTrackerEn from '@toolbox/tool-habit-tracker/locales/en-US.json'
 import toolSalaryCalcZh from '@toolbox/tool-salary-calc/locales/zh-CN.json'
 import toolSalaryCalcEn from '@toolbox/tool-salary-calc/locales/en-US.json'
 import toolCurrencyConverterZh from '@toolbox/tool-currency-converter/locales/zh-CN.json'
@@ -370,7 +368,6 @@ export const resources = {
     toolIpamChangelog: toolIpamChangelogZh as Record<string, string>,
     toolIpamScan: toolIpamScanZh as Record<string, string>,
     toolPomodoro: toolPomodoroZh as Record<string, string>,
-    toolHabitTracker: toolHabitTrackerZh as Record<string, string>,
     toolSalaryCalc: toolSalaryCalcZh as Record<string, string>,
     toolCurrencyConverter: toolCurrencyConverterZh as Record<string, string>,
     toolJwtDecoder: toolJwtDecoderZh as Record<string, string>,
@@ -523,7 +520,6 @@ export const resources = {
     toolIpamChangelog: toolIpamChangelogEn as Record<string, string>,
     toolIpamScan: toolIpamScanEn as Record<string, string>,
     toolPomodoro: toolPomodoroEn as Record<string, string>,
-    toolHabitTracker: toolHabitTrackerEn as Record<string, string>,
     toolSalaryCalc: toolSalaryCalcEn as Record<string, string>,
     toolCurrencyConverter: toolCurrencyConverterEn as Record<string, string>,
     toolJwtDecoder: toolJwtDecoderEn as Record<string, string>,

@@ -80,7 +80,6 @@ const FitnessPlanner = lazy(() => import('@toolbox/tool-fitness-planner'))
 const MeetingScheduler = lazy(() => import('@toolbox/tool-meeting-scheduler'))
 const ColorSystem = lazy(() => import('@toolbox/tool-color-system'))
 const GraphqlBuilder = lazy(() => import('@toolbox/tool-graphql-builder'))
-const HabitTracker = lazy(() => import('@toolbox/tool-habit-tracker'))
 
 function RouteLoading() {
   const { t } = useTranslation('common')
@@ -439,7 +438,6 @@ function App() {
           <Route path="/ipam-changelog" element={<IpamChangelog />} />
           <Route path="/ipam-scan" element={<IpamScan />} />
           <Route path="/pomodoro" element={<Pomodoro />} />
-          <Route path="/habit-tracker" element={<HabitTracker />} />
           <Route path="/expense-tracker" element={<ExpenseTracker />} />
           <Route path="/subscription-manager" element={<SubscriptionManager />} />
           <Route path="/curl-to-fetch" element={<CurlToFetch />} />
