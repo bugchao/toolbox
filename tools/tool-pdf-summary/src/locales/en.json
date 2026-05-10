@@ -1,0 +1,48 @@
+{
+  "title": "PDF Summary",
+  "description": "Extract text from PDF and generate concise key-point summary plus keyword list (fully client-side, no upload)",
+  "upload": {
+    "drop": "Drop a PDF here, or click to select",
+    "limit": "Up to 50MB, single file, fully local parsing",
+    "select": "Choose file",
+    "replace": "Replace file",
+    "clear": "Clear"
+  },
+  "fields": {
+    "length": "Summary length",
+    "lengthShort": "Short (~2 sentences)",
+    "lengthMedium": "Medium (~4 sentences)",
+    "lengthLong": "Long (~8 sentences)"
+  },
+  "actions": {
+    "summarize": "Generate summary",
+    "extracting": "Extracting PDF text…",
+    "summarizing": "Summarizing…",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "result": {
+    "summary": "Summary",
+    "keywords": "Top keywords",
+    "stats": "Stats",
+    "pages": "{{count}} pages",
+    "chars": "{{count}} chars",
+    "compression": "{{rate}}% compression",
+    "readingTime": "~{{min}} min read",
+    "empty": "Upload a PDF and click Generate"
+  },
+  "errors": {
+    "notPdf": "Please select a PDF file",
+    "tooLarge": "File exceeds 50MB",
+    "parseFailed": "PDF parsing failed: {{message}}",
+    "emptyText": "No readable text extracted (PDF may be scan-based)"
+  },
+  "tips": {
+    "title": "Tips",
+    "items": [
+      "Fully client-side — your file never leaves your browser",
+      "Scanned PDFs have no text layer; OCR them first",
+      "Summary uses keyword frequency + sentence position heuristics; no external AI calls"
+    ]
+  }
+}

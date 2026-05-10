@@ -311,6 +311,7 @@
 | 问答 + 深挖 | `/deep-dive-qa` | `tools/tool-deep-dive-qa` → DeepDiveQa |
 | 发音评估工具 | `/pronunciation-eval` | `tools/tool-pronunciation-eval` → PronunciationEval |
 | 句子改写工具 | `/sentence-rewriter` | `tools/tool-sentence-rewriter` → SentenceRewriter |
+| PDF 总结工具 | `/pdf-summary` | `tools/tool-pdf-summary` → PdfSummary |
 
 ---
 
