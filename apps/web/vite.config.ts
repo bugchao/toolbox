@@ -86,6 +86,9 @@ console.log(`[vite] Auto-scanned ${Object.keys(toolAliases)} tool aliases`)
 // https://vitejs.dev/config/
 export default defineConfig({
   base,
+  server: {
+    port: 5177,
+  },
   plugins: [
     react(),
     toolManifestPlugin(),
