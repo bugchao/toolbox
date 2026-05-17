@@ -1,0 +1,21 @@
+{
+  "title": "Dice",
+  "description": "Classic 1–6 pip dice, choose 1–12 dice, with a tumble roll animation and crypto-secure RNG",
+  "diceCount": "Dice",
+  "decrement": "Remove one die",
+  "increment": "Add one die",
+  "rangeHint": "(1–{{max}})",
+  "roll": "Roll",
+  "rolling": "Rolling…",
+  "sumLabel": "Sum",
+  "faceLabel": "{{value}} pips",
+  "hiddenAria": "Hidden",
+  "hide": "Hide",
+  "reveal": "Reveal",
+  "historyLabel": "History",
+  "clearHistory": "Clear",
+  "statRolls": "Rolls",
+  "statMin": "Min",
+  "statMax": "Max",
+  "statAvg": "Avg"
+}

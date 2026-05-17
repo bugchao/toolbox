@@ -1,0 +1,21 @@
+{
+  "title": "骰子",
+  "description": "经典 1-6 点骰子，可选 1~12 颗，带 tumble 滚动动画，crypto 安全随机",
+  "diceCount": "骰子数",
+  "decrement": "减少一颗",
+  "increment": "增加一颗",
+  "rangeHint": "(1~{{max}})",
+  "roll": "投掷",
+  "rolling": "投掷中…",
+  "sumLabel": "合计",
+  "faceLabel": "{{value}} 点",
+  "hiddenAria": "已隐藏",
+  "hide": "隐藏",
+  "reveal": "显示",
+  "historyLabel": "历史",
+  "clearHistory": "清空",
+  "statRolls": "次数",
+  "statMin": "最小",
+  "statMax": "最大",
+  "statAvg": "平均"
+}
