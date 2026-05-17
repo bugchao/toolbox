@@ -9,7 +9,7 @@ import {
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
   Radio, Shield, Database, Network, ScrollText,
-  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins
+  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins, Gamepad2
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
@@ -51,6 +51,7 @@ const CATEGORIES = [
   { id: 'ipam', nameKey: 'category_ipam', icon: Database },
   { id: 'security', nameKey: 'category_security', icon: Shield },
   { id: 'life', nameKey: 'category_life', icon: HeartIcon },
+  { id: 'social_game', nameKey: 'category_social_game', icon: Gamepad2 },
   { id: 'travel', nameKey: 'category_travel', icon: Plane },
   { id: 'learn', nameKey: 'category_learn', icon: BookOpen },
   { id: 'news', nameKey: 'category_news', icon: Newspaper },

@@ -6,7 +6,7 @@ const toolDiceRollerManifest = defineToolManifest({
   path: '/dice-roller',
   namespace: 'toolDiceRoller',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'social_game',
   icon: Dices,
   keywords: ['dice', 'roll', 'random', '骰子', '掷骰', '随机', '桌游', '点数'],
   meta: {

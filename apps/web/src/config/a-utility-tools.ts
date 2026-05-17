@@ -5,8 +5,7 @@ import type { ToolEntry } from './tools'
 import {
   Image, Eraser, PenTool, Crop, RotateCw, Sparkles, Grid3x3,
   FileCode, Heart, Palette, Laugh, Waves, File, FileSpreadsheet,
-  Scissors, FileBadge, Pipette, NotebookPen, QrCode, ScanLine, Wand2,
-  Dices,
+  Scissors, FileBadge, Pipette, NotebookPen, QrCode, ScanLine, Wand2
 } from 'lucide-react'
 
 export const UTILITY_TOOLS: ToolEntry[] = [
@@ -37,7 +36,6 @@ export const UTILITY_TOOLS: ToolEntry[] = [
   { path: '/color-generator', nameKey: 'tools.color_generator', icon: Pipette, categoryKey: 'utils', keywords: ['配色'] },
   { path: '/meme-generator', nameKey: 'tools.meme_generator', icon: Laugh, categoryKey: 'utils', keywords: ['表情包'] },
   { path: '/copywriting-generator', nameKey: 'tools.copywriting_generator', icon: NotebookPen, categoryKey: 'utils', keywords: ['文案'] },
-  { path: '/dice-roller', nameKey: 'tools.dice_roller', icon: Dices, categoryKey: 'utils', keywords: ['骰子', '随机', 'dice', 'd20', 'rpg', '跑团'] },
 
   // 二维码工具（3 个）
   { path: '/qrcode/generate', nameKey: 'tools.qrcode_generate', icon: QrCode, categoryKey: 'qrcode', keywords: ['qr', '二维码'] },

@@ -18,6 +18,50 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-17',
+    title: {
+      zh: '骰子上线 + JSON 升级 + 新增「社交游戏」分类',
+      en: 'Dice launched + JSON revamp + new "Social Games" category',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /dice-roller 骰子工具：真 3D cube（CSS perspective + preserve-3d），1-6 经典点骰子（1 与 4 红点），默认 5 颗、可选 1~12 颗；crypto 安全随机；支持隐藏/显示（大话骰盖盅效果）；历史与统计带时间戳且刷新不丢，主按钮 sticky 贴底单手操作。',
+          en: 'New /dice-roller: real 3D CSS cube (perspective + preserve-3d), classic 1–6 pip dice with red 1/4 pips, default 5 dice (1–12 selectable); crypto-secure RNG; hide/reveal toggle (Liar\'s Dice "cup" effect); persisted history with timestamps; sticky bottom roll button for one-handed use.',
+        },
+        paths: ['/dice-roller'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增「社交游戏」分类，归类桌游/聚会/抽签/随机互动类工具；骰子归入该分类，左侧导航插入「生活工具」与「旅行工具」之间。',
+          en: 'New "Social Games" category for tabletop / party / random-interaction tools; Dice moved into it, slotted between Life and Travel in the sidebar.',
+        },
+        paths: ['/dice-roller'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: 'JSON 格式化全面升级：输入区接入 Monaco 编辑器（实时高亮 + 内置 JSON 校验），输出区可在「格式化文本」与「jsoncrack 结构图」间切换；结构图支持四向布局、缩放、适配视图与节点上限保护。绕开 Monaco AMD loader 与 UMD 依赖（human-format 等）的 define 冲突。',
+          en: 'JSON Formatter revamp: input editor powered by Monaco (live highlighting + built-in JSON validation); output toggles between formatted text and a jsoncrack structured graph (4-way layout, zoom, fit-to-view, node-limit guard). Bypasses Monaco\'s AMD loader to avoid `define` collisions with UMD deps like human-format.',
+        },
+        paths: ['/json'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '外壳布局放开宽度上限：原 `<main>` 写死 max-w-6xl（1152px）改为 w-full，宽屏下双栏/可视化类工具不再被钳制；保留 px-4/sm:px-6/lg:px-8 内边距，已自带 max-w-* 的工具不受影响。',
+          en: 'App shell width cap lifted: `<main>` no longer enforces max-w-6xl (1152px), so wide-screen split-pane / visualization tools breathe; horizontal padding preserved, tools with their own max-w-* remain unchanged.',
+        },
+        paths: [],
+        extraLabels: [
+          { zh: '全局布局', en: 'Layout' },
+        ],
+      },
+    ],
+  },
+  {
     date: '2026-05-11',
     title: {
       zh: 'PDF 总结新增 + 12 个工具接入导航',

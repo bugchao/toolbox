@@ -27,6 +27,7 @@ import { UTILITY_TOOLS } from './a-utility-tools'
 import { AI_TOOLS } from './a-ai-tools'
 import { QUERY_TOOLS } from './a-query-tools'
 import { LEARNING_TOOLS } from './a-learning-tools'
+import { SOCIAL_GAME_TOOLS } from './a-social-game-tools'
 
 const _staticTools: ToolEntry[] = [
   { path: '/', nameKey: 'home', icon: Home },
@@ -39,6 +40,7 @@ const _staticTools: ToolEntry[] = [
   ...AI_TOOLS,
   ...QUERY_TOOLS,
   ...LEARNING_TOOLS,
+  ...SOCIAL_GAME_TOOLS,
 ]
 
 const _staticPaths = new Set(_staticTools.map((t) => t.path))
