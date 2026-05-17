@@ -2,8 +2,9 @@
 // 适用：桌游/聚会/抽签/随机互动类工具
 
 import type { ToolEntry } from './tools'
-import { Dices } from 'lucide-react'
+import { Dices, MessageCircleQuestion } from 'lucide-react'
 
 export const SOCIAL_GAME_TOOLS: ToolEntry[] = [
   { path: '/dice-roller', nameKey: 'tools.dice_roller', icon: Dices, categoryKey: 'social_game', keywords: ['骰子', '随机', 'dice', '桌游', '大话骰', '色子'] },
+  { path: '/truth-dare', nameKey: 'tools.truth_dare', icon: MessageCircleQuestion, categoryKey: 'social_game', keywords: ['真心话', '大冒险', '聚会', 'truth', 'dare', 'party', '游戏'] },
 ]

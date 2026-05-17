@@ -41,6 +41,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         paths: ['/dice-roller'],
       },
       {
+        type: 'added',
+        summary: {
+          zh: '新增 /truth-dare 真心话大冒险：48 条内置题（真心话 / 大冒险 × 温和/普通/刺激/限制级 4 档）双语对齐；玩家列表与轮转、自定义题目库、已抽题去重，全部本地存储；中英文按界面语言自动切换。',
+          en: 'New /truth-dare: 48 built-in prompts (Truth / Dare × 4 difficulty tiers, mild → wild) in both languages; player rotation, custom prompt library, used-prompt de-duplication — all client-side; prompts auto-switch with UI language.',
+        },
+        paths: ['/truth-dare'],
+      },
+      {
         type: 'updated',
         summary: {
           zh: 'JSON 格式化全面升级：输入区接入 Monaco 编辑器（实时高亮 + 内置 JSON 校验），输出区可在「格式化文本」与「jsoncrack 结构图」间切换；结构图支持四向布局、缩放、适配视图与节点上限保护。绕开 Monaco AMD loader 与 UMD 依赖（human-format 等）的 define 冲突。',

@@ -1,0 +1,38 @@
+{
+  "title": "Truth or Dare",
+  "description": "Party-ready Truth or Dare: random prompts across 4 difficulty tiers, player rotation, custom prompts — all client-side",
+  "typeLabel": "Type",
+  "difficultyLabel": "Difficulty",
+  "type": {
+    "truth": "Truth",
+    "dare": "Dare"
+  },
+  "difficulty": {
+    "mild": "Mild",
+    "normal": "Normal",
+    "spicy": "Spicy",
+    "wild": "Wild"
+  },
+  "drawTruth": "Draw Truth",
+  "drawDare": "Draw Dare",
+  "drawRandom": "Random",
+  "drawing": "Drawing…",
+  "passToNext": "Next player",
+  "currentTurn": "Up: {{player}}",
+  "prevPlayer": "Previous player",
+  "nextPlayer": "Next player",
+  "emptyHint": "Tap a button below to draw a prompt",
+  "exhaustedHint": "All prompts at this difficulty are used. Reset or enable more difficulties.",
+  "resetUsed": "Reset used",
+  "poolStatus": "Pool: {{used}} / {{total}} used",
+  "playersLabel": "Players",
+  "playerPlaceholder": "Add a player…",
+  "addPlayer": "Add",
+  "removePlayer": "Remove",
+  "noPlayers": "No players yet (optional — add some to enable rotation)",
+  "customLabel": "Custom prompts",
+  "customPlaceholder": "Add your own prompt…",
+  "addCustom": "Add",
+  "removeCustom": "Delete",
+  "noCustom": "No custom prompts yet"
+}

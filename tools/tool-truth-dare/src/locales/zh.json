@@ -1,0 +1,38 @@
+{
+  "title": "真心话大冒险",
+  "description": "聚会神器：随机抽真心话/大冒险题目，4 档难度题库，支持玩家轮转与自定义题目",
+  "typeLabel": "类型",
+  "difficultyLabel": "难度",
+  "type": {
+    "truth": "真心话",
+    "dare": "大冒险"
+  },
+  "difficulty": {
+    "mild": "温和",
+    "normal": "普通",
+    "spicy": "刺激",
+    "wild": "限制级"
+  },
+  "drawTruth": "抽真心话",
+  "drawDare": "抽大冒险",
+  "drawRandom": "随机抽题",
+  "drawing": "抽题中…",
+  "passToNext": "下一位",
+  "currentTurn": "轮到：{{player}}",
+  "prevPlayer": "上一位",
+  "nextPlayer": "下一位",
+  "emptyHint": "点下方按钮开始抽题",
+  "exhaustedHint": "当前难度下的题目已抽完，可重置或开启更多难度",
+  "resetUsed": "重置已抽",
+  "poolStatus": "题库：{{used}} / {{total}} 已抽",
+  "playersLabel": "玩家",
+  "playerPlaceholder": "添加玩家昵称…",
+  "addPlayer": "添加",
+  "removePlayer": "移除",
+  "noPlayers": "暂无玩家，开始游戏前请添加（可选）",
+  "customLabel": "自定义题目",
+  "customPlaceholder": "添加自己的题目…",
+  "addCustom": "添加",
+  "removeCustom": "删除",
+  "noCustom": "还没有自定义题目"
+}
