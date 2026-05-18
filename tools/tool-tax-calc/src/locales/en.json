@@ -1,0 +1,63 @@
+{
+  "title": "IIT Calculator (China)",
+  "description": "China Individual Income Tax: 12-month cumulative-withholding table, 7-tier comprehensive-income brackets, itemized deductions, and year-end-bonus single vs merged comparison",
+  "disclaimer": "For estimation only — not tax advice. Final tax owed is determined by the tax authority. Uses the 7-tier progressive brackets for comprehensive income (effective 2019) and the single-taxation rule for annual bonus (per Cai Shui [2018] No. 164 and extensions).",
+  "section": {
+    "basic": "Basic info",
+    "itemized": "Itemized deductions",
+    "bonus": "Year-end bonus",
+    "summary": "Annual summary",
+    "monthly": "Monthly cumulative withholding",
+    "brackets": "7-tier reference brackets"
+  },
+  "field": {
+    "monthlyPretax": "Monthly pre-tax salary (¥)",
+    "insurance": "Social insurance + housing fund",
+    "insuranceHint": "Pre-tax deduction for social security & housing fund",
+    "insuranceModeRate": "By rate",
+    "insuranceModeAmount": "By amount",
+    "perMonth": "month",
+    "yearEndBonus": "Year-end bonus (annual lump sum, optional)"
+  },
+  "itemized": {
+    "childEducation": "Child education",
+    "babyCare": "Care for children under 3",
+    "continuingEducation": "Continuing education",
+    "housingLoan": "Housing mortgage interest (first home)",
+    "housingRent": "Housing rent",
+    "cityA": "Tier-1 city",
+    "cityB": "Provincial capital / Tier-2",
+    "cityC": "Other cities",
+    "elderlySupport": "Elderly support",
+    "elderlySole": "Only child",
+    "elderlyShared": "Shared",
+    "perChild": "mo/child",
+    "childCount": "Children"
+  },
+  "bonus": {
+    "singleTax": "Single-taxation: bonus tax",
+    "mergedDelta": "Merged: bonus marginal tax",
+    "betterBy": "✓ saves ¥{{amount}} vs the other",
+    "computingHint": "Enter monthly salary to compare merged option",
+    "hint": "Through 2027 you may continue choosing single-taxation for the annual bonus; merging into comprehensive income applies the 7-tier progressive rate. The optimal choice depends on your overall income."
+  },
+  "summary": {
+    "annualPretax": "Annual pre-tax",
+    "totalDeductions": "Total deductions (basic + insurance + itemized)",
+    "annualTax": "Total annual tax",
+    "takeHome": "Annual take-home (incl. bonus)",
+    "taxableAnnual": "Annual taxable income",
+    "topRate": "Marginal rate applied"
+  },
+  "table": {
+    "month": "Month",
+    "pretax": "Pre-tax",
+    "insurance": "Insurance",
+    "cumulativeTaxable": "Cumulative taxable",
+    "monthlyTax": "This month's tax",
+    "takeHome": "Take-home",
+    "range": "Annual taxable income range",
+    "rate": "Rate",
+    "quickDeduct": "Quick-deduct"
+  }
+}

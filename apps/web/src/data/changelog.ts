@@ -20,10 +20,18 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
     date: '2026-05-18',
     title: {
-      zh: '社交游戏分类扩展 ×3：谁是卧底 / 猜数字 / 狼人杀',
-      en: 'Social Games grow ×3: Undercover, Guess Number, Werewolf',
+      zh: '社交游戏 ×3 + 个税计算器',
+      en: 'Social Games ×3 + China IIT Calculator',
     },
     items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /tax-calc 个税计算器：基于 2019 年起综合所得 7 级超额累进税率，月度累计预扣预缴模型生成 12 个月预扣表；支持五险一金按比例或按金额输入；6 类专项附加扣除（子女教育/婴幼儿照护/继续教育/住房贷款/住房租金按城市等级/赡养老人独生 vs 分摊）实时聚合；年终奖单独 vs 合并计税自动对比并标出更优方案。',
+          en: 'New /tax-calc: China IIT calculator with the post-2019 7-tier progressive comprehensive-income brackets; 12-month cumulative-withholding table; social insurance configurable by rate or amount; six itemized deductions (child education, baby care, continuing ed, housing loan, housing rent by city tier, elderly support — only-child vs shared) auto-aggregated; year-end bonus single vs merged comparison highlights the better option.',
+        },
+        paths: ['/tax-calc'],
+      },
       {
         type: 'added',
         summary: {
