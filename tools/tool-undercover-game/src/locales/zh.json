@@ -1,0 +1,71 @@
+{
+  "title": "谁是卧底",
+  "description": "单设备多人桌游：随机分配身份与相似词对，传机翻牌看身份，描述+投票淘汰，自动判胜负",
+  "loading": "加载中…",
+  "setup": {
+    "title": "游戏设置",
+    "playerCount": "玩家人数",
+    "undercoverCount": "卧底数量",
+    "maxHint": "最多 {{max}}",
+    "includeWhiteboard": "包含白板",
+    "whiteboardHint": "白板没有词，需要靠听描述瞎掰",
+    "playerNames": "玩家昵称（可选，留空将使用「玩家 N」）",
+    "poolStatus": "词库：{{total}} 对",
+    "start": "开始游戏"
+  },
+  "custom": {
+    "title": "自定义词对",
+    "civilianPlaceholder": "平民词（如：苹果）",
+    "undercoverPlaceholder": "卧底词（如：梨）",
+    "add": "添加",
+    "empty": "还没有自定义词对，使用内置题库"
+  },
+  "reveal": {
+    "progress": "{{idx}} / {{total}}",
+    "playerLabel": "请把手机交给：{{name}}",
+    "tap": "点击翻牌看身份",
+    "privateHint": "请确保只有自己能看到",
+    "tapToHide": "再次点击隐藏",
+    "blankWord": "（白板·无词）",
+    "passNext": "下一位",
+    "allDone": "全部完成",
+    "hide": "隐藏"
+  },
+  "stage": {
+    "round": "第 {{round}} 轮",
+    "aliveCount": "{{alive}} / {{total}} 存活"
+  },
+  "stageLabel": {
+    "discuss": "描述阶段",
+    "vote": "投票阶段",
+    "reveal-elim": "亮身份",
+    "ended": "已结束"
+  },
+  "discuss": {
+    "hint": "每位存活玩家依次描述自己的词（不能直接说出原词）",
+    "toVote": "进入投票"
+  },
+  "vote": {
+    "hint": "点击下方玩家卡片淘汰他/她"
+  },
+  "elim": {
+    "title": "{{name}} 出局",
+    "continue": "继续下一轮"
+  },
+  "winner": {
+    "civilian": "平民阵营胜利！",
+    "undercover": "卧底胜利！",
+    "civilianWord": "平民词",
+    "undercoverWord": "卧底词",
+    "again": "再来一局（同玩家）",
+    "exit": "返回设置"
+  },
+  "role": {
+    "civilian": "平民",
+    "undercover": "卧底",
+    "whiteboard": "白板"
+  },
+  "actions": {
+    "abort": "结束本局"
+  }
+}

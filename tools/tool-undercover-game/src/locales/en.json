@@ -1,0 +1,71 @@
+{
+  "title": "Undercover",
+  "description": "Single-device party game: secret roles + similar words, pass-and-flip cards, vote out, auto-detect winner",
+  "loading": "Loading…",
+  "setup": {
+    "title": "Game setup",
+    "playerCount": "Players",
+    "undercoverCount": "Undercover count",
+    "maxHint": "max {{max}}",
+    "includeWhiteboard": "Include Whiteboard",
+    "whiteboardHint": "Whiteboard has no word and must bluff",
+    "playerNames": "Player names (optional — leaves \"Player N\" if blank)",
+    "poolStatus": "Word pool: {{total}} pairs",
+    "start": "Start game"
+  },
+  "custom": {
+    "title": "Custom word pairs",
+    "civilianPlaceholder": "Civilian word (e.g. Apple)",
+    "undercoverPlaceholder": "Undercover word (e.g. Pear)",
+    "add": "Add",
+    "empty": "No custom pairs yet — using built-in library"
+  },
+  "reveal": {
+    "progress": "{{idx}} / {{total}}",
+    "playerLabel": "Hand the phone to: {{name}}",
+    "tap": "Tap to reveal",
+    "privateHint": "Make sure only you can see",
+    "tapToHide": "Tap again to hide",
+    "blankWord": "(Whiteboard — no word)",
+    "passNext": "Next player",
+    "allDone": "All done",
+    "hide": "Hide"
+  },
+  "stage": {
+    "round": "Round {{round}}",
+    "aliveCount": "{{alive}} / {{total}} alive"
+  },
+  "stageLabel": {
+    "discuss": "Discussion",
+    "vote": "Voting",
+    "reveal-elim": "Reveal",
+    "ended": "Ended"
+  },
+  "discuss": {
+    "hint": "Each alive player describes their word in turn (don't say it directly)",
+    "toVote": "Go to vote"
+  },
+  "vote": {
+    "hint": "Tap a player card below to eliminate them"
+  },
+  "elim": {
+    "title": "{{name}} eliminated",
+    "continue": "Continue next round"
+  },
+  "winner": {
+    "civilian": "Civilians win!",
+    "undercover": "Undercover wins!",
+    "civilianWord": "Civilian word",
+    "undercoverWord": "Undercover word",
+    "again": "Play again (same players)",
+    "exit": "Back to setup"
+  },
+  "role": {
+    "civilian": "Civilian",
+    "undercover": "Undercover",
+    "whiteboard": "Whiteboard"
+  },
+  "actions": {
+    "abort": "End this game"
+  }
+}

@@ -18,6 +18,23 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-18',
+    title: {
+      zh: '谁是卧底上线 —— 社交游戏分类扩展',
+      en: 'Undercover launched — Social Games category grows',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /undercover-game 谁是卧底：单设备多人桌游，35 对内置词对 + 自定义词对、卧底数量与白板可选；pass-and-flip 翻牌私密看身份与词；分阶段 setup → 翻牌 → 描述 → 投票 → 亮身份 → 结束；自动判胜负，平民与卧底词同步揭晓；游戏中途状态持久化（刷新可恢复）。',
+          en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
+        },
+        paths: ['/undercover-game'],
+      },
+    ],
+  },
+  {
     date: '2026-05-17',
     title: {
       zh: '骰子上线 + JSON 升级 + 新增「社交游戏」分类',
