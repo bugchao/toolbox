@@ -119,7 +119,7 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | RSA 密钥生成 | `/rsa-keygen` | **已上线** | - | RSA 公私钥生成（落位 `tools/tool-rsa-keygen`） |
-| AES 加密解密 | `/aes-cipher` | 待开发 | P1 | AES 加密解密工具 |
+| AES 加密解密 | `/aes-cipher` | **已上线** | P1 | Web Crypto AES-GCM/CBC/CTR、128/192/256 位、PBKDF2 口令派生（200k 迭代）、随机 IV/Salt、Base64/Hex、GCM AAD |
 | 密码强度检测 | `/password-strength` | **已上线** | - | 密码安全评分（落位 `tools/tool-password-strength`） |
 | HMAC 签名工具 | `/hmac-sign` | 待开发 | P2 | HMAC 签名生成与验证 |
 | 证书解析工具 | `/cert-parser` | 待开发 | P2 | X.509 证书解析 |

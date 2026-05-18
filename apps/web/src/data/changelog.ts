@@ -51,6 +51,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
       {
         type: 'added',
         summary: {
+          zh: '新增 /aes-cipher AES 加解密：Web Crypto API 原生实现 AES-GCM / CBC / CTR 三种模式 × 128/192/256 位密钥；密钥源支持原始字节或 PBKDF2-SHA256 口令派生（默认 200,000 迭代）；随机或手动 IV，GCM 支持 AAD 附加认证数据；Base64/Hex/UTF-8 编码自由切换且字段间自动重新编码；密钥/口令/IV/明文密文均不持久化，刷新即清空。',
+          en: 'New /aes-cipher: native Web Crypto AES-GCM / CBC / CTR × 128/192/256-bit keys; key source can be raw bytes or PBKDF2-SHA256 from a passphrase (default 200,000 iterations); IV is random or manual, GCM supports AAD; Base64 / Hex / UTF-8 encodings switch freely with auto re-encoding between fields; key, passphrase, IV, plaintext and ciphertext are never persisted and wiped on refresh.',
+        },
+        paths: ['/aes-cipher'],
+      },
+      {
+        type: 'added',
+        summary: {
           zh: '新增 /undercover-game 谁是卧底：单设备多人桌游，35 对内置词对 + 自定义词对、卧底数量与白板可选；pass-and-flip 翻牌私密看身份与词；分阶段 setup → 翻牌 → 描述 → 投票 → 亮身份 → 结束；自动判胜负，平民与卧底词同步揭晓；游戏中途状态持久化（刷新可恢复）。',
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },
