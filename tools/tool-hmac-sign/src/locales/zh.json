@@ -1,0 +1,47 @@
+{
+  "title": "HMAC 签名",
+  "description": "Web Crypto 原生 HMAC-SHA1/256/384/512 签名与验证：本地计算、Base64/Hex/Base64URL 输出、常量时间比对",
+  "loading": "加载中…",
+  "disclaimer": "所有签名/验证在本地浏览器完成，密钥与消息不会上传；适合在 API/webhook 调试场景临时验签。",
+  "running": "处理中…",
+  "section": {
+    "config": "算法配置"
+  },
+  "field": {
+    "algorithm": "哈希算法",
+    "outputEncoding": "签名编码",
+    "mode": "模式",
+    "key": "密钥",
+    "keyEncoding": "密钥编码",
+    "message": "消息",
+    "messageEncoding": "消息编码",
+    "expected": "期望签名",
+    "output": "结果"
+  },
+  "action": {
+    "sign": "签名",
+    "verify": "验证"
+  },
+  "key": {
+    "random": "随机密钥",
+    "placeholder": "输入密钥…"
+  },
+  "message": {
+    "placeholder": "输入要签名的消息…"
+  },
+  "verify": {
+    "placeholder": "粘贴待校验的签名（与下方输出编码一致）",
+    "hint": "对比使用常量时间比对，结果只显示 通过/不通过。",
+    "match": "签名匹配 ✓",
+    "mismatch": "签名不匹配 ✗"
+  },
+  "output": {
+    "placeholder": "签名结果将显示在这里"
+  },
+  "copy": "复制",
+  "copied": "已复制",
+  "errors": {
+    "noKey": "请输入密钥",
+    "noExpected": "请粘贴期望签名"
+  }
+}

@@ -121,7 +121,7 @@
 | RSA 密钥生成 | `/rsa-keygen` | **已上线** | - | RSA 公私钥生成（落位 `tools/tool-rsa-keygen`） |
 | AES 加密解密 | `/aes-cipher` | **已上线** | P1 | Web Crypto AES-GCM/CBC/CTR、128/192/256 位、PBKDF2 口令派生（200k 迭代）、随机 IV/Salt、Base64/Hex、GCM AAD |
 | 密码强度检测 | `/password-strength` | **已上线** | - | 密码安全评分（落位 `tools/tool-password-strength`） |
-| HMAC 签名工具 | `/hmac-sign` | 待开发 | P2 | HMAC 签名生成与验证 |
+| HMAC 签名工具 | `/hmac-sign` | **已上线** | P2 | Web Crypto HMAC-SHA1/256/384/512、Base64/Hex/Base64URL、签名/验证双模、常量时间比对 |
 | 证书解析工具 | `/cert-parser` | 待开发 | P2 | X.509 证书解析 |
 
 ### 生活工具（Life）- 15 个

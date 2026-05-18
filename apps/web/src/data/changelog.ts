@@ -59,6 +59,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
       {
         type: 'added',
         summary: {
+          zh: '新增 /hmac-sign HMAC 签名：Web Crypto 原生 HMAC-SHA1/256/384/512；密钥与消息支持 UTF-8/Base64/Hex 编码，输出可选 Hex/Base64/Base64URL；双模式签名 + 验证，验证阶段使用常量时间比对避免 timing 侧信道；适合 API / Webhook 调试。',
+          en: 'New /hmac-sign: native Web Crypto HMAC-SHA1/256/384/512; key & message accept UTF-8/Base64/Hex encodings, output as Hex/Base64/Base64URL; dual sign + verify modes with constant-time comparison to avoid timing side-channels — ideal for API / webhook debugging.',
+        },
+        paths: ['/hmac-sign'],
+      },
+      {
+        type: 'added',
+        summary: {
           zh: '新增 /undercover-game 谁是卧底：单设备多人桌游，35 对内置词对 + 自定义词对、卧底数量与白板可选；pass-and-flip 翻牌私密看身份与词；分阶段 setup → 翻牌 → 描述 → 投票 → 亮身份 → 结束；自动判胜负，平民与卧底词同步揭晓；游戏中途状态持久化（刷新可恢复）。',
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },
