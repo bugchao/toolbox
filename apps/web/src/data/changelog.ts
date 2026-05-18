@@ -43,6 +43,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
       {
         type: 'added',
         summary: {
+          zh: '新增 /business-card 名片生成器：3 套模板（极简边线 / 侧栏色块 / 渐变现代）+ 调色板 + 8 个预设色；可选 vCard 二维码（扫码一键存通讯录）或站点 URL；标准 90×54 mm，html2canvas 4× 高清导出 PNG / jspdf 导出名片实际尺寸 PDF；状态本地持久化，下次进来字段都还在。',
+          en: 'New /business-card: 3 templates (minimal edge / side stripe / gradient modern) with a color picker and 8 presets; optional QR encodes a vCard (scan-to-save contact) or website URL; standard 90×54 mm card, html2canvas at 4× for print-quality PNG, jspdf exports an actual-size PDF; state persists locally so fields are kept across visits.',
+        },
+        paths: ['/business-card'],
+      },
+      {
+        type: 'added',
+        summary: {
           zh: '新增 /undercover-game 谁是卧底：单设备多人桌游，35 对内置词对 + 自定义词对、卧底数量与白板可选；pass-and-flip 翻牌私密看身份与词；分阶段 setup → 翻牌 → 描述 → 投票 → 亮身份 → 结束；自动判胜负，平民与卧底词同步揭晓；游戏中途状态持久化（刷新可恢复）。',
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },

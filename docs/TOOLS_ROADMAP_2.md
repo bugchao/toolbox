@@ -77,7 +77,7 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | Logo 生成器 | `/logo-generator` | **已上线** | - | AI 生成 Logo（落位 `tools/tool-logo-generator`） |
-| 名片生成器 | `/business-card` | 待开发 | P1 | 在线名片设计 |
+| 名片生成器 | `/business-card` | **已上线** | P1 | 3 套模板（极简/侧栏色块/渐变现代）、调色板、自动 vCard 二维码、html2canvas 4× 高清导出 PNG/PDF |
 | 海报生成器 | `/poster-maker` | 待开发 | P2 | 快速生成海报 |
 | 签名设计 | `/signature-design` | 待开发 | P2 | 艺术签名生成 |
 | 印章生成器 | `/seal-generator` | 待开发 | P2 | 电子印章生成 |
