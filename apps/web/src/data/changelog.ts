@@ -35,6 +35,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
       {
         type: 'added',
         summary: {
+          zh: '新增 /data-masking 数据脱敏：9 类内置规则（手机/身份证/邮箱/银行卡/IPv4/IPv6/MAC/车牌/JWT）一键开关，命中数实时显示在徽章上；支持自定义正则 + 替换模板（含 $1/$2 捕获组），无效正则即时报错；贪心算法去重叠匹配；左右双栏对照 + 复制/下载/"以脱敏结果替换原文"。全程本地处理。',
+          en: 'New /data-masking: 9 built-in rules (mobile / ID / email / bank-card / IPv4 / IPv6 / MAC / plate / JWT) toggleable with live hit-count badges; custom regex + replacement template ($1/$2 supported, invalid patterns flagged inline); greedy de-overlap algorithm; side-by-side input/output with copy, download and "use masked output as input". All client-side.',
+        },
+        paths: ['/data-masking'],
+      },
+      {
+        type: 'added',
+        summary: {
           zh: '新增 /undercover-game 谁是卧底：单设备多人桌游，35 对内置词对 + 自定义词对、卧底数量与白板可选；pass-and-flip 翻牌私密看身份与词；分阶段 setup → 翻牌 → 描述 → 投票 → 亮身份 → 结束；自动判胜负，平民与卧底词同步揭晓；游戏中途状态持久化（刷新可恢复）。',
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },

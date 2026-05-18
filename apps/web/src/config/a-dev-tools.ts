@@ -6,12 +6,13 @@ import {
   Code, FileJson, Braces, CalendarClock, ExternalLink, Shuffle, Calendar,
   LockKeyhole, Binary, Terminal, Dices, SplitSquareHorizontal, RefreshCw,
   FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GitGraph,
-  Send,   Calculator, AlignLeft, Lock, Hash
+  Send,   Calculator, AlignLeft, Lock, Hash, ShieldOff,
 } from 'lucide-react'
 
 export const DEV_TOOLS: ToolEntry[] = [
   // 基础开发工具（12 个）
   { path: '/json', nameKey: 'tools.json', icon: FileJson, categoryKey: 'dev', keywords: ['json'], i18nNamespace: 'toolJson' },
+  { path: '/data-masking', nameKey: 'tools.data_masking', icon: ShieldOff, categoryKey: 'dev', keywords: ['数据脱敏', '隐私', '日志', 'pii', 'redact', '手机号', '身份证'] },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: Code, categoryKey: 'dev', keywords: ['base64'] },
   { path: '/timestamp', nameKey: 'tools.timestamp', icon: CalendarClock, categoryKey: 'dev', keywords: ['时间戳'] },
