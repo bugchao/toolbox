@@ -1,0 +1,50 @@
+{
+  "title": "猜数字",
+  "description": "电脑出数字让你猜，或自己设数字让朋友猜；带二分提示与历史最佳成绩",
+  "loading": "加载中…",
+  "modeLabel": "模式",
+  "mode": {
+    "cpu": "电脑出题",
+    "duel": "对手出题"
+  },
+  "rangeLabel": "范围",
+  "minAttemptsHint": "理论最少 {{count}} 次（二分）",
+  "best": {
+    "label": "历史最佳：{{attempts}} 次 / {{time}} 秒",
+    "clear": "清除最佳"
+  },
+  "duel": {
+    "setterTitle": "出题人设数字（其他人请回避）",
+    "setterHint": "请设一个 {{min}} ~ {{max}} 的整数",
+    "confirm": "确定",
+    "show": "显示",
+    "hide": "隐藏"
+  },
+  "cpu": {
+    "hint": "电脑会在 {{min}} ~ {{max}} 之间随机选一个整数",
+    "start": "开始游戏"
+  },
+  "game": {
+    "attempts": "已猜",
+    "elapsed": "用时",
+    "bounds": "当前区间 [{{lo}}, {{hi}}]",
+    "placeholder": "{{lo}} ~ {{hi}}",
+    "submit": "猜",
+    "binaryHint": "二分提示：试试 {{mid}}",
+    "win": "🎉 答对了！数字就是 {{secret}}，用了 {{attempts}} 次 / {{time}} 秒",
+    "optimal": "最优解 ≤ {{min}} 次，你打到了理论极限！",
+    "again": "再来一局",
+    "reset": "重新开始",
+    "giveUp": "投降看答案",
+    "giveUpReveal": "答案"
+  },
+  "feedback": {
+    "higher": "再大一点",
+    "lower": "再小一点",
+    "hit": "命中！"
+  },
+  "errors": {
+    "notInteger": "请输入整数",
+    "outOfRange": "请输入 {{min}} ~ {{max}} 范围内的整数"
+  }
+}

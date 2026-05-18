@@ -1,0 +1,75 @@
+{
+  "title": "Werewolf",
+  "description": "Single-device role dealer: configure classic roles, pass-and-flip secret reveal — for in-person play",
+  "loading": "Loading…",
+  "team": {
+    "good": "Good",
+    "evil": "Wolf team",
+    "neutral": "Neutral"
+  },
+  "roles": {
+    "villager": {
+      "name": "Villager",
+      "desc": "Good team, no skill. Vote out wolves during the day."
+    },
+    "werewolf": {
+      "name": "Werewolf",
+      "desc": "Pick a kill each night; disguise as a villager by day and vote out the good team."
+    },
+    "wolfKing": {
+      "name": "Wolf King",
+      "desc": "An upgraded werewolf. When voted out or killed, may shoot another player."
+    },
+    "seer": {
+      "name": "Seer",
+      "desc": "Each night, check one player to see whether they are good or wolf."
+    },
+    "witch": {
+      "name": "Witch",
+      "desc": "Has one save potion and one poison potion. Each may be used once per game; killed by poison, you cannot use end-of-game skills."
+    },
+    "hunter": {
+      "name": "Hunter",
+      "desc": "When voted out or killed by wolves, may shoot another player (disabled if poisoned)."
+    },
+    "guard": {
+      "name": "Guard",
+      "desc": "Protects one player each night from being killed; cannot guard the same person two nights in a row."
+    },
+    "idiot": {
+      "name": "Idiot",
+      "desc": "Flips their card when voted out — immune to that elimination — and loses voting rights afterwards but can still speak."
+    },
+    "cupid": {
+      "name": "Cupid",
+      "desc": "On the first night, pairs two players as lovers; if one dies the other dies too. Forms a third party if lovers are on opposing teams."
+    }
+  },
+  "setup": {
+    "title": "Role composition",
+    "totalLabel": "{{total}} players ({{wolves}} wolves)",
+    "decrement": "Decrement",
+    "increment": "Increment",
+    "resetDefault": "Reset to default",
+    "namesLabel": "Player names (optional — defaults to P1/P2…)",
+    "namesHint": "Phone will be passed in this order during dealing",
+    "dealStart": "Deal cards"
+  },
+  "warnings": {
+    "tooFew": "At least 4 players are required",
+    "noWolf": "Need at least 1 werewolf card",
+    "wolfTooMany": "Wolves cannot equal or exceed the good team"
+  },
+  "reveal": {
+    "progress": "{{idx}} / {{total}}",
+    "playerLabel": "Hand the phone to: {{name}}",
+    "tap": "Tap to reveal",
+    "privateHint": "Make sure only you can see",
+    "tapToHide": "Tap again to hide",
+    "passNext": "Next player",
+    "allDone": "All done"
+  },
+  "actions": {
+    "abort": "Abort deal"
+  }
+}

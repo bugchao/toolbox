@@ -1,0 +1,50 @@
+{
+  "title": "Guess Number",
+  "description": "Let the computer pick a number, or set one yourself for a friend to guess; with binary-style hint and best-score history",
+  "loading": "Loading…",
+  "modeLabel": "Mode",
+  "mode": {
+    "cpu": "Computer",
+    "duel": "Friend sets"
+  },
+  "rangeLabel": "Range",
+  "minAttemptsHint": "Theoretical min: {{count}} guesses (binary)",
+  "best": {
+    "label": "Best: {{attempts}} guesses / {{time}}s",
+    "clear": "Clear best"
+  },
+  "duel": {
+    "setterTitle": "Setter picks a number (others look away)",
+    "setterHint": "Pick an integer between {{min}} and {{max}}",
+    "confirm": "Confirm",
+    "show": "Show",
+    "hide": "Hide"
+  },
+  "cpu": {
+    "hint": "The computer will pick an integer in {{min}} – {{max}}",
+    "start": "Start"
+  },
+  "game": {
+    "attempts": "Tries",
+    "elapsed": "Elapsed",
+    "bounds": "Current bounds [{{lo}}, {{hi}}]",
+    "placeholder": "{{lo}} – {{hi}}",
+    "submit": "Guess",
+    "binaryHint": "Binary tip: try {{mid}}",
+    "win": "🎉 Got it! The number was {{secret}} in {{attempts}} tries / {{time}}s",
+    "optimal": "Optimal solution ≤ {{min}} — you matched the theoretical bound!",
+    "again": "Play again",
+    "reset": "Reset",
+    "giveUp": "Give up",
+    "giveUpReveal": "Answer"
+  },
+  "feedback": {
+    "higher": "Higher",
+    "lower": "Lower",
+    "hit": "Hit!"
+  },
+  "errors": {
+    "notInteger": "Enter an integer",
+    "outOfRange": "Enter an integer in {{min}} – {{max}}"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "title": "狼人杀",
+  "description": "单设备发牌器：自由配比经典角色，pass-and-flip 私密看身份；适合线下主持",
+  "loading": "加载中…",
+  "team": {
+    "good": "好人",
+    "evil": "狼人阵营",
+    "neutral": "中立"
+  },
+  "roles": {
+    "villager": {
+      "name": "村民",
+      "desc": "好人阵营，无技能。白天发言推理找出狼人。"
+    },
+    "werewolf": {
+      "name": "狼人",
+      "desc": "夜晚一起选择刀人；白天伪装好人，争取投票淘汰好人。"
+    },
+    "wolfKing": {
+      "name": "狼王",
+      "desc": "狼人阵营升级版。被投票出局或死亡时可发动技能带走任意玩家。"
+    },
+    "seer": {
+      "name": "预言家",
+      "desc": "每晚可查验一名玩家身份，确认是「好人」还是「狼人」。"
+    },
+    "witch": {
+      "name": "女巫",
+      "desc": "拥有一瓶解药和一瓶毒药。整局各使用一次，毒药当晚死后无法发动技能。"
+    },
+    "hunter": {
+      "name": "猎人",
+      "desc": "被投票出局或被狼人刀杀时可开枪带走任意玩家（被毒杀则失效）。"
+    },
+    "guard": {
+      "name": "守卫",
+      "desc": "每晚守护一名玩家防被刀；不能连续两晚守同一人。"
+    },
+    "idiot": {
+      "name": "白痴",
+      "desc": "被投票出局时翻牌亮身份，免疫此次出局；之后失去投票权，仍可发言。"
+    },
+    "cupid": {
+      "name": "丘比特",
+      "desc": "首夜连接两名玩家为情侣；情侣一死另一同死，可与对立阵营组成第三方。"
+    }
+  },
+  "setup": {
+    "title": "角色配置",
+    "totalLabel": "共 {{total}} 人（狼人 {{wolves}}）",
+    "decrement": "减少",
+    "increment": "增加",
+    "resetDefault": "恢复默认配比",
+    "namesLabel": "玩家昵称（可选，留空使用 P1/P2…）",
+    "namesHint": "发牌时按这个顺序逐人传递手机看身份",
+    "dealStart": "开始发牌"
+  },
+  "warnings": {
+    "tooFew": "至少需要 4 名玩家",
+    "noWolf": "至少需要 1 张狼人牌",
+    "wolfTooMany": "狼人不能多于好人，否则游戏无法进行"
+  },
+  "reveal": {
+    "progress": "{{idx}} / {{total}}",
+    "playerLabel": "请把手机交给：{{name}}",
+    "tap": "点击翻牌看身份",
+    "privateHint": "请确保只有自己能看到",
+    "tapToHide": "再次点击隐藏",
+    "passNext": "下一位",
+    "allDone": "全部完成"
+  },
+  "actions": {
+    "abort": "中断发牌"
+  }
+}

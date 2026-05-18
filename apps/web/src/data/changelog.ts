@@ -20,8 +20,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
     date: '2026-05-18',
     title: {
-      zh: '谁是卧底上线 —— 社交游戏分类扩展',
-      en: 'Undercover launched — Social Games category grows',
+      zh: '社交游戏分类扩展 ×3：谁是卧底 / 猜数字 / 狼人杀',
+      en: 'Social Games grow ×3: Undercover, Guess Number, Werewolf',
     },
     items: [
       {
@@ -31,6 +31,22 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },
         paths: ['/undercover-game'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /guess-number 猜数字：双模式（电脑出题 / 朋友设题），可调范围、二分提示、命中即时统计次数与用时；自动记录每个范围下的历史最佳；达到理论极限（⌈log₂(range)⌉）时给"最优解"褒奖。',
+          en: 'New /guess-number: two modes (computer picks / friend sets), adjustable range, binary-style hint, per-range best-score history; awards an "optimal" badge when you match the theoretical bound ⌈log₂(range)⌉.',
+        },
+        paths: ['/guess-number'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /werewolf 狼人杀：单设备发牌器，9 种经典角色（村民/狼人/狼王/预言家/女巫/猎人/守卫/白痴/丘比特），各带技能说明；自由配比 + 平衡校验（狼人不得多于好人、至少 4 人）；shuffle 后 pass-and-flip 私密分发身份卡，适合线下当面玩主持。',
+          en: 'New /werewolf: single-device role dealer for in-person play. Nine classic roles (Villager / Werewolf / Wolf King / Seer / Witch / Hunter / Guard / Idiot / Cupid) with full skill descriptions; free composition with balance validation; shuffled pass-and-flip reveal so each player sees only their card.',
+        },
+        paths: ['/werewolf'],
       },
     ],
   },
