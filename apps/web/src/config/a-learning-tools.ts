@@ -4,10 +4,11 @@
 import type { ToolEntry } from './tools'
 import {
   GraduationCap, CalendarDays, Crosshair, BookOpen, BookMarked,
-  Brain, BookA, BookCopy, LayoutList, Lightbulb, Baby, Binoculars, Type
+  Brain, BookA, BookCopy, LayoutList, Lightbulb, Baby, Binoculars, Type, Sigma,
 } from 'lucide-react'
 
 export const LEARNING_TOOLS: ToolEntry[] = [
+  { path: '/matrix-calc', nameKey: 'tools.matrix_calc', icon: Sigma, categoryKey: 'learn', keywords: ['矩阵', '线性代数', '矩阵运算', 'matrix', 'linear algebra', '行列式', '转置', '逆矩阵'] },
   // 学习管理（3 个）
   { path: '/study-timer', nameKey: 'tools.study_timer', icon: GraduationCap, categoryKey: 'learn', keywords: ['学习', '计时', '专注', '统计'], i18nNamespace: 'toolStudyTimer' },
   { path: '/study-planner', nameKey: 'tools.study_planner', icon: CalendarDays, categoryKey: 'learn', keywords: ['学习', '计划', 'AI', '复习', '备考'], i18nNamespace: 'toolStudyPlanner' },

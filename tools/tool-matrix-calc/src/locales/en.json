@@ -1,0 +1,44 @@
+{
+  "title": "Matrix Calculator",
+  "description": "Linear-algebra essentials: add/sub/mul, transpose, determinant, inverse, rank, trace; 2x2 to 10x10",
+  "loading": "Loading…",
+  "disclaimer": "All computation runs locally in your browser. Matrix data is never uploaded.",
+  "matrix": {
+    "matrixA": "Matrix A",
+    "matrixB": "Matrix B",
+    "rows": "Rows",
+    "cols": "Cols",
+    "clear": "Clear",
+    "identity": "Identity",
+    "random": "Random",
+    "scalar": "Scalar k"
+  },
+  "op": {
+    "section": {
+      "unary": "Unary (A only)",
+      "binary": "Binary (A and B)",
+      "scalar": "Scalar"
+    },
+    "transpose": "Transpose Aᵀ",
+    "det": "Determinant det(A)",
+    "inverse": "Inverse A⁻¹",
+    "rank": "Rank rank(A)",
+    "trace": "Trace tr(A)",
+    "add": "A + B",
+    "sub": "A - B",
+    "mul": "A × B",
+    "scalarMul": "k × A"
+  },
+  "result": {
+    "title": "Result",
+    "empty": "Pick an operation to begin",
+    "scalarLabel": "= "
+  },
+  "errors": {
+    "notSquare": "{{op}} requires a square matrix",
+    "dimMismatch": "{{op}} dimension mismatch ({{a}} vs {{b}})",
+    "singular": "Matrix is singular; inverse does not exist",
+    "mulMismatch": "A.cols ({{aCols}}) must equal B.rows ({{bRows}})",
+    "invalidNumber": "Invalid number in matrix, please check inputs"
+  }
+}
