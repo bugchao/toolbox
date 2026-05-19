@@ -127,7 +127,9 @@ export function getToolDescription(
     if (translated !== `${tool.i18nNamespace}:description`) return translated
   }
   
-  // 3. 最终回退到 home.toolDesc.*
+  // 3. 最终回退到 home.toolDesc.*；如果连这里都缺，返回空串而不是字面 key（避免首页露出 toolDesc.xxx）
   const descKey = tool.nameKey.replace('tools.', '')
-  return tHome(`toolDesc.${descKey}`)
+  const fullKey = `toolDesc.${descKey}`
+  const out = tHome(fullKey)
+  return out === fullKey || out === descKey ? '' : out
 }
