@@ -119,11 +119,12 @@ export interface CryptParams {
 
 function buildAlgParams(p: CryptParams): AesGcmParams | AesCbcParams | AesCtrParams {
   if (p.mode === 'GCM') {
-    return {
-      name: 'AES-GCM',
-      iv: new Uint8Array(p.iv),
-      additionalData: p.aad ? new Uint8Array(p.aad) : undefined,
-    }
+    // 注意：Chrome 在 additionalData 字段存在但值为 undefined 时会抛
+    // "AeadParams: additionalData: Not a BufferSource"。所以必须条件展开，
+    // 而不是设置一个 undefined 值。
+    const base: AesGcmParams = { name: 'AES-GCM', iv: new Uint8Array(p.iv) }
+    if (p.aad && p.aad.length > 0) base.additionalData = new Uint8Array(p.aad)
+    return base
   }
   if (p.mode === 'CBC') return { name: 'AES-CBC', iv: new Uint8Array(p.iv) }
   return { name: 'AES-CTR', counter: new Uint8Array(p.iv), length: p.ctrLengthBits ?? 64 }
