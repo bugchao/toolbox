@@ -1,0 +1,48 @@
+{
+  "title": "Meta Tag Generator",
+  "description": "Generate SEO + Open Graph + Twitter Card tags in one click, with live preview of Google / Twitter / Facebook share cards",
+  "loading": "Loading…",
+  "section": {
+    "seo": "Basic SEO",
+    "og": "Open Graph (Facebook/LinkedIn)",
+    "twitter": "Twitter / X Card",
+    "preview": "Preview",
+    "output": "HTML Output"
+  },
+  "field": {
+    "title": "Page title",
+    "description": "Description",
+    "keywords": "Keywords (comma separated)",
+    "author": "Author",
+    "canonical": "Canonical URL",
+    "robots": "robots",
+    "viewport": "viewport",
+    "themeColor": "Theme color",
+    "ogTitle": "OG title (blank → page title)",
+    "ogDescription": "OG description (blank → page description)",
+    "ogType": "OG type",
+    "ogUrl": "OG URL (blank → canonical)",
+    "ogImage": "OG image URL",
+    "ogSiteName": "Site name",
+    "ogLocale": "Locale",
+    "twitterCard": "Card type",
+    "twitterSite": "Site @handle",
+    "twitterCreator": "Author @handle"
+  },
+  "toggle": {
+    "og": "Emit Open Graph tags",
+    "twitter": "Emit Twitter Card tags"
+  },
+  "preview": {
+    "google": "Google Search",
+    "twitter": "Twitter / X",
+    "facebook": "Facebook / LinkedIn",
+    "noImage": "(no image)",
+    "domain": "example.com"
+  },
+  "counter": "{{n}} / {{max}}",
+  "copy": "Copy HTML",
+  "copied": "Copied",
+  "download": "Download",
+  "reset": "Reset"
+}

@@ -18,6 +18,39 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-19',
+    title: {
+      zh: '三工具并行交付：矩阵计算器 / 体重记录 / Meta 标签生成器',
+      en: 'Three tools shipped in parallel: Matrix Calculator / Weight Tracker / Meta Tag Generator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /matrix-calc 矩阵计算器：2x2 ~ 10x10 矩阵 A/B 自由编辑；单目运算（转置、行列式、逆矩阵、秩、迹）+ 双目运算（加减乘）+ 标量乘；行列式用 LU 分解 + 部分主元法，逆矩阵用 Gauss-Jordan 增广消元，秩用行阶梯形主元计数；维度不合法自动禁用对应按钮并提示原因；结果区按矩阵/标量/错误三态渲染，浮点近零阈值 1e-10。',
+          en: 'New /matrix-calc: edit two matrices A/B (2x2–10x10); unary ops (transpose, determinant, inverse, rank, trace) + binary ops (add/sub/mul) + scalar multiply; determinant via LU with partial pivoting, inverse via Gauss-Jordan on the augmented matrix, rank by counting pivots in row-echelon form; ops disable themselves with reason tooltips when dims do not match; near-zero threshold 1e-10.',
+        },
+        paths: ['/matrix-calc'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /weight-tracker 体重记录：日期 + 体重 + 备注每日记录（同日覆盖确认）；4 项概览（当前/7 日均值/累计变化/距目标）；SVG 折线图按真实日期间距绘点（不是 index 等距）；动态 BMI 四级分类（偏瘦/正常/超重/肥胖）含颜色徽章；目标进度条同时支持减重与增重；kg/lb 单位切换只换显示不动存储；身高、目标、单位、历史全部本地持久化。',
+          en: 'New /weight-tracker: log date + weight + note daily (same-day overwrite confirm); 4 summary cards (current / 7-day avg / total change / to-goal); SVG trend chart plots by real date spacing (not index); live BMI four-tier classification (underweight / normal / overweight / obese) with colored badge; goal progress bar handles both weight-loss and weight-gain; kg/lb switches display only, storage stays in kg; height, target, unit and history all persisted locally.',
+        },
+        paths: ['/weight-tracker'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /meta-tag-gen Meta 标签生成器：基础 SEO + Open Graph + Twitter Card 三组标签一表填写；实时预览 Google 搜索片段 / Twitter 卡片 / Facebook 卡片三种社交分享样式；title/description 字符计数（≤60/≤160 超出转红）；所有动态字段经 HTML escape，预览不会被注入；OG/Twitter 留空自动 fallback 到基础字段；HTML 输出 monospace textarea + 复制 + 下载。',
+          en: 'New /meta-tag-gen: fill in SEO + Open Graph + Twitter Card tags in one form; live preview as Google search snippet / Twitter card / Facebook card; title/description character counters (≤60/≤160 turn red over limit); every dynamic value passes through HTML escape so the preview cannot be injected; OG / Twitter fields fall back to base fields when blank; HTML output in a monospace textarea with copy and download.',
+        },
+        paths: ['/meta-tag-gen'],
+      },
+    ],
+  },
+  {
     date: '2026-05-18',
     title: {
       zh: '社交游戏 ×3 + 个税计算器',

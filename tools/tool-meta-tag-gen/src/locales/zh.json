@@ -1,0 +1,48 @@
+{
+  "title": "Meta 标签生成器",
+  "description": "一键生成 SEO + Open Graph + Twitter Card 标签，实时预览 Google / Twitter / Facebook 分享卡片",
+  "loading": "加载中…",
+  "section": {
+    "seo": "基础 SEO",
+    "og": "Open Graph (Facebook/LinkedIn)",
+    "twitter": "Twitter / X Card",
+    "preview": "预览",
+    "output": "HTML 输出"
+  },
+  "field": {
+    "title": "页面标题",
+    "description": "描述",
+    "keywords": "关键词（逗号分隔）",
+    "author": "作者",
+    "canonical": "规范 URL",
+    "robots": "robots",
+    "viewport": "viewport",
+    "themeColor": "主题色",
+    "ogTitle": "OG 标题（留空用页面标题）",
+    "ogDescription": "OG 描述（留空用页面描述）",
+    "ogType": "OG 类型",
+    "ogUrl": "OG URL（留空用规范 URL）",
+    "ogImage": "OG 图片 URL",
+    "ogSiteName": "网站名",
+    "ogLocale": "语言区域",
+    "twitterCard": "卡片类型",
+    "twitterSite": "网站 @handle",
+    "twitterCreator": "作者 @handle"
+  },
+  "toggle": {
+    "og": "输出 Open Graph 标签",
+    "twitter": "输出 Twitter Card 标签"
+  },
+  "preview": {
+    "google": "Google 搜索",
+    "twitter": "Twitter / X",
+    "facebook": "Facebook / LinkedIn",
+    "noImage": "（无图）",
+    "domain": "example.com"
+  },
+  "counter": "{{n}} / {{max}}",
+  "copy": "复制 HTML",
+  "copied": "已复制",
+  "download": "下载",
+  "reset": "恢复默认"
+}

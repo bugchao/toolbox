@@ -6,7 +6,7 @@ import {
   Image, Eraser, PenTool, Crop, RotateCw, Sparkles, Grid3x3,
   FileCode, Heart, Palette, Laugh, Waves, File, FileSpreadsheet,
   Scissors, FileBadge, Pipette, NotebookPen, QrCode, ScanLine, Wand2,
-  Contact,
+  Contact, Tags,
 } from 'lucide-react'
 
 export const UTILITY_TOOLS: ToolEntry[] = [
@@ -35,6 +35,7 @@ export const UTILITY_TOOLS: ToolEntry[] = [
   { path: '/short-link', nameKey: 'tools.short_link', icon: Scissors, categoryKey: 'utils', keywords: ['短链接'] },
   { path: '/resume-generator', nameKey: 'tools.resume', icon: FileBadge, categoryKey: 'utils', keywords: ['简历'] },
   { path: '/business-card', nameKey: 'tools.business_card', icon: Contact, categoryKey: 'utils', keywords: ['名片', '名片设计', 'business card', 'vcard', '二维码', '设计'] },
+  { path: '/meta-tag-gen', nameKey: 'tools.meta_tag_gen', icon: Tags, categoryKey: 'utils', keywords: ['seo', 'meta', 'og', 'open graph', 'twitter card', '社交卡片', '搜索优化'] },
   { path: '/color-generator', nameKey: 'tools.color_generator', icon: Pipette, categoryKey: 'utils', keywords: ['配色'] },
   { path: '/meme-generator', nameKey: 'tools.meme_generator', icon: Laugh, categoryKey: 'utils', keywords: ['表情包'] },
   { path: '/copywriting-generator', nameKey: 'tools.copywriting_generator', icon: NotebookPen, categoryKey: 'utils', keywords: ['文案'] },

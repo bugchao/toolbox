@@ -78,6 +78,7 @@
 |----------|----------|------|--------|------|
 | Logo 生成器 | `/logo-generator` | **已上线** | - | AI 生成 Logo（落位 `tools/tool-logo-generator`） |
 | 名片生成器 | `/business-card` | **已上线** | P1 | 3 套模板（极简/侧栏色块/渐变现代）、调色板、自动 vCard 二维码、html2canvas 4× 高清导出 PNG/PDF |
+| Meta 标签生成器 | `/meta-tag-gen` | **已上线** | P1 | SEO + OG + Twitter Card 三套标签，Google/Twitter/Facebook 三种预览卡片，HTML escape + 字符计数 |
 | 海报生成器 | `/poster-maker` | 待开发 | P2 | 快速生成海报 |
 | 签名设计 | `/signature-design` | 待开发 | P2 | 艺术签名生成 |
 | 印章生成器 | `/seal-generator` | 待开发 | P2 | 电子印章生成 |
@@ -130,7 +131,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 体重记录 | `/weight-tracker` | 待开发 | P1 | 体重变化趋势 |
+| 体重记录 | `/weight-tracker` | **已上线** | P1 | 每日记录 + SVG 趋势曲线（真实日期间距）+ 动态 BMI 四级分类 + 目标进度（支持减重/增重）+ kg/lb 切换 |
 | 血压记录 | `/blood-pressure` | 待开发 | P2 | 血压监测记录 |
 | 用药提醒 | `/medication-reminder` | 待开发 | P2 | 用药时间提醒 |
 | 健身计划生成器 | `/workout-planner` | 待开发 | P1 | AI 生成健身计划 |
@@ -246,7 +247,7 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | 方程求解器 | `/equation-solver` | 待开发 | P0 | 一元二次方程求解 |
-| 矩阵计算器 | `/matrix-calc` | 待开发 | P1 | 矩阵运算 |
+| 矩阵计算器 | `/matrix-calc` | **已上线** | P1 | 加减乘转置、行列式（LU 部分主元）、逆矩阵（Gauss-Jordan）、秩、迹；2x2~10x10 |
 | 函数图像绘制 | `/function-plot` | 待开发 | P2 | 函数图像可视化 |
 | 几何图形计算 | `/geometry-calc` | 待开发 | P2 | 面积周长计算 |
 | 进制转换器 | `/base-converter` | **已上线** | - | 2/8/10/16 进制转换（落位 `tools/tool-base-converter`） |
