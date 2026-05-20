@@ -9,7 +9,12 @@
     "emoji": "图标",
     "add": "添加",
     "recurring": "每年重复",
-    "recurringHint": "如生日/纪念日。取消则为一次性事件（过期自动消失）"
+    "recurringHint": "如生日/纪念日。取消则为一次性事件（过期自动消失）",
+    "calendarGregorian": "公历",
+    "calendarLunar": "农历",
+    "dateLabel": "公历日期",
+    "lunarLabel": "农历日期",
+    "lunarRangeHint": "支持 {{min}}–{{max}} 年范围"
   },
   "card": {
     "days": "天",

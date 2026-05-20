@@ -188,6 +188,94 @@ export function toIso(d: Date): string {
   return `${y}-${m}-${dd}`
 }
 
+// ─────────────────────────────────────────────────────────────
+// 农历 ↔ 公历 转换数据（2026–2030 五年范围）
+// 每年记录：lunar new-year 的公历日期、各月天数（29 或 30）、闰月位置
+// 数据通过已知节日 LUT 反推 + 标准农历参考整理，可能与权威发布相差 ±1 日
+// ─────────────────────────────────────────────────────────────
+
+export interface LunarYearData {
+  newYear: string // 'YYYY-MM-DD'：lunar 1-1 对应的公历
+  // 各月长度（29/30）。无闰月时长度 12；有闰月时长度 13，闰月插在 leapMonth 之后
+  monthDays: number[]
+  // 0 = 无闰月；1-12 = 闰几月（闰月排在该月之后）
+  leapMonth: number
+}
+
+export const LUNAR_YEARS: Record<number, LunarYearData> = {
+  2026: { newYear: '2026-02-17', monthDays: [30, 29, 30, 29, 30, 29, 29, 29, 30, 30, 29, 30], leapMonth: 0 },
+  2027: { newYear: '2027-02-06', monthDays: [29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30, 29], leapMonth: 0 },
+  // 2028 是闰年（闰五月，年总 384 天）
+  2028: { newYear: '2028-01-26', monthDays: [30, 29, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30, 29], leapMonth: 5 },
+  2029: { newYear: '2029-02-13', monthDays: [29, 30, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30], leapMonth: 0 },
+  2030: { newYear: '2030-02-03', monthDays: [29, 30, 29, 30, 29, 30, 29, 30, 30, 29, 30, 29], leapMonth: 0 },
+}
+
+export const LUNAR_YEAR_MIN = 2026
+export const LUNAR_YEAR_MAX = 2030
+
+/**
+ * 农历日期 → 公历 Date
+ * @param year   农历年（必须在 LUNAR_YEARS 范围内）
+ * @param month  农历月（1-12，不含闰月本身——闰月作为独立机制处理）
+ * @param day    农历日（1-30）
+ * @returns 对应公历 Date；超出数据范围或日不存在则返回 null
+ */
+export function lunarToGregorian(year: number, month: number, day: number): Date | null {
+  const data = LUNAR_YEARS[year]
+  if (!data) return null
+  if (month < 1 || month > 12) return null
+  if (day < 1 || day > 30) return null
+
+  // 闰年时月数组长 13，闰月夹在 leapMonth 之后；普通月 idx：m≤leapMonth 用 m-1，否则用 m（跳过闰月槽位）
+  let idx: number
+  if (data.leapMonth > 0 && month > data.leapMonth) {
+    idx = month
+  } else {
+    idx = month - 1
+  }
+
+  if (idx >= data.monthDays.length) return null
+  if (day > data.monthDays[idx]) return null
+
+  let offset = 0
+  for (let i = 0; i < idx; i++) offset += data.monthDays[i]
+  offset += day - 1
+
+  const [y, m, d] = data.newYear.split('-').map(Number)
+  const result = new Date(y, m - 1, d)
+  result.setDate(result.getDate() + offset)
+  return result
+}
+
+/**
+ * 找到农历(月,日)在 LUNAR_YEAR_MIN..LUNAR_YEAR_MAX 范围内、首个 ≥ today 的公历 Date
+ */
+export function nextLunarOccurrence(month: number, day: number, today: Date): Date | null {
+  const ref = startOfDay(today)
+  for (let y = ref.getFullYear(); y <= LUNAR_YEAR_MAX; y++) {
+    if (y < LUNAR_YEAR_MIN) continue
+    const d = lunarToGregorian(y, month, day)
+    if (d && d.getTime() >= ref.getTime()) return d
+  }
+  return null
+}
+
+const LUNAR_MONTH_NAMES_ZH = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '腊月']
+const LUNAR_DAY_NAMES_ZH = [
+  '初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
+  '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+  '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十',
+]
+export function lunarMonthName(month: number, lang: 'zh' | 'en' = 'zh'): string {
+  if (lang === 'zh') return LUNAR_MONTH_NAMES_ZH[month - 1] ?? `${month}月`
+  return `Lunar M${month}`
+}
+export function lunarDayName(day: number, lang: 'zh' | 'en' = 'zh'): string {
+  if (lang === 'zh') return LUNAR_DAY_NAMES_ZH[day - 1] ?? `${day}日`
+  return `D${day}`
+}
+
 /**
  * 计算 from→to 之间的剩余时长，按 天/时/分/秒 分解
  */

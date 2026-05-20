@@ -13,8 +13,14 @@ import { useTranslation } from 'react-i18next'
 
 import {
   BUILT_IN_HOLIDAYS,
+  LUNAR_YEAR_MAX,
+  LUNAR_YEAR_MIN,
   computeRemaining,
   getNextOccurrence,
+  lunarDayName,
+  lunarMonthName,
+  lunarToGregorian,
+  nextLunarOccurrence,
   parseIso,
   startOfDay,
   toIso,
@@ -27,8 +33,12 @@ interface CustomHoliday {
   id: string
   name: string
   emoji: string
-  date: string // YYYY-MM-DD
-  recurring: boolean // 是否年度重复
+  // 公历或农历；老数据没有该字段时默认 'gregorian'
+  calendarType?: 'gregorian' | 'lunar'
+  // gregorian: YYYY-MM-DD 公历日期
+  // lunar: 把 lunarYear-lunarMonth-lunarDay 编码到 date 字符串中（不直接当公历用）
+  date: string
+  recurring: boolean
 }
 
 interface PersistedState {
@@ -62,9 +72,22 @@ const HolidayCountdown: React.FC = () => {
     return () => window.clearInterval(id)
   }, [])
 
-  const [draft, setDraft] = useState<{ name: string; date: string; emoji: string; recurring: boolean }>({
+  const [draft, setDraft] = useState<{
+    name: string
+    calendarType: 'gregorian' | 'lunar'
+    date: string
+    lunarYear: number
+    lunarMonth: number
+    lunarDay: number
+    emoji: string
+    recurring: boolean
+  }>({
     name: '',
+    calendarType: 'gregorian',
     date: toIso(new Date()),
+    lunarYear: Math.max(LUNAR_YEAR_MIN, new Date().getFullYear()),
+    lunarMonth: 1,
+    lunarDay: 1,
     emoji: CUSTOM_EMOJI_OPTIONS[0],
     recurring: true,
   })
@@ -101,27 +124,36 @@ const HolidayCountdown: React.FC = () => {
       })
     }
     // 自定义
+    const today = startOfDay(now)
     for (const c of data.customs) {
-      const base = parseIso(c.date)
-      let next: Date | null = base
-      if (c.recurring) {
-        // 让 next 等于今年/明年的 MM-DD
-        const today = startOfDay(now)
-        const year = today.getFullYear()
-        const tryThisYear = new Date(year, base.getMonth(), base.getDate())
-        next = tryThisYear.getTime() >= today.getTime()
-          ? tryThisYear
-          : new Date(year + 1, base.getMonth(), base.getDate())
+      const ct = c.calendarType ?? 'gregorian'
+      let next: Date | null = null
+      if (ct === 'lunar') {
+        const [ly, lm, ld] = c.date.split('-').map(Number)
+        if (c.recurring) {
+          next = nextLunarOccurrence(lm, ld, now)
+        } else {
+          const cand = lunarToGregorian(ly, lm, ld)
+          if (cand && cand.getTime() >= today.getTime()) next = cand
+        }
       } else {
-        // 一次性事件，已过则不显示
-        if (base.getTime() < startOfDay(now).getTime()) next = null
+        const base = parseIso(c.date)
+        if (c.recurring) {
+          const year = today.getFullYear()
+          const tryThisYear = new Date(year, base.getMonth(), base.getDate())
+          next = tryThisYear.getTime() >= today.getTime()
+            ? tryThisYear
+            : new Date(year + 1, base.getMonth(), base.getDate())
+        } else {
+          if (base.getTime() >= today.getTime()) next = base
+        }
       }
       visible.push({
         key: `c:${c.id}`,
         name: c.name || '—',
         emoji: c.emoji,
         isCustom: true,
-        isLunar: false,
+        isLunar: ct === 'lunar',
         customId: c.id,
         next,
         remaining: next ? computeRemaining(next, now) : null,
@@ -146,12 +178,23 @@ const HolidayCountdown: React.FC = () => {
 
   const addCustom = useCallback(() => {
     const name = draft.name.trim()
-    if (!name || !draft.date) return
+    if (!name) return
+    let dateStr: string
+    if (draft.calendarType === 'lunar') {
+      // 农历自定义日期需要在我们的 LUT 范围内可解析
+      const probe = lunarToGregorian(draft.lunarYear, draft.lunarMonth, draft.lunarDay)
+      if (!probe) return
+      dateStr = `${draft.lunarYear}-${String(draft.lunarMonth).padStart(2, '0')}-${String(draft.lunarDay).padStart(2, '0')}`
+    } else {
+      if (!draft.date) return
+      dateStr = draft.date
+    }
     const item: CustomHoliday = {
       id: `c-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       name,
       emoji: draft.emoji,
-      date: draft.date,
+      calendarType: draft.calendarType,
+      date: dateStr,
       recurring: draft.recurring,
     }
     void save({ ...data, customs: [...data.customs, item] })
@@ -210,19 +253,40 @@ const HolidayCountdown: React.FC = () => {
         </button>
         {formOpen && (
           <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto_auto] gap-2 items-start">
+            {/* 日历类型 */}
+            <div className="inline-flex border border-gray-300 rounded-md overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setDraft({ ...draft, calendarType: 'gregorian' })}
+                className={`px-3 py-1 text-xs ${
+                  draft.calendarType === 'gregorian'
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {t('form.calendarGregorian')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setDraft({ ...draft, calendarType: 'lunar' })}
+                className={`px-3 py-1 text-xs ${
+                  draft.calendarType === 'lunar'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {t('form.calendarLunar')}
+              </button>
+            </div>
+
+            {/* 名称 + 日期 + emoji + 添加 */}
+            <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-2 items-start">
               <input
                 type="text"
                 value={draft.name}
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
                 onKeyDown={(e) => e.key === 'Enter' && addCustom()}
                 placeholder={t('form.namePlaceholder')}
-                className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <input
-                type="date"
-                value={draft.date}
-                onChange={(e) => setDraft({ ...draft, date: e.target.value })}
                 className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <select
@@ -239,13 +303,72 @@ const HolidayCountdown: React.FC = () => {
               <button
                 type="button"
                 onClick={addCustom}
-                disabled={!draft.name.trim() || !draft.date}
+                disabled={!draft.name.trim() || (draft.calendarType === 'gregorian' && !draft.date)}
                 className="px-3 py-1.5 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-300 transition-colors flex items-center gap-1"
               >
                 <Plus className="w-4 h-4" />
                 {t('form.add')}
               </button>
             </div>
+
+            {/* 日期输入区（按 calendarType 切换） */}
+            {draft.calendarType === 'gregorian' ? (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 shrink-0">{t('form.dateLabel')}:</span>
+                <input
+                  type="date"
+                  value={draft.date}
+                  onChange={(e) => setDraft({ ...draft, date: e.target.value })}
+                  className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+            ) : (
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs text-gray-500 shrink-0">{t('form.lunarLabel')}:</span>
+                {!draft.recurring && (
+                  <select
+                    value={draft.lunarYear}
+                    onChange={(e) => setDraft({ ...draft, lunarYear: Number(e.target.value) })}
+                    className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  >
+                    {Array.from({ length: LUNAR_YEAR_MAX - LUNAR_YEAR_MIN + 1 }).map((_, i) => {
+                      const y = LUNAR_YEAR_MIN + i
+                      return (
+                        <option key={y} value={y}>
+                          {y}
+                        </option>
+                      )
+                    })}
+                  </select>
+                )}
+                <select
+                  value={draft.lunarMonth}
+                  onChange={(e) => setDraft({ ...draft, lunarMonth: Number(e.target.value) })}
+                  className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {lunarMonthName(i + 1, isZh ? 'zh' : 'en')}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={draft.lunarDay}
+                  onChange={(e) => setDraft({ ...draft, lunarDay: Number(e.target.value) })}
+                  className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  {Array.from({ length: 30 }).map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {lunarDayName(i + 1, isZh ? 'zh' : 'en')}
+                    </option>
+                  ))}
+                </select>
+                <span className="text-xs text-gray-400">
+                  {t('form.lunarRangeHint', { min: LUNAR_YEAR_MIN, max: LUNAR_YEAR_MAX })}
+                </span>
+              </div>
+            )}
+
             <label className="inline-flex items-center gap-2 text-sm text-gray-700">
               <input
                 type="checkbox"

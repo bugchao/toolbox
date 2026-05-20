@@ -9,7 +9,12 @@
     "emoji": "Icon",
     "add": "Add",
     "recurring": "Yearly",
-    "recurringHint": "Birthdays / anniversaries. Untick for a one-off event (disappears once past)."
+    "recurringHint": "Birthdays / anniversaries. Untick for a one-off event (disappears once past).",
+    "calendarGregorian": "Gregorian",
+    "calendarLunar": "Lunar",
+    "dateLabel": "Gregorian date",
+    "lunarLabel": "Lunar date",
+    "lunarRangeHint": "Supports years {{min}}–{{max}}"
   },
   "card": {
     "days": "days",
