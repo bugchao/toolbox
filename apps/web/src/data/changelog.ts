@@ -51,6 +51,22 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/aes-cipher'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /trash-classifier 垃圾分类助手：内置 ~110 条常见品目（可回收 30 / 湿垃圾 28 / 干垃圾 29 / 有害 20）+ 同义词别名；模糊匹配按相关度评分（完全匹配 100 / 别名匹配 95 / 包含 80 / 含别名 70 / 反向包含 60）；随机抽题 + 4 大类浏览全表 + 自定义补录 + 搜索历史；结果卡显示分类徽章 + emoji + 提示语。',
+          en: 'New /trash-classifier: ~110 built-in items across 4 categories (recyclable 30 / wet 28 / dry 29 / hazardous 20) with synonym aliases; fuzzy match with relevance scoring; random draw + browse-by-category + custom entries + search history; result card shows category badge + emoji + disposal hint.',
+        },
+        paths: ['/trash-classifier'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '节日倒计时升级：自定义日期支持「公历 / 农历」切换；农历用 2026-2030 五年公历对照表（含 2028 闰五月），按年自动循环；点击节日名称弹出排期 modal，展示未来若干年的日期 + 星期 + 距今天数，最近一次高亮，支持 X / 遮罩 / Esc 三路关闭。',
+          en: 'Holiday Countdown upgrade: custom dates can now switch between Gregorian and Lunar; lunar uses a 2026-2030 LUT (incl. 2028 leap month 5) and auto-cycles yearly; clicking a holiday name opens a schedule modal showing upcoming years\' dates + weekday + days-from-now, the nearest one highlighted, closable via X / backdrop / Esc.',
+        },
+        paths: ['/holiday-countdown'],
+      },
     ],
   },
   {
