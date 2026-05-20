@@ -18,6 +18,42 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-20',
+    title: {
+      zh: '节日倒计时上线 + 修复 17 个 DNS 工具描述显示 key 字面量',
+      en: 'Holiday Countdown launched + fixed 17 DNS tool descriptions showing literal i18n keys',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /holiday-countdown 节日倒计时：内置 24 个节日（公历 16 个 + 农历 8 个，覆盖元旦 / 春节 / 元宵 / 龙抬头 / 清明 / 劳动 / 端午 / 七夕 / 中秋 / 重阳 / 国庆 / 圣诞 等），农历用 2026-2030 五年公历对照表预存；自定义日期支持「年度重复」（生日/纪念日）或「一次性」（过期消失）；按剩余时间升序排列，每分钟自动刷新；卡片色调按紧急度变红（≤1 天）/ 黄（≤7 天）/ 蓝（更远）；可隐藏内置节日并随时恢复。',
+          en: 'New /holiday-countdown: 24 built-in holidays (16 Gregorian + 8 lunar, covering Chinese New Year, Lantern, Qingming, Dragon Boat, Qixi, Mid-Autumn, Double Ninth, National Day, Christmas, etc.); lunar dates precomputed as a 2026-2030 LUT; custom dates support "yearly recurring" (birthdays/anniversaries) or "one-off" (auto-removed when past); cards sorted by days remaining, updated every minute; accent color shifts red (≤1 day) / amber (≤7 days) / indigo (further); built-in holidays can be hidden and restored.',
+        },
+        paths: ['/holiday-countdown'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '首页修复：17 个 DNS 工具描述不再露出 `toolDesc.dns_xxx` 字面量。getToolDescription 在最后一档加安全网（key 缺失返回空串而非 key 自身），同时为 home.toolDesc 补齐 dns_global_check / dns_performance / dns_ttl / dns_soa / dns_diagnose / dns_pollution_check / dns_hijack_check / dns_cache_check / dns_loop_check / dns_ns / dns_cname_chain / dns_nxdomain / dns_latency / dns_authoritative / dns_recursive / dns_path_viz / dns_tunnel 共 17 条中英描述。',
+          en: 'Home page fix: 17 DNS tools no longer leak `toolDesc.dns_xxx` literal keys. Added a safety net in getToolDescription (returns empty when the key is missing instead of the key itself), and filled in zh/en descriptions for the 17 missing entries under home.toolDesc.',
+        },
+        paths: [],
+        extraLabels: [
+          { zh: '首页 DNS 描述修复', en: 'Home DNS desc fix' },
+        ],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: 'AES 加解密修复：GCM 模式 additionalData 字段在「存在但值为 undefined」时 Chrome 抛 "AeadParams: additionalData: Not a BufferSource"。改为条件展开，只在 AAD 实际有内容时挂上字段。',
+          en: 'AES Cipher fix: in Chrome, GCM\'s additionalData field throws "AeadParams: additionalData: Not a BufferSource" when present-but-undefined. Now conditionally added only when AAD actually has content.',
+        },
+        paths: ['/aes-cipher'],
+      },
+    ],
+  },
+  {
     date: '2026-05-19',
     title: {
       zh: '三工具并行交付：矩阵计算器 / 体重记录 / Meta 标签生成器',

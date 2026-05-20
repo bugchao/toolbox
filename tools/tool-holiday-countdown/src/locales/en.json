@@ -1,0 +1,28 @@
+{
+  "title": "Holiday Countdown",
+  "description": "Built-in Chinese holidays (incl. lunar) + custom birthdays / anniversaries; live \"N days HH:MM\" on every card, auto-rolls to next year",
+  "loading": "Loading…",
+  "disclaimer": "Lunar holiday dates are precomputed for 2026–2030; out-of-range entries are hidden. For precise dates, add your own custom entry.",
+  "form": {
+    "title": "Add a custom date",
+    "namePlaceholder": "Name (e.g. birthday, anniversary)",
+    "emoji": "Icon",
+    "add": "Add",
+    "recurring": "Yearly",
+    "recurringHint": "Birthdays / anniversaries. Untick for a one-off event (disappears once past)."
+  },
+  "card": {
+    "days": "days",
+    "lunar": "Lunar",
+    "hide": "Hide",
+    "remove": "Remove",
+    "today": "Today!",
+    "noDate": "—",
+    "outOfRange": "Past or out of data range"
+  },
+  "hidden": {
+    "title": "Hidden built-in holidays",
+    "restore": "Restore"
+  },
+  "empty": "No countdowns yet — add a custom date or restore a built-in holiday"
+}
