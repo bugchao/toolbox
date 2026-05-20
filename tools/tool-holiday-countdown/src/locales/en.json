@@ -23,7 +23,16 @@
     "remove": "Remove",
     "today": "Today!",
     "noDate": "—",
-    "outOfRange": "Past or out of data range"
+    "outOfRange": "Past or out of data range",
+    "openSchedule": "View upcoming dates"
+  },
+  "modal": {
+    "close": "Close",
+    "lunarLabel": "Lunar",
+    "empty": "No upcoming occurrences within data range",
+    "today": "Today",
+    "daysAway": "days",
+    "footer": "{{count}} upcoming occurrence(s)"
   },
   "hidden": {
     "title": "Hidden built-in holidays",

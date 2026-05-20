@@ -277,6 +277,30 @@ export function lunarDayName(day: number, lang: 'zh' | 'en' = 'zh'): string {
 }
 
 /**
+ * 内置节日：从 today 起返回 maxYears 年内的所有未来公历日期（升序）
+ */
+export function builtInSchedule(h: Holiday, today: Date, maxYears = 10): Date[] {
+  const t = startOfDay(today).getTime()
+  if (h.type === 'gregorian' && h.monthDay) {
+    const [m, d] = h.monthDay.split('-').map(Number)
+    const out: Date[] = []
+    const startYear = new Date(t).getFullYear()
+    for (let y = startYear; y < startYear + maxYears; y++) {
+      const cand = new Date(y, m - 1, d)
+      if (cand.getTime() >= t) out.push(cand)
+    }
+    return out
+  }
+  if (h.type === 'lunar' && h.dates) {
+    return Object.values(h.dates)
+      .map(parseIso)
+      .filter((d) => d.getTime() >= t)
+      .sort((a, b) => a.getTime() - b.getTime())
+  }
+  return []
+}
+
+/**
  * 计算 from→to 之间的剩余时长，按 天/时/分/秒 分解
  */
 export interface Remaining {

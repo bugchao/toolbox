@@ -6,6 +6,8 @@ import {
   Eye,
   ChevronDown,
   Repeat,
+  X,
+  CalendarDays,
 } from 'lucide-react'
 import { PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
@@ -15,6 +17,7 @@ import {
   BUILT_IN_HOLIDAYS,
   LUNAR_YEAR_MAX,
   LUNAR_YEAR_MIN,
+  builtInSchedule,
   computeRemaining,
   getNextOccurrence,
   lunarDayName,
@@ -72,6 +75,18 @@ const HolidayCountdown: React.FC = () => {
     return () => window.clearInterval(id)
   }, [])
 
+  const [selectedKey, setSelectedKey] = useState<string | null>(null)
+
+  // Escape 关闭详情 modal
+  useEffect(() => {
+    if (!selectedKey) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedKey(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [selectedKey])
+
   const [draft, setDraft] = useState<{
     name: string
     calendarType: 'gregorian' | 'lunar'
@@ -104,14 +119,20 @@ const HolidayCountdown: React.FC = () => {
     builtInId?: string
     next: Date | null
     remaining: Remaining | null
+    /** 未来若干年的全部排期（升序），供详情 modal 使用 */
+    schedule: Date[]
+    /** 农历自定义日期的 (月, 日)，供详情显示 */
+    lunarMonthDay?: { month: number; day: number }
   }
 
   const items: DisplayItem[] = useMemo(() => {
     const visible: DisplayItem[] = []
+    const today = startOfDay(now)
     // 内置
     for (const h of BUILT_IN_HOLIDAYS) {
       if (data.hiddenBuiltInIds.includes(h.id)) continue
-      const next = getNextOccurrence(h, now)
+      const schedule = builtInSchedule(h, now, 10)
+      const next = schedule[0] ?? getNextOccurrence(h, now)
       visible.push({
         key: `b:${h.id}`,
         name: isZh ? h.zh : h.en,
@@ -121,31 +142,46 @@ const HolidayCountdown: React.FC = () => {
         builtInId: h.id,
         next,
         remaining: next ? computeRemaining(next, now) : null,
+        schedule,
       })
     }
     // 自定义
-    const today = startOfDay(now)
     for (const c of data.customs) {
       const ct = c.calendarType ?? 'gregorian'
       let next: Date | null = null
+      const schedule: Date[] = []
+      let lunarMonthDay: { month: number; day: number } | undefined
       if (ct === 'lunar') {
         const [ly, lm, ld] = c.date.split('-').map(Number)
+        lunarMonthDay = { month: lm, day: ld }
         if (c.recurring) {
-          next = nextLunarOccurrence(lm, ld, now)
+          for (let y = Math.max(LUNAR_YEAR_MIN, today.getFullYear()); y <= LUNAR_YEAR_MAX; y++) {
+            const cand = lunarToGregorian(y, lm, ld)
+            if (cand && cand.getTime() >= today.getTime()) schedule.push(cand)
+          }
+          schedule.sort((a, b) => a.getTime() - b.getTime())
+          next = schedule[0] ?? nextLunarOccurrence(lm, ld, now)
         } else {
           const cand = lunarToGregorian(ly, lm, ld)
-          if (cand && cand.getTime() >= today.getTime()) next = cand
+          if (cand && cand.getTime() >= today.getTime()) {
+            schedule.push(cand)
+            next = cand
+          }
         }
       } else {
         const base = parseIso(c.date)
         if (c.recurring) {
-          const year = today.getFullYear()
-          const tryThisYear = new Date(year, base.getMonth(), base.getDate())
-          next = tryThisYear.getTime() >= today.getTime()
-            ? tryThisYear
-            : new Date(year + 1, base.getMonth(), base.getDate())
+          const startYear = today.getFullYear()
+          for (let y = startYear; y < startYear + 10; y++) {
+            const cand = new Date(y, base.getMonth(), base.getDate())
+            if (cand.getTime() >= today.getTime()) schedule.push(cand)
+          }
+          next = schedule[0] ?? null
         } else {
-          if (base.getTime() >= today.getTime()) next = base
+          if (base.getTime() >= today.getTime()) {
+            schedule.push(base)
+            next = base
+          }
         }
       }
       visible.push({
@@ -157,6 +193,8 @@ const HolidayCountdown: React.FC = () => {
         customId: c.id,
         next,
         remaining: next ? computeRemaining(next, now) : null,
+        schedule,
+        lunarMonthDay,
       })
     }
     // 按剩余时间升序，null（过期/无未来日期）放最后
@@ -393,6 +431,7 @@ const HolidayCountdown: React.FC = () => {
               item={item}
               onHide={() => item.builtInId && hideBuiltIn(item.builtInId)}
               onRemove={() => item.customId && removeCustom(item.customId)}
+              onSelect={() => setSelectedKey(item.key)}
               isZh={isZh}
               t={t}
             />
@@ -444,6 +483,121 @@ const HolidayCountdown: React.FC = () => {
       )}
 
       <p className="text-xs text-gray-400 text-center">{t('disclaimer')}</p>
+
+      {selectedKey && (
+        (() => {
+          const item = items.find((x) => x.key === selectedKey)
+          if (!item) return null
+          return (
+            <ScheduleModal item={item} onClose={() => setSelectedKey(null)} now={now} isZh={isZh} t={t} />
+          )
+        })()
+      )}
+    </div>
+  )
+}
+
+interface ScheduleModalProps {
+  item: {
+    key: string
+    name: string
+    emoji: string
+    isLunar: boolean
+    schedule: Date[]
+    lunarMonthDay?: { month: number; day: number }
+  }
+  onClose: () => void
+  now: Date
+  isZh: boolean
+  t: (k: string, opts?: Record<string, unknown>) => string
+}
+const ScheduleModal: React.FC<ScheduleModalProps> = ({ item, onClose, now, isZh, t }) => {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[80vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="flex items-center gap-2 p-4 border-b border-gray-200">
+          <span className="text-2xl">{item.emoji}</span>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base font-semibold text-gray-800 truncate">{item.name}</h3>
+            {item.isLunar && item.lunarMonthDay && (
+              <p className="text-xs text-amber-700 mt-0.5">
+                {t('modal.lunarLabel')}: {lunarMonthName(item.lunarMonthDay.month, isZh ? 'zh' : 'en')}
+                {lunarDayName(item.lunarMonthDay.day, isZh ? 'zh' : 'en')}
+              </p>
+            )}
+            {item.isLunar && !item.lunarMonthDay && (
+              <span className="text-[10px] inline-block px-1.5 py-0.5 mt-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200">
+                {t('card.lunar')}
+              </span>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-700"
+            aria-label={t('modal.close')}
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </header>
+        <div className="overflow-y-auto flex-1">
+          {item.schedule.length === 0 ? (
+            <div className="p-8 text-center text-sm text-gray-400 flex flex-col items-center gap-2">
+              <CalendarDays className="w-6 h-6" />
+              <span>{t('modal.empty')}</span>
+            </div>
+          ) : (
+            <ul className="divide-y divide-gray-100">
+              {item.schedule.map((d, i) => {
+                const r = computeRemaining(d, now)
+                const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+                const weekday = d.toLocaleDateString(isZh ? 'zh-CN' : 'en-US', { weekday: 'short' })
+                const highlight = i === 0
+                return (
+                  <li
+                    key={i}
+                    className={`px-4 py-3 flex items-baseline gap-3 ${
+                      highlight ? 'bg-indigo-50/60' : ''
+                    }`}
+                  >
+                    <span className="text-xs font-mono text-gray-500 w-12 shrink-0">
+                      {d.getFullYear()}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-mono text-gray-800">{dateStr}</div>
+                      <div className="text-xs text-gray-400">{weekday}</div>
+                    </div>
+                    <div
+                      className={`text-right shrink-0 ${
+                        highlight ? 'text-rose-600 font-bold' : 'text-gray-700'
+                      }`}
+                    >
+                      {r.days === 0 ? (
+                        <span className="text-xs">{t('modal.today')}</span>
+                      ) : (
+                        <span className="text-sm font-mono tabular-nums">
+                          {r.days} {t('modal.daysAway')}
+                        </span>
+                      )}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </div>
+        <footer className="p-3 border-t border-gray-100 text-xs text-gray-400 text-center">
+          {t('modal.footer', { count: item.schedule.length })}
+        </footer>
+      </div>
     </div>
   )
 }
@@ -462,10 +616,11 @@ interface CountdownCardProps {
   }
   onHide: () => void
   onRemove: () => void
+  onSelect: () => void
   isZh: boolean
   t: (k: string, opts?: Record<string, unknown>) => string
 }
-const CountdownCard: React.FC<CountdownCardProps> = ({ item, onHide, onRemove, isZh, t }) => {
+const CountdownCard: React.FC<CountdownCardProps> = ({ item, onHide, onRemove, onSelect, isZh, t }) => {
   const r = item.remaining
   const dateStr = item.next
     ? `${item.next.getFullYear()}-${String(item.next.getMonth() + 1).padStart(2, '0')}-${String(item.next.getDate()).padStart(2, '0')}`
@@ -485,7 +640,14 @@ const CountdownCard: React.FC<CountdownCardProps> = ({ item, onHide, onRemove, i
     >
       <div className="flex items-center gap-2">
         <span className="text-2xl leading-none">{item.emoji}</span>
-        <span className="text-sm font-semibold text-gray-800 truncate flex-1">{item.name}</span>
+        <button
+          type="button"
+          onClick={onSelect}
+          className="text-sm font-semibold text-gray-800 truncate flex-1 text-left hover:text-indigo-600 transition-colors"
+          title={t('card.openSchedule')}
+        >
+          {item.name}
+        </button>
         {item.isLunar && (
           <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-100 text-amber-700 border border-amber-200 font-medium">
             {t('card.lunar')}

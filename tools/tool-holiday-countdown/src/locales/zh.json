@@ -23,7 +23,16 @@
     "remove": "删除",
     "today": "今天就是",
     "noDate": "—",
-    "outOfRange": "已过期或超出数据范围"
+    "outOfRange": "已过期或超出数据范围",
+    "openSchedule": "点击查看历年排期"
+  },
+  "modal": {
+    "close": "关闭",
+    "lunarLabel": "农历",
+    "empty": "暂无可计算的未来日期",
+    "today": "今天",
+    "daysAway": "天后",
+    "footer": "共 {{count}} 次未来排期"
   },
   "hidden": {
     "title": "已隐藏的内置节日",
