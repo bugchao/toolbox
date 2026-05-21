@@ -32,6 +32,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/item-locator'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /fake-data-gen 测试数据生成器：32 种字段类型（ID/个人/地址/公司/网络/金融/数值/文本/时间/自定义 10 大类）+ 用户/订单/产品/员工 4 套预设模板；JSON / CSV / SQL Insert / TypeScript 四种输出；最高 10000 行；数值字段支持 min/max/精度，枚举/固定值字段支持自定义配置；全部使用 crypto.getRandomValues 均匀随机；字段可上下移动、删除。',
+          en: 'New /fake-data-gen: 32 field types (ID / Person / Address / Company / Web / Finance / Numeric / Text / Time / Custom — 10 groups) + 4 presets (User / Order / Product / Employee); 4 output formats (JSON / CSV / SQL Insert / TypeScript); up to 10,000 rows; numeric fields support min/max/precision, enum/static support custom config; all randomness uses crypto.getRandomValues; fields support reorder and delete.',
+        },
+        paths: ['/fake-data-gen'],
+      },
     ],
   },
   {

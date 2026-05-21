@@ -112,7 +112,7 @@
 | CSV 转 JSON | `/csv-to-json` | **已上线** | - | CSV 与 JSON 互转（落位 `tools/tool-csv-to-json`） |
 | XML 格式化 | `/xml-formatter` | 待开发 | P2 | XML 格式化与校验 |
 | 数据脱敏工具 | `/data-masking` | **已上线** | P1 | 9 类内置规则（手机/身份证/邮箱/银行卡/IPv4/IPv6/MAC/车牌/JWT）+ 自定义正则、贪心去重叠、命中统计 |
-| 随机数据生成器 | `/fake-data-gen` | 待开发 | P2 | 生成测试数据 |
+| 随机数据生成器 | `/fake-data-gen` | **已上线** | P2 | 32 种字段类型（ID/个人/地址/公司/网络/金融/数值/文本/时间/自定义），4 套预设模板，4 种输出格式（JSON/CSV/SQL/TS），最高 10000 行，crypto 随机 |
 | SQL 转 NoSQL | `/sql-to-nosql` | 待开发 | P2 | SQL 语句转 MongoDB 等 |
 
 #### 加密与安全（5 个）

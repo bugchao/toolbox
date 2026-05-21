@@ -1,0 +1,32 @@
+{
+  "title": "Fake Data Generator",
+  "description": "Batch generate name / email / phone / address / company fake data; export as JSON / CSV / SQL Insert / TypeScript",
+  "loading": "Loading…",
+  "control": {
+    "count": "Rows",
+    "format": "Format",
+    "table": "Table",
+    "preset": "Presets",
+    "generate": "Generate {{count}} rows",
+    "generating": "Generating…"
+  },
+  "schema": {
+    "title": "Schema",
+    "addField": "Add field",
+    "removeField": "Remove",
+    "fieldName": "Field name",
+    "empty": "No fields yet. Click \"Add field\" or load a preset above."
+  },
+  "config": {
+    "daysRange": "Days",
+    "enumPlaceholder": "option 1, option 2, option 3…",
+    "staticPlaceholder": "Static value"
+  },
+  "output": {
+    "title": "Output",
+    "placeholder": "Click \"Generate\" below to start…",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download"
+  }
+}

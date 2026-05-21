@@ -6,7 +6,7 @@ import {
   Code, FileJson, Braces, CalendarClock, ExternalLink, Shuffle, Calendar,
   LockKeyhole, Binary, Terminal, Dices, SplitSquareHorizontal, RefreshCw,
   FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GitGraph,
-  Send,   Calculator, AlignLeft, Lock, Hash, ShieldOff, FileSignature,
+  Send,   Calculator, AlignLeft, Lock, Hash, ShieldOff, FileSignature, Database,
 } from 'lucide-react'
 
 export const DEV_TOOLS: ToolEntry[] = [
@@ -15,6 +15,7 @@ export const DEV_TOOLS: ToolEntry[] = [
   { path: '/data-masking', nameKey: 'tools.data_masking', icon: ShieldOff, categoryKey: 'dev', keywords: ['数据脱敏', '隐私', '日志', 'pii', 'redact', '手机号', '身份证'] },
   { path: '/aes-cipher', nameKey: 'tools.aes_cipher', icon: KeyRound, categoryKey: 'dev', keywords: ['aes', '加密', '解密', 'gcm', 'cbc', 'ctr', 'pbkdf2', 'crypto'] },
   { path: '/hmac-sign', nameKey: 'tools.hmac_sign', icon: FileSignature, categoryKey: 'dev', keywords: ['hmac', '签名', 'sign', 'verify', 'sha256', 'webhook', 'api'] },
+  { path: '/fake-data-gen', nameKey: 'tools.fake_data_gen', icon: Database, categoryKey: 'dev', keywords: ['fake', '假数据', '测试数据', 'mock', 'seed', 'csv', 'sql', 'faker'] },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: Code, categoryKey: 'dev', keywords: ['base64'] },
   { path: '/timestamp', nameKey: 'tools.timestamp', icon: CalendarClock, categoryKey: 'dev', keywords: ['时间戳'] },
