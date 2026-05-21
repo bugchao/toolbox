@@ -1,0 +1,47 @@
+{
+  "title": "物品放置记录",
+  "description": "记录衣物 / 手表 / 日常用品放在哪里；按类型 + 场景多维筛选，全文搜索，本地存储，再也不用翻箱倒柜",
+  "loading": "加载中…",
+  "disclaimer": "全部数据保存在本地浏览器（{{count}} 条）；建议定期导出 JSON 备份。",
+  "search": {
+    "placeholder": "搜索名称 / 位置 / 标签 / 备注…"
+  },
+  "filter": {
+    "category": "类型",
+    "scenario": "场景",
+    "all": "全部"
+  },
+  "action": {
+    "add": "添加",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "update": "更新",
+    "cancel": "取消",
+    "exportTitle": "导出为 JSON"
+  },
+  "form": {
+    "addTitle": "添加物品",
+    "editTitle": "编辑物品"
+  },
+  "field": {
+    "name": "物品名称",
+    "namePlaceholder": "如：黑色羊毛大衣 / Apple Watch S9 / 护照",
+    "location": "存放位置",
+    "locationPlaceholder": "如：主卧衣柜最上层右侧 / 床头柜抽屉",
+    "category": "类型",
+    "scenario": "场景",
+    "tags": "标签（逗号分隔）",
+    "tagsPlaceholder": "如：冬装, 出差用, 礼物",
+    "note": "备注",
+    "notePlaceholder": "买入时间、注意事项、保养提醒…"
+  },
+  "updatedAt": "更新于 {{date}}",
+  "confirmDelete": "确认删除这条记录吗？",
+  "confirmImport": "导入将覆盖现有 {{count}} 条记录，是否继续？",
+  "importError": "导入失败，请检查 JSON 格式",
+  "empty": {
+    "first": "还没有记录，点击右上角「添加」开始",
+    "filtered": "当前筛选条件下没有匹配的记录"
+  }
+}

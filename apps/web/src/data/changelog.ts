@@ -18,6 +18,23 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-21',
+    title: {
+      zh: '新增 /item-locator 物品放置记录',
+      en: 'New /item-locator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /item-locator 物品放置记录：用于记录衣物 / 手表 / 文档 / 电子产品等日常物品到底放在哪里。预设 13 个类型（衣物/鞋包/首饰手表/电子/文档/化妆/工具/药品/食品/书籍/玩具/装饰/其他）× 12 个场景（卧室/客厅/厨房/书房/储物间/阳台/卫生间/办公室/车里/仓储/朋友处/其他场所），双维筛选 + 标签 + 备注；全文搜索覆盖名称/位置/标签/备注；增删改 + JSON 导入导出（覆盖前二次确认）；全部数据本地存储。',
+          en: 'New /item-locator: track where you put clothes / watches / documents / electronics. Built-in 13 categories × 12 scenarios two-axis filtering with tags + notes; full-text search across name / location / tags / note; CRUD + JSON import / export (with overwrite confirm); all data stays local.',
+        },
+        paths: ['/item-locator'],
+      },
+    ],
+  },
+  {
     date: '2026-05-20',
     title: {
       zh: '节日倒计时上线 + 修复 17 个 DNS 工具描述显示 key 字面量',

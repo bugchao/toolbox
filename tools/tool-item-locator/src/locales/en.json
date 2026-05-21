@@ -1,0 +1,47 @@
+{
+  "title": "Item Locator",
+  "description": "Record where you put clothes / watches / daily items; filter by category + scenario, full-text search, fully local — never dig through boxes again",
+  "loading": "Loading…",
+  "disclaimer": "All data is kept locally in your browser ({{count}} entries). Export JSON periodically to back up.",
+  "search": {
+    "placeholder": "Search name / location / tags / note…"
+  },
+  "filter": {
+    "category": "Category",
+    "scenario": "Scenario",
+    "all": "All"
+  },
+  "action": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "exportTitle": "Export as JSON"
+  },
+  "form": {
+    "addTitle": "Add item",
+    "editTitle": "Edit item"
+  },
+  "field": {
+    "name": "Item name",
+    "namePlaceholder": "e.g. Black wool coat / Apple Watch S9 / Passport",
+    "location": "Where it's stored",
+    "locationPlaceholder": "e.g. Master bedroom wardrobe, top shelf, right side",
+    "category": "Category",
+    "scenario": "Scenario",
+    "tags": "Tags (comma-separated)",
+    "tagsPlaceholder": "e.g. winter, travel, gift",
+    "note": "Notes",
+    "notePlaceholder": "Purchase date, maintenance reminders, anything…"
+  },
+  "updatedAt": "Updated {{date}}",
+  "confirmDelete": "Delete this entry?",
+  "confirmImport": "Importing will replace the existing {{count}} entries. Continue?",
+  "importError": "Import failed — check the JSON format",
+  "empty": {
+    "first": "No entries yet — click \"Add\" to start",
+    "filtered": "No matches under the current filters"
+  }
+}
