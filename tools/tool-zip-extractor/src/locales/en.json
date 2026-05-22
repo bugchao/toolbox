@@ -1,0 +1,26 @@
+{
+  "title": "ZIP Extractor",
+  "description": "Drag in a ZIP to browse its tree, download or preview text / images; all local, no upload",
+  "loading": "Loading…",
+  "disclaimer": "JSZip parses the archive locally in your browser — files never leave your machine.",
+  "drop": {
+    "hint": "Drag a ZIP file here",
+    "tip": "Single-file preview & download supported; large archives may take a moment to parse",
+    "choose": "Choose file"
+  },
+  "parsing": "Parsing {{name}}…",
+  "stats": "{{files}} files · {{dirs}} folders · {{size}} total",
+  "action": {
+    "close": "Close",
+    "preview": "Preview",
+    "download": "Download"
+  },
+  "preview": {
+    "hint": "Select a file on the left to preview (auto-detects text / image)",
+    "empty": "File is empty",
+    "binary": "Binary file ({{size}}) — please download to inspect"
+  },
+  "error": {
+    "parse": "Parse failed: {{msg}}"
+  }
+}

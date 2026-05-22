@@ -48,6 +48,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/md-table-gen'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /zip-extractor ZIP 在线解压：JSZip 在浏览器本地解析压缩包，文件树折叠展开浏览，按扩展名自动选择预览方式（文本用 <pre> 等宽 / 图片用 <img>），不可预览的二进制文件提示下载；每个文件支持单独下载；并行解压获取真实大小；不支持 RAR。',
+          en: 'New /zip-extractor: parse ZIP archives locally via JSZip; browse with a collapsible tree; auto-preview by extension (text via monospace `<pre>`, images via `<img>`); binary files prompt direct download; per-file download supported; parallel size resolution; RAR not supported.',
+        },
+        paths: ['/zip-extractor'],
+      },
     ],
   },
   {
