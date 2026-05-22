@@ -6,7 +6,7 @@ import {
   Image, Eraser, PenTool, Crop, RotateCw, Sparkles, Grid3x3,
   FileCode, Heart, Palette, Laugh, Waves, File, FileSpreadsheet,
   Scissors, FileBadge, Pipette, NotebookPen, QrCode, ScanLine, Wand2,
-  Contact, Tags, FileCheck2, FolderArchive, Copy,
+  Contact, Tags, FileCheck2, FolderArchive, Copy, SplitSquareHorizontal,
 } from 'lucide-react'
 
 export const UTILITY_TOOLS: ToolEntry[] = [
@@ -39,6 +39,7 @@ export const UTILITY_TOOLS: ToolEntry[] = [
   { path: '/file-hash-check', nameKey: 'tools.file_hash_check', icon: FileCheck2, categoryKey: 'utils', keywords: ['hash', '哈希', '校验', 'md5', 'sha-256', 'checksum', '完整性'] },
   { path: '/zip-extractor', nameKey: 'tools.zip_extractor', icon: FolderArchive, categoryKey: 'utils', keywords: ['zip', '解压', '压缩包', '文件树', 'extract', 'archive'] },
   { path: '/duplicate-finder', nameKey: 'tools.duplicate_finder', icon: Copy, categoryKey: 'utils', keywords: ['重复', '查重', '去重', 'duplicate', 'dedup', 'hash'] },
+  { path: '/file-splitter', nameKey: 'tools.file_splitter', icon: SplitSquareHorizontal, categoryKey: 'utils', keywords: ['文件', '分割', '合并', '切片', 'split', 'merge', 'chunk'] },
   { path: '/color-generator', nameKey: 'tools.color_generator', icon: Pipette, categoryKey: 'utils', keywords: ['配色'] },
   { path: '/meme-generator', nameKey: 'tools.meme_generator', icon: Laugh, categoryKey: 'utils', keywords: ['表情包'] },
   { path: '/copywriting-generator', nameKey: 'tools.copywriting_generator', icon: NotebookPen, categoryKey: 'utils', keywords: ['文案'] },

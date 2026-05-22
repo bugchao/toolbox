@@ -64,6 +64,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/duplicate-finder'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /file-splitter 大文件分割合并：分割 tab 按字节数（KB/MB/GB）或份数切分，预览分片列表（最多 30 条 + "还有 N 份未显示"提示），可打包成 ZIP 一键下载或逐个下载（每个延迟 80ms 避免浏览器阻塞）；合并 tab 多选 part，按文件名数字感知排序（localeCompare numeric），可手动上下移动调序，输出名自动从首个 part 猜测（去掉 .NNN 或 .partNN 后缀）；Blob 拼接生成最终文件。全程本地。',
+          en: 'New /file-splitter: Split tab cuts by byte size (KB/MB/GB) or part count, previews up to 30 parts with "{n} more not shown" hint, downloads as one ZIP or individually (80ms staggered); Merge tab natural-sorts multi-selected parts (numeric localeCompare), allows manual reorder, auto-guesses output name by stripping .NNN/.partNN suffix; Blob concatenation builds the final file. All local.',
+        },
+        paths: ['/file-splitter'],
+      },
     ],
   },
   {
