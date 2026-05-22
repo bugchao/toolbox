@@ -1,0 +1,34 @@
+{
+  "title": "Duplicate Finder",
+  "description": "Select multiple files, hash with local SHA-256, group identical content; mark keep / delete and export a cleanup report",
+  "loading": "Loading…",
+  "disclaimer": "Everything runs locally in your browser (Web Crypto + size pre-filter). Files are only read for hashing, never uploaded. After choosing what to keep, use your OS to delete the rest.",
+  "drop": {
+    "hint": "Drag multiple files here",
+    "tip": "Pre-grouped by file size; only same-size files get SHA-256 hashed to avoid waste",
+    "choose": "Choose files"
+  },
+  "stats": {
+    "total": "Total files",
+    "dupGroups": "Duplicate groups",
+    "canFree": "Space to free",
+    "hashing": "Hashing",
+    "done": "Done"
+  },
+  "groups": {
+    "title": "Duplicates",
+    "summary": "{{count}} identical files · each {{size}} · could free {{waste}}",
+    "exportCsv": "Export CSV",
+    "clearAll": "Clear",
+    "keep": "Keep",
+    "delete": "Delete"
+  },
+  "unique": {
+    "title": "Unique files"
+  },
+  "action": {
+    "download": "Download",
+    "remove": "Remove from list"
+  },
+  "emptyHint": "Drop files to start scanning for duplicates"
+}

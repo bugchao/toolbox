@@ -56,6 +56,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/zip-extractor'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /duplicate-finder 重复文件检测：拖入多个文件后先按 size 预分组（不同大小必然不同），仅对同 size 组并发 6 路 SHA-256 哈希；按 hash 聚类后展示重复组（按可释放空间降序），每组用单选标"保留"自动反推"删除"；右上角 4 项 stat 卡（总数 / 重复组 / 可释放 / 哈希中）；CSV 报告导出 file_name / size / sha256 / group / action。',
+          en: 'New /duplicate-finder: pre-group by size (different sizes are never duplicates), then concurrently SHA-256 only files within same-size buckets (6 workers); group by hash and sort duplicates by reclaimable size descending; per-group radio chooses which to keep (others auto "delete"); 4 stat cards (total / dup groups / reclaimable / hashing); CSV report with file_name / size / sha256 / group / action.',
+        },
+        paths: ['/duplicate-finder'],
+      },
     ],
   },
   {
