@@ -32,6 +32,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/xml-formatter'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /file-hash-check 文件哈希校验：拖拽 / 多文件批量；MD5 用 RFC 1321 纯 JS 实现（Web Crypto 不支持），SHA-1/SHA-256/SHA-512 走 crypto.subtle.digest；预期哈希按长度自动识别算法（32/40/64/128 hex）；命中算法行用 emerald 高亮、不匹配用 red 高亮；批量复制单个 hash + 一键下载全部为 txt；文件不上传。',
+          en: 'New /file-hash-check: drag-drop / multi-file batch; MD5 implemented in pure JS per RFC 1321 (Web Crypto does not ship MD5), SHA-1 / SHA-256 / SHA-512 via crypto.subtle.digest; expected hash detected by hex length (32/40/64/128); matching row highlighted emerald, mismatching red; per-hash copy + bulk download as txt; files never uploaded.',
+        },
+        paths: ['/file-hash-check'],
+      },
     ],
   },
   {
