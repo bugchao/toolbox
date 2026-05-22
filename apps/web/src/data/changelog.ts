@@ -18,6 +18,23 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-22',
+    title: {
+      zh: '新增 /xml-formatter XML 格式化',
+      en: 'New /xml-formatter',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /xml-formatter XML 格式化：浏览器原生 DOMParser 解析，自写递归序列化器（缩进 2/4/Tab 可选、简单文本元素 inline 输出、可选保留注释、CDATA & PI 透传）；压缩模式可选移除注释；校验模式显示元素节点数；XML 声明（<?xml ... ?>）自动保留；解析失败时定位行列号并显示错误片段。',
+          en: 'New /xml-formatter: parse with native DOMParser, custom recursive serializer (2 / 4 / Tab indent, inline simple text elements, optional comment retention, CDATA & PI passthrough); minify can drop comments; validate reports element count; XML declaration preserved; parse errors show line/column with snippet.',
+        },
+        paths: ['/xml-formatter'],
+      },
+    ],
+  },
+  {
     date: '2026-05-21',
     title: {
       zh: '新增 /item-locator 物品放置记录',
