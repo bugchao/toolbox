@@ -1,0 +1,36 @@
+{
+  "title": "Markdown 表格生成器",
+  "description": "可视化编辑 + CSV/TSV/JSON/Markdown 互转 + 列对齐 + 实时输出，本地处理",
+  "loading": "加载中…",
+  "action": {
+    "addRow": "添加行",
+    "addCol": "添加列",
+    "import": "导入",
+    "sample": "示例",
+    "clear": "清空",
+    "removeRow": "删除行",
+    "removeCol": "删除列",
+    "rowUp": "上移",
+    "rowDown": "下移",
+    "colLeft": "左移",
+    "colRight": "右移"
+  },
+  "import": {
+    "format": "格式",
+    "placeholder_csv": "name,age,city\nAlice,28,Beijing\nBob,35,Shanghai",
+    "placeholder_tsv": "name\\tage\\tcity\nAlice\\t28\\tBeijing",
+    "placeholder_json": "[\n  { \"name\": \"Alice\", \"age\": 28 },\n  { \"name\": \"Bob\", \"age\": 35 }\n]",
+    "placeholder_md": "| name | age |\n|:---|:---:|\n| Alice | 28 |",
+    "confirm": "导入",
+    "error": "解析失败，请检查格式"
+  },
+  "editor": {
+    "stats": "{{rows}} 行 × {{cols}} 列"
+  },
+  "output": {
+    "title": "输出",
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载"
+  }
+}

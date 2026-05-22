@@ -40,6 +40,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         },
         paths: ['/file-hash-check'],
       },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /md-table-gen Markdown 表格生成器：可视化网格编辑（每单元格 input、行列上下左右移动、删除、列对齐左/中/右）；从 CSV / TSV / JSON（对象数组）/ Markdown 双向解析导入（含 RFC 4180 引号转义解析）；实时输出 MD / CSV / TSV / JSON 四种格式；复制 + 下载（按格式自动选 mime 与扩展名）。状态本地持久化。',
+          en: 'New /md-table-gen: visual grid editor (per-cell input, row/column move + delete, column alignment L/C/R); import from CSV / TSV / JSON (array of objects) / Markdown with RFC 4180-compliant quote parsing; live output in MD / CSV / TSV / JSON; copy + download with mime auto-selection. State persisted locally.',
+        },
+        paths: ['/md-table-gen'],
+      },
     ],
   },
   {

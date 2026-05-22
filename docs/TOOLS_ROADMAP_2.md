@@ -101,7 +101,7 @@
 |----------|----------|------|--------|------|
 | 代码差异对比 | `/code-diff` | **已上线** | - | 代码版本对比（落位 `tools/tool-code-diff`） |
 | SQL 格式化 | `/sql-formatter` | **已上线** | - | SQL 语句格式化（落位 `tools/tool-sql-formatter`） |
-| Markdown 表格生成器 | `/md-table-gen` | 待开发 | P2 | 快速生成 Markdown 表格 |
+| Markdown 表格生成器 | `/md-table-gen` | **已上线** | P2 | 可视化编辑 + CSV/TSV/JSON/MD 双向互转 + 列对齐 + 行列上下左右移动 + 实时多格式输出 |
 | Git Commit 生成器 | `/git-commit-gen` | 待开发 | P1 | AI 生成 Commit 信息 |
 | 代码行数统计 | `/code-counter` | 待开发 | P2 | 统计项目代码行数 |
 

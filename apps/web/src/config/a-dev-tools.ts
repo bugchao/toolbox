@@ -6,7 +6,7 @@ import {
   Code, FileJson, Braces, CalendarClock, ExternalLink, Shuffle, Calendar,
   LockKeyhole, Binary, Terminal, Dices, SplitSquareHorizontal, RefreshCw,
   FileCode, Wand2, KeyRound, ArrowRightLeft, Github, FileSearch, GitGraph,
-  Send,   Calculator, AlignLeft, Lock, Hash, ShieldOff, FileSignature, Database,
+  Send,   Calculator, AlignLeft, Lock, Hash, ShieldOff, FileSignature, Database, Table,
 } from 'lucide-react'
 
 export const DEV_TOOLS: ToolEntry[] = [
@@ -17,6 +17,7 @@ export const DEV_TOOLS: ToolEntry[] = [
   { path: '/hmac-sign', nameKey: 'tools.hmac_sign', icon: FileSignature, categoryKey: 'dev', keywords: ['hmac', '签名', 'sign', 'verify', 'sha256', 'webhook', 'api'] },
   { path: '/fake-data-gen', nameKey: 'tools.fake_data_gen', icon: Database, categoryKey: 'dev', keywords: ['fake', '假数据', '测试数据', 'mock', 'seed', 'csv', 'sql', 'faker'] },
   { path: '/xml-formatter', nameKey: 'tools.xml_formatter', icon: FileCode, categoryKey: 'dev', keywords: ['xml', '格式化', '美化', '压缩', '校验', 'pretty', 'format'] },
+  { path: '/md-table-gen', nameKey: 'tools.md_table_gen', icon: Table, categoryKey: 'dev', keywords: ['markdown', '表格', 'csv', 'tsv', 'json', 'table'] },
   { path: '/format-converter', nameKey: 'tools.format_converter', icon: Braces, categoryKey: 'dev', keywords: ['yaml', 'xml', '格式转换'] },
   { path: '/base64', nameKey: 'tools.base64', icon: Code, categoryKey: 'dev', keywords: ['base64'] },
   { path: '/timestamp', nameKey: 'tools.timestamp', icon: CalendarClock, categoryKey: 'dev', keywords: ['时间戳'] },
