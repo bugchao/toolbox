@@ -1,0 +1,32 @@
+{
+  "title": "Trash Classifier",
+  "description": "100+ built-in items: type any item to see its category (recyclable / wet / dry / hazardous); fuzzy match, random draw, custom entries",
+  "loading": "Loading…",
+  "disclaimer": "Data is hand-curated; local rules may differ — follow your municipality's official guidelines.",
+  "search": {
+    "placeholder": "Type an item (e.g. apple peel, battery…)",
+    "random": "Random",
+    "notFound": "No built-in or custom match. Add it manually in the Custom section below.",
+    "related": "Related"
+  },
+  "result": {
+    "belongs": "Goes to",
+    "aliases": "Also known as"
+  },
+  "browse": {
+    "count": "{{count}} entries",
+    "entries": "entries",
+    "collapse": "Collapse"
+  },
+  "custom": {
+    "title": "Custom entries",
+    "namePlaceholder": "Item name",
+    "hintPlaceholder": "Disposal hint (optional)",
+    "add": "Add",
+    "empty": "No custom entries yet"
+  },
+  "history": {
+    "title": "Search history",
+    "clear": "Clear history"
+  }
+}

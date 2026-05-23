@@ -1,0 +1,63 @@
+{
+  "title": "个税计算器",
+  "description": "中国个税累计预扣预缴模型：12 月月度税表、7 级综合所得税率、专项附加扣除、年终奖单独/合并计税对比",
+  "disclaimer": "本工具仅供估算参考，不构成税务建议；实际应缴税款以税务部门为准。计算依据 2019 年起施行的综合所得 7 级超额累进税率，年终奖单独计税政策（财税〔2018〕164 号及后续延期）。",
+  "section": {
+    "basic": "基础信息",
+    "itemized": "专项附加扣除",
+    "bonus": "年终奖",
+    "summary": "年度合计",
+    "monthly": "月度累计预扣表",
+    "brackets": "7 级税率参考"
+  },
+  "field": {
+    "monthlyPretax": "月度税前工资 (¥)",
+    "insurance": "五险一金",
+    "insuranceHint": "扣除从税前工资中预扣的部分",
+    "insuranceModeRate": "按比例",
+    "insuranceModeAmount": "按金额",
+    "perMonth": "月",
+    "yearEndBonus": "年终奖（全年一次性奖金，可选）"
+  },
+  "itemized": {
+    "childEducation": "子女教育",
+    "babyCare": "3 岁以下婴幼儿照护",
+    "continuingEducation": "继续教育",
+    "housingLoan": "住房贷款利息（首套）",
+    "housingRent": "住房租金",
+    "cityA": "一线城市",
+    "cityB": "省会等二线",
+    "cityC": "其他城市",
+    "elderlySupport": "赡养老人",
+    "elderlySole": "独生子女",
+    "elderlyShared": "非独，分摊",
+    "perChild": "月/孩",
+    "childCount": "孩数"
+  },
+  "bonus": {
+    "singleTax": "单独计税：年终奖税额",
+    "mergedDelta": "合并计税：年终奖部分税额增量",
+    "betterBy": "✓ 比另一方少 ¥{{amount}}",
+    "computingHint": "请填写月薪以对比合并方案",
+    "hint": "2027 年前年终奖可继续选择单独计税；并入综合所得后按 7 级累进。两种方式哪种更省视个人情况而定。"
+  },
+  "summary": {
+    "annualPretax": "年度税前收入",
+    "totalDeductions": "总扣除（含基本+社保+专项）",
+    "annualTax": "全年合计税额",
+    "takeHome": "年度税后实发（含年终奖）",
+    "taxableAnnual": "年应纳税所得额",
+    "topRate": "适用最高档税率"
+  },
+  "table": {
+    "month": "月",
+    "pretax": "税前工资",
+    "insurance": "社保扣除",
+    "cumulativeTaxable": "累计应纳税所得额",
+    "monthlyTax": "当月预扣税",
+    "takeHome": "实发到手",
+    "range": "年应纳税所得额范围",
+    "rate": "税率",
+    "quickDeduct": "速算扣除数"
+  }
+}

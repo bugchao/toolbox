@@ -1,0 +1,31 @@
+{
+  "title": "File Splitter / Merger",
+  "description": "Split a file by byte size or part count into .part fragments; merge multiple parts back. All in-browser",
+  "loading": "Loading…",
+  "disclaimer": "Everything runs locally: File.slice for split, Blob for merge. Files are never uploaded.",
+  "tab": {
+    "split": "Split",
+    "merge": "Merge"
+  },
+  "split": {
+    "choose": "Click or drag to choose a file to split",
+    "modeLabel": "Mode",
+    "bySize": "By size",
+    "byCount": "By count",
+    "partSize": "Part size",
+    "partCount": "Parts",
+    "preview": "Will be cut into {{count}} parts, each ~{{each}}{{last, select, undefined { · last {{last}}} other { · last {{last}}}}}",
+    "partsList": "Parts preview",
+    "morePartsHidden": "{{n}} more not shown",
+    "downloadZip": "Download as ZIP",
+    "downloadEach": "Download each"
+  },
+  "merge": {
+    "choose": "Click or drag to choose multiple part files",
+    "tip": "Files are sorted numerically by name; adjust below if needed",
+    "partsTitle": "{{count}} parts · {{size}} total",
+    "clearAll": "Clear",
+    "outputName": "Merged file name",
+    "run": "Merge & download"
+  }
+}

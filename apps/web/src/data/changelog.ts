@@ -18,12 +18,245 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
-    date: '2026-05-18',
+    date: '2026-05-24',
     title: {
-      zh: '谁是卧底上线 —— 社交游戏分类扩展',
-      en: 'Undercover launched — Social Games category grows',
+      zh: '新增 /bird-smash 弹弓物理小游戏 + manifest 校验脚本',
+      en: 'New /bird-smash physics game + manifest consistency check script',
     },
     items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /bird-smash 愤怒的小鸟（Bird Smash）：基于 Matter.js 物理引擎 + zustand 状态管理的 2D 弹弓游戏，拖拽小鸟瞄准发射，摧毁木箱 / 石块 / 玻璃打败敌人；归入「社交游戏」分类，自动从 manifest 注册无需改 nav。',
+          en: 'New /bird-smash (Angry Birds clone): 2D slingshot game built on Matter.js physics + zustand store; drag birds to aim and launch, destroy wood / stone / glass to defeat enemies; auto-registered into the Social Games category via manifest.',
+        },
+        paths: ['/bird-smash'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: 'scripts/validate-manifests.ts：manifest-first 体系一致性校验脚本（440 行），覆盖 nav locale 是否齐全 / 路径与 namespace 唯一性 / manifest 必填字段 / loadMessages 引用文件存在性；任一规则不通过即 exit 1，可挂 CI 防回归。',
+          en: 'scripts/validate-manifests.ts: manifest-first consistency checker (440 lines) — verifies nav locale coverage, path & namespace uniqueness, required manifest fields, and loadMessages target existence; exits 1 on any violation, ready for CI.',
+        },
+        paths: [],
+        extraLabels: [{ zh: '工程化', en: 'Tooling' }],
+      },
+    ],
+  },
+  {
+    date: '2026-05-22',
+    title: {
+      zh: '新增 /xml-formatter XML 格式化',
+      en: 'New /xml-formatter',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /xml-formatter XML 格式化：浏览器原生 DOMParser 解析，自写递归序列化器（缩进 2/4/Tab 可选、简单文本元素 inline 输出、可选保留注释、CDATA & PI 透传）；压缩模式可选移除注释；校验模式显示元素节点数；XML 声明（<?xml ... ?>）自动保留；解析失败时定位行列号并显示错误片段。',
+          en: 'New /xml-formatter: parse with native DOMParser, custom recursive serializer (2 / 4 / Tab indent, inline simple text elements, optional comment retention, CDATA & PI passthrough); minify can drop comments; validate reports element count; XML declaration preserved; parse errors show line/column with snippet.',
+        },
+        paths: ['/xml-formatter'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /file-hash-check 文件哈希校验：拖拽 / 多文件批量；MD5 用 RFC 1321 纯 JS 实现（Web Crypto 不支持），SHA-1/SHA-256/SHA-512 走 crypto.subtle.digest；预期哈希按长度自动识别算法（32/40/64/128 hex）；命中算法行用 emerald 高亮、不匹配用 red 高亮；批量复制单个 hash + 一键下载全部为 txt；文件不上传。',
+          en: 'New /file-hash-check: drag-drop / multi-file batch; MD5 implemented in pure JS per RFC 1321 (Web Crypto does not ship MD5), SHA-1 / SHA-256 / SHA-512 via crypto.subtle.digest; expected hash detected by hex length (32/40/64/128); matching row highlighted emerald, mismatching red; per-hash copy + bulk download as txt; files never uploaded.',
+        },
+        paths: ['/file-hash-check'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /md-table-gen Markdown 表格生成器：可视化网格编辑（每单元格 input、行列上下左右移动、删除、列对齐左/中/右）；从 CSV / TSV / JSON（对象数组）/ Markdown 双向解析导入（含 RFC 4180 引号转义解析）；实时输出 MD / CSV / TSV / JSON 四种格式；复制 + 下载（按格式自动选 mime 与扩展名）。状态本地持久化。',
+          en: 'New /md-table-gen: visual grid editor (per-cell input, row/column move + delete, column alignment L/C/R); import from CSV / TSV / JSON (array of objects) / Markdown with RFC 4180-compliant quote parsing; live output in MD / CSV / TSV / JSON; copy + download with mime auto-selection. State persisted locally.',
+        },
+        paths: ['/md-table-gen'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /zip-extractor ZIP 在线解压：JSZip 在浏览器本地解析压缩包，文件树折叠展开浏览，按扩展名自动选择预览方式（文本用 <pre> 等宽 / 图片用 <img>），不可预览的二进制文件提示下载；每个文件支持单独下载；并行解压获取真实大小；不支持 RAR。',
+          en: 'New /zip-extractor: parse ZIP archives locally via JSZip; browse with a collapsible tree; auto-preview by extension (text via monospace `<pre>`, images via `<img>`); binary files prompt direct download; per-file download supported; parallel size resolution; RAR not supported.',
+        },
+        paths: ['/zip-extractor'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /duplicate-finder 重复文件检测：拖入多个文件后先按 size 预分组（不同大小必然不同），仅对同 size 组并发 6 路 SHA-256 哈希；按 hash 聚类后展示重复组（按可释放空间降序），每组用单选标"保留"自动反推"删除"；右上角 4 项 stat 卡（总数 / 重复组 / 可释放 / 哈希中）；CSV 报告导出 file_name / size / sha256 / group / action。',
+          en: 'New /duplicate-finder: pre-group by size (different sizes are never duplicates), then concurrently SHA-256 only files within same-size buckets (6 workers); group by hash and sort duplicates by reclaimable size descending; per-group radio chooses which to keep (others auto "delete"); 4 stat cards (total / dup groups / reclaimable / hashing); CSV report with file_name / size / sha256 / group / action.',
+        },
+        paths: ['/duplicate-finder'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /file-splitter 大文件分割合并：分割 tab 按字节数（KB/MB/GB）或份数切分，预览分片列表（最多 30 条 + "还有 N 份未显示"提示），可打包成 ZIP 一键下载或逐个下载（每个延迟 80ms 避免浏览器阻塞）；合并 tab 多选 part，按文件名数字感知排序（localeCompare numeric），可手动上下移动调序，输出名自动从首个 part 猜测（去掉 .NNN 或 .partNN 后缀）；Blob 拼接生成最终文件。全程本地。',
+          en: 'New /file-splitter: Split tab cuts by byte size (KB/MB/GB) or part count, previews up to 30 parts with "{n} more not shown" hint, downloads as one ZIP or individually (80ms staggered); Merge tab natural-sorts multi-selected parts (numeric localeCompare), allows manual reorder, auto-guesses output name by stripping .NNN/.partNN suffix; Blob concatenation builds the final file. All local.',
+        },
+        paths: ['/file-splitter'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-21',
+    title: {
+      zh: '新增 /item-locator 物品放置记录',
+      en: 'New /item-locator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /item-locator 物品放置记录：用于记录衣物 / 手表 / 文档 / 电子产品等日常物品到底放在哪里。预设 13 个类型（衣物/鞋包/首饰手表/电子/文档/化妆/工具/药品/食品/书籍/玩具/装饰/其他）× 12 个场景（卧室/客厅/厨房/书房/储物间/阳台/卫生间/办公室/车里/仓储/朋友处/其他场所），双维筛选 + 标签 + 备注；全文搜索覆盖名称/位置/标签/备注；增删改 + JSON 导入导出（覆盖前二次确认）；全部数据本地存储。',
+          en: 'New /item-locator: track where you put clothes / watches / documents / electronics. Built-in 13 categories × 12 scenarios two-axis filtering with tags + notes; full-text search across name / location / tags / note; CRUD + JSON import / export (with overwrite confirm); all data stays local.',
+        },
+        paths: ['/item-locator'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /fake-data-gen 测试数据生成器：32 种字段类型（ID/个人/地址/公司/网络/金融/数值/文本/时间/自定义 10 大类）+ 用户/订单/产品/员工 4 套预设模板；JSON / CSV / SQL Insert / TypeScript 四种输出；最高 10000 行；数值字段支持 min/max/精度，枚举/固定值字段支持自定义配置；全部使用 crypto.getRandomValues 均匀随机；字段可上下移动、删除。',
+          en: 'New /fake-data-gen: 32 field types (ID / Person / Address / Company / Web / Finance / Numeric / Text / Time / Custom — 10 groups) + 4 presets (User / Order / Product / Employee); 4 output formats (JSON / CSV / SQL Insert / TypeScript); up to 10,000 rows; numeric fields support min/max/precision, enum/static support custom config; all randomness uses crypto.getRandomValues; fields support reorder and delete.',
+        },
+        paths: ['/fake-data-gen'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-20',
+    title: {
+      zh: '节日倒计时上线 + 修复 17 个 DNS 工具描述显示 key 字面量',
+      en: 'Holiday Countdown launched + fixed 17 DNS tool descriptions showing literal i18n keys',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /holiday-countdown 节日倒计时：内置 24 个节日（公历 16 个 + 农历 8 个，覆盖元旦 / 春节 / 元宵 / 龙抬头 / 清明 / 劳动 / 端午 / 七夕 / 中秋 / 重阳 / 国庆 / 圣诞 等），农历用 2026-2030 五年公历对照表预存；自定义日期支持「年度重复」（生日/纪念日）或「一次性」（过期消失）；按剩余时间升序排列，每分钟自动刷新；卡片色调按紧急度变红（≤1 天）/ 黄（≤7 天）/ 蓝（更远）；可隐藏内置节日并随时恢复。',
+          en: 'New /holiday-countdown: 24 built-in holidays (16 Gregorian + 8 lunar, covering Chinese New Year, Lantern, Qingming, Dragon Boat, Qixi, Mid-Autumn, Double Ninth, National Day, Christmas, etc.); lunar dates precomputed as a 2026-2030 LUT; custom dates support "yearly recurring" (birthdays/anniversaries) or "one-off" (auto-removed when past); cards sorted by days remaining, updated every minute; accent color shifts red (≤1 day) / amber (≤7 days) / indigo (further); built-in holidays can be hidden and restored.',
+        },
+        paths: ['/holiday-countdown'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '首页修复：17 个 DNS 工具描述不再露出 `toolDesc.dns_xxx` 字面量。getToolDescription 在最后一档加安全网（key 缺失返回空串而非 key 自身），同时为 home.toolDesc 补齐 dns_global_check / dns_performance / dns_ttl / dns_soa / dns_diagnose / dns_pollution_check / dns_hijack_check / dns_cache_check / dns_loop_check / dns_ns / dns_cname_chain / dns_nxdomain / dns_latency / dns_authoritative / dns_recursive / dns_path_viz / dns_tunnel 共 17 条中英描述。',
+          en: 'Home page fix: 17 DNS tools no longer leak `toolDesc.dns_xxx` literal keys. Added a safety net in getToolDescription (returns empty when the key is missing instead of the key itself), and filled in zh/en descriptions for the 17 missing entries under home.toolDesc.',
+        },
+        paths: [],
+        extraLabels: [
+          { zh: '首页 DNS 描述修复', en: 'Home DNS desc fix' },
+        ],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: 'AES 加解密修复：GCM 模式 additionalData 字段在「存在但值为 undefined」时 Chrome 抛 "AeadParams: additionalData: Not a BufferSource"。改为条件展开，只在 AAD 实际有内容时挂上字段。',
+          en: 'AES Cipher fix: in Chrome, GCM\'s additionalData field throws "AeadParams: additionalData: Not a BufferSource" when present-but-undefined. Now conditionally added only when AAD actually has content.',
+        },
+        paths: ['/aes-cipher'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /trash-classifier 垃圾分类助手：内置 ~110 条常见品目（可回收 30 / 湿垃圾 28 / 干垃圾 29 / 有害 20）+ 同义词别名；模糊匹配按相关度评分（完全匹配 100 / 别名匹配 95 / 包含 80 / 含别名 70 / 反向包含 60）；随机抽题 + 4 大类浏览全表 + 自定义补录 + 搜索历史；结果卡显示分类徽章 + emoji + 提示语。',
+          en: 'New /trash-classifier: ~110 built-in items across 4 categories (recyclable 30 / wet 28 / dry 29 / hazardous 20) with synonym aliases; fuzzy match with relevance scoring; random draw + browse-by-category + custom entries + search history; result card shows category badge + emoji + disposal hint.',
+        },
+        paths: ['/trash-classifier'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '节日倒计时升级：自定义日期支持「公历 / 农历」切换；农历用 2026-2030 五年公历对照表（含 2028 闰五月），按年自动循环；点击节日名称弹出排期 modal，展示未来若干年的日期 + 星期 + 距今天数，最近一次高亮，支持 X / 遮罩 / Esc 三路关闭。',
+          en: 'Holiday Countdown upgrade: custom dates can now switch between Gregorian and Lunar; lunar uses a 2026-2030 LUT (incl. 2028 leap month 5) and auto-cycles yearly; clicking a holiday name opens a schedule modal showing upcoming years\' dates + weekday + days-from-now, the nearest one highlighted, closable via X / backdrop / Esc.',
+        },
+        paths: ['/holiday-countdown'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-19',
+    title: {
+      zh: '三工具并行交付：矩阵计算器 / 体重记录 / Meta 标签生成器',
+      en: 'Three tools shipped in parallel: Matrix Calculator / Weight Tracker / Meta Tag Generator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /matrix-calc 矩阵计算器：2x2 ~ 10x10 矩阵 A/B 自由编辑；单目运算（转置、行列式、逆矩阵、秩、迹）+ 双目运算（加减乘）+ 标量乘；行列式用 LU 分解 + 部分主元法，逆矩阵用 Gauss-Jordan 增广消元，秩用行阶梯形主元计数；维度不合法自动禁用对应按钮并提示原因；结果区按矩阵/标量/错误三态渲染，浮点近零阈值 1e-10。',
+          en: 'New /matrix-calc: edit two matrices A/B (2x2–10x10); unary ops (transpose, determinant, inverse, rank, trace) + binary ops (add/sub/mul) + scalar multiply; determinant via LU with partial pivoting, inverse via Gauss-Jordan on the augmented matrix, rank by counting pivots in row-echelon form; ops disable themselves with reason tooltips when dims do not match; near-zero threshold 1e-10.',
+        },
+        paths: ['/matrix-calc'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /weight-tracker 体重记录：日期 + 体重 + 备注每日记录（同日覆盖确认）；4 项概览（当前/7 日均值/累计变化/距目标）；SVG 折线图按真实日期间距绘点（不是 index 等距）；动态 BMI 四级分类（偏瘦/正常/超重/肥胖）含颜色徽章；目标进度条同时支持减重与增重；kg/lb 单位切换只换显示不动存储；身高、目标、单位、历史全部本地持久化。',
+          en: 'New /weight-tracker: log date + weight + note daily (same-day overwrite confirm); 4 summary cards (current / 7-day avg / total change / to-goal); SVG trend chart plots by real date spacing (not index); live BMI four-tier classification (underweight / normal / overweight / obese) with colored badge; goal progress bar handles both weight-loss and weight-gain; kg/lb switches display only, storage stays in kg; height, target, unit and history all persisted locally.',
+        },
+        paths: ['/weight-tracker'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /meta-tag-gen Meta 标签生成器：基础 SEO + Open Graph + Twitter Card 三组标签一表填写；实时预览 Google 搜索片段 / Twitter 卡片 / Facebook 卡片三种社交分享样式；title/description 字符计数（≤60/≤160 超出转红）；所有动态字段经 HTML escape，预览不会被注入；OG/Twitter 留空自动 fallback 到基础字段；HTML 输出 monospace textarea + 复制 + 下载。',
+          en: 'New /meta-tag-gen: fill in SEO + Open Graph + Twitter Card tags in one form; live preview as Google search snippet / Twitter card / Facebook card; title/description character counters (≤60/≤160 turn red over limit); every dynamic value passes through HTML escape so the preview cannot be injected; OG / Twitter fields fall back to base fields when blank; HTML output in a monospace textarea with copy and download.',
+        },
+        paths: ['/meta-tag-gen'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-18',
+    title: {
+      zh: '社交游戏 ×3 + 个税计算器',
+      en: 'Social Games ×3 + China IIT Calculator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /tax-calc 个税计算器：基于 2019 年起综合所得 7 级超额累进税率，月度累计预扣预缴模型生成 12 个月预扣表；支持五险一金按比例或按金额输入；6 类专项附加扣除（子女教育/婴幼儿照护/继续教育/住房贷款/住房租金按城市等级/赡养老人独生 vs 分摊）实时聚合；年终奖单独 vs 合并计税自动对比并标出更优方案。',
+          en: 'New /tax-calc: China IIT calculator with the post-2019 7-tier progressive comprehensive-income brackets; 12-month cumulative-withholding table; social insurance configurable by rate or amount; six itemized deductions (child education, baby care, continuing ed, housing loan, housing rent by city tier, elderly support — only-child vs shared) auto-aggregated; year-end bonus single vs merged comparison highlights the better option.',
+        },
+        paths: ['/tax-calc'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /data-masking 数据脱敏：9 类内置规则（手机/身份证/邮箱/银行卡/IPv4/IPv6/MAC/车牌/JWT）一键开关，命中数实时显示在徽章上；支持自定义正则 + 替换模板（含 $1/$2 捕获组），无效正则即时报错；贪心算法去重叠匹配；左右双栏对照 + 复制/下载/"以脱敏结果替换原文"。全程本地处理。',
+          en: 'New /data-masking: 9 built-in rules (mobile / ID / email / bank-card / IPv4 / IPv6 / MAC / plate / JWT) toggleable with live hit-count badges; custom regex + replacement template ($1/$2 supported, invalid patterns flagged inline); greedy de-overlap algorithm; side-by-side input/output with copy, download and "use masked output as input". All client-side.',
+        },
+        paths: ['/data-masking'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /business-card 名片生成器：3 套模板（极简边线 / 侧栏色块 / 渐变现代）+ 调色板 + 8 个预设色；可选 vCard 二维码（扫码一键存通讯录）或站点 URL；标准 90×54 mm，html2canvas 4× 高清导出 PNG / jspdf 导出名片实际尺寸 PDF；状态本地持久化，下次进来字段都还在。',
+          en: 'New /business-card: 3 templates (minimal edge / side stripe / gradient modern) with a color picker and 8 presets; optional QR encodes a vCard (scan-to-save contact) or website URL; standard 90×54 mm card, html2canvas at 4× for print-quality PNG, jspdf exports an actual-size PDF; state persists locally so fields are kept across visits.',
+        },
+        paths: ['/business-card'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /aes-cipher AES 加解密：Web Crypto API 原生实现 AES-GCM / CBC / CTR 三种模式 × 128/192/256 位密钥；密钥源支持原始字节或 PBKDF2-SHA256 口令派生（默认 200,000 迭代）；随机或手动 IV，GCM 支持 AAD 附加认证数据；Base64/Hex/UTF-8 编码自由切换且字段间自动重新编码；密钥/口令/IV/明文密文均不持久化，刷新即清空。',
+          en: 'New /aes-cipher: native Web Crypto AES-GCM / CBC / CTR × 128/192/256-bit keys; key source can be raw bytes or PBKDF2-SHA256 from a passphrase (default 200,000 iterations); IV is random or manual, GCM supports AAD; Base64 / Hex / UTF-8 encodings switch freely with auto re-encoding between fields; key, passphrase, IV, plaintext and ciphertext are never persisted and wiped on refresh.',
+        },
+        paths: ['/aes-cipher'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /hmac-sign HMAC 签名：Web Crypto 原生 HMAC-SHA1/256/384/512；密钥与消息支持 UTF-8/Base64/Hex 编码，输出可选 Hex/Base64/Base64URL；双模式签名 + 验证，验证阶段使用常量时间比对避免 timing 侧信道；适合 API / Webhook 调试。',
+          en: 'New /hmac-sign: native Web Crypto HMAC-SHA1/256/384/512; key & message accept UTF-8/Base64/Hex encodings, output as Hex/Base64/Base64URL; dual sign + verify modes with constant-time comparison to avoid timing side-channels — ideal for API / webhook debugging.',
+        },
+        paths: ['/hmac-sign'],
+      },
       {
         type: 'added',
         summary: {
@@ -31,6 +264,22 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
           en: 'New /undercover-game (Spyfall-style): single-device party game, 35 built-in word pairs + custom pairs, configurable undercover count and optional Whiteboard role; pass-and-flip cards reveal each player\'s role and word privately; staged flow setup → reveal → discuss → vote → reveal-elim → ended with automatic winner detection; in-progress state persists across refresh.',
         },
         paths: ['/undercover-game'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /guess-number 猜数字：双模式（电脑出题 / 朋友设题），可调范围、二分提示、命中即时统计次数与用时；自动记录每个范围下的历史最佳；达到理论极限（⌈log₂(range)⌉）时给"最优解"褒奖。',
+          en: 'New /guess-number: two modes (computer picks / friend sets), adjustable range, binary-style hint, per-range best-score history; awards an "optimal" badge when you match the theoretical bound ⌈log₂(range)⌉.',
+        },
+        paths: ['/guess-number'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /werewolf 狼人杀：单设备发牌器，9 种经典角色（村民/狼人/狼王/预言家/女巫/猎人/守卫/白痴/丘比特），各带技能说明；自由配比 + 平衡校验（狼人不得多于好人、至少 4 人）；shuffle 后 pass-and-flip 私密分发身份卡，适合线下当面玩主持。',
+          en: 'New /werewolf: single-device role dealer for in-person play. Nine classic roles (Villager / Werewolf / Wolf King / Seer / Witch / Hunter / Guard / Idiot / Cupid) with full skill descriptions; free composition with balance validation; shuffled pass-and-flip reveal so each player sees only their card.',
+        },
+        paths: ['/werewolf'],
       },
     ],
   },

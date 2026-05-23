@@ -1,0 +1,32 @@
+{
+  "title": "测试数据生成器",
+  "description": "批量生成姓名/邮箱/手机/地址/公司等假数据；JSON / CSV / SQL Insert / TypeScript 多格式输出",
+  "loading": "加载中…",
+  "control": {
+    "count": "行数",
+    "format": "格式",
+    "table": "表名",
+    "preset": "模板",
+    "generate": "生成 {{count}} 行",
+    "generating": "生成中…"
+  },
+  "schema": {
+    "title": "字段定义",
+    "addField": "添加字段",
+    "removeField": "删除字段",
+    "fieldName": "字段名",
+    "empty": "尚未定义字段，点击「添加字段」或使用上方预设模板"
+  },
+  "config": {
+    "daysRange": "范围(天)",
+    "enumPlaceholder": "选项 1, 选项 2, 选项 3…",
+    "staticPlaceholder": "固定值"
+  },
+  "output": {
+    "title": "输出结果",
+    "placeholder": "点击底部「生成」按钮开始生成数据…",
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "title": "Markdown Table Generator",
+  "description": "Visual editor + CSV/TSV/JSON/Markdown conversion + column alignment + live output, all local",
+  "loading": "Loading…",
+  "action": {
+    "addRow": "Add row",
+    "addCol": "Add column",
+    "import": "Import",
+    "sample": "Sample",
+    "clear": "Clear",
+    "removeRow": "Remove row",
+    "removeCol": "Remove column",
+    "rowUp": "Move up",
+    "rowDown": "Move down",
+    "colLeft": "Move left",
+    "colRight": "Move right"
+  },
+  "import": {
+    "format": "Format",
+    "placeholder_csv": "name,age,city\nAlice,28,Beijing\nBob,35,Shanghai",
+    "placeholder_tsv": "name\\tage\\tcity\nAlice\\t28\\tBeijing",
+    "placeholder_json": "[\n  { \"name\": \"Alice\", \"age\": 28 },\n  { \"name\": \"Bob\", \"age\": 35 }\n]",
+    "placeholder_md": "| name | age |\n|:---|:---:|\n| Alice | 28 |",
+    "confirm": "Import",
+    "error": "Parse failed — check the format"
+  },
+  "editor": {
+    "stats": "{{rows}} rows × {{cols}} cols"
+  },
+  "output": {
+    "title": "Output",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "title": "File Hash Checker",
+  "description": "Compute MD5 / SHA-1 / SHA-256 / SHA-512 locally; multi-file batch, auto-match expected hash, copy & download",
+  "loading": "Loading…",
+  "disclaimer": "Files never leave your browser: MD5 is implemented in pure JS, SHA-* via Web Crypto API. Everything runs locally.",
+  "drop": {
+    "hint": "Drag files here, or click the button to choose",
+    "choose": "Choose files"
+  },
+  "compare": {
+    "label": "Expected hash",
+    "hint": "(algorithm auto-detected by length)",
+    "placeholder": "Paste expected hex hash — e.g. SHA-256 from a download page…",
+    "detected": "Detected: {{algo}}",
+    "unknown": "Not a valid hex hash string"
+  },
+  "entries": {
+    "title": "Hashed files",
+    "downloadAll": "Download results",
+    "clearAll": "Clear"
+  },
+  "row": {
+    "remove": "Remove",
+    "copy": "Copy",
+    "matched": "{{algo}} match ✓",
+    "mismatch": "{{algo}} mismatch ✗"
+  }
+}

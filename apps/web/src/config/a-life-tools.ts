@@ -7,7 +7,7 @@ import {
   CreditCard, Flame, UtensilsCrossed, Coins, Flag, ClipboardCheck, PlaneTakeoff,
   Percent, Watch, Milestone, Luggage, ChefHat, Moon, Droplets, Footprints,
   PersonStanding, Dumbbell, CalendarRange, Palette, Code2, HeartPulse,
-  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock, Ticket, Home
+  TimerOff, ListChecks, Backpack, SplitSquareHorizontal, Heart, Clock, Ticket, Home, Scale, CalendarHeart, Recycle, Boxes,
 } from 'lucide-react'
 
 export const LIFE_TOOLS: ToolEntry[] = [
@@ -23,6 +23,11 @@ export const LIFE_TOOLS: ToolEntry[] = [
 
   // 财务工具（5 个）
   { path: '/salary-calc', nameKey: 'tools.salary_calc', icon: DollarSign, categoryKey: 'life', keywords: ['工资', '税后', '五险一金', '个税'], i18nNamespace: 'toolSalaryCalc' },
+  { path: '/tax-calc', nameKey: 'tools.tax_calc', icon: Receipt, categoryKey: 'life', keywords: ['个税', '所得税', '专项附加', '年终奖', 'iit', 'tax'] },
+  { path: '/weight-tracker', nameKey: 'tools.weight_tracker', icon: Scale, categoryKey: 'life', keywords: ['体重', '减肥', 'BMI', '健康', '记录', 'weight', 'tracker'] },
+  { path: '/holiday-countdown', nameKey: 'tools.holiday_countdown', icon: CalendarHeart, categoryKey: 'life', keywords: ['节日', '倒计时', '生日', '纪念日', '春节', '中秋', 'countdown', 'holiday'] },
+  { path: '/trash-classifier', nameKey: 'tools.trash_classifier', icon: Recycle, categoryKey: 'life', keywords: ['垃圾分类', '环保', '可回收', '湿垃圾', '干垃圾', '有害', 'trash', 'recycle'] },
+  { path: '/item-locator', nameKey: 'tools.item_locator', icon: Boxes, categoryKey: 'life', keywords: ['物品', '存放', '位置', '记录', '衣物', '手表', '收纳', 'item', 'storage', 'inventory'] },
   { path: '/currency-converter', nameKey: 'tools.currency_converter', icon: ArrowLeftRight, categoryKey: 'life', keywords: ['汇率', '换算', '货币', '外汇'], i18nNamespace: 'toolCurrencyConverter' },
   { path: '/currency-history', nameKey: 'tools.currency_history', icon: ArrowLeftRight, categoryKey: 'life', keywords: ['汇率', '历史', '趋势', '货币'] },
   { path: '/expense-tracker', nameKey: 'tools.expense_tracker', icon: Receipt, categoryKey: 'life', keywords: ['记账', '支出', '消费', '财务'], i18nNamespace: 'toolExpenseTracker' },

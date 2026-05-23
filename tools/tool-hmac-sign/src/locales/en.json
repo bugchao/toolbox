@@ -1,0 +1,47 @@
+{
+  "title": "HMAC",
+  "description": "Native Web Crypto HMAC-SHA1/256/384/512 sign & verify, Base64/Hex/Base64URL output, constant-time compare",
+  "loading": "Loading…",
+  "disclaimer": "Sign & verify runs locally in your browser — keys and messages never leave your machine. Handy for API / webhook debugging.",
+  "running": "Working…",
+  "section": {
+    "config": "Algorithm config"
+  },
+  "field": {
+    "algorithm": "Hash algorithm",
+    "outputEncoding": "Signature encoding",
+    "mode": "Mode",
+    "key": "Key",
+    "keyEncoding": "Key encoding",
+    "message": "Message",
+    "messageEncoding": "Message encoding",
+    "expected": "Expected signature",
+    "output": "Result"
+  },
+  "action": {
+    "sign": "Sign",
+    "verify": "Verify"
+  },
+  "key": {
+    "random": "Random key",
+    "placeholder": "Enter key…"
+  },
+  "message": {
+    "placeholder": "Enter the message to sign…"
+  },
+  "verify": {
+    "placeholder": "Paste the signature to verify (must match the output encoding above)",
+    "hint": "Comparison is constant-time and only reports match / mismatch.",
+    "match": "Signature matches ✓",
+    "mismatch": "Signature does not match ✗"
+  },
+  "output": {
+    "placeholder": "Signature will appear here"
+  },
+  "copy": "Copy",
+  "copied": "Copied",
+  "errors": {
+    "noKey": "Enter a key",
+    "noExpected": "Paste the expected signature"
+  }
+}

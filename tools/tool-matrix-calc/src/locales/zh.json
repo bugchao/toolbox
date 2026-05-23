@@ -1,0 +1,44 @@
+{
+  "title": "矩阵计算器",
+  "description": "常用矩阵运算：加减、乘法、转置、行列式、逆矩阵、秩、迹；支持 2x2 ~ 10x10",
+  "loading": "加载中…",
+  "disclaimer": "所有计算在浏览器本地完成，矩阵数据不会上传。",
+  "matrix": {
+    "matrixA": "矩阵 A",
+    "matrixB": "矩阵 B",
+    "rows": "行",
+    "cols": "列",
+    "clear": "清零",
+    "identity": "单位矩阵",
+    "random": "随机填充",
+    "scalar": "标量 k"
+  },
+  "op": {
+    "section": {
+      "unary": "单目运算（仅 A）",
+      "binary": "双目运算（A 与 B）",
+      "scalar": "标量运算"
+    },
+    "transpose": "转置 Aᵀ",
+    "det": "行列式 det(A)",
+    "inverse": "逆矩阵 A⁻¹",
+    "rank": "秩 rank(A)",
+    "trace": "迹 tr(A)",
+    "add": "A + B",
+    "sub": "A - B",
+    "mul": "A × B",
+    "scalarMul": "k × A"
+  },
+  "result": {
+    "title": "结果",
+    "empty": "选择一个运算开始",
+    "scalarLabel": "= "
+  },
+  "errors": {
+    "notSquare": "{{op}} 仅适用于方阵",
+    "dimMismatch": "{{op}} 维度不匹配（{{a}} 与 {{b}}）",
+    "singular": "矩阵奇异，不存在逆矩阵",
+    "mulMismatch": "A 的列数 ({{aCols}}) 必须等于 B 的行数 ({{bRows}})",
+    "invalidNumber": "存在无效数字，请检查输入"
+  }
+}

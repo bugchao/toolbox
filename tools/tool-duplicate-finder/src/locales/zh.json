@@ -1,0 +1,34 @@
+{
+  "title": "重复文件检测",
+  "description": "选多个文件，本地 SHA-256 哈希按内容分组找出重复；标记保留 / 删除并导出清理报告",
+  "loading": "加载中…",
+  "disclaimer": "全部在本地浏览器计算（Web Crypto + size 预过滤）；浏览器只读取文件内容，不会上传。建议批量勾选保留后用文件系统手动删除。",
+  "drop": {
+    "hint": "拖拽多个文件到此区域",
+    "tip": "先按文件大小预分组，仅对同大小的文件计算 SHA-256，避免无谓哈希",
+    "choose": "选择文件"
+  },
+  "stats": {
+    "total": "总文件",
+    "dupGroups": "重复组",
+    "canFree": "可释放",
+    "hashing": "正在哈希",
+    "done": "已完成"
+  },
+  "groups": {
+    "title": "重复组",
+    "summary": "{{count}} 个相同文件 · 每个 {{size}} · 可释放 {{waste}}",
+    "exportCsv": "导出报告",
+    "clearAll": "清空",
+    "keep": "保留",
+    "delete": "删除"
+  },
+  "unique": {
+    "title": "唯一文件"
+  },
+  "action": {
+    "download": "下载",
+    "remove": "从列表移除"
+  },
+  "emptyHint": "拖入文件开始检测重复"
+}

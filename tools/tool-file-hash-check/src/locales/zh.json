@@ -1,0 +1,28 @@
+{
+  "title": "文件哈希校验",
+  "description": "本地计算 MD5 / SHA-1 / SHA-256 / SHA-512；支持多文件批量、预期哈希自动比对、复制下载",
+  "loading": "加载中…",
+  "disclaimer": "文件不会上传：MD5 用纯 JS 实现，SHA 系列用浏览器 Web Crypto API，全部在本地浏览器完成。",
+  "drop": {
+    "hint": "拖拽文件到此区域，或点击下方按钮选择",
+    "choose": "选择文件"
+  },
+  "compare": {
+    "label": "预期哈希",
+    "hint": "（按长度自动识别算法）",
+    "placeholder": "粘贴期望的 hex 哈希，例如：从官网下载页复制的 SHA-256…",
+    "detected": "识别到：{{algo}}",
+    "unknown": "不是有效的 hex 哈希字符串"
+  },
+  "entries": {
+    "title": "已计算文件",
+    "downloadAll": "下载结果",
+    "clearAll": "清空"
+  },
+  "row": {
+    "remove": "移除",
+    "copy": "复制",
+    "matched": "{{algo}} 匹配 ✓",
+    "mismatch": "{{algo}} 不匹配 ✗"
+  }
+}

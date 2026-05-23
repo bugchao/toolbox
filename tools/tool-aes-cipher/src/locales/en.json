@@ -1,0 +1,64 @@
+{
+  "title": "AES Cipher",
+  "description": "Native Web Crypto AES-GCM / CBC / CTR; 128/192/256-bit keys; PBKDF2 passphrase derivation; random IV; Base64 / Hex I/O",
+  "loading": "Loading…",
+  "disclaimer": "Everything runs locally in your browser — keys and passphrases never leave your machine, and are wiped on refresh. Store keys, IVs, and salts safely yourself.",
+  "running": "Working…",
+  "section": {
+    "algorithm": "Algorithm",
+    "key": "Key",
+    "iv": "IV / Nonce"
+  },
+  "field": {
+    "mode": "Mode",
+    "bits": "Key size",
+    "direction": "Direction",
+    "keyEncoding": "Key encoding",
+    "ivEncoding": "IV / Salt encoding",
+    "outputEncoding": "Ciphertext encoding"
+  },
+  "mode": {
+    "gcmHint": "recommended · authenticated",
+    "cbcHint": "uses PKCS#7 padding",
+    "ctrHint": "stream, no padding"
+  },
+  "action": {
+    "encrypt": "Encrypt",
+    "decrypt": "Decrypt"
+  },
+  "key": {
+    "passphrase": "Passphrase (PBKDF2)",
+    "raw": "Raw key",
+    "passphrasePlaceholder": "Enter passphrase…",
+    "saltPlaceholder": "Salt (required when decrypting)",
+    "saltRandom": "Random salt",
+    "iterationsTitle": "PBKDF2 iterations",
+    "passphraseHint": "Key derived from passphrase + salt via PBKDF2-SHA256 (default 200,000 iterations). Decryption needs the same salt and iteration count.",
+    "rawPlaceholder": "{{bytes}}-byte raw key",
+    "rawRandom": "Random key"
+  },
+  "iv": {
+    "placeholder": "{{bytes}}-byte IV",
+    "random": "Random IV",
+    "useAad": "Additional Authenticated Data (GCM only)",
+    "aadPlaceholder": "Plain text AAD (not encrypted but authenticated)"
+  },
+  "io": {
+    "plaintext": "Plaintext (UTF-8)",
+    "ciphertext": "Ciphertext",
+    "plaintextPlaceholder": "Enter plaintext to encrypt…",
+    "ciphertextPlaceholder": "Paste ciphertext…",
+    "outputPlaceholder": "Result will appear here"
+  },
+  "copy": "Copy",
+  "copied": "Copied",
+  "errors": {
+    "noPassphrase": "Enter a passphrase",
+    "noSaltDecrypt": "Salt is required for decryption",
+    "noRawKey": "Enter a raw key",
+    "keyLenMismatch": "Key length {{actual}} bytes does not match the chosen {{expected}} bytes",
+    "noIvDecrypt": "IV is required for decryption",
+    "ivLenMismatch": "IV length {{actual}} bytes; must be {{expected}} bytes",
+    "decryptFail": "Decryption failed: key, IV, salt or ciphertext mismatch (GCM auth failure also lands here)"
+  }
+}

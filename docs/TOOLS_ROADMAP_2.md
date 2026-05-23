@@ -67,17 +67,18 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | 文件批量重命名 | `/batch-rename` | 待开发 | P1 | 批量重命名文件 |
-| 文件哈希校验 | `/file-hash-check` | 待开发 | P2 | 文件完整性校验 |
-| ZIP 在线解压 | `/zip-extractor` | 待开发 | P2 | 在线解压 ZIP/RAR |
-| 文件分割合并 | `/file-splitter` | 待开发 | P2 | 大文件分割与合并 |
-| 重复文件检测 | `/duplicate-finder` | 待开发 | P2 | 检测重复文件 |
+| 文件哈希校验 | `/file-hash-check` | **已上线** | P2 | 拖拽 / 批量处理；MD5 纯 JS 实现 + SHA-1/256/512 走 Web Crypto；预期哈希按长度自动识别算法；命中/不匹配色块标记 |
+| ZIP 在线解压 | `/zip-extractor` | **已上线** | P2 | JSZip 本地解析、文件树折叠浏览、文本/图片自动预览、单文件下载；不支持 RAR |
+| 文件分割合并 | `/file-splitter` | **已上线** | P2 | 双 tab（分割 / 合并）；File.slice 按 size 或份数切分，JSZip 打包下载 / 逐个下载；多 part 数字升序自动排序，可手动调序后 Blob 拼接合并；输出名自动猜测 |
+| 重复文件检测 | `/duplicate-finder` | **已上线** | P2 | size 预过滤 + 并发 6 路 SHA-256；重复组按可释放空间降序、单选保留、CSV 清理报告导出 |
 
 #### 生成器（5 个）
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | Logo 生成器 | `/logo-generator` | **已上线** | - | AI 生成 Logo（落位 `tools/tool-logo-generator`） |
-| 名片生成器 | `/business-card` | 待开发 | P1 | 在线名片设计 |
+| 名片生成器 | `/business-card` | **已上线** | P1 | 3 套模板（极简/侧栏色块/渐变现代）、调色板、自动 vCard 二维码、html2canvas 4× 高清导出 PNG/PDF |
+| Meta 标签生成器 | `/meta-tag-gen` | **已上线** | P1 | SEO + OG + Twitter Card 三套标签，Google/Twitter/Facebook 三种预览卡片，HTML escape + 字符计数 |
 | 海报生成器 | `/poster-maker` | 待开发 | P2 | 快速生成海报 |
 | 签名设计 | `/signature-design` | 待开发 | P2 | 艺术签名生成 |
 | 印章生成器 | `/seal-generator` | 待开发 | P2 | 电子印章生成 |
@@ -100,7 +101,7 @@
 |----------|----------|------|--------|------|
 | 代码差异对比 | `/code-diff` | **已上线** | - | 代码版本对比（落位 `tools/tool-code-diff`） |
 | SQL 格式化 | `/sql-formatter` | **已上线** | - | SQL 语句格式化（落位 `tools/tool-sql-formatter`） |
-| Markdown 表格生成器 | `/md-table-gen` | 待开发 | P2 | 快速生成 Markdown 表格 |
+| Markdown 表格生成器 | `/md-table-gen` | **已上线** | P2 | 可视化编辑 + CSV/TSV/JSON/MD 双向互转 + 列对齐 + 行列上下左右移动 + 实时多格式输出 |
 | Git Commit 生成器 | `/git-commit-gen` | 待开发 | P1 | AI 生成 Commit 信息 |
 | 代码行数统计 | `/code-counter` | 待开发 | P2 | 统计项目代码行数 |
 
@@ -109,9 +110,9 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | CSV 转 JSON | `/csv-to-json` | **已上线** | - | CSV 与 JSON 互转（落位 `tools/tool-csv-to-json`） |
-| XML 格式化 | `/xml-formatter` | 待开发 | P2 | XML 格式化与校验 |
-| 数据脱敏工具 | `/data-masking` | 待开发 | P1 | 敏感数据脱敏 |
-| 随机数据生成器 | `/fake-data-gen` | 待开发 | P2 | 生成测试数据 |
+| XML 格式化 | `/xml-formatter` | **已上线** | P2 | DOMParser 原生解析、自定义序列化、2/4/Tab 缩进、保留注释/CDATA/简单 inline、压缩可选去注释、错误行列定位 |
+| 数据脱敏工具 | `/data-masking` | **已上线** | P1 | 9 类内置规则（手机/身份证/邮箱/银行卡/IPv4/IPv6/MAC/车牌/JWT）+ 自定义正则、贪心去重叠、命中统计 |
+| 随机数据生成器 | `/fake-data-gen` | **已上线** | P2 | 32 种字段类型（ID/个人/地址/公司/网络/金融/数值/文本/时间/自定义），4 套预设模板，4 种输出格式（JSON/CSV/SQL/TS），最高 10000 行，crypto 随机 |
 | SQL 转 NoSQL | `/sql-to-nosql` | 待开发 | P2 | SQL 语句转 MongoDB 等 |
 
 #### 加密与安全（5 个）
@@ -119,9 +120,9 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | RSA 密钥生成 | `/rsa-keygen` | **已上线** | - | RSA 公私钥生成（落位 `tools/tool-rsa-keygen`） |
-| AES 加密解密 | `/aes-cipher` | 待开发 | P1 | AES 加密解密工具 |
+| AES 加密解密 | `/aes-cipher` | **已上线** | P1 | Web Crypto AES-GCM/CBC/CTR、128/192/256 位、PBKDF2 口令派生（200k 迭代）、随机 IV/Salt、Base64/Hex、GCM AAD |
 | 密码强度检测 | `/password-strength` | **已上线** | - | 密码安全评分（落位 `tools/tool-password-strength`） |
-| HMAC 签名工具 | `/hmac-sign` | 待开发 | P2 | HMAC 签名生成与验证 |
+| HMAC 签名工具 | `/hmac-sign` | **已上线** | P2 | Web Crypto HMAC-SHA1/256/384/512、Base64/Hex/Base64URL、签名/验证双模、常量时间比对 |
 | 证书解析工具 | `/cert-parser` | 待开发 | P2 | X.509 证书解析 |
 
 ### 生活工具（Life）- 15 个
@@ -130,7 +131,7 @@
 
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
-| 体重记录 | `/weight-tracker` | 待开发 | P1 | 体重变化趋势 |
+| 体重记录 | `/weight-tracker` | **已上线** | P1 | 每日记录 + SVG 趋势曲线（真实日期间距）+ 动态 BMI 四级分类 + 目标进度（支持减重/增重）+ kg/lb 切换 |
 | 血压记录 | `/blood-pressure` | 待开发 | P2 | 血压监测记录 |
 | 用药提醒 | `/medication-reminder` | 待开发 | P2 | 用药时间提醒 |
 | 健身计划生成器 | `/workout-planner` | 待开发 | P1 | AI 生成健身计划 |
@@ -141,8 +142,9 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | 快递查询 | `/express-tracker` | 待开发 | P0 | 快递物流查询 |
-| 垃圾分类助手 | `/trash-classifier` | 待开发 | P1 | 垃圾分类查询 |
-| 节日倒计时 | `/holiday-countdown` | 待开发 | P1 | 节日倒计时提醒 |
+| 垃圾分类助手 | `/trash-classifier` | **已上线** | P1 | 内置 ~110 条品目（可回收/湿/干/有害四类）+ 模糊匹配评分 + 随机抽题 + 自定义补录 + 浏览全表 + 搜索历史 |
+| 物品放置记录 | `/item-locator` | **已上线** | P1 | 13 类型 × 12 场景双维分类、全文搜索（名称/位置/标签/备注）、增删改、JSON 导入导出、本地存储 |
+| 节日倒计时 | `/holiday-countdown` | **已上线** | P1 | 内置 24 个节日（公历 + 农历 2026-2030 LUT）+ 自定义日期（一次性 / 年度循环）+ 按距离升序 + 每分钟刷新 |
 | 亲戚称呼计算器 | `/relative-name` | 待开发 | P2 | 亲戚关系称呼 |
 | 黄道吉日查询 | `/auspicious-day` | 待开发 | P2 | 黄历吉日查询 |
 
@@ -151,7 +153,7 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | 房贷计算器 | `/mortgage-calc` | **已上线** | - | 房贷月供计算（落位 `tools/tool-mortgage-calc`） |
-| 个税计算器 | `/tax-calc` | 待开发 | P1 | 个人所得税计算 |
+| 个税计算器 | `/tax-calc` | **已上线** | P1 | 累计预扣预缴 7 级综合所得 + 6 项专项附加扣除 + 年终奖单独/合并对比 + 12 月月度税表 |
 | 退休金计算器 | `/pension-calc` | 待开发 | P2 | 退休金估算 |
 | 基金收益计算 | `/fund-calc` | 待开发 | P2 | 基金收益计算 |
 | 股票收益计算 | `/stock-calc` | 待开发 | P2 | 股票收益计算 |
@@ -215,7 +217,9 @@
 | 骰子模拟器 | `/dice-roller` | **已上线** | P1 | 经典 1-6 点骰子，可选 1~12 颗，tumble 滚动动画，crypto 安全随机，历史与统计 |
 | 真心话大冒险 | `/truth-dare` | **已上线** | P1 | 4 档难度题库（≥48 条）、玩家轮转、自定义题目、crypto 抽题、本地持久化 |
 | 谁是卧底 | `/undercover-game` | **已上线** | P1 | 单设备多人桌游：随机词对+身份分配、pass-and-flip 翻牌、白板可选、自定义词对、自动判胜负 |
-| 猜数字游戏 | `/guess-number` | 待开发 | P2 | 猜数字小游戏 |
+| 猜数字游戏 | `/guess-number` | **已上线** | P2 | 单人/双人模式、可调范围、二分提示、历史最佳成绩 |
+| 狼人杀 | `/werewolf` | **已上线** | - | 单设备发牌器：9 种经典角色自由配比、pass-and-flip 私密看身份、平衡校验 |
+| 物理弹射小游戏 (Bird Smash) | `/bird-smash` | **已上线** | - | 2D 物理弹射网页游戏（落位 `tools/tool-bird-smash`），支持多种小鸟技能、木头/石头/玻璃建筑、关卡与星级 |
 | 打字速度测试 | `/typing-test` | 待开发 | P2 | 打字速度测试 |
 
 #### 生成器（5 个）
@@ -245,7 +249,7 @@
 | 工具名称 | 路由路径 | 状态 | 优先级 | 备注 |
 |----------|----------|------|--------|------|
 | 方程求解器 | `/equation-solver` | 待开发 | P0 | 一元二次方程求解 |
-| 矩阵计算器 | `/matrix-calc` | 待开发 | P1 | 矩阵运算 |
+| 矩阵计算器 | `/matrix-calc` | **已上线** | P1 | 加减乘转置、行列式（LU 部分主元）、逆矩阵（Gauss-Jordan）、秩、迹；2x2~10x10 |
 | 函数图像绘制 | `/function-plot` | 待开发 | P2 | 函数图像可视化 |
 | 几何图形计算 | `/geometry-calc` | 待开发 | P2 | 面积周长计算 |
 | 进制转换器 | `/base-converter` | **已上线** | - | 2/8/10/16 进制转换（落位 `tools/tool-base-converter`） |

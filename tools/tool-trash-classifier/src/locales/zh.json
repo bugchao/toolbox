@@ -1,0 +1,32 @@
+{
+  "title": "垃圾分类助手",
+  "description": "内置 100+ 常见品目，输入物品名查询所属四大类（可回收/湿/干/有害），支持模糊匹配、随机抽题、自定义补录",
+  "loading": "加载中…",
+  "disclaimer": "数据为常见品目人工整理，部分条目地方标准略有差异；以本地实际投放规则为准。",
+  "search": {
+    "placeholder": "输入物品名称（如 苹果皮、电池…）",
+    "random": "随机抽一个",
+    "notFound": "没有匹配到内置或自定义条目，可在下方「自定义」区手动补录。",
+    "related": "相关条目"
+  },
+  "result": {
+    "belongs": "应投放至",
+    "aliases": "别名"
+  },
+  "browse": {
+    "count": "{{count}} 条",
+    "entries": "条目",
+    "collapse": "折叠"
+  },
+  "custom": {
+    "title": "自定义条目",
+    "namePlaceholder": "物品名称",
+    "hintPlaceholder": "投放提示（可选）",
+    "add": "添加",
+    "empty": "暂无自定义条目"
+  },
+  "history": {
+    "title": "搜索历史",
+    "clear": "清空历史"
+  }
+}

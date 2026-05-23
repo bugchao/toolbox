@@ -1,0 +1,35 @@
+{
+  "title": "Business Card",
+  "description": "3-template online card designer: live preview, custom palette, auto vCard QR code, one-click PNG / PDF export",
+  "loading": "Loading…",
+  "section": {
+    "template": "Template",
+    "color": "Accent color",
+    "identity": "Identity",
+    "contact": "Contact",
+    "qr": "QR code"
+  },
+  "field": {
+    "name": "Name",
+    "title": "Title",
+    "company": "Company",
+    "tagline": "Tagline",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "address": "Address",
+    "showQr": "Show QR code",
+    "qrContent": "QR content",
+    "qrVcard": "vCard (saves to contacts)",
+    "qrWebsite": "Website URL",
+    "qrWebsiteHint": "Fill in the Website field, or the QR will be empty"
+  },
+  "preview": {
+    "label": "Live preview",
+    "size": "Standard 90 × 54 mm (exported at 4× for print)"
+  },
+  "exportPng": "Export PNG",
+  "exportPdf": "Export PDF",
+  "exporting": "Exporting…",
+  "reset": "Reset"
+}

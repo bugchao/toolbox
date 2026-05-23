@@ -1,0 +1,37 @@
+{
+  "title": "XML Formatter",
+  "description": "Pretty-print / minify / validate XML using native DOMParser, custom indent, error line locator",
+  "loading": "Loading…",
+  "disclaimer": "Everything runs locally in your browser via DOMParser.",
+  "config": {
+    "indent": "Indent",
+    "indent2": "2 spaces",
+    "indent4": "4 spaces",
+    "indentTab": "Tab",
+    "keepComments": "Keep comments",
+    "inlineSimple": "Inline simple text elements",
+    "minifyDropComments": "Drop comments when minifying"
+  },
+  "action": {
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "clear": "Clear"
+  },
+  "error": {
+    "title": "XML parse failed",
+    "location": "At line {{line}}, column {{col}}"
+  },
+  "validOk": "Valid XML · {{count}} element nodes",
+  "io": {
+    "input": "Input XML",
+    "inputPlaceholder": "Paste or type XML…",
+    "output": "Output",
+    "outputPlaceholder": "Result will appear here",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download",
+    "swap": "Use as input",
+    "swapTitle": "Replace input with output"
+  }
+}

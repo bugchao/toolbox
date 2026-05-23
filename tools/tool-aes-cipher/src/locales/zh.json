@@ -1,0 +1,64 @@
+{
+  "title": "AES 加解密",
+  "description": "Web Crypto API 原生 AES-GCM / CBC / CTR；128/192/256 位密钥；PBKDF2 口令派生；随机 IV / Base64 / Hex 全支持",
+  "loading": "加载中…",
+  "disclaimer": "所有加密/解密在浏览器本地完成，密钥与密码不会上传；切换页面或刷新即丢失。生产场景请妥善保管密钥与 IV/Salt。",
+  "running": "处理中…",
+  "section": {
+    "algorithm": "算法",
+    "key": "密钥",
+    "iv": "IV / Nonce"
+  },
+  "field": {
+    "mode": "模式",
+    "bits": "密钥位数",
+    "direction": "方向",
+    "keyEncoding": "密钥编码",
+    "ivEncoding": "IV / Salt 编码",
+    "outputEncoding": "密文编码"
+  },
+  "mode": {
+    "gcmHint": "推荐 · 含完整性认证",
+    "cbcHint": "需 PKCS#7 填充",
+    "ctrHint": "无填充流式"
+  },
+  "action": {
+    "encrypt": "加密",
+    "decrypt": "解密"
+  },
+  "key": {
+    "passphrase": "口令派生 (PBKDF2)",
+    "raw": "原始密钥",
+    "passphrasePlaceholder": "输入口令…",
+    "saltPlaceholder": "Salt（解密时必填）",
+    "saltRandom": "随机 Salt",
+    "iterationsTitle": "PBKDF2 迭代次数",
+    "passphraseHint": "口令 + Salt 经 PBKDF2-SHA256（默认 200,000 次）派生密钥；解密时需提供同样的 Salt 和迭代次数。",
+    "rawPlaceholder": "{{bytes}} 字节原始密钥",
+    "rawRandom": "随机密钥"
+  },
+  "iv": {
+    "placeholder": "{{bytes}} 字节 IV",
+    "random": "随机 IV",
+    "useAad": "附加认证数据 AAD（仅 GCM）",
+    "aadPlaceholder": "附加数据明文（不加密但参与认证）"
+  },
+  "io": {
+    "plaintext": "明文（UTF-8）",
+    "ciphertext": "密文",
+    "plaintextPlaceholder": "输入要加密的明文…",
+    "ciphertextPlaceholder": "粘贴密文…",
+    "outputPlaceholder": "处理结果将显示在这里"
+  },
+  "copy": "复制",
+  "copied": "已复制",
+  "errors": {
+    "noPassphrase": "请输入口令",
+    "noSaltDecrypt": "解密时必须提供 Salt",
+    "noRawKey": "请输入原始密钥",
+    "keyLenMismatch": "密钥长度 {{actual}} 字节，与所选 {{expected}} 字节不匹配",
+    "noIvDecrypt": "解密时必须提供 IV",
+    "ivLenMismatch": "IV 长度 {{actual}} 字节，需为 {{expected}} 字节",
+    "decryptFail": "解密失败：密钥、IV、Salt 或密文不匹配（GCM 校验失败也会到此）"
+  }
+}

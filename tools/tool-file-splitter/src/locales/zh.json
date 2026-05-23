@@ -1,0 +1,31 @@
+{
+  "title": "大文件分割合并",
+  "description": "按字节数或份数切分文件为多个 .part，反向多选 part 合并恢复；浏览器本地处理",
+  "loading": "加载中…",
+  "disclaimer": "全部在浏览器本地完成：File.slice 做切片、Blob 做拼接；文件不会上传。",
+  "tab": {
+    "split": "分割",
+    "merge": "合并"
+  },
+  "split": {
+    "choose": "点击或拖拽选择要分割的文件",
+    "modeLabel": "切分方式",
+    "bySize": "按大小",
+    "byCount": "按份数",
+    "partSize": "每份大小",
+    "partCount": "份数",
+    "preview": "将切成 {{count}} 份，每份约 {{each}}{{last, select, undefined { · 最后一份 {{last}}} other { · 最后一份 {{last}}}}}",
+    "partsList": "分片列表（预览）",
+    "morePartsHidden": "还有 {{n}} 份未显示",
+    "downloadZip": "打包为 ZIP 下载",
+    "downloadEach": "逐个下载"
+  },
+  "merge": {
+    "choose": "点击或拖拽选择多个 part 文件",
+    "tip": "文件名按数字升序自动排序，可在下方手动调整顺序",
+    "partsTitle": "{{count}} 个分片 · 共 {{size}}",
+    "clearAll": "清空",
+    "outputName": "合并后文件名",
+    "run": "合并并下载"
+  }
+}

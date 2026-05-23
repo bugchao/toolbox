@@ -1,0 +1,68 @@
+{
+  "title": "Weight Tracker",
+  "description": "Log daily weight, visualize trend curve, dynamic BMI and goal progress bar; client-side with local storage",
+  "loading": "Loading…",
+  "section": {
+    "quickLog": "Quick Log",
+    "metrics": "Overview",
+    "trend": "Trend (last 30 days)",
+    "profile": "Profile",
+    "history": "History"
+  },
+  "field": {
+    "date": "Date",
+    "weight": "Weight",
+    "note": "Note",
+    "notePlaceholder": "Mood, diet, workout…",
+    "height": "Height",
+    "target": "Goal weight",
+    "unit": "Unit"
+  },
+  "action": {
+    "record": "Record",
+    "delete": "Delete",
+    "clearAll": "Clear all",
+    "confirmOverwrite": "There is already an entry on {{date}}. Overwrite?",
+    "confirmDelete": "Delete the entry on {{date}}?",
+    "confirmClearAll": "Clear all history? This action cannot be undone."
+  },
+  "metrics": {
+    "current": "Current",
+    "avg7": "7-day avg",
+    "totalChange": "Total change",
+    "toTarget": "To goal",
+    "noData": "No data"
+  },
+  "bmi": {
+    "label": "BMI",
+    "underweight": "Underweight",
+    "normal": "Normal",
+    "overweight": "Overweight",
+    "obese": "Obese"
+  },
+  "progress": {
+    "label": "Goal progress",
+    "fromStart": "Start {{w}}",
+    "toTarget": "Goal {{w}}"
+  },
+  "empty": {
+    "trend": "Log at least 2 days of data to see the trend curve",
+    "history": "No entries yet — log one above"
+  },
+  "unitLabel": {
+    "kg": "Kilogram (kg)",
+    "lb": "Pound (lb)"
+  },
+  "heightUnit": {
+    "cm": "cm",
+    "in": "in"
+  },
+  "tooltip": {
+    "weightOn": "{{date}}: {{w}}"
+  },
+  "diff": {
+    "up": "↑ {{v}}",
+    "down": "↓ {{v}}",
+    "same": "no change"
+  }
+}

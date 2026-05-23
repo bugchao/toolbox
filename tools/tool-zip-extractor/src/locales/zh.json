@@ -1,0 +1,26 @@
+{
+  "title": "ZIP 在线解压",
+  "description": "拖入 ZIP 浏览文件树，单文件下载或文本/图片预览；本地处理，不上传",
+  "loading": "加载中…",
+  "disclaimer": "JSZip 在浏览器本地解析压缩包，文件不会上传到服务器。",
+  "drop": {
+    "hint": "拖拽 ZIP 文件到此区域",
+    "tip": "支持单文件预览与下载；体积较大的 ZIP 解析需要数秒",
+    "choose": "选择文件"
+  },
+  "parsing": "正在解析 {{name}}…",
+  "stats": "{{files}} 个文件 · {{dirs}} 个文件夹 · 共 {{size}}",
+  "action": {
+    "close": "关闭",
+    "preview": "预览",
+    "download": "下载"
+  },
+  "preview": {
+    "hint": "选中左侧文件预览（文本 / 图片自动识别）",
+    "empty": "文件内容为空",
+    "binary": "二进制文件（{{size}}），请直接下载查看"
+  },
+  "error": {
+    "parse": "解析失败：{{msg}}"
+  }
+}

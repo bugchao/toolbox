@@ -1,0 +1,37 @@
+{
+  "title": "XML 格式化",
+  "description": "XML 美化 / 压缩 / 校验：DOMParser 原生解析，自定义缩进，错误行号定位",
+  "loading": "加载中…",
+  "disclaimer": "所有处理在本地浏览器完成（DOMParser）。",
+  "config": {
+    "indent": "缩进",
+    "indent2": "2 空格",
+    "indent4": "4 空格",
+    "indentTab": "Tab",
+    "keepComments": "保留注释",
+    "inlineSimple": "简单文本元素 inline",
+    "minifyDropComments": "压缩时移除注释"
+  },
+  "action": {
+    "format": "格式化",
+    "minify": "压缩",
+    "validate": "校验",
+    "clear": "清空"
+  },
+  "error": {
+    "title": "XML 解析失败",
+    "location": "位置：行 {{line}}，列 {{col}}"
+  },
+  "validOk": "XML 合法 · 包含 {{count}} 个元素节点",
+  "io": {
+    "input": "输入 XML",
+    "inputPlaceholder": "粘贴或输入 XML…",
+    "output": "输出",
+    "outputPlaceholder": "处理结果将显示在这里",
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载",
+    "swap": "替换原文",
+    "swapTitle": "用输出结果替换输入"
+  }
+}

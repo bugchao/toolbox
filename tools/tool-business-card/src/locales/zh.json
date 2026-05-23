@@ -1,0 +1,35 @@
+{
+  "title": "名片生成器",
+  "description": "3 套模板的在线名片设计：实时预览、自定义配色、自动生成 vCard 二维码、一键导出 PNG / PDF",
+  "loading": "加载中…",
+  "section": {
+    "template": "模板",
+    "color": "主色",
+    "identity": "身份信息",
+    "contact": "联系方式",
+    "qr": "二维码"
+  },
+  "field": {
+    "name": "姓名",
+    "title": "职位",
+    "company": "公司",
+    "tagline": "Slogan / 标语",
+    "phone": "电话",
+    "email": "邮箱",
+    "website": "网站",
+    "address": "地址",
+    "showQr": "显示二维码",
+    "qrContent": "扫码内容",
+    "qrVcard": "vCard（一键存通讯录）",
+    "qrWebsite": "网站链接",
+    "qrWebsiteHint": "请填写网站字段，否则二维码为空"
+  },
+  "preview": {
+    "label": "实时预览",
+    "size": "标准名片 90 × 54 mm（导出 4× 高清）"
+  },
+  "exportPng": "导出 PNG",
+  "exportPdf": "导出 PDF",
+  "exporting": "导出中…",
+  "reset": "恢复默认"
+}

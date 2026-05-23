@@ -1,0 +1,38 @@
+{
+  "title": "数据脱敏",
+  "description": "批量识别并脱敏文本中的手机号 / 身份证 / 邮箱 / 银行卡 / IP / MAC / 车牌 / JWT 等敏感字段；支持自定义正则与命中统计",
+  "loading": "加载中…",
+  "disclaimer": "所有处理在本地浏览器完成，不会上传任何数据；脱敏后建议二次人工核对再外发。",
+  "rulesLabel": "内置规则",
+  "rule": {
+    "mobile": { "name": "手机号", "example": "中国大陆 11 位手机号" },
+    "idCard": { "name": "身份证", "example": "18 位身份证号" },
+    "email": { "name": "邮箱", "example": "电子邮件地址" },
+    "bankCard": { "name": "银行卡", "example": "13-19 位卡号" },
+    "ipv4": { "name": "IPv4", "example": "IPv4 地址" },
+    "ipv6": { "name": "IPv6", "example": "IPv6 地址" },
+    "mac": { "name": "MAC 地址", "example": "MAC 地址 AA:BB:..." },
+    "plate": { "name": "车牌号", "example": "中国大陆车牌" },
+    "jwt": { "name": "JWT", "example": "JSON Web Token" }
+  },
+  "customLabel": "自定义规则",
+  "custom": {
+    "namePlaceholder": "规则名称",
+    "patternPlaceholder": "正则表达式（如 \\d{6})",
+    "replacementPlaceholder": "替换为（支持 $1）",
+    "add": "添加",
+    "hint": "正则会自动加上 g 标志；替换文本可用 $1/$2 引用捕获组。",
+    "empty": "暂无自定义规则"
+  },
+  "inputLabel": "原始文本",
+  "inputPlaceholder": "粘贴需要脱敏的文本…",
+  "outputLabel": "脱敏结果",
+  "outputPlaceholder": "脱敏后文本会显示在这里",
+  "hitCount": "{{count}} 处命中",
+  "copy": "复制",
+  "copied": "已复制",
+  "download": "下载",
+  "clear": "清空",
+  "replaceInput": "替换原文",
+  "replaceInputTitle": "用脱敏结果替换原始文本"
+}

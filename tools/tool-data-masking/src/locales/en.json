@@ -1,0 +1,38 @@
+{
+  "title": "Data Masking",
+  "description": "Redact phone / ID / email / bank-card / IP / MAC / plate / JWT and other sensitive fields in bulk text; supports custom regex rules and hit stats",
+  "loading": "Loading…",
+  "disclaimer": "Everything runs locally in your browser — no data leaves your machine. Always review masked output before sharing.",
+  "rulesLabel": "Built-in rules",
+  "rule": {
+    "mobile": { "name": "Mobile", "example": "China-mainland 11-digit mobile" },
+    "idCard": { "name": "ID card", "example": "18-digit ID card number" },
+    "email": { "name": "Email", "example": "Email address" },
+    "bankCard": { "name": "Bank card", "example": "13–19 digit card number" },
+    "ipv4": { "name": "IPv4", "example": "IPv4 address" },
+    "ipv6": { "name": "IPv6", "example": "IPv6 address" },
+    "mac": { "name": "MAC", "example": "MAC address AA:BB:..." },
+    "plate": { "name": "Plate", "example": "China-mainland licence plate" },
+    "jwt": { "name": "JWT", "example": "JSON Web Token" }
+  },
+  "customLabel": "Custom rules",
+  "custom": {
+    "namePlaceholder": "Rule name",
+    "patternPlaceholder": "Regex pattern (e.g. \\d{6})",
+    "replacementPlaceholder": "Replacement (supports $1)",
+    "add": "Add",
+    "hint": "The 'g' flag is added automatically. Replacement may reference capture groups via $1/$2.",
+    "empty": "No custom rules yet"
+  },
+  "inputLabel": "Input",
+  "inputPlaceholder": "Paste text to mask…",
+  "outputLabel": "Masked output",
+  "outputPlaceholder": "Masked text will appear here",
+  "hitCount": "{{count}} matches",
+  "copy": "Copy",
+  "copied": "Copied",
+  "download": "Download",
+  "clear": "Clear",
+  "replaceInput": "Use as input",
+  "replaceInputTitle": "Replace input with the masked output"
+}
