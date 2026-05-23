@@ -18,6 +18,32 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-05-24',
+    title: {
+      zh: '新增 /bird-smash 弹弓物理小游戏 + manifest 校验脚本',
+      en: 'New /bird-smash physics game + manifest consistency check script',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /bird-smash 愤怒的小鸟（Bird Smash）：基于 Matter.js 物理引擎 + zustand 状态管理的 2D 弹弓游戏，拖拽小鸟瞄准发射，摧毁木箱 / 石块 / 玻璃打败敌人；归入「社交游戏」分类，自动从 manifest 注册无需改 nav。',
+          en: 'New /bird-smash (Angry Birds clone): 2D slingshot game built on Matter.js physics + zustand store; drag birds to aim and launch, destroy wood / stone / glass to defeat enemies; auto-registered into the Social Games category via manifest.',
+        },
+        paths: ['/bird-smash'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: 'scripts/validate-manifests.ts：manifest-first 体系一致性校验脚本（440 行），覆盖 nav locale 是否齐全 / 路径与 namespace 唯一性 / manifest 必填字段 / loadMessages 引用文件存在性；任一规则不通过即 exit 1，可挂 CI 防回归。',
+          en: 'scripts/validate-manifests.ts: manifest-first consistency checker (440 lines) — verifies nav locale coverage, path & namespace uniqueness, required manifest fields, and loadMessages target existence; exits 1 on any violation, ready for CI.',
+        },
+        paths: [],
+        extraLabels: [{ zh: '工程化', en: 'Tooling' }],
+      },
+    ],
+  },
+  {
     date: '2026-05-22',
     title: {
       zh: '新增 /xml-formatter XML 格式化',
