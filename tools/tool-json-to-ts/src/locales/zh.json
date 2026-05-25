@@ -1,0 +1,20 @@
+{
+  "title": "JSON 转 TypeScript",
+  "description": "把 JSON 转换成 TypeScript interface / type 定义；嵌套对象自动提取，数组元素合并字段并推断可选。",
+  "options": {
+    "rootName": "顶级类型名",
+    "style": "输出风格"
+  },
+  "input": {
+    "heading": "JSON 输入",
+    "placeholder": "粘贴 JSON …",
+    "format": "格式化",
+    "clear": "清空",
+    "error": "JSON 解析错误"
+  },
+  "output": {
+    "heading": "TypeScript 输出",
+    "copy": "复制",
+    "empty": "// 在左侧粘贴 JSON 后生成类型定义"
+  }
+}
