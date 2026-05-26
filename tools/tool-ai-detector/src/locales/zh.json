@@ -1,0 +1,41 @@
+{
+  "title": "AI 内容检测（启发式）",
+  "description": "本地启发式 AI 检测：粘贴文本或上传图片，给出 0–100 的 AI 倾向分、三档分类与可解释的特征明细。不联网、不需要 API key。",
+  "tabs": {
+    "text": "文本检测",
+    "image": "图片检测"
+  },
+  "disclaimer": {
+    "title": "启发式估计，结果仅供参考",
+    "body": "本工具基于本地统计特征（词汇多样性、句长方差、n-gram 重复、AI 倾向词、图像元数据与边缘/直方图等）给出 AI 倾向评分。准确率有限，请勿作为版权、学术诚信或正式判定依据。"
+  },
+  "text": {
+    "heading": "粘贴或键入文本",
+    "placeholder": "在此粘贴需要检测的中文或英文文本（建议 ≥ 80 字符）…",
+    "chars": "字符",
+    "clear": "清空",
+    "empty": "粘贴或键入文本即可开始评估。",
+    "tooShort": "样本过短（< {{min}} 字符），不足以稳定评估，请补充。"
+  },
+  "image": {
+    "cta": "点击或拖拽图片到此处",
+    "dragHint": "支持 PNG / JPEG / WebP；最大约 10MB；本地处理不上传",
+    "empty": "上传图片即可开始评估。",
+    "analyzing": "正在分析图片特征…",
+    "notImage": "请选择图片文件（image/*）",
+    "metadataHit": "命中 {{n}} 条 AI 元数据"
+  },
+  "verdict": {
+    "human": "人工撰写可能性高",
+    "suspect": "疑似 AI / 不确定",
+    "ai": "AI 生成可能性高"
+  },
+  "result": {
+    "aiLikelihood": "AI 倾向分",
+    "breakdown": "特征贡献明细",
+    "feature": "特征",
+    "value": "取值",
+    "contribution": "AI 倾向",
+    "weight": "权重"
+  }
+}

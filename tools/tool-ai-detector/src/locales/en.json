@@ -1,0 +1,41 @@
+{
+  "title": "AI Content Detector (Heuristic)",
+  "description": "Local heuristic AI detection: paste text or upload an image to get a 0–100 AI-likelihood score, a three-tier verdict and a per-feature breakdown. No network, no API key.",
+  "tabs": {
+    "text": "Text",
+    "image": "Image"
+  },
+  "disclaimer": {
+    "title": "Heuristic estimate — for reference only",
+    "body": "This tool uses local statistical features (lexical diversity, sentence-length variance, n-gram repeats, AI-leaning lexicon, image metadata, edge/histogram statistics, etc.) to estimate AI likelihood. Accuracy is limited. Do NOT use it for copyright, academic integrity or formal adjudication."
+  },
+  "text": {
+    "heading": "Paste or type text",
+    "placeholder": "Paste Chinese or English text to check (≥ 80 characters recommended)…",
+    "chars": "chars",
+    "clear": "Clear",
+    "empty": "Paste or type text to start.",
+    "tooShort": "Sample too short (< {{min}} chars) for a stable estimate."
+  },
+  "image": {
+    "cta": "Click or drag an image here",
+    "dragHint": "PNG / JPEG / WebP supported; up to ~10MB; processed locally",
+    "empty": "Upload an image to start.",
+    "analyzing": "Analyzing image features…",
+    "notImage": "Please select an image file (image/*)",
+    "metadataHit": "{{n}} AI metadata hint(s)"
+  },
+  "verdict": {
+    "human": "Likely Human",
+    "suspect": "Suspect / Uncertain",
+    "ai": "Likely AI"
+  },
+  "result": {
+    "aiLikelihood": "AI likelihood",
+    "breakdown": "Feature breakdown",
+    "feature": "Feature",
+    "value": "Value",
+    "contribution": "AI lean",
+    "weight": "Weight"
+  }
+}
