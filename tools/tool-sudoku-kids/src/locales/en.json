@@ -1,0 +1,32 @@
+{
+  "title": "Sudoku Quest for Kids",
+  "description": "A kid-friendly sudoku: 4×4 starter → 6×6 grower → 9×9 classic, 30 levels with three-star scoring, pencil notes, hints and undo.",
+  "difficulty": {
+    "easy": "Starter",
+    "easySpec": "4×4 · 10 levels",
+    "medium": "Grower",
+    "mediumSpec": "6×6 · 10 levels",
+    "hard": "Classic",
+    "hardSpec": "9×9 · 10 levels"
+  },
+  "actions": {
+    "pencil": "Pencil",
+    "erase": "Erase",
+    "undo": "Undo",
+    "hint": "Hint"
+  },
+  "game": {
+    "backToMap": "Back to map",
+    "errors": "Errors",
+    "hints": "Hints used",
+    "tips": "Tips: arrow keys move, number keys fill the cell, press N to toggle pencil/confirm, Backspace clears. 3 stars = no errors, no hints!"
+  },
+  "complete": {
+    "title": "Level Complete!",
+    "errors": "Errors",
+    "hints": "Hints used",
+    "replay": "Replay",
+    "next": "Next Level",
+    "backToMap": "Back to map"
+  }
+}
