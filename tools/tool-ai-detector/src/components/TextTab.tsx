@@ -46,7 +46,7 @@ const TextTab: React.FC = () => {
 
       <div>
         {result && analysis ? (
-          <ResultPanel result={result} />
+          <ResultPanel result={result} suspicious={analysis.suspiciousSentences} />
         ) : (
           <div className="flex h-full min-h-[200px] flex-col items-center justify-center rounded-2xl border border-dashed border-gray-300 p-6 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
             <p className="mb-2 text-lg">📝</p>

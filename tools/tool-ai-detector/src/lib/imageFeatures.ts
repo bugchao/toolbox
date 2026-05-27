@@ -140,6 +140,96 @@ function histogramEntropy(imageData: ImageData): number {
   return h
 }
 
+// 8×8 二维 DCT-II（预计算余弦表）
+const DCT8 = (() => {
+  const m: number[][] = Array.from({ length: 8 }, () => new Array(8).fill(0))
+  for (let k = 0; k < 8; k++) {
+    const c = k === 0 ? 1 / Math.sqrt(2) : 1
+    for (let n = 0; n < 8; n++) {
+      m[k][n] = c * Math.cos(((2 * n + 1) * k * Math.PI) / 16)
+    }
+  }
+  return m
+})()
+
+function dctRow(input: Float32Array, out: Float32Array) {
+  for (let k = 0; k < 8; k++) {
+    let s = 0
+    for (let n = 0; n < 8; n++) s += input[n] * DCT8[k][n]
+    out[k] = s * 0.5
+  }
+}
+
+/** 8×8 块的 DCT，返回 64 个系数 */
+function dctBlock(block: Float32Array): Float32Array {
+  // 先对每一行做 DCT-II
+  const tmp = new Float32Array(64)
+  const row = new Float32Array(8)
+  const rowOut = new Float32Array(8)
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) row[c] = block[r * 8 + c]
+    dctRow(row, rowOut)
+    for (let c = 0; c < 8; c++) tmp[r * 8 + c] = rowOut[c]
+  }
+  // 再对每一列做 DCT-II
+  const out = new Float32Array(64)
+  const col = new Float32Array(8)
+  const colOut = new Float32Array(8)
+  for (let c = 0; c < 8; c++) {
+    for (let r = 0; r < 8; r++) col[r] = tmp[r * 8 + c]
+    dctRow(col, colOut)
+    for (let r = 0; r < 8; r++) out[r * 8 + c] = colOut[r]
+  }
+  return out
+}
+
+/** 图像分块 8×8 DCT，返回（中高频能量 / 总能量）的平均占比 */
+function dctHighFreqRatio(imageData: ImageData): number {
+  const { width, height, data } = imageData
+  const gray = new Float32Array(width * height)
+  for (let i = 0, j = 0; i < data.length; i += 4, j++) {
+    gray[j] = (data[i] * 299 + data[i + 1] * 587 + data[i + 2] * 114) / 1000
+  }
+  const block = new Float32Array(64)
+  let totalLow = 0
+  let totalHigh = 0
+  let blocks = 0
+  for (let y = 0; y + 8 <= height; y += 8) {
+    for (let x = 0; x + 8 <= width; x += 8) {
+      // 提取块（去均值）
+      let sum = 0
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          sum += gray[(y + r) * width + (x + c)]
+        }
+      }
+      const m = sum / 64
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          block[r * 8 + c] = gray[(y + r) * width + (x + c)] - m
+        }
+      }
+      const coeffs = dctBlock(block)
+      // 沿对角线划分：u+v < 4 为低频，>= 4 为高频；DC (0,0) 已被去均值消掉
+      let low = 0
+      let high = 0
+      for (let u = 0; u < 8; u++) {
+        for (let v = 0; v < 8; v++) {
+          const e = coeffs[u * 8 + v] ** 2
+          if (u + v < 4) low += e
+          else high += e
+        }
+      }
+      totalLow += low
+      totalHigh += high
+      blocks++
+    }
+  }
+  if (blocks === 0) return 0
+  const total = totalLow + totalHigh
+  return total === 0 ? 0 : totalHigh / total
+}
+
 /** Sobel 边缘比：边缘像素占比，AI 平滑图通常偏低 */
 function edgeRatio(imageData: ImageData): number {
   const { width, height, data } = imageData
@@ -236,6 +326,17 @@ export async function analyzeImage(file: File): Promise<ImageAnalysis> {
       value: er.toFixed(3),
       // 真实照片 0.05–0.25；AI 出图（写实风）偏低 0.02–0.08
       contribution: Math.round(remap(er, 0.18, 0.04, 25, 80)),
+      weight: 0.15,
+    })
+
+    // 5) DCT 高频能量占比：扩散/GAN 模型常在高频留下统计痕迹
+    const dctHigh = dctHighFreqRatio(imageData)
+    features.push({
+      key: 'dct_high',
+      rawLabel: 'DCT high-freq energy ratio (8×8 blocks)',
+      value: dctHigh.toFixed(3),
+      // 真实照片高频更"杂乱"，0.25–0.55；AI 出图常更平滑 (0.05–0.25) 或异常尖锐
+      contribution: Math.round(remap(dctHigh, 0.4, 0.12, 25, 80)),
       weight: 0.2,
     })
   } else {

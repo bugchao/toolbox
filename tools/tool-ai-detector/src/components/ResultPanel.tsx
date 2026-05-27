@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProgressRing } from '@toolbox/ui-kit'
 import type { ScoreResult, Verdict } from '../lib/score'
+import type { SuspiciousSentence } from '../lib/textFeatures'
 
 type Tone = { wrap: string; chip: string; ringColor: string }
 
@@ -23,7 +24,12 @@ const TONE: Record<Verdict, Tone> = {
   },
 }
 
-const ResultPanel: React.FC<{ result: ScoreResult }> = ({ result }) => {
+export type ResultPanelProps = {
+  result: ScoreResult
+  suspicious?: SuspiciousSentence[]
+}
+
+const ResultPanel: React.FC<ResultPanelProps> = ({ result, suspicious }) => {
   const { t } = useTranslation('toolAiDetector')
   const tone = TONE[result.verdict]
 
@@ -87,6 +93,34 @@ const ResultPanel: React.FC<{ result: ScoreResult }> = ({ result }) => {
           </table>
         </div>
       </div>
+
+      {suspicious && suspicious.length > 0 && (
+        <div>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            {t('result.suspicious')}
+          </h4>
+          <ul className="space-y-2">
+            {suspicious.map((s, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 rounded-lg border border-rose-200 bg-rose-50/60 px-3 py-2 text-sm dark:border-rose-800 dark:bg-rose-900/20"
+              >
+                <span className="mt-0.5 shrink-0 rounded bg-rose-600 px-2 py-0.5 text-xs font-bold text-white">
+                  {s.score}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="leading-relaxed text-gray-800 dark:text-gray-100">{s.text}</p>
+                  {s.reasons.length > 0 && (
+                    <p className="mt-1 text-xs text-rose-700 dark:text-rose-300">
+                      {s.reasons.slice(0, 4).map((r) => `“${r}”`).join(' · ')}
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

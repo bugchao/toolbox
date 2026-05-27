@@ -36,6 +36,7 @@
     "feature": "特征",
     "value": "取值",
     "contribution": "AI 倾向",
-    "weight": "权重"
+    "weight": "权重",
+    "suspicious": "可疑句子"
   }
 }

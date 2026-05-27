@@ -45,6 +45,34 @@ describe('analyzeText', () => {
       expect(f.contribution).toBeLessThanOrEqual(100)
     }
   })
+
+  it('includes burstiness feature', () => {
+    const a = analyzeText(
+      'The cat sat on the mat. Then the cat jumped. Suddenly, a tiny dog ran in and barked loudly at the cat until the cat finally left the room in a hurry.',
+    )
+    expect(a.features.some((f) => f.key === 'burstiness')).toBe(true)
+  })
+
+  it('includes stopword window stdev feature', () => {
+    const longish =
+      'The quick brown fox jumps over the lazy dog repeatedly throughout this lengthy demonstration sentence. '.repeat(
+        4,
+      )
+    const a = analyzeText(longish)
+    expect(a.features.some((f) => f.key === 'stopword_std')).toBe(true)
+  })
+
+  it('returns suspicious sentences with AI-leaning content', () => {
+    const text =
+      'It was raining yesterday. ' +
+      'Furthermore, this comprehensive analysis underscores the multifaceted nature of robust solutions in the modern era. ' +
+      'Moreover, leveraging the meticulous methodology, the pivotal findings delve deeply into the intricate dynamics. ' +
+      'The kids played outside. '
+    const a = analyzeText(text)
+    expect(a.suspiciousSentences.length).toBeGreaterThan(0)
+    expect(a.suspiciousSentences[0].score).toBeGreaterThanOrEqual(60)
+    expect(a.suspiciousSentences[0].reasons.length).toBeGreaterThan(0)
+  })
 })
 
 describe('aggregate', () => {

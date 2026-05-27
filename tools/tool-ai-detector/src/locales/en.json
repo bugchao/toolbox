@@ -36,6 +36,7 @@
     "feature": "Feature",
     "value": "Value",
     "contribution": "AI lean",
-    "weight": "Weight"
+    "weight": "Weight",
+    "suspicious": "Suspicious sentences"
   }
 }

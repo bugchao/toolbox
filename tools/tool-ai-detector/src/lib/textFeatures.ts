@@ -10,10 +10,17 @@ export type Feature = {
   weight: number
 }
 
+export type SuspiciousSentence = {
+  text: string
+  score: number
+  reasons: string[]
+}
+
 export type TextAnalysis = {
   language: 'zh' | 'en' | 'mixed'
   length: number
   features: Feature[]
+  suspiciousSentences: SuspiciousSentence[]
 }
 
 const ZH_CHAR_RE = /[一-鿿]/g
@@ -114,11 +121,89 @@ function ngramRepeatRatio(tokens: string[], n: number): number {
   return repeats / (tokens.length - n + 1)
 }
 
+function mean(nums: number[]): number {
+  if (nums.length === 0) return 0
+  return nums.reduce((s, v) => s + v, 0) / nums.length
+}
+
 function stddev(nums: number[]): number {
   if (nums.length === 0) return 0
-  const mean = nums.reduce((s, v) => s + v, 0) / nums.length
-  const variance = nums.reduce((s, v) => s + (v - mean) ** 2, 0) / nums.length
+  const m = mean(nums)
+  const variance = nums.reduce((s, v) => s + (v - m) ** 2, 0) / nums.length
   return Math.sqrt(variance)
+}
+
+const EN_STOPWORDS = ['the', 'of', 'and', 'to', 'in', 'a', 'is', 'that', 'for', 'with', 'as', 'on', 'by']
+const ZH_STOPWORDS = ['的', '了', '是', '在', '和', '也', '就', '都', '与', '及']
+
+/** 把文本切成 N 个窗口，计算每个窗口里 stopwords 占比 → 返回该序列的标准差 */
+function stopwordWindowStd(text: string, lang: 'zh' | 'en' | 'mixed', windows = 6): number {
+  if (text.length < windows * 20) return 0
+  const stopwords = lang === 'en' ? EN_STOPWORDS : ZH_STOPWORDS
+  const tokens =
+    lang === 'en' ? text.toLowerCase().match(EN_WORD_RE) ?? [] : Array.from(text)
+  if (tokens.length < windows) return 0
+  const chunkSize = Math.floor(tokens.length / windows)
+  const ratios: number[] = []
+  for (let i = 0; i < windows; i++) {
+    const chunk = tokens.slice(i * chunkSize, (i + 1) * chunkSize)
+    const hit = chunk.filter((tk) => stopwords.includes(tk)).length
+    ratios.push(chunk.length > 0 ? hit / chunk.length : 0)
+  }
+  return stddev(ratios)
+}
+
+/** 单句 AI 倾向打分：基于 AI 倾向词命中、长度规整、重复 token */
+function scoreSentence(
+  sentence: string,
+  lang: 'zh' | 'en' | 'mixed',
+): { score: number; reasons: string[] } {
+  const reasons: string[] = []
+  let score = 30
+
+  // 1) AI 倾向词命中
+  const lex = lang === 'en' ? EN_AI_LEXICON : ZH_AI_LEXICON
+  let hits = 0
+  if (lang === 'en') {
+    const lower = sentence.toLowerCase()
+    for (const w of lex) {
+      const re = new RegExp(`\\b${w}\\b`, 'g')
+      const c = (lower.match(re) ?? []).length
+      if (c > 0) {
+        hits += c
+        reasons.push(w)
+      }
+    }
+  } else {
+    for (const w of lex) {
+      if (sentence.includes(w)) {
+        hits++
+        reasons.push(w)
+      }
+    }
+  }
+  score += Math.min(40, hits * 20)
+
+  // 2) 长句 + 多逗号"AI 套句"信号
+  const commaCount = (sentence.match(/[,，;；]/g) ?? []).length
+  if (sentence.length > 60 && commaCount >= 3) {
+    score += 10
+    reasons.push('long-with-clauses')
+  }
+
+  // 3) 句内 token 重复（同词出现 ≥ 3 次）
+  const tokens =
+    lang === 'en' ? sentence.toLowerCase().match(EN_WORD_RE) ?? [] : Array.from(sentence)
+  const tcounts = new Map<string, number>()
+  for (const t of tokens) tcounts.set(t, (tcounts.get(t) ?? 0) + 1)
+  let repeatHits = 0
+  for (const c of tcounts.values()) if (c >= 3) repeatHits++
+  if (repeatHits > 0) {
+    score += Math.min(10, repeatHits * 5)
+    reasons.push('token-repeat')
+  }
+
+  return { score: Math.max(0, Math.min(100, score)), reasons }
 }
 
 export function analyzeText(text: string): TextAnalysis {
@@ -153,7 +238,18 @@ export function analyzeText(text: string): TextAnalysis {
     value: sdSent.toFixed(1),
     // 中文 sd 通常 5–25；英文 8–35；越小越像 AI
     contribution: Math.round(remap(sdSent, language === 'en' ? 25 : 18, language === 'en' ? 6 : 4, 20, 90)),
-    weight: 0.15,
+    weight: 0.12,
+  })
+
+  // 2b) Burstiness（变异系数 CV）：人类波动大、AI 偏平
+  const meanSent = mean(sentenceLens)
+  const cv = meanSent > 0 ? sdSent / meanSent : 0
+  features.push({
+    key: 'burstiness',
+    rawLabel: 'Sentence-length burstiness (CV)',
+    value: cv.toFixed(2),
+    contribution: Math.round(remap(cv, 0.8, 0.2, 20, 85)),
+    weight: 0.12,
   })
 
   // 3) bigram 重复率：高 → 偏 AI（套话）
@@ -221,8 +317,25 @@ export function analyzeText(text: string): TextAnalysis {
     value: paragraphs.length > 1 ? sdPara.toFixed(1) : 'n/a',
     // 段落数过少不参与
     contribution: paragraphs.length <= 1 ? 50 : Math.round(remap(sdPara, 120, 20, 20, 85)),
-    weight: paragraphs.length <= 1 ? 0.05 : 0.15,
+    weight: paragraphs.length <= 1 ? 0.05 : 0.12,
   })
 
-  return { language, length, features }
+  // 8) 停用词窗口方差：人类波动大、AI 写作偏均匀
+  const stopStd = stopwordWindowStd(text, language)
+  features.push({
+    key: 'stopword_std',
+    rawLabel: 'Function-word ratio stdev (sliding)',
+    value: stopStd.toFixed(3),
+    contribution: Math.round(remap(stopStd, 0.06, 0.015, 25, 80)),
+    weight: 0.1,
+  })
+
+  // 句级 AI 倾向打分 → 取分数 ≥ 60 的前 5 条
+  const scored = sentences.map((s) => ({ text: s, ...scoreSentence(s, language) }))
+  const suspiciousSentences = scored
+    .filter((s) => s.score >= 60)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5)
+
+  return { language, length, features, suspiciousSentences }
 }
