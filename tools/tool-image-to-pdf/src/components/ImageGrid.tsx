@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RotateCw, X } from 'lucide-react'
 import type { ImageItem } from '../lib/buildPdf'
@@ -13,19 +13,6 @@ export type ImageGridProps = {
 const ImageGrid: React.FC<ImageGridProps> = ({ items, onReorder, onRotate, onRemove }) => {
   const { t } = useTranslation('toolImageToPdf')
   const [draggingId, setDraggingId] = useState<string | null>(null)
-
-  // 为每张图维护一个临时 objectURL，列表变化时清理
-  const urls = useMemo(() => {
-    const map = new Map<string, string>()
-    for (const it of items) map.set(it.id, URL.createObjectURL(it.file))
-    return map
-  }, [items])
-
-  useEffect(() => {
-    return () => {
-      for (const url of urls.values()) URL.revokeObjectURL(url)
-    }
-  }, [urls])
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
     setDraggingId(id)
@@ -49,7 +36,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ items, onReorder, onRotate, onRem
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {items.map((it, idx) => {
-        const url = urls.get(it.id)
+        const url = it.url
         return (
           <div
             key={it.id}

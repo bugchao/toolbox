@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { Download, FileImage } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -19,10 +19,11 @@ async function loadImageItem(file: File): Promise<ImageItem> {
     const url = URL.createObjectURL(file)
     const img = new Image()
     img.onload = () => {
-      URL.revokeObjectURL(url)
+      // 不 revoke：URL 跟随 item 生命周期，由调用方在删除/卸载时统一撤销
       resolve({
         id: `${file.name}-${file.size}-${Math.random().toString(36).slice(2, 8)}`,
         file,
+        url,
         rotation: 0,
         naturalWidth: img.naturalWidth,
         naturalHeight: img.naturalHeight,
@@ -65,8 +66,23 @@ const ImageToPdf: React.FC = () => {
   }
 
   const onRemove = (id: string) => {
-    setItems((cur) => cur.filter((it) => it.id !== id))
+    setItems((cur) => {
+      const target = cur.find((it) => it.id === id)
+      if (target?.url) URL.revokeObjectURL(target.url)
+      return cur.filter((it) => it.id !== id)
+    })
   }
+
+  // 卸载时统一撤销所有持有的 objectURL（用 ref 抓最新列表，避免闭包）
+  const itemsRef = useRef(items)
+  itemsRef.current = items
+  useEffect(() => {
+    return () => {
+      for (const it of itemsRef.current) {
+        if (it.url) URL.revokeObjectURL(it.url)
+      }
+    }
+  }, [])
 
   const onExport = async () => {
     if (items.length === 0) return

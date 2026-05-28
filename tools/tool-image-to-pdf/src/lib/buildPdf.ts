@@ -12,6 +12,8 @@ import { containFit, slotBoxes, type PerPage } from './layout'
 export type ImageItem = {
   id: string
   file: File
+  /** UI 端复用的 objectURL，跟随 item 生命周期（删除/卸载时撤销）；可选 */
+  url?: string
   /** 顺时针旋转角度 0/90/180/270 */
   rotation: number
   /** 解码后的原始像素尺寸 */
