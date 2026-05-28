@@ -1,0 +1,55 @@
+{
+  "title": "Images → PDF",
+  "description": "Combine local images into a single PDF: drag-and-drop, reorder, rotate, paper size, orientation, margins, 1/2/4-per-page layout — no upload.",
+  "notice": {
+    "title": "Fully local processing",
+    "body": "Images are combined into a PDF in your browser — nothing is uploaded. Supports JPG / PNG / WebP."
+  },
+  "drop": {
+    "cta": "Click or drag multiple images here",
+    "hint": "JPG / PNG / WebP; multi-select; processed locally",
+    "skipped": "Skipped {{n}} non-image file(s)"
+  },
+  "grid": {
+    "heading": "Image order (drag to rearrange)",
+    "count": "{{n}} image(s)",
+    "empty": "No images yet",
+    "rotate": "Rotate 90° clockwise",
+    "remove": "Remove"
+  },
+  "options": {
+    "heading": "Page & layout",
+    "paper": "Paper size",
+    "paperOpts": {
+      "a4": "A4 (210×297mm)",
+      "letter": "Letter (8.5×11in)",
+      "legal": "Legal (8.5×14in)",
+      "a3": "A3 (297×420mm)",
+      "a5": "A5 (148×210mm)",
+      "fit": "Fit to image ratio"
+    },
+    "orientation": "Orientation",
+    "orientationOpts": {
+      "portrait": "Portrait",
+      "landscape": "Landscape"
+    },
+    "margin": "Margin",
+    "marginOpts": {
+      "none": "None",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    },
+    "perPage": "Images per page",
+    "perPageOpts": {
+      "1": "1 / page",
+      "2": "2 / page",
+      "4": "4 / page"
+    }
+  },
+  "export": {
+    "filename": "File name",
+    "cta": "Export PDF & Download",
+    "busy": "Generating PDF…"
+  }
+}
