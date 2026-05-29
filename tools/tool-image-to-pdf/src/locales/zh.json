@@ -1,0 +1,55 @@
+{
+  "title": "图片转 PDF",
+  "description": "把多张本地图片合成一份 PDF：拖拽多图、排序、单张旋转、A4/Letter 等纸张、横竖、边距、每页 1/2/4 张拼版，导出不上传。",
+  "notice": {
+    "title": "完全本地处理",
+    "body": "图片仅在浏览器内合成 PDF，不会上传到任何服务器；支持 JPG / PNG / WebP。"
+  },
+  "drop": {
+    "cta": "点击或拖拽多张图片到此处",
+    "hint": "支持 JPG / PNG / WebP；可多选；本地处理不上传",
+    "skipped": "已跳过 {{n}} 个非图片文件"
+  },
+  "grid": {
+    "heading": "图片顺序（拖动调整）",
+    "count": "{{n}} 张",
+    "empty": "尚未添加图片",
+    "rotate": "顺时针旋转 90°",
+    "remove": "移除"
+  },
+  "options": {
+    "heading": "页面与版式",
+    "paper": "纸张大小",
+    "paperOpts": {
+      "a4": "A4 (210×297mm)",
+      "letter": "Letter (8.5×11in)",
+      "legal": "Legal (8.5×14in)",
+      "a3": "A3 (297×420mm)",
+      "a5": "A5 (148×210mm)",
+      "fit": "适应图片比例"
+    },
+    "orientation": "方向",
+    "orientationOpts": {
+      "portrait": "竖向",
+      "landscape": "横向"
+    },
+    "margin": "边距",
+    "marginOpts": {
+      "none": "无",
+      "small": "小",
+      "medium": "中",
+      "large": "大"
+    },
+    "perPage": "每页张数",
+    "perPageOpts": {
+      "1": "1 张",
+      "2": "2 张",
+      "4": "4 张"
+    }
+  },
+  "export": {
+    "filename": "文件名",
+    "cta": "导出 PDF 并下载",
+    "busy": "正在生成 PDF…"
+  }
+}
