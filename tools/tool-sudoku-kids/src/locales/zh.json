@@ -1,0 +1,32 @@
+{
+  "title": "数独闯关（儿童版）",
+  "description": "面向小朋友的数独：4×4 入门 → 6×6 进阶 → 9×9 标准，30 关递进、三星评分、提示与撤销助你边玩边学。",
+  "difficulty": {
+    "easy": "入门",
+    "easySpec": "4×4 · 共 10 关",
+    "medium": "进阶",
+    "mediumSpec": "6×6 · 共 10 关",
+    "hard": "标准",
+    "hardSpec": "9×9 · 共 10 关"
+  },
+  "actions": {
+    "pencil": "铅笔",
+    "erase": "擦除",
+    "undo": "撤销",
+    "hint": "提示"
+  },
+  "game": {
+    "backToMap": "返回地图",
+    "errors": "错误次数",
+    "hints": "提示次数",
+    "tips": "操作小贴士：方向键移动选格，数字键直接填入，按 N 切换\"铅笔/正式\"模式，Backspace 清空当前格。三星 = 无提示无错误！"
+  },
+  "complete": {
+    "title": "通关成功！",
+    "errors": "错误次数",
+    "hints": "提示次数",
+    "replay": "再玩一次",
+    "next": "下一关",
+    "backToMap": "返回地图"
+  }
+}
