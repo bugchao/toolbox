@@ -1,0 +1,8 @@
+# 图片占位目录
+# 这里用于放置 sudoku-kids 工具的插画资源（PNG/SVG/WebP）。
+# 命名约定：
+#   - mascot-easy.png   入门档 4×4 主形象
+#   - mascot-medium.png 进阶档 6×6 主形象
+#   - mascot-hard.png   标准档 9×9 主形象
+#   - confetti.png      通关弹窗装饰
+# 接入方式：组件中通过 <img src="/sudoku-kids/xxx.png" /> 引用。

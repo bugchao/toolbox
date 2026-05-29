@@ -1,0 +1,27 @@
+{
+  "title": "WCAG 对比度检查器",
+  "description": "实时计算前景与背景颜色之间的 WCAG 对比度，给出 AA/AAA 合规等级，支持一键调整到达标。",
+  "inputs": {
+    "heading": "颜色",
+    "foreground": "前景色（文本）",
+    "background": "背景色"
+  },
+  "actions": {
+    "swap": "互换前景/背景",
+    "fixAA": "自动调到 AA",
+    "fixAAA": "自动调到 AAA"
+  },
+  "result": {
+    "heading": "对比度结果",
+    "aaNormal": "AA 普通文本",
+    "aaLarge": "AA 大号文本",
+    "aaaNormal": "AAA 普通文本",
+    "aaaLarge": "AAA 大号文本",
+    "invalid": "请输入有效的 HEX 颜色值（#RGB 或 #RRGGBB）"
+  },
+  "preview": {
+    "large": "大号文本预览 18pt+",
+    "normal": "正文样式预览：The quick brown fox 一二三四五六七",
+    "small": "辅助说明 / 12pt 小字预览"
+  }
+}
