@@ -1,0 +1,27 @@
+{
+  "title": "WCAG Contrast Checker",
+  "description": "Calculate the WCAG contrast between text and background in real time, with AA/AAA grading and one-click adjustment to compliance.",
+  "inputs": {
+    "heading": "Colors",
+    "foreground": "Foreground (text)",
+    "background": "Background"
+  },
+  "actions": {
+    "swap": "Swap fg/bg",
+    "fixAA": "Auto-fix to AA",
+    "fixAAA": "Auto-fix to AAA"
+  },
+  "result": {
+    "heading": "Contrast result",
+    "aaNormal": "AA normal text",
+    "aaLarge": "AA large text",
+    "aaaNormal": "AAA normal text",
+    "aaaLarge": "AAA large text",
+    "invalid": "Enter a valid HEX color (#RGB or #RRGGBB)"
+  },
+  "preview": {
+    "large": "Large text preview 18pt+",
+    "normal": "Body sample: The quick brown fox jumps over the lazy dog.",
+    "small": "Caption / 12pt small text preview"
+  }
+}

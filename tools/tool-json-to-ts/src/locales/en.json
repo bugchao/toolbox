@@ -1,0 +1,20 @@
+{
+  "title": "JSON to TypeScript",
+  "description": "Convert JSON into TypeScript interface / type definitions; nested objects are extracted and array items are merged with optional inference.",
+  "options": {
+    "rootName": "Root type name",
+    "style": "Output style"
+  },
+  "input": {
+    "heading": "JSON input",
+    "placeholder": "Paste JSON…",
+    "format": "Format",
+    "clear": "Clear",
+    "error": "JSON parse error"
+  },
+  "output": {
+    "heading": "TypeScript output",
+    "copy": "Copy",
+    "empty": "// Paste JSON on the left to generate type definitions"
+  }
+}
