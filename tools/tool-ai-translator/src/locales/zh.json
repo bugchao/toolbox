@@ -1,0 +1,81 @@
+{
+  "title": "AI 翻译",
+  "description": "把任意文本通过大模型翻译，支持云端 API、本地服务（Ollama）与浏览器内 WebLLM；API Key、baseUrl、模型选择全部保存在本地。",
+  "notice": {
+    "title": "API Key 仅存浏览器本地",
+    "body": "所有请求由你的浏览器直接发往你选择的 Provider，本工具不经过任何中转。云端 API Key 仅保存在 localStorage，刷新页面后仍生效；删除即可清空。"
+  },
+  "header": {
+    "settings": "设置",
+    "model": "模型",
+    "swap": "交换语种"
+  },
+  "panel": {
+    "input": "输入",
+    "output": "翻译结果",
+    "inputPlaceholder": "在此粘贴或输入要翻译的文本，Ctrl/⌘ + Enter 开始翻译",
+    "outputPlaceholder": "翻译结果将以流式方式逐字显示",
+    "clear": "清空",
+    "copy": "复制"
+  },
+  "action": {
+    "translate": "翻译",
+    "stop": "停止",
+    "shortcut": "快捷键 Ctrl/⌘ + Enter",
+    "streaming": "正在流式接收…",
+    "loadingWebllm": "加载 WebLLM 模型 {{pct}}%"
+  },
+  "badge": {
+    "cloud": "云端",
+    "local": "本地",
+    "webllm": "WebLLM"
+  },
+  "error": {
+    "missingApiKey": "缺少 API Key，请在「设置」中填入对应 Provider 的密钥。",
+    "missingModel": "未指定模型，请到「设置」选择或填入模型名。",
+    "missingBaseUrl": "缺少 baseUrl，请到「设置」填入接口地址。",
+    "webllmNotInit": "WebLLM 模型尚未加载，请等待初始化完成。",
+    "generic": "请求失败：{{msg}}"
+  },
+  "settings": {
+    "heading": "Provider 设置",
+    "done": "完成",
+    "tab": {
+      "cloud": "云端 API",
+      "local": "本地服务",
+      "webllm": "浏览器 WebLLM",
+      "cloudNotice": "API Key 仅保存在本机浏览器；请求由浏览器直接发往 Provider。Anthropic 的浏览器直连需自行评估安全策略。",
+      "localNotice": "本地 HTTP 服务（如 Ollama）需事先启动；如果走 OpenAI 兼容协议，建议使用「云端 / OpenAI 兼容自定义」并填本地 baseUrl。",
+      "webllmNotice": "首次使用需要下载模型（数百 MB），完整运行在浏览器内（需要 WebGPU 支持）。模型下载后会缓存在浏览器中。"
+    },
+    "field": {
+      "apiKey": "API Key",
+      "apiKeyRequired": "必填",
+      "apiKeyOptional": "可留空",
+      "baseUrl": "Base URL",
+      "model": "模型",
+      "modelCustomPlaceholder": "自定义模型名（如 my-model）",
+      "custom": "自定义"
+    }
+  },
+  "provider": {
+    "customHint": "兼容 OpenAI Chat Completions 协议的任意端点。本地服务（LM Studio / vllm 等）也可用此项接入。"
+  },
+  "lang": {
+    "auto": "自动检测",
+    "zh": "简体中文",
+    "zhTW": "繁體中文",
+    "en": "英语",
+    "ja": "日语",
+    "ko": "韩语",
+    "fr": "法语",
+    "de": "德语",
+    "es": "西班牙语",
+    "ru": "俄语",
+    "pt": "葡萄牙语",
+    "it": "意大利语",
+    "ar": "阿拉伯语",
+    "th": "泰语",
+    "vi": "越南语"
+  }
+}

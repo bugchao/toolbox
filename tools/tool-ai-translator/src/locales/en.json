@@ -1,0 +1,81 @@
+{
+  "title": "AI Translator",
+  "description": "Translate any text via large language models — cloud APIs, local servers (Ollama), and in-browser WebLLM. API keys, base URLs and model choices all live in localStorage.",
+  "notice": {
+    "title": "API keys never leave your browser",
+    "body": "Every request goes from your browser straight to the provider you choose; this tool is not a proxy. Cloud API keys live in localStorage — clear them anytime."
+  },
+  "header": {
+    "settings": "Settings",
+    "model": "Model",
+    "swap": "Swap languages"
+  },
+  "panel": {
+    "input": "Input",
+    "output": "Translation",
+    "inputPlaceholder": "Paste or type the text to translate. Ctrl/⌘ + Enter to translate.",
+    "outputPlaceholder": "Translation streams in character by character",
+    "clear": "Clear",
+    "copy": "Copy"
+  },
+  "action": {
+    "translate": "Translate",
+    "stop": "Stop",
+    "shortcut": "Shortcut: Ctrl/⌘ + Enter",
+    "streaming": "Streaming…",
+    "loadingWebllm": "Loading WebLLM model {{pct}}%"
+  },
+  "badge": {
+    "cloud": "Cloud",
+    "local": "Local",
+    "webllm": "WebLLM"
+  },
+  "error": {
+    "missingApiKey": "API key missing — open Settings and add one for the selected provider.",
+    "missingModel": "No model selected — open Settings to pick or type a model name.",
+    "missingBaseUrl": "Base URL missing — open Settings to enter an endpoint.",
+    "webllmNotInit": "WebLLM model is not loaded yet — wait for initialization.",
+    "generic": "Request failed: {{msg}}"
+  },
+  "settings": {
+    "heading": "Provider settings",
+    "done": "Done",
+    "tab": {
+      "cloud": "Cloud APIs",
+      "local": "Local servers",
+      "webllm": "Browser WebLLM",
+      "cloudNotice": "API keys live in this browser only — requests go direct to providers. Anthropic browser calls require you to accept the direct-access header.",
+      "localNotice": "Local HTTP servers like Ollama must already be running. For OpenAI-compatible local servers, use Cloud → OpenAI-compatible custom and point baseUrl at localhost.",
+      "webllmNotice": "First run downloads a model (hundreds of MB) and runs fully in-browser (requires WebGPU). Subsequent runs reuse the cached model."
+    },
+    "field": {
+      "apiKey": "API key",
+      "apiKeyRequired": "required",
+      "apiKeyOptional": "optional",
+      "baseUrl": "Base URL",
+      "model": "Model",
+      "modelCustomPlaceholder": "custom model name (e.g. my-model)",
+      "custom": "custom"
+    }
+  },
+  "provider": {
+    "customHint": "Any endpoint that implements OpenAI Chat Completions. Use this for LM Studio, vllm, or self-hosted compatible servers."
+  },
+  "lang": {
+    "auto": "Auto-detect",
+    "zh": "Simplified Chinese",
+    "zhTW": "Traditional Chinese",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "ru": "Russian",
+    "pt": "Portuguese",
+    "it": "Italian",
+    "ar": "Arabic",
+    "th": "Thai",
+    "vi": "Vietnamese"
+  }
+}
