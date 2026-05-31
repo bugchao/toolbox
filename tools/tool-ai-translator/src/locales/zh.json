@@ -52,6 +52,7 @@
     "missingModel": "未指定模型，请到「设置」选择或填入模型名。",
     "missingBaseUrl": "缺少 baseUrl，请到「设置」填入接口地址。",
     "webllmNotInit": "WebLLM 模型尚未加载，请等待初始化完成。",
+    "ollamaModelNotFound": "Ollama 本地没有模型「{{model}}」。请先在终端执行 `ollama pull {{model}}`，或在「设置」里选/填一个已经下载的模型。",
     "generic": "请求失败：{{msg}}"
   },
   "settings": {
@@ -72,7 +73,8 @@
       "baseUrl": "Base URL",
       "model": "模型",
       "modelCustomPlaceholder": "自定义模型名（如 my-model）",
-      "modelHint": "可直接输入自定义模型名；下拉里是常见预设，仅作建议。",
+      "modelCustomOption": "✎ 自定义…",
+      "modelHint": "从下拉选常见模型；选「自定义…」可手输任意模型名（如 Ollama 本地拉过的 tag）。",
       "custom": "自定义"
     }
   },

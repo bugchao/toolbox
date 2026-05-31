@@ -189,7 +189,19 @@ async function streamOllama(
     signal,
   })
   if (!res.ok || !res.body) {
-    throw new Error(`Ollama HTTP ${res.status}`)
+    // Ollama 返回的 JSON 错误体形如 {"error": "model 'qwen2.5:3b' not found, try pulling it first"}
+    let detail = ''
+    try {
+      const cloned = res.clone()
+      const j = await cloned.json()
+      detail = typeof j?.error === 'string' ? j.error : ''
+    } catch {
+      detail = (await res.text().catch(() => '')).slice(0, 200)
+    }
+    if (res.status === 404 && /not found|try pulling/i.test(detail)) {
+      throw new Error(`ollama_model_not_found:${model}`)
+    }
+    throw new Error(`Ollama HTTP ${res.status}${detail ? `: ${detail}` : ''}`)
   }
   const reader = res.body.getReader()
   const decoder = new TextDecoder()

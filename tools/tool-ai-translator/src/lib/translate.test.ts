@@ -159,6 +159,37 @@ describe('translate – Gemini protocol', () => {
 })
 
 describe('translate – Ollama protocol', () => {
+  it('translates "model not found" 404 into ollama_model_not_found:<model>', async () => {
+    const fetchFn = vi.fn(async () =>
+      new Response(
+        JSON.stringify({ error: "model 'qwen2.5:3b' not found, try pulling it first" }),
+        { status: 404, headers: { 'Content-Type': 'application/json' } },
+      ),
+    )
+    await expect(translate({
+      providerId: 'ollama',
+      model: 'qwen2.5:3b',
+      source: 'en',
+      target: 'zh',
+      text: 'hi',
+      fetchFn: fetchFn as unknown as typeof fetch,
+    })).rejects.toThrow(/^ollama_model_not_found:qwen2\.5:3b$/)
+  })
+
+  it('surfaces Ollama error body for non-404 failures', async () => {
+    const fetchFn = vi.fn(async () =>
+      new Response(JSON.stringify({ error: 'bad request' }), { status: 400 }),
+    )
+    await expect(translate({
+      providerId: 'ollama',
+      model: 'qwen2.5:3b',
+      source: 'en',
+      target: 'zh',
+      text: 'hi',
+      fetchFn: fetchFn as unknown as typeof fetch,
+    })).rejects.toThrow(/Ollama HTTP 400.*bad request/)
+  })
+
   it('POSTs to /api/chat and concatenates ndjson chunks until done=true', async () => {
     const fetchFn = vi.fn(async (url: RequestInfo | URL) => {
       expect(String(url)).toContain('/api/chat')

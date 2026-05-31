@@ -354,11 +354,15 @@ const AiTranslator: React.FC = () => {
 
           {error && (
             <div className="mt-3 rounded-md border border-rose-300 bg-rose-50 px-3 py-2 text-sm text-rose-700 dark:border-rose-700 dark:bg-rose-900/30 dark:text-rose-200">
-              {error === 'missing_api_key' ? t('error.missingApiKey') :
-                error === 'missing_model' ? t('error.missingModel') :
-                  error === 'missing_base_url' ? t('error.missingBaseUrl') :
-                    error === 'webllm_not_initialized' ? t('error.webllmNotInit') :
-                      t('error.generic', { msg: error })}
+              {(() => {
+                if (error === 'missing_api_key') return t('error.missingApiKey')
+                if (error === 'missing_model') return t('error.missingModel')
+                if (error === 'missing_base_url') return t('error.missingBaseUrl')
+                if (error === 'webllm_not_initialized') return t('error.webllmNotInit')
+                const ollamaMiss = error.match(/^ollama_model_not_found:(.+)$/)
+                if (ollamaMiss) return t('error.ollamaModelNotFound', { model: ollamaMiss[1] })
+                return t('error.generic', { msg: error })
+              })()}
             </div>
           )}
         </Card>

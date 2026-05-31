@@ -52,6 +52,7 @@
     "missingModel": "No model selected — open Settings to pick or type a model name.",
     "missingBaseUrl": "Base URL missing — open Settings to enter an endpoint.",
     "webllmNotInit": "WebLLM model is not loaded yet — wait for initialization.",
+    "ollamaModelNotFound": "Ollama doesn't have model \"{{model}}\" locally. Run `ollama pull {{model}}` in a terminal first, or pick/type a different model in Settings.",
     "generic": "Request failed: {{msg}}"
   },
   "settings": {
@@ -72,7 +73,8 @@
       "baseUrl": "Base URL",
       "model": "Model",
       "modelCustomPlaceholder": "custom model name (e.g. my-model)",
-      "modelHint": "Type any model name; the dropdown is just suggestions for common presets.",
+      "modelCustomOption": "✎ Custom…",
+      "modelHint": "Pick a common model from the dropdown, or choose \"Custom…\" to type any model name (e.g. a tag you pulled with Ollama).",
       "custom": "custom"
     }
   },

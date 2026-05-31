@@ -170,21 +170,13 @@ const ProviderEditor: React.FC<{
       )}
 
       <Field label={t('settings.field.model')}>
-        <Input
-          list={provider.models.length > 0 ? `models-${providerId}` : undefined}
+        <ModelPicker
+          providerId={providerId}
+          presetModels={provider.models}
+          defaultModel={provider.defaultModel}
           value={cfg.model ?? ''}
-          placeholder={provider.defaultModel || t('settings.field.modelCustomPlaceholder') || 'model name'}
-          onChange={(e) => persist({ ...cfg, model: e.target.value })}
-          spellCheck={false}
-          autoComplete="off"
+          onChange={(next) => persist({ ...cfg, model: next })}
         />
-        {provider.models.length > 0 && (
-          <datalist id={`models-${providerId}`}>
-            {provider.models.map((m) => (
-              <option key={m} value={m} />
-            ))}
-          </datalist>
-        )}
         <p className="mt-1 text-[11px] text-gray-500 dark:text-gray-400">
           {t('settings.field.modelHint')}
         </p>
@@ -210,5 +202,71 @@ const Field: React.FC<{ label: string; icon?: React.ReactNode; children: React.R
     {children}
   </label>
 )
+
+const CUSTOM_SENTINEL = '__custom__'
+
+/** 模型选择：下拉为主路径（含「自定义」入口），自定义时显示独立输入。 */
+const ModelPicker: React.FC<{
+  providerId: string
+  presetModels: string[]
+  defaultModel: string
+  value: string
+  onChange: (next: string) => void
+}> = ({ providerId, presetModels, defaultModel, value, onChange }) => {
+  const { t } = useTranslation('toolAiTranslator')
+  // 当前值是否落在预设列表里
+  const inPreset = !!value && presetModels.includes(value)
+  // 「初始就是自定义」的情况：value 非空且不在 preset
+  const startedCustom = !!value && !inPreset
+  const [customMode, setCustomMode] = useState<boolean>(startedCustom || presetModels.length === 0)
+
+  const selectValue = customMode ? CUSTOM_SENTINEL : (inPreset ? value : (value || defaultModel))
+
+  const onSelectChange = (next: string) => {
+    if (next === CUSTOM_SENTINEL) {
+      setCustomMode(true)
+      // 不立即清空 value；若用户想用自定义则在输入框里改
+      if (inPreset) onChange('')
+      return
+    }
+    setCustomMode(false)
+    onChange(next)
+  }
+
+  return (
+    <div className="space-y-1.5">
+      {presetModels.length > 0 && (
+        <select
+          value={selectValue}
+          onChange={(e) => onSelectChange(e.target.value)}
+          className="w-full rounded border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+        >
+          {presetModels.map((m) => (
+            <option key={m} value={m}>{m}</option>
+          ))}
+          <option value={CUSTOM_SENTINEL}>{t('settings.field.modelCustomOption')}</option>
+        </select>
+      )}
+      {(customMode || presetModels.length === 0) && (
+        <Input
+          value={value}
+          placeholder={defaultModel || t('settings.field.modelCustomPlaceholder') || 'model name'}
+          onChange={(e) => onChange(e.target.value)}
+          spellCheck={false}
+          autoComplete="off"
+          // datalist 在「自定义」模式下额外提供 autocomplete，但不强制
+          list={presetModels.length > 0 ? `models-${providerId}` : undefined}
+        />
+      )}
+      {presetModels.length > 0 && (
+        <datalist id={`models-${providerId}`}>
+          {presetModels.map((m) => (
+            <option key={m} value={m} />
+          ))}
+        </datalist>
+      )}
+    </div>
+  )
+}
 
 export default SettingsDrawer
