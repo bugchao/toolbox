@@ -170,29 +170,24 @@ const ProviderEditor: React.FC<{
       )}
 
       <Field label={t('settings.field.model')}>
-        {provider.models.length > 0 ? (
-          <div className="flex gap-2">
-            <select
-              value={cfg.model ?? provider.defaultModel}
-              onChange={(e) => persist({ ...cfg, model: e.target.value })}
-              className="flex-1 rounded border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
-            >
-              {provider.models.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-              {cfg.model && !provider.models.includes(cfg.model) && (
-                <option value={cfg.model}>{cfg.model} ({t('settings.field.custom')})</option>
-              )}
-            </select>
-          </div>
-        ) : (
-          <Input
-            value={cfg.model ?? ''}
-            placeholder={t('settings.field.modelCustomPlaceholder') ?? 'model name'}
-            onChange={(e) => persist({ ...cfg, model: e.target.value })}
-            spellCheck={false}
-          />
+        <Input
+          list={provider.models.length > 0 ? `models-${providerId}` : undefined}
+          value={cfg.model ?? ''}
+          placeholder={provider.defaultModel || t('settings.field.modelCustomPlaceholder') || 'model name'}
+          onChange={(e) => persist({ ...cfg, model: e.target.value })}
+          spellCheck={false}
+          autoComplete="off"
+        />
+        {provider.models.length > 0 && (
+          <datalist id={`models-${providerId}`}>
+            {provider.models.map((m) => (
+              <option key={m} value={m} />
+            ))}
+          </datalist>
         )}
+        <p className="mt-1 text-[11px] text-gray-500 dark:text-gray-400">
+          {t('settings.field.modelHint')}
+        </p>
       </Field>
 
       {provider.hintKey && (

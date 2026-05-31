@@ -46,4 +46,16 @@ describe('PROVIDERS registry', () => {
   it('getProvider returns undefined for unknown id', () => {
     expect(getProvider('zzz-not-real')).toBeUndefined()
   })
+
+  it('non-custom providers expose a meaningful list of model suggestions (>= 3)', () => {
+    for (const p of PROVIDERS) {
+      if (p.kind === 'custom') continue
+      expect(p.models.length).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('ollama and webllm carry a hintKey to advertise custom-model entry', () => {
+    expect(getProvider('ollama')?.hintKey).toBeTruthy()
+    expect(getProvider('webllm')?.hintKey).toBeTruthy()
+  })
 })

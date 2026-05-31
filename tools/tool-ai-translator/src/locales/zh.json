@@ -72,11 +72,14 @@
       "baseUrl": "Base URL",
       "model": "模型",
       "modelCustomPlaceholder": "自定义模型名（如 my-model）",
+      "modelHint": "可直接输入自定义模型名；下拉里是常见预设，仅作建议。",
       "custom": "自定义"
     }
   },
   "provider": {
-    "customHint": "兼容 OpenAI Chat Completions 协议的任意端点。本地服务（LM Studio / vllm 等）也可用此项接入。"
+    "customHint": "兼容 OpenAI Chat Completions 协议的任意端点。本地服务（LM Studio / vllm 等）也可用此项接入。",
+    "ollamaHint": "模型名要和 `ollama pull` / `ollama list` 输出完全一致（含 tag），比如 `qwen2.5:3b`。预设里没列出的也可以手输。",
+    "webllmHint": "MLC 官方模型 ID，参考 https://github.com/mlc-ai/web-llm 的 prebuilt 列表。模型越大显存占用越高。"
   },
   "lang": {
     "auto": "自动检测",

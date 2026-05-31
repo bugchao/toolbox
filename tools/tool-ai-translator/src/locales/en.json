@@ -72,11 +72,14 @@
       "baseUrl": "Base URL",
       "model": "Model",
       "modelCustomPlaceholder": "custom model name (e.g. my-model)",
+      "modelHint": "Type any model name; the dropdown is just suggestions for common presets.",
       "custom": "custom"
     }
   },
   "provider": {
-    "customHint": "Any endpoint that implements OpenAI Chat Completions. Use this for LM Studio, vllm, or self-hosted compatible servers."
+    "customHint": "Any endpoint that implements OpenAI Chat Completions. Use this for LM Studio, vllm, or self-hosted compatible servers.",
+    "ollamaHint": "Model name must match `ollama pull` / `ollama list` exactly (including tag), e.g. `qwen2.5:3b`. Models not listed below can be typed directly.",
+    "webllmHint": "MLC official model IDs — see the prebuilt list at https://github.com/mlc-ai/web-llm. Larger models require more VRAM."
   },
   "lang": {
     "auto": "Auto-detect",
