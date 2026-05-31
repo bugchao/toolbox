@@ -7,8 +7,23 @@
   },
   "header": {
     "settings": "设置",
+    "history": "历史",
     "model": "模型",
     "swap": "交换语种"
+  },
+  "history": {
+    "heading": "翻译历史",
+    "done": "完成",
+    "empty": "暂无历史记录。完成一次翻译后会自动保存。",
+    "restore": "载入到编辑器",
+    "delete": "删除",
+    "clearAll": "清空全部",
+    "confirmClearAll": "确定清空全部翻译历史？此操作不可撤销。",
+    "strategyTitle": "存储策略",
+    "strategyCap": "容量滚动（满后丢弃最旧）",
+    "strategyManual": "仅手动管理（不自动丢弃）",
+    "capLabel": "上限",
+    "nearLimit": "接近上限"
   },
   "panel": {
     "input": "输入",

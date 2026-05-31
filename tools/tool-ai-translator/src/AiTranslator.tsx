@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import {
   ArrowLeftRight,
   ClipboardCopy,
+  History,
   Loader2,
   Send,
   Settings,
@@ -18,7 +19,15 @@ import { PROVIDERS, getProvider } from './lib/providers'
 import { readProviderConfig, readSession, writeSession } from './lib/storage'
 import { isSpeechSupported, speak, stopSpeaking } from './lib/speech'
 import { translate } from './lib/translate'
+import {
+  addEntry as addHistoryEntry,
+  readHistory,
+  readSettings as readHistorySettings,
+  writeHistory,
+  type HistoryEntry,
+} from './lib/history'
 import SettingsDrawer from './components/SettingsDrawer'
+import HistoryDrawer from './components/HistoryDrawer'
 
 type ProgressState = { loaded: number; total: number; text: string } | null
 
@@ -32,6 +41,8 @@ const AiTranslator: React.FC = () => {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [historyOpen, setHistoryOpen] = useState(false)
+  const [historyTick, setHistoryTick] = useState(0)
   const [progress, setProgress] = useState<ProgressState>(null)
   const [cfgVersion, setCfgVersion] = useState(0)
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
@@ -92,6 +103,7 @@ const AiTranslator: React.FC = () => {
         setProgress(null)
         webllmStream = stream
       }
+      let finalOutput = ''
       await translate({
         providerId,
         model: providerCfg.model || provider.defaultModel,
@@ -101,9 +113,21 @@ const AiTranslator: React.FC = () => {
         target,
         text: input,
         signal: ctrl.signal,
-        onChunk: (chunk) => setOutput((cur) => cur + chunk),
+        onChunk: (chunk) => {
+          finalOutput += chunk
+          setOutput((cur) => cur + chunk)
+        },
         webllmStream,
       })
+      // 翻译完整成功（未被中断 / 未抛错），写入历史
+      if (!ctrl.signal.aborted && finalOutput.trim()) {
+        const cur = readHistory()
+        const next = addHistoryEntry(cur, {
+          providerId, source, target, input, output: finalOutput,
+        }, readHistorySettings())
+        writeHistory(next)
+        setHistoryTick((t) => t + 1)
+      }
     } catch (e) {
       const msg = (e as Error).message ?? String(e)
       if (!ctrl.signal.aborted) setError(msg)
@@ -188,6 +212,12 @@ const AiTranslator: React.FC = () => {
               </code>
             </div>
             <span className="flex-1" />
+            <Button type="button" variant="ghost" onClick={() => setHistoryOpen(true)}>
+              <span className="inline-flex items-center gap-1.5">
+                <History className="h-4 w-4" />
+                {t('header.history')}
+              </span>
+            </Button>
             <Button type="button" variant="ghost" onClick={() => setSettingsOpen(true)}>
               <span className="inline-flex items-center gap-1.5">
                 <Settings className="h-4 w-4" />
@@ -347,6 +377,20 @@ const AiTranslator: React.FC = () => {
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
         onChanged={() => setCfgVersion((v) => v + 1)}
+      />
+
+      <HistoryDrawer
+        open={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+        refreshKey={historyTick}
+        onRestore={(e: HistoryEntry) => {
+          setProviderId(e.providerId)
+          setSource(e.source)
+          setTarget(e.target)
+          setInput(e.input)
+          setOutput(e.output)
+          setError(null)
+        }}
       />
     </div>
   )

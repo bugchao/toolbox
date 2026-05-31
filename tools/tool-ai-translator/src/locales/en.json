@@ -7,8 +7,23 @@
   },
   "header": {
     "settings": "Settings",
+    "history": "History",
     "model": "Model",
     "swap": "Swap languages"
+  },
+  "history": {
+    "heading": "Translation history",
+    "done": "Done",
+    "empty": "No history yet — successful translations are saved here automatically.",
+    "restore": "Load into editor",
+    "delete": "Delete",
+    "clearAll": "Clear all",
+    "confirmClearAll": "Clear all translation history? This cannot be undone.",
+    "strategyTitle": "Storage policy",
+    "strategyCap": "Rolling cap (drop oldest when full)",
+    "strategyManual": "Manual only (never auto-drop)",
+    "capLabel": "Cap",
+    "nearLimit": "near limit"
   },
   "panel": {
     "input": "Input",
