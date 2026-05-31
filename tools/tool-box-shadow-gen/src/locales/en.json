@@ -1,0 +1,52 @@
+{
+  "title": "CSS Box Shadow Generator",
+  "description": "Stack multiple box-shadow layers with live preview, Material / Neumorphism / Glassmorphism presets, and one-click CSS or Tailwind output.",
+  "notice": {
+    "title": "Fully local",
+    "body": "All parameters are composed into the box-shadow value inside your browser — nothing is uploaded."
+  },
+  "layers": {
+    "heading": "Shadow layers",
+    "add": "Add layer",
+    "clear": "Clear",
+    "empty": "No layers yet — click \"Add layer\" or apply a preset below.",
+    "itemTitle": "Layer #{{n}}",
+    "x": "Offset X",
+    "y": "Offset Y",
+    "blur": "Blur",
+    "spread": "Spread",
+    "color": "Color",
+    "alpha": "Alpha",
+    "inset": "Inset",
+    "up": "Move up",
+    "down": "Move down",
+    "remove": "Remove"
+  },
+  "presets": {
+    "heading": "Presets"
+  },
+  "preset": {
+    "material1": "Material 1",
+    "material2": "Material 2",
+    "material4": "Material 4",
+    "material8": "Material 8",
+    "material16": "Material 16",
+    "neumorphismLight": "Neumorphism (light)",
+    "neumorphismDark": "Neumorphism (dark)",
+    "glassmorphism": "Glassmorphism"
+  },
+  "preview": {
+    "heading": "Preview & output",
+    "shape": "Shape",
+    "shapeRect": "Rectangle",
+    "shapePill": "Pill",
+    "shapeCircle": "Circle",
+    "radius": "Radius",
+    "boxColor": "Box color",
+    "stageColor": "Stage color"
+  },
+  "output": {
+    "css": "CSS rule",
+    "tailwind": "Tailwind arbitrary value"
+  }
+}
