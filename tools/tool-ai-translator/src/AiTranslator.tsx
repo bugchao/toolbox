@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 import { LANGUAGES, type LangCode } from './lib/languages'
 import { PROVIDERS, getProvider } from './lib/providers'
-import { readProviderConfig, readSession, writeSession } from './lib/storage'
+import { readProviderConfig } from './lib/storage'
 import { isSpeechSupported, speak, stopSpeaking } from './lib/speech'
 import { translate } from './lib/translate'
 import {
@@ -26,6 +26,7 @@ import {
   writeHistory,
   type HistoryEntry,
 } from './lib/history'
+import { usePersistedSession } from './hooks/usePersistedSession'
 import SettingsDrawer from './components/SettingsDrawer'
 import HistoryDrawer from './components/HistoryDrawer'
 
@@ -33,9 +34,12 @@ type ProgressState = { loaded: number; total: number; text: string } | null
 
 const AiTranslator: React.FC = () => {
   const { t } = useTranslation('toolAiTranslator')
-  const [providerId, setProviderId] = useState<string>('openai')
-  const [source, setSource] = useState<LangCode>('auto')
-  const [target, setTarget] = useState<LangCode>('en')
+  // providerId / source / target 通过专用 hook 完成「先恢复后持久化」的安全顺序，
+  // 避免首屏挂载时用默认值覆盖存档（issue: 切到 WebLLM 刷新后回到 OpenAI）。
+  const {
+    providerId, source, target,
+    setProviderId, setSource, setTarget,
+  } = usePersistedSession({ providerId: 'openai', source: 'auto', target: 'en' })
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [busy, setBusy] = useState(false)
@@ -48,19 +52,6 @@ const AiTranslator: React.FC = () => {
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
   const speechOk = useMemo(() => isSpeechSupported(), [])
   const abortRef = useRef<AbortController | null>(null)
-
-  // 初始：从 localStorage 恢复
-  useEffect(() => {
-    const s = readSession()
-    if (s.providerId) setProviderId(s.providerId)
-    if (s.source) setSource(s.source as LangCode)
-    if (s.target) setTarget(s.target as LangCode)
-  }, [])
-
-  // 持久化当前选择
-  useEffect(() => {
-    writeSession({ providerId, source, target })
-  }, [providerId, source, target])
 
   const provider = useMemo(() => getProvider(providerId), [providerId])
   const providerCfg = useMemo(
