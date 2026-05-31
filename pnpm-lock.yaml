@@ -3116,6 +3116,9 @@ importers:
       '@toolbox/ui-kit':
         specifier: workspace:*
         version: link:../../packages/ui-kit
+      jszip:
+        specifier: ^3.10.1
+        version: 3.10.1
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@18.3.1)
