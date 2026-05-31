@@ -59,6 +59,8 @@
 | 渐变色生成器 | `/gradient-gen` | `tools/tool-gradient-gen` → GradientGen |
 | 随机名字生成器 | `/name-generator` | `tools/tool-name-generator` → NameGenerator |
 | 抽签工具 | `/lottery` | `tools/tool-lottery` → Lottery |
+| Favicon 生成器 | `/favicon-generator` | `tools/tool-favicon-generator` → FaviconGenerator |
+| CSS 阴影生成器 | `/box-shadow-gen` | `tools/tool-box-shadow-gen` → BoxShadowGen |
 
 ### 研发工具
 
