@@ -1,0 +1,52 @@
+{
+  "title": "Favicon Generator",
+  "description": "Upload one image locally and generate a multi-size favicon.ico, standalone PNGs, site.webmanifest, an HTML snippet, and a ZIP bundle in seconds.",
+  "upload": {
+    "heading": "Upload source image",
+    "drop": "Drop an image here or click to select",
+    "hint": "Supports PNG / JPG / WebP / SVG, >= 512x512 recommended",
+    "replace": "Replace image",
+    "invalid": "Unable to read this file. Please choose a valid image.",
+    "tooLarge": "File too large. Please choose an image under 10MB."
+  },
+  "options": {
+    "heading": "Generation options",
+    "background": "Background fill",
+    "backgroundHint": "Transparent by default; pick a color to flatten as the background",
+    "transparent": "Transparent",
+    "maskable": "Apply maskable safe-area for SVG",
+    "maskableHint": "Reserves an 80% safe area when maskable mode is on (recommended for Android adaptive icons)"
+  },
+  "preview": {
+    "heading": "Preview (16 / 32 / 48 / 180)",
+    "empty": "Multi-size previews will appear here once an image is uploaded"
+  },
+  "output": {
+    "heading": "Export",
+    "downloadZip": "Download ZIP bundle",
+    "copyHtml": "Copy HTML snippet",
+    "copyManifest": "Copy site.webmanifest",
+    "copied": "Copied to clipboard",
+    "failed": "Copy failed, please select manually",
+    "htmlHeading": "HTML <link> snippet (paste into <head>)",
+    "manifestHeading": "site.webmanifest",
+    "filesHeading": "Files in the bundle",
+    "waiting": "Upload a source image to enable export"
+  },
+  "notice": {
+    "title": "Processed locally, never uploaded",
+    "description": "All image processing happens in your browser via Canvas. Source images and generated outputs are not sent to any server."
+  },
+  "files": {
+    "ico": "favicon.ico (multi-size 16/32/48)",
+    "png16": "favicon-16.png",
+    "png32": "favicon-32.png",
+    "png48": "favicon-48.png",
+    "png96": "favicon-96.png",
+    "apple": "apple-touch-icon-180.png",
+    "android192": "android-chrome-192.png",
+    "android512": "android-chrome-512.png",
+    "manifest": "site.webmanifest",
+    "html": "head-snippet.html"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Favicon 生成器",
+  "description": "本地上传一张图片，自动生成多尺寸 favicon.ico、独立 PNG、site.webmanifest 与 HTML 片段，并支持一键 ZIP 下载。",
+  "upload": {
+    "heading": "上传源图片",
+    "drop": "拖拽图片到此处，或点击选择",
+    "hint": "支持 PNG / JPG / WebP / SVG，建议尺寸 ≥ 512×512",
+    "replace": "替换图片",
+    "invalid": "无法识别该文件，请选择有效的图片",
+    "tooLarge": "文件过大，请选择小于 10MB 的图片"
+  },
+  "options": {
+    "heading": "生成选项",
+    "background": "背景填充色",
+    "backgroundHint": "默认透明；选择具体颜色后将作为底色合成",
+    "transparent": "透明",
+    "maskable": "SVG 启用 maskable 安全区",
+    "maskableHint": "在 maskable 模式下保留 80% 安全区，适用于 Android 自适应图标"
+  },
+  "preview": {
+    "heading": "预览（16 / 32 / 48 / 180）",
+    "empty": "上传图片后将在此处显示多尺寸预览"
+  },
+  "output": {
+    "heading": "导出",
+    "downloadZip": "下载 ZIP 整包",
+    "copyHtml": "复制 HTML 片段",
+    "copyManifest": "复制 site.webmanifest",
+    "copied": "已复制到剪贴板",
+    "failed": "复制失败，请手动选择文本",
+    "htmlHeading": "HTML <link> 片段（粘贴到 <head>）",
+    "manifestHeading": "site.webmanifest",
+    "filesHeading": "将包含的文件",
+    "waiting": "上传源图片后即可导出"
+  },
+  "notice": {
+    "title": "本地处理，零上传",
+    "description": "所有图像处理都在浏览器内通过 Canvas 完成，源图片与生成结果不会被上传到任何服务器。"
+  },
+  "files": {
+    "ico": "favicon.ico（多尺寸 16/32/48）",
+    "png16": "favicon-16.png",
+    "png32": "favicon-32.png",
+    "png48": "favicon-48.png",
+    "png96": "favicon-96.png",
+    "apple": "apple-touch-icon-180.png",
+    "android192": "android-chrome-192.png",
+    "android512": "android-chrome-512.png",
+    "manifest": "site.webmanifest",
+    "html": "head-snippet.html"
+  }
+}
