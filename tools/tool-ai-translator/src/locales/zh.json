@@ -16,7 +16,9 @@
     "inputPlaceholder": "在此粘贴或输入要翻译的文本，Ctrl/⌘ + Enter 开始翻译",
     "outputPlaceholder": "翻译结果将以流式方式逐字显示",
     "clear": "清空",
-    "copy": "复制"
+    "copy": "复制",
+    "speak": "朗读",
+    "stopSpeak": "停止朗读"
   },
   "action": {
     "translate": "翻译",

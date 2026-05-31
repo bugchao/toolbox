@@ -10,10 +10,13 @@ import {
   Sparkles,
   Square,
   Trash2,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import { LANGUAGES, type LangCode } from './lib/languages'
 import { PROVIDERS, getProvider } from './lib/providers'
 import { readProviderConfig, readSession, writeSession } from './lib/storage'
+import { isSpeechSupported, speak, stopSpeaking } from './lib/speech'
 import { translate } from './lib/translate'
 import SettingsDrawer from './components/SettingsDrawer'
 
@@ -31,6 +34,8 @@ const AiTranslator: React.FC = () => {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [progress, setProgress] = useState<ProgressState>(null)
   const [cfgVersion, setCfgVersion] = useState(0)
+  const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
+  const speechOk = useMemo(() => isSpeechSupported(), [])
   const abortRef = useRef<AbortController | null>(null)
 
   // 初始：从 localStorage 恢复
@@ -120,6 +125,26 @@ const AiTranslator: React.FC = () => {
     try { await navigator.clipboard.writeText(output) } catch { /* ignore */ }
   }
 
+  // 卸载时停止朗读，避免残音
+  useEffect(() => () => { stopSpeaking() }, [])
+
+  const handleSpeak = (panel: 'input' | 'output') => {
+    if (speakingPanel === panel) {
+      stopSpeaking()
+      setSpeakingPanel(null)
+      return
+    }
+    const text = panel === 'input' ? input : output
+    // 输入侧若选了「自动检测」就让浏览器自选 voice
+    const lang = panel === 'input' ? (source === 'auto' ? undefined : source) : target
+    const ok = speak(text, lang, {
+      onStart: () => setSpeakingPanel(panel),
+      onEnd: () => setSpeakingPanel((cur) => (cur === panel ? null : cur)),
+      onError: () => setSpeakingPanel((cur) => (cur === panel ? null : cur)),
+    })
+    if (!ok) setSpeakingPanel(null)
+  }
+
   const providerBadge = (() => {
     if (!provider) return null
     if (provider.kind === 'cloud' || provider.kind === 'custom') return t('badge.cloud')
@@ -205,14 +230,28 @@ const AiTranslator: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>{t('panel.input')} · {input.length}</span>
-                <button
-                  type="button"
-                  onClick={() => setInput('')}
-                  disabled={!input}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  <Trash2 className="h-3 w-3" /> {t('panel.clear')}
-                </button>
+                <div className="flex items-center gap-3">
+                  {speechOk && (
+                    <button
+                      type="button"
+                      onClick={() => handleSpeak('input')}
+                      disabled={!input}
+                      title={speakingPanel === 'input' ? t('panel.stopSpeak') : t('panel.speak')}
+                      className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                    >
+                      {speakingPanel === 'input' ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+                      {speakingPanel === 'input' ? t('panel.stopSpeak') : t('panel.speak')}
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setInput('')}
+                    disabled={!input}
+                    className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                  >
+                    <Trash2 className="h-3 w-3" /> {t('panel.clear')}
+                  </button>
+                </div>
               </div>
               <TextArea
                 value={input}
@@ -226,14 +265,28 @@ const AiTranslator: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>{t('panel.output')} · {output.length}</span>
-                <button
-                  type="button"
-                  onClick={copyOutput}
-                  disabled={!output}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  <ClipboardCopy className="h-3 w-3" /> {t('panel.copy')}
-                </button>
+                <div className="flex items-center gap-3">
+                  {speechOk && (
+                    <button
+                      type="button"
+                      onClick={() => handleSpeak('output')}
+                      disabled={!output}
+                      title={speakingPanel === 'output' ? t('panel.stopSpeak') : t('panel.speak')}
+                      className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                    >
+                      {speakingPanel === 'output' ? <VolumeX className="h-3 w-3" /> : <Volume2 className="h-3 w-3" />}
+                      {speakingPanel === 'output' ? t('panel.stopSpeak') : t('panel.speak')}
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={copyOutput}
+                    disabled={!output}
+                    className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                  >
+                    <ClipboardCopy className="h-3 w-3" /> {t('panel.copy')}
+                  </button>
+                </div>
               </div>
               <TextArea value={output} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
             </div>

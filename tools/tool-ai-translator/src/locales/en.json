@@ -16,7 +16,9 @@
     "inputPlaceholder": "Paste or type the text to translate. Ctrl/⌘ + Enter to translate.",
     "outputPlaceholder": "Translation streams in character by character",
     "clear": "Clear",
-    "copy": "Copy"
+    "copy": "Copy",
+    "speak": "Speak",
+    "stopSpeak": "Stop"
   },
   "action": {
     "translate": "Translate",
