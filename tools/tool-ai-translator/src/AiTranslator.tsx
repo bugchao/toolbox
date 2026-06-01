@@ -5,6 +5,7 @@ import {
   ArrowLeftRight,
   BookMarked,
   ClipboardCopy,
+  Columns2,
   Eye,
   FileText,
   History,
@@ -66,6 +67,14 @@ const AiTranslator: React.FC = () => {
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
   const [mode, setMode] = useState<'text' | 'files'>('text')
   const [outputView, setOutputView] = useState<'raw' | 'rendered'>('raw')
+  // 对比模式：providerIdB 非空 → 并行调两个 provider
+  const [compareEnabled, setCompareEnabled] = useState(false)
+  const [providerIdB, setProviderIdB] = useState<string>('anthropic')
+  const [outputB, setOutputB] = useState('')
+  const [busyB, setBusyB] = useState(false)
+  const [errorB, setErrorB] = useState<string | null>(null)
+  const [progressB, setProgressB] = useState<ProgressState>(null)
+  const abortBRef = useRef<AbortController | null>(null)
   const speechOk = useMemo(() => isSpeechSupported(), [])
   const abortRef = useRef<AbortController | null>(null)
 
@@ -74,6 +83,12 @@ const AiTranslator: React.FC = () => {
     () => readProviderConfig(providerId),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [providerId, cfgVersion],
+  )
+  const providerB = useMemo(() => getProvider(providerIdB), [providerIdB])
+  const providerBCfg = useMemo(
+    () => readProviderConfig(providerIdB),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [providerIdB, cfgVersion],
   )
 
   const handleSwap = () => {
@@ -86,68 +101,111 @@ const AiTranslator: React.FC = () => {
   const handleStop = () => {
     abortRef.current?.abort()
     abortRef.current = null
+    abortBRef.current?.abort()
+    abortBRef.current = null
     setBusy(false)
+    setBusyB(false)
   }
 
-  const handleTranslate = useCallback(async () => {
-    if (!provider) return
-    if (!input.trim()) return
-    setError(null)
-    setOutput('')
-    setProgress(null)
-    setBusy(true)
+  /**
+   * 单端翻译实现：闭包了 provider 选择与 setter，方便对比模式 Promise.all 并行调用。
+   * 返回最终聚合文本（供 caller 决定要不要入库）。
+   */
+  const runOneTranslate = useCallback(async (opts: {
+    side: 'A' | 'B'
+    providerId: string
+    setProgress: (p: ProgressState) => void
+    setOutput: React.Dispatch<React.SetStateAction<string>>
+    setError: (msg: string | null) => void
+    setBusy: (b: boolean) => void
+    abortRef: React.MutableRefObject<AbortController | null>
+  }): Promise<string> => {
+    const p = getProvider(opts.providerId)
+    if (!p) throw new Error('no_provider')
+    const cfg = readProviderConfig(opts.providerId)
+    opts.setError(null)
+    opts.setOutput('')
+    opts.setProgress(null)
+    opts.setBusy(true)
     const ctrl = new AbortController()
-    abortRef.current = ctrl
+    opts.abortRef.current = ctrl
 
     try {
       let webllmStream: Parameters<typeof translate>[0]['webllmStream'] | undefined
-      if (provider.kind === 'webllm') {
+      if (p.kind === 'webllm') {
         const { ensureEngine, webllmStream: stream } = await import('./lib/webllm')
-        const targetModel = providerCfg.model || provider.defaultModel
-        await ensureEngine(targetModel, (r) => {
-          setProgress({ loaded: r.progress, total: 1, text: r.text })
+        await ensureEngine(cfg.model || p.defaultModel, (r) => {
+          opts.setProgress({ loaded: r.progress, total: 1, text: r.text })
         })
-        setProgress(null)
+        opts.setProgress(null)
         webllmStream = stream
       }
-      let finalOutput = ''
-      // 注入当前文本对应的术语表条目
+      let acc = ''
       const glossarySnippet = glossaryFormat(
         glossaryApplicable(readGlossary(), source, target, input),
       )
       await translate({
-        providerId,
-        model: providerCfg.model || provider.defaultModel,
-        baseUrl: providerCfg.baseUrl || provider.defaultBaseUrl,
-        apiKey: providerCfg.apiKey,
+        providerId: opts.providerId,
+        model: cfg.model || p.defaultModel,
+        baseUrl: cfg.baseUrl || p.defaultBaseUrl,
+        apiKey: cfg.apiKey,
         source,
         target,
         text: input,
         glossary: glossarySnippet || undefined,
         signal: ctrl.signal,
         onChunk: (chunk) => {
-          finalOutput += chunk
-          setOutput((cur) => cur + chunk)
+          acc += chunk
+          opts.setOutput((cur) => cur + chunk)
         },
         webllmStream,
       })
-      // 翻译完整成功（未被中断 / 未抛错），写入历史
-      if (!ctrl.signal.aborted && finalOutput.trim()) {
-        const cur = readHistory()
-        const next = addHistoryEntry(cur, {
-          providerId, source, target, input, output: finalOutput,
-        }, readHistorySettings())
-        writeHistory(next)
-        setHistoryTick((t) => t + 1)
-      }
+      return acc
     } catch (e) {
-      const msg = (e as Error).message ?? String(e)
-      if (!ctrl.signal.aborted) setError(msg)
+      if (!ctrl.signal.aborted) opts.setError((e as Error).message ?? String(e))
+      return ''
     } finally {
-      if (abortRef.current === ctrl) abortRef.current = null
-      setBusy(false)
+      if (opts.abortRef.current === ctrl) opts.abortRef.current = null
+      opts.setBusy(false)
     }
-  }, [provider, providerId, providerCfg, input, source, target])
+  }, [input, source, target])
+
+  const handleTranslate = useCallback(async () => {
+    if (!provider) return
+    if (!input.trim()) return
+
+    const runA = runOneTranslate({
+      side: 'A',
+      providerId,
+      setProgress,
+      setOutput,
+      setError,
+      setBusy,
+      abortRef,
+    })
+    const runB = compareEnabled
+      ? runOneTranslate({
+        side: 'B',
+        providerId: providerIdB,
+        setProgress: setProgressB,
+        setOutput: setOutputB,
+        setError: setErrorB,
+        setBusy: setBusyB,
+        abortRef: abortBRef,
+      })
+      : null
+
+    const [aOut] = await Promise.all([runA, runB])
+    // 历史只记 A 端（避免对比模式重复入库）
+    if (aOut && aOut.trim() && !abortRef.current?.signal.aborted) {
+      const cur = readHistory()
+      const next = addHistoryEntry(cur, {
+        providerId, source, target, input, output: aOut,
+      }, readHistorySettings())
+      writeHistory(next)
+      setHistoryTick((t) => t + 1)
+    }
+  }, [provider, providerId, providerIdB, compareEnabled, input, source, target, runOneTranslate])
 
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
@@ -257,6 +315,22 @@ const AiTranslator: React.FC = () => {
               </code>
             </div>
             <span className="flex-1" />
+            {mode === 'text' && (
+              <button
+                type="button"
+                onClick={() => setCompareEnabled((v) => !v)}
+                title={t('header.compare')}
+                className={[
+                  'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition',
+                  compareEnabled
+                    ? 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:border-indigo-400 dark:bg-indigo-900/30 dark:text-indigo-300'
+                    : 'border-gray-300 text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800',
+                ].join(' ')}
+              >
+                <Columns2 className="h-3.5 w-3.5" />
+                {t('header.compare')}
+              </button>
+            )}
             <Button type="button" variant="ghost" onClick={() => setGlossaryOpen(true)}>
               <span className="inline-flex items-center gap-1.5">
                 <BookMarked className="h-4 w-4" />
@@ -276,6 +350,25 @@ const AiTranslator: React.FC = () => {
               </span>
             </Button>
           </div>
+
+          {compareEnabled && mode === 'text' && (
+            <div className="mb-4 flex flex-wrap items-center gap-2 rounded-md border border-dashed border-indigo-300 bg-indigo-50/30 px-2 py-1.5 text-xs dark:border-indigo-700 dark:bg-indigo-900/10">
+              <span className="font-semibold text-indigo-700 dark:text-indigo-300">B:</span>
+              <select
+                value={providerIdB}
+                onChange={(e) => setProviderIdB(e.target.value)}
+                className="rounded-md border border-gray-300 bg-white px-2 py-1 text-xs text-gray-900 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+              >
+                {PROVIDERS.map((p) => (
+                  <option key={p.id} value={p.id}>{p.label}</option>
+                ))}
+              </select>
+              <span className="text-gray-500 dark:text-gray-400">{t('header.model')}:</span>
+              <code className="rounded bg-white px-1.5 py-0.5 text-gray-800 dark:bg-gray-800 dark:text-gray-100">
+                {providerBCfg.model || providerB?.defaultModel || '—'}
+              </code>
+            </div>
+          )}
 
           <div className="mb-4 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
             <select
@@ -341,7 +434,7 @@ const AiTranslator: React.FC = () => {
             <FilesPanel translateChunk={translateChunkForFiles} />
           ) : (
           <>
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className={['grid gap-3', compareEnabled ? 'lg:grid-cols-3 md:grid-cols-1' : 'md:grid-cols-2'].join(' ')}>
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>{t('panel.input')} · {input.length}</span>
@@ -379,7 +472,12 @@ const AiTranslator: React.FC = () => {
 
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                <span>{t('panel.output')} · {output.length}</span>
+                <span>
+                  {compareEnabled && (
+                    <span className="mr-1 rounded bg-indigo-100 px-1 py-0.5 text-[10px] font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">A · {provider?.label}</span>
+                  )}
+                  {t('panel.output')} · {output.length}
+                </span>
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
@@ -419,6 +517,48 @@ const AiTranslator: React.FC = () => {
                 <TextArea value={output} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
               )}
             </div>
+
+            {compareEnabled && (
+              <div className="flex flex-col">
+                <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                  <span>
+                    <span className="mr-1 rounded bg-violet-100 px-1 py-0.5 text-[10px] font-semibold text-violet-700 dark:bg-violet-900/30 dark:text-violet-300">B · {providerB?.label}</span>
+                    {t('panel.output')} · {outputB.length}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (!outputB) return
+                        try { await navigator.clipboard.writeText(outputB) } catch { /* ignore */ }
+                      }}
+                      disabled={!outputB}
+                      className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                    >
+                      <ClipboardCopy className="h-3 w-3" /> {t('panel.copy')}
+                    </button>
+                  </div>
+                </div>
+                <TextArea value={outputB} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
+                {progressB && (
+                  <div className="mt-1 h-1 w-full overflow-hidden rounded bg-gray-200 dark:bg-gray-700">
+                    <div
+                      className="h-full bg-violet-500 transition-[width] duration-200"
+                      style={{ width: `${Math.min(100, Math.max(0, progressB.loaded * 100))}%` }}
+                    />
+                  </div>
+                )}
+                {errorB && (
+                  <div className="mt-2 rounded-md border border-rose-300 bg-rose-50 px-2 py-1 text-xs text-rose-700 dark:border-rose-700 dark:bg-rose-900/30 dark:text-rose-200">
+                    {errorB === 'missing_api_key' ? t('error.missingApiKey') :
+                      errorB === 'missing_model' ? t('error.missingModel') :
+                        errorB === 'missing_base_url' ? t('error.missingBaseUrl') :
+                          errorB === 'webllm_not_initialized' ? t('error.webllmNotInit') :
+                            t('error.generic', { msg: errorB })}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-3">
