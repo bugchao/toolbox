@@ -5,6 +5,7 @@ import {
   ArrowLeftRight,
   BookMarked,
   ClipboardCopy,
+  Eye,
   FileText,
   History,
   Loader2,
@@ -39,6 +40,7 @@ import SettingsDrawer from './components/SettingsDrawer'
 import HistoryDrawer from './components/HistoryDrawer'
 import GlossaryDrawer from './components/GlossaryDrawer'
 import FilesPanel from './components/FilesPanel'
+import MarkdownView from './components/MarkdownView'
 
 type ProgressState = { loaded: number; total: number; text: string } | null
 
@@ -63,6 +65,7 @@ const AiTranslator: React.FC = () => {
   const [cfgVersion, setCfgVersion] = useState(0)
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
   const [mode, setMode] = useState<'text' | 'files'>('text')
+  const [outputView, setOutputView] = useState<'raw' | 'rendered'>('raw')
   const speechOk = useMemo(() => isSpeechSupported(), [])
   const abortRef = useRef<AbortController | null>(null)
 
@@ -378,6 +381,16 @@ const AiTranslator: React.FC = () => {
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>{t('panel.output')} · {output.length}</span>
                 <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setOutputView((v) => (v === 'raw' ? 'rendered' : 'raw'))}
+                    disabled={!output}
+                    title={outputView === 'raw' ? t('panel.renderMd') : t('panel.showRaw')}
+                    className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
+                  >
+                    <Eye className="h-3 w-3" />
+                    {outputView === 'raw' ? t('panel.renderMd') : t('panel.showRaw')}
+                  </button>
                   {speechOk && (
                     <button
                       type="button"
@@ -400,7 +413,11 @@ const AiTranslator: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <TextArea value={output} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
+              {outputView === 'rendered' && output ? (
+                <MarkdownView content={output} className="min-h-[280px]" />
+              ) : (
+                <TextArea value={output} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
+              )}
             </div>
           </div>
 

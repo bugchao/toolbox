@@ -78,7 +78,9 @@
     "clear": "清空",
     "copy": "复制",
     "speak": "朗读",
-    "stopSpeak": "停止朗读"
+    "stopSpeak": "停止朗读",
+    "renderMd": "Markdown",
+    "showRaw": "原文"
   },
   "action": {
     "translate": "翻译",

@@ -78,7 +78,9 @@
     "clear": "Clear",
     "copy": "Copy",
     "speak": "Speak",
-    "stopSpeak": "Stop"
+    "stopSpeak": "Stop",
+    "renderMd": "Markdown",
+    "showRaw": "Raw"
   },
   "action": {
     "translate": "Translate",
