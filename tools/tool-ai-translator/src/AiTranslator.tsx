@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import {
   ArrowLeftRight,
   ClipboardCopy,
+  FileText,
   History,
   Loader2,
   Send,
@@ -11,6 +12,7 @@ import {
   Sparkles,
   Square,
   Trash2,
+  Type,
   Volume2,
   VolumeX,
 } from 'lucide-react'
@@ -29,6 +31,7 @@ import {
 import { usePersistedSession } from './hooks/usePersistedSession'
 import SettingsDrawer from './components/SettingsDrawer'
 import HistoryDrawer from './components/HistoryDrawer'
+import FilesPanel from './components/FilesPanel'
 
 type ProgressState = { loaded: number; total: number; text: string } | null
 
@@ -50,6 +53,7 @@ const AiTranslator: React.FC = () => {
   const [progress, setProgress] = useState<ProgressState>(null)
   const [cfgVersion, setCfgVersion] = useState(0)
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
+  const [mode, setMode] = useState<'text' | 'files'>('text')
   const speechOk = useMemo(() => isSpeechSupported(), [])
   const abortRef = useRef<AbortController | null>(null)
 
@@ -134,6 +138,34 @@ const AiTranslator: React.FC = () => {
       handleTranslate()
     }
   }
+
+  /**
+   * 给 FilesPanel 用的单段翻译入口：闭包了当前 provider / 模型 / 语种，
+   * 复用 translate() 管线，把流式 chunk 聚合成完整字符串返回。
+   */
+  const translateChunkForFiles = useCallback(async (text: string, signal?: AbortSignal): Promise<string> => {
+    if (!provider) throw new Error('no provider')
+    let webllmStream: Parameters<typeof translate>[0]['webllmStream'] | undefined
+    if (provider.kind === 'webllm') {
+      const mod = await import('./lib/webllm')
+      await mod.ensureEngine(providerCfg.model || provider.defaultModel)
+      webllmStream = mod.webllmStream
+    }
+    let acc = ''
+    await translate({
+      providerId,
+      model: providerCfg.model || provider.defaultModel,
+      baseUrl: providerCfg.baseUrl || provider.defaultBaseUrl,
+      apiKey: providerCfg.apiKey,
+      source,
+      target,
+      text,
+      signal,
+      onChunk: (c) => { acc += c },
+      webllmStream,
+    })
+    return acc
+  }, [provider, providerId, providerCfg, source, target])
 
   const copyOutput = async () => {
     if (!output) return
@@ -247,6 +279,40 @@ const AiTranslator: React.FC = () => {
             </select>
           </div>
 
+          {/* 模式 Tab：文本翻译 / 文件批量 */}
+          <div className="mb-4 inline-flex rounded-md border border-gray-200 p-0.5 dark:border-gray-700">
+            <button
+              type="button"
+              onClick={() => setMode('text')}
+              className={[
+                'inline-flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition',
+                mode === 'text'
+                  ? 'bg-indigo-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
+              ].join(' ')}
+            >
+              <Type className="h-3.5 w-3.5" />
+              {t('mode.text')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode('files')}
+              className={[
+                'inline-flex items-center gap-1.5 rounded px-3 py-1 text-xs font-medium transition',
+                mode === 'files'
+                  ? 'bg-indigo-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
+              ].join(' ')}
+            >
+              <FileText className="h-3.5 w-3.5" />
+              {t('mode.files')}
+            </button>
+          </div>
+
+          {mode === 'files' ? (
+            <FilesPanel translateChunk={translateChunkForFiles} />
+          ) : (
+          <>
           <div className="grid gap-3 md:grid-cols-2">
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
@@ -364,6 +430,8 @@ const AiTranslator: React.FC = () => {
                 return t('error.generic', { msg: error })
               })()}
             </div>
+          )}
+          </>
           )}
         </Card>
       </div>

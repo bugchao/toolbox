@@ -11,6 +11,31 @@
     "model": "Model",
     "swap": "Swap languages"
   },
+  "mode": {
+    "text": "Text",
+    "files": "Files"
+  },
+  "files": {
+    "dropCta": "Drop files or click to choose",
+    "dropHint": ".txt / .md / .markdown / .mdx; max 2 MB per file; multiple OK",
+    "skipped": "Skipped {{n}} invalid file(s)",
+    "translateAll": "Translate all",
+    "stop": "Stop",
+    "downloadOne": "Download",
+    "downloadZip": "Download all (ZIP)",
+    "clear": "Clear",
+    "remove": "Remove",
+    "translating": "Translating…",
+    "allDone": "All done",
+    "status": {
+      "pending": "Pending",
+      "running": "Running",
+      "done": "Done",
+      "donePartial": "Done ({{n}} failed)",
+      "failed": "Failed",
+      "canceled": "Canceled"
+    }
+  },
   "history": {
     "heading": "Translation history",
     "done": "Done",
