@@ -20,6 +20,19 @@ describe('buildMessages', () => {
     expect(m[0].content).toContain('Simplified Chinese')
     expect(m[1]).toEqual({ role: 'user', content: 'hello' })
   })
+
+  it('appends glossary snippet to the system message when provided', () => {
+    const m = buildMessages('en', 'zh', 'hello', {
+      glossary: 'Glossary: "API" → "接口"',
+    })
+    expect(m[0].content).toContain('API')
+    expect(m[0].content).toContain('接口')
+  })
+
+  it('ignores empty / whitespace-only glossary', () => {
+    const m = buildMessages('en', 'zh', 'hi', { glossary: '   ' })
+    expect(m[0].content).not.toContain('Glossary')
+  })
 })
 
 /** 把字符串转成单次 read 完成的 ReadableStream<Uint8Array> */

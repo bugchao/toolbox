@@ -8,8 +8,28 @@
   "header": {
     "settings": "设置",
     "history": "历史",
+    "glossary": "术语表",
     "model": "模型",
     "swap": "交换语种"
+  },
+  "glossary": {
+    "heading": "术语表",
+    "done": "完成",
+    "add": "新增",
+    "import": "导入",
+    "export": "导出",
+    "clearAll": "清空",
+    "confirmClear": "确定清空所有术语？此操作不可撤销。",
+    "delete": "删除",
+    "empty": "尚无术语条目。点「新增」开始维护，或「导入」一份现有 JSON。",
+    "emptySearch": "未匹配到术语条目。",
+    "searchPlaceholder": "按原文 / 译文 / 备注过滤…",
+    "source": "原文术语",
+    "target": "译文术语",
+    "langPair": "语向",
+    "anyLang": "全部",
+    "caseSensitive": "区分大小写",
+    "activeBadge": "本次生效 {{n}} 条"
   },
   "mode": {
     "text": "文本",

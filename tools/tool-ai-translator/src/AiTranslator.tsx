@@ -3,6 +3,7 @@ import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } fro
 import { useTranslation } from 'react-i18next'
 import {
   ArrowLeftRight,
+  BookMarked,
   ClipboardCopy,
   FileText,
   History,
@@ -28,9 +29,15 @@ import {
   writeHistory,
   type HistoryEntry,
 } from './lib/history'
+import {
+  applicable as glossaryApplicable,
+  formatPromptInjection as glossaryFormat,
+  readGlossary,
+} from './lib/glossary'
 import { usePersistedSession } from './hooks/usePersistedSession'
 import SettingsDrawer from './components/SettingsDrawer'
 import HistoryDrawer from './components/HistoryDrawer'
+import GlossaryDrawer from './components/GlossaryDrawer'
 import FilesPanel from './components/FilesPanel'
 
 type ProgressState = { loaded: number; total: number; text: string } | null
@@ -50,6 +57,8 @@ const AiTranslator: React.FC = () => {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
   const [historyTick, setHistoryTick] = useState(0)
+  const [glossaryOpen, setGlossaryOpen] = useState(false)
+  const [glossaryTick, setGlossaryTick] = useState(0)
   const [progress, setProgress] = useState<ProgressState>(null)
   const [cfgVersion, setCfgVersion] = useState(0)
   const [speakingPanel, setSpeakingPanel] = useState<'input' | 'output' | null>(null)
@@ -99,6 +108,10 @@ const AiTranslator: React.FC = () => {
         webllmStream = stream
       }
       let finalOutput = ''
+      // 注入当前文本对应的术语表条目
+      const glossarySnippet = glossaryFormat(
+        glossaryApplicable(readGlossary(), source, target, input),
+      )
       await translate({
         providerId,
         model: providerCfg.model || provider.defaultModel,
@@ -107,6 +120,7 @@ const AiTranslator: React.FC = () => {
         source,
         target,
         text: input,
+        glossary: glossarySnippet || undefined,
         signal: ctrl.signal,
         onChunk: (chunk) => {
           finalOutput += chunk
@@ -152,6 +166,10 @@ const AiTranslator: React.FC = () => {
       webllmStream = mod.webllmStream
     }
     let acc = ''
+    // 每段独立计算 glossary 命中，避免在长文里漏掉只在尾部出现的术语
+    const glossarySnippet = glossaryFormat(
+      glossaryApplicable(readGlossary(), source, target, text),
+    )
     await translate({
       providerId,
       model: providerCfg.model || provider.defaultModel,
@@ -160,12 +178,13 @@ const AiTranslator: React.FC = () => {
       source,
       target,
       text,
+      glossary: glossarySnippet || undefined,
       signal,
       onChunk: (c) => { acc += c },
       webllmStream,
     })
     return acc
-  }, [provider, providerId, providerCfg, source, target])
+  }, [provider, providerId, providerCfg, source, target, glossaryTick])
 
   const copyOutput = async () => {
     if (!output) return
@@ -235,6 +254,12 @@ const AiTranslator: React.FC = () => {
               </code>
             </div>
             <span className="flex-1" />
+            <Button type="button" variant="ghost" onClick={() => setGlossaryOpen(true)}>
+              <span className="inline-flex items-center gap-1.5">
+                <BookMarked className="h-4 w-4" />
+                {t('header.glossary')}
+              </span>
+            </Button>
             <Button type="button" variant="ghost" onClick={() => setHistoryOpen(true)}>
               <span className="inline-flex items-center gap-1.5">
                 <History className="h-4 w-4" />
@@ -454,6 +479,15 @@ const AiTranslator: React.FC = () => {
           setOutput(e.output)
           setError(null)
         }}
+      />
+
+      <GlossaryDrawer
+        open={glossaryOpen}
+        onClose={() => setGlossaryOpen(false)}
+        contextText={input}
+        contextSource={source}
+        contextTarget={target}
+        onChanged={() => setGlossaryTick((v) => v + 1)}
       />
     </div>
   )

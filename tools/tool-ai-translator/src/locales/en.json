@@ -8,8 +8,28 @@
   "header": {
     "settings": "Settings",
     "history": "History",
+    "glossary": "Glossary",
     "model": "Model",
     "swap": "Swap languages"
+  },
+  "glossary": {
+    "heading": "Glossary",
+    "done": "Done",
+    "add": "Add",
+    "import": "Import",
+    "export": "Export",
+    "clearAll": "Clear all",
+    "confirmClear": "Clear all glossary entries? This cannot be undone.",
+    "delete": "Delete",
+    "empty": "No entries yet. Click \"Add\" to start, or \"Import\" an existing JSON.",
+    "emptySearch": "No entries match your filter.",
+    "searchPlaceholder": "Filter by source / target / note…",
+    "source": "Source term",
+    "target": "Target term",
+    "langPair": "Direction",
+    "anyLang": "Any",
+    "caseSensitive": "Case-sensitive",
+    "activeBadge": "{{n}} active now"
   },
   "mode": {
     "text": "Text",

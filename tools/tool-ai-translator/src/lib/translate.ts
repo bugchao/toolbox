@@ -16,6 +16,8 @@ export type TranslateParams = {
   source: LangCode
   target: LangCode
   text: string
+  /** 已格式化的术语表片段（来自 glossary.formatPromptInjection），非空时注入系统消息。 */
+  glossary?: string
   /** 让用户能取消 */
   signal?: AbortSignal
   /** 每个 chunk（已是新增的增量文本）触发 */
@@ -41,14 +43,27 @@ export function buildPrompt(source: LangCode, target: LangCode, text: string): s
 
 export type ChatMessages = { role: 'system' | 'user'; content: string }[]
 
-export function buildMessages(source: LangCode, target: LangCode, text: string): ChatMessages {
+export type BuildMessagesOptions = {
+  /** 已经格式化好的术语表片段；非空时附加到系统消息末尾。 */
+  glossary?: string
+}
+
+export function buildMessages(
+  source: LangCode,
+  target: LangCode,
+  text: string,
+  options: BuildMessagesOptions = {},
+): ChatMessages {
   const src = getLang(source).englishName
   const tgt = getLang(target).englishName
+  const sysParts = [
+    `You are a professional translator. Translate from ${src} to ${tgt}. Output only the translated text — no preface, no quotes, no explanations. Preserve line breaks, lists, code blocks and inline punctuation.`,
+  ]
+  if (options.glossary && options.glossary.trim()) {
+    sysParts.push('', options.glossary.trim())
+  }
   return [
-    {
-      role: 'system',
-      content: `You are a professional translator. Translate from ${src} to ${tgt}. Output only the translated text — no preface, no quotes, no explanations. Preserve line breaks, lists, code blocks and inline punctuation.`,
-    },
+    { role: 'system', content: sysParts.join('\n') },
     { role: 'user', content: text },
   ]
 }
@@ -246,7 +261,9 @@ export async function translate(params: TranslateParams): Promise<string> {
   const provider = getProvider(params.providerId)
   if (!provider) throw new Error(`Unknown provider: ${params.providerId}`)
 
-  const messages = buildMessages(params.source, params.target, params.text)
+  const messages = buildMessages(params.source, params.target, params.text, {
+    glossary: params.glossary,
+  })
   const baseUrl = (params.baseUrl ?? provider.defaultBaseUrl).trim()
   const model = (params.model ?? provider.defaultModel).trim()
   const apiKey = (params.apiKey ?? '').trim()
