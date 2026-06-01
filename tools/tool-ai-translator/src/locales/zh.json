@@ -1,0 +1,151 @@
+{
+  "title": "AI 翻译",
+  "description": "把任意文本通过大模型翻译，支持云端 API、本地服务（Ollama）与浏览器内 WebLLM；API Key、baseUrl、模型选择全部保存在本地。",
+  "notice": {
+    "title": "API Key 仅存浏览器本地",
+    "body": "所有请求由你的浏览器直接发往你选择的 Provider，本工具不经过任何中转。云端 API Key 仅保存在 localStorage，刷新页面后仍生效；删除即可清空。"
+  },
+  "header": {
+    "settings": "设置",
+    "history": "历史",
+    "glossary": "术语表",
+    "compare": "对比模式",
+    "model": "模型",
+    "swap": "交换语种"
+  },
+  "glossary": {
+    "heading": "术语表",
+    "done": "完成",
+    "add": "新增",
+    "import": "导入",
+    "export": "导出",
+    "clearAll": "清空",
+    "confirmClear": "确定清空所有术语？此操作不可撤销。",
+    "delete": "删除",
+    "empty": "尚无术语条目。点「新增」开始维护，或「导入」一份现有 JSON。",
+    "emptySearch": "未匹配到术语条目。",
+    "searchPlaceholder": "按原文 / 译文 / 备注过滤…",
+    "source": "原文术语",
+    "target": "译文术语",
+    "langPair": "语向",
+    "anyLang": "全部",
+    "caseSensitive": "区分大小写",
+    "activeBadge": "本次生效 {{n}} 条"
+  },
+  "mode": {
+    "text": "文本",
+    "files": "文件"
+  },
+  "files": {
+    "dropCta": "拖入或点击选择文件",
+    "dropHint": "支持 .txt / .md / .markdown / .mdx；单文件最大 2 MB；可多选",
+    "skipped": "跳过 {{n}} 个无效文件",
+    "translateAll": "全部翻译",
+    "stop": "停止",
+    "downloadOne": "下载",
+    "downloadZip": "打包下载 ZIP",
+    "clear": "清空",
+    "remove": "移除",
+    "translating": "正在翻译…",
+    "allDone": "全部完成",
+    "status": {
+      "pending": "等待中",
+      "running": "翻译中",
+      "done": "已完成",
+      "donePartial": "已完成（{{n}} 段失败）",
+      "failed": "失败",
+      "canceled": "已取消"
+    }
+  },
+  "history": {
+    "heading": "翻译历史",
+    "done": "完成",
+    "empty": "暂无历史记录。完成一次翻译后会自动保存。",
+    "restore": "载入到编辑器",
+    "delete": "删除",
+    "clearAll": "清空全部",
+    "confirmClearAll": "确定清空全部翻译历史？此操作不可撤销。",
+    "strategyTitle": "存储策略",
+    "strategyCap": "容量滚动（满后丢弃最旧）",
+    "strategyManual": "仅手动管理（不自动丢弃）",
+    "capLabel": "上限",
+    "nearLimit": "接近上限"
+  },
+  "panel": {
+    "input": "输入",
+    "output": "翻译结果",
+    "inputPlaceholder": "在此粘贴或输入要翻译的文本，Ctrl/⌘ + Enter 开始翻译",
+    "outputPlaceholder": "翻译结果将以流式方式逐字显示",
+    "clear": "清空",
+    "copy": "复制",
+    "speak": "朗读",
+    "stopSpeak": "停止朗读",
+    "renderMd": "Markdown",
+    "showRaw": "原文"
+  },
+  "action": {
+    "translate": "翻译",
+    "stop": "停止",
+    "shortcut": "快捷键 Ctrl/⌘ + Enter",
+    "streaming": "正在流式接收…",
+    "loadingWebllm": "加载 WebLLM 模型 {{pct}}%"
+  },
+  "badge": {
+    "cloud": "云端",
+    "local": "本地",
+    "webllm": "WebLLM"
+  },
+  "error": {
+    "missingApiKey": "缺少 API Key，请在「设置」中填入对应 Provider 的密钥。",
+    "missingModel": "未指定模型，请到「设置」选择或填入模型名。",
+    "missingBaseUrl": "缺少 baseUrl，请到「设置」填入接口地址。",
+    "webllmNotInit": "WebLLM 模型尚未加载，请等待初始化完成。",
+    "ollamaModelNotFound": "Ollama 本地没有模型「{{model}}」。请先在终端执行 `ollama pull {{model}}`，或在「设置」里选/填一个已经下载的模型。",
+    "generic": "请求失败：{{msg}}"
+  },
+  "settings": {
+    "heading": "Provider 设置",
+    "done": "完成",
+    "tab": {
+      "cloud": "云端 API",
+      "local": "本地服务",
+      "webllm": "浏览器 WebLLM",
+      "cloudNotice": "API Key 仅保存在本机浏览器；请求由浏览器直接发往 Provider。Anthropic 的浏览器直连需自行评估安全策略。",
+      "localNotice": "本地 HTTP 服务（如 Ollama）需事先启动；如果走 OpenAI 兼容协议，建议使用「云端 / OpenAI 兼容自定义」并填本地 baseUrl。",
+      "webllmNotice": "首次使用需要下载模型（数百 MB），完整运行在浏览器内（需要 WebGPU 支持）。模型下载后会缓存在浏览器中。"
+    },
+    "field": {
+      "apiKey": "API Key",
+      "apiKeyRequired": "必填",
+      "apiKeyOptional": "可留空",
+      "baseUrl": "Base URL",
+      "model": "模型",
+      "modelCustomPlaceholder": "自定义模型名（如 my-model）",
+      "modelCustomOption": "✎ 自定义…",
+      "modelHint": "从下拉选常见模型；选「自定义…」可手输任意模型名（如 Ollama 本地拉过的 tag）。",
+      "custom": "自定义"
+    }
+  },
+  "provider": {
+    "customHint": "兼容 OpenAI Chat Completions 协议的任意端点。本地服务（LM Studio / vllm 等）也可用此项接入。",
+    "ollamaHint": "模型名要和 `ollama pull` / `ollama list` 输出完全一致（含 tag），比如 `qwen2.5:3b`。预设里没列出的也可以手输。",
+    "webllmHint": "MLC 官方模型 ID，参考 https://github.com/mlc-ai/web-llm 的 prebuilt 列表。模型越大显存占用越高。"
+  },
+  "lang": {
+    "auto": "自动检测",
+    "zh": "简体中文",
+    "zhTW": "繁體中文",
+    "en": "英语",
+    "ja": "日语",
+    "ko": "韩语",
+    "fr": "法语",
+    "de": "德语",
+    "es": "西班牙语",
+    "ru": "俄语",
+    "pt": "葡萄牙语",
+    "it": "意大利语",
+    "ar": "阿拉伯语",
+    "th": "泰语",
+    "vi": "越南语"
+  }
+}

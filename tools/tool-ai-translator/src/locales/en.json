@@ -1,0 +1,151 @@
+{
+  "title": "AI Translator",
+  "description": "Translate any text via large language models — cloud APIs, local servers (Ollama), and in-browser WebLLM. API keys, base URLs and model choices all live in localStorage.",
+  "notice": {
+    "title": "API keys never leave your browser",
+    "body": "Every request goes from your browser straight to the provider you choose; this tool is not a proxy. Cloud API keys live in localStorage — clear them anytime."
+  },
+  "header": {
+    "settings": "Settings",
+    "history": "History",
+    "glossary": "Glossary",
+    "compare": "Compare",
+    "model": "Model",
+    "swap": "Swap languages"
+  },
+  "glossary": {
+    "heading": "Glossary",
+    "done": "Done",
+    "add": "Add",
+    "import": "Import",
+    "export": "Export",
+    "clearAll": "Clear all",
+    "confirmClear": "Clear all glossary entries? This cannot be undone.",
+    "delete": "Delete",
+    "empty": "No entries yet. Click \"Add\" to start, or \"Import\" an existing JSON.",
+    "emptySearch": "No entries match your filter.",
+    "searchPlaceholder": "Filter by source / target / note…",
+    "source": "Source term",
+    "target": "Target term",
+    "langPair": "Direction",
+    "anyLang": "Any",
+    "caseSensitive": "Case-sensitive",
+    "activeBadge": "{{n}} active now"
+  },
+  "mode": {
+    "text": "Text",
+    "files": "Files"
+  },
+  "files": {
+    "dropCta": "Drop files or click to choose",
+    "dropHint": ".txt / .md / .markdown / .mdx; max 2 MB per file; multiple OK",
+    "skipped": "Skipped {{n}} invalid file(s)",
+    "translateAll": "Translate all",
+    "stop": "Stop",
+    "downloadOne": "Download",
+    "downloadZip": "Download all (ZIP)",
+    "clear": "Clear",
+    "remove": "Remove",
+    "translating": "Translating…",
+    "allDone": "All done",
+    "status": {
+      "pending": "Pending",
+      "running": "Running",
+      "done": "Done",
+      "donePartial": "Done ({{n}} failed)",
+      "failed": "Failed",
+      "canceled": "Canceled"
+    }
+  },
+  "history": {
+    "heading": "Translation history",
+    "done": "Done",
+    "empty": "No history yet — successful translations are saved here automatically.",
+    "restore": "Load into editor",
+    "delete": "Delete",
+    "clearAll": "Clear all",
+    "confirmClearAll": "Clear all translation history? This cannot be undone.",
+    "strategyTitle": "Storage policy",
+    "strategyCap": "Rolling cap (drop oldest when full)",
+    "strategyManual": "Manual only (never auto-drop)",
+    "capLabel": "Cap",
+    "nearLimit": "near limit"
+  },
+  "panel": {
+    "input": "Input",
+    "output": "Translation",
+    "inputPlaceholder": "Paste or type the text to translate. Ctrl/⌘ + Enter to translate.",
+    "outputPlaceholder": "Translation streams in character by character",
+    "clear": "Clear",
+    "copy": "Copy",
+    "speak": "Speak",
+    "stopSpeak": "Stop",
+    "renderMd": "Markdown",
+    "showRaw": "Raw"
+  },
+  "action": {
+    "translate": "Translate",
+    "stop": "Stop",
+    "shortcut": "Shortcut: Ctrl/⌘ + Enter",
+    "streaming": "Streaming…",
+    "loadingWebllm": "Loading WebLLM model {{pct}}%"
+  },
+  "badge": {
+    "cloud": "Cloud",
+    "local": "Local",
+    "webllm": "WebLLM"
+  },
+  "error": {
+    "missingApiKey": "API key missing — open Settings and add one for the selected provider.",
+    "missingModel": "No model selected — open Settings to pick or type a model name.",
+    "missingBaseUrl": "Base URL missing — open Settings to enter an endpoint.",
+    "webllmNotInit": "WebLLM model is not loaded yet — wait for initialization.",
+    "ollamaModelNotFound": "Ollama doesn't have model \"{{model}}\" locally. Run `ollama pull {{model}}` in a terminal first, or pick/type a different model in Settings.",
+    "generic": "Request failed: {{msg}}"
+  },
+  "settings": {
+    "heading": "Provider settings",
+    "done": "Done",
+    "tab": {
+      "cloud": "Cloud APIs",
+      "local": "Local servers",
+      "webllm": "Browser WebLLM",
+      "cloudNotice": "API keys live in this browser only — requests go direct to providers. Anthropic browser calls require you to accept the direct-access header.",
+      "localNotice": "Local HTTP servers like Ollama must already be running. For OpenAI-compatible local servers, use Cloud → OpenAI-compatible custom and point baseUrl at localhost.",
+      "webllmNotice": "First run downloads a model (hundreds of MB) and runs fully in-browser (requires WebGPU). Subsequent runs reuse the cached model."
+    },
+    "field": {
+      "apiKey": "API key",
+      "apiKeyRequired": "required",
+      "apiKeyOptional": "optional",
+      "baseUrl": "Base URL",
+      "model": "Model",
+      "modelCustomPlaceholder": "custom model name (e.g. my-model)",
+      "modelCustomOption": "✎ Custom…",
+      "modelHint": "Pick a common model from the dropdown, or choose \"Custom…\" to type any model name (e.g. a tag you pulled with Ollama).",
+      "custom": "custom"
+    }
+  },
+  "provider": {
+    "customHint": "Any endpoint that implements OpenAI Chat Completions. Use this for LM Studio, vllm, or self-hosted compatible servers.",
+    "ollamaHint": "Model name must match `ollama pull` / `ollama list` exactly (including tag), e.g. `qwen2.5:3b`. Models not listed below can be typed directly.",
+    "webllmHint": "MLC official model IDs — see the prebuilt list at https://github.com/mlc-ai/web-llm. Larger models require more VRAM."
+  },
+  "lang": {
+    "auto": "Auto-detect",
+    "zh": "Simplified Chinese",
+    "zhTW": "Traditional Chinese",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "ru": "Russian",
+    "pt": "Portuguese",
+    "it": "Italian",
+    "ar": "Arabic",
+    "th": "Thai",
+    "vi": "Vietnamese"
+  }
+}
