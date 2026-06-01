@@ -1,0 +1,52 @@
+{
+  "title": "CSS 阴影生成器",
+  "description": "可视化编辑多层 box-shadow，实时预览，内置 Material / Neumorphism / Glassmorphism 预设；一键复制 CSS 规则或 Tailwind 任意值。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有参数在浏览器内合成 box-shadow 代码，不上传任何数据。"
+  },
+  "layers": {
+    "heading": "阴影层",
+    "add": "添加层",
+    "clear": "清空",
+    "empty": "暂无阴影层，点「添加层」开始；或从下方预设直接载入。",
+    "itemTitle": "层 #{{n}}",
+    "x": "X 偏移",
+    "y": "Y 偏移",
+    "blur": "模糊",
+    "spread": "扩散",
+    "color": "颜色",
+    "alpha": "不透明",
+    "inset": "内阴影",
+    "up": "上移",
+    "down": "下移",
+    "remove": "删除"
+  },
+  "presets": {
+    "heading": "预设"
+  },
+  "preset": {
+    "material1": "Material 1",
+    "material2": "Material 2",
+    "material4": "Material 4",
+    "material8": "Material 8",
+    "material16": "Material 16",
+    "neumorphismLight": "新拟态（浅）",
+    "neumorphismDark": "新拟态（深）",
+    "glassmorphism": "玻璃拟态"
+  },
+  "preview": {
+    "heading": "预览与输出",
+    "shape": "形状",
+    "shapeRect": "矩形",
+    "shapePill": "胶囊",
+    "shapeCircle": "圆形",
+    "radius": "圆角",
+    "boxColor": "块颜色",
+    "stageColor": "舞台底色"
+  },
+  "output": {
+    "css": "CSS 规则",
+    "tailwind": "Tailwind 任意值"
+  }
+}
