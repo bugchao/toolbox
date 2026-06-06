@@ -1,0 +1,43 @@
+{
+  "title": "HTML Entity Encoder & Decoder",
+  "description": "Two-way HTML entity converter that runs fully in the browser. Five encoding strengths (minimal, named, decimal / hex code points, named-with-hex fallback), lenient decoding, and full Unicode / emoji support.",
+  "notice": {
+    "title": "Fully local",
+    "body": "All encoding and decoding happens in your browser. Nothing is uploaded, so it is safe to paste snippets that contain sensitive content."
+  },
+  "mode": {
+    "label": "Mode",
+    "encode": "Encode",
+    "decode": "Decode",
+    "swap": "Swap input / output"
+  },
+  "encodeMode": {
+    "label": "Encoding strength",
+    "minimal": "minimal (< > & \" ')",
+    "namedExtended": "named-extended (common named entities)",
+    "nonAsciiDecimal": "non-ascii-decimal (&#dddd;)",
+    "nonAsciiHex": "non-ascii-hex (&#xHHHH;)",
+    "allNonAsciiNamed": "all-non-ascii-named (named, hex fallback)"
+  },
+  "decode": {
+    "hint": "Lenient decoding: accepts &name; / &#nnnn; / &#xHHHH;, semicolon optional, unknown entities are kept verbatim."
+  },
+  "input": {
+    "encodeHeading": "Source text",
+    "decodeHeading": "Encoded text",
+    "encodePlaceholder": "Paste your HTML or plain text here…",
+    "decodePlaceholder": "Paste text with entities, e.g. &lt;div&gt;…&lt;/div&gt;"
+  },
+  "output": {
+    "encodeHeading": "Encoded output",
+    "decodeHeading": "Decoded output",
+    "placeholder": "Conversion result will appear here in real time"
+  },
+  "actions": {
+    "pasteSample": "Paste sample",
+    "clear": "Clear",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "chars": "{{count}} chars"
+}
