@@ -1,0 +1,49 @@
+{
+  "title": "Slug 生成器",
+  "description": "把任意文本转 URL 友好的别名：中文拼音、英文 kebab-case、Unicode 规范化、停用词剔除、自定义替换、批量模式。",
+  "notice": {
+    "title": "纯本地处理",
+    "body": "拼音与字符转换全部在浏览器内完成，输入文本不会上传到任何服务器。"
+  },
+  "mode": {
+    "single": "单条",
+    "batch": "批量"
+  },
+  "input": {
+    "single": "输入文本",
+    "singlePlaceholder": "粘贴或输入要转换的文本",
+    "batch": "输入（每行一条）",
+    "batchPlaceholder": "每行一条文本，空行原样保留"
+  },
+  "output": {
+    "label": "Slug 输出",
+    "copy": "复制",
+    "copied": "已复制",
+    "empty": "输出会在这里实时显示",
+    "length": "{{n}} / {{max}} 字符"
+  },
+  "options": {
+    "heading": "选项",
+    "separator": "分隔符",
+    "separatorNone": "无（直接拼接）",
+    "case": "大小写",
+    "caseLower": "小写",
+    "caseUpper": "大写",
+    "casePreserve": "保留原样",
+    "chinese": "中文处理",
+    "chinesePinyinFull": "全拼",
+    "chinesePinyinInitials": "首字母",
+    "chineseSkip": "丢弃",
+    "chineseKeep": "保留中文字符",
+    "maxLength": "最大长度",
+    "maxLengthPlaceholder": "不限制",
+    "allowedExtras": "额外允许字符",
+    "stripDiacritics": "剥离变音符号（é → e）",
+    "stripStopwords": "剔除英文停用词（the / a / and 等）",
+    "replacementsHeading": "自定义替换",
+    "replacementsHint": "在拼音 / 过滤前先把原文里的某些片段替换掉，比如把「&」替换成「and」。",
+    "replaceFromPlaceholder": "原文",
+    "replaceToPlaceholder": "替换为",
+    "replaceAdd": "添加"
+  }
+}
