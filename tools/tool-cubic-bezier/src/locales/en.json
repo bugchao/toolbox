@@ -1,0 +1,49 @@
+{
+  "title": "CSS Cubic Bezier Editor",
+  "description": "Drag P1 / P2 handles to shape a cubic-bezier easing curve, live preview the animation, switch between presets, copy CSS in one click.",
+  "notice": {
+    "title": "Fully local",
+    "body": "All math and animations run in your browser. Nothing is uploaded. Drag freely and try the presets."
+  },
+  "editor": {
+    "heading": "Curve editor",
+    "hint": "Drag the green / purple handles, or tune the sliders below. Y can overshoot into [-0.5, 1.5].",
+    "p1": "P1 handle",
+    "p2": "P2 handle",
+    "x1": "x1",
+    "y1": "y1",
+    "x2": "x2",
+    "y2": "y2"
+  },
+  "output": {
+    "heading": "CSS output",
+    "code": "CSS",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "duration": {
+    "label": "Animation duration",
+    "unit": "s"
+  },
+  "presets": {
+    "heading": "Presets"
+  },
+  "preset": {
+    "linear": "linear",
+    "ease": "ease",
+    "easeIn": "ease-in",
+    "easeOut": "ease-out",
+    "easeInOut": "ease-in-out",
+    "easeInOutCubic": "easeInOutCubic",
+    "easeOutBack": "easeOutBack",
+    "easeInOutQuart": "easeInOutQuart",
+    "easeOutBounce": "easeOutBounce"
+  },
+  "preview": {
+    "heading": "Animation preview",
+    "hint": "Three balls loop back and forth so you can compare the current curve with linear and ease.",
+    "current": "current",
+    "linear": "linear",
+    "ease": "ease"
+  }
+}
