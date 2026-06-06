@@ -1,0 +1,49 @@
+{
+  "title": "Slug Generator",
+  "description": "Turn any text into a URL-friendly slug: pinyin for Chinese, kebab-case for English, Unicode normalization, stopword stripping, custom replacements, and batch mode.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Pinyin and character normalization happen entirely in your browser — no text is uploaded."
+  },
+  "mode": {
+    "single": "Single",
+    "batch": "Batch"
+  },
+  "input": {
+    "single": "Input",
+    "singlePlaceholder": "Paste or type text to slugify",
+    "batch": "Input (one per line)",
+    "batchPlaceholder": "One text per line; blank lines pass through unchanged"
+  },
+  "output": {
+    "label": "Slug",
+    "copy": "Copy",
+    "copied": "Copied",
+    "empty": "Output appears here as you type",
+    "length": "{{n}} / {{max}} chars"
+  },
+  "options": {
+    "heading": "Options",
+    "separator": "Separator",
+    "separatorNone": "None (join directly)",
+    "case": "Case",
+    "caseLower": "lowercase",
+    "caseUpper": "UPPERCASE",
+    "casePreserve": "Preserve",
+    "chinese": "Chinese",
+    "chinesePinyinFull": "Full pinyin",
+    "chinesePinyinInitials": "Pinyin initials",
+    "chineseSkip": "Drop",
+    "chineseKeep": "Keep CJK chars",
+    "maxLength": "Max length",
+    "maxLengthPlaceholder": "Unlimited",
+    "allowedExtras": "Extra allowed chars",
+    "stripDiacritics": "Strip diacritics (é → e)",
+    "stripStopwords": "Strip English stopwords (the / a / and …)",
+    "replacementsHeading": "Custom replacements",
+    "replacementsHint": "Replace fragments BEFORE pinyin / filter — e.g. \"&\" → \"and\".",
+    "replaceFromPlaceholder": "from",
+    "replaceToPlaceholder": "to",
+    "replaceAdd": "Add"
+  }
+}
