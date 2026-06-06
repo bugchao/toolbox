@@ -1,0 +1,43 @@
+{
+  "title": "HTML 实体编解码",
+  "description": "本地双向编解码 HTML 实体。支持 5 种编码强度（minimal / 命名实体表 / 非 ASCII 十进制 / 十六进制 / 命名优先回退 hex），解码宽松，emoji 与 CJK 全支持，不上传任何数据。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有编解码都在浏览器内执行，不会把内容上传到任何服务器。可以放心粘贴含敏感信息的片段。"
+  },
+  "mode": {
+    "label": "模式",
+    "encode": "编码",
+    "decode": "解码",
+    "swap": "交换输入输出"
+  },
+  "encodeMode": {
+    "label": "编码强度",
+    "minimal": "minimal（< > & \" '）",
+    "namedExtended": "named-extended（命名实体表）",
+    "nonAsciiDecimal": "non-ascii-decimal（&#dddd;）",
+    "nonAsciiHex": "non-ascii-hex（&#xHHHH;）",
+    "allNonAsciiNamed": "all-non-ascii-named（命名 + hex 回退）"
+  },
+  "decode": {
+    "hint": "宽松解码：识别 &name; / &#nnnn; / &#xHHHH;；分号可省略；不认识的实体保留原样。"
+  },
+  "input": {
+    "encodeHeading": "原文",
+    "decodeHeading": "已编码文本",
+    "encodePlaceholder": "在此粘贴原始 HTML 或文本…",
+    "decodePlaceholder": "在此粘贴含实体的文本，如 &lt;div&gt;…&lt;/div&gt;"
+  },
+  "output": {
+    "encodeHeading": "编码结果",
+    "decodeHeading": "解码结果",
+    "placeholder": "右侧将实时显示转换结果"
+  },
+  "actions": {
+    "pasteSample": "粘贴样例",
+    "clear": "清空",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "chars": "{{count}} 字符"
+}
