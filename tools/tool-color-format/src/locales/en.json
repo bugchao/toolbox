@@ -1,0 +1,37 @@
+{
+  "title": "Color Format Converter",
+  "description": "Convert between hex, rgb, hsl, hwb, lab, lch, oklch, oklab and named colors, with WCAG contrast hints and P3 gamut warnings.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing, color-space conversion and contrast math all run in your browser — nothing is uploaded."
+  },
+  "input": {
+    "label": "Color string",
+    "placeholder": "Paste any CSS color — #3366cc, oklch(0.7 0.18 250), hsl(160 75% 45%)…",
+    "parseError": "Cannot parse: {{msg}}"
+  },
+  "hsl": {
+    "heading": "HSL controls"
+  },
+  "samples": {
+    "heading": "Samples"
+  },
+  "history": {
+    "heading": "Recent",
+    "clear": "Clear"
+  },
+  "formats": {
+    "heading": "All formats"
+  },
+  "wcag": {
+    "heading": "WCAG contrast",
+    "vsWhite": "On white (#fff)",
+    "vsBlack": "On black (#000)",
+    "legend": "AAA ≥ 7.0; AA ≥ 4.5 for body text; AA-large ≥ 3.0 for large text; below = fail."
+  },
+  "badge": {
+    "named": "Named: {{name}}",
+    "outOfSrgb": "Out of sRGB gamut",
+    "outOfP3": "Out of P3 gamut"
+  }
+}
