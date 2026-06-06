@@ -1,0 +1,58 @@
+{
+  "title": "EXIF Cleaner",
+  "description": "Drop a photo to inspect its EXIF (camera, capture time, GPS location, etc.) and strip every trace of metadata with one click — fully in your browser.",
+  "notice": {
+    "title": "Processed locally, never uploaded",
+    "description": "Your photos never leave this device. EXIF often carries sensitive data such as GPS coordinates, camera serial numbers, and original timestamps — clean them before sharing."
+  },
+  "upload": {
+    "heading": "Select or drop images",
+    "drop": "Drop images here, or click to pick",
+    "hint": "Supports JPG / PNG / WebP / HEIC, up to 20 MB per file",
+    "tooLarge": "File too large (over 20 MB), skipped: {{name}}",
+    "invalid": "Could not read this file: {{name}}",
+    "addMore": "Add more"
+  },
+  "list": {
+    "heading": "Queue",
+    "empty": "No images added yet",
+    "size": "Size",
+    "status": {
+      "loading": "Parsing…",
+      "withExif": "Has EXIF",
+      "withoutExif": "No EXIF",
+      "failed": "Parse failed"
+    },
+    "actions": {
+      "details": "View details",
+      "hideDetails": "Hide details",
+      "download": "Download clean copy",
+      "downloading": "Processing…",
+      "remove": "Remove"
+    }
+  },
+  "details": {
+    "make": "Camera make",
+    "model": "Camera model",
+    "lens": "Lens",
+    "iso": "ISO",
+    "aperture": "Aperture",
+    "shutter": "Shutter",
+    "focalLength": "Focal length",
+    "takenAt": "Captured",
+    "software": "Software",
+    "orientation": "Orientation",
+    "gps": "GPS location",
+    "gpsWarning": "This photo carries precise coordinates that may reveal where it was taken",
+    "empty": "No EXIF fields detected"
+  },
+  "batch": {
+    "downloadAll": "Download all (ZIP)",
+    "preparing": "Packing…",
+    "clearAll": "Clear queue"
+  },
+  "errors": {
+    "stripFailed": "Failed to strip metadata: {{name}}",
+    "zipFailed": "Failed to build the ZIP, please retry"
+  }
+}

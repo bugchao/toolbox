@@ -1,0 +1,58 @@
+{
+  "title": "EXIF 清理器",
+  "description": "拖入图片即可查看 EXIF 信息（含相机型号、拍摄时间、GPS 位置等），一键清除全部元数据并下载干净副本。",
+  "notice": {
+    "title": "全部在浏览器本地处理，零上传",
+    "description": "图片永远不会离开你的设备。EXIF 中常常包含拍摄位置（GPS 经纬度）、相机序列号、原始时间戳等隐私信息，分享前清理一下更安心。"
+  },
+  "upload": {
+    "heading": "选择或拖入图片",
+    "drop": "把图片拖到这里，或点击选择",
+    "hint": "支持 JPG / PNG / WebP / HEIC，单个文件不超过 20 MB",
+    "tooLarge": "文件过大（超过 20 MB），已跳过：{{name}}",
+    "invalid": "无法读取该文件：{{name}}",
+    "addMore": "继续添加"
+  },
+  "list": {
+    "heading": "待处理图片",
+    "empty": "尚未添加任何图片",
+    "size": "大小",
+    "status": {
+      "loading": "解析中…",
+      "withExif": "含 EXIF",
+      "withoutExif": "无 EXIF",
+      "failed": "解析失败"
+    },
+    "actions": {
+      "details": "查看详情",
+      "hideDetails": "收起详情",
+      "download": "下载干净版",
+      "downloading": "处理中…",
+      "remove": "移除"
+    }
+  },
+  "details": {
+    "make": "相机厂商",
+    "model": "相机型号",
+    "lens": "镜头",
+    "iso": "ISO",
+    "aperture": "光圈",
+    "shutter": "快门",
+    "focalLength": "焦距",
+    "takenAt": "拍摄时间",
+    "software": "处理软件",
+    "orientation": "方向",
+    "gps": "GPS 位置",
+    "gpsWarning": "该照片包含精确地理坐标，可能泄露拍摄地点",
+    "empty": "未发现任何 EXIF 字段"
+  },
+  "batch": {
+    "downloadAll": "全部下载（ZIP）",
+    "preparing": "正在打包…",
+    "clearAll": "清空列表"
+  },
+  "errors": {
+    "stripFailed": "剥离元数据失败：{{name}}",
+    "zipFailed": "打包失败，请稍后重试"
+  }
+}
