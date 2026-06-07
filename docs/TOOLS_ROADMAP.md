@@ -61,6 +61,7 @@
 | 抽签工具 | `/lottery` | `tools/tool-lottery` → Lottery |
 | Favicon 生成器 | `/favicon-generator` | `tools/tool-favicon-generator` → FaviconGenerator |
 | CSS 阴影生成器 | `/box-shadow-gen` | `tools/tool-box-shadow-gen` → BoxShadowGen |
+| EXIF 查看 / 清理 | `/exif-cleaner` | `tools/tool-exif-cleaner` → ExifCleaner |
 
 ### 研发工具
 
@@ -92,6 +93,17 @@
 | SQL 格式化工具 | `/sql-formatter` | `tools/tool-sql-formatter` → SqlFormatter |
 | Mock API 数据生成器（faker schema） | `/mock-api` | `tools/tool-mock-api` → MockApi |
 | API 响应模拟器（REST 模板 + curl） | `/api-mock` | `tools/tool-api-mock` → ApiMock |
+| Slug 生成器（中英拼音 + Unicode 规范化） | `/slug-generator` | `tools/tool-slug-generator` → SlugGenerator |
+| CSS 缓动曲线可视化（cubic-bezier） | `/cubic-bezier` | `tools/tool-cubic-bezier` → CubicBezier |
+| YAML ↔ JSON 互转 | `/yaml-json` | `tools/tool-yaml-json` → YamlJson |
+| TOML ↔ JSON 互转 | `/toml-json` | `tools/tool-toml-json` → TomlJson |
+| HTML 实体编解码 | `/html-entities` | `tools/tool-html-entities` → HtmlEntities |
+| URL Query 可视化编辑器 | `/url-query` | `tools/tool-url-query` → UrlQuery |
+| 颜色格式互转（hex/rgb/hsl/oklch …） | `/color-format` | `tools/tool-color-format` → ColorFormat |
+| Lorem Ipsum / 乱数假文生成器 | `/lorem-ipsum` | `tools/tool-lorem-ipsum` → LoremIpsum |
+| JSON Schema 校验器 | `/json-schema-validator` | `tools/tool-json-schema-validator` → JsonSchemaValidator |
+| Cookie 解析器 | `/cookie-parser` | `tools/tool-cookie-parser` → CookieParser |
+| Mermaid 实时编辑器 | `/mermaid` | `tools/tool-mermaid` → Mermaid |
 
 ### 查询工具
 
@@ -108,6 +120,7 @@
 | AI 会议纪要生成器 | `/meeting-minutes` | `apps/web/src/pages/MeetingMinutes.tsx` |
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
+| AI 翻译（云端 / Ollama / WebLLM 多端） | `/ai-translator` | `tools/tool-ai-translator` → AiTranslator |
 
 ### 网络工具
 
