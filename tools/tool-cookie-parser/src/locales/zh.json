@@ -1,0 +1,65 @@
+{
+  "title": "Cookie 解析器",
+  "description": "粘贴 Cookie / Set-Cookie 头 → 结构化展示所有属性（Domain / Path / Expires / SameSite 等）并标注安全/隐私问题，纯本地处理。",
+  "copy": "复制",
+  "copied": "已复制",
+  "localOnly": {
+    "title": "纯本地解析",
+    "description": "所有解析都在浏览器内完成，Cookie 内容不会上传到任何服务器。"
+  },
+  "modes": {
+    "cookie": "Cookie 头（请求方向）",
+    "setCookie": "Set-Cookie 头（响应方向）"
+  },
+  "input": {
+    "cookieLabel": "Cookie 请求头",
+    "setCookieLabel": "Set-Cookie 响应头（每行一条）",
+    "cookiePlaceholder": "name1=value1; name2=value2; …",
+    "setCookiePlaceholder": "sid=abc123; Path=/; Domain=example.com; Secure; HttpOnly; SameSite=Strict\nfoo=bar; Path=/api; Max-Age=3600",
+    "charCount": "{{n}} 字符",
+    "sample": "样例 {{n}}",
+    "clear": "清空"
+  },
+  "results": {
+    "cookieTitle": "解析出 {{n}} 个 Cookie",
+    "setCookieTitle": "解析出 {{n}} 个 Set-Cookie",
+    "empty": "暂无内容，请在上方输入或选样例。",
+    "skipped": "跳过 {{n}} 个无效片段"
+  },
+  "cookieTable": {
+    "name": "名称",
+    "value": "值",
+    "length": "长度",
+    "action": "操作"
+  },
+  "attrs": {
+    "domain": "Domain",
+    "path": "Path",
+    "expires": "Expires",
+    "maxAge": "Max-Age",
+    "secure": "Secure",
+    "httpOnly": "HttpOnly",
+    "sameSite": "SameSite",
+    "priority": "Priority",
+    "partitioned": "Partitioned",
+    "notSet": "—"
+  },
+  "warnings": {
+    "sameSiteNoneRequiresSecure": "SameSite=None 必须带 Secure，否则浏览器会拒收。",
+    "tokenShouldBeHttpOnly": "看起来像会话令牌，建议加上 HttpOnly 防 XSS 偷取。",
+    "alreadyExpired": "Expires 已是过去时间，浏览器会立即删除。",
+    "noDomainHostOnly": "未设置 Domain — Cookie 仅对当前主机生效，子域看不到。"
+  },
+  "unit": {
+    "second": "秒",
+    "minute": "分钟",
+    "hour": "小时",
+    "day": "天",
+    "month": "个月",
+    "year": "年"
+  },
+  "relative": {
+    "past": "{{amount}} {{unit}}前",
+    "future": "{{amount}} {{unit}}后"
+  }
+}
