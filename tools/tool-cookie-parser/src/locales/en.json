@@ -1,0 +1,65 @@
+{
+  "title": "Cookie Parser",
+  "description": "Paste a Cookie / Set-Cookie header → structured table of all attributes (Domain / Path / Expires / SameSite …) with security & privacy warnings. Fully local.",
+  "copy": "Copy",
+  "copied": "Copied",
+  "localOnly": {
+    "title": "Local-only parsing",
+    "description": "All parsing happens in your browser — cookie contents are never uploaded."
+  },
+  "modes": {
+    "cookie": "Cookie header (request)",
+    "setCookie": "Set-Cookie header (response)"
+  },
+  "input": {
+    "cookieLabel": "Cookie request header",
+    "setCookieLabel": "Set-Cookie response header (one per line)",
+    "cookiePlaceholder": "name1=value1; name2=value2; …",
+    "setCookiePlaceholder": "sid=abc123; Path=/; Domain=example.com; Secure; HttpOnly; SameSite=Strict\nfoo=bar; Path=/api; Max-Age=3600",
+    "charCount": "{{n}} chars",
+    "sample": "Sample {{n}}",
+    "clear": "Clear"
+  },
+  "results": {
+    "cookieTitle": "{{n}} cookie(s) parsed",
+    "setCookieTitle": "{{n}} Set-Cookie entry(ies) parsed",
+    "empty": "Nothing yet — paste above or pick a sample.",
+    "skipped": "Skipped {{n}} invalid fragment(s)"
+  },
+  "cookieTable": {
+    "name": "Name",
+    "value": "Value",
+    "length": "Length",
+    "action": "Action"
+  },
+  "attrs": {
+    "domain": "Domain",
+    "path": "Path",
+    "expires": "Expires",
+    "maxAge": "Max-Age",
+    "secure": "Secure",
+    "httpOnly": "HttpOnly",
+    "sameSite": "SameSite",
+    "priority": "Priority",
+    "partitioned": "Partitioned",
+    "notSet": "—"
+  },
+  "warnings": {
+    "sameSiteNoneRequiresSecure": "SameSite=None requires Secure — browsers will reject otherwise.",
+    "tokenShouldBeHttpOnly": "Looks like a session token; add HttpOnly to defend against XSS theft.",
+    "alreadyExpired": "Expires is in the past — the browser will drop this cookie immediately.",
+    "noDomainHostOnly": "No Domain attribute — cookie is host-only, subdomains won't see it."
+  },
+  "unit": {
+    "second": "second(s)",
+    "minute": "minute(s)",
+    "hour": "hour(s)",
+    "day": "day(s)",
+    "month": "month(s)",
+    "year": "year(s)"
+  },
+  "relative": {
+    "past": "{{amount}} {{unit}} ago",
+    "future": "in {{amount}} {{unit}}"
+  }
+}
