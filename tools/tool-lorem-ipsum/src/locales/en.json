@@ -1,0 +1,36 @@
+{
+  "title": "Lorem Ipsum Generator",
+  "description": "Generate classic Lorem Ipsum or Chinese pseudo-text by paragraphs / sentences / words. Output Plain / Markdown / HTML with optional deterministic seed.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Composed entirely in your browser — nothing is uploaded. Set a seed to get reproducible results."
+  },
+  "options": {
+    "flavor": "Flavor",
+    "flavorLatin": "Latin lorem",
+    "flavorChinese": "Chinese pseudo",
+    "unit": "Unit",
+    "unitParagraphs": "Paragraphs",
+    "unitSentences": "Sentences",
+    "unitWords": "Words",
+    "count": "Count",
+    "format": "Format",
+    "headingEvery": "Heading every N paragraphs",
+    "headingEveryHint": "0 = none",
+    "htmlMode": "HTML structure",
+    "seed": "Seed",
+    "seedPlaceholder": "blank = true random",
+    "seedRandom": "Roll",
+    "classic": "Classic opener",
+    "classicLabel": "First paragraph starts with \"Lorem ipsum\" / 「夫将欲观…」"
+  },
+  "actions": {
+    "regenerate": "Regenerate",
+    "copy": "Copy",
+    "copied": "Copied",
+    "charCount": "{{n}} chars"
+  },
+  "output": {
+    "heading": "Output"
+  }
+}

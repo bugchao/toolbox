@@ -1,0 +1,49 @@
+{
+  "title": "CSS 缓动曲线编辑器",
+  "description": "可视化拖拽 P1 / P2 控制点，实时预览 cubic-bezier 缓动曲线；内置常用预设，时长可调，一键复制 CSS。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有计算和动画都在浏览器内运行，不上传任何数据。可以随便拖、随便切。"
+  },
+  "editor": {
+    "heading": "曲线编辑",
+    "hint": "拖动绿色 / 紫色控制点，或调整下方滑块。允许 Y 轴 overshoot 到 [-0.5, 1.5]。",
+    "p1": "P1 控制点",
+    "p2": "P2 控制点",
+    "x1": "x1",
+    "y1": "y1",
+    "x2": "x2",
+    "y2": "y2"
+  },
+  "output": {
+    "heading": "CSS 输出",
+    "code": "CSS",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "duration": {
+    "label": "动画时长",
+    "unit": "秒"
+  },
+  "presets": {
+    "heading": "预设"
+  },
+  "preset": {
+    "linear": "linear",
+    "ease": "ease",
+    "easeIn": "ease-in",
+    "easeOut": "ease-out",
+    "easeInOut": "ease-in-out",
+    "easeInOutCubic": "easeInOutCubic",
+    "easeOutBack": "easeOutBack",
+    "easeInOutQuart": "easeInOutQuart",
+    "easeOutBounce": "easeOutBounce"
+  },
+  "preview": {
+    "heading": "动画预览",
+    "hint": "三个小球同时往返循环，对比当前曲线 / linear / ease。",
+    "current": "当前曲线",
+    "linear": "linear",
+    "ease": "ease"
+  }
+}

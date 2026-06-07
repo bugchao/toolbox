@@ -1,0 +1,33 @@
+{
+  "title": "TOML ↔ JSON",
+  "description": "Bi-directional live conversion between TOML and JSON with nested tables, array-of-tables, inline tables; line-numbered errors; Cargo / config / nested samples included.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and serialization happen in your browser — nothing is uploaded."
+  },
+  "options": {
+    "direction": "Direction",
+    "directionAuto": "Auto (follow last edit)",
+    "jsonIndent": "JSON indent",
+    "samples": "Samples",
+    "samplesPick": "Pick…",
+    "clear": "Clear"
+  },
+  "placeholder": {
+    "toml": "Paste TOML, e.g. [server]\\nport = 8080",
+    "json": "Paste JSON; root must be an object"
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "toml": "TOML error: {{msg}}",
+    "tomlWithLine": "TOML error (line {{line}}): {{msg}}",
+    "json": "JSON error: {{msg}}",
+    "jsonWithLine": "JSON error (line {{line}}): {{msg}}"
+  },
+  "hint": {
+    "bidirectional": "Edit either side to auto-sync the other; lock direction for one-way only."
+  }
+}

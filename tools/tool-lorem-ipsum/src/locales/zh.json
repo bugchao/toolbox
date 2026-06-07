@@ -1,0 +1,36 @@
+{
+  "title": "Lorem Ipsum 生成器",
+  "description": "生成经典 Lorem Ipsum 假文与中文「乱数假文」，按段 / 句 / 词控制长度，输出 Plain / Markdown / HTML 三种格式。可选种子保证可重现。",
+  "notice": {
+    "title": "完全本地",
+    "body": "全程在浏览器内合成，不上传任何数据；可填种子号让每次结果一致，方便复现。"
+  },
+  "options": {
+    "flavor": "风格",
+    "flavorLatin": "拉丁 lorem",
+    "flavorChinese": "中文乱数",
+    "unit": "单位",
+    "unitParagraphs": "段",
+    "unitSentences": "句",
+    "unitWords": "词",
+    "count": "数量",
+    "format": "输出格式",
+    "headingEvery": "每隔几段插一个标题",
+    "headingEveryHint": "0 = 不插",
+    "htmlMode": "HTML 结构",
+    "seed": "随机种子",
+    "seedPlaceholder": "留空 = 真随机",
+    "seedRandom": "投骰子",
+    "classic": "经典开头",
+    "classicLabel": "首段以「Lorem ipsum / 夫将欲观…」起步"
+  },
+  "actions": {
+    "regenerate": "重新生成",
+    "copy": "复制",
+    "copied": "已复制",
+    "charCount": "{{n}} 字符"
+  },
+  "output": {
+    "heading": "结果"
+  }
+}
