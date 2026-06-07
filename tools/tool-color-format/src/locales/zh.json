@@ -1,0 +1,37 @@
+{
+  "title": "颜色格式互转",
+  "description": "在 hex / rgb / hsl / hwb / lab / lch / oklch / oklab 等多种颜色格式之间互转，附带 WCAG 对比度提示与 P3 色域警告。",
+  "notice": {
+    "title": "完全本地",
+    "body": "颜色解析、色空间转换、对比度计算均在浏览器内完成，不上传任何数据。"
+  },
+  "input": {
+    "label": "颜色字符串",
+    "placeholder": "粘任意 CSS 颜色，比如 #3366cc、oklch(0.7 0.18 250)、hsl(160 75% 45%)",
+    "parseError": "无法解析：{{msg}}"
+  },
+  "hsl": {
+    "heading": "HSL 调节"
+  },
+  "samples": {
+    "heading": "样例"
+  },
+  "history": {
+    "heading": "最近使用",
+    "clear": "清空"
+  },
+  "formats": {
+    "heading": "所有格式"
+  },
+  "wcag": {
+    "heading": "WCAG 对比度",
+    "vsWhite": "白底（#fff）",
+    "vsBlack": "黑底（#000）",
+    "legend": "AAA ≥ 7.0、AA ≥ 4.5（正文）、AA-large ≥ 3.0（大字号）、低于即 fail。"
+  },
+  "badge": {
+    "named": "命名色：{{name}}",
+    "outOfSrgb": "超出 sRGB 色域",
+    "outOfP3": "超出 P3 色域"
+  }
+}
