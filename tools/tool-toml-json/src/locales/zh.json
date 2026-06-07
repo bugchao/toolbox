@@ -1,0 +1,33 @@
+{
+  "title": "TOML ↔ JSON 互转",
+  "description": "双向实时互转 TOML 与 JSON，支持嵌套表、数组表、行内表；错误带行号；提供 Cargo / 配置文件 / 嵌套示例。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析和序列化都在浏览器内完成，输入文本不会上传任何服务器。"
+  },
+  "options": {
+    "direction": "方向",
+    "directionAuto": "自动（按上次编辑）",
+    "jsonIndent": "JSON 缩进",
+    "samples": "样例",
+    "samplesPick": "选择…",
+    "clear": "清空"
+  },
+  "placeholder": {
+    "toml": "粘 TOML，比如 [server]\\nport = 8080",
+    "json": "粘 JSON，根必须是对象"
+  },
+  "copy": {
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "toml": "TOML 错误：{{msg}}",
+    "tomlWithLine": "TOML 错误（第 {{line}} 行）：{{msg}}",
+    "json": "JSON 错误：{{msg}}",
+    "jsonWithLine": "JSON 错误（第 {{line}} 行）：{{msg}}"
+  },
+  "hint": {
+    "bidirectional": "编辑任一侧自动同步另一侧；方向锁定时只单向同步。"
+  }
+}
