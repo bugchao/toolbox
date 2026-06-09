@@ -1,10 +1,11 @@
 import React from 'react'
 import { Input, Empty } from 'antd'
 import { useStore } from '../state/store'
+import { DrawioFrame } from './DrawioFrame'
 
 const { TextArea } = Input
 
-/** 源代码编辑器（Mermaid / PlantUML）；draw.io 显示占位（iframe 在 Section 6 集成后接入）。 */
+/** 源代码编辑器（Mermaid / PlantUML）；draw.io 走 iframe。 */
 export const EditorPane: React.FC = () => {
   const { state, dispatch, selected } = useStore()
 
@@ -18,15 +19,17 @@ export const EditorPane: React.FC = () => {
 
   if (selected.engine === 'drawio') {
     return (
-      <section style={{ flex: 1, padding: 24 }}>
-        <Empty
-          description={
-            <>
-              draw.io editor pane —— 集成 iframe 留 Phase 4 接入。
-              <br />
-              当前 XML 长度：{selected.source.length}
-            </>
-          }
+      <section style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Input
+          size="small"
+          value={selected.title}
+          onChange={(e) => dispatch({ type: 'UPDATE_TITLE', id: selected.id, title: e.target.value })}
+          style={{ margin: 6 }}
+        />
+        <DrawioFrame
+          xml={selected.source}
+          embedUrl={selected.settings.drawioUrl}
+          onXmlChange={(xml) => dispatch({ type: 'UPDATE_SOURCE', id: selected.id, source: xml })}
         />
       </section>
     )
