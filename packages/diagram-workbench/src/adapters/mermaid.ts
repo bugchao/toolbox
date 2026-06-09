@@ -36,12 +36,13 @@ export const mermaidAdapter: DiagramAdapter = {
     }
   },
 
-  async render(source: string, options = {}): Promise<AdapterRender> {
+  async render(source: string, options: Record<string, unknown> = {}): Promise<AdapterRender> {
     if (!source.trim()) return { ok: false, message: 'Empty source' }
     try {
       const m = await load()
-      if (options.theme && options.theme !== 'default') {
-        m.initialize({ theme: options.theme as 'dark' | 'forest' | 'neutral' })
+      const theme = typeof options.theme === 'string' ? options.theme : undefined
+      if (theme && theme !== 'default') {
+        m.initialize({ theme: theme as 'dark' | 'forest' | 'neutral' })
       }
       renderSeq += 1
       const { svg } = await m.render(`mw-mermaid-${renderSeq}`, source)
