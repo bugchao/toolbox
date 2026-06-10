@@ -1,0 +1,27 @@
+{
+  "title": "Regex 铁路图",
+  "description": "把任意 JS 正则解析为 AST 并绘制成铁路图（railroad diagram），同时支持匹配测试与逐 token 解释。",
+  "notice": {
+    "title": "完全本地",
+    "body": "正则解析、铁路图绘制、匹配测试全部在浏览器内完成，不上传任何数据。"
+  },
+  "input": {
+    "pattern": "正则表达式",
+    "flags": "Flags",
+    "samples": "示例"
+  },
+  "railroad": {
+    "heading": "铁路图",
+    "copySvg": "复制 SVG",
+    "copied": "已复制",
+    "empty": "请先输入合法的正则表达式。"
+  },
+  "matcher": {
+    "heading": "匹配测试",
+    "placeholder": "粘贴测试文本，匹配将在下方高亮。",
+    "count": "命中 {{n}} 处",
+    "span": "区间",
+    "full": "完整匹配",
+    "groups": "捕获组"
+  }
+}
