@@ -1,0 +1,31 @@
+{
+  "title": "Base64 文件互转",
+  "description": "拖文件转 Base64 / Data URI；粘 Base64 自动嗅探文件类型（PNG/JPEG/PDF/ZIP 等魔数）并还原下载。纯本地处理。",
+  "notice": {
+    "title": "完全本地",
+    "body": "文件读取、编码、魔数识别、还原下载全部在浏览器内完成，不上传任何数据。"
+  },
+  "mode": {
+    "encode": "文件 → Base64",
+    "decode": "Base64 → 文件"
+  },
+  "encode": {
+    "dropCta": "拖入或点击选择文件",
+    "dropHint": "单文件最大 {{max}}；任何类型都行",
+    "tooLarge": "文件超出上限（{{max}}）",
+    "b64Length": "Base64 长度 {{n}}"
+  },
+  "decode": {
+    "inputLabel": "粘贴 Base64 / Data URI",
+    "placeholder": "支持标准 Base64、URL-safe 变体、带换行的多行串、data:...;base64,... 前缀",
+    "detected": "识别类型",
+    "filename": "保存文件名",
+    "download": "下载{{ext}}",
+    "error": {
+      "empty": "内容为空。",
+      "invalid_length": "长度不合法（去掉空白后应是 4 的倍数，余 1 不可能）。",
+      "invalid_characters": "含有非 Base64 字符。",
+      "generic": "解码失败：{{msg}}"
+    }
+  }
+}
