@@ -1,0 +1,45 @@
+{
+  "title": "JWT 生成器",
+  "description": "用 WebCrypto 在浏览器本地签发 HS256 / HS384 / HS512 JWT：自定义 payload 与 header、密钥支持 UTF-8 / Base64、附带签名验证。",
+  "notice": {
+    "title": "密钥不出浏览器，但请勿用生产密钥",
+    "body": "签名与验证全部走 WebCrypto 在本地完成、零上传；即便如此也建议只用测试密钥，生产密钥不该粘进任何网页。"
+  },
+  "sign": {
+    "heading": "签发",
+    "alg": "算法",
+    "payload": "Payload（JSON 对象）",
+    "refreshTimestamps": "刷新 iat / exp",
+    "headerExtra": "Header 附加字段（可选，alg/typ 不可覆盖）",
+    "secret": "密钥",
+    "secretEncoding": "密钥编码",
+    "cta": "签发 JWT",
+    "output": "Token",
+    "empty": "签发后 token 显示在这里，三段分色（header / payload / signature）。",
+    "legend": "红 = header · 紫 = payload · 蓝 = signature"
+  },
+  "verify": {
+    "heading": "验证",
+    "tokenPlaceholder": "粘贴要验证的 JWT（仅支持 HS256/384/512）",
+    "secret": "密钥",
+    "cta": "验证签名",
+    "valid": "签名有效（{{alg}}）",
+    "invalid": "签名无效 —— 密钥不对或 token 被篡改。"
+  },
+  "copy": {
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "empty": "Payload 为空。",
+    "payload_must_be_object": "Payload 必须是 JSON 对象（不能是数组或标量）。",
+    "bad_json": "Payload JSON 解析失败。",
+    "headerMustBeObject": "Header 附加字段必须是 JSON 对象。",
+    "headerBadJson": "Header JSON 解析失败。",
+    "missing_secret": "请填密钥。",
+    "bad_secret_encoding": "密钥按所选编码解析失败（Base64 模式请检查字符）。",
+    "malformed_token": "Token 不是 xxx.yyy.zzz 三段结构。",
+    "bad_header": "Header 段无法解析。",
+    "unsupported_alg": "仅支持 HS256 / HS384 / HS512（拒绝 alg=none 与 RS/ES 系）。"
+  }
+}
