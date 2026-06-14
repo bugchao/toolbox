@@ -1,0 +1,27 @@
+{
+  "title": "Regex Railroad Diagram",
+  "description": "Parse any JS regex into its AST and draw the railroad diagram; live match tester and per-token explanations included.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Regex parsing, railroad rendering and match testing all run in your browser — nothing is uploaded."
+  },
+  "input": {
+    "pattern": "Pattern",
+    "flags": "Flags",
+    "samples": "Samples"
+  },
+  "railroad": {
+    "heading": "Railroad",
+    "copySvg": "Copy SVG",
+    "copied": "Copied",
+    "empty": "Enter a valid regex above."
+  },
+  "matcher": {
+    "heading": "Match tester",
+    "placeholder": "Paste sample text; matches will be highlighted.",
+    "count": "{{n}} match(es)",
+    "span": "Span",
+    "full": "Full match",
+    "groups": "Captures"
+  }
+}
