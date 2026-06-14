@@ -1,4 +1,36 @@
 {
-  "title": "Mermaid",
-  "description": "TODO: Add an English description"
+  "title": "Mermaid Live Editor",
+  "description": "Edit Mermaid source with live rendering — flowchart, sequence, class, state, ER, gantt, pie and mindmap; export SVG and 2x PNG.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Mermaid is loaded on demand (it's a large library); source and diagrams stay in your browser."
+  },
+  "toolbar": {
+    "theme": "Theme",
+    "samples": "Samples",
+    "samplesPick": "Pick…",
+    "live": "Live render",
+    "render": "Render",
+    "rerender": "Re-render",
+    "clear": "Clear"
+  },
+  "editor": {
+    "heading": "Mermaid source",
+    "placeholder": "Type mermaid source here, e.g. flowchart LR …",
+    "rendering": "Rendering…"
+  },
+  "preview": {
+    "heading": "Preview",
+    "empty": "Diagram renders here as you type"
+  },
+  "samples": {
+    "flowchart": "Flowchart",
+    "sequence": "Sequence",
+    "class": "Class",
+    "state": "State",
+    "er": "ER",
+    "gantt": "Gantt",
+    "pie": "Pie",
+    "mindmap": "Mindmap"
+  }
 }

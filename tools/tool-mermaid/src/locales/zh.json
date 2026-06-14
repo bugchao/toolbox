@@ -1,4 +1,36 @@
 {
-  "title": "Mermaid",
-  "description": "TODO: 补充中文描述"
+  "title": "Mermaid 实时编辑器",
+  "description": "编辑 Mermaid 源码实时渲染图表，覆盖流程图 / 时序图 / 类图 / 状态图 / ER / 甘特 / 饼图 / 思维导图，可导出 SVG 与 2x PNG。",
+  "notice": {
+    "title": "完全本地",
+    "body": "Mermaid 渲染体积较大，首次使用会动态加载；源码与图表均在浏览器内处理，不上传。"
+  },
+  "toolbar": {
+    "theme": "主题",
+    "samples": "样例",
+    "samplesPick": "选择…",
+    "live": "实时渲染",
+    "render": "渲染",
+    "rerender": "重新渲染",
+    "clear": "清空"
+  },
+  "editor": {
+    "heading": "Mermaid 源码",
+    "placeholder": "在此输入 mermaid 源码，比如 flowchart LR …",
+    "rendering": "渲染中…"
+  },
+  "preview": {
+    "heading": "预览",
+    "empty": "输入源码后此处实时渲染"
+  },
+  "samples": {
+    "flowchart": "流程图",
+    "sequence": "时序图",
+    "class": "类图",
+    "state": "状态图",
+    "er": "ER 图",
+    "gantt": "甘特图",
+    "pie": "饼图",
+    "mindmap": "思维导图"
+  }
 }
