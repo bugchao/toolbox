@@ -1,0 +1,45 @@
+{
+  "title": "JWT Builder",
+  "description": "Sign HS256 / HS384 / HS512 JWTs locally with WebCrypto: custom payload & header, UTF-8 / Base64 secrets, plus signature verification.",
+  "notice": {
+    "title": "Secrets never leave the browser — still, use test keys only",
+    "body": "Signing and verification run locally via WebCrypto with zero upload; even so, never paste production secrets into any web page."
+  },
+  "sign": {
+    "heading": "Sign",
+    "alg": "Algorithm",
+    "payload": "Payload (JSON object)",
+    "refreshTimestamps": "Refresh iat / exp",
+    "headerExtra": "Extra header fields (optional; alg/typ are protected)",
+    "secret": "Secret",
+    "secretEncoding": "Secret encoding",
+    "cta": "Sign JWT",
+    "output": "Token",
+    "empty": "The signed token appears here with three color-coded segments.",
+    "legend": "red = header · violet = payload · blue = signature"
+  },
+  "verify": {
+    "heading": "Verify",
+    "tokenPlaceholder": "Paste a JWT to verify (HS256/384/512 only)",
+    "secret": "Secret",
+    "cta": "Verify signature",
+    "valid": "Signature valid ({{alg}})",
+    "invalid": "Signature invalid — wrong secret or tampered token."
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "empty": "Payload is empty.",
+    "payload_must_be_object": "Payload must be a JSON object (not an array or scalar).",
+    "bad_json": "Payload JSON failed to parse.",
+    "headerMustBeObject": "Extra header fields must be a JSON object.",
+    "headerBadJson": "Header JSON failed to parse.",
+    "missing_secret": "Secret is required.",
+    "bad_secret_encoding": "Secret failed to decode with the selected encoding (check Base64 characters).",
+    "malformed_token": "Token is not in xxx.yyy.zzz form.",
+    "bad_header": "Header segment cannot be parsed.",
+    "unsupported_alg": "Only HS256 / HS384 / HS512 are supported (alg=none and RS/ES are rejected)."
+  }
+}
