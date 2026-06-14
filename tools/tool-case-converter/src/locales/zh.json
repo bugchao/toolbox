@@ -1,0 +1,32 @@
+{
+  "title": "命名风格转换",
+  "description": "把任意文本拆词后一键转 camelCase / PascalCase / snake_case / CONSTANT_CASE / kebab-case / Title Case 等 13 种风格；支持批量逐行、中英混排与连续大写。",
+  "notice": {
+    "title": "完全本地",
+    "body": "分词与转换全部在浏览器内完成，不上传任何数据。多行输入时逐行转换，空行保留。"
+  },
+  "input": {
+    "label": "输入",
+    "placeholder": "输入任意命名，如 parseHTTPResponse、hello_world、foo-bar-baz（可多行）",
+    "tokens": "分词"
+  },
+  "output": {
+    "heading": "各种风格",
+    "hint": "点任意结果即可复制；分词显示的是第一行的拆词结果。"
+  },
+  "cases": {
+    "camel": "camelCase",
+    "pascal": "PascalCase",
+    "snake": "snake_case",
+    "constant": "CONSTANT_CASE",
+    "kebab": "kebab-case",
+    "cobol": "COBOL-CASE",
+    "train": "Train-Case",
+    "title": "Title Case",
+    "sentence": "Sentence case",
+    "lower": "lower case",
+    "upper": "UPPER CASE",
+    "dot": "dot.case",
+    "path": "path/case"
+  }
+}

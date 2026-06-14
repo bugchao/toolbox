@@ -1,0 +1,32 @@
+{
+  "title": "Case Converter",
+  "description": "Tokenize any text and convert to 13 styles — camelCase, PascalCase, snake_case, CONSTANT_CASE, kebab-case, Title Case and more; batch line mode, CJK-aware, smart acronym splitting.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Tokenizing and conversion run entirely in your browser. Multi-line input is converted line by line, blank lines preserved."
+  },
+  "input": {
+    "label": "Input",
+    "placeholder": "Type any identifier, e.g. parseHTTPResponse, hello_world, foo-bar-baz (multi-line OK)",
+    "tokens": "Tokens"
+  },
+  "output": {
+    "heading": "All styles",
+    "hint": "Click any result to copy. The token chips show the split of the first line."
+  },
+  "cases": {
+    "camel": "camelCase",
+    "pascal": "PascalCase",
+    "snake": "snake_case",
+    "constant": "CONSTANT_CASE",
+    "kebab": "kebab-case",
+    "cobol": "COBOL-CASE",
+    "train": "Train-Case",
+    "title": "Title Case",
+    "sentence": "Sentence case",
+    "lower": "lower case",
+    "upper": "UPPER CASE",
+    "dot": "dot.case",
+    "path": "path/case"
+  }
+}
