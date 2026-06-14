@@ -1,0 +1,38 @@
+{
+  "title": "CSV ↔ Markdown 表格",
+  "description": "双向实时互转 CSV 与 Markdown 表格：引号/换行字段、列对齐、列宽美化（中英混排对齐）、转置。零依赖纯本地。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析与生成全部在浏览器内完成，表格内容不会上传任何服务器。"
+  },
+  "options": {
+    "direction": "方向",
+    "directionAuto": "自动（按上次编辑）",
+    "delimiter": "CSV 分隔符",
+    "align": "MD 对齐",
+    "alignNone": "默认",
+    "alignLeft": "左对齐",
+    "alignCenter": "居中",
+    "alignRight": "右对齐",
+    "pretty": "列宽美化",
+    "transpose": "转置",
+    "clear": "清空"
+  },
+  "placeholder": {
+    "csv": "粘 CSV，引号字段支持逗号 / 换行 / \"\" 转义",
+    "md": "粘 Markdown 表格（第二行须为 --- 分隔行）"
+  },
+  "copy": {
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "empty": "内容为空。",
+    "unterminated_quote": "引号未闭合。",
+    "too_few_rows": "至少需要表头 + 分隔行两行。",
+    "missing_align_row": "第二行必须是 --- / :--- / ---: 分隔行。"
+  },
+  "hint": {
+    "bidirectional": "编辑任一侧自动同步另一侧；方向锁定时只单向同步。"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "title": "CSV ↔ Markdown Table",
+  "description": "Bi-directional live conversion between CSV and Markdown tables: quoted/multiline fields, column alignment, pretty padding (CJK-aware) and transpose. Zero deps, fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and generation run entirely in your browser — table contents are never uploaded."
+  },
+  "options": {
+    "direction": "Direction",
+    "directionAuto": "Auto (follow last edit)",
+    "delimiter": "CSV delimiter",
+    "align": "MD align",
+    "alignNone": "Default",
+    "alignLeft": "Left",
+    "alignCenter": "Center",
+    "alignRight": "Right",
+    "pretty": "Pretty padding",
+    "transpose": "Transpose",
+    "clear": "Clear"
+  },
+  "placeholder": {
+    "csv": "Paste CSV; quoted fields may contain commas / newlines / \"\" escapes",
+    "md": "Paste a Markdown table (second line must be the --- separator row)"
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "empty": "Input is empty.",
+    "unterminated_quote": "Unterminated quote.",
+    "too_few_rows": "Need at least a header row plus the separator row.",
+    "missing_align_row": "Second line must be a --- / :--- / ---: separator row."
+  },
+  "hint": {
+    "bidirectional": "Edit either side to auto-sync the other; lock direction for one-way only."
+  }
+}
