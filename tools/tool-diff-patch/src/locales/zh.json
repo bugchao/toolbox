@@ -1,0 +1,37 @@
+{
+  "title": "Diff / Patch 工具",
+  "description": "两段文本生成 unified diff（可调上下文行数），或把 patch 应用回原文；按行着色 + 增删统计，纯本地。",
+  "notice": {
+    "title": "完全本地",
+    "body": "diff 生成与 patch 应用全部在浏览器内完成，文本不会上传任何服务器。"
+  },
+  "mode": {
+    "diff": "生成 Diff",
+    "apply": "应用 Patch"
+  },
+  "diff": {
+    "old": "原文（旧）",
+    "new": "改后（新）",
+    "context": "上下文行数",
+    "hunks": "{{n}} 个 hunk",
+    "sendToApply": "→ 送到「应用」",
+    "identical": "两段内容相同，无 diff。"
+  },
+  "apply": {
+    "source": "原文",
+    "patch": "Patch（unified diff）",
+    "patchPlaceholder": "粘贴 unified diff（含 @@ hunk 标记）",
+    "result": "应用结果",
+    "empty": "粘贴 patch 后此处显示应用结果。"
+  },
+  "copy": {
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "empty_patch": "Patch 为空。",
+    "no_hunks": "未发现 @@ hunk —— 这看起来不是有效的 unified diff。",
+    "hunk_mismatch": "Patch 无法套用到该原文（上下文不匹配，可能原文版本不对）。",
+    "parse_failed": "Patch 解析失败。"
+  }
+}
