@@ -1,0 +1,37 @@
+{
+  "title": "Diff / Patch",
+  "description": "Generate a unified diff from two texts (adjustable context), or apply a patch back onto a source; color-coded lines and add/del stats. Fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Diff generation and patch application all run in your browser — text is never uploaded."
+  },
+  "mode": {
+    "diff": "Make Diff",
+    "apply": "Apply Patch"
+  },
+  "diff": {
+    "old": "Old",
+    "new": "New",
+    "context": "Context lines",
+    "hunks": "{{n}} hunk(s)",
+    "sendToApply": "→ Send to Apply",
+    "identical": "Both sides are identical — no diff."
+  },
+  "apply": {
+    "source": "Source",
+    "patch": "Patch (unified diff)",
+    "patchPlaceholder": "Paste a unified diff (with @@ hunk markers)",
+    "result": "Result",
+    "empty": "Paste a patch to see the applied result here."
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "empty_patch": "Patch is empty.",
+    "no_hunks": "No @@ hunks found — this does not look like a valid unified diff.",
+    "hunk_mismatch": "Patch could not be applied (context mismatch — wrong source version?).",
+    "parse_failed": "Patch failed to parse."
+  }
+}
