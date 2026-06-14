@@ -1,0 +1,31 @@
+{
+  "title": "Base64 ↔ File",
+  "description": "Drop a file to get Base64 / Data URI; paste Base64 to sniff the type (PNG/JPEG/PDF/ZIP magic bytes) and download the restored file. Fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "File reading, encoding, magic-byte sniffing and download all run in your browser — nothing is uploaded."
+  },
+  "mode": {
+    "encode": "File → Base64",
+    "decode": "Base64 → File"
+  },
+  "encode": {
+    "dropCta": "Drop a file or click to choose",
+    "dropHint": "Max {{max}} per file; any type",
+    "tooLarge": "File exceeds the limit ({{max}})",
+    "b64Length": "Base64 length {{n}}"
+  },
+  "decode": {
+    "inputLabel": "Paste Base64 / Data URI",
+    "placeholder": "Standard Base64, URL-safe variant, multi-line strings, and data:...;base64,... prefixes are all accepted",
+    "detected": "Detected type",
+    "filename": "Save as",
+    "download": "Download{{ext}}",
+    "error": {
+      "empty": "Input is empty.",
+      "invalid_length": "Impossible length (after stripping whitespace, length mod 4 must not be 1).",
+      "invalid_characters": "Contains non-Base64 characters.",
+      "generic": "Decode failed: {{msg}}"
+    }
+  }
+}
