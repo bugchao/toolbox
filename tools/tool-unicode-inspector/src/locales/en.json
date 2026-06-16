@@ -1,0 +1,28 @@
+{
+  "title": "Unicode Inspector",
+  "description": "Break down text char by char: code point, Unicode block, UTF-8 / UTF-16 bytes, JS/HTML/CSS escapes; iterates by code point (emoji-safe) and surfaces code-point vs UTF-16 vs UTF-8 length.",
+  "notice": {
+    "title": "Fully local",
+    "body": "All analysis runs in your browser — nothing is uploaded. Iterates by code point (not UTF-16 unit), so emoji and surrogate pairs count as one character."
+  },
+  "input": {
+    "label": "Input text",
+    "placeholder": "Paste or type text to inspect char by char"
+  },
+  "stats": {
+    "codePoints": "Code points",
+    "utf16": "UTF-16 length",
+    "utf8": "UTF-8 bytes",
+    "hasAstral": "Contains astral chars (>U+FFFF)"
+  },
+  "table": {
+    "heading": "Per character",
+    "char": "Glyph",
+    "code": "Code point",
+    "block": "Unicode block",
+    "truncated": "Showing first {{n}} characters only."
+  },
+  "escape": {
+    "heading": "Full-string escapes"
+  }
+}
