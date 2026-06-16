@@ -1,0 +1,43 @@
+{
+  "title": "Cron Explainer",
+  "description": "Parse a standard 5-field cron expression into a human-readable description and list the next run times; supports */ , - steps, month/weekday aliases, and DOM∨DOW semantics.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and next-run computation run entirely in your browser; times use your local timezone and nothing is uploaded."
+  },
+  "input": {
+    "label": "Cron expression (min hour dom month dow)",
+    "presets": "Presets"
+  },
+  "fields": {
+    "minute": "minute",
+    "hour": "hour",
+    "dom": "day",
+    "month": "month",
+    "dow": "weekday"
+  },
+  "desc": {
+    "heading": "Explanation"
+  },
+  "runs": {
+    "heading": "Next runs",
+    "none": "No matching run within about a year.",
+    "inMinutes": "in {{n}} min",
+    "inHours": "in ~{{n}} h",
+    "inDays": "in ~{{n}} d"
+  },
+  "error": {
+    "field": "Field \"{{field}}\": {{msg}}",
+    "generic": "Parse failed: {{msg}}"
+  },
+  "presets": {
+    "everyMinute": "Every minute",
+    "every5Min": "Every 5 min",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "weekdays9am": "Weekdays 9am",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  }
+}
