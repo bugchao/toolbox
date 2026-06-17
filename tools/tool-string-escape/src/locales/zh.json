@@ -1,0 +1,27 @@
+{
+  "title": "字符串转义",
+  "description": "在 JSON / JS / C / Shell / SQL / 正则 等语境下转义与反转义字符串；支持 \\xHH \\uHHHH \\u{} 八进制，双向实时。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有转义在浏览器内完成，不上传。Shell / SQL 输出含外层引号，可直接粘进命令或语句。"
+  },
+  "lang": {
+    "json": "JSON",
+    "js": "JavaScript",
+    "cstyle": "C / Java",
+    "shell": "Shell",
+    "sql": "SQL",
+    "regex": "正则"
+  },
+  "mode": {
+    "escape": "转义",
+    "unescape": "反转义"
+  },
+  "io": {
+    "input": "输入",
+    "output": "输出",
+    "swap": "把输出送回输入并切换方向",
+    "copy": "复制",
+    "copied": "已复制"
+  }
+}
