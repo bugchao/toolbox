@@ -1,0 +1,29 @@
+{
+  "title": ".env ↔ JSON 互转",
+  "description": "双向实时互转 .env 与扁平 JSON：支持 export 前缀、单/双引号转义、跨行值、行内注释；嵌套对象自动转 JSON 串。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析与生成全部在浏览器内完成，配置内容不会上传。JSON 侧为扁平 string map，嵌套对象会被序列化成 JSON 字符串。"
+  },
+  "options": {
+    "direction": "方向",
+    "directionAuto": "自动（按上次编辑）",
+    "exportPrefix": "加 export 前缀",
+    "clear": "清空"
+  },
+  "placeholder": {
+    "env": "粘 .env，支持 export / 引号 / 行内 # 注释 / 跨行值",
+    "json": "粘扁平 JSON 对象，如 {\"PORT\":\"8080\"}"
+  },
+  "copy": {
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "root_must_be_object": "JSON 根必须是对象（不能是数组或标量）。",
+    "bad_json": "JSON 解析失败。"
+  },
+  "hint": {
+    "flat": "编辑任一侧自动同步另一侧；方向锁定时只单向。.env 是扁平结构，深层嵌套会被压成 JSON 串。"
+  }
+}
