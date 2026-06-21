@@ -1,0 +1,25 @@
+{
+  "title": "ID Generator",
+  "description": "Generate UUID v4 / v7, ULID and NanoID in bulk with adjustable count and NanoID length — all via WebCrypto, locally; ULID/UUIDv7 are time-ordered.",
+  "notice": {
+    "title": "Local cryptographic randomness",
+    "body": "Everything is generated with the browser WebCrypto (crypto.getRandomValues) — no upload, no server. UUID v7 and ULID embed a timestamp prefix, so they sort by time."
+  },
+  "opts": {
+    "kind": "Type",
+    "count": "Count",
+    "nanoSize": "NanoID length",
+    "regenerate": "Regenerate",
+    "copyAll": "Copy all",
+    "copied": "Copied"
+  },
+  "kind": {
+    "uuidv4": "UUID v4",
+    "uuidv7": "UUID v7",
+    "ulid": "ULID",
+    "nanoid": "NanoID"
+  },
+  "plain": {
+    "summary": "Plain text (one per line)"
+  }
+}
