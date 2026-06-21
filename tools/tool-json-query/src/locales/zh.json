@@ -1,0 +1,24 @@
+{
+  "title": "JSON 路径查询",
+  "description": "用点号/方括号路径从 JSON 取值：支持 .key、[0]、[-1]、* 通配、[1:3] 切片与嵌套展开；实时显示所有匹配。纯本地。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析与查询在浏览器内完成，不上传。语法：.key / ['key'] / [0] / [-1] / * 通配 / [1:3] 切片，可任意嵌套。多个匹配以数组返回。"
+  },
+  "path": {
+    "label": "查询路径",
+    "examples": "示例",
+    "matchCount": "{{n}} 个匹配"
+  },
+  "io": {
+    "json": "JSON 输入",
+    "result": "查询结果",
+    "noMatch": "无匹配",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "badJson": "JSON 解析失败。",
+    "badPath": "路径无效：{{msg}}"
+  }
+}
