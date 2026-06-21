@@ -1,0 +1,22 @@
+{
+  "title": "Markdown TOC",
+  "description": "Generate a nested table of contents from Markdown headings: GitHub-style anchors, level range, ordered/unordered, code-block aware, slug de-dup. Fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and generation run in your browser — nothing is uploaded. Anchors use GitHub-style slugs with -1/-2 de-dup; '#' inside fenced code blocks is ignored."
+  },
+  "opts": {
+    "minLevel": "From level",
+    "maxLevel": "To level",
+    "ordered": "Ordered list",
+    "links": "With links",
+    "headingCount": "{{n}} headings"
+  },
+  "io": {
+    "input": "Markdown input",
+    "toc": "Table of contents",
+    "empty": "No headings found in the selected level range.",
+    "copy": "Copy",
+    "copied": "Copied"
+  }
+}
