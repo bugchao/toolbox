@@ -1,0 +1,22 @@
+{
+  "title": "Markdown 目录生成",
+  "description": "从 Markdown 标题生成嵌套目录（TOC）：GitHub 风格锚点、可调层级范围、有序/无序、跳过代码块、同名锚点去重。纯本地。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析与生成在浏览器内完成，不上传。锚点采用 GitHub 风格 slug，同名标题自动追加 -1/-2 去重；围栏代码块内的 # 不计入。"
+  },
+  "opts": {
+    "minLevel": "起始层级",
+    "maxLevel": "结束层级",
+    "ordered": "有序列表",
+    "links": "生成链接",
+    "headingCount": "{{n}} 个标题"
+  },
+  "io": {
+    "input": "Markdown 输入",
+    "toc": "目录",
+    "empty": "未检测到标题（在所选层级范围内）。",
+    "copy": "复制",
+    "copied": "已复制"
+  }
+}
