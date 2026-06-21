@@ -1,0 +1,29 @@
+{
+  "title": ".env ↔ JSON",
+  "description": "Bi-directional live conversion between .env and flat JSON: export prefix, single/double-quote escapes, multi-line values, inline comments; nested objects become JSON strings.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and generation run entirely in your browser — config is never uploaded. The JSON side is a flat string map; nested objects get serialized to JSON strings."
+  },
+  "options": {
+    "direction": "Direction",
+    "directionAuto": "Auto (follow last edit)",
+    "exportPrefix": "Add export prefix",
+    "clear": "Clear"
+  },
+  "placeholder": {
+    "env": "Paste .env — export / quotes / inline # comments / multi-line values supported",
+    "json": "Paste a flat JSON object, e.g. {\"PORT\":\"8080\"}"
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "root_must_be_object": "JSON root must be an object (not an array or scalar).",
+    "bad_json": "JSON failed to parse."
+  },
+  "hint": {
+    "flat": "Edit either side to auto-sync the other; lock direction for one-way. .env is flat — deep nesting collapses to JSON strings."
+  }
+}
