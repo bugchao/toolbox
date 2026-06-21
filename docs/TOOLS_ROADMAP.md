@@ -104,6 +104,12 @@
 | JSON Schema 校验器 | `/json-schema-validator` | `tools/tool-json-schema-validator` → JsonSchemaValidator |
 | Cookie 解析器 | `/cookie-parser` | `tools/tool-cookie-parser` → CookieParser |
 | Mermaid 实时编辑器 | `/mermaid` | `tools/tool-mermaid` → Mermaid |
+| Regex 铁路图 + 匹配测试 | `/regex-railroad` | `tools/tool-regex-railroad` → RegexRailroad |
+| Base64 文件互转 | `/base64-file` | `tools/tool-base64-file` → Base64File |
+| CSV ↔ Markdown 表格 | `/csv-markdown` | `tools/tool-csv-markdown` → CsvMarkdown |
+| JWT 生成器（HS256/384/512 签发 + 验证） | `/jwt-builder` | `tools/tool-jwt-builder` → JwtBuilder |
+| Diff / Patch 工具（unified diff 生成/应用） | `/diff-patch` | `tools/tool-diff-patch` → DiffPatch |
+| 命名风格转换（13 种 case） | `/case-converter` | `tools/tool-case-converter` → CaseConverter |
 
 ### 查询工具
 
