@@ -1,0 +1,33 @@
+{
+  "title": "Base & Bitwise Calculator",
+  "description": "Convert across any radix (2–36) with BigInt support, two's-complement bit views (8/16/32/64-bit) and bitwise ops (AND/OR/XOR/NOT/shift). Fully local.",
+  "notice": {
+    "title": "Fully local · BigInt-backed",
+    "body": "All math uses BigInt — no precision loss beyond 64 bits; conversion, two's complement and bitwise ops run in your browser."
+  },
+  "convert": {
+    "input": "Input value",
+    "inputBase": "Input base"
+  },
+  "bases": {
+    "bin": "Binary",
+    "oct": "Octal",
+    "dec": "Decimal",
+    "hex": "Hex"
+  },
+  "tc": {
+    "heading": "Two's complement",
+    "binary": "Binary",
+    "hex": "Hex",
+    "unsigned": "Unsigned",
+    "signed": "Signed",
+    "outOfRange": "Out of {{width}}-bit range"
+  },
+  "bitwise": {
+    "heading": "Bitwise",
+    "hint": "NOT and negative binaries are shown as two's complement at the current {{width}}-bit width."
+  },
+  "error": {
+    "parse": "Cannot parse in this base (check digits vs base)."
+  }
+}

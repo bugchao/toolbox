@@ -1,0 +1,33 @@
+{
+  "title": "进制 & 位运算计算器",
+  "description": "任意进制（2–36）互转 + BigInt 大整数 + 补码位视图（8/16/32/64 位）+ 位运算（AND/OR/XOR/NOT/移位）；纯本地。",
+  "notice": {
+    "title": "完全本地 · 支持大整数",
+    "body": "全部用 BigInt 计算，64 位以上也不丢精度；转换、补码与位运算都在浏览器内完成。"
+  },
+  "convert": {
+    "input": "输入数值",
+    "inputBase": "输入进制"
+  },
+  "bases": {
+    "bin": "二进制",
+    "oct": "八进制",
+    "dec": "十进制",
+    "hex": "十六进制"
+  },
+  "tc": {
+    "heading": "补码视图",
+    "binary": "二进制",
+    "hex": "十六进制",
+    "unsigned": "无符号",
+    "signed": "有符号",
+    "outOfRange": "超出 {{width}} 位可表示范围"
+  },
+  "bitwise": {
+    "heading": "位运算",
+    "hint": "NOT 与负数二进制按当前 {{width}} 位宽取补码显示。"
+  },
+  "error": {
+    "parse": "无法按该进制解析（检查数字与进制是否匹配）。"
+  }
+}
