@@ -1,0 +1,26 @@
+{
+  "title": "Duration Calculator",
+  "description": "Parse durations like 1d2h30m, convert across units (ms/s/m/h/d/w), humanize, clock-format, and add/subtract to a base time. Fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing and conversion run in your browser. Compound forms like 1d2h30m / 90m / 1.5h / 500ms are supported; a bare number is treated as seconds."
+  },
+  "input": {
+    "label": "Duration",
+    "error": "Cannot parse — try 1d2h30m / 90m / 1.5h / 500ms or a bare number of seconds"
+  },
+  "units": {
+    "heading": "Unit conversion (click to copy)",
+    "ms": "ms",
+    "s": "sec",
+    "m": "min",
+    "h": "hr",
+    "d": "day",
+    "w": "wk"
+  },
+  "addto": {
+    "heading": "Add to base time",
+    "base": "Base time",
+    "badBase": "Invalid base time"
+  }
+}
