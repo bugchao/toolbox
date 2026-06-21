@@ -1,0 +1,33 @@
+{
+  "title": "MIME Type Lookup",
+  "description": "Bi-directional extension ↔ Content-Type lookup: filename/extension → MIME, MIME → extensions, with category search. Offline reference.",
+  "notice": {
+    "title": "Offline reference",
+    "body": "Built-in common MIME table, no network requests. Extension may include a dot or be a full filename (suffix auto-extracted); MIME may carry params like charset."
+  },
+  "ext": {
+    "heading": "Extension → MIME",
+    "unknown": "unknown, falls back to octet-stream"
+  },
+  "mime": {
+    "heading": "MIME → Extensions",
+    "unknown": "MIME not in table"
+  },
+  "table": {
+    "search": "Search mime / extension",
+    "all": "All",
+    "count": "{{n}} found",
+    "none": "No match",
+    "mime": "MIME",
+    "ext": "Extensions",
+    "category": "Category"
+  },
+  "cat": {
+    "image": "Image",
+    "text": "Text",
+    "application": "Application",
+    "audio": "Audio",
+    "video": "Video",
+    "font": "Font"
+  }
+}

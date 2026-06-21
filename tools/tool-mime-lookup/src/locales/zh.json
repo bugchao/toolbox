@@ -1,0 +1,33 @@
+{
+  "title": "MIME 类型速查",
+  "description": "扩展名 ↔ Content-Type 双向查询：输文件名/扩展名查 MIME，输 MIME 查扩展名，按类别搜索。离线速查。",
+  "notice": {
+    "title": "离线速查",
+    "body": "内置常用 MIME 表，不发网络请求。扩展名可带点或整个文件名（自动取后缀）；MIME 可带 charset 等参数。"
+  },
+  "ext": {
+    "heading": "扩展名 → MIME",
+    "unknown": "未知，回退 octet-stream"
+  },
+  "mime": {
+    "heading": "MIME → 扩展名",
+    "unknown": "未收录此 MIME"
+  },
+  "table": {
+    "search": "搜索 mime / 扩展名",
+    "all": "全部",
+    "count": "{{n}} 条",
+    "none": "无匹配",
+    "mime": "MIME",
+    "ext": "扩展名",
+    "category": "类别"
+  },
+  "cat": {
+    "image": "图像",
+    "text": "文本",
+    "application": "应用",
+    "audio": "音频",
+    "video": "视频",
+    "font": "字体"
+  }
+}
