@@ -1,0 +1,28 @@
+{
+  "title": "Unicode 字符检查器",
+  "description": "逐字符剖析文本：码点 U+、Unicode 块、UTF-8 / UTF-16 字节、JS/HTML/CSS 转义；正确按码点切分 emoji 与代理对，统计码点/UTF-16/UTF-8 长度差异。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有剖析在浏览器内完成，文本不上传。按码点（非 UTF-16 码元）遍历，emoji 与代理对算一个字符。"
+  },
+  "input": {
+    "label": "输入文本",
+    "placeholder": "粘贴或输入文本，逐字符在下方剖析"
+  },
+  "stats": {
+    "codePoints": "码点数",
+    "utf16": "UTF-16 长度",
+    "utf8": "UTF-8 字节",
+    "hasAstral": "含 astral 字符（>U+FFFF）"
+  },
+  "table": {
+    "heading": "逐字符",
+    "char": "字形",
+    "code": "码点",
+    "block": "Unicode 块",
+    "truncated": "仅显示前 {{n}} 个字符。"
+  },
+  "escape": {
+    "heading": "整体转义"
+  }
+}
