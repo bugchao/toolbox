@@ -1,0 +1,39 @@
+{
+  "title": "文本行处理",
+  "description": "按行处理文本：排序（升降/自然/长度）、去重、反转、打乱、加/去行号、去空行、trim、关键词过滤、统计。纯本地零依赖。",
+  "notice": {
+    "title": "完全本地",
+    "body": "所有操作在浏览器内对当前文本就地处理，不上传。操作直接改写下方文本框，可连续叠加。"
+  },
+  "group": {
+    "sort": "排序",
+    "edit": "编辑",
+    "filter": "过滤"
+  },
+  "op": {
+    "sortAsc": "升序",
+    "sortDesc": "降序",
+    "sortNatural": "自然排序",
+    "sortLength": "按长度",
+    "caseInsensitive": "忽略大小写",
+    "dedupe": "去重",
+    "reverse": "反转",
+    "shuffle": "打乱",
+    "removeBlank": "去空行",
+    "trim": "去首尾空格",
+    "number": "加行号",
+    "unnumber": "去行号",
+    "filterPlaceholder": "关键词 / 正则",
+    "exclude": "排除",
+    "applyFilter": "过滤"
+  },
+  "stats": {
+    "total": "共 {{n}} 行",
+    "unique": "唯一 {{n}}",
+    "blank": "空 {{n}}",
+    "chars": "{{n}} 字符"
+  },
+  "copy": "复制",
+  "copied": "已复制",
+  "clear": "清空"
+}
