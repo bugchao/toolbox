@@ -1,0 +1,25 @@
+{
+  "title": "ID 生成器",
+  "description": "生成 UUID v4 / v7、ULID、NanoID：批量、可调数量与 NanoID 长度，全部用 WebCrypto 本地生成；ULID/UUIDv7 时间有序。",
+  "notice": {
+    "title": "本地加密随机",
+    "body": "全部用浏览器 WebCrypto（crypto.getRandomValues）生成，不上传也不依赖服务器；UUID v7 与 ULID 前缀含时间戳，天然按时间有序。"
+  },
+  "opts": {
+    "kind": "类型",
+    "count": "数量",
+    "nanoSize": "NanoID 长度",
+    "regenerate": "重新生成",
+    "copyAll": "复制全部",
+    "copied": "已复制"
+  },
+  "kind": {
+    "uuidv4": "UUID v4",
+    "uuidv7": "UUID v7",
+    "ulid": "ULID",
+    "nanoid": "NanoID"
+  },
+  "plain": {
+    "summary": "纯文本（每行一个）"
+  }
+}
