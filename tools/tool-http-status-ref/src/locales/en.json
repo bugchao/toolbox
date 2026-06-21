@@ -1,0 +1,54 @@
+{
+  "title": "HTTP Status Codes",
+  "description": "Quick reference for HTTP status codes: grouped by 1xx–5xx, searchable by code or meaning, with explanations and common scenarios. Offline reference.",
+  "notice": {
+    "title": "Offline reference",
+    "body": "A static cheat sheet — no network requests. Search by code number, English phrase, or meaning."
+  },
+  "search": {
+    "placeholder": "Search: 404 / not found",
+    "all": "All",
+    "count": "{{n}} found",
+    "none": "No matching status code."
+  },
+  "class": {
+    "1xx": "Informational",
+    "2xx": "Success",
+    "3xx": "Redirection",
+    "4xx": "Client error",
+    "5xx": "Server error"
+  },
+  "codes": {
+    "c100": "Continue: headers received, client should send the request body.",
+    "c101": "Switching Protocols: server agrees to switch per the Upgrade header (e.g. WebSocket).",
+    "c102": "Processing: received and working, no response yet (WebDAV).",
+    "c103": "Early Hints: preliminary headers (e.g. preload) before the final response.",
+    "c200": "OK: the request succeeded.",
+    "c201": "Created: succeeded and a new resource was created (typical for POST).",
+    "c202": "Accepted: accepted but not yet processed (async).",
+    "c204": "No Content: success with no response body (typical for DELETE / PUT).",
+    "c206": "Partial Content: a Range request returned partial data (resumable / video).",
+    "c301": "Moved Permanently: resource permanently at a new URL; update links.",
+    "c302": "Found: resource temporarily at another URL (legacy behaves like 303).",
+    "c303": "See Other: GET the result from another URL (post-redirect-get).",
+    "c304": "Not Modified: cache is still valid (works with ETag / If-Modified-Since).",
+    "c307": "Temporary Redirect: like 302 but preserves method and body.",
+    "c308": "Permanent Redirect: like 301 but preserves method and body.",
+    "c400": "Bad Request: malformed syntax or invalid params.",
+    "c401": "Unauthorized: authentication required (missing / invalid token).",
+    "c403": "Forbidden: authenticated but not permitted.",
+    "c404": "Not Found: the resource does not exist.",
+    "c405": "Method Not Allowed: the method is not supported for this resource.",
+    "c409": "Conflict: conflicts with the current resource state (duplicate / version).",
+    "c410": "Gone: resource existed but is permanently removed.",
+    "c418": "I'm a teapot: April Fools' easter egg; can't brew coffee.",
+    "c422": "Unprocessable Entity: syntactically fine but semantically wrong (form validation).",
+    "c429": "Too Many Requests: rate-limited; slow down (see Retry-After).",
+    "c500": "Internal Server Error: an unhandled server-side exception.",
+    "c501": "Not Implemented: the server does not support the functionality.",
+    "c502": "Bad Gateway: upstream returned an invalid response (proxy / gateway).",
+    "c503": "Service Unavailable: overloaded or under maintenance; retry later.",
+    "c504": "Gateway Timeout: upstream did not respond in time.",
+    "c511": "Network Authentication Required: authenticate at the network portal first (captive WiFi)."
+  }
+}
