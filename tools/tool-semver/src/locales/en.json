@@ -1,0 +1,29 @@
+{
+  "title": "Semver Toolkit",
+  "description": "Parse, compare, sort, range-match (^ ~ >= ||), diff level and bump semantic versions. Fully local, zero deps.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Parsing, comparison and range matching all run in your browser, following SemVer 2.0 (prerelease precedence; build metadata ignored in comparison)."
+  },
+  "parse": {
+    "heading": "Parse",
+    "invalid": "Not a valid semantic version.",
+    "next": "Next",
+    "majorLabel": "major"
+  },
+  "compare": {
+    "heading": "Compare two versions",
+    "equal": "They are equal",
+    "result": "{{a}} is greater than {{b}}"
+  },
+  "satisfies": {
+    "heading": "Range match",
+    "yes": "Satisfies the range ✓",
+    "no": "Does not satisfy ✗"
+  },
+  "sort": {
+    "heading": "Sort & maxSatisfying",
+    "input": "Version list (one per line, invalid lines ignored)",
+    "output": "Descending result"
+  }
+}
