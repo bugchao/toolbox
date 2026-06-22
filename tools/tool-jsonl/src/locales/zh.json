@@ -1,0 +1,31 @@
+{
+  "title": "JSON Lines 工具",
+  "description": "NDJSON / JSON Lines ↔ JSON 数组互转，逐行校验报错（带行号），压缩规整。日志与数据流常用，纯本地。",
+  "notice": {
+    "title": "完全本地",
+    "body": "转换与校验在浏览器内完成，不上传。NDJSON 每行一个 JSON、空行自动跳过；转数组时任一行非法都会带行号报错。"
+  },
+  "mode": {
+    "toArray": "NDJSON → 数组",
+    "toJsonl": "数组 → NDJSON"
+  },
+  "swap": "交换方向",
+  "minify": "压缩每行",
+  "stats": {
+    "records": "{{n}} 条记录",
+    "errors": "{{n}} 行错误",
+    "blank": "{{n}} 空行"
+  },
+  "io": {
+    "jsonlInput": "NDJSON 输入",
+    "arrayOutput": "JSON 数组",
+    "arrayInput": "JSON 数组输入",
+    "jsonlOutput": "NDJSON 输出",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "error": {
+    "lineErrors": "以下行解析失败：",
+    "parse": "JSON 解析失败"
+  }
+}

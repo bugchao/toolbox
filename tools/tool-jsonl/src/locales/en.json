@@ -1,0 +1,31 @@
+{
+  "title": "JSON Lines Tool",
+  "description": "Convert NDJSON / JSON Lines ↔ JSON array, validate each line with line numbers, and compact. Handy for logs and data streams. Fully local.",
+  "notice": {
+    "title": "Fully local",
+    "body": "Conversion and validation run in your browser — nothing is uploaded. NDJSON is one JSON per line, blank lines skipped; converting to an array reports any bad line with its number."
+  },
+  "mode": {
+    "toArray": "NDJSON → Array",
+    "toJsonl": "Array → NDJSON"
+  },
+  "swap": "Swap direction",
+  "minify": "Compact lines",
+  "stats": {
+    "records": "{{n}} records",
+    "errors": "{{n}} line errors",
+    "blank": "{{n}} blank"
+  },
+  "io": {
+    "jsonlInput": "NDJSON input",
+    "arrayOutput": "JSON array",
+    "arrayInput": "JSON array input",
+    "jsonlOutput": "NDJSON output",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "error": {
+    "lineErrors": "These lines failed to parse:",
+    "parse": "JSON parse failed"
+  }
+}
