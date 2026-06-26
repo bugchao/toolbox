@@ -1,0 +1,39 @@
+{
+  "title": "JSON Diff",
+  "description": "Structural diff of two JSON docs — ignores key order, highlights added/removed/changed. Fully local.",
+  "notice": {
+    "title": "Structural diff, key order ignored",
+    "body": "Recurses by key and diffs arrays by index; type changes are flagged too. Runs entirely in your browser — nothing is uploaded."
+  },
+  "io": {
+    "left": "Original JSON (left)",
+    "right": "Comparison JSON (right)"
+  },
+  "toolbar": {
+    "hideUnchanged": "Hide unchanged",
+    "swap": "Swap sides",
+    "sample": "Sample",
+    "copy": "Copy result",
+    "copied": "Copied"
+  },
+  "error": {
+    "parse": "Parse error"
+  },
+  "summary": {
+    "added": "{{n}} added",
+    "removed": "{{n}} removed",
+    "changed": "{{n}} changed",
+    "unchanged": "{{n}} unchanged"
+  },
+  "result": {
+    "title": "Differences",
+    "identical": "The two JSON documents are identical",
+    "waiting": "Enter valid JSON on both sides to see the differences"
+  },
+  "type": {
+    "added": "Added",
+    "removed": "Removed",
+    "changed": "Changed",
+    "unchanged": "Unchanged"
+  }
+}

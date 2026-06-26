@@ -1,0 +1,39 @@
+{
+  "title": "JSON Diff",
+  "description": "两份 JSON 结构化对比，忽略键顺序，标出新增/删除/修改与类型变化。纯本地。",
+  "notice": {
+    "title": "结构化对比，键顺序无关",
+    "body": "按键递归、数组按索引比较；类型变化也会被标出。全部在浏览器本地完成，不上传任何数据。"
+  },
+  "io": {
+    "left": "原始 JSON（左）",
+    "right": "对比 JSON（右）"
+  },
+  "toolbar": {
+    "hideUnchanged": "隐藏未变项",
+    "swap": "交换左右",
+    "sample": "示例",
+    "copy": "复制结果",
+    "copied": "已复制"
+  },
+  "error": {
+    "parse": "解析失败"
+  },
+  "summary": {
+    "added": "新增 {{n}}",
+    "removed": "删除 {{n}}",
+    "changed": "修改 {{n}}",
+    "unchanged": "未变 {{n}}"
+  },
+  "result": {
+    "title": "差异",
+    "identical": "两份 JSON 完全一致",
+    "waiting": "请输入两侧合法的 JSON 后查看差异"
+  },
+  "type": {
+    "added": "新增",
+    "removed": "删除",
+    "changed": "修改",
+    "unchanged": "未变"
+  }
+}
