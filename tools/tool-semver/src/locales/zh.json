@@ -1,0 +1,29 @@
+{
+  "title": "Semver 版本工具",
+  "description": "语义化版本解析 / 比较 / 排序 / 范围匹配（^ ~ >= || 等）/ 差异级别 / 自增。纯本地零依赖。",
+  "notice": {
+    "title": "完全本地",
+    "body": "解析、比较与范围匹配均在浏览器内完成，遵循 SemVer 2.0（含预发布优先级、build 元数据不参与比较）。"
+  },
+  "parse": {
+    "heading": "解析",
+    "invalid": "不是合法的语义化版本。",
+    "next": "下一版本",
+    "majorLabel": "major"
+  },
+  "compare": {
+    "heading": "比较两版本",
+    "equal": "两者相等",
+    "result": "{{a}} 大于 {{b}}"
+  },
+  "satisfies": {
+    "heading": "范围匹配",
+    "yes": "满足该范围 ✓",
+    "no": "不满足该范围 ✗"
+  },
+  "sort": {
+    "heading": "排序与 maxSatisfying",
+    "input": "版本列表（每行一个，非法行忽略）",
+    "output": "降序结果"
+  }
+}
