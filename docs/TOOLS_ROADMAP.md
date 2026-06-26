@@ -103,6 +103,7 @@
 | Lorem Ipsum / 乱数假文生成器 | `/lorem-ipsum` | `tools/tool-lorem-ipsum` → LoremIpsum |
 | JSON Schema 校验器 | `/json-schema-validator` | `tools/tool-json-schema-validator` → JsonSchemaValidator |
 | JSON Diff（结构化对比） | `/json-diff` | `tools/tool-json-diff` → JsonDiff |
+| JSON Flatten（扁平化 + CSV） | `/json-flatten` | `tools/tool-json-flatten` → JsonFlatten |
 | Cookie 解析器 | `/cookie-parser` | `tools/tool-cookie-parser` → CookieParser |
 | Mermaid 实时编辑器 | `/mermaid` | `tools/tool-mermaid` → Mermaid |
 | Regex 铁路图 + 匹配测试 | `/regex-railroad` | `tools/tool-regex-railroad` → RegexRailroad |

@@ -1,0 +1,28 @@
+{
+  "title": "JSON Flatten",
+  "description": "嵌套 JSON 扁平化为点路径键，可导出 CSV；对象数组转表格。纯本地。",
+  "notice": {
+    "title": "扁平化 + CSV 导出",
+    "body": "对象按 a.b 路径、数组按 a[0] 索引展开为单层键值；对象数组可直接转成 CSV 表格。全部在浏览器本地完成，不上传任何数据。"
+  },
+  "io": {
+    "input": "输入 JSON",
+    "output": "结果"
+  },
+  "mode": {
+    "flat": "扁平键值",
+    "csv": "CSV"
+  },
+  "toolbar": {
+    "sample": "示例",
+    "copy": "复制结果",
+    "copied": "已复制"
+  },
+  "error": {
+    "parse": "解析失败"
+  },
+  "stats": {
+    "keys": "{{n}} 个键",
+    "rows": "{{n}} 行"
+  }
+}

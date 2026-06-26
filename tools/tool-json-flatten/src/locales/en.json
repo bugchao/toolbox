@@ -1,0 +1,28 @@
+{
+  "title": "JSON Flatten",
+  "description": "Flatten nested JSON into dot-path keys and export CSV; turns object arrays into tables. Fully local.",
+  "notice": {
+    "title": "Flatten + CSV export",
+    "body": "Objects expand by a.b paths and arrays by a[0] indices into single-level key/value pairs; arrays of objects convert straight to a CSV table. Runs entirely in your browser — nothing is uploaded."
+  },
+  "io": {
+    "input": "Input JSON",
+    "output": "Result"
+  },
+  "mode": {
+    "flat": "Flat keys",
+    "csv": "CSV"
+  },
+  "toolbar": {
+    "sample": "Sample",
+    "copy": "Copy result",
+    "copied": "Copied"
+  },
+  "error": {
+    "parse": "Parse error"
+  },
+  "stats": {
+    "keys": "{{n}} keys",
+    "rows": "{{n}} rows"
+  }
+}
