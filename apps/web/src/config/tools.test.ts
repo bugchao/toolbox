@@ -29,10 +29,16 @@ describe('tools config', () => {
 
   describe('getToolTitle', () => {
     it('uses i18nNamespace title when present', () => {
+      // toolJson 命名空间是懒加载的，单测中不会自动加载，需显式 mock 已加载状态
+      const hasLoadedNamespaceSpy = vi.spyOn(i18n, 'hasLoadedNamespace').mockReturnValue(true)
+      const existsSpy = vi.spyOn(i18n, 'exists').mockReturnValue(true)
       const t = vi.fn((key: string) => (key === 'toolJson:title' ? 'JSON 工具' : key))
       const tool = getToolByPath('/json')!
       expect(getToolTitle(tool, t)).toBe('JSON 工具')
       expect(t).toHaveBeenCalledWith('toolJson:title')
+
+      hasLoadedNamespaceSpy.mockRestore()
+      existsSpy.mockRestore()
     })
 
     it('falls back to nav nameKey when tool namespace is not loaded', () => {
@@ -58,12 +64,18 @@ describe('tools config', () => {
 
   describe('getToolDescription', () => {
     it('uses i18nNamespace description when present', () => {
+      // toolJson 命名空间是懒加载的，单测中不会自动加载，需显式 mock 已加载状态
+      const hasLoadedNamespaceSpy = vi.spyOn(i18n, 'hasLoadedNamespace').mockReturnValue(true)
+      const existsSpy = vi.spyOn(i18n, 'exists').mockReturnValue(true)
       const t = vi.fn((key: string) => (key === 'toolJson:description' ? 'JSON 格式化' : key))
       const tHome = vi.fn()
       const tool = getToolByPath('/json')!
       expect(getToolDescription(tool, t, tHome)).toBe('JSON 格式化')
       expect(t).toHaveBeenCalledWith('toolJson:description')
       expect(tHome).not.toHaveBeenCalled()
+
+      hasLoadedNamespaceSpy.mockRestore()
+      existsSpy.mockRestore()
     })
 
     it('uses home.toolDesc when no i18nNamespace', () => {
