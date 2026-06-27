@@ -1,0 +1,59 @@
+{
+  "title": "User-Agent 解析器",
+  "description": "粘贴 User-Agent 字符串，解析出浏览器、排版引擎、操作系统、设备类型与爬虫信息。",
+  "localOnly": {
+    "title": "纯本地解析",
+    "description": "所有解析都在浏览器本地完成，不会上传任何数据。"
+  },
+  "input": {
+    "label": "User-Agent 字符串",
+    "placeholder": "在此粘贴 User-Agent 字符串…",
+    "charCount": "{{n}} 个字符",
+    "useCurrent": "使用当前浏览器 UA",
+    "clear": "清空",
+    "sample": "示例 {{n}}"
+  },
+  "results": {
+    "summaryTitle": "解析结果",
+    "tokensTitle": "原始片段",
+    "productsTitle": "产品 Token",
+    "commentsTitle": "注释片段",
+    "rawTitle": "原始 User-Agent"
+  },
+  "fields": {
+    "browser": "浏览器",
+    "browserVersion": "浏览器版本",
+    "engine": "排版引擎",
+    "engineVersion": "引擎版本",
+    "os": "操作系统",
+    "osVersion": "系统版本",
+    "device": "设备类型",
+    "cpu": "CPU 架构",
+    "bot": "是否爬虫",
+    "botName": "爬虫名称"
+  },
+  "device": {
+    "desktop": "桌面",
+    "mobile": "手机",
+    "tablet": "平板",
+    "bot": "爬虫 / 机器人",
+    "unknown": "未知"
+  },
+  "bot": {
+    "yes": "是",
+    "no": "否"
+  },
+  "table": {
+    "name": "名称",
+    "version": "版本"
+  },
+  "empty": {
+    "title": "等待输入",
+    "description": "粘贴一段 User-Agent，或点击「使用当前浏览器 UA」开始解析。"
+  },
+  "unrecognized": {
+    "title": "无法识别",
+    "description": "这段文本不像有效的 User-Agent，请检查后重试。"
+  },
+  "notDetected": "未检测到"
+}

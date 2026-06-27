@@ -1,0 +1,42 @@
+{
+  "title": "WiFi QR Code",
+  "description": "Generate a scannable WiFi QR code from network details, fully local.",
+  "notice": {
+    "title": "Generated locally",
+    "body": "The QR code is generated in your browser. The network name and password are never uploaded to any server. Scan it to join the network instantly."
+  },
+  "form": {
+    "title": "Network details",
+    "ssid": "Network name (SSID)",
+    "ssidPlaceholder": "e.g. MyHome-WiFi",
+    "password": "Password",
+    "passwordPlaceholder": "Enter the WiFi password",
+    "encryption": "Encryption",
+    "hidden": "Hidden network",
+    "errorLevel": "Error correction",
+    "size": "Size"
+  },
+  "auth": {
+    "WPA": "WPA/WPA2",
+    "WEP": "WEP",
+    "nopass": "No password"
+  },
+  "ecLevel": {
+    "L": "Low (L)",
+    "M": "Medium (M)",
+    "Q": "Quartile (Q)",
+    "H": "High (H)"
+  },
+  "preview": {
+    "title": "QR preview",
+    "emptyTitle": "Waiting for input",
+    "empty": "Enter a network name (SSID) to generate the QR code.",
+    "string": "WiFi string",
+    "download": "Download PNG",
+    "copy": "Copy string",
+    "copied": "Copied"
+  },
+  "error": {
+    "render": "Failed to generate the QR code, please check your input."
+  }
+}

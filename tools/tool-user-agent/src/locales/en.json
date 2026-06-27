@@ -1,0 +1,59 @@
+{
+  "title": "User-Agent Parser",
+  "description": "Paste a User-Agent string to parse the browser, rendering engine, operating system, device type and bot info.",
+  "localOnly": {
+    "title": "Fully local",
+    "description": "All parsing runs locally in your browser. Nothing is uploaded."
+  },
+  "input": {
+    "label": "User-Agent string",
+    "placeholder": "Paste a User-Agent string here…",
+    "charCount": "{{n}} characters",
+    "useCurrent": "Use current browser UA",
+    "clear": "Clear",
+    "sample": "Sample {{n}}"
+  },
+  "results": {
+    "summaryTitle": "Parsed result",
+    "tokensTitle": "Raw segments",
+    "productsTitle": "Product tokens",
+    "commentsTitle": "Comment segments",
+    "rawTitle": "Raw User-Agent"
+  },
+  "fields": {
+    "browser": "Browser",
+    "browserVersion": "Browser version",
+    "engine": "Engine",
+    "engineVersion": "Engine version",
+    "os": "Operating system",
+    "osVersion": "OS version",
+    "device": "Device type",
+    "cpu": "CPU architecture",
+    "bot": "Is bot",
+    "botName": "Bot name"
+  },
+  "device": {
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "tablet": "Tablet",
+    "bot": "Bot / Crawler",
+    "unknown": "Unknown"
+  },
+  "bot": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "table": {
+    "name": "Name",
+    "version": "Version"
+  },
+  "empty": {
+    "title": "Waiting for input",
+    "description": "Paste a User-Agent, or click \"Use current browser UA\" to start parsing."
+  },
+  "unrecognized": {
+    "title": "Not recognized",
+    "description": "This text does not look like a valid User-Agent. Please check and try again."
+  },
+  "notDetected": "Not detected"
+}

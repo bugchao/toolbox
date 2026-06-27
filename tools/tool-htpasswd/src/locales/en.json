@@ -1,0 +1,50 @@
+{
+  "title": "Htpasswd Generator",
+  "description": "Generate Apache / Nginx Basic Auth credentials locally with bcrypt, apr1 (Apache MD5), or SHA.",
+  "notice": {
+    "title": "Runs entirely in your browser",
+    "body": "All hashing happens locally in your browser. Usernames and passwords are never uploaded to any server."
+  },
+  "form": {
+    "heading": "Generate credential",
+    "username": "Username",
+    "usernamePlaceholder": "e.g. admin",
+    "password": "Password",
+    "passwordPlaceholder": "Enter the password to hash",
+    "showPassword": "Show password",
+    "algorithm": "Algorithm",
+    "cost": "Cost (rounds)",
+    "generate": "Generate entry",
+    "add": "Add to list"
+  },
+  "algo": {
+    "bcrypt": "bcrypt",
+    "apr1": "apr1 (Apache MD5)",
+    "sha": "SHA (SHA-1)",
+    "bcryptHint": "Recommended and most secure. Outputs the $2y$ prefix for Apache compatibility.",
+    "apr1Hint": "Apache-specific MD5 scheme with broad compatibility.",
+    "shaHint": "{SHA}base64(sha1) — widely compatible but weak; avoid for new deployments."
+  },
+  "result": {
+    "heading": "Result",
+    "entry": "htpasswd entry",
+    "copy": "Copy",
+    "copied": "Copied",
+    "empty": "Fill in a username and password, then click generate."
+  },
+  "list": {
+    "heading": ".htpasswd file",
+    "empty": "No entries yet. After generating, click \"Add to list\" to collect multiple users.",
+    "remove": "Remove",
+    "copyAll": "Copy all",
+    "download": "Download .htpasswd",
+    "clear": "Clear"
+  },
+  "error": {
+    "usernameEmpty": "Username cannot be empty.",
+    "usernameColon": "Username cannot contain a colon (:).",
+    "usernameWhitespace": "Username cannot contain spaces or whitespace.",
+    "passwordEmpty": "Password cannot be empty.",
+    "generic": "Generation failed, please try again."
+  }
+}

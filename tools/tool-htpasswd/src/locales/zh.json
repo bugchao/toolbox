@@ -1,0 +1,50 @@
+{
+  "title": "Htpasswd 生成器",
+  "description": "本地生成 Apache / Nginx Basic Auth 凭据，支持 bcrypt、apr1（Apache MD5）与 SHA。",
+  "notice": {
+    "title": "纯本地计算",
+    "body": "所有哈希都在你的浏览器内完成，用户名与密码不会上传到任何服务器。"
+  },
+  "form": {
+    "heading": "生成凭据",
+    "username": "用户名",
+    "usernamePlaceholder": "例如 admin",
+    "password": "密码",
+    "passwordPlaceholder": "输入要加密的密码",
+    "showPassword": "显示密码",
+    "algorithm": "算法",
+    "cost": "Cost（迭代轮数）",
+    "generate": "生成条目",
+    "add": "添加到列表"
+  },
+  "algo": {
+    "bcrypt": "bcrypt",
+    "apr1": "apr1（Apache MD5）",
+    "sha": "SHA（SHA-1）",
+    "bcryptHint": "推荐，最安全。输出 $2y$ 前缀以兼容 Apache。",
+    "apr1Hint": "Apache 专用 MD5 方案，兼容性好。",
+    "shaHint": "{SHA}base64(sha1)，兼容性强但安全性较弱，不建议新部署使用。"
+  },
+  "result": {
+    "heading": "生成结果",
+    "entry": "htpasswd 条目",
+    "copy": "复制",
+    "copied": "已复制",
+    "empty": "填写用户名与密码后点击生成。"
+  },
+  "list": {
+    "heading": ".htpasswd 文件",
+    "empty": "尚未添加任何条目。生成后点击“添加到列表”可累积多个用户。",
+    "remove": "移除",
+    "copyAll": "复制全部",
+    "download": "下载 .htpasswd",
+    "clear": "清空"
+  },
+  "error": {
+    "usernameEmpty": "用户名不能为空。",
+    "usernameColon": "用户名不能包含冒号（:）。",
+    "usernameWhitespace": "用户名不能包含空格或空白字符。",
+    "passwordEmpty": "密码不能为空。",
+    "generic": "生成失败，请重试。"
+  }
+}

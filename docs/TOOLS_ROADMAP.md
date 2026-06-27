@@ -62,6 +62,7 @@
 | Favicon 生成器 | `/favicon-generator` | `tools/tool-favicon-generator` → FaviconGenerator |
 | CSS 阴影生成器 | `/box-shadow-gen` | `tools/tool-box-shadow-gen` → BoxShadowGen |
 | EXIF 查看 / 清理 | `/exif-cleaner` | `tools/tool-exif-cleaner` → ExifCleaner |
+| WiFi 二维码生成 | `/wifi-qr` | `tools/tool-wifi-qr` → WifiQr |
 
 ### 研发工具
 
@@ -119,6 +120,8 @@
 | SVG 优化 / 转 React 组件 | `/svg-to-jsx` | `tools/tool-svg-to-jsx` → SvgToJsx |
 | Cron 表达式解析器 | `/cron-parser` | `tools/tool-cron-parser` → CronParser |
 | .env 解析 / 转换 | `/dotenv-parser` | `tools/tool-dotenv-parser` → DotenvParser |
+| User-Agent 解析器 | `/user-agent` | `tools/tool-user-agent` → UserAgent |
+| htpasswd 生成器 | `/htpasswd` | `tools/tool-htpasswd` → Htpasswd |
 
 ### 查询工具
 

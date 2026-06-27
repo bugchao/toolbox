@@ -1,0 +1,42 @@
+{
+  "title": "WiFi 二维码",
+  "description": "输入网络信息生成可扫码联网的 WiFi 二维码，纯本地生成。",
+  "notice": {
+    "title": "纯本地生成",
+    "body": "二维码在浏览器本地生成，网络名称与密码不会上传到任何服务器。扫码即可一键联网。"
+  },
+  "form": {
+    "title": "网络信息",
+    "ssid": "网络名称 (SSID)",
+    "ssidPlaceholder": "例如 MyHome-WiFi",
+    "password": "密码",
+    "passwordPlaceholder": "请输入 WiFi 密码",
+    "encryption": "加密方式",
+    "hidden": "隐藏网络",
+    "errorLevel": "纠错级别",
+    "size": "尺寸"
+  },
+  "auth": {
+    "WPA": "WPA/WPA2",
+    "WEP": "WEP",
+    "nopass": "无密码"
+  },
+  "ecLevel": {
+    "L": "低 (L)",
+    "M": "中 (M)",
+    "Q": "较高 (Q)",
+    "H": "高 (H)"
+  },
+  "preview": {
+    "title": "二维码预览",
+    "emptyTitle": "等待输入",
+    "empty": "请输入网络名称 (SSID) 以生成二维码。",
+    "string": "WiFi 字符串",
+    "download": "下载 PNG",
+    "copy": "复制字符串",
+    "copied": "已复制"
+  },
+  "error": {
+    "render": "生成二维码失败，请检查输入内容。"
+  }
+}
