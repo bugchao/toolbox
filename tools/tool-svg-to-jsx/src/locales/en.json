@@ -1,0 +1,36 @@
+{
+  "title": "SVG to JSX",
+  "description": "Paste SVG source to optimize it and convert it into a React component, with TypeScript and forwardRef prop spreading.",
+  "notice": {
+    "title": "Runs locally",
+    "body": "All conversion happens in your browser; your SVG is never uploaded. Optimization uses lightweight string processing, no svgo."
+  },
+  "input": {
+    "label": "SVG source",
+    "placeholder": "Paste your <svg> source here…"
+  },
+  "options": {
+    "heading": "Options",
+    "optimize": "Optimize",
+    "optimizeHint": "Strip comments, extra whitespace, XML declaration / DOCTYPE and editor metadata",
+    "toJsx": "JSX attributes",
+    "toJsxHint": "class→className, hyphenated attrs to camelCase, style string to object",
+    "wrapComponent": "Wrap as React component",
+    "typescript": "TypeScript",
+    "forwardRef": "forwardRef + spread props",
+    "componentName": "Component name"
+  },
+  "output": {
+    "heading": "Output",
+    "copy": "Copy",
+    "copied": "Copied",
+    "empty": "Result will appear here"
+  },
+  "preview": {
+    "heading": "Live preview"
+  },
+  "errors": {
+    "empty": "Paste some SVG source to get started.",
+    "noSvg": "No <svg> root element detected. Please check that the input is valid SVG."
+  }
+}

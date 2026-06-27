@@ -1,0 +1,109 @@
+{
+  "title": "Cron 解析器",
+  "description": "粘贴一个 cron 表达式，立即得到人话解释、逐字段拆解和未来运行时间预测。",
+  "notice": {
+    "title": "解析方向，不是生成器",
+    "body": "本工具把已有的 cron 表达式「翻译成人话」并预测下次运行时间。支持标准 5 字段（分 时 日 月 周）、范围/列表/步进、月份与星期英文缩写、7 表示周日，以及 @daily、@hourly 等常用别名。"
+  },
+  "input": {
+    "label": "Cron 表达式",
+    "placeholder": "例如：*/15 9-17 * * 1-5",
+    "format": "格式：分 时 日 月 周"
+  },
+  "examples": {
+    "heading": "常用示例",
+    "items": {
+      "everyQuarterBusiness": "工作日工作时间每 15 分钟",
+      "midnight": "每天午夜",
+      "weekdayMorning": "工作日早上 9 点",
+      "monthlyFirst": "每月 1 号零点",
+      "everyHalfHour": "每 30 分钟",
+      "monthMid": "每月 1 号和 15 号",
+      "hourlyAlias": "每小时（别名）"
+    }
+  },
+  "summary": {
+    "heading": "人话解释",
+    "union": "注意：日和周字段都被限定，按 cron 标准取「并集」——只要满足其一即触发。",
+    "separator": "，"
+  },
+  "breakdown": {
+    "heading": "逐字段拆解",
+    "colField": "字段",
+    "colExpr": "表达式",
+    "colMeaning": "含义"
+  },
+  "nextRuns": {
+    "heading": "未来运行时间",
+    "countLabel": "预测次数",
+    "colIndex": "#",
+    "colTime": "本地时间",
+    "colWeekday": "星期",
+    "colRelative": "距现在",
+    "empty": "无匹配的运行时间",
+    "timezoneNote": "按你当前所在时区（本地时间）推算。"
+  },
+  "fields": {
+    "minute": "分钟",
+    "hour": "小时",
+    "dom": "日（月内）",
+    "month": "月",
+    "dow": "星期"
+  },
+  "desc": {
+    "minute": {
+      "every": "每分钟",
+      "step": "每隔 {{step}} 分钟",
+      "stepRange": "第 {{from}} 到 {{to}} 分钟之间每隔 {{step}} 分钟",
+      "range": "第 {{from}} 到 {{to}} 分钟",
+      "values": "在第 {{values}} 分钟"
+    },
+    "hour": {
+      "every": "每小时",
+      "step": "每隔 {{step}} 小时",
+      "stepRange": "{{from}} 点到 {{to}} 点之间每隔 {{step}} 小时",
+      "range": "{{from}} 点到 {{to}} 点之间",
+      "values": "在 {{values}} 点"
+    },
+    "dom": {
+      "every": "每天",
+      "step": "每隔 {{step}} 天",
+      "stepRange": "每月 {{from}} 到 {{to}} 号之间每隔 {{step}} 天",
+      "range": "每月 {{from}} 到 {{to}} 号",
+      "values": "每月 {{values}} 号"
+    },
+    "month": {
+      "every": "每月",
+      "step": "每隔 {{step}} 个月",
+      "stepRange": "{{from}} 到 {{to}} 之间每隔 {{step}} 个月",
+      "range": "{{from}} 到 {{to}}",
+      "values": "在 {{values}}"
+    },
+    "dow": {
+      "every": "一周中的每一天",
+      "step": "每隔 {{step}} 天（按星期计）",
+      "stepRange": "{{from}} 到 {{to}} 之间每隔 {{step}} 天",
+      "range": "{{from}} 至 {{to}}",
+      "values": "{{values}}"
+    }
+  },
+  "relative": {
+    "now": "即将到来",
+    "minutes": "{{value}} 分钟后",
+    "hours": "{{value}} 小时后",
+    "days": "{{value}} 天后"
+  },
+  "errors": {
+    "title": "无法解析表达式",
+    "inField": "字段「{{field}}」：",
+    "empty": "请输入一个 cron 表达式。",
+    "unknownAlias": "不支持的别名「{{value}}」。支持 @yearly / @monthly / @weekly / @daily / @hourly 等。",
+    "fieldCount": "应为 5 个字段（分 时 日 月 周），实际为 {{count}} 个。",
+    "invalidValue": "无法识别的取值「{{value}}」。",
+    "outOfRange": "取值「{{value}}」超出允许范围（{{min}}–{{max}}）。",
+    "rangeOrder": "范围起点 {{from}} 不能大于终点 {{to}}。",
+    "invalidStep": "无效的步进「{{value}}」，步进必须是大于 0 的整数。"
+  },
+  "weekdays": ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+  "months": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+}

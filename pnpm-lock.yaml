@@ -1542,6 +1542,37 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-chmod-calc:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-city-route:
     dependencies:
       lucide-react:
@@ -1922,6 +1953,37 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-cron-parser:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-crowd-forecast:
     dependencies:
       '@toolbox/tool-registry':
@@ -1945,6 +2007,37 @@ importers:
         version: 18.3.28
       '@types/react-dom':
         specifier: ^18.3.0
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-css-clamp:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.28)
       react-i18next:
         specifier: ^15.0.0
@@ -3295,6 +3388,37 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  tools/tool-dotenv-parser:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-duplicate-finder:
     dependencies:
       '@toolbox/tool-registry':
@@ -3887,6 +4011,37 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.7(@types/react@18.3.28)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-gitignore-gen:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       typescript:
         specifier: ^5.2.2
         version: 5.9.3
@@ -6028,6 +6183,37 @@ importers:
         specifier: ^5.2.2
         version: 5.9.3
 
+  tools/tool-meta-tags:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-mime-lookup:
     dependencies:
       '@toolbox/tool-registry':
@@ -7408,6 +7594,37 @@ importers:
         specifier: ^18.3.0
         version: 18.3.7(@types/react@18.3.28)
 
+  tools/tool-semver:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
   tools/tool-sentence-rewriter:
     dependencies:
       '@toolbox/tool-registry':
@@ -7761,6 +7978,37 @@ importers:
         version: 18.3.7(@types/react@18.3.28)
 
   tools/tool-sudoku-kids:
+    dependencies:
+      '@toolbox/tool-registry':
+        specifier: workspace:*
+        version: link:../../packages/tool-registry
+      '@toolbox/ui-kit':
+        specifier: workspace:*
+        version: link:../../packages/ui-kit
+      lucide-react:
+        specifier: ^0.577.0
+        version: 0.577.0(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.28
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.28)
+      react-i18next:
+        specifier: ^15.0.0
+        version: 15.7.4(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.9.3
+
+  tools/tool-svg-to-jsx:
     dependencies:
       '@toolbox/tool-registry':
         specifier: workspace:*

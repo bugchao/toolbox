@@ -1,0 +1,58 @@
+{
+  "title": ".env Parser & Converter",
+  "description": "Paste your .env content to parse it into a key/value table and convert it to JSON / YAML / Shell export in real time, with validation for common issues.",
+  "notice": {
+    "title": "Fully local",
+    "body": "All parsing and conversion happen inside your browser. Nothing is uploaded to any server."
+  },
+  "input": {
+    "heading": "Input",
+    "label": "Paste content",
+    "formatEnv": ".env",
+    "formatJson": "JSON",
+    "placeholderEnv": "# Example\nexport API_KEY=\"sk-12345\"\nDB_HOST=localhost\nDEBUG=true # inline comment",
+    "placeholderJson": "{\n  \"API_KEY\": \"sk-12345\",\n  \"DB_HOST\": \"localhost\"\n}",
+    "sample": "Load sample",
+    "clear": "Clear"
+  },
+  "jsonError": "Failed to parse JSON: {{msg}}",
+  "jsonNotObject": "Input must be a JSON object (key/value map).",
+  "stats": {
+    "heading": "Parse stats",
+    "total": "Pairs",
+    "comments": "Comments",
+    "blanks": "Blank lines",
+    "issues": "Issues"
+  },
+  "table": {
+    "heading": "Parsed result",
+    "key": "Key",
+    "value": "Value",
+    "quoted": "Quote",
+    "empty": "No key/value pairs to show yet",
+    "quoteNone": "none",
+    "quoteSingle": "single",
+    "quoteDouble": "double",
+    "emptyValue": "(empty)"
+  },
+  "issues": {
+    "heading": "Validation",
+    "duplicate": "Duplicate key {{key}} (line {{line}}); the later value overrides the earlier one.",
+    "emptyKey": "Empty key on line {{line}}.",
+    "invalidKey": "Key {{key}} (line {{line}}) has an invalid name; it should match [A-Za-z_][A-Za-z0-9_]*.",
+    "invalidKeyNoLine": "Key {{key}} has an invalid name; it should match [A-Za-z_][A-Za-z0-9_]*.",
+    "suspiciousUnquoted": "Key {{key}} (line {{line}}) has an unquoted value containing spaces and may be truncated; consider quoting it.",
+    "noEquals": "Line {{line}} has no '=' and was ignored: {{raw}}"
+  },
+  "output": {
+    "heading": "Conversion output",
+    "format": "Target format",
+    "env": ".env",
+    "json": "JSON",
+    "yaml": "YAML",
+    "shell": "Shell export",
+    "copy": "Copy",
+    "copied": "Copied",
+    "empty": "The converted result appears here once content is parsed."
+  }
+}

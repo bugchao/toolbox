@@ -1,0 +1,54 @@
+{
+  "title": "Chmod Calculator",
+  "description": "Toggle the permission matrix or type octal to build chmod commands both ways",
+  "notice": {
+    "title": "About file permissions",
+    "body": "Linux/Unix permissions combine read(4)/write(2)/execute(1) for owner, group and others. Toggle the matrix, or type an octal value to drive everything in reverse."
+  },
+  "matrix": {
+    "heading": "Permission matrix",
+    "hint": "The number in parentheses is each permission's octal value.",
+    "class": {
+      "owner": "Owner",
+      "group": "Group",
+      "other": "Others"
+    },
+    "perm": {
+      "read": "Read",
+      "write": "Write",
+      "execute": "Execute"
+    }
+  },
+  "special": {
+    "heading": "Special bits",
+    "hint": "Special bits change the matching execute character in the symbolic notation.",
+    "setuid": {
+      "label": "Setuid (4)",
+      "desc": "Run as the file owner; affects the owner execute bit (x→s / S)"
+    },
+    "setgid": {
+      "label": "Setgid (2)",
+      "desc": "Run as the file group; affects the group execute bit (x→s / S)"
+    },
+    "sticky": {
+      "label": "Sticky (1)",
+      "desc": "Only the owner may delete files in the directory; affects the others execute bit (x→t / T)"
+    }
+  },
+  "input": {
+    "heading": "Reverse input",
+    "label": "Octal permission",
+    "placeholder": "e.g. 755 or 1755",
+    "error": "Enter a valid octal permission: 3 or 4 digits, each 0-7 (e.g. 755, 4755).",
+    "filenameLabel": "File name",
+    "filenamePlaceholder": "filename"
+  },
+  "output": {
+    "heading": "Output",
+    "octal": "Octal",
+    "symbolic": "Symbolic",
+    "command": "Full command",
+    "copy": "Copy",
+    "copied": "Copied"
+  }
+}

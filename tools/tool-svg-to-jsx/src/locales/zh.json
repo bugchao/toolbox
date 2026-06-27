@@ -1,0 +1,36 @@
+{
+  "title": "SVG 优化转 JSX",
+  "description": "粘贴 SVG 源码，一键优化压缩并转成 React 组件，支持 TypeScript 与 forwardRef 透传 props。",
+  "notice": {
+    "title": "纯本地处理",
+    "body": "所有转换都在浏览器中完成，SVG 源码不会上传。优化使用轻量字符串处理，不依赖 svgo。"
+  },
+  "input": {
+    "label": "SVG 源码",
+    "placeholder": "在此粘贴 <svg> 源码…"
+  },
+  "options": {
+    "heading": "选项",
+    "optimize": "优化压缩",
+    "optimizeHint": "去注释、去多余空白、移除 XML 声明 / DOCTYPE 与编辑器元数据",
+    "toJsx": "转 JSX 属性",
+    "toJsxHint": "class→className、连字符属性转驼峰、style 字符串转对象",
+    "wrapComponent": "包成 React 组件",
+    "typescript": "TypeScript",
+    "forwardRef": "forwardRef + 透传 props",
+    "componentName": "组件名"
+  },
+  "output": {
+    "heading": "输出",
+    "copy": "复制",
+    "copied": "已复制",
+    "empty": "结果将显示在这里"
+  },
+  "preview": {
+    "heading": "实时预览"
+  },
+  "errors": {
+    "empty": "请粘贴 SVG 源码开始。",
+    "noSvg": "未检测到 <svg> 根元素，请检查输入是否为合法 SVG。"
+  }
+}

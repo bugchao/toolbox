@@ -1,0 +1,82 @@
+{
+  "title": "Meta 标签生成器",
+  "description": "填写页面信息，实时生成 SEO、Open Graph 与 Twitter Card 标签，并预览社交分享效果。",
+  "notice": {
+    "title": "纯前端生成，数据不离开浏览器",
+    "body": "所有标签在本地实时生成。空字段会自动省略，可直接复制到页面 <head> 中。"
+  },
+  "counter": "{{count}} / {{max}}",
+  "form": {
+    "heading": "页面信息",
+    "reset": "清空"
+  },
+  "fields": {
+    "title": {
+      "label": "页面标题",
+      "placeholder": "例如：在线工具箱 - 开发者效率工具集",
+      "hint": "建议不超过 60 个字符"
+    },
+    "description": {
+      "label": "页面描述",
+      "placeholder": "一句话概括页面内容，用于搜索结果与分享摘要",
+      "hint": "建议不超过 160 个字符"
+    },
+    "url": {
+      "label": "规范 URL（canonical）",
+      "placeholder": "https://example.com/page"
+    },
+    "siteName": {
+      "label": "站点名称",
+      "placeholder": "例如：在线工具箱"
+    },
+    "author": {
+      "label": "作者",
+      "placeholder": "例如：张三"
+    },
+    "image": {
+      "label": "社交分享图 URL",
+      "placeholder": "https://example.com/og-image.png",
+      "hint": "推荐尺寸 1200×630，比例约 1.91:1"
+    },
+    "twitterCard": {
+      "label": "Twitter 卡片类型",
+      "options": {
+        "summary": "摘要小图",
+        "summary_large_image": "大图摘要"
+      }
+    },
+    "twitterHandle": {
+      "label": "Twitter 账号",
+      "placeholder": "@yoursite"
+    },
+    "locale": {
+      "label": "语言 / Locale",
+      "placeholder": "zh_CN",
+      "hint": "Open Graph og:locale 格式，如 zh_CN、en_US"
+    },
+    "themeColor": {
+      "label": "主题色（可选）",
+      "placeholder": "#6366f1",
+      "hint": "浏览器地址栏 / 工具栏配色"
+    }
+  },
+  "preview": {
+    "heading": "分享预览",
+    "og": "通用卡片（Open Graph）",
+    "twitter": "Twitter 卡片",
+    "placeholderTitle": "页面标题将显示在这里",
+    "placeholderDesc": "页面描述将显示在这里",
+    "imageAlt": "分享图预览"
+  },
+  "warnings": {
+    "title": "长度提示（不影响生成）",
+    "titleLong": "标题为 {{count}} 个字符，超过推荐的 {{max}} 个，搜索结果中可能被截断。",
+    "descLong": "描述为 {{count}} 个字符，超过推荐的 {{max}} 个，分享摘要中可能被截断。"
+  },
+  "output": {
+    "heading": "生成的标签",
+    "copy": "复制",
+    "copied": "已复制",
+    "empty": "填写上方任意字段后，将在此生成可复制的 HTML 标签。"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "title": "CSS clamp() 生成器",
+  "description": "为流式响应式排版生成 clamp() 表达式，随视口宽度平滑缩放字号与间距",
+  "notice": {
+    "title": "什么是 clamp()？",
+    "body": "clamp(min, preferred, max) 让尺寸在最小与最大视口之间随宽度线性变化，超出范围时夹在边界值，无需媒体查询即可实现流式排版。"
+  },
+  "presets": {
+    "heading": "标题",
+    "body": "正文",
+    "spacing": "间距"
+  },
+  "presetsHeading": "常用预设",
+  "config": {
+    "heading": "参数",
+    "minVw": "最小视口宽度",
+    "maxVw": "最大视口宽度",
+    "minSize": "最小尺寸",
+    "maxSize": "最大尺寸",
+    "rootFontSize": "根字号",
+    "unit": "尺寸单位"
+  },
+  "warnings": {
+    "viewport": "最大视口宽度需大于最小视口宽度，否则无法计算斜率。",
+    "size": "最小尺寸大于最大尺寸，生成的 clamp() 会反向缩放，请确认是否符合预期。",
+    "root": "根字号需为正数，已回退使用默认值 16px 进行换算。"
+  },
+  "result": {
+    "heading": "生成结果",
+    "fullLabel": "完整 clamp()",
+    "minLabel": "最小值",
+    "preferredLabel": "偏好值",
+    "maxLabel": "最大值",
+    "cssLabel": "CSS 用法",
+    "copy": "复制",
+    "copied": "已复制"
+  },
+  "preview": {
+    "heading": "实时预览",
+    "viewportWidth": "预览视口宽度",
+    "resolved": "当前解析值",
+    "sampleText": "敏捷的棕色狐狸跳过懒狗 Fluid 1234",
+    "boxLabel": "尺寸方块",
+    "hint": "拖动滑块模拟不同视口宽度，观察尺寸如何在最小值与最大值之间平滑过渡。"
+  }
+}

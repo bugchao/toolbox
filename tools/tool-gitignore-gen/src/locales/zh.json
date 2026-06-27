@@ -1,0 +1,34 @@
+{
+  "title": ".gitignore 生成器",
+  "description": "勾选常用项目模板，实时合并生成可下载的 .gitignore 文件",
+  "notice": {
+    "title": "如何使用",
+    "body": "选择一个或多个模板，下方会按分组实时合并并去重生成 .gitignore，支持复制或下载。"
+  },
+  "groups": {
+    "language": "编程语言",
+    "framework": "框架",
+    "os": "操作系统",
+    "editor": "编辑器 / IDE",
+    "misc": "通用"
+  },
+  "templates": {
+    "heading": "选择模板",
+    "searchPlaceholder": "搜索模板…",
+    "selectedCount": "已选择 {{count}} 个模板",
+    "clear": "清空选择",
+    "noResults": "没有匹配的模板"
+  },
+  "output": {
+    "heading": "生成结果",
+    "filename": "文件名：.gitignore",
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载 .gitignore",
+    "lineCount": "{{count}} 行规则",
+    "empty": {
+      "title": "尚未选择模板",
+      "body": "请在上方选择至少一个模板，即可在此查看生成的 .gitignore 内容。"
+    }
+  }
+}

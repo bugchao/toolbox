@@ -112,6 +112,13 @@
 | JWT 生成器（HS256/384/512 签发 + 验证） | `/jwt-builder` | `tools/tool-jwt-builder` → JwtBuilder |
 | Diff / Patch 工具（unified diff 生成/应用） | `/diff-patch` | `tools/tool-diff-patch` → DiffPatch |
 | 命名风格转换（13 种 case） | `/case-converter` | `tools/tool-case-converter` → CaseConverter |
+| CSS clamp() 流式排版生成器 | `/css-clamp` | `tools/tool-css-clamp` → CssClamp |
+| .gitignore 生成器 | `/gitignore-gen` | `tools/tool-gitignore-gen` → GitignoreGen |
+| Meta / Open Graph 标签生成器 | `/meta-tags` | `tools/tool-meta-tags` → MetaTags |
+| chmod 权限计算器 | `/chmod-calc` | `tools/tool-chmod-calc` → ChmodCalc |
+| SVG 优化 / 转 React 组件 | `/svg-to-jsx` | `tools/tool-svg-to-jsx` → SvgToJsx |
+| Cron 表达式解析器 | `/cron-parser` | `tools/tool-cron-parser` → CronParser |
+| .env 解析 / 转换 | `/dotenv-parser` | `tools/tool-dotenv-parser` → DotenvParser |
 
 ### 查询工具
 

@@ -1,0 +1,58 @@
+{
+  "title": ".env 解析转换",
+  "description": "粘贴 .env 内容即可解析为键值表，并实时转换为 JSON / YAML / Shell export，附带常见格式问题校验。",
+  "notice": {
+    "title": "纯本地处理",
+    "body": "所有解析与转换都在你的浏览器内完成，内容不会上传到任何服务器。"
+  },
+  "input": {
+    "heading": "输入",
+    "label": "粘贴内容",
+    "formatEnv": ".env",
+    "formatJson": "JSON",
+    "placeholderEnv": "# 示例\nexport API_KEY=\"sk-12345\"\nDB_HOST=localhost\nDEBUG=true # 行内注释",
+    "placeholderJson": "{\n  \"API_KEY\": \"sk-12345\",\n  \"DB_HOST\": \"localhost\"\n}",
+    "sample": "载入示例",
+    "clear": "清空"
+  },
+  "jsonError": "JSON 解析失败：{{msg}}",
+  "jsonNotObject": "输入必须是一个 JSON 对象（键值映射）。",
+  "stats": {
+    "heading": "解析统计",
+    "total": "键值对",
+    "comments": "注释行",
+    "blanks": "空行",
+    "issues": "问题"
+  },
+  "table": {
+    "heading": "解析结果",
+    "key": "键",
+    "value": "值",
+    "quoted": "引号",
+    "empty": "暂无可展示的键值对",
+    "quoteNone": "无",
+    "quoteSingle": "单引号",
+    "quoteDouble": "双引号",
+    "emptyValue": "（空）"
+  },
+  "issues": {
+    "heading": "校验提示",
+    "duplicate": "重复的键 {{key}}（第 {{line}} 行），后者会覆盖前者。",
+    "emptyKey": "第 {{line}} 行存在空键。",
+    "invalidKey": "键 {{key}}（第 {{line}} 行）命名不合法，应匹配 [A-Za-z_][A-Za-z0-9_]*。",
+    "invalidKeyNoLine": "键 {{key}} 命名不合法，应匹配 [A-Za-z_][A-Za-z0-9_]*。",
+    "suspiciousUnquoted": "键 {{key}}（第 {{line}} 行）的值未加引号却包含空格，可能被截断，建议加引号。",
+    "noEquals": "第 {{line}} 行缺少等号，已忽略：{{raw}}"
+  },
+  "output": {
+    "heading": "转换输出",
+    "format": "目标格式",
+    "env": ".env",
+    "json": "JSON",
+    "yaml": "YAML",
+    "shell": "Shell export",
+    "copy": "复制",
+    "copied": "已复制",
+    "empty": "解析到内容后这里会显示转换结果。"
+  }
+}

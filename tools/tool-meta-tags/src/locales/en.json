@@ -1,0 +1,82 @@
+{
+  "title": "Meta Tag Generator",
+  "description": "Fill in page details to generate SEO, Open Graph and Twitter Card tags with a live social share preview.",
+  "notice": {
+    "title": "Generated locally, nothing leaves your browser",
+    "body": "All tags are produced in real time. Empty fields are skipped, so you can paste the result straight into your page <head>."
+  },
+  "counter": "{{count}} / {{max}}",
+  "form": {
+    "heading": "Page details",
+    "reset": "Clear"
+  },
+  "fields": {
+    "title": {
+      "label": "Page title",
+      "placeholder": "e.g. Online Toolbox - Developer productivity tools",
+      "hint": "Keep it under 60 characters"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "One sentence summarizing the page, used in search results and share snippets",
+      "hint": "Keep it under 160 characters"
+    },
+    "url": {
+      "label": "Canonical URL",
+      "placeholder": "https://example.com/page"
+    },
+    "siteName": {
+      "label": "Site name",
+      "placeholder": "e.g. Online Toolbox"
+    },
+    "author": {
+      "label": "Author",
+      "placeholder": "e.g. Jane Doe"
+    },
+    "image": {
+      "label": "Share image URL",
+      "placeholder": "https://example.com/og-image.png",
+      "hint": "Recommended 1200x630, roughly 1.91:1"
+    },
+    "twitterCard": {
+      "label": "Twitter card type",
+      "options": {
+        "summary": "Summary",
+        "summary_large_image": "Large image"
+      }
+    },
+    "twitterHandle": {
+      "label": "Twitter handle",
+      "placeholder": "@yoursite"
+    },
+    "locale": {
+      "label": "Language / Locale",
+      "placeholder": "en_US",
+      "hint": "Open Graph og:locale format, e.g. en_US, zh_CN"
+    },
+    "themeColor": {
+      "label": "Theme color (optional)",
+      "placeholder": "#6366f1",
+      "hint": "Browser address bar / toolbar color"
+    }
+  },
+  "preview": {
+    "heading": "Share preview",
+    "og": "Generic card (Open Graph)",
+    "twitter": "Twitter card",
+    "placeholderTitle": "Your page title will appear here",
+    "placeholderDesc": "Your page description will appear here",
+    "imageAlt": "Share image preview"
+  },
+  "warnings": {
+    "title": "Length hints (does not block generation)",
+    "titleLong": "Title is {{count}} characters, above the recommended {{max}}; it may be truncated in search results.",
+    "descLong": "Description is {{count}} characters, above the recommended {{max}}; it may be truncated in share snippets."
+  },
+  "output": {
+    "heading": "Generated tags",
+    "copy": "Copy",
+    "copied": "Copied",
+    "empty": "Fill in any field above to generate copyable HTML tags here."
+  }
+}

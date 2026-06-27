@@ -1,0 +1,46 @@
+{
+  "title": "CSS clamp() Generator",
+  "description": "Generate clamp() expressions for fluid typography that scale font size and spacing with the viewport",
+  "notice": {
+    "title": "What is clamp()?",
+    "body": "clamp(min, preferred, max) scales a value linearly with the viewport between two breakpoints and locks it to the bounds outside that range — fluid typography without media queries."
+  },
+  "presets": {
+    "heading": "Heading",
+    "body": "Body",
+    "spacing": "Spacing"
+  },
+  "presetsHeading": "Presets",
+  "config": {
+    "heading": "Parameters",
+    "minVw": "Min viewport width",
+    "maxVw": "Max viewport width",
+    "minSize": "Min size",
+    "maxSize": "Max size",
+    "rootFontSize": "Root font size",
+    "unit": "Size unit"
+  },
+  "warnings": {
+    "viewport": "Max viewport width must be greater than min viewport width, otherwise the slope cannot be computed.",
+    "size": "Min size is larger than max size, so the generated clamp() will scale in reverse — please confirm this is intended.",
+    "root": "Root font size must be positive; falling back to the default 16px for conversion."
+  },
+  "result": {
+    "heading": "Result",
+    "fullLabel": "Full clamp()",
+    "minLabel": "Minimum",
+    "preferredLabel": "Preferred",
+    "maxLabel": "Maximum",
+    "cssLabel": "CSS usage",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "preview": {
+    "heading": "Live preview",
+    "viewportWidth": "Preview viewport width",
+    "resolved": "Resolved value",
+    "sampleText": "The quick brown fox jumps over the lazy dog Fluid 1234",
+    "boxLabel": "Sized box",
+    "hint": "Drag the slider to simulate different viewport widths and watch the size glide between the min and max bounds."
+  }
+}

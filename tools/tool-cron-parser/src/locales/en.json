@@ -1,0 +1,109 @@
+{
+  "title": "Cron Parser",
+  "description": "Paste a cron expression to get a plain-language explanation, a field-by-field breakdown, and a forecast of upcoming run times.",
+  "notice": {
+    "title": "Parser, not a generator",
+    "body": "This tool translates an existing cron expression into plain language and predicts when it will next fire. It supports the standard 5 fields (minute hour day month weekday), ranges/lists/steps, English month and weekday abbreviations, 7 for Sunday, and common aliases like @daily and @hourly."
+  },
+  "input": {
+    "label": "Cron expression",
+    "placeholder": "e.g. */15 9-17 * * 1-5",
+    "format": "Format: minute hour day month weekday"
+  },
+  "examples": {
+    "heading": "Common examples",
+    "items": {
+      "everyQuarterBusiness": "Every 15 min, business hours, weekdays",
+      "midnight": "Every day at midnight",
+      "weekdayMorning": "Weekdays at 9 AM",
+      "monthlyFirst": "Midnight on the 1st of each month",
+      "everyHalfHour": "Every 30 minutes",
+      "monthMid": "1st and 15th of each month",
+      "hourlyAlias": "Every hour (alias)"
+    }
+  },
+  "summary": {
+    "heading": "Plain language",
+    "union": "Note: both the day-of-month and day-of-week fields are restricted, so cron uses their union — it fires when either one matches.",
+    "separator": ", "
+  },
+  "breakdown": {
+    "heading": "Field breakdown",
+    "colField": "Field",
+    "colExpr": "Expression",
+    "colMeaning": "Meaning"
+  },
+  "nextRuns": {
+    "heading": "Upcoming runs",
+    "countLabel": "How many",
+    "colIndex": "#",
+    "colTime": "Local time",
+    "colWeekday": "Weekday",
+    "colRelative": "From now",
+    "empty": "No matching run times",
+    "timezoneNote": "Computed in your current time zone (local time)."
+  },
+  "fields": {
+    "minute": "Minute",
+    "hour": "Hour",
+    "dom": "Day of month",
+    "month": "Month",
+    "dow": "Day of week"
+  },
+  "desc": {
+    "minute": {
+      "every": "every minute",
+      "step": "every {{step}} minutes",
+      "stepRange": "every {{step}} minutes from minute {{from}} through {{to}}",
+      "range": "minutes {{from}} through {{to}}",
+      "values": "at minute {{values}}"
+    },
+    "hour": {
+      "every": "every hour",
+      "step": "every {{step}} hours",
+      "stepRange": "every {{step}} hours from {{from}}:00 through {{to}}:00",
+      "range": "between {{from}}:00 and {{to}}:00",
+      "values": "at {{values}}:00"
+    },
+    "dom": {
+      "every": "every day",
+      "step": "every {{step}} days of the month",
+      "stepRange": "every {{step}} days from day {{from}} through {{to}} of the month",
+      "range": "from day {{from}} through {{to}} of the month",
+      "values": "on day {{values}} of the month"
+    },
+    "month": {
+      "every": "every month",
+      "step": "every {{step}} months",
+      "stepRange": "every {{step}} months from {{from}} through {{to}}",
+      "range": "from {{from}} through {{to}}",
+      "values": "in {{values}}"
+    },
+    "dow": {
+      "every": "every day of the week",
+      "step": "every {{step}} days of the week",
+      "stepRange": "every {{step}} days of the week from {{from}} through {{to}}",
+      "range": "{{from}} through {{to}}",
+      "values": "on {{values}}"
+    }
+  },
+  "relative": {
+    "now": "due now",
+    "minutes": "in {{value}} min",
+    "hours": "in {{value}} h",
+    "days": "in {{value}} d"
+  },
+  "errors": {
+    "title": "Could not parse the expression",
+    "inField": "Field \"{{field}}\": ",
+    "empty": "Please enter a cron expression.",
+    "unknownAlias": "Unsupported alias \"{{value}}\". Supported: @yearly / @monthly / @weekly / @daily / @hourly and similar.",
+    "fieldCount": "Expected 5 fields (minute hour day month weekday), got {{count}}.",
+    "invalidValue": "Unrecognized value \"{{value}}\".",
+    "outOfRange": "Value \"{{value}}\" is out of range ({{min}}-{{max}}).",
+    "rangeOrder": "Range start {{from}} cannot be greater than end {{to}}.",
+    "invalidStep": "Invalid step \"{{value}}\"; the step must be an integer greater than 0."
+  },
+  "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+}

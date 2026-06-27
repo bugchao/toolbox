@@ -1,0 +1,34 @@
+{
+  "title": ".gitignore Generator",
+  "description": "Select common project templates and merge them into a downloadable .gitignore",
+  "notice": {
+    "title": "How to use",
+    "body": "Pick one or more templates. The .gitignore below is merged and de-duplicated in real time, ready to copy or download."
+  },
+  "groups": {
+    "language": "Languages",
+    "framework": "Frameworks",
+    "os": "Operating Systems",
+    "editor": "Editors / IDEs",
+    "misc": "General"
+  },
+  "templates": {
+    "heading": "Select templates",
+    "searchPlaceholder": "Search templates…",
+    "selectedCount": "{{count}} template(s) selected",
+    "clear": "Clear selection",
+    "noResults": "No matching templates"
+  },
+  "output": {
+    "heading": "Output",
+    "filename": "File name: .gitignore",
+    "copy": "Copy",
+    "copied": "Copied",
+    "download": "Download .gitignore",
+    "lineCount": "{{count}} rule line(s)",
+    "empty": {
+      "title": "No templates selected yet",
+      "body": "Select at least one template above to preview the generated .gitignore here."
+    }
+  }
+}

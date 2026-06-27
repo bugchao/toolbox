@@ -1,0 +1,54 @@
+{
+  "title": "Chmod 权限计算器",
+  "description": "勾选权限矩阵或输入八进制，双向生成 chmod 命令与符号表示",
+  "notice": {
+    "title": "关于文件权限",
+    "body": "Linux/Unix 用读(4)/写(2)/执行(1)三位组合，分别作用于所有者、组和其他用户。可点击矩阵勾选，也可直接键入八进制反向联动。"
+  },
+  "matrix": {
+    "heading": "权限矩阵",
+    "hint": "每个权限括号内为对应的八进制数值。",
+    "class": {
+      "owner": "所有者",
+      "group": "组",
+      "other": "其他"
+    },
+    "perm": {
+      "read": "读取",
+      "write": "写入",
+      "execute": "执行"
+    }
+  },
+  "special": {
+    "heading": "特殊权限位",
+    "hint": "特殊位会改变符号表示中对应执行位的字符。",
+    "setuid": {
+      "label": "Setuid (4)",
+      "desc": "以文件所有者身份运行，影响所有者执行位 (x→s / S)"
+    },
+    "setgid": {
+      "label": "Setgid (2)",
+      "desc": "以文件所属组身份运行，影响组执行位 (x→s / S)"
+    },
+    "sticky": {
+      "label": "Sticky (1)",
+      "desc": "仅所有者可删除目录内文件，影响其他执行位 (x→t / T)"
+    }
+  },
+  "input": {
+    "heading": "反向输入",
+    "label": "八进制权限",
+    "placeholder": "如 755 或 1755",
+    "error": "请输入合法的八进制权限：3 位或 4 位，每位 0-7（如 755、4755）。",
+    "filenameLabel": "文件名",
+    "filenamePlaceholder": "filename"
+  },
+  "output": {
+    "heading": "输出结果",
+    "octal": "八进制",
+    "symbolic": "符号表示",
+    "command": "完整命令",
+    "copy": "复制",
+    "copied": "已复制"
+  }
+}
