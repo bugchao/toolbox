@@ -101,18 +101,30 @@ export const SAMPLES: MermaidSample[] = [
     label: 'mindmap',
     src: `mindmap
   root((Mermaid))
-    流程图
-      flowchart
-    时序图
-      sequenceDiagram
-    类图
-      classDiagram
-    状态图
-      stateDiagram-v2
-    其他
-      gantt
-      pie
-      mindmap`,
+    结构图
+      流程
+      时序
+      类与状态
+    数据图
+      甘特
+      饼图
+    创意图
+      思维导图
+      象限图`,
+  },
+  {
+    id: 'zenuml',
+    label: 'zenuml',
+    src: `zenuml
+  title 下单流程
+  @Actor 用户
+  用户->Web.下单() {
+    Web->订单服务.创建订单() {
+      订单服务->库存服务.扣减库存()
+      return 订单号
+    }
+    return 下单成功
+  }`,
   },
 ]
 

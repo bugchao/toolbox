@@ -7,12 +7,23 @@
   },
   "toolbar": {
     "theme": "主题",
+    "customColor": "自定义配色",
+    "layout": "布局",
+    "sketch": "手绘风格",
     "samples": "样例",
     "samplesPick": "选择…",
     "live": "实时渲染",
     "render": "渲染",
     "rerender": "重新渲染",
+    "save": "保存",
     "clear": "清空"
+  },
+  "history": {
+    "heading": "本地历史",
+    "name": "名称",
+    "restore": "恢复",
+    "delete": "删除",
+    "clear": "清空历史"
   },
   "editor": {
     "heading": "Mermaid 源码",
@@ -21,7 +32,11 @@
   },
   "preview": {
     "heading": "预览",
-    "empty": "输入源码后此处实时渲染"
+    "empty": "输入源码后此处实时渲染",
+    "fullscreen": "全屏查看",
+    "exitFullscreen": "退出全屏",
+    "editHint": "点击图中元素可定位到对应源码",
+    "editHintRename": "点击定位源码 · 双击标签可就地改名"
   },
   "samples": {
     "flowchart": "流程图",
@@ -31,6 +46,7 @@
     "er": "ER 图",
     "gantt": "甘特图",
     "pie": "饼图",
-    "mindmap": "思维导图"
+    "mindmap": "思维导图",
+    "zenuml": "ZenUML"
   }
 }

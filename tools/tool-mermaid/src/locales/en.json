@@ -7,12 +7,23 @@
   },
   "toolbar": {
     "theme": "Theme",
+    "customColor": "Custom color",
+    "layout": "Layout",
+    "sketch": "Hand-drawn",
     "samples": "Samples",
     "samplesPick": "Pick…",
     "live": "Live render",
     "render": "Render",
     "rerender": "Re-render",
+    "save": "Save",
     "clear": "Clear"
+  },
+  "history": {
+    "heading": "Local history",
+    "name": "Name",
+    "restore": "Restore",
+    "delete": "Delete",
+    "clear": "Clear history"
   },
   "editor": {
     "heading": "Mermaid source",
@@ -21,7 +32,11 @@
   },
   "preview": {
     "heading": "Preview",
-    "empty": "Diagram renders here as you type"
+    "empty": "Diagram renders here as you type",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "editHint": "Click an element to jump to its source",
+    "editHintRename": "Click to locate source · double-click a label to rename"
   },
   "samples": {
     "flowchart": "Flowchart",
@@ -31,6 +46,7 @@
     "er": "ER",
     "gantt": "Gantt",
     "pie": "Pie",
-    "mindmap": "Mindmap"
+    "mindmap": "Mindmap",
+    "zenuml": "ZenUML"
   }
 }
