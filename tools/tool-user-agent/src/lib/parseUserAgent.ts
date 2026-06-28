@@ -19,10 +19,7 @@ export interface NameVersion {
   version: string
 }
 
-export interface ProductToken {
-  name: string
-  version: string
-}
+export type ProductToken = NameVersion
 
 export interface UserAgentResult {
   browser: NameVersion
@@ -232,7 +229,6 @@ function detectOS(ua: string): NameVersion {
   if (m) return { name: 'macOS', version: m[1].replace(/_/g, '.') }
   if (/Macintosh|Mac OS X/.test(ua)) return { name: 'macOS', version: UNKNOWN }
   // 其他类 Unix
-  if (/CrOS/.test(ua)) return { name: 'Chrome OS', version: UNKNOWN }
   if (/Linux/.test(ua)) return { name: 'Linux', version: UNKNOWN }
   if (/FreeBSD/.test(ua)) return { name: 'FreeBSD', version: UNKNOWN }
   return { name: UNKNOWN, version: UNKNOWN }

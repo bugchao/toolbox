@@ -60,11 +60,6 @@ export function extractDomain(url: string): string {
   }
 }
 
-interface TagLine {
-  /** 标签字符串 */
-  tag: string
-}
-
 /** 生成完整的 <head> 标签字符串，空字段对应的标签会被省略。 */
 export function generateTags(form: MetaTagsForm): string {
   const title = form.title.trim()
@@ -77,22 +72,22 @@ export function generateTags(form: MetaTagsForm): string {
   const themeColor = form.themeColor.trim()
   const handle = normalizeHandle(form.twitterHandle)
 
-  const lines: TagLine[] = []
+  const lines: string[] = []
   const meta = (name: string, content: string) => {
-    if (content) lines.push({ tag: `<meta name="${name}" content="${escapeAttr(content)}" />` })
+    if (content) lines.push(`<meta name="${name}" content="${escapeAttr(content)}" />`)
   }
   const property = (prop: string, content: string) => {
-    if (content) lines.push({ tag: `<meta property="${prop}" content="${escapeAttr(content)}" />` })
+    if (content) lines.push(`<meta property="${prop}" content="${escapeAttr(content)}" />`)
   }
-  const comment = (text: string) => lines.push({ tag: `<!-- ${text} -->` })
+  const comment = (text: string) => lines.push(`<!-- ${text} -->`)
 
   // 基础 SEO
   comment('Primary / SEO')
-  if (title) lines.push({ tag: `<title>${escapeAttr(title)}</title>` })
+  if (title) lines.push(`<title>${escapeAttr(title)}</title>`)
   meta('description', description)
   meta('author', author)
   meta('theme-color', themeColor)
-  if (url) lines.push({ tag: `<link rel="canonical" href="${escapeAttr(url)}" />` })
+  if (url) lines.push(`<link rel="canonical" href="${escapeAttr(url)}" />`)
 
   // Open Graph
   comment('Open Graph / Facebook')
@@ -113,17 +108,16 @@ export function generateTags(form: MetaTagsForm): string {
   meta('twitter:site', handle)
 
   // 去掉没有任何实体标签的孤立注释
-  const cleaned: TagLine[] = []
+  const cleaned: string[] = []
   for (let i = 0; i < lines.length; i++) {
     const cur = lines[i]
-    const isComment = cur.tag.startsWith('<!--')
-    if (isComment) {
+    if (cur.startsWith('<!--')) {
       const next = lines[i + 1]
-      if (!next || next.tag.startsWith('<!--')) continue
-      if (cleaned.length > 0) cleaned.push({ tag: '' })
+      if (!next || next.startsWith('<!--')) continue
+      if (cleaned.length > 0) cleaned.push('')
     }
     cleaned.push(cur)
   }
 
-  return cleaned.map((l) => l.tag).join('\n')
+  return cleaned.join('\n')
 }

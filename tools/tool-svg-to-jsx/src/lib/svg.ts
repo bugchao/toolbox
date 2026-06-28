@@ -227,8 +227,8 @@ export function build(input: string, opts: JsxOptions): BuildResult {
     return { code: optimized, preview }
   }
 
-  // 包成组件时必须转 JSX，否则 class= 等属性在组件里非法
-  let markup = opts.toJsx || opts.wrapComponent ? svgToJsxMarkup(optimized) : optimized
+  // 走到这里 toJsx 或 wrapComponent 至少一个为真，必须转 JSX
+  let markup = svgToJsxMarkup(optimized)
 
   if (!opts.wrapComponent) {
     return { code: markup, preview }
