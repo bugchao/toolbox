@@ -3,7 +3,8 @@
   "description": "Edit Mermaid source with live rendering — flowchart, sequence, class, state, ER, gantt, pie and mindmap; export SVG and 2x PNG.",
   "notice": {
     "title": "Fully local",
-    "body": "Mermaid is loaded on demand (it's a large library); source and diagrams stay in your browser."
+    "body": "Mermaid is loaded on demand (it's a large library); source and diagrams stay in your browser.",
+    "dismiss": "Don't show again"
   },
   "toolbar": {
     "theme": "Theme",

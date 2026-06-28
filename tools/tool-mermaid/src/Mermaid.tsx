@@ -29,6 +29,7 @@ import { canRename, labelFromTarget, rangeOf, replaceFirst, type LabelHit } from
 import Splitter from './Splitter'
 
 const RENDER_DEBOUNCE_MS = 400
+const NOTICE_KEY = 'tool-mermaid:notice-hidden'
 const SELECT_CLS =
   'rounded border border-gray-300 bg-white px-2 py-1 text-xs dark:border-gray-700 dark:bg-gray-900'
 
@@ -69,6 +70,13 @@ const Mermaid: React.FC = () => {
   const [ratio, setRatio] = useState(0.5)
   const [fullscreen, setFullscreen] = useState(false)
   const [history, setHistory] = useState<HistoryEntry[]>(() => loadHistory())
+  const [noticeHidden, setNoticeHidden] = useState(() => {
+    try {
+      return localStorage.getItem(NOTICE_KEY) === '1'
+    } catch {
+      return false
+    }
+  })
   // 预览就地改名的浮层输入：视口坐标 + 原文本
   const [editing, setEditing] = useState<(LabelHit & { value: string }) | null>(null)
   const timer = useRef<number | null>(null)
@@ -115,6 +123,15 @@ const Mermaid: React.FC = () => {
   const updateHistory = useCallback((next: HistoryEntry[]) => {
     setHistory(next)
     saveHistory(next)
+  }, [])
+
+  const dismissNotice = useCallback(() => {
+    setNoticeHidden(true)
+    try {
+      localStorage.setItem(NOTICE_KEY, '1')
+    } catch {
+      // ponytail: 隐私模式/配额异常忽略，关闭状态尽力持久化
+    }
   }, [])
 
   const renderNow = useCallback(
@@ -262,7 +279,16 @@ const Mermaid: React.FC = () => {
       <div className="relative z-10 space-y-6">
         <PageHero title={t('title')} description={t('description')} />
 
-        <NoticeCard tone="info" title={t('notice.title')} description={t('notice.body')} icon={GitBranch} />
+        {!noticeHidden && (
+          <NoticeCard
+            tone="info"
+            title={t('notice.title')}
+            description={t('notice.body')}
+            icon={GitBranch}
+            onDismiss={dismissNotice}
+            dismissLabel={t('notice.dismiss')}
+          />
+        )}
 
         <Card>
           <div className="mb-4 flex flex-wrap items-center gap-2 text-xs">
