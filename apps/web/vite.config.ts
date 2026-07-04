@@ -7,6 +7,7 @@ import { createSecurityApiMiddleware } from '../../tools/tool-security-suite/ser
 import { createWhoisLookupApiMiddleware } from '../../tools/tool-whois-lookup/server/whois-lookup-api.js'
 import { createCertToolsApiMiddleware } from '../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
 import { createSslCertApiMiddleware } from '../../tools/tool-ssl-cert/server/ssl-cert-api.js'
+import { createMeetingAudioApiMiddleware } from '../../services/meeting-audio-service/src/api.js'
 import fs from 'fs'
 
 const root = path.resolve(__dirname, '../..')
@@ -126,6 +127,12 @@ export default defineConfig({
       name: 'toolbox-ssl-cert-api',
       configureServer(server) {
         server.middlewares.use(createSslCertApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-meeting-audio-api',
+      configureServer(server) {
+        server.middlewares.use(createMeetingAudioApiMiddleware())
       },
     },
   ],

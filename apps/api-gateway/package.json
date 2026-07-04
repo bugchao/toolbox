@@ -14,6 +14,7 @@
     "@toolbox/content-service": "workspace:*",
     "@toolbox/dns-service": "workspace:*",
     "@toolbox/ip-service": "workspace:*",
+    "@toolbox/meeting-audio-service": "workspace:*",
     "@toolbox/security-service": "workspace:*",
     "@toolbox/service-core": "workspace:*",
     "@toolbox/storage-service": "workspace:*",

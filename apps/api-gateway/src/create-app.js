@@ -8,6 +8,7 @@ import {
 import { contentService } from '@toolbox/content-service'
 import { dnsService } from '@toolbox/dns-service'
 import { ipService } from '@toolbox/ip-service'
+import { meetingAudioService } from '@toolbox/meeting-audio-service'
 import { securityService } from '@toolbox/security-service'
 import { storageService } from '@toolbox/storage-service'
 import { utilityService } from '@toolbox/utility-service'
@@ -20,7 +21,7 @@ export async function createApiGatewayApp({ rootDir }) {
 
   const services = await registerServiceModules(
     app,
-    [dnsService, ipService, securityService, contentService, utilityService, storageService],
+    [dnsService, ipService, securityService, contentService, utilityService, storageService, meetingAudioService],
     { rootDir }
   )
 

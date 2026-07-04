@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   AudioLines,
@@ -9,10 +9,13 @@ import {
   FileVideo2,
   Mic,
   MicOff,
+  MonitorSpeaker,
+  Radio,
   Sparkles,
   Upload,
 } from 'lucide-react'
 import { Card, FadeIn, PageHero, StaggerChildren } from '@toolbox/ui-kit'
+import { useSystemAudioTranscriber } from '../hooks/useSystemAudioTranscriber'
 
 interface MeetingAsset {
   name: string
@@ -110,15 +113,9 @@ function extractActionItems(sentences: string[]) {
   })
 }
 
-function generateMinutes(title: string, date: string, transcript: string) {
-  const sentences = splitSentences(transcript)
-  const summary = sentences.slice(0, 3)
-  const participants = extractParticipants(transcript)
-  const decisions = extractKeywords(sentences, [/(决定|确定|结论|批准|同意|将会|agreed|decided)/i])
-  const risks = extractKeywords(sentences, [/(风险|阻塞|问题|挑战|依赖|延期|blocker|risk|issue)/i])
-  const actionItems = extractActionItems(sentences)
-
-  const markdown = [
+function buildMarkdown(title: string, date: string, parts: Omit<GeneratedMinutes, 'markdown'>) {
+  const { summary, participants, decisions, risks, actionItems } = parts
+  return [
     `# ${title || '会议纪要'}`,
     '',
     `- 日期：${date || '待补充'}`,
@@ -138,8 +135,18 @@ function generateMinutes(title: string, date: string, transcript: string) {
       ? actionItems.map((item) => `- ${item.task} | 负责人：${item.owner} | 截止：${item.due}`)
       : ['- 暂未识别到行动项']),
   ].join('\n')
+}
 
-  return { summary, participants, decisions, risks, actionItems, markdown }
+function generateMinutes(title: string, date: string, transcript: string): GeneratedMinutes {
+  const sentences = splitSentences(transcript)
+  const parts = {
+    summary: sentences.slice(0, 3),
+    participants: extractParticipants(transcript),
+    decisions: extractKeywords(sentences, [/(决定|确定|结论|批准|同意|将会|agreed|decided)/i]),
+    risks: extractKeywords(sentences, [/(风险|阻塞|问题|挑战|依赖|延期|blocker|risk|issue)/i]),
+    actionItems: extractActionItems(sentences),
+  }
+  return { ...parts, markdown: buildMarkdown(title, date, parts) }
 }
 
 function formatFileSize(size: number) {
@@ -169,6 +176,67 @@ Carol: 我负责把构建验证和回归检查在下周一前跑完。`)
   const [copied, setCopied] = useState(false)
 
   const speechSupported = useMemo(() => Boolean(window.SpeechRecognition || window.webkitSpeechRecognition), [])
+
+  const appendTranscript = (text: string) => setTranscript((current) => `${current.trim()}\n${text}`.trim())
+  const systemAudio = useSystemAudioTranscriber(appendTranscript)
+
+  const toggleSystemAudio = () => {
+    if (systemAudio.phase === 'recording' || systemAudio.phase === 'loading-model') {
+      systemAudio.stop()
+      setStatus('已停止系统声音转写')
+      return
+    }
+    setStatus('请在弹窗中选择要共享的标签页/窗口，并勾选“分享音频”')
+    void systemAudio.start()
+  }
+
+  // 本地引擎：BlackHole + whisper.cpp（走 /api/meeting-audio），能录桌面 App 的声音，延迟约 2 秒
+  const localEsRef = useRef<EventSource | null>(null)
+  const [localEngineOn, setLocalEngineOn] = useState(false)
+
+  const stopLocalEngine = () => {
+    localEsRef.current?.close()
+    localEsRef.current = null
+    setLocalEngineOn(false)
+  }
+
+  const toggleLocalEngine = () => {
+    if (localEsRef.current) {
+      stopLocalEngine()
+      setStatus('已停止本地引擎转写')
+      return
+    }
+    const es = new EventSource('/api/meeting-audio/stream?lang=zh')
+    localEsRef.current = es
+    setLocalEngineOn(true)
+    setStatus('正在连接本地转写服务…')
+    es.addEventListener('model', (event) => {
+      setStatus(`正在下载 whisper 模型 ${JSON.parse((event as MessageEvent).data).progress}%（仅首次）`)
+    })
+    es.addEventListener('status', (event) => {
+      setStatus(JSON.parse((event as MessageEvent).data).message)
+    })
+    es.addEventListener('text', (event) => {
+      appendTranscript(JSON.parse((event as MessageEvent).data).text)
+    })
+    es.addEventListener('error', (event) => {
+      const data = (event as MessageEvent).data
+      setStatus(data ? JSON.parse(data).message : '本地转写服务不可用，请确认 whisper-cpp 已安装且服务已启动')
+      stopLocalEngine()
+    })
+  }
+
+  useEffect(() => () => localEsRef.current?.close(), [])
+
+  useEffect(() => {
+    if (systemAudio.phase === 'loading-model') {
+      setStatus(`正在加载本地语音模型 ${systemAudio.modelProgress}%（首次需下载，之后走缓存）`)
+    } else if (systemAudio.phase === 'recording') {
+      setStatus('正在本地转写系统声音，音频不出本机；说完约 15 秒出一段')
+    } else if (systemAudio.phase === 'error' && systemAudio.error) {
+      setStatus(systemAudio.error)
+    }
+  }, [systemAudio.phase, systemAudio.modelProgress, systemAudio.error])
 
   const handleTranscriptFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -232,10 +300,26 @@ Carol: 我负责把构建验证和回归检查在下周一前跑完。`)
     setStatus('正在实时转写，请保持麦克风开启')
   }
 
-  const buildMinutes = () => {
-    const nextMinutes = generateMinutes(meetingTitle, meetingDate, transcript)
-    setMinutes(nextMinutes)
-    setStatus('已生成结构化纪要，可继续修改转写稿后重新生成')
+  const buildMinutes = async () => {
+    setStatus('正在生成纪要…')
+    try {
+      // 优先本地 Ollama AI 总结，不可用（未运行/超时）时静默回退规则提取
+      const res = await fetch('/api/meeting-audio/summarize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transcript, title: meetingTitle, date: meetingDate }),
+      })
+      if (res.ok) {
+        const { model, minutes: parts } = await res.json()
+        setMinutes({ ...parts, markdown: buildMarkdown(meetingTitle, meetingDate, parts) })
+        setStatus(`已由本地模型 ${model} 生成纪要，可修改转写稿后重新生成`)
+        return
+      }
+    } catch {
+      // 服务不可达，走规则提取
+    }
+    setMinutes(generateMinutes(meetingTitle, meetingDate, transcript))
+    setStatus('已生成结构化纪要（规则提取；本地运行 Ollama 可获得 AI 纪要）')
   }
 
   const copyMarkdown = async () => {
@@ -306,6 +390,30 @@ Carol: 我负责把构建验证和回归检查在下周一前跑完。`)
                 >
                   {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                   {isRecording ? '停止转写' : '实时语音输入'}
+                </button>
+                {systemAudio.supported && (
+                  <button
+                    type="button"
+                    onClick={toggleSystemAudio}
+                    className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white ${systemAudio.phase === 'recording' || systemAudio.phase === 'loading-model' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-sky-600 hover:bg-sky-700'}`}
+                    title="捕获会议里对方从扬声器发出的声音（Zoom / 腾讯会议 / 网页），本地 whisper 转写"
+                  >
+                    <MonitorSpeaker className="w-4 h-4" />
+                    {systemAudio.phase === 'loading-model'
+                      ? `加载模型 ${systemAudio.modelProgress}%`
+                      : systemAudio.phase === 'recording'
+                        ? '停止系统声音'
+                        : '会议声音转写'}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={toggleLocalEngine}
+                  className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white ${localEngineOn ? 'bg-rose-600 hover:bg-rose-700' : 'bg-emerald-600 hover:bg-emerald-700'}`}
+                  title="通过 BlackHole 虚拟声卡 + 本地 whisper.cpp 录制系统声音（含桌面会议软件），需先 brew install whisper-cpp blackhole-2ch"
+                >
+                  <Radio className="w-4 h-4" />
+                  {localEngineOn ? '停止本地引擎' : '本地引擎转写'}
                 </button>
                 <input ref={mediaFileRef} type="file" accept="audio/*,video/*" multiple className="hidden" onChange={handleMediaFile} />
                 <input ref={transcriptFileRef} type="file" accept=".txt,.md,.srt,.vtt" className="hidden" onChange={handleTranscriptFile} />

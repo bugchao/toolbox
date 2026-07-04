@@ -12,6 +12,7 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "@toolbox/TimezoneConverter": "workspace:*",
     "@toolbox/core": "workspace:*",
     "@toolbox/i18n-runtime": "workspace:*",
