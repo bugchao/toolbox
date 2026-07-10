@@ -86,7 +86,14 @@ const ChinaMapPanel: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [showConfig, setShowConfig] = useState(false)
   const mapContainerRef = useRef<HTMLDivElement>(null)
+  const chartRef = useRef<ReactECharts>(null)
   const [isFullscreen, toggleFullscreen] = useFullscreen(mapContainerRef)
+
+  useEffect(() => {
+    // 全屏切换后容器尺寸变化，等布局稳定再让 echarts 重新计算大小
+    const timer = setTimeout(() => chartRef.current?.getEchartsInstance().resize(), 100)
+    return () => clearTimeout(timer)
+  }, [isFullscreen])
 
   const registerMap = useCallback(async () => {
     if (echarts.getMap('china')) {
@@ -323,8 +330,11 @@ const ChinaMapPanel: React.FC = () => {
       </Card>
 
       <Card padded={false} className="overflow-hidden">
-        <div ref={mapContainerRef} className="bg-white dark:bg-gray-900">
-          <div className="flex items-center justify-end gap-2 border-b border-gray-200 p-2 dark:border-gray-700">
+        <div
+          ref={mapContainerRef}
+          className={`bg-white dark:bg-gray-900 ${isFullscreen ? 'flex h-full w-full flex-col' : ''}`}
+        >
+          <div className="flex shrink-0 items-center justify-end gap-2 border-b border-gray-200 p-2 dark:border-gray-700">
             <Button variant="ghost" onClick={toggleFullscreen}>
               <span className="inline-flex items-center gap-1.5">
                 {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
@@ -332,8 +342,8 @@ const ChinaMapPanel: React.FC = () => {
               </span>
             </Button>
           </div>
-          <div className="h-[560px] w-full p-2">
-            <ReactECharts option={getOption()} style={{ height: '100%', width: '100%' }} opts={{ renderer: 'canvas' }} />
+          <div className={`w-full p-2 ${isFullscreen ? 'flex-1' : 'h-[560px]'}`}>
+            <ReactECharts ref={chartRef} option={getOption()} style={{ height: '100%', width: '100%' }} opts={{ renderer: 'canvas' }} />
           </div>
         </div>
       </Card>
