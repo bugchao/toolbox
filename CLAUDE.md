@@ -140,7 +140,7 @@ Temporary reports, snapshots, and dated one-off notes should go to `docs/archive
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **toolbox** (22695 symbols, 32243 relationships, 281 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **toolbox** (23120 symbols, 32780 relationships, 268 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
