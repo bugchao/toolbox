@@ -18,6 +18,368 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-07-04',
+    title: {
+      zh: '会议纪要新增系统音频转写 + 图片压缩器重构',
+      en: 'Meeting Minutes gains system-audio transcription + Image Compressor rewrite',
+    },
+    items: [
+      {
+        type: 'updated',
+        summary: {
+          zh: '会议纪要升级：新增 useSystemAudioTranscriber，通过 getDisplayMedia 抓取系统/标签页声音，浏览器内 transformers.js Whisper 本地转写（音频不出本机）；同时新增 services/meeting-audio-service 后端服务并接入 api-gateway，提供 BlackHole + whisper.cpp 本地引擎的流式转写与纪要总结接口，供更长录音场景使用。',
+          en: 'Meeting Minutes upgrade: new useSystemAudioTranscriber captures system/tab audio via getDisplayMedia and transcribes locally in-browser with transformers.js Whisper (audio never leaves the device); also added a services/meeting-audio-service backend wired into api-gateway offering BlackHole + whisper.cpp streaming transcription and summarization for longer recordings.',
+        },
+        paths: ['/meeting-minutes'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '图片压缩器重构：拆分尺寸计算 / 体积估算等纯函数便于单测，压缩与下载流程随之精简；补充 imageCompressor 命名空间中英文案接入 i18n，新增单测覆盖核心计算逻辑。',
+          en: 'Image Compressor refactor: extracted pure functions for size calculation / weight estimation for testability, simplifying the compress/download flow; added imageCompressor i18n namespace (zh/en) and unit tests for the core math.',
+        },
+        paths: ['/image-compressor'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-29',
+    title: {
+      zh: 'Mermaid 大升级：CodeMirror 编辑器 + 分栏全屏 + 手绘风格',
+      en: 'Mermaid overhaul: CodeMirror editor + split/fullscreen + hand-drawn style',
+    },
+    items: [
+      {
+        type: 'updated',
+        summary: {
+          zh: 'Mermaid 编辑器全面升级：输入区换用 CodeMirror（跟随明暗主题 + Recursive 可变字体）；中间可拖动分割条、左右等高，预览区支持全屏；接入 ELK / tidy-tree 布局与 ZenUML 外部图，新增 svg2roughjs 手绘风格开关；自定义主色可按 primaryColor 派生整套配色；本地历史支持自动提取标题命名并可编辑；预览区点击元素可定位回源码，双击标签可就地改名（flowchart/pie/gantt）；修复甘特图横向溢出与思维导图样例关键字冲突。',
+          en: 'Major Mermaid upgrade: editor now runs on CodeMirror (theme-aware + Recursive variable font); draggable split divider with equal-height panes, fullscreen preview; ELK / tidy-tree layouts and ZenUML external diagrams registered, plus an svg2roughjs hand-drawn style toggle; custom primary color derives a full palette; local history auto-names entries from the title and is editable; clicking a preview element jumps to its source, double-clicking a label renames it in place (flowchart/pie/gantt); fixed gantt horizontal overflow and a mindmap sample keyword clash.',
+        },
+        paths: ['/mermaid'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: 'Mermaid「完全本地」提示支持关闭并持久化，避免每次进入都重复弹出。',
+          en: 'Mermaid\'s "fully local" notice can now be dismissed and stays dismissed, instead of reappearing on every visit.',
+        },
+        paths: ['/mermaid'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-27',
+    title: {
+      zh: '10 个工具集中上线：WiFi 二维码 / User-Agent 解析 / chmod 计算器等',
+      en: 'Ten tools shipped together: WiFi QR / User-Agent Parser / chmod Calculator and more',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /wifi-qr WiFi 二维码：填写 SSID/密码/加密方式（WPA/WEP/无密码）本地生成可扫码联网的二维码。新增 /user-agent User-Agent 解析器：解析 UA 字符串识别浏览器、引擎、操作系统、设备类型与爬虫。新增 /htpasswd 生成器：本地生成 Apache/Nginx Basic Auth 凭据，支持 bcrypt / apr1 / SHA。',
+          en: 'New /wifi-qr: enter SSID/password/encryption (WPA/WEP/open) to generate a scannable WiFi QR code locally. New /user-agent: parse a UA string into browser, engine, OS, device type and bot info. New /htpasswd: generate Apache/Nginx Basic Auth credentials locally (bcrypt / apr1 / SHA).',
+        },
+        paths: ['/wifi-qr', '/user-agent', '/htpasswd'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 7 个研发工具：/css-clamp（流式响应式字号/间距 clamp() 生成器，实时预览不同视口取值）、/gitignore-gen（勾选常用模板一键生成下载 .gitignore）、/meta-tags（SEO/Open Graph/Twitter Card 标签生成 + 实时分享卡片预览）、/chmod-calc（权限矩阵或八进制双向生成 chmod 命令与符号表示）、/svg-to-jsx（SVGO 优化 + 转 React 组件，支持 TypeScript/forwardRef）、/cron-parser（cron 表达式翻译成人话并逐字段拆解、预测未来运行时间）、/dotenv-parser（.env 解析并互转 JSON/YAML/Shell export，含校验提示）。均为 manifest-first 纯前端 + i18n(zh/en) + 单测。',
+          en: 'Seven new dev tools: /css-clamp (fluid clamp() generator for responsive font size/spacing with live viewport preview), /gitignore-gen (pick templates, generate and download a .gitignore), /meta-tags (SEO/Open Graph/Twitter Card tags with live social-card preview), /chmod-calc (permission matrix or octal, both ways, to chmod command + symbolic form), /svg-to-jsx (SVGO optimize + convert to a React component with TS/forwardRef), /cron-parser (translate cron expressions to plain language, per-field breakdown, predicted next runs), /dotenv-parser (parse .env and convert to JSON/YAML/Shell export with validation). All manifest-first, client-only, zh/en i18n, and unit-tested.',
+        },
+        paths: ['/css-clamp', '/gitignore-gen', '/meta-tags', '/chmod-calc', '/svg-to-jsx', '/cron-parser', '/dotenv-parser'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '简化 meta-tags / svg-to-jsx / user-agent 冗余代码：去掉单字段包装类型、消除提前返回后的恒真三元、删除被前置分支挡住的死代码。',
+          en: 'Simplified meta-tags / svg-to-jsx / user-agent: dropped a single-field wrapper type, removed an always-true ternary after an early return, and deleted dead code shadowed by an earlier branch.',
+        },
+        paths: ['/meta-tags', '/svg-to-jsx', '/user-agent'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-26',
+    title: {
+      zh: '新增 JSON Diff 与 JSON Flatten',
+      en: 'New JSON Diff and JSON Flatten',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /json-diff：两份 JSON 结构化对比，忽略键顺序，标出新增/删除/修改与类型变化，纯本地。新增 /json-flatten：嵌套 JSON 扁平化为点路径键并可导出 CSV，对象数组自动转表格。',
+          en: 'New /json-diff: structural diff of two JSON docs, ignoring key order, highlighting added/removed/changed values and type changes — fully local. New /json-flatten: flatten nested JSON into dot-path keys with CSV export, turning object arrays into tables.',
+        },
+        paths: ['/json-diff', '/json-flatten'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-22',
+    title: {
+      zh: '新增 Markdown 目录生成 / MIME 速查 / Semver / JSON Lines',
+      en: 'New Markdown TOC / MIME Lookup / Semver / JSON Lines',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /markdown-toc：从 Markdown 标题生成嵌套目录，GitHub 风格锚点、可调层级范围、跳过代码块、同名锚点去重。新增 /mime-lookup：扩展名 ↔ Content-Type 双向查询，支持按类别搜索。新增 /semver：语义化版本解析/比较/排序/范围匹配（^ ~ >= ||）/差异级别/自增。新增 /jsonl：NDJSON/JSON Lines ↔ JSON 数组互转，逐行校验报错并带行号。',
+          en: 'New /markdown-toc: generate a nested TOC from Markdown headings with GitHub-style anchors, level range, code-block awareness and slug de-dup. New /mime-lookup: bi-directional extension ↔ Content-Type lookup with category search. New /semver: parse, compare, sort, range-match (^ ~ >= ||), diff level and bump semantic versions. New /jsonl: convert NDJSON/JSON Lines ↔ JSON array with per-line validation and line numbers.',
+        },
+        paths: ['/markdown-toc', '/mime-lookup', '/semver', '/jsonl'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-21',
+    title: {
+      zh: '6 个研发小工具集中上线：进制计算 / ID 生成器 / 文本行处理等',
+      en: 'Six dev utilities shipped together: Base Calculator / ID Generator / Line Tools and more',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /number-base（任意 2–36 进制互转 + BigInt + 8/16/32/64 位补码视图 + 位运算）、/id-generator（UUID v4/v7、ULID、NanoID 批量生成，WebCrypto 本地随机，ULID/UUIDv7 时间有序）、/line-tools（按行排序/去重/反转/打乱/加去行号/去空行/trim/过滤/统计）、/duration-calc（解析 1d2h30m 等时长串、单位互转、人性化、时钟格式、加减到基准时间）、/json-query（点号/方括号路径查询 JSON，支持通配与切片）、/http-status-ref（HTTP 状态码分类速查，按码或含义搜索）。均纯本地零依赖。',
+          en: 'New /number-base (any radix 2–36 with BigInt, 8/16/32/64-bit two\'s-complement views, bitwise ops), /id-generator (bulk UUID v4/v7, ULID, NanoID via WebCrypto, time-ordered ULID/UUIDv7), /line-tools (sort/dedupe/reverse/shuffle/number/trim/filter/stats per line), /duration-calc (parse durations like 1d2h30m, unit conversion, humanize, clock format, add/subtract to a base time), /json-query (dot/bracket JSON path queries with wildcards and slices), /http-status-ref (searchable HTTP status code reference grouped 1xx–5xx). All fully local, zero dependencies.',
+        },
+        paths: ['/number-base', '/id-generator', '/line-tools', '/duration-calc', '/json-query', '/http-status-ref'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-17',
+    title: {
+      zh: '新增 .env ↔ JSON 互转与字符串转义',
+      en: 'New .env ↔ JSON converter and String Escape',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /env-json：.env 与扁平 JSON 双向实时互转，支持 export 前缀、单双引号转义、跨行值、行内注释，嵌套对象自动转 JSON 串。新增 /string-escape：在 JSON/JS/C/Shell/SQL/正则等语境下转义与反转义字符串，支持 \\xHH \\uHHHH \\u{} 与八进制。',
+          en: 'New /env-json: live bi-directional conversion between .env and flat JSON, handling export prefixes, quote escapes, multi-line values and inline comments. New /string-escape: escape/unescape strings for JSON/JS/C/Shell/SQL/regex contexts, including \\xHH \\uHHHH \\u{} and octal.',
+        },
+        paths: ['/env-json', '/string-escape'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-16',
+    title: {
+      zh: '新增 Cron 表达式解析与 Unicode 字符检查器',
+      en: 'New Cron Explainer and Unicode Inspector',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /cron-explain：解析标准 5 字段 cron 表达式为人类可读描述并列出接下来若干次执行时间，支持 */,- 区间步进与月份/星期别名。新增 /unicode-inspector：逐字符剖析文本，展示码点 U+、Unicode 块、UTF-8/UTF-16 字节与 JS/HTML/CSS 转义，按码点正确切分 emoji 与代理对。',
+          en: 'New /cron-explain: parse a standard 5-field cron expression into a human-readable description and list upcoming run times, supporting */,- steps and month/weekday aliases. New /unicode-inspector: break text down character by character with code point, Unicode block, UTF-8/UTF-16 bytes, and JS/HTML/CSS escapes — correctly iterates emoji and surrogate pairs by code point.',
+        },
+        paths: ['/cron-explain', '/unicode-inspector'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-14',
+    title: {
+      zh: '新增 Diff/Patch 工具与命名风格转换',
+      en: 'New Diff/Patch tool and Case Converter',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /diff-patch：两段文本生成可调上下文行数的 unified diff，或把 patch 应用回原文，按行着色并统计增删。新增 /case-converter：把任意文本拆词后一键转 camelCase/PascalCase/snake_case/CONSTANT_CASE/kebab-case/Title Case 等 13 种风格，支持批量逐行、中英混排与连续大写智能拆分。',
+          en: 'New /diff-patch: generate a unified diff from two texts with adjustable context, or apply a patch back onto a source, with color-coded lines and add/del stats. New /case-converter: tokenize any text and convert to 13 styles (camelCase, PascalCase, snake_case, CONSTANT_CASE, kebab-case, Title Case and more), with batch line mode, CJK-aware handling and smart acronym splitting.',
+        },
+        paths: ['/diff-patch', '/case-converter'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-11',
+    title: {
+      zh: '新增 CSV ↔ Markdown 表格与 JWT 生成器',
+      en: 'New CSV ↔ Markdown table and JWT Builder',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /csv-markdown：CSV 与 Markdown 表格双向实时互转，处理引号/换行字段、列对齐、中英混排列宽美化与转置，零依赖纯本地。新增 /jwt-builder：用 WebCrypto 在浏览器本地签发 HS256/HS384/HS512 JWT，自定义 payload 与 header，密钥支持 UTF-8/Base64，并附带签名验证。',
+          en: 'New /csv-markdown: live bi-directional conversion between CSV and Markdown tables, handling quoted/multiline fields, column alignment, CJK-aware padding and transpose — zero deps, fully local. New /jwt-builder: sign HS256/HS384/HS512 JWTs locally with WebCrypto, custom payload & header, UTF-8/Base64 secrets, plus signature verification.',
+        },
+        paths: ['/csv-markdown', '/jwt-builder'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-10',
+    title: {
+      zh: '新增 Regex 铁路图与 Base64 文件互转',
+      en: 'New Regex Railroad Diagram and Base64 ↔ File',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /regex-railroad：把任意 JS 正则解析为 AST 并绘制铁路图（railroad diagram），附带匹配测试与逐 token 解释。新增 /base64-file：拖文件转 Base64/Data URI，粘贴 Base64 自动嗅探文件类型（PNG/JPEG/PDF/ZIP 等魔数）并还原下载，纯本地处理。',
+          en: 'New /regex-railroad: parse any JS regex into its AST and draw a railroad diagram, with a live match tester and per-token explanations. New /base64-file: drop a file to get Base64/Data URI, or paste Base64 to sniff the file type (PNG/JPEG/PDF/ZIP magic bytes) and download the restored file — fully local.',
+        },
+        paths: ['/regex-railroad', '/base64-file'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-07',
+    title: {
+      zh: '新增 JSON Schema 校验器 / Cookie 解析 / TOML 互转 / Mermaid 渲染',
+      en: 'New JSON Schema Validator / Cookie Parser / TOML converter / Mermaid renderer',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '3 个 subagent 协作并行交付：新增 /json-schema-validator（浏览器本地用 Ajv 校验 JSON 是否符合 JSON Schema，支持 draft-07/2019-09/2020-12，错误定位到 JSON Path）、/cookie-parser（粘贴 Cookie 请求头或 Set-Cookie 响应头本地解析为结构化表格，标注 SameSite/Secure/HttpOnly 等安全问题）、/mermaid（粘贴 Mermaid 源码实时渲染流程图/时序图/类图/状态图/ER 图/甘特图/饼图/思维导图，一键导出 SVG/PNG，本地不上传）。',
+          en: 'Delivered in parallel by 3 subagents: new /json-schema-validator (validate JSON against a schema locally with Ajv, draft-07/2019-09/2020-12, JSON-Path error locations), /cookie-parser (paste Cookie or Set-Cookie headers, parse into structured tables locally, flag SameSite/Secure/HttpOnly issues), /mermaid (paste Mermaid source and render flowchart/sequence/class/state/ER/gantt/pie/mindmap diagrams live, one-click SVG/PNG export, fully local).',
+        },
+        paths: ['/json-schema-validator', '/cookie-parser', '/mermaid'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /toml-json：TOML 与 JSON 双向实时互转，支持嵌套表、数组、行内表，错误带行号。',
+          en: 'New /toml-json: live bi-directional conversion between TOML and JSON, handling nested tables, arrays and inline tables, with line-numbered errors.',
+        },
+        paths: ['/toml-json'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-06',
+    title: {
+      zh: '8 个工具集中上线：Slug 生成器 / 缓动曲线 / EXIF 清理 / 颜色格式互转等',
+      en: 'Eight tools shipped together: Slug Generator / Cubic Bezier / EXIF Cleaner / Color Format and more',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /slug-generator（任意文本转 URL 友好别名：中文拼音、英文 kebab-case、Unicode 规范化、停用词剔除、批量模式）、/yaml-json（YAML 与 JSON 双向实时互转，自定义缩进与错误行号高亮）、/cubic-bezier（可视化拖拽编辑 cubic-bezier 控制点，实时预览动画曲线，内置 easing 预设）、/exif-cleaner（本地解析照片 EXIF 元数据并一键剥离，零上传）。',
+          en: 'New /slug-generator (turn any text into a URL-friendly slug: pinyin for Chinese, kebab-case for English, Unicode normalization, stopword stripping, batch mode), /yaml-json (live bi-directional YAML ↔ JSON with custom indent and error-line highlighting), /cubic-bezier (drag control points to design a cubic-bezier easing curve with live animation preview and presets), /exif-cleaner (parse photo EXIF metadata locally and strip it with one click, zero uploads).',
+        },
+        paths: ['/slug-generator', '/yaml-json', '/cubic-bezier', '/exif-cleaner'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /url-query（URL 查询参数拆成可编辑列表，实时拼回完整 URL，支持编解码与重复键）、/html-entities（HTML 实体双向编解码，5 种编码强度 + 宽松解码，支持 emoji 与 CJK）、/color-format（hex/rgb/hsl/hwb/lab/lch/oklch/oklab 等颜色格式互转，附 WCAG 对比度与 P3 色域提示）、/lorem-ipsum（经典 Lorem Ipsum 与中文乱数假文生成，Plain/Markdown/HTML 三种输出，可选种子保证可重现）。',
+          en: 'New /url-query (split a URL\'s query string into an editable list, rebuild live, with encode/decode and duplicate keys), /html-entities (two-way HTML entity conversion with 5 encoding strengths and lenient decoding, full emoji/CJK support), /color-format (convert between hex/rgb/hsl/hwb/lab/lch/oklch/oklab with WCAG contrast and P3 gamut hints), /lorem-ipsum (classic Lorem Ipsum or Chinese pseudo-text, Plain/Markdown/HTML output, optional deterministic seed).',
+        },
+        paths: ['/url-query', '/html-entities', '/color-format', '/lorem-ipsum'],
+      },
+    ],
+  },
+  {
+    date: '2026-06-01',
+    title: {
+      zh: 'AI 翻译平台上线 + CSS 阴影生成器',
+      en: 'AI Translator platform launched + CSS Box Shadow Generator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /ai-translator AI 翻译：云端 API（OpenAI/Claude/Gemini/DeepSeek/Moonshot/通义）、本地 Ollama、浏览器内 WebLLM 三端可切换，流式输出，API Key 与模型选择本地存储；上线当日快速迭代加入：朗读输入/结果（Web SpeechSynthesis 按语种选 voice）、本地历史（容量滚动/手动两种策略 + 抽屉增删改）、模型库扩展（含 Qwen3/Gemma3）+ 模型字段改为可输入下拉、Ollama 未拉取模型的友好报错、文件批量翻译（.txt/.md 段落级串行 + ZIP 打包下载）、术语表（翻译记忆 v1，prompt 注入 + 抽屉 CRUD + 导入导出）、Markdown 渲染视图、双 Provider 并排对比模式。',
+          en: 'New /ai-translator: LLM-powered translation switchable across cloud APIs (OpenAI/Claude/Gemini/DeepSeek/Moonshot/Qwen), local Ollama, and in-browser WebLLM, with streaming output and localStorage-persisted API keys/model choice. Rapid same-day iteration added: read-aloud for input/output (Web SpeechSynthesis, per-language voice), local history (rolling/manual retention + drawer CRUD), expanded model library (incl. Qwen3/Gemma3) with an editable-dropdown model field, friendly errors for un-pulled Ollama models, batch file translation (.txt/.md, paragraph-serial, ZIP download), a glossary (translation-memory v1, prompt injection + drawer CRUD + import/export), a Markdown render view, and a side-by-side dual-provider comparison mode.',
+        },
+        paths: ['/ai-translator'],
+      },
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /box-shadow-gen CSS 阴影生成器：多层 box-shadow 可视化编辑（x/y/blur/spread/颜色/alpha/inset），形状切换（矩形/胶囊/圆形），8 个预设（Material/Neumorphism/Glassmorphism），一键输出 CSS 或 Tailwind 任意值，零新增依赖。',
+          en: 'New /box-shadow-gen: visually edit multi-layer box-shadow (x/y/blur/spread/color/alpha/inset), switch shape (rectangle/pill/circle), 8 presets (Material/Neumorphism/Glassmorphism), one-click CSS or Tailwind arbitrary-value output, zero new dependencies.',
+        },
+        paths: ['/box-shadow-gen'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-31',
+    title: {
+      zh: '新增 Favicon 生成器',
+      en: 'New Favicon Generator',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /favicon-generator：上传一张图片，本地一键生成多尺寸 favicon.ico（16/32/48 PNG-in-ICO 容器）、独立 PNG（16~512，含 apple-touch-icon）、site.webmanifest 片段与 HTML <link> 代码片段，支持透明背景/自填底色与 maskable 安全区，全部资源打包 ZIP 下载。',
+          en: 'New /favicon-generator: upload one image and instantly generate a multi-size favicon.ico (16/32/48 PNG-in-ICO), standalone PNGs (16–512, incl. apple-touch-icon), a site.webmanifest snippet and HTML <link> code — with transparent/custom background and maskable safe-zone options, all bundled into a ZIP download.',
+        },
+        paths: ['/favicon-generator'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-28',
+    title: {
+      zh: '新增 /image-to-pdf 图片转 PDF',
+      en: 'New /image-to-pdf',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /image-to-pdf 图片转 PDF：本地把多张 JPG/PNG/WebP 图片合成为一个 PDF，支持拖拽排序、旋转、A4/Letter 等纸张、横竖方向、边距、每页 1/2/4 张拼版，导出不上传；同日修复 React 18 StrictMode 下选完图片后立即消失的问题（对象 URL 生命周期跟随图片项，而非挂在渲染期 useMemo 上）。',
+          en: 'New /image-to-pdf: combine multiple JPG/PNG/WebP images into a single PDF locally — drag to reorder, rotate, paper size, orientation, margins, 1/2/4-per-page layout, no upload; same-day fix for a React 18 StrictMode bug where selected images vanished immediately (object URL lifetime now tracks the image item instead of a render-time useMemo).',
+        },
+        paths: ['/image-to-pdf'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-26',
+    title: {
+      zh: '新增儿童数独闯关 + AI 内容检测器',
+      en: 'New Kids Sudoku Quest + AI Content Detector',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /sudoku-kids 儿童数独闯关：4×4/6×6/9×9 三档难度、30 关递进、三星评分与学习辅助，面向小朋友设计。新增 /ai-detector AI 检测（启发式）：文本与图片输入本地计算 AI 倾向分与三档分类，无需联网或 API key；次日（05-27）深化启发式算法 — 文本新增 Burstiness（句长变异系数）、停用词滑动窗口方差、句级可疑度打分（展示 top 5 可疑句 + 命中关键词）；图片新增 8×8 二维 DCT 高频能量占比统计，区分真实照片与 AI 平滑出图。',
+          en: 'New /sudoku-kids: kid-friendly sudoku with 4×4/6×6/9×9 difficulties, 30 progressive levels, three-star scoring and learning helpers. New /ai-detector (heuristic): local text/image AI-likelihood scoring with a three-tier verdict, no network or API key; deepened the next day (05-27) — text gained burstiness (sentence-length CV), stopword sliding-window variance, and per-sentence suspicion scoring (top-5 flagged sentences with matched keywords); images gained 8×8 2D-DCT high-frequency energy ratio to separate real photos from AI-smoothed output.',
+        },
+        paths: ['/sudoku-kids', '/ai-detector'],
+      },
+    ],
+  },
+  {
+    date: '2026-05-25',
+    title: {
+      zh: '新增 WCAG 对比度检查器 + JSON 转 TypeScript',
+      en: 'New WCAG Contrast Checker + JSON to TypeScript',
+    },
+    items: [
+      {
+        type: 'added',
+        summary: {
+          zh: '新增 /contrast-checker：检测前景/背景色的 WCAG 对比度，实时给出 AA/AAA 合规等级与文本预览。新增 /json-to-ts：把 JSON 转换成 TypeScript interface/type 类型定义，自动推断可选字段与数组类型合并。',
+          en: 'New /contrast-checker: check WCAG color contrast between text and background with live AA/AAA grading and preview. New /json-to-ts: convert JSON into TypeScript interface/type definitions with smart optional-field and array-merging inference.',
+        },
+        paths: ['/contrast-checker', '/json-to-ts'],
+      },
+    ],
+  },
+  {
     date: '2026-05-24',
     title: {
       zh: '新增 /bird-smash 弹弓物理小游戏 + manifest 校验脚本',
