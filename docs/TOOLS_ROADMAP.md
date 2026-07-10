@@ -63,6 +63,7 @@
 | CSS 阴影生成器 | `/box-shadow-gen` | `tools/tool-box-shadow-gen` → BoxShadowGen |
 | EXIF 查看 / 清理 | `/exif-cleaner` | `tools/tool-exif-cleaner` → ExifCleaner |
 | WiFi 二维码生成 | `/wifi-qr` | `tools/tool-wifi-qr` → WifiQr |
+| 数据地图可视化（中国/世界，echarts 分级着色） | `/data-to-map` | `tools/tool-data-to-map` → DataToMap |
 
 ### 研发工具
 

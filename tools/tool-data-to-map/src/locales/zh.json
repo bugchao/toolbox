@@ -1,0 +1,71 @@
+{
+  "title": "数据地图可视化",
+  "description": "上传 CSV/JSON 区域数据，在中国地图或世界地图上生成分级着色可视化，纯本地处理。",
+  "tabs": {
+    "world": "世界地图",
+    "china": "中国地图"
+  },
+  "common": {
+    "uploadLabel": "选择文件上传 (JSON/CSV)",
+    "downloadTemplate": "下载模板",
+    "dataLoaded": "已加载 {{count}} 条区域数据",
+    "clearData": "清空数据",
+    "clearConfirm": "确定要清空所有上传的数据吗？",
+    "showLabels": "显示区域名称",
+    "configShow": "显示颜色分段配置",
+    "configHide": "隐藏配置",
+    "resetConfig": "重置配置",
+    "resetConfirm": "确定要重置颜色配置为默认值吗？",
+    "presetLabel": "预设颜色方案：",
+    "preset1": "方案 1",
+    "preset2": "方案 2",
+    "preset3": "方案 3",
+    "placeholderUpload": "请上传区域数据文件",
+    "loadingMap": "正在加载地图数据...",
+    "tooltipValue": "数值: {{value}}",
+    "fullscreenEnter": "全屏",
+    "fullscreenExit": "退出全屏",
+    "dataPreviewTitle": "数据预览",
+    "tableHeaderName": "区域名称",
+    "tableHeaderValue": "数值",
+    "errors": {
+      "mapLoadFailed": "地图数据加载失败，请刷新页面重试",
+      "downloadTemplate": "下载模板失败，请稍后重试",
+      "downloadFailed": "下载失败，请稍后重试",
+      "fileRead": "文件读取失败",
+      "unsupportedFormat": "不支持的文件格式，请上传 JSON 或 CSV 文件",
+      "missingColumns": "CSV 文件必须包含 name/region 和 value/count 列",
+      "noData": "未能解析出有效数据"
+    }
+  },
+  "china": {
+    "mapTitle": "中国地图 - 各区域数据展示",
+    "nameHint1": "提示：区域名称会自动转换为地图标准格式（如「北京」→「北京市」，「广东」→「广东省」）",
+    "nameHint2": "支持格式：省份名（如「广东」）、完整名称（如「广东省」）、直辖市（如「北京」「上海」）",
+    "configTitle": "颜色分段配置（单位：万）",
+    "configNote": "提示：数值范围应该从大到小排列（300 > 200 > 100 > 50 > 30 > 1 > 0）",
+    "level5": "300 以上",
+    "level4": "200-300",
+    "level3": "100-200",
+    "level2": "50-100",
+    "level1": "30-50",
+    "level0": "1-30",
+    "levelMinus1": "1 以下",
+    "unitWan": "万"
+  },
+  "world": {
+    "mapTitle": "世界地图",
+    "configTitle": "颜色分段配置（数值直接对应）",
+    "configNote": "提示：分段为 0 以下、1-8、9-30、30-50… 配置数值与数据直接对应",
+    "level1": "30-50",
+    "level0": "9-30",
+    "levelMinus1": "0",
+    "levelMinus2": "1-8",
+    "lowerBound": "下界",
+    "upperBound": "上界",
+    "exportSizeLabel": "导出尺寸：",
+    "downloadPng": "下载地图 PNG",
+    "errorChartNotReady": "图表未就绪，请稍后再试",
+    "errorNoDataForExport": "请先上传数据后再下载"
+  }
+}

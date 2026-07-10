@@ -1,0 +1,71 @@
+{
+  "title": "Data to Map",
+  "description": "Upload CSV/JSON region data and visualize it as a choropleth on a China or World map, fully local.",
+  "tabs": {
+    "world": "World Map",
+    "china": "China Map"
+  },
+  "common": {
+    "uploadLabel": "Upload file (JSON/CSV)",
+    "downloadTemplate": "Download template",
+    "dataLoaded": "Loaded {{count}} regions",
+    "clearData": "Clear data",
+    "clearConfirm": "Clear all uploaded data?",
+    "showLabels": "Show region names",
+    "configShow": "Show color scale config",
+    "configHide": "Hide config",
+    "resetConfig": "Reset config",
+    "resetConfirm": "Reset the color scale to defaults?",
+    "presetLabel": "Preset color scheme:",
+    "preset1": "Preset 1",
+    "preset2": "Preset 2",
+    "preset3": "Preset 3",
+    "placeholderUpload": "Upload a region data file to begin",
+    "loadingMap": "Loading map data...",
+    "tooltipValue": "Value: {{value}}",
+    "fullscreenEnter": "Fullscreen",
+    "fullscreenExit": "Exit fullscreen",
+    "dataPreviewTitle": "Data preview",
+    "tableHeaderName": "Region",
+    "tableHeaderValue": "Value",
+    "errors": {
+      "mapLoadFailed": "Failed to load map data, please refresh and try again",
+      "downloadTemplate": "Failed to download the template, please try again later",
+      "downloadFailed": "Download failed, please try again later",
+      "fileRead": "Failed to read the file",
+      "unsupportedFormat": "Unsupported file format, please upload a JSON or CSV file",
+      "missingColumns": "The CSV file must contain name/region and value/count columns",
+      "noData": "No valid data could be parsed"
+    }
+  },
+  "china": {
+    "mapTitle": "China Map - Regional Data",
+    "nameHint1": "Tip: region names are auto-converted to the map's standard form (e.g. \"Beijing\" → \"Beijing Municipality\", \"Guangdong\" → \"Guangdong Province\").",
+    "nameHint2": "Supported formats: short province names, full names, and municipalities (e.g. Beijing, Shanghai).",
+    "configTitle": "Color scale config (unit: 10k)",
+    "configNote": "Tip: value ranges should descend from left to right (300 > 200 > 100 > 50 > 30 > 1 > 0).",
+    "level5": "300+",
+    "level4": "200-300",
+    "level3": "100-200",
+    "level2": "50-100",
+    "level1": "30-50",
+    "level0": "1-30",
+    "levelMinus1": "Below 1",
+    "unitWan": "10k"
+  },
+  "world": {
+    "mapTitle": "World Map",
+    "configTitle": "Color scale config (raw values)",
+    "configNote": "Tip: buckets are 0, 1-8, 9-30, 30-50 ... values map directly to your data.",
+    "level1": "30-50",
+    "level0": "9-30",
+    "levelMinus1": "0",
+    "levelMinus2": "1-8",
+    "lowerBound": "Lower bound",
+    "upperBound": "Upper bound",
+    "exportSizeLabel": "Export size:",
+    "downloadPng": "Download map PNG",
+    "errorChartNotReady": "Chart is not ready yet, please try again shortly",
+    "errorNoDataForExport": "Upload data before downloading"
+  }
+}
