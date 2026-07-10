@@ -49,3 +49,4 @@ toolbox-store.db-wal
 # Git worktrees
 .worktrees/
 
+graphify-out
