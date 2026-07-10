@@ -64,11 +64,14 @@
 | EXIF 查看 / 清理 | `/exif-cleaner` | `tools/tool-exif-cleaner` → ExifCleaner |
 | WiFi 二维码生成 | `/wifi-qr` | `tools/tool-wifi-qr` → WifiQr |
 | 数据地图可视化（中国/世界，echarts 分级着色） | `/data-to-map` | `tools/tool-data-to-map` → DataToMap |
+| 图片转 PDF | `/image-to-pdf` | `tools/tool-image-to-pdf` |
+| 愤怒的小鸟（Bird Smash 小游戏） | `/bird-smash` | `tools/tool-bird-smash` |
 
 ### 研发工具
 
 | 工具名称 | 路由路径 | 代码位置 |
 |----------|----------|----------|
+| 图表工作台（Mermaid/PlantUML/draw.io，独立应用未接入主站路由） | 独立 Vite 入口 | `packages/diagram-workbench` |
 | JSON 格式化/校验 | `/json` | `apps/web/src/pages/JsonFormatter.tsx` |
 | JSON/YAML/XML 格式转换器 | `/format-converter` | `apps/web/src/pages/FormatConverter.tsx` |
 | Base64 编解码 | `/base64` | `apps/web/src/pages/Base64.tsx` |
@@ -140,6 +143,8 @@
 | AI UI 设计生成器 | `/ui-generator` | `apps/web/src/pages/UIGenerator.tsx` |
 | AI PPT 生成器 | `/ppt-generator` | `tools/tool-ppt-generator` → PptGenerator |
 | AI 翻译（云端 / Ollama / WebLLM 多端） | `/ai-translator` | `tools/tool-ai-translator` → AiTranslator |
+| AI 聊天中心（多 Provider 对比） | `/ai-chat-hub` | `tools/tool-ai-chat-hub` |
+| AI 内容检测（启发式） | `/ai-detector` | `tools/tool-ai-detector` |
 
 ### 网络工具
 
@@ -328,6 +333,7 @@
 | 单词记忆工具 | `/vocab-trainer` | `tools/tool-vocab-trainer` → VocabTrainer |
 | 错题本系统 | `/mistake-book` | `tools/tool-mistake-book` → MistakeBook |
 | 自动出题工具 | `/quiz-gen` | `tools/tool-quiz-gen` → QuizGen |
+| 数独闯关（儿童版） | `/sudoku-kids` | `tools/tool-sudoku-kids` |
 | 选择题生成器 | `/mcq-gen` | `tools/tool-mcq-gen` → McqGen |
 | 知识对比工具 | `/knowledge-compare` | `tools/tool-knowledge-compare` → KnowledgeCompare |
 | 一句话讲清工具 | `/one-liner` | `tools/tool-one-liner` → OneLiner |

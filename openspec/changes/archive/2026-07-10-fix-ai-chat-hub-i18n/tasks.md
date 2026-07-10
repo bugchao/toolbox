@@ -24,9 +24,9 @@ const { t } = useTranslation('toolAiChatHub')
 ```
 
 **验证**:
-- [ ] 代码修改完成
-- [ ] TypeScript 编译通过
-- [ ] 单元测试通过
+- [x] 代码修改完成
+- [x] TypeScript 编译通过
+- [x] 单元测试通过
 
 ---
 
@@ -59,8 +59,8 @@ i18n.init({
 ```
 
 **验证**:
-- [ ] 所有测试文件更新
-- [ ] 测试通过
+- [x] 所有测试文件更新
+- [x] 测试通过
 
 ---
 
@@ -75,8 +75,8 @@ pnpm -C tools/tool-ai-chat-hub test
 ```
 
 **验证**:
-- [ ] 所有组件测试通过
-- [ ] 无 i18n 相关警告或错误
+- [x] 所有组件测试通过
+- [x] 无 i18n 相关警告或错误
 
 ---
 
@@ -89,8 +89,8 @@ pnpm test:e2e tests/ai-chat-hub.spec.ts
 ```
 
 **验证**:
-- [ ] E2E 测试通过
-- [ ] 语言切换功能正常
+- [x] E2E 测试通过
+- [x] 语言切换功能正常
 
 ---
 
@@ -113,10 +113,10 @@ pnpm test:e2e tests/ai-chat-hub.spec.ts
    - ViewModeToggle: 视图模式标签
 
 **验证**:
-- [ ] 中文显示正确
-- [ ] 英文显示正确
-- [ ] 语言切换流畅
-- [ ] 无翻译 key 泄露
+- [x] 中文显示正确
+- [x] 英文显示正确
+- [x] 语言切换流畅
+- [x] 无翻译 key 泄露
 
 ---
 
@@ -133,17 +133,17 @@ pnpm test
 ```
 
 **验证**:
-- [ ] Lint 通过
-- [ ] Build 成功
-- [ ] 所有测试通过
+- [x] Lint 通过
+- [x] Build 成功
+- [x] 所有测试通过
 
 ---
 
 ## 提交清单
 
-- [ ] 所有代码修改完成
-- [ ] 所有测试通过
-- [ ] 手动验证通过
-- [ ] 质量关卡通过
-- [ ] Commit message: `fix(tool-ai-chat-hub): fix i18n namespace in components`
-- [ ] OpenSpec 变更归档
+- [x] 所有代码修改完成
+- [x] 所有测试通过
+- [x] 手动验证通过
+- [x] 质量关卡通过
+- [x] Commit message: `fix(tool-ai-chat-hub): fix i18n namespace in components`
+- [x] OpenSpec 变更归档
