@@ -1,0 +1,41 @@
+{
+  "title": "图像处理实验工作台",
+  "description": "责任链式效果叠加：逐步调参、实时预览、撤销/重做、流程保存与导入导出",
+  "upload": {
+    "hint": "点击或拖拽图片到这里（本地处理，不上传）",
+    "empty": "加载一张图片开始实验"
+  },
+  "steps": {
+    "title": "效果管线",
+    "add": "＋ 添加效果…",
+    "empty": "还没有步骤，从上方添加一个效果"
+  },
+  "effects": {
+    "brightness": "亮度",
+    "contrast": "对比度",
+    "saturate": "饱和度",
+    "grayscale": "灰度",
+    "sepia": "褐色",
+    "hueRotate": "色相旋转",
+    "invert": "反色",
+    "blur": "模糊",
+    "pixelate": "像素化",
+    "threshold": "二值化"
+  },
+  "toolbar": {
+    "exportPng": "导出 PNG",
+    "exportJson": "导出流程",
+    "importJson": "导入流程"
+  },
+  "saved": {
+    "title": "已存流程",
+    "namePlaceholder": "流程名称",
+    "save": "保存",
+    "load": "加载",
+    "empty": "暂无保存的流程"
+  },
+  "errors": {
+    "notImage": "请选择图片文件（PNG/JPEG/WebP）",
+    "invalidJson": "导入失败：不是合法的管线 JSON"
+  }
+}

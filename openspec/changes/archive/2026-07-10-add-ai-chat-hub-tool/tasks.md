@@ -311,10 +311,10 @@ Group 3 (串行 - 依赖 Group 2)
 ## 验证检查点
 
 每个任务完成后验证：
-- [ ] 单元测试通过：`pnpm -C tools/tool-ai-chat-hub test`
-- [ ] TypeScript 编译通过：`pnpm -C tools/tool-ai-chat-hub exec tsc --noEmit`
-- [ ] ESLint 检查通过：`pnpm lint`
-- [ ] 功能符合规范中的场景描述
+- [x] 单元测试通过：`pnpm -C tools/tool-ai-chat-hub test`
+- [x] TypeScript 编译通过：`pnpm -C tools/tool-ai-chat-hub exec tsc --noEmit`
+- [x] ESLint 检查通过：`pnpm lint`
+- [x] 功能符合规范中的场景描述
 
 ## 注意事项
 
