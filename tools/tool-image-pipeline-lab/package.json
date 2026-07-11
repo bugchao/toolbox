@@ -8,6 +8,7 @@
     "lint": "eslint . --ext ts,tsx"
   },
   "dependencies": {
+    "@toolbox/storage": "workspace:*",
     "@toolbox/tool-registry": "workspace:*",
     "@toolbox/ui-kit": "workspace:*",
     "lucide-react": "^0.577.0",

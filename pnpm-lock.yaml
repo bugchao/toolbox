@@ -5000,6 +5000,9 @@ importers:
 
   tools/tool-image-pipeline-lab:
     dependencies:
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
       '@toolbox/tool-registry':
         specifier: workspace:*
         version: link:../../packages/tool-registry

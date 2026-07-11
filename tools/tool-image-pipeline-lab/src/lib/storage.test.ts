@@ -1,23 +1,9 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { EFFECTS } from './effects'
 import { newStep } from './pipeline'
-import { deletePipeline, listPipelines, parsePipelineJson, savePipeline, serializePipeline } from './storage'
+import { parsePipelineJson, sanitizeSteps, serializePipeline } from './storage'
 
 describe('storage', () => {
-  beforeEach(() => localStorage.clear())
-
-  it('save → list → delete round-trip，按名 upsert', () => {
-    const steps = [newStep('grayscale'), newStep('blur')]
-    savePipeline('老照片', steps)
-    savePipeline('老照片', steps.slice(0, 1))
-    savePipeline('另一个', steps)
-    const saved = listPipelines()
-    expect(saved.map((p) => p.name).sort()).toEqual(['另一个', '老照片'])
-    expect(saved.find((p) => p.name === '老照片')?.steps).toHaveLength(1)
-    deletePipeline('老照片')
-    expect(listPipelines().map((p) => p.name)).toEqual(['另一个'])
-  })
-
   it('serialize → parse 复原 type/value/enabled，id 重新生成', () => {
     const steps = [
       { ...newStep('brightness'), value: 150, enabled: false },
@@ -43,5 +29,12 @@ describe('storage', () => {
     const parsed = parsePipelineJson(json)
     expect(parsed[0].value).toBe(EFFECTS.blur.max)
     expect(parsed[1].value).toBe(EFFECTS.pixelate.min)
+  })
+
+  it('sanitizeSteps 直接校验持久化数据：坏效果抛错、越界 clamp', () => {
+    expect(() => sanitizeSteps([{ type: 'nope', value: 1, enabled: true }])).toThrow()
+    const ok = sanitizeSteps([{ type: 'blur', value: 999, enabled: true }])
+    expect(ok[0].value).toBe(EFFECTS.blur.max)
+    expect(ok[0].enabled).toBe(true)
   })
 })

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import { useToolStorage } from '@toolbox/storage'
 import { Button, Card, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import {
   ArrowDown,
@@ -18,15 +19,22 @@ import { useTranslation } from 'react-i18next'
 import { EFFECTS, EFFECT_TYPES } from './lib/effects'
 import { initialHistory, pipelineReducer } from './lib/pipeline'
 import { applyPipeline } from './lib/render'
-import { deletePipeline, listPipelines, parsePipelineJson, savePipeline, serializePipeline, type SavedPipeline } from './lib/storage'
+import { parsePipelineJson, sanitizeSteps, serializePipeline, type SavedPipeline } from './lib/storage'
 import type { EffectType } from './lib/types'
+
+const IconLabel: React.FC<{ icon: React.ReactNode; children: React.ReactNode }> = ({ icon, children }) => (
+  <span className="flex items-center gap-1">
+    {icon}
+    {children}
+  </span>
+)
 
 const ImagePipelineLab: React.FC = () => {
   const { t } = useTranslation('toolImagePipelineLab')
   const [history, dispatch] = useReducer(pipelineReducer, initialHistory)
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [fileName, setFileName] = useState('')
-  const [saved, setSaved] = useState<SavedPipeline[]>(() => listPipelines())
+  const { data: saved, save: persistSaved } = useToolStorage<SavedPipeline[]>('image-pipeline-lab', 'pipelines', [])
   const [saveName, setSaveName] = useState('')
   const [error, setError] = useState('')
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -97,14 +105,22 @@ const ImagePipelineLab: React.FC = () => {
   const handleSave = () => {
     const name = saveName.trim()
     if (!name) return
-    savePipeline(name, steps)
-    setSaved(listPipelines())
+    void persistSaved([...saved.filter((p) => p.name !== name), { name, steps, savedAt: Date.now() }])
     setSaveName('')
   }
 
   const handleDelete = (name: string) => {
-    deletePipeline(name)
-    setSaved(listPipelines())
+    void persistSaved(saved.filter((p) => p.name !== name))
+  }
+
+  const handleLoad = (p: SavedPipeline) => {
+    try {
+      // 持久化数据与导入 JSON 同为不可信来源，加载前统一过 sanitizeSteps
+      dispatch({ type: 'replace', steps: sanitizeSteps(p.steps) })
+      setError('')
+    } catch {
+      setError(t('errors.invalidJson'))
+    }
   }
 
   return (
@@ -232,22 +248,13 @@ const ImagePipelineLab: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 border-t border-gray-200 pt-4 dark:border-gray-700">
                   <Button size="sm" disabled={!image} onClick={exportPng}>
-                    <span className="flex items-center gap-1">
-                      <Download className="h-4 w-4" />
-                      {t('toolbar.exportPng')}
-                    </span>
+                    <IconLabel icon={<Download className="h-4 w-4" />}>{t('toolbar.exportPng')}</IconLabel>
                   </Button>
                   <Button variant="secondary" size="sm" disabled={steps.length === 0} onClick={exportJson}>
-                    <span className="flex items-center gap-1">
-                      <FileDown className="h-4 w-4" />
-                      {t('toolbar.exportJson')}
-                    </span>
+                    <IconLabel icon={<FileDown className="h-4 w-4" />}>{t('toolbar.exportJson')}</IconLabel>
                   </Button>
                   <Button variant="secondary" size="sm" onClick={() => importInputRef.current?.click()}>
-                    <span className="flex items-center gap-1">
-                      <FileUp className="h-4 w-4" />
-                      {t('toolbar.importJson')}
-                    </span>
+                    <IconLabel icon={<FileUp className="h-4 w-4" />}>{t('toolbar.importJson')}</IconLabel>
                   </Button>
                   <input
                     ref={importInputRef}
@@ -275,10 +282,7 @@ const ImagePipelineLab: React.FC = () => {
                     onChange={(e) => setSaveName(e.target.value)}
                   />
                   <Button size="sm" disabled={!saveName.trim() || steps.length === 0} onClick={handleSave}>
-                    <span className="flex items-center gap-1">
-                      <Save className="h-4 w-4" />
-                      {t('saved.save')}
-                    </span>
+                    <IconLabel icon={<Save className="h-4 w-4" />}>{t('saved.save')}</IconLabel>
                   </Button>
                 </div>
                 {saved.length === 0 && <p className="text-sm text-gray-400">{t('saved.empty')}</p>}
@@ -290,7 +294,7 @@ const ImagePipelineLab: React.FC = () => {
                         <span className="ml-1 text-xs text-gray-400">({p.steps.length})</span>
                       </span>
                       <div className="flex shrink-0 gap-1">
-                        <Button variant="ghost" size="sm" onClick={() => dispatch({ type: 'replace', steps: p.steps })}>
+                        <Button variant="ghost" size="sm" onClick={() => handleLoad(p)}>
                           {t('saved.load')}
                         </Button>
                         <Button variant="ghost" size="sm" onClick={() => handleDelete(p.name)}>

@@ -2,30 +2,10 @@ import { EFFECTS } from './effects'
 import { newStep } from './pipeline'
 import type { EffectType, PipelineStep } from './types'
 
-const KEY = 'toolbox.image-pipeline-lab.pipelines.v1'
-
 export interface SavedPipeline {
   name: string
   steps: PipelineStep[]
   savedAt: number
-}
-
-export function listPipelines(): SavedPipeline[] {
-  try {
-    const raw = localStorage.getItem(KEY)
-    return raw ? (JSON.parse(raw) as SavedPipeline[]) : []
-  } catch {
-    return []
-  }
-}
-
-export function savePipeline(name: string, steps: PipelineStep[]): void {
-  const rest = listPipelines().filter((p) => p.name !== name)
-  localStorage.setItem(KEY, JSON.stringify([...rest, { name, steps, savedAt: Date.now() }]))
-}
-
-export function deletePipeline(name: string): void {
-  localStorage.setItem(KEY, JSON.stringify(listPipelines().filter((p) => p.name !== name)))
 }
 
 export function serializePipeline(steps: PipelineStep[]): string {
@@ -39,7 +19,11 @@ export function serializePipeline(steps: PipelineStep[]): string {
 /** 解析导入的管线 JSON；非法结构抛 Error，value clamp 到效果范围，id 重新生成 */
 export function parsePipelineJson(text: string): PipelineStep[] {
   const parsed: unknown = JSON.parse(text)
-  const steps = (parsed as { steps?: unknown }).steps
+  return sanitizeSteps((parsed as { steps?: unknown }).steps)
+}
+
+/** 不可信 steps（导入 JSON / 持久化数据）的统一校验入口：非法结构抛 Error，value clamp 到效果范围，id 重新生成 */
+export function sanitizeSteps(steps: unknown): PipelineStep[] {
   if (!Array.isArray(steps)) throw new Error('steps must be an array')
   return steps.map((raw) => {
     const { type, value, enabled } = raw as { type?: unknown; value?: unknown; enabled?: unknown }
