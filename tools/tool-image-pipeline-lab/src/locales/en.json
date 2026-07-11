@@ -1,4 +1,41 @@
 {
-  "title": "ImagePipelineLab",
-  "description": "TODO: Add an English description"
+  "title": "Image Pipeline Lab",
+  "description": "Chainable image effects: tune each step live, undo/redo, save and share pipelines",
+  "upload": {
+    "hint": "Click or drop an image here (processed locally, never uploaded)",
+    "empty": "Load an image to start experimenting"
+  },
+  "steps": {
+    "title": "Effect pipeline",
+    "add": "+ Add effect…",
+    "empty": "No steps yet — add an effect above"
+  },
+  "effects": {
+    "brightness": "Brightness",
+    "contrast": "Contrast",
+    "saturate": "Saturation",
+    "grayscale": "Grayscale",
+    "sepia": "Sepia",
+    "hueRotate": "Hue rotate",
+    "invert": "Invert",
+    "blur": "Blur",
+    "pixelate": "Pixelate",
+    "threshold": "Threshold"
+  },
+  "toolbar": {
+    "exportPng": "Export PNG",
+    "exportJson": "Export pipeline",
+    "importJson": "Import pipeline"
+  },
+  "saved": {
+    "title": "Saved pipelines",
+    "namePlaceholder": "Pipeline name",
+    "save": "Save",
+    "load": "Load",
+    "empty": "No saved pipelines yet"
+  },
+  "errors": {
+    "notImage": "Please pick an image file (PNG/JPEG/WebP)",
+    "invalidJson": "Import failed: not a valid pipeline JSON"
+  }
 }
