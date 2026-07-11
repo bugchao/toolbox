@@ -65,6 +65,7 @@
 | WiFi 二维码生成 | `/wifi-qr` | `tools/tool-wifi-qr` → WifiQr |
 | 数据地图可视化（中国/世界，echarts 分级着色） | `/data-to-map` | `tools/tool-data-to-map` → DataToMap |
 | 图片转 PDF | `/image-to-pdf` | `tools/tool-image-to-pdf` |
+| 图像处理实验工作台（效果管线/撤销重做/流程保存） | `/image-pipeline-lab` | `tools/tool-image-pipeline-lab` → ImagePipelineLab |
 | 愤怒的小鸟（Bird Smash 小游戏） | `/bird-smash` | `tools/tool-bird-smash` |
 
 ### 研发工具
@@ -406,7 +407,6 @@
 | Canvas 图像工作台 | utility | `/image-canvas-lab` | **已上线** | P1 | 水印合成、多图层叠图、`getImageData`/`putImageData` 像素处理、透明度与混合模式；纯前端，无上传 |
 | 证件照工具（标准尺寸 + 换底） | utility | `/id-photo` | **已上线** | P2 | 对标证件照场景；可与 `/image-background-remover` 能力衔接；AI 换底可选 |
 | ~~图像本地加载预览基座~~ | utility | `/image-local-preview` | **已上线** | - | `FileReader.readAsDataURL`；大图预览、元信息；可拆为组件供 `image-canvas-lab` 复用 |
-| 图像处理实验工作台 | utility | `/image-pipeline-lab` | 调研中 | P3 | 对标责任链式流程：效果叠加、参数调节、撤销/重做、流程保存；可选轻后端（Flask 类）或纯前端栈 |
 | **── 生活：开发者友好 ──** | | | | | |
 | ~~curl 转 fetch~~ | dev | `/curl-to-fetch` | **已上线** | - | curl 命令转 JS fetch 代码 |
 | ~~JWT 解析工具~~ | dev | `/jwt-decoder` | **已上线** | - | JWT Token 解码与验证 |
