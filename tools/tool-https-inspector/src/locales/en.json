@@ -1,0 +1,71 @@
+{
+  "title": "HTTPS Inspector",
+  "description": "Enter a domain to check HTTPS grade, IPv6, CDN, mail server, GM and post-quantum support at once",
+  "inputPlaceholder": "Enter a domain, e.g. example.com",
+  "check": "Check",
+  "checking": "Checking",
+  "gradeLabel": "Overall grade",
+  "supported": "Supported",
+  "notSupported": "Not supported",
+  "yes": "Yes",
+  "no": "No",
+  "noData": "No data",
+  "moduleError": "This check failed",
+  "singleVantagePoint": "Based on a single vantage point, for reference only",
+  "modules": {
+    "https": "HTTPS Grade",
+    "ipv6": "IPv6",
+    "cdn": "CDN",
+    "mail": "Mail Server",
+    "gm": "GM HTTPS",
+    "pqc": "Post-Quantum HTTPS"
+  },
+  "https": {
+    "protocols": "Protocol versions",
+    "cipher": "Cipher suite",
+    "negotiated": "Negotiated protocol",
+    "reasons": "Deductions",
+    "suggestions": "Recommendations",
+    "cert": "Certificate",
+    "subject": "Subject",
+    "issuer": "Issuer",
+    "validity": "Validity",
+    "daysRemaining": "{{days}} days left",
+    "san": "Subject Alternative Names",
+    "chain": "Certificate chain",
+    "selfSigned": "Self-signed"
+  },
+  "ipv6": {
+    "deployed": "IPv6 deployed",
+    "notDeployed": "IPv6 not deployed",
+    "reachable": "HTTPS reachable over IPv6",
+    "unreachable": "HTTPS not reachable over IPv6",
+    "addresses": "IPv6 addresses"
+  },
+  "cdn": {
+    "uses": "CDN detected",
+    "none": "No CDN detected",
+    "vendor": "Vendor",
+    "evidence": "Evidence",
+    "cname": "CNAME"
+  },
+  "mail": {
+    "noMx": "No mail server configured for this domain",
+    "mxHost": "Primary MX",
+    "startTls": "STARTTLS",
+    "cert": "Mail server certificate",
+    "subject": "Subject",
+    "issuer": "Issuer"
+  },
+  "gm": {
+    "supportedDesc": "Server supports GM (TLCP) HTTPS",
+    "notSupportedDesc": "Server does not support GM HTTPS",
+    "cipher": "Selected cipher"
+  },
+  "pqc": {
+    "supportedDesc": "Server supports post-quantum key exchange",
+    "notSupportedDesc": "Server does not support post-quantum HTTPS",
+    "group": "Selected group",
+    "viaHelloRetry": "Negotiated via HelloRetryRequest"
+  }
+}
