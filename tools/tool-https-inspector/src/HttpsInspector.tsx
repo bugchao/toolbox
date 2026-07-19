@@ -59,6 +59,64 @@ interface PqcModule extends ModuleBase {
   viaHelloRetry?: boolean
 }
 
+interface OverviewModule extends ModuleBase {
+  ip: string
+  port: number
+  geo: { country: string; countryCode: string; regionName: string; city: string; isp: string } | null
+}
+
+interface CertificateModule extends ModuleBase {
+  signatureAlgorithm: string
+  publicKeyAlgorithm: string
+  publicKeyBits: string
+  brand: string
+  ctCompliant: boolean
+  revocationStatus: string
+}
+
+interface ProtocolDetailsModule extends ModuleBase {
+  http2: boolean
+  hsts: boolean
+  hstsHeader: string | null
+  ocspStapled: boolean
+  forwardSecrecy: boolean | null
+  caa: boolean
+  caaRecords: Array<{ critical: number; issue?: string; issuewild?: string }>
+}
+
+interface CipherMatrixModule extends ModuleBase {
+  matrix: { tls13: string[]; tls12: string[]; tls11: string[]; tls10: string[] }
+}
+
+interface VulnResult {
+  ok: boolean
+  vulnerable?: boolean
+  leakedBytes?: number
+  notSupported?: boolean
+  reason?: string
+  error?: string
+}
+
+interface VulnerabilitiesModule extends ModuleBase {
+  drown: VulnResult
+  poodle: VulnResult
+  freak: VulnResult
+  heartbleed: VulnResult
+  ccsInjection: VulnResult
+  robot: VulnResult
+}
+
+interface HandshakeSimModule extends ModuleBase {
+  clients: Array<{ id: string; label: string; success: boolean; negotiatedProtocol?: string }>
+}
+
+type CompatStatus = 'trusted' | 'untrusted' | 'unknown'
+
+interface CertCompatModule extends ModuleBase {
+  baseline: CompatStatus
+  platforms: Array<{ id: string; status: CompatStatus; reasons: string[] }>
+}
+
 interface Report {
   domain: string
   port: number
@@ -71,6 +129,13 @@ interface Report {
     gm: GmModule
     pqc: PqcModule
   }
+  overview: OverviewModule
+  certificate: CertificateModule
+  protocolDetails: ProtocolDetailsModule
+  cipherMatrix: CipherMatrixModule
+  vulnerabilities: VulnerabilitiesModule
+  handshakeSim: HandshakeSimModule
+  certCompat: CertCompatModule
   timestamp: string
 }
 
@@ -143,6 +208,7 @@ export default function HttpsInspector() {
   }
 
   const m = report?.modules
+  const compatLevel: Record<CompatStatus, StatusLevel> = { trusted: 'success', untrusted: 'danger', unknown: 'warning' }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
@@ -174,14 +240,40 @@ export default function HttpsInspector() {
 
           {report && m && (
             <div className="mt-6 space-y-4">
-              {/* 综合评级 */}
+              {/* 概述 */}
               <div className="flex items-center justify-between p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
-                <div>
+                <div className="space-y-1">
                   <p className="text-sm text-gray-500">{t('gradeLabel')}</p>
                   <p className="font-mono text-lg">{report.domain}</p>
+                  {report.overview.ok && (
+                    <div className="text-xs text-gray-500 space-y-0.5">
+                      <div>{t('overview.ip')}：{report.overview.ip}:{report.overview.port}</div>
+                      {report.overview.geo ? (
+                        <div>{t('overview.location')}：{report.overview.geo.country} {report.overview.geo.regionName} {report.overview.geo.city}（{report.overview.geo.isp}）</div>
+                      ) : (
+                        <div>{t('overview.geoUnavailable')}</div>
+                      )}
+                      <div>{t('overview.detectedAt')}：{new Date(report.timestamp).toLocaleString()}</div>
+                    </div>
+                  )}
                 </div>
                 <span className={`text-5xl font-bold ${gradeColor(report.grade)}`}>{report.grade ?? '—'}</span>
               </div>
+
+              {/* 证书信息扩展 */}
+              <ModuleCard title={t('modules.certificate')} error={report.certificate.ok ? undefined : report.certificate.error}>
+                {report.certificate.ok && (
+                  <div className="space-y-2">
+                    <Row label={t('certificate.signatureAlgorithm')}>{report.certificate.signatureAlgorithm || '-'}</Row>
+                    <Row label={t('certificate.publicKeyAlgorithm')}>
+                      {report.certificate.publicKeyAlgorithm || '-'}{report.certificate.publicKeyBits ? ` (${report.certificate.publicKeyBits} bit)` : ''}
+                    </Row>
+                    <Row label={t('certificate.brand')}>{report.certificate.brand || '-'}</Row>
+                    <StatusBadge level={report.certificate.ctCompliant ? 'success' : 'neutral'} label={`${t('certificate.ctCompliant')} ${report.certificate.ctCompliant ? '✓' : '✗'}`} />
+                    <p className="text-xs text-gray-400">{t('certificate.revocationUnknown')}</p>
+                  </div>
+                )}
+              </ModuleCard>
 
               {/* HTTPS 评级 */}
               <ModuleCard title={t('modules.https')} error={m.https.ok ? undefined : m.https.error}>
@@ -291,6 +383,107 @@ export default function HttpsInspector() {
                   )}
                 </ModuleCard>
               </div>
+
+              {/* 协议详情 */}
+              <ModuleCard title={t('modules.protocolDetails')} error={report.protocolDetails.ok ? undefined : report.protocolDetails.error}>
+                {report.protocolDetails.ok && (
+                  <div className="flex flex-wrap gap-2">
+                    <StatusBadge level={report.protocolDetails.http2 ? 'success' : 'neutral'} label={`${t('protocolDetails.http2')} ${report.protocolDetails.http2 ? '✓' : '✗'}`} />
+                    <StatusBadge level={report.protocolDetails.hsts ? 'success' : 'warning'} label={`${t('protocolDetails.hsts')} ${report.protocolDetails.hsts ? '✓' : '✗'}`} />
+                    <StatusBadge level={report.protocolDetails.ocspStapled ? 'success' : 'neutral'} label={`${t('protocolDetails.ocspStapled')} ${report.protocolDetails.ocspStapled ? '✓' : '✗'}`} />
+                    <StatusBadge
+                      level={report.protocolDetails.forwardSecrecy ? 'success' : 'warning'}
+                      label={`${t('protocolDetails.forwardSecrecy')} ${report.protocolDetails.forwardSecrecy ? '✓' : '✗'}`}
+                    />
+                    <StatusBadge level={report.protocolDetails.caa ? 'success' : 'neutral'} label={`${t('protocolDetails.caa')} ${report.protocolDetails.caa ? '✓' : '✗'}`} />
+                  </div>
+                )}
+              </ModuleCard>
+
+              {/* 协议与套件枚举 */}
+              <ModuleCard title={t('modules.cipherMatrix')} error={report.cipherMatrix.ok ? undefined : report.cipherMatrix.error}>
+                {report.cipherMatrix.ok && (
+                  <div className="space-y-2">
+                    {(['tls13', 'tls12', 'tls11', 'tls10'] as const).map((k) => (
+                      <div key={k} className="text-sm">
+                        <span className="text-gray-500">{k.replace('tls1', 'TLS 1.')}：</span>
+                        {report.cipherMatrix.matrix[k].length > 0 ? (
+                          <span className="font-mono text-xs">{report.cipherMatrix.matrix[k].join(', ')}</span>
+                        ) : (
+                          <span className="text-xs text-gray-400">{t('cipherMatrix.noSuites')}</span>
+                        )}
+                      </div>
+                    ))}
+                    <p className="text-xs text-gray-400">{t('cipherMatrix.note')}</p>
+                  </div>
+                )}
+              </ModuleCard>
+
+              {/* SSL 漏洞：checkVulnerabilities 总是 ok:true，各子项自带 ok/notSupported 标记 */}
+              <ModuleCard title={t('modules.vulnerabilities')}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {([
+                    ['drown', report.vulnerabilities.drown],
+                    ['poodle', report.vulnerabilities.poodle],
+                    ['freak', report.vulnerabilities.freak],
+                    ['heartbleed', report.vulnerabilities.heartbleed],
+                    ['ccsInjection', report.vulnerabilities.ccsInjection],
+                    ['robot', report.vulnerabilities.robot],
+                  ] as const).map(([key, v]) => (
+                    <div key={key} className="text-sm flex items-center gap-2">
+                      <span className="text-gray-500 flex-1">{t(`vulnerabilities.${key}`)}</span>
+                      {v.notSupported ? (
+                        <StatusBadge level="neutral" label={t('vulnerabilities.notSupportedNote')} />
+                      ) : v.ok ? (
+                        <StatusBadge level={v.vulnerable ? 'danger' : 'success'} label={v.vulnerable ? t('vulnerabilities.found') : t('vulnerabilities.notFound')} />
+                      ) : (
+                        <StatusBadge level="warning" label={t('moduleError')} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {report.vulnerabilities.heartbleed.vulnerable && (
+                  <p className="text-xs text-red-500 mt-2">{t('vulnerabilities.leakedBytes', { count: report.vulnerabilities.heartbleed.leakedBytes ?? 0 })}</p>
+                )}
+              </ModuleCard>
+
+              {/* 客户端握手模拟 */}
+              <ModuleCard title={t('modules.handshakeSim')} error={report.handshakeSim.ok ? undefined : report.handshakeSim.error}>
+                {report.handshakeSim.ok && (
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                      {report.handshakeSim.clients.map((c) => (
+                        <div key={c.id} className="text-sm flex items-center gap-2">
+                          <span className="text-gray-500 flex-1 truncate">{c.label}</span>
+                          <StatusBadge
+                            level={c.success ? 'success' : 'danger'}
+                            label={c.success ? (c.negotiatedProtocol ?? t('handshakeSim.success')) : t('handshakeSim.failure')}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-400">{t('handshakeSim.note')}</p>
+                  </div>
+                )}
+              </ModuleCard>
+
+              {/* 证书兼容性测试 */}
+              <ModuleCard title={t('modules.certCompat')} error={report.certCompat.ok ? undefined : report.certCompat.error}>
+                {report.certCompat.ok && (
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                      {report.certCompat.platforms.map((p) => (
+                        <StatusBadge
+                          key={p.id}
+                          level={compatLevel[p.status]}
+                          label={`${t(`certCompat.platforms.${p.id}`)}：${t(`certCompat.${p.status}`)}`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-xs text-gray-400">{t('certCompat.note')}</p>
+                  </div>
+                )}
+              </ModuleCard>
             </div>
           )}
         </Card>
