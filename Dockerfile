@@ -20,6 +20,9 @@ FROM docker.io/library/node:24-alpine
 
 WORKDIR /app
 
+# openssl CLI：证书解析类工具（cert-suite-shared、https-inspector）通过 execFile 调用
+RUN apk add --no-cache openssl
+
 # 复制生产所需文件并安装依赖（含 cheerio、tsx 用于爬虫）
 COPY package.json server.js ./
 RUN npm install --omit=dev
