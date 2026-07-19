@@ -1,0 +1,137 @@
+{
+  "title": "全方位 HTTPS 检测",
+  "description": "输入域名，一次检测 HTTPS 评级、IPv6、CDN、邮件服务器、国密与后量子支持",
+  "inputPlaceholder": "输入域名，例如：example.com",
+  "check": "检测",
+  "checking": "检测中",
+  "gradeLabel": "综合评级",
+  "supported": "支持",
+  "notSupported": "不支持",
+  "yes": "是",
+  "no": "否",
+  "noData": "无数据",
+  "moduleError": "该项检测失败",
+  "singleVantagePoint": "结论基于单一探测点，仅供参考",
+  "modules": {
+    "overview": "概述",
+    "https": "HTTPS 评级",
+    "ipv6": "IPv6 检测",
+    "cdn": "CDN 检测",
+    "mail": "邮件服务器",
+    "gm": "国密 HTTPS",
+    "pqc": "后量子 HTTPS",
+    "certificate": "证书信息",
+    "protocolDetails": "协议详情",
+    "cipherMatrix": "协议与套件",
+    "vulnerabilities": "SSL 漏洞",
+    "handshakeSim": "客户端握手模拟",
+    "certCompat": "证书兼容性测试"
+  },
+  "https": {
+    "protocols": "协议版本",
+    "cipher": "加密套件",
+    "negotiated": "协商协议",
+    "reasons": "扣分原因",
+    "suggestions": "修复建议",
+    "cert": "证书",
+    "subject": "主体",
+    "issuer": "颁发机构",
+    "validity": "有效期",
+    "daysRemaining": "剩余 {{days}} 天",
+    "san": "域名覆盖（SAN）",
+    "chain": "证书链",
+    "selfSigned": "自签名"
+  },
+  "ipv6": {
+    "deployed": "已部署 IPv6",
+    "notDeployed": "未部署 IPv6",
+    "reachable": "IPv6 下 HTTPS 可用",
+    "unreachable": "IPv6 下 HTTPS 不可用",
+    "addresses": "IPv6 地址"
+  },
+  "cdn": {
+    "uses": "使用了 CDN",
+    "none": "未检测到 CDN",
+    "vendor": "厂商",
+    "evidence": "判定依据",
+    "cname": "CNAME"
+  },
+  "mail": {
+    "noMx": "该域名未配置邮件服务器",
+    "mxHost": "首选 MX",
+    "startTls": "STARTTLS",
+    "cert": "邮件服务器证书",
+    "subject": "主体",
+    "issuer": "颁发机构"
+  },
+  "gm": {
+    "supportedDesc": "服务端支持国密（TLCP/GM）HTTPS",
+    "notSupportedDesc": "服务端不支持国密 HTTPS",
+    "cipher": "选中套件"
+  },
+  "pqc": {
+    "supportedDesc": "服务端支持后量子密钥交换",
+    "notSupportedDesc": "服务端不支持后量子 HTTPS",
+    "group": "选中分组",
+    "viaHelloRetry": "经 HelloRetryRequest 协商"
+  },
+  "overview": {
+    "ip": "出口 IP",
+    "location": "地理位置",
+    "detectedAt": "检测时间",
+    "geoUnavailable": "地理位置查询失败，仅显示 IP"
+  },
+  "certificate": {
+    "signatureAlgorithm": "签名算法",
+    "publicKeyAlgorithm": "公钥算法",
+    "publicKeyBits": "公钥强度",
+    "brand": "证书品牌",
+    "ctCompliant": "CT 合规",
+    "revocationStatus": "吊销状态",
+    "revocationUnknown": "未知（未实现完整 OCSP 请求链路）",
+    "opensslUnavailable": "系统未安装 openssl，扩展字段不可用"
+  },
+  "protocolDetails": {
+    "http2": "HTTP/2",
+    "hsts": "HSTS",
+    "ocspStapled": "OCSP 装订",
+    "forwardSecrecy": "正向保密",
+    "caa": "CAA 记录"
+  },
+  "cipherMatrix": {
+    "note": "TLS 1.3 套件由运行时固定管理，无法逐个禁用探测",
+    "noSuites": "该版本下未接受任何候选套件（或不支持此协议版本）"
+  },
+  "vulnerabilities": {
+    "drown": "DROWN（SSLv2）",
+    "poodle": "POODLE（SSLv3 降级）",
+    "freak": "FREAK（弱密钥降级）",
+    "heartbleed": "Heartbleed（心跳内存泄露）",
+    "ccsInjection": "CCS 注入",
+    "robot": "ROBOT",
+    "notFound": "未发现风险",
+    "found": "存在风险",
+    "leakedBytes": "泄露字节数：{{count}}（内容已丢弃，不做展示）",
+    "notSupportedNote": "暂未支持精确探测"
+  },
+  "handshakeSim": {
+    "note": "近似模拟，非真实客户端库回放",
+    "success": "握手成功",
+    "failure": "握手失败",
+    "negotiatedProtocol": "协商协议"
+  },
+  "certCompat": {
+    "note": "推断结果，非真实多平台验证",
+    "trusted": "可信",
+    "untrusted": "不可信",
+    "unknown": "未知",
+    "platforms": {
+      "android": "Android",
+      "ios": "iOS",
+      "macos": "macOS",
+      "windows": "Windows",
+      "browsers": "主流浏览器",
+      "java": "Java"
+    }
+  }
+}

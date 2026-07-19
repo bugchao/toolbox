@@ -5,6 +5,7 @@ import { registerDnssecVerifyApiRoutes } from '../../../tools/tool-security-dnss
 import { registerSecurityDnsDdosApiRoutes } from '../../../tools/tool-security-dns-ddos/server/dns-ddos-api.js'
 import { registerSecurityDomainHijackApiRoutes } from '../../../tools/tool-security-domain-hijack/server/domain-hijack-api.js'
 import { registerSslCertApiRoutes } from '../../../tools/tool-ssl-cert/server/ssl-cert-api.js'
+import { registerHttpsInspectorApiRoutes } from '../../../tools/tool-https-inspector/server/https-inspector-api.js'
 import { registerHttpHeadersApiRoutes } from '../../../tools/tool-http-headers/server/http-headers-api.js'
 import { registerCertToolsApiRoutes } from '../../../tools/tool-cert-suite-shared/server/cert-tools-api.js'
 
@@ -18,6 +19,7 @@ export const securityService = defineServiceModule({
   routePrefixes: [
     '/api/security',
     '/api/ssl',
+    '/api/https-inspector',
     '/api/http-headers',
     '/api/cert-tools',
   ],
@@ -28,6 +30,7 @@ export const securityService = defineServiceModule({
     registerSecurityDnsDdosApiRoutes(app)
     registerSecurityDomainHijackApiRoutes(app)
     registerSslCertApiRoutes(app)
+    registerHttpsInspectorApiRoutes(app)
     registerHttpHeadersApiRoutes(app)
     registerCertToolsApiRoutes(app)
   },

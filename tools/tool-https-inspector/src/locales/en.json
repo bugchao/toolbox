@@ -1,0 +1,137 @@
+{
+  "title": "HTTPS Inspector",
+  "description": "Enter a domain to check HTTPS grade, IPv6, CDN, mail server, GM and post-quantum support at once",
+  "inputPlaceholder": "Enter a domain, e.g. example.com",
+  "check": "Check",
+  "checking": "Checking",
+  "gradeLabel": "Overall grade",
+  "supported": "Supported",
+  "notSupported": "Not supported",
+  "yes": "Yes",
+  "no": "No",
+  "noData": "No data",
+  "moduleError": "This check failed",
+  "singleVantagePoint": "Based on a single vantage point, for reference only",
+  "modules": {
+    "overview": "Overview",
+    "https": "HTTPS Grade",
+    "ipv6": "IPv6",
+    "cdn": "CDN",
+    "mail": "Mail Server",
+    "gm": "GM HTTPS",
+    "pqc": "Post-Quantum HTTPS",
+    "certificate": "Certificate Info",
+    "protocolDetails": "Protocol Details",
+    "cipherMatrix": "Protocol & Ciphers",
+    "vulnerabilities": "SSL Vulnerabilities",
+    "handshakeSim": "Client Handshake Simulation",
+    "certCompat": "Certificate Compatibility"
+  },
+  "https": {
+    "protocols": "Protocol versions",
+    "cipher": "Cipher suite",
+    "negotiated": "Negotiated protocol",
+    "reasons": "Deductions",
+    "suggestions": "Recommendations",
+    "cert": "Certificate",
+    "subject": "Subject",
+    "issuer": "Issuer",
+    "validity": "Validity",
+    "daysRemaining": "{{days}} days left",
+    "san": "Subject Alternative Names",
+    "chain": "Certificate chain",
+    "selfSigned": "Self-signed"
+  },
+  "ipv6": {
+    "deployed": "IPv6 deployed",
+    "notDeployed": "IPv6 not deployed",
+    "reachable": "HTTPS reachable over IPv6",
+    "unreachable": "HTTPS not reachable over IPv6",
+    "addresses": "IPv6 addresses"
+  },
+  "cdn": {
+    "uses": "CDN detected",
+    "none": "No CDN detected",
+    "vendor": "Vendor",
+    "evidence": "Evidence",
+    "cname": "CNAME"
+  },
+  "mail": {
+    "noMx": "No mail server configured for this domain",
+    "mxHost": "Primary MX",
+    "startTls": "STARTTLS",
+    "cert": "Mail server certificate",
+    "subject": "Subject",
+    "issuer": "Issuer"
+  },
+  "gm": {
+    "supportedDesc": "Server supports GM (TLCP) HTTPS",
+    "notSupportedDesc": "Server does not support GM HTTPS",
+    "cipher": "Selected cipher"
+  },
+  "pqc": {
+    "supportedDesc": "Server supports post-quantum key exchange",
+    "notSupportedDesc": "Server does not support post-quantum HTTPS",
+    "group": "Selected group",
+    "viaHelloRetry": "Negotiated via HelloRetryRequest"
+  },
+  "overview": {
+    "ip": "Exit IP",
+    "location": "Location",
+    "detectedAt": "Detected at",
+    "geoUnavailable": "Geolocation lookup failed, showing IP only"
+  },
+  "certificate": {
+    "signatureAlgorithm": "Signature algorithm",
+    "publicKeyAlgorithm": "Public key algorithm",
+    "publicKeyBits": "Public key strength",
+    "brand": "Certificate brand",
+    "ctCompliant": "CT compliant",
+    "revocationStatus": "Revocation status",
+    "revocationUnknown": "Unknown (full OCSP request flow not implemented)",
+    "opensslUnavailable": "openssl not installed on the system, extended fields unavailable"
+  },
+  "protocolDetails": {
+    "http2": "HTTP/2",
+    "hsts": "HSTS",
+    "ocspStapled": "OCSP Stapling",
+    "forwardSecrecy": "Forward Secrecy",
+    "caa": "CAA Records"
+  },
+  "cipherMatrix": {
+    "note": "TLS 1.3 suites are managed by the runtime and cannot be individually disabled for probing",
+    "noSuites": "No candidate suites were accepted for this version (or the version is unsupported)"
+  },
+  "vulnerabilities": {
+    "drown": "DROWN (SSLv2)",
+    "poodle": "POODLE (SSLv3 downgrade)",
+    "freak": "FREAK (weak key downgrade)",
+    "heartbleed": "Heartbleed (memory disclosure)",
+    "ccsInjection": "CCS Injection",
+    "robot": "ROBOT",
+    "notFound": "No risk found",
+    "found": "Risk found",
+    "leakedBytes": "Leaked bytes: {{count}} (content discarded, not displayed)",
+    "notSupportedNote": "Precise detection not yet supported"
+  },
+  "handshakeSim": {
+    "note": "Approximate simulation, not a real client library replay",
+    "success": "Handshake succeeded",
+    "failure": "Handshake failed",
+    "negotiatedProtocol": "Negotiated protocol"
+  },
+  "certCompat": {
+    "note": "Inferred result, not a real multi-platform verification",
+    "trusted": "Trusted",
+    "untrusted": "Untrusted",
+    "unknown": "Unknown",
+    "platforms": {
+      "android": "Android",
+      "ios": "iOS",
+      "macos": "macOS",
+      "windows": "Windows",
+      "browsers": "Major Browsers",
+      "java": "Java"
+    }
+  }
+}
