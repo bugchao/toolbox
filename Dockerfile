@@ -24,7 +24,7 @@ RUN pnpm prune --prod
 # 阶段2: 生产环境（新闻爬虫为 TypeScript，无 Python 依赖）
 FROM docker.io/library/node:24-alpine
 
-# 证书工具（cert-content-viewer/cert-csr-viewer/ssl-format-converter）依赖系统 openssl CLI
+# 证书/TLS 解析类工具（cert-suite-shared、https-inspector）通过 execFile 调用系统 openssl CLI
 RUN apk add --no-cache openssl
 
 WORKDIR /app
