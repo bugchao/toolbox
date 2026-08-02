@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface DayEntry {
   day: number;
@@ -138,10 +139,6 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
     URL.revokeObjectURL(url);
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(generatedJournal);
-    alert('已复制到剪贴板！');
-  };
 
   if (step === 'input') {
     return (
@@ -340,12 +337,13 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
             >
               返回编辑
             </button>
-            <button
-              onClick={copyToClipboard}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              📋 复制
-            </button>
+            <CopyButton
+              variant="button"
+              value={generatedJournal}
+              label="📋 复制"
+              copiedLabel="✅ 已复制"
+              className="!bg-blue-500 !text-white hover:!bg-blue-600"
+            />
             <button
               onClick={downloadJournal}
               className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"

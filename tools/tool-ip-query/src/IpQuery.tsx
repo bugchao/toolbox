@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Search, Copy, MapPin, Globe, Wifi, Calendar, Info, Check, Loader2 } from 'lucide-react'
-import { PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
+import { Search, MapPin, Globe, Wifi, Calendar, Info, Loader2 } from 'lucide-react'
+import { CopyButton, PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
 
 export const I18N_NAMESPACE = 'toolIpQuery'
 
@@ -30,7 +30,6 @@ const IpQuery: React.FC = () => {
   const [ipInfo, setIpInfo] = useState<IpInfo | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const [activeTab, setActiveTab] = useState<'query' | 'history'>('query')
 
@@ -93,12 +92,6 @@ const IpQuery: React.FC = () => {
     }
   }
 
-  const copyToClipboard = (text: string, field: string) => {
-    navigator.clipboard.writeText(text)
-    setCopiedField(field)
-    setTimeout(() => setCopiedField(null), 2000)
-  }
-
   const InfoItem = ({ labelKey, value, icon: Icon, copyable = false }: { labelKey: string; value: string | number; icon: React.ElementType; copyable?: boolean }) => (
     <div className="flex items-start space-x-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors">
       <div className="mt-1 text-indigo-600 dark:text-indigo-400">
@@ -109,13 +102,11 @@ const IpQuery: React.FC = () => {
         <div className="text-gray-900 dark:text-gray-100 font-medium mt-0.5 flex items-center">
           {value}
           {copyable && (
-            <button
-              onClick={() => copyToClipboard(String(value), labelKey)}
-              className="ml-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-              title={t('copy')}
-            >
-              {copiedField === labelKey ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-            </button>
+            <CopyButton
+              value={String(value)}
+              label={t('copy')}
+              className="ml-2 !text-gray-400 hover:!text-indigo-600 dark:hover:!text-indigo-400"
+            />
           )}
         </div>
       </div>
@@ -255,13 +246,13 @@ const IpQuery: React.FC = () => {
           </div>
 
           <div className="flex justify-center">
-            <button
-              onClick={() => copyToClipboard(JSON.stringify(ipInfo, null, 2), 'copyAll')}
-              className="bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 border border-indigo-600 dark:border-indigo-500 px-6 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors font-medium flex items-center"
-            >
-              {copiedField === 'copyAll' ? <Check className="w-5 h-5 mr-2" /> : <Copy className="w-5 h-5 mr-2" />}
-              {copiedField === 'copyAll' ? t('copiedAll') : t('copyAll')}
-            </button>
+            <CopyButton
+              variant="button"
+              value={JSON.stringify(ipInfo, null, 2)}
+              label={t('copyAll')}
+              copiedLabel={t('copiedAll')}
+              className="!bg-white dark:!bg-gray-800 !text-indigo-600 dark:!text-indigo-400 border border-indigo-600 dark:border-indigo-500 hover:!bg-indigo-50 dark:hover:!bg-indigo-900/20"
+            />
           </div>
         </div>
       )}

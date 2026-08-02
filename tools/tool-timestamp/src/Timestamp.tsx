@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Clock, Check } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Clock } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 const Timestamp: React.FC = () => {
   const { t } = useTranslation('nav')
@@ -9,7 +9,6 @@ const Timestamp: React.FC = () => {
   const [timestamp, setTimestamp] = useState('')
   const [datetime, setDatetime] = useState('')
   const [unit, setUnit] = useState<'second' | 'millisecond'>('second')
-  const [copied, setCopied] = useState(false)
   const [error, setError] = useState('')
 
   const getCurrentTimestamp = () => {
@@ -71,11 +70,6 @@ const Timestamp: React.FC = () => {
     }
   }
 
-  const copyToClipboard = async (text: string) => {
-    await navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   const clearAll = () => {
     setTimestamp('')
@@ -144,13 +138,13 @@ const Timestamp: React.FC = () => {
           <div className="flex items-center justify-between mb-2">
             <label className="block text-sm font-medium text-gray-700">时间戳</label>
             {timestamp && (
-              <button
-                onClick={() => copyToClipboard(timestamp)}
-                className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
-              >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? '已复制' : '复制'}
-              </button>
+              <CopyButton
+                variant="inline"
+                value={timestamp}
+                label="复制"
+                copiedLabel="已复制"
+                className="text-sm !text-indigo-600 hover:!text-indigo-800"
+              />
             )}
           </div>
           <div className="flex gap-4">
@@ -174,13 +168,13 @@ const Timestamp: React.FC = () => {
           <div className="flex items-center justify-between mb-2">
             <label className="block text-sm font-medium text-gray-700">日期时间</label>
             {datetime && (
-              <button
-                onClick={() => copyToClipboard(datetime)}
-                className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
-              >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? '已复制' : '复制'}
-              </button>
+              <CopyButton
+                variant="inline"
+                value={datetime}
+                label="复制"
+                copiedLabel="已复制"
+                className="text-sm !text-indigo-600 hover:!text-indigo-800"
+              />
             )}
           </div>
           <div className="flex gap-4">

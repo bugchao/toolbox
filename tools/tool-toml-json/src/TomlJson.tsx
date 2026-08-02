@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeftRight, Check, ClipboardCopy, Eraser, FileCode2 } from 'lucide-react'
+import { ArrowLeftRight, Eraser, FileCode2 } from 'lucide-react'
 import { jsonToToml, tomlToJson, type ConvertResult, type JsonIndent } from './lib/convert'
 import { SAMPLES } from './lib/samples'
 
@@ -15,7 +15,6 @@ const TomlJson: React.FC = () => {
   const [indent, setIndent] = useState<JsonIndent>(2)
   const [tomlError, setTomlError] = useState<{ message: string; line?: number } | null>(null)
   const [jsonError, setJsonError] = useState<{ message: string; line?: number } | null>(null)
-  const [copied, setCopied] = useState<'toml' | 'json' | null>(null)
   const skipTomlSync = useRef(false)
   const skipJsonSync = useRef(false)
   const lastEditedRef = useRef<'toml' | 'json' | null>('toml')
@@ -59,15 +58,6 @@ const TomlJson: React.FC = () => {
       setJsonError({ message: r.message, line: r.line })
     }
   }, [json, direction])
-
-  const onCopy = async (side: 'toml' | 'json', text: string) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(side)
-      window.setTimeout(() => setCopied((cur) => (cur === side ? null : cur)), 1200)
-    } catch { /* ignore */ }
-  }
 
   const onTomlChange = (v: string) => { lastEditedRef.current = 'toml'; setToml(v) }
   const onJsonChange = (v: string) => { lastEditedRef.current = 'json'; setJson(v) }
@@ -148,15 +138,14 @@ const TomlJson: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>TOML · {toml.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('toml', toml)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={toml}
                   disabled={!toml}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'toml' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'toml' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={toml}
@@ -178,15 +167,14 @@ const TomlJson: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>JSON · {json.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('json', json)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={json}
                   disabled={!json}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'json' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'json' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={json}

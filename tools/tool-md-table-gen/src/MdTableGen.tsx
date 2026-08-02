@@ -6,8 +6,6 @@ import {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
-  Copy,
-  Check,
   Download,
   AlignLeft,
   AlignCenter,
@@ -17,7 +15,7 @@ import {
   Trash2,
   Upload,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -70,7 +68,6 @@ const MdTableGen: React.FC = () => {
   const [importFormat, setImportFormat] = useState<ImportFormat>('csv')
   const [importText, setImportText] = useState('')
   const [importError, setImportError] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const updateTable = useCallback(
     (next: TableData) => {
@@ -109,16 +106,6 @@ const MdTableGen: React.FC = () => {
     setImportOpen(false)
   }
 
-  const copyOutput = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
   const downloadOutput = () => {
     const ext = data.exportFormat === 'md' ? 'md' : data.exportFormat
     const mime =
@@ -382,15 +369,16 @@ const MdTableGen: React.FC = () => {
             </div>
           </div>
           <div className="flex gap-1">
-            <button
-              type="button"
-              onClick={copyOutput}
+            <CopyButton
+              value={output}
               disabled={!output}
-              className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
-            >
-              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              {copied ? t('output.copied') : t('output.copy')}
-            </button>
+              size="sm"
+              variant="button"
+              buttonVariant="ghost"
+              label={t('output.copy')}
+              copiedLabel={t('output.copied')}
+              className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+            />
             <button
               type="button"
               onClick={downloadOutput}

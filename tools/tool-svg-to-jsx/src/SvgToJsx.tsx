@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import {
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -10,7 +11,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, Code2, Copy, FileWarning } from 'lucide-react'
+import { Code2, FileWarning } from 'lucide-react'
 import { build, type JsxOptions } from './lib/svg'
 
 const SAMPLE = `<?xml version="1.0" encoding="UTF-8"?>
@@ -26,7 +27,6 @@ const SvgToJsx: React.FC = () => {
   const { t } = useTranslation('toolSvgToJsx')
   const [input, setInput] = useState(SAMPLE)
   const [componentName, setComponentName] = useState('SvgIcon')
-  const [copied, setCopied] = useState(false)
 
   const [optimize, setOptimize] = useState(true)
   const [toJsx, setToJsx] = useState(true)
@@ -50,16 +50,6 @@ const SvgToJsx: React.FC = () => {
 
   const result = useMemo(() => build(input, options), [input, options])
 
-  const onCopy = async () => {
-    if (!result.code) return
-    try {
-      await navigator.clipboard.writeText(result.code)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -169,18 +159,14 @@ const SvgToJsx: React.FC = () => {
                   {t('output.heading')}
                 </h2>
                 {result.code && (
-                  <button
-                    type="button"
-                    onClick={() => void onCopy()}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-gray-700 dark:text-gray-300 dark:hover:border-indigo-700"
-                  >
-                    {copied ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-500" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5" />
-                    )}
-                    {copied ? t('output.copied') : t('output.copy')}
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    size="sm"
+                    value={result.code}
+                    label={t('output.copy')}
+                    copiedLabel={t('output.copied')}
+                    className="border border-gray-200 hover:border-indigo-300 hover:!text-indigo-600 dark:border-gray-700 dark:hover:border-indigo-700"
+                  />
                 )}
               </div>
 

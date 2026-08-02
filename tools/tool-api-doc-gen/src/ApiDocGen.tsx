@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FileText, Copy, Download, Plus, Trash2 } from 'lucide-react'
-import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { FileText, Download, Plus, Trash2 } from 'lucide-react'
+import { CopyButton, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { ApiData, Parameter, Response, METHODS, PARAM_TYPES } from './types'
 import { parseOpenApi, generateMarkdown, generateHtml } from './utils'
 
@@ -56,12 +56,6 @@ export default function ApiDocGen() {
   const output = previewFormat === 'markdown' ? markdown : html
   const inputCls = 'w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100'
   const labelCls = 'mb-1 block text-xs font-medium text-gray-500 dark:text-gray-400'
-
-  const handleCopy = async () => {
-    if (!output) return
-    await navigator.clipboard.writeText(output)
-    setMessage(t('copied'))
-  }
 
   const handleDownload = () => {
     if (!output) return
@@ -239,9 +233,13 @@ export default function ApiDocGen() {
                     </button>
                   ))}
                 </div>
-                <button onClick={handleCopy} className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700" title={t('copy')}>
-                  <Copy className="h-4 w-4" />
-                </button>
+                <CopyButton
+                  value={output}
+                  disabled={!output}
+                  label={t('copy')}
+                  onCopied={() => setMessage(t('copied'))}
+                  className="!h-9 !w-9 rounded-lg border border-gray-200 hover:!bg-gray-50 dark:border-gray-700 dark:hover:!bg-gray-700"
+                />
                 <button onClick={handleDownload} className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700" title={t('download')}>
                   <Download className="h-4 w-4" />
                 </button>

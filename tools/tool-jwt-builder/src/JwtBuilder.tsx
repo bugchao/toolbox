@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, KeySquare, RefreshCw, ShieldCheck, ShieldX } from 'lucide-react'
+import { KeySquare, RefreshCw, ShieldCheck, ShieldX } from 'lucide-react'
 import {
   buildClaimsTemplate,
   parsePayload,
@@ -22,7 +22,6 @@ const JwtBuilder: React.FC = () => {
   const [secretEncoding, setSecretEncoding] = useState<SecretEncoding>('utf8')
   const [token, setToken] = useState('')
   const [signError, setSignError] = useState<string | null>(null)
-  const [copied, setCopied] = useState(false)
 
   // 验证 Tab 状态
   const [verifyToken, setVerifyToken] = useState('')
@@ -73,15 +72,6 @@ const JwtBuilder: React.FC = () => {
       next.exp = now + Math.max(60, oldExp - oldIat)
     }
     setPayloadText(JSON.stringify(next, null, 2))
-  }
-
-  const onCopy = async () => {
-    if (!token) return
-    try {
-      await navigator.clipboard.writeText(token)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
   }
 
   const onVerify = async () => {
@@ -227,15 +217,14 @@ const JwtBuilder: React.FC = () => {
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-200">
                   {t('sign.output')}
                 </span>
-                <button
-                  type="button"
-                  onClick={() => void onCopy()}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={token}
                   disabled={!token}
-                  className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               {tokenParts ? (
                 <div className="break-all rounded-md border border-gray-200 bg-gray-50 p-3 font-mono text-xs leading-relaxed dark:border-gray-700 dark:bg-gray-900">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Upload, Check, RefreshCw } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Upload, RefreshCw } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 const Base64: React.FC = () => {
   const { t } = useTranslation('nav')
@@ -9,7 +9,6 @@ const Base64: React.FC = () => {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')
-  const [copied, setCopied] = useState(false)
   const [error, setError] = useState('')
 
   const convert = () => {
@@ -44,13 +43,6 @@ const Base64: React.FC = () => {
       setInput(`文件: ${file.name}`)
     }
     reader.readAsDataURL(file)
-  }
-
-  const copyToClipboard = async () => {
-    if (!output) return
-    await navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   const clearAll = () => {
@@ -107,14 +99,14 @@ const Base64: React.FC = () => {
             />
           </label>
 
-          <button
-            onClick={copyToClipboard}
+          <CopyButton
+            variant="button"
+            value={output}
             disabled={!output}
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 flex items-center gap-2"
-          >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            {copied ? '已复制' : '复制结果'}
-          </button>
+            label="复制结果"
+            copiedLabel="已复制"
+            className="!bg-green-600 !text-white hover:!bg-green-700"
+          />
 
           <button
             onClick={clearAll}

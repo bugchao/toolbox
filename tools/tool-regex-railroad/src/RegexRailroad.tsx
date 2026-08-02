@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Workflow } from 'lucide-react'
+import { Workflow } from 'lucide-react'
 import { parsePattern } from './lib/parse'
 import { toIr } from './lib/ir'
 import { renderSvg } from './lib/render'
@@ -21,7 +21,6 @@ const RegexRailroad: React.FC = () => {
   const [pattern, setPattern] = useState(SAMPLES[0].pattern)
   const [flags, setFlags] = useState(SAMPLES[0].flags)
   const [input, setInput] = useState('contact me at alice@example.com or bob@dev.io')
-  const [copied, setCopied] = useState(false)
 
   const parsed = useMemo(() => parsePattern(pattern, flags), [pattern, flags])
   const svg = useMemo(() => {
@@ -37,14 +36,6 @@ const RegexRailroad: React.FC = () => {
   const toggleFlag = (f: string) =>
     setFlags((cur) => (cur.includes(f) ? cur.replace(f, '') : cur + f))
 
-  const onCopySvg = async () => {
-    if (!svg) return
-    try {
-      await navigator.clipboard.writeText(svg)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   const onSample = (s: typeof SAMPLES[0]) => {
     setPattern(s.pattern); setFlags(s.flags)
@@ -128,12 +119,14 @@ const RegexRailroad: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               {t('railroad.heading')}
             </h2>
-            <Button type="button" variant="ghost" onClick={onCopySvg} disabled={!svg}>
-              <span className="inline-flex items-center gap-1.5">
-                {copied ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                {copied ? t('railroad.copied') : t('railroad.copySvg')}
-              </span>
-            </Button>
+            <CopyButton
+              variant="button"
+              buttonVariant="ghost"
+              value={svg}
+              disabled={!svg}
+              label={t('railroad.copySvg')}
+              copiedLabel={t('railroad.copied')}
+            />
           </div>
           {svg ? (
             <div

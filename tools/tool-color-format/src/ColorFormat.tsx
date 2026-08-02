@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { AlertTriangle, Check, ClipboardCopy, Palette } from 'lucide-react'
+import { AlertTriangle, Palette } from 'lucide-react'
 import {
   contrastHints,
   formatAll,
@@ -64,7 +64,6 @@ const ColorFormat: React.FC = () => {
   const { t } = useTranslation('toolColorFormat')
   const [input, setInput] = useState<string>(readLast)
   const [history, setHistory] = useState<string[]>(readHistory)
-  const [copied, setCopied] = useState<string | null>(null)
 
   const parsed = useMemo(() => parseColor(input), [input])
   const color: Color | null = parsed.ok ? parsed.color : null
@@ -103,14 +102,6 @@ const ColorFormat: React.FC = () => {
     setHslState(next)
     const c = fromHsl(next.h, next.s, next.l, next.a)
     setInput(toHsl(c))
-  }
-
-  const onCopy = async (fmt: string, value: string) => {
-    try {
-      await navigator.clipboard.writeText(value)
-      setCopied(fmt)
-      window.setTimeout(() => setCopied((cur) => (cur === fmt ? null : cur)), 1200)
-    } catch { /* ignore */ }
   }
 
   const pushHistory = (val: string) => {
@@ -270,7 +261,6 @@ const ColorFormat: React.FC = () => {
             <div className="grid gap-2 sm:grid-cols-2">
               {FORMAT_ORDER.map((fmt) => {
                 const value = allFormats[fmt]
-                const isCopied = copied === fmt
                 return (
                   <div
                     key={fmt}
@@ -282,13 +272,7 @@ const ColorFormat: React.FC = () => {
                     <code className="flex-1 truncate font-mono text-sm text-gray-800 dark:text-gray-100">
                       {value}
                     </code>
-                    <button
-                      type="button"
-                      onClick={() => onCopy(fmt, value)}
-                      className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                    >
-                      {isCopied ? <Check className="h-3.5 w-3.5" /> : <ClipboardCopy className="h-3.5 w-3.5" />}
-                    </button>
+                    <CopyButton value={value} size="sm" />
                   </div>
                 )
               })}

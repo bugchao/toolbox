@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Fingerprint, RefreshCw } from 'lucide-react'
+import { Fingerprint, RefreshCw } from 'lucide-react'
 import { generateMany, type IdKind } from './lib/ids'
 
 const KINDS: { id: IdKind; len: string }[] = [
@@ -17,24 +17,12 @@ const IdGenerator: React.FC = () => {
   const [count, setCount] = useState(5)
   const [nanoSize, setNanoSize] = useState(21)
   const [ids, setIds] = useState<string[]>(() => generateMany('uuidv4', 5))
-  const [copied, setCopied] = useState(false)
 
   const regen = (k: IdKind = kind, c: number = count, n: number = nanoSize) => {
     setIds(generateMany(k, c, n))
   }
 
   const onKind = (k: IdKind) => { setKind(k); regen(k) }
-
-  const copyAll = async () => {
-    if (ids.length === 0) return
-    try {
-      await navigator.clipboard.writeText(ids.join('\n'))
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
-
-  const copyOne = (s: string) => { void navigator.clipboard?.writeText(s).catch(() => undefined) }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -86,12 +74,14 @@ const IdGenerator: React.FC = () => {
             <Button onClick={() => regen()}>
               <span className="inline-flex items-center gap-1.5"><RefreshCw className="h-4 w-4" />{t('opts.regenerate')}</span>
             </Button>
-            <Button variant="ghost" onClick={() => void copyAll()}>
-              <span className="inline-flex items-center gap-1.5">
-                {copied ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                {copied ? t('opts.copied') : t('opts.copyAll')}
-              </span>
-            </Button>
+            <CopyButton
+              variant="button"
+              buttonVariant="ghost"
+              value={ids.join('\n')}
+              disabled={ids.length === 0}
+              label={t('opts.copyAll')}
+              copiedLabel={t('opts.copied')}
+            />
           </div>
 
           <ul className="divide-y divide-gray-100 rounded-md border border-gray-200 dark:divide-gray-800 dark:border-gray-700">
@@ -99,13 +89,11 @@ const IdGenerator: React.FC = () => {
               <li key={i} className="group flex items-center gap-3 px-3 py-1.5">
                 <span className="w-8 shrink-0 text-right text-[10px] text-gray-400">{i + 1}</span>
                 <code className="flex-1 truncate font-mono text-sm text-gray-800 dark:text-gray-100">{id}</code>
-                <button
-                  type="button"
-                  onClick={() => copyOne(id)}
-                  className="shrink-0 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:text-gray-600 dark:hover:text-gray-200"
-                >
-                  <ClipboardCopy className="h-3.5 w-3.5" />
-                </button>
+                <CopyButton
+                  value={id}
+                  size="sm"
+                  className="shrink-0 !text-gray-400 opacity-0 transition group-hover:opacity-100 hover:!text-gray-600 dark:hover:!text-gray-200"
+                />
               </li>
             ))}
           </ul>

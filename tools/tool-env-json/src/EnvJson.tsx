@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeftRight, Check, ClipboardCopy, Eraser, FileCog } from 'lucide-react'
+import { ArrowLeftRight, Eraser, FileCog } from 'lucide-react'
 import { jsonToMap, mapToJson, parseEnv, toEnv } from './lib/convert'
 
 const SAMPLE_ENV = `# app config
@@ -21,7 +21,6 @@ const EnvJson: React.FC = () => {
   const [exportPrefix, setExportPrefix] = useState(false)
   const [envError, setEnvError] = useState<string | null>(null)
   const [jsonError, setJsonError] = useState<string | null>(null)
-  const [copied, setCopied] = useState<'env' | 'json' | null>(null)
   const skipEnv = useRef(false)
   const skipJson = useRef(false)
   const lastEdited = useRef<'env' | 'json'>('env')
@@ -73,14 +72,6 @@ const EnvJson: React.FC = () => {
     if (jsonText.trim()) syncFromJson(jsonText, next)
   }
 
-  const onCopy = async (side: 'env' | 'json', text: string) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(side)
-      window.setTimeout(() => setCopied((c) => (c === side ? null : c)), 1200)
-    } catch { /* ignore */ }
-  }
 
   const onClear = () => {
     skipEnv.current = true
@@ -127,15 +118,14 @@ const EnvJson: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>.env · {envText.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('env', envText)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={envText}
                   disabled={!envText}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'env' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'env' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={envText}
@@ -155,15 +145,14 @@ const EnvJson: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>JSON · {jsonText.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('json', jsonText)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={jsonText}
                   disabled={!jsonText}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'json' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'json' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={jsonText}

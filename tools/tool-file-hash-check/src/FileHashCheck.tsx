@@ -2,8 +2,6 @@ import React, { useCallback, useMemo, useRef, useState } from 'react'
 import {
   FileCheck2,
   Upload,
-  Copy,
-  Check,
   X,
   Loader2,
   ShieldCheck,
@@ -12,7 +10,7 @@ import {
   Download,
   Info,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -40,7 +38,6 @@ const FileHashCheck: React.FC = () => {
   const [entries, setEntries] = useState<FileEntry[]>([])
   const [expected, setExpected] = useState('')
   const [dragOver, setDragOver] = useState(false)
-  const [copiedId, setCopiedId] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const expectedNormalized = useMemo(() => expected.trim().toLowerCase(), [expected])
@@ -94,16 +91,6 @@ const FileHashCheck: React.FC = () => {
     setEntries((prev) => prev.filter((e) => e.id !== id))
   }
   const clearAll = () => setEntries([])
-
-  const copyHash = async (id: string, algo: HashAlgo, hash: string) => {
-    try {
-      await navigator.clipboard.writeText(hash)
-      setCopiedId(`${id}:${algo}`)
-      setTimeout(() => setCopiedId(null), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
 
   const downloadAll = () => {
     if (entries.length === 0) return
@@ -225,9 +212,7 @@ const FileHashCheck: React.FC = () => {
                 entry={e}
                 expectedHash={expectedNormalized}
                 expectedAlgo={expectedAlgo}
-                onCopy={copyHash}
                 onRemove={() => removeEntry(e.id)}
-                copiedKey={copiedId}
                 t={t}
               />
             ))}
@@ -242,18 +227,14 @@ interface FileRowProps {
   entry: FileEntry
   expectedHash: string
   expectedAlgo: HashAlgo | null
-  onCopy: (id: string, algo: HashAlgo, hash: string) => void
   onRemove: () => void
-  copiedKey: string | null
   t: (k: string, opts?: Record<string, unknown>) => string
 }
 const FileRow: React.FC<FileRowProps> = ({
   entry,
   expectedHash,
   expectedAlgo,
-  onCopy,
   onRemove,
-  copiedKey,
   t,
 }) => {
   // 命中状态：若提供了 expectedHash 且该行的算法 hash 相符
@@ -320,7 +301,6 @@ const FileRow: React.FC<FileRowProps> = ({
             const hash = entry.hashes![a]
             const isMatched = matchedAlgo === a
             const isMismatched = mismatchAlgo === a
-            const copyKey = `${entry.id}:${a}`
             return (
               <div
                 key={a}
@@ -334,14 +314,12 @@ const FileRow: React.FC<FileRowProps> = ({
               >
                 <span className="text-gray-500 w-16 shrink-0">{a}</span>
                 <span className="flex-1 break-all text-gray-800">{hash}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy(entry.id, a, hash)}
-                  className="text-gray-400 hover:text-indigo-600 shrink-0"
-                  title={t('row.copy')}
-                >
-                  {copiedKey === copyKey ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                </button>
+                <CopyButton
+                  value={hash}
+                  size="sm"
+                  label={t('row.copy')}
+                  className="!text-gray-400 hover:!text-indigo-600 shrink-0"
+                />
               </div>
             )
           })}

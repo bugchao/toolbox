@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { faker } from '@faker-js/faker'
-import { Copy, Download, Plus, Trash2, RefreshCw } from 'lucide-react'
+import { Download, Plus, Trash2, RefreshCw } from 'lucide-react'
 
 interface FieldConfig {
   id: string
@@ -37,7 +37,6 @@ const MockApi: React.FC = () => {
   ])
   const [count, setCount] = useState(10)
   const [mockData, setMockData] = useState<any[]>([])
-  const [copied, setCopied] = useState(false)
 
   const addField = () => {
     setFields([
@@ -105,16 +104,6 @@ const MockApi: React.FC = () => {
       return item
     })
     setMockData(data)
-  }
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(JSON.stringify(mockData, null, 2))
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy:', err)
-    }
   }
 
   const downloadJson = () => {
@@ -231,13 +220,14 @@ const MockApi: React.FC = () => {
               </h3>
               {mockData.length > 0 && (
                 <div className="flex gap-2">
-                  <button
-                    onClick={copyToClipboard}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
-                  >
-                    <Copy size={16} />
-                    {copied ? t('copied') : t('copy')}
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    size="sm"
+                    value={JSON.stringify(mockData, null, 2)}
+                    label={t('copy')}
+                    copiedLabel={t('copied')}
+                    className="!bg-gray-500 !text-white hover:!bg-gray-600"
+                  />
                   <button
                     onClick={downloadJson}
                     className="flex items-center gap-2 px-3 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"

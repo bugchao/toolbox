@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { Plus, Trash2, Copy, Check, Download } from 'lucide-react'
+import { Plus, Trash2, Download } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 
 type FormatType = 'isc' | 'dnsmasq' | 'mikrotik'
 
@@ -49,7 +50,6 @@ export function DhcpMacBinding() {
     { id: '1', mac: '', ip: '', hostname: '' }
   ])
   const [format, setFormat] = useState<FormatType>('isc')
-  const [copied, setCopied] = useState(false)
 
   const addRow = () => setBindings(prev => [...prev, { id: Date.now().toString(), mac: '', ip: '', hostname: '' }])
   const removeRow = (id: string) => setBindings(prev => prev.filter(b => b.id !== id))
@@ -57,12 +57,6 @@ export function DhcpMacBinding() {
     setBindings(prev => prev.map(b => b.id === id ? { ...b, [field]: value } : b))
 
   const config = generateConfig(bindings, format)
-
-  const copy = useCallback(async () => {
-    await navigator.clipboard.writeText(config)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }, [config])
 
   const download = useCallback(() => {
     const ext = format === 'dnsmasq' ? 'conf' : 'txt'
@@ -147,13 +141,7 @@ export function DhcpMacBinding() {
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-gray-900 dark:text-gray-100">生成配置</h2>
             <div className="flex gap-2">
-              <button
-                onClick={copy}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-                {copied ? '已复制' : '复制'}
-              </button>
+              <CopyButton variant="button" value={config} label="复制" copiedLabel="已复制" />
               <button
                 onClick={download}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"

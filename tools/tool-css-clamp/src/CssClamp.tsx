@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Button,
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -10,7 +11,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, MoveHorizontal } from 'lucide-react'
+import { MoveHorizontal } from 'lucide-react'
 import {
   buildClamp,
   resolvePx,
@@ -48,7 +49,6 @@ const CssClamp: React.FC = () => {
 
   const [input, setInput] = useState<ClampInput>(PRESETS[0].value)
   const [previewVw, setPreviewVw] = useState<number>(768)
-  const [copied, setCopied] = useState(false)
 
   const warnings = useMemo<WarningKey[]>(() => validateInput(input), [input])
   const result = useMemo(() => buildClamp(input), [input])
@@ -61,16 +61,6 @@ const CssClamp: React.FC = () => {
 
   const applyPreset = (preset: Preset) => {
     setInput(preset.value)
-  }
-
-  const onCopy = async (value: string) => {
-    try {
-      await navigator.clipboard.writeText(value)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* 剪贴板不可用时静默忽略 */
-    }
   }
 
   const cssRule = `font-size: ${result.css};`
@@ -185,14 +175,14 @@ const CssClamp: React.FC = () => {
                   <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     {t('result.fullLabel')}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => onCopy(result.css)}
-                    className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                  >
-                    {copied ? <Check className="h-3.5 w-3.5" /> : <ClipboardCopy className="h-3.5 w-3.5" />}
-                    {copied ? t('result.copied') : t('result.copy')}
-                  </button>
+                  <CopyButton
+                    value={result.css}
+                    variant="button"
+                    buttonVariant="ghost"
+                    size="sm"
+                    label={t('result.copy')}
+                    copiedLabel={t('result.copied')}
+                  />
                 </div>
                 <code className="block break-all font-mono text-sm text-gray-900 dark:text-gray-100">
                   {result.css}

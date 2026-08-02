@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Telescope } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Telescope } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Perspective { expert: string; beginner: string; history: string; analogy: string }
 interface Item { term: string; category: string; perspectives: Perspective }
@@ -71,7 +71,6 @@ export default function MultiPerspective() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('全部')
   const [expanded, setExpanded] = useState<number | null>(null)
-  const [copied, setCopied] = useState<string | null>(null)
 
   const filtered = DATA.filter(d => {
     const matchCat = category === '全部' || d.category === category
@@ -79,11 +78,6 @@ export default function MultiPerspective() {
     return matchCat && (!q || d.term.toLowerCase().includes(q))
   })
 
-  const copy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(id)
-    setTimeout(() => setCopied(null), 1500)
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -123,10 +117,7 @@ export default function MultiPerspective() {
                           <span className="text-xs font-semibold text-gray-600 dark:text-gray-300">{emoji} {t(key)}</span>
                           <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{d.perspectives[key]}</p>
                         </div>
-                        <button onClick={() => copy(d.perspectives[key], `${i}-${key}`)}
-                          className="shrink-0 text-gray-300 hover:text-indigo-500">
-                          {copied === `${i}-${key}` ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                        </button>
+                        <CopyButton value={d.perspectives[key]} className="shrink-0 !text-gray-300 hover:!text-indigo-500" />
                       </div>
                     </div>
                   ))}

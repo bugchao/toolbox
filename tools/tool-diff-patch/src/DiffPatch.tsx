@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, FileDiff, GitCompare, Wand2 } from 'lucide-react'
+import { FileDiff, GitCompare, Wand2 } from 'lucide-react'
 import {
   applyUnifiedPatch,
   classifyPatchLines,
@@ -45,7 +45,6 @@ const DiffPatch: React.FC = () => {
   const [source, setSource] = useState(SAMPLE_OLD)
   const [patchText, setPatchText] = useState('')
 
-  const [copied, setCopied] = useState(false)
 
   const patch = useMemo(
     () => makePatch(oldText, newText, { context }),
@@ -55,15 +54,6 @@ const DiffPatch: React.FC = () => {
   const classified = useMemo(() => (patch ? classifyPatchLines(patch) : []), [patch])
 
   const applied = useMemo(() => applyUnifiedPatch(source, patchText), [source, patchText])
-
-  const onCopyPatch = async () => {
-    if (!patch) return
-    try {
-      await navigator.clipboard.writeText(patch)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   const onSendToApply = () => {
     setSource(oldText)
@@ -162,15 +152,14 @@ const DiffPatch: React.FC = () => {
                 <Button type="button" variant="ghost" onClick={onSendToApply} disabled={!patch}>
                   {t('diff.sendToApply')}
                 </Button>
-                <button
-                  type="button"
-                  onClick={() => void onCopyPatch()}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={patch}
                   disabled={!patch}
-                  className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
 
               {patch ? (

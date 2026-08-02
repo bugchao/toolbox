@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Lightbulb, Copy, Check, Search } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Lightbulb, Search } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Concept {
   name: string; category: string; simple: string
@@ -50,7 +50,6 @@ export default function ConceptExplainer() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('全部')
   const [selected, setSelected] = useState<Concept | null>(null)
-  const [copied, setCopied] = useState(false)
 
   const filtered = useMemo(() => CONCEPTS.filter(c => {
     const matchCat = category === '全部' || c.category === category
@@ -58,11 +57,8 @@ export default function ConceptExplainer() {
     return matchCat && matchSearch
   }), [search, category])
 
-  const handleCopy = (c: Concept) => {
-    navigator.clipboard.writeText(`${c.name}\n一句话：${c.simple}\n类比：${c.analogy}\n详解：${c.detail}\n例子：${c.example}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const conceptText = (c: Concept) =>
+    `${c.name}\n一句话：${c.simple}\n类比：${c.analogy}\n详解：${c.detail}\n例子：${c.example}`
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -120,11 +116,16 @@ export default function ConceptExplainer() {
                     <span className="text-xs font-semibold text-gray-500">{t('related')}：</span>
                     {c.related.map(r => <span key={r} className="text-xs px-2 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full">{r}</span>)}
                   </div>
-                  <button onClick={e => { e.stopPropagation(); handleCopy(c) }}
-                    className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-indigo-600">
-                    {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                    {copied ? t('copied') : t('copy')}
-                  </button>
+                  <div onClick={e => e.stopPropagation()} className="inline-flex">
+                    <CopyButton
+                      variant="inline"
+                      size="sm"
+                      value={conceptText(c)}
+                      label={t('copy')}
+                      copiedLabel={t('copied')}
+                      className="!text-gray-500 hover:!text-indigo-600"
+                    />
+                  </div>
                 </div>
               )}
             </div>

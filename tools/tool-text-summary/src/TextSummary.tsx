@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FileText, Copy, Check, Trash2, Zap } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { FileText, Trash2, Zap } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type Length = 'short' | 'medium' | 'long'
 
@@ -56,7 +56,6 @@ export default function TextSummary() {
   const [length, setLength] = useState<Length>('medium')
   const [result, setResult] = useState('')
   const [keywords, setKeywords] = useState<string[]>([])
-  const [copied, setCopied] = useState(false)
 
   const handleSummarize = useCallback(() => {
     if (!input.trim()) return
@@ -64,11 +63,6 @@ export default function TextSummary() {
     setKeywords(extractKeywords(input))
   }, [input, length])
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(result)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   const inputLen = input.length
   const resultLen = result.length
@@ -149,11 +143,14 @@ export default function TextSummary() {
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                 <span className="text-xs font-medium text-gray-500">{t('result')}</span>
-                <button onClick={handleCopy}
-                  className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-indigo-600 transition-colors">
-                  {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? t('copied') : t('copy')}
-                </button>
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={result}
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                  className="!text-gray-500 hover:!text-indigo-600"
+                />
               </div>
               <div className="px-4 py-4 text-sm text-gray-800 dark:text-gray-200 leading-relaxed">{result}</div>
             </div>

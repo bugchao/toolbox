@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Check, Copy, FileSearch, Loader2, Trash2, Upload, Zap } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { FileSearch, Loader2, Trash2, Upload, Zap } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
@@ -85,7 +85,6 @@ export default function PdfSummary() {
   const [keywords, setKeywords] = useState<string[]>([])
   const [busy, setBusy] = useState<'extract' | 'summarize' | null>(null)
   const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onPick = (f: File | null) => {
@@ -139,12 +138,6 @@ export default function PdfSummary() {
     }
   }, [file, length, t])
 
-  const handleCopy = () => {
-    if (!summary) return
-    navigator.clipboard.writeText(summary)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
 
   const inputLen = text.length
   const summaryLen = summary.length
@@ -248,13 +241,14 @@ export default function PdfSummary() {
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-semibold text-gray-800 dark:text-gray-100">{t('result.summary')}</h3>
             {summary && (
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-1 rounded-md border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
-              >
-                {copied ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Copy className="h-3.5 w-3.5" />}
-                {copied ? t('actions.copied') : t('actions.copy')}
-              </button>
+              <CopyButton
+                variant="button"
+                size="sm"
+                value={summary}
+                label={t('actions.copy')}
+                copiedLabel={t('actions.copied')}
+                className="border border-gray-300 !text-gray-700 hover:!bg-gray-100 dark:border-gray-600 dark:!text-gray-200 dark:hover:!bg-gray-700"
+              />
             )}
           </div>
           {summary ? (

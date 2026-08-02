@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Code2, Copy, Check, Trash2, Zap } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Code2, Trash2, Zap } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type Lang = 'auto' | 'javascript' | 'typescript' | 'python' | 'java' | 'go' | 'rust' | 'css' | 'html' | 'sql' | 'bash'
 
@@ -71,20 +71,15 @@ export default function CodeExplainer() {
   const [code, setCode] = useState('')
   const [lang, setLang] = useState<Lang>('auto')
   const [result, setResult] = useState<{ lines: LineExplanation[]; overview: string } | null>(null)
-  const [copied, setCopied] = useState(false)
 
   const handleExplain = () => {
     if (!code.trim()) return
     setResult(explainCode(code, lang))
   }
 
-  const handleCopy = () => {
-    if (!result) return
-    const text = result.lines.map(l => `第${l.line}行: ${l.code}\n→ ${l.explanation}`).join('\n\n')
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const resultText = result
+    ? result.lines.map(l => `第${l.line}行: ${l.code}\n→ ${l.explanation}`).join('\n\n')
+    : ''
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -145,10 +140,14 @@ export default function CodeExplainer() {
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                 <span className="text-xs font-medium text-gray-500">{t('result')}</span>
-                <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-indigo-600">
-                  {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? t('copied') : t('copy')}
-                </button>
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={resultText}
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                  className="!text-gray-500 hover:!text-indigo-600"
+                />
               </div>
               <div className="divide-y divide-gray-50 dark:divide-gray-700">
                 {result.lines.map(l => (

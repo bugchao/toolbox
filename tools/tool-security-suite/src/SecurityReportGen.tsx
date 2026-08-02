@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { ClipboardCopy, Download, FileText, History, ShieldHalf, WandSparkles } from 'lucide-react'
+import { Download, FileText, History, ShieldHalf, WandSparkles } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Button, Card, InsightList, Input, MetricCard } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, InsightList, Input, MetricCard } from '@toolbox/ui-kit'
 import { apiPost } from './shared/api'
 import HistoryPanel from './shared/HistoryPanel'
 import { ErrorCard, LoadingCard } from './shared/RequestState'
@@ -20,7 +20,6 @@ const SecurityReportGen: React.FC = () => {
   const [portTarget, setPortTarget] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
   const [result, setResult] = useState<SecurityReportResult | null>(null)
   const [viewMode, setViewMode] = useState<'query' | 'history'>('query')
   const history = useLocalHistory<{
@@ -45,7 +44,6 @@ const SecurityReportGen: React.FC = () => {
 
     setLoading(true)
     setError('')
-    setCopied(false)
     try {
       const payload = await apiPost<SecurityReportResult>('/api/security/report', {
         domain: next.domain.trim(),
@@ -81,11 +79,6 @@ const SecurityReportGen: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     await runReport({ domain, ip, portTarget })
-  }
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(markdown)
-    setCopied(true)
   }
 
   const handleDownload = () => {
@@ -234,10 +227,12 @@ const SecurityReportGen: React.FC = () => {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('report.previewTitle')}</div>
               <div className="flex flex-wrap gap-2">
-                <Button type="button" variant="secondary" onClick={handleCopy}>
-                  <ClipboardCopy className="mr-2 h-4 w-4" />
-                  {copied ? t('report.copied') : t('report.copy')}
-                </Button>
+                <CopyButton
+                  variant="button"
+                  value={markdown}
+                  label={t('report.copy')}
+                  copiedLabel={t('report.copied')}
+                />
                 <Button type="button" onClick={handleDownload}>
                   <Download className="mr-2 h-4 w-4" />
                   {t('report.download')}

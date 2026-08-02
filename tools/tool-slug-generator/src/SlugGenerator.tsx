@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, FileText, Link2, Plus, Trash2, Type } from 'lucide-react'
+import { FileText, Link2, Plus, Trash2, Type } from 'lucide-react'
 import {
   DEFAULT_OPTIONS,
   slugify,
@@ -28,7 +28,6 @@ const SlugGenerator: React.FC = () => {
   const [maxLengthInput, setMaxLengthInput] = useState('')
   const [replaceFrom, setReplaceFrom] = useState('')
   const [replaceTo, setReplaceTo] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const effectiveOpts: SlugOptions = useMemo(() => {
     const max = parseInt(maxLengthInput, 10)
@@ -38,14 +37,6 @@ const SlugGenerator: React.FC = () => {
   const singleOutput = useMemo(() => slugify(single, effectiveOpts), [single, effectiveOpts])
   const batchOutput = useMemo(() => slugifyBatch(batch, effectiveOpts), [batch, effectiveOpts])
 
-  const onCopy = async (text: string) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   const addReplacement = () => {
     if (!replaceFrom) return
@@ -124,15 +115,14 @@ const SlugGenerator: React.FC = () => {
               <div>
                 <div className="mb-1 flex items-center justify-between text-xs">
                   <span className="font-medium text-gray-700 dark:text-gray-200">{t('output.label')}</span>
-                  <button
-                    type="button"
-                    onClick={() => onCopy(singleOutput)}
+                  <CopyButton
+                    variant="inline"
+                    size="sm"
+                    value={singleOutput}
                     disabled={!singleOutput}
-                    className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-                  >
-                    {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                    {copied ? t('output.copied') : t('output.copy')}
-                  </button>
+                    label={t('output.copy')}
+                    copiedLabel={t('output.copied')}
+                  />
                 </div>
                 <code className="block w-full break-all rounded-md border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-indigo-700 dark:border-gray-700 dark:bg-gray-900 dark:text-indigo-300">
                   {singleOutput || <span className="text-gray-400 italic">{t('output.empty')}</span>}
@@ -161,15 +151,14 @@ const SlugGenerator: React.FC = () => {
               <div>
                 <div className="mb-1 flex items-center justify-between text-xs">
                   <span className="font-medium text-gray-700 dark:text-gray-200">{t('output.label')}</span>
-                  <button
-                    type="button"
-                    onClick={() => onCopy(batchOutput)}
+                  <CopyButton
+                    variant="inline"
+                    size="sm"
+                    value={batchOutput}
                     disabled={!batchOutput.trim()}
-                    className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-                  >
-                    {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                    {copied ? t('output.copied') : t('output.copy')}
-                  </button>
+                    label={t('output.copy')}
+                    copiedLabel={t('output.copied')}
+                  />
                 </div>
                 <TextArea value={batchOutput} readOnly rows={10} placeholder={t('output.empty')} />
               </div>

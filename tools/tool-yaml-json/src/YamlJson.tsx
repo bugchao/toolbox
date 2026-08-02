@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next'
 import {
   Button,
   Card,
+  CopyButton,
   NoticeCard,
   PageHero,
   ParticlesBackground,
   TextArea,
 } from '@toolbox/ui-kit'
-import { Check, Copy, FileJson2, Sparkles, Trash2 } from 'lucide-react'
+import { FileJson2, Sparkles, Trash2 } from 'lucide-react'
 import {
   type ConvertResult,
   type JsonIndent,
@@ -58,7 +59,6 @@ const YamlJson: React.FC = () => {
   const [yamlStyle, setYamlStyle] = useState<YamlFlowStyle>('block')
   const [yamlError, setYamlError] = useState<SideError | null>(null)
   const [jsonError, setJsonError] = useState<SideError | null>(null)
-  const [copied, setCopied] = useState<Side | null>(null)
 
   /** 上次编辑的一侧。用来在 auto 模式下决定单向同步，避免无限回灌循环。 */
   const lastEditedSide = useRef<Side>('yaml')
@@ -157,17 +157,6 @@ const YamlJson: React.FC = () => {
     },
     [direction, syncJsonToYaml],
   )
-
-  const handleCopy = useCallback(async (text: string, side: Side) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(side)
-      window.setTimeout(() => setCopied(null), 1500)
-    } catch {
-      // 忽略剪贴板异常，不打断用户
-    }
-  }, [])
 
   const handleClearAll = useCallback(() => {
     skipNextSync.current = true
@@ -327,21 +316,15 @@ const YamlJson: React.FC = () => {
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   {t('chars', { count: yamlCharCount })}
                 </span>
-                <Button
-                  variant="ghost"
+                <CopyButton
+                  variant="button"
+                  buttonVariant="ghost"
                   size="sm"
-                  onClick={() => handleCopy(yamlText, 'yaml')}
+                  value={yamlText}
                   disabled={!yamlText}
-                >
-                  <span className="inline-flex items-center gap-1">
-                    {copied === 'yaml' ? (
-                      <Check className="h-3.5 w-3.5" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5" />
-                    )}
-                    {copied === 'yaml' ? t('copied') : t('copy')}
-                  </span>
-                </Button>
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                />
               </div>
             </div>
             <TextArea
@@ -377,21 +360,15 @@ const YamlJson: React.FC = () => {
                 <span className="text-xs text-gray-500 dark:text-gray-400">
                   {t('chars', { count: jsonCharCount })}
                 </span>
-                <Button
-                  variant="ghost"
+                <CopyButton
+                  variant="button"
+                  buttonVariant="ghost"
                   size="sm"
-                  onClick={() => handleCopy(jsonText, 'json')}
+                  value={jsonText}
                   disabled={!jsonText}
-                >
-                  <span className="inline-flex items-center gap-1">
-                    {copied === 'json' ? (
-                      <Check className="h-3.5 w-3.5" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5" />
-                    )}
-                    {copied === 'json' ? t('copied') : t('copy')}
-                  </span>
-                </Button>
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                />
               </div>
             </div>
             <TextArea

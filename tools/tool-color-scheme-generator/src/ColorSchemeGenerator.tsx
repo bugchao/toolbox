@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 import './ColorSchemeGenerator.css';
 
 type SchemeType = 'monochromatic' | 'analogous' | 'complementary' | 'triadic' | 'tetradic' | 'split-complementary';
@@ -176,20 +177,12 @@ export const ColorSchemeGenerator: React.FC = () => {
     setColors(newColors);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    alert('已复制到剪贴板');
-  };
-
   const randomColor = () => {
     const randomHex = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     setBaseColor(randomHex);
   };
 
-  const exportPalette = () => {
-    const css = colors.map((c, i) => `--color-${i + 1}: ${c.hex};`).join('\n');
-    copyToClipboard(css);
-  };
+  const paletteCss = colors.map((c, i) => `--color-${i + 1}: ${c.hex};`).join('\n');
 
   return (
     <div className="color-scheme-generator">
@@ -230,25 +223,38 @@ export const ColorSchemeGenerator: React.FC = () => {
             </select>
           </div>
 
-          <button className="export-btn" onClick={exportPalette}>
-            📋 导出 CSS 变量
-          </button>
+          <CopyButton
+            variant="button"
+            value={paletteCss}
+            label="📋 导出 CSS 变量"
+            copiedLabel="✅ 已复制"
+          />
         </div>
 
         <div className="colors-display">
           {colors.map((color, index) => (
             <div key={index} className="color-card" style={{ background: color.hex }}>
               <div className="color-info">
-                <div className="color-value" onClick={() => copyToClipboard(color.hex)}>
-                  {color.hex}
-                </div>
+                <CopyButton
+                  variant="inline"
+                  className="color-value"
+                  value={color.hex}
+                  label={color.hex}
+                  copiedLabel={`${color.hex} ✅`}
+                />
                 <div className="color-formats">
-                  <div onClick={() => copyToClipboard(`rgb(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b})`)}>
-                    RGB: {color.rgb.r}, {color.rgb.g}, {color.rgb.b}
-                  </div>
-                  <div onClick={() => copyToClipboard(`hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`)}>
-                    HSL: {color.hsl.h}°, {color.hsl.s}%, {color.hsl.l}%
-                  </div>
+                  <CopyButton
+                    variant="inline"
+                    value={`rgb(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b})`}
+                    label={`RGB: ${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}`}
+                    copiedLabel="✅ 已复制"
+                  />
+                  <CopyButton
+                    variant="inline"
+                    value={`hsl(${color.hsl.h}, ${color.hsl.s}%, ${color.hsl.l}%)`}
+                    label={`HSL: ${color.hsl.h}°, ${color.hsl.s}%, ${color.hsl.l}%`}
+                    copiedLabel="✅ 已复制"
+                  />
                 </div>
               </div>
             </div>

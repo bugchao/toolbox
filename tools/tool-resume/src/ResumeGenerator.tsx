@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Download, Copy, Check, User, Briefcase, GraduationCap, Award, Book, Phone, Mail, Globe, MapPin, Link2, Plus, Trash2, Eye, FileText, Settings } from 'lucide-react'
+import { Download, User, Briefcase, GraduationCap, Award, Book, Phone, Mail, Globe, MapPin, Link2, Plus, Trash2, Eye, FileText, Settings } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Experience {
   id: string
@@ -70,7 +70,6 @@ const ResumeGenerator: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit')
   const [selectedTemplate, setSelectedTemplate] = useState<'modern' | 'simple' | 'creative'>('modern')
   const resumeRef = useRef<HTMLDivElement>(null)
-  const [copied, setCopied] = useState(false)
   const [exporting, setExporting] = useState(false)
 
   const [resumeData, setResumeData] = useState<ResumeData>({
@@ -342,8 +341,7 @@ const ResumeGenerator: React.FC = () => {
   }
 
   // 复制为Markdown
-  const copyAsMarkdown = async () => {
-    const markdown = `# ${resumeData.basicInfo.name}
+  const buildMarkdown = () => `# ${resumeData.basicInfo.name}
 ## ${resumeData.basicInfo.position}
 
 ### 联系方式
@@ -385,11 +383,6 @@ ${project.description}
 ### 证书认证
 ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
 `
-
-    await navigator.clipboard.writeText(markdown)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   const SkillStars = ({ level }: { level: number }) => (
     <div className="flex">
@@ -447,13 +440,13 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
               <option value="creative">创意模板</option>
             </select>
 
-            <button
-              onClick={copyAsMarkdown}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center"
-            >
-              {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
-              {copied ? '已复制' : '复制Markdown'}
-            </button>
+            <CopyButton
+              variant="button"
+              value={buildMarkdown()}
+              label="复制Markdown"
+              copiedLabel="已复制"
+              className="!bg-green-600 !text-white hover:!bg-green-700"
+            />
 
             <button
               onClick={exportToPDF}

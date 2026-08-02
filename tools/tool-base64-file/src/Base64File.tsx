@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Download, FileDigit, FileText, Type, Upload } from 'lucide-react'
+import { Download, FileDigit, FileText, Type, Upload } from 'lucide-react'
 import {
   base64ToBytes,
   bytesToBase64,
@@ -25,7 +25,6 @@ const Base64File: React.FC = () => {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')
   const [encoded, setEncoded] = useState<EncodeState>(null)
   const [encodeError, setEncodeError] = useState<string | null>(null)
-  const [copied, setCopied] = useState<string | null>(null)
   const [decodeInput, setDecodeInput] = useState('')
   const [decodeName, setDecodeName] = useState('decoded')
 
@@ -45,15 +44,6 @@ const Base64File: React.FC = () => {
       mime: f.type || sniffType(buf)?.mime || 'application/octet-stream',
       base64: bytesToBase64(buf),
     })
-  }
-
-  const onCopy = async (key: string, text: string) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(key)
-      window.setTimeout(() => setCopied((c) => (c === key ? null : c)), 1200)
-    } catch { /* ignore */ }
   }
 
   // —— 解码方向 ——
@@ -177,18 +167,8 @@ const Base64File: React.FC = () => {
                     <span>{t('encode.b64Length', { n: encoded.base64.length })}</span>
                   </div>
 
-                  <OutputBlock
-                    label="Base64"
-                    value={encoded.base64}
-                    copied={copied === 'b64'}
-                    onCopy={() => onCopy('b64', encoded.base64)}
-                  />
-                  <OutputBlock
-                    label="Data URI"
-                    value={toDataUri(encoded.base64, encoded.mime)}
-                    copied={copied === 'uri'}
-                    onCopy={() => onCopy('uri', toDataUri(encoded.base64, encoded.mime))}
-                  />
+                  <OutputBlock label="Base64" value={encoded.base64} />
+                  <OutputBlock label="Data URI" value={toDataUri(encoded.base64, encoded.mime)} />
                 </div>
               )}
             </div>
@@ -265,20 +245,11 @@ const Base64File: React.FC = () => {
 const OutputBlock: React.FC<{
   label: string
   value: string
-  copied: boolean
-  onCopy: () => void
-}> = ({ label, value, copied, onCopy }) => (
+}> = ({ label, value }) => (
   <div>
     <div className="mb-1 flex items-center justify-between text-xs">
       <span className="font-medium text-gray-700 dark:text-gray-200">{label}</span>
-      <button
-        type="button"
-        onClick={onCopy}
-        className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-        {copied ? 'Copied' : 'Copy'}
-      </button>
+      <CopyButton variant="inline" size="sm" value={value} />
     </div>
     <pre className="max-h-36 overflow-auto break-all rounded-md border border-gray-200 bg-gray-50 p-3 font-mono text-[11px] leading-relaxed text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200">
       {value.length > 4096 ? value.slice(0, 4096) + `\n… (${value.length} chars total — use Copy)` : value}

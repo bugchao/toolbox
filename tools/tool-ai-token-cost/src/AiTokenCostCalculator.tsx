@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
-import { Copy, Download, Plus, Trash2 } from 'lucide-react'
+import { Download, Plus, Trash2 } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 
 interface AiModel {
   id: string
@@ -198,20 +199,14 @@ const AiTokenCostCalculator: React.FC = () => {
     document.body.removeChild(link)
   }
 
-  const copyAsMarkdown = () => {
-    const markdown = [
-      '| 模型 | 提供商 | 费用 (USD) | 费用 (CNY) |',
-      '|------|--------|-----------|-----------|',
-      ...results.map(
-        r =>
-          `| ${r.model.name} | ${r.model.provider} | $${r.totalCost.toFixed(6)} | ¥${(r.totalCost * rate).toFixed(2)} |`
-      )
-    ].join('\n')
-
-    navigator.clipboard.writeText(markdown).then(() => {
-      alert('已复制到剪贴板')
-    })
-  }
+  const markdown = [
+    '| 模型 | 提供商 | 费用 (USD) | 费用 (CNY) |',
+    '|------|--------|-----------|-----------|',
+    ...results.map(
+      r =>
+        `| ${r.model.name} | ${r.model.provider} | $${r.totalCost.toFixed(6)} | ¥${(r.totalCost * rate).toFixed(2)} |`
+    )
+  ].join('\n')
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -264,12 +259,12 @@ const AiTokenCostCalculator: React.FC = () => {
               操作
             </label>
             <div className="flex space-x-2">
-              <button
-                onClick={copyAsMarkdown}
-                className="btn bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900/50 flex items-center"
-              >
-                <Copy className="w-4 h-4" />
-              </button>
+              <CopyButton
+                value={markdown}
+                label="复制为 Markdown"
+                copiedLabel="已复制"
+                className="btn !p-0 !w-9 !h-9 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900/50"
+              />
               <button
                 onClick={downloadResults}
                 disabled={results.length === 0}

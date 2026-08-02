@@ -1,8 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import {
   ShieldOff,
-  Copy,
-  Check,
   Download,
   Eraser,
   Plus,
@@ -11,7 +9,7 @@ import {
   Info,
   ArrowLeftRight,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -56,7 +54,6 @@ const DataMasking: React.FC = () => {
   )
 
   const [input, setInput] = useState(SAMPLE_INPUT)
-  const [copied, setCopied] = useState(false)
   const [customOpen, setCustomOpen] = useState(false)
   const [draft, setDraft] = useState<{ name: string; pattern: string; flags: string; replacement: string }>({
     name: '',
@@ -123,17 +120,6 @@ const DataMasking: React.FC = () => {
   const removeCustom = (id: string) => {
     void save({ ...data, customRules: data.customRules.filter((c) => c.id !== id) })
   }
-
-  const copyOutput = useCallback(async () => {
-    if (!result.output) return
-    try {
-      await navigator.clipboard.writeText(result.output)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }, [result.output])
 
   const downloadOutput = () => {
     const blob = new Blob([result.output], { type: 'text/plain;charset=utf-8' })
@@ -333,15 +319,16 @@ const DataMasking: React.FC = () => {
               </span>
             </label>
             <div className="flex gap-1">
-              <button
-                type="button"
-                onClick={copyOutput}
+              <CopyButton
+                value={result.output}
                 disabled={!result.output}
-                className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
-              >
-                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                {copied ? t('copied') : t('copy')}
-              </button>
+                size="sm"
+                buttonVariant="ghost"
+                variant="button"
+                label={t('copy')}
+                copiedLabel={t('copied')}
+                className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+              />
               <button
                 type="button"
                 onClick={downloadOutput}

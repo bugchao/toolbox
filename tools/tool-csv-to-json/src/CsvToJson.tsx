@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FileJson, Upload, Copy, Download, Check } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { FileJson, Upload, Download } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type Delimiter = ',' | ';' | '\t' | 'custom'
 
@@ -67,7 +67,6 @@ export default function CsvToJson() {
   const [customDelimiter, setCustomDelimiter] = useState('|')
   const [hasHeader, setHasHeader] = useState(true)
   const [prettify, setPrettify] = useState(true)
-  const [copied, setCopied] = useState(false)
 
   const actualDelimiter = useMemo(() => {
     if (delimiterType === 'custom') return customDelimiter
@@ -96,13 +95,6 @@ export default function CsvToJson() {
       setDelimiterType(detected)
     }
     reader.readAsText(file)
-  }
-
-  const handleCopy = async () => {
-    if (!jsonResult) return
-    await navigator.clipboard.writeText(jsonResult)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   const handleDownload = () => {
@@ -206,14 +198,14 @@ export default function CsvToJson() {
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('jsonOutput')}</h3>
               <div className="flex gap-2">
-                <button
-                  onClick={handleCopy}
+                <CopyButton
+                  variant="button"
+                  value={jsonResult}
                   disabled={!jsonResult}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  {copied ? t('copied') : t('copy')}
-                </button>
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                  className="!bg-indigo-600 !text-white hover:!bg-indigo-700"
+                />
                 <button
                   onClick={handleDownload}
                   disabled={!jsonResult}

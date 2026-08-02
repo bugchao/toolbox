@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 type NameType = 'chinese' | 'english' | 'japanese' | 'fantasy' | 'tech' | 'pet';
 type Gender = 'male' | 'female' | 'neutral';
@@ -102,10 +103,6 @@ const NameGenerator: React.FC = () => {
     setGeneratedNames(names);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
-
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow-lg p-6">
@@ -203,12 +200,13 @@ const NameGenerator: React.FC = () => {
                       <span className="ml-2 text-sm text-gray-500">({item.meaning})</span>
                     )}
                   </div>
-                  <button
-                    onClick={() => copyToClipboard(item.name)}
-                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition"
-                  >
-                    复制
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    value={item.name}
+                    label="复制"
+                    copiedLabel="已复制"
+                    className="!bg-blue-500 hover:!bg-blue-600 !text-white text-sm"
+                  />
                 </div>
               ))}
             </div>

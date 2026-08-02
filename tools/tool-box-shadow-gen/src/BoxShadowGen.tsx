@@ -1,12 +1,10 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import {
   ArrowDown,
   ArrowUp,
   BoxSelect,
-  Check,
-  Copy,
   Plus,
   Trash2,
 } from 'lucide-react'
@@ -17,20 +15,6 @@ import { PRESETS } from './lib/presets'
 type Shape = 'rectangle' | 'pill' | 'circle'
 
 const DEFAULT_LAYERS: ShadowLayer[] = [createLayer({ id: 'init', x: 0, y: 6, blur: 16, spread: 0, color: '#000000', alpha: 0.2 })]
-
-function useClipboard() {
-  const [copiedKey, setCopiedKey] = useState<string | null>(null)
-  const copy = async (key: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopiedKey(key)
-      window.setTimeout(() => setCopiedKey((cur) => (cur === key ? null : cur)), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
-  return { copiedKey, copy }
-}
 
 const BoxShadowGen: React.FC = () => {
   const { t } = useTranslation('toolBoxShadowGen')
@@ -43,7 +27,6 @@ const BoxShadowGen: React.FC = () => {
   const cssValue = useMemo(() => layersToCss(layers), [layers])
   const tailwindValue = useMemo(() => layersToTailwind(layers), [layers])
   const cssRule = `.box {\n  box-shadow: ${cssValue};\n}`
-  const { copiedKey, copy } = useClipboard()
 
   const applyPreset = (presetId: string) => {
     const p = PRESETS.find((x) => x.id === presetId)
@@ -287,18 +270,8 @@ const BoxShadowGen: React.FC = () => {
             </div>
 
             <div className="mt-5 space-y-3 border-t border-gray-200 pt-4 dark:border-gray-700">
-              <OutputBlock
-                label={t('output.css')}
-                value={cssRule}
-                onCopy={() => copy('css', cssRule)}
-                copied={copiedKey === 'css'}
-              />
-              <OutputBlock
-                label={t('output.tailwind')}
-                value={tailwindValue}
-                onCopy={() => copy('tw', tailwindValue)}
-                copied={copiedKey === 'tw'}
-              />
+              <OutputBlock label={t('output.css')} value={cssRule} />
+              <OutputBlock label={t('output.tailwind')} value={tailwindValue} />
             </div>
           </Card>
         </div>
@@ -362,18 +335,11 @@ const SelectField: React.FC<{
 const OutputBlock: React.FC<{
   label: string
   value: string
-  onCopy: () => void
-  copied: boolean
-}> = ({ label, value, onCopy, copied }) => (
+}> = ({ label, value }) => (
   <div>
     <div className="mb-1.5 flex items-center justify-between">
       <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
-      <Button type="button" variant="ghost" onClick={onCopy}>
-        <span className="inline-flex items-center gap-1.5 text-xs">
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? 'Copied' : 'Copy'}
-        </span>
-      </Button>
+      <CopyButton variant="button" buttonVariant="ghost" size="sm" value={value} />
     </div>
     <pre className="overflow-x-auto rounded-md border border-gray-200 bg-gray-50 p-3 text-xs text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
       <code>{value}</code>

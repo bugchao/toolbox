@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Copy, Trash2, Wand2 } from 'lucide-react'
+import { Trash2, Wand2 } from 'lucide-react'
 import { jsonToTs } from './lib/jsonToTs'
 
 const SAMPLE = `{
@@ -43,14 +43,6 @@ const JsonToTs: React.FC = () => {
     }
   }
 
-  const copy = async (value: string) => {
-    if (!value) return
-    try {
-      await navigator.clipboard.writeText(value)
-    } catch {
-      // ignore
-    }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -130,17 +122,14 @@ const JsonToTs: React.FC = () => {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {t('output.heading')}
               </h2>
-              <Button
-                variant="ghost"
+              <CopyButton
+                variant="button"
+                buttonVariant="ghost"
                 size="sm"
-                onClick={() => copy(result.output)}
+                value={result.output}
                 disabled={!result.output}
-              >
-                <span className="inline-flex items-center gap-1.5">
-                  <Copy className="h-4 w-4" />
-                  {t('output.copy')}
-                </span>
-              </Button>
+                label={t('output.copy')}
+              />
             </div>
             <pre className="min-h-[360px] overflow-auto rounded-lg border border-gray-200 bg-gray-50 p-4 font-mono text-sm leading-relaxed text-gray-800 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-100">
               <code>{result.output || t('output.empty')}</code>

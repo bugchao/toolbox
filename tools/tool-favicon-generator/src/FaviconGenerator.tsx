@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, Switch } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, Switch } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, Copy, Download, ImagePlus, RefreshCw } from 'lucide-react'
+import { Download, ImagePlus, RefreshCw } from 'lucide-react'
 import JSZip from 'jszip'
 import { encodeIco } from './lib/ico'
 import { canvasToPngBytes, createOutputCanvas, resizeOnto } from './lib/resize'
@@ -67,7 +67,6 @@ const FaviconGenerator: React.FC = () => {
   const [maskable, setMaskable] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
-  const [copied, setCopied] = useState<'html' | 'manifest' | null>(null)
 
   const htmlSnippet = useMemo(() => buildHtmlSnippet({ themeColor: background }), [background])
   const manifestJson = useMemo(
@@ -148,15 +147,6 @@ const FaviconGenerator: React.FC = () => {
     }
   }
 
-  const copy = async (text: string, which: 'html' | 'manifest') => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(which)
-      setTimeout(() => setCopied((c) => (c === which ? null : c)), 1800)
-    } catch {
-      setError(t('output.failed'))
-    }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -266,18 +256,8 @@ const FaviconGenerator: React.FC = () => {
                     {t('output.downloadZip')}
                   </span>
                 </Button>
-                <Button variant="secondary" onClick={() => copy(htmlSnippet, 'html')}>
-                  <span className="inline-flex items-center gap-1.5">
-                    {copied === 'html' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {t('output.copyHtml')}
-                  </span>
-                </Button>
-                <Button variant="secondary" onClick={() => copy(manifestJson, 'manifest')}>
-                  <span className="inline-flex items-center gap-1.5">
-                    {copied === 'manifest' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {t('output.copyManifest')}
-                  </span>
-                </Button>
+                <CopyButton variant="button" value={htmlSnippet} label={t('output.copyHtml')} copiedLabel={t('output.copyHtml')} />
+                <CopyButton variant="button" value={manifestJson} label={t('output.copyManifest')} copiedLabel={t('output.copyManifest')} />
               </div>
 
               <div className="grid gap-4 lg:grid-cols-2">

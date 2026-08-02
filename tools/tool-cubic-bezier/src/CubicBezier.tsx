@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Card, CopyButton, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, Copy, Spline } from 'lucide-react'
+import { Spline } from 'lucide-react'
 import {
   X_MAX,
   X_MIN,
@@ -44,7 +44,6 @@ const CubicBezier: React.FC = () => {
   const [p1, setP1] = useState<Point>(DEFAULT_P1)
   const [p2, setP2] = useState<Point>(DEFAULT_P2)
   const [duration, setDuration] = useState(1.2)
-  const [copied, setCopied] = useState(false)
 
   const cssValue = useMemo(() => formatCss(p1, p2), [p1, p2])
   const curveSamples = useMemo(() => sampleCurve(p1, p2, 64), [p1, p2])
@@ -60,15 +59,6 @@ const CubicBezier: React.FC = () => {
     [curveSamples],
   )
 
-  const onCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(cssValue)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }, [cssValue])
 
   const applyPreset = useCallback((id: PresetId) => {
     const p = PRESETS.find((x) => x.id === id)
@@ -153,12 +143,14 @@ const CubicBezier: React.FC = () => {
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
                   {t('output.code')}
                 </span>
-                <Button type="button" variant="ghost" onClick={onCopy}>
-                  <span className="inline-flex items-center gap-1.5 text-xs">
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? t('output.copied') : t('output.copy')}
-                  </span>
-                </Button>
+                <CopyButton
+                  variant="button"
+                  buttonVariant="ghost"
+                  size="sm"
+                  value={cssValue}
+                  label={t('output.copy')}
+                  copiedLabel={t('output.copied')}
+                />
               </div>
               <pre className="overflow-x-auto rounded-md border border-gray-200 bg-gray-50 p-3 text-xs text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
                 <code>{cssValue}</code>

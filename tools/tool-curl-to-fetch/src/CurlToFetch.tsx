@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
-import { Copy, CheckCircle, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 
 function parseCurl(curl: string): {
   method: string; url: string; headers: Record<string, string>;
@@ -82,14 +83,8 @@ const SAMPLE = `curl -X POST 'https://api.example.com/users' \\
 
 export function CurlToFetch() {
   const [input, setInput] = useState('')
-  const [copied, setCopied] = useState(false)
-
   const parsed = useMemo(() => input.trim() ? parseCurl(input) : null, [input])
   const output = useMemo(() => parsed ? toFetch(parsed) : '', [parsed])
-
-  const copy = () => {
-    navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) })
-  }
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
@@ -115,10 +110,14 @@ export function CurlToFetch() {
               <ArrowRight className="w-4 h-4 text-indigo-400" />fetch 代码
             </div>
             {output && (
-              <button onClick={copy} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600">
-                {copied ? <CheckCircle className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? '已复制' : '复制'}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={output}
+                label="复制"
+                copiedLabel="已复制"
+                className="!text-gray-400 hover:!text-gray-600"
+              />
             )}
           </div>
           <div className="w-full h-[242px] px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 font-mono text-xs text-gray-800 dark:text-gray-200 overflow-auto whitespace-pre">

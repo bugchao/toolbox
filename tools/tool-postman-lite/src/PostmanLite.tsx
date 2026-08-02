@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Send, Plus, Trash2, Copy, Check, Download, History, Clock } from 'lucide-react';
+import { Send, Plus, Trash2, Download, History, Clock } from 'lucide-react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface Header {
   id: string;
@@ -40,7 +41,6 @@ const PostmanLite: React.FC = () => {
   const [responseTime, setResponseTime] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<'response' | 'history'>('response');
   const [history, setHistory] = useState<RequestHistory[]>([]);
-  const [copied, setCopied] = useState(false);
 
   const methods: HttpMethod[] = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
 
@@ -158,13 +158,6 @@ const PostmanLite: React.FC = () => {
     }
   };
 
-  const copyResponse = () => {
-    if (response) {
-      navigator.clipboard.writeText(JSON.stringify(response, null, 2));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   const downloadResponse = () => {
     if (response) {
@@ -389,13 +382,13 @@ const PostmanLite: React.FC = () => {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <button
-                      onClick={copyResponse}
-                      className="text-sm text-blue-500 hover:underline flex items-center gap-1"
-                    >
-                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      {copied ? '已复制' : '复制'}
-                    </button>
+                    <CopyButton
+                      variant="inline"
+                      value={response ? JSON.stringify(response, null, 2) : ''}
+                      label="复制"
+                      copiedLabel="已复制"
+                      className="text-sm !text-blue-500 hover:underline"
+                    />
                     <button
                       onClick={downloadResponse}
                       className="text-sm text-blue-500 hover:underline flex items-center gap-1"

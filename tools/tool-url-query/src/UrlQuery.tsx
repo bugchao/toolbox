@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import {
   Button,
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -12,8 +13,6 @@ import {
 import {
   ArrowDown,
   ArrowUp,
-  Check,
-  Copy,
   Eraser,
   Info,
   Link2,
@@ -57,7 +56,6 @@ const UrlQuery: React.FC = () => {
 
   const [keepDup, setKeepDup] = useState(true)
   const [showBare, setShowBare] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   /**
    * 用 ref 跟踪「最近一次重组写入的字符串」，避免我们写到 input 后又把它当成
@@ -189,15 +187,6 @@ const UrlQuery: React.FC = () => {
     setRawInput(SAMPLE_URL)
   }, [])
 
-  const copyOutput = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(outputUrl)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* clipboard unavailable */
-    }
-  }, [outputUrl])
 
   // ───────── render ─────────
   const chip = (label: string, value: string) => (
@@ -402,16 +391,14 @@ const UrlQuery: React.FC = () => {
                   <span className="text-xs text-gray-500 dark:text-gray-400">
                     {t('output.length', { count: outputUrl.length })}
                   </span>
-                  <Button variant="ghost" size="sm" onClick={copyOutput}>
-                    <span className="inline-flex items-center gap-1.5">
-                      {copied ? (
-                        <Check className="h-4 w-4" />
-                      ) : (
-                        <Copy className="h-4 w-4" />
-                      )}
-                      {copied ? t('output.copied') : t('output.copy')}
-                    </span>
-                  </Button>
+                  <CopyButton
+                    variant="button"
+                    buttonVariant="ghost"
+                    size="sm"
+                    value={outputUrl}
+                    label={t('output.copy')}
+                    copiedLabel={t('output.copied')}
+                  />
                 </div>
               </div>
               <pre className="overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 font-mono text-xs leading-6 text-gray-800 dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-100">

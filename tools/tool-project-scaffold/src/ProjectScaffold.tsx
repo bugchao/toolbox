@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, FolderTree } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { FolderTree } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 const TEMPLATES: Record<string, Record<string, string[]>> = {
   'React + Vite': {
@@ -175,7 +175,6 @@ export default function ProjectScaffold() {
   const { t } = useTranslation('toolProjectScaffold')
   const [framework, setFramework] = useState('React + Vite')
   const [selected, setSelected] = useState<string[]>([])
-  const [copied, setCopied] = useState(false)
 
   const tpl = TEMPLATES[framework]
   const features = Object.keys(tpl).filter(k => k !== 'base')
@@ -190,11 +189,6 @@ export default function ProjectScaffold() {
 
   const treeText = tree.join('\n')
 
-  const copy = () => {
-    navigator.clipboard.writeText(treeText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   const download = () => {
     const blob = new Blob([treeText], { type: 'text/plain' })
@@ -242,11 +236,14 @@ export default function ProjectScaffold() {
           <div className="flex items-center justify-between px-4 py-2 border-b border-gray-700">
             <span className="text-xs text-gray-400 font-mono">{t('preview')}</span>
             <div className="flex gap-2">
-              <button onClick={copy}
-                className="flex items-center gap-1.5 px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors">
-                {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
-                {copied ? t('copied') : t('copy')}
-              </button>
+              <CopyButton
+                variant="button"
+                size="sm"
+                value={treeText}
+                label={t('copy')}
+                copiedLabel={t('copied')}
+                className="!bg-gray-700 hover:!bg-gray-600 !text-gray-200"
+              />
               <button onClick={download}
                 className="px-3 py-1 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg">{t('download')}</button>
             </div>

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { AlignJustify, ArrowLeftRight, Check, ClipboardCopy } from 'lucide-react'
+import { AlignJustify, ArrowLeftRight } from 'lucide-react'
 import { arrayToJsonl, jsonlToArray, minifyJsonl, stats } from './lib/jsonl'
 
 type Mode = 'toArray' | 'toJsonl'
@@ -14,7 +14,6 @@ const Jsonl: React.FC = () => {
   const { t } = useTranslation('toolJsonl')
   const [mode, setMode] = useState<Mode>('toArray')
   const [input, setInput] = useState(SAMPLE_JSONL)
-  const [copied, setCopied] = useState(false)
 
   const st = useMemo(() => (mode === 'toArray' ? stats(input) : null), [input, mode])
 
@@ -39,14 +38,6 @@ const Jsonl: React.FC = () => {
     setInput(minifyJsonl(input).text)
   }
 
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -88,10 +79,14 @@ const Jsonl: React.FC = () => {
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{mode === 'toArray' ? t('io.arrayOutput') : t('io.jsonlOutput')}</h2>
-              <button type="button" onClick={() => void onCopy()} disabled={!output} className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30">
-                {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                {copied ? t('io.copied') : t('io.copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={output}
+                disabled={!output}
+                label={t('io.copy')}
+                copiedLabel={t('io.copied')}
+              />
             </div>
             {result.ok ? (
               <TextArea value={output} readOnly rows={18} spellCheck={false} className="!font-mono !text-xs" />

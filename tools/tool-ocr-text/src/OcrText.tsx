@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Upload, Copy, Check, Loader2, X, Languages } from 'lucide-react'
+import { Upload, Loader2, X, Languages } from 'lucide-react'
 import { createWorker, PSM } from 'tesseract.js'
 
 interface RecognitionResult {
@@ -21,7 +21,6 @@ const OcrText: React.FC = () => {
   const { t } = useTranslation('toolOcrText')
   const [results, setResults] = useState<RecognitionResult[]>([])
   const [isDragging, setIsDragging] = useState(false)
-  const [copiedId, setCopiedId] = useState<string | null>(null)
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>('auto')
 
   const languageOptions: { value: LanguageOption; label: string }[] = [
@@ -146,19 +145,6 @@ const OcrText: React.FC = () => {
       e.target.value = ''
     },
     [handleFiles]
-  )
-
-  const copyText = useCallback(
-    async (id: string, text: string) => {
-      try {
-        await navigator.clipboard.writeText(text)
-        setCopiedId(id)
-        setTimeout(() => setCopiedId(null), 2000)
-      } catch (error) {
-        console.error('Failed to copy:', error)
-      }
-    },
-    []
   )
 
   const removeResult = useCallback((id: string) => {
@@ -295,22 +281,14 @@ const OcrText: React.FC = () => {
                           <span className="text-sm text-gray-600 dark:text-gray-400">
                             {t('confidence')}: {result.confidence}%
                           </span>
-                          <button
-                            onClick={() => copyText(result.id, result.text)}
-                            className="flex items-center gap-1 px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                          >
-                            {copiedId === result.id ? (
-                              <>
-                                <Check className="w-4 h-4" />
-                                {t('copied')}
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="w-4 h-4" />
-                                {t('copy')}
-                              </>
-                            )}
-                          </button>
+                          <CopyButton
+                            variant="button"
+                            size="sm"
+                            value={result.text}
+                            label={t('copy')}
+                            copiedLabel={t('copied')}
+                            className="!bg-gray-100 dark:!bg-gray-700 !text-gray-700 dark:!text-gray-300 hover:!bg-gray-200 dark:hover:!bg-gray-600"
+                          />
                         </div>
                         <div className="flex-1 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg overflow-auto">
                           <pre className="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap font-mono">

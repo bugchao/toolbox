@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Palette, Copy, Check, Download } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Palette } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 function hexToHsl(hex: string): [number, number, number] {
   const r = parseInt(hex.slice(1, 3), 16) / 255
@@ -58,7 +58,6 @@ export default function ColorSystem() {
   const [primary, setPrimary] = useState('#6366f1')
   const [scale, setScale] = useState<{ step: number; hex: string }[]>([])
   const [palette, setPalette] = useState<ColorSwatch[]>([])
-  const [copied, setCopied] = useState<string | null>(null)
   const [format, setFormat] = useState<'hex' | 'rgb' | 'hsl'>('hex')
 
   const handleGenerate = () => {
@@ -82,17 +81,10 @@ export default function ColorSystem() {
     return hex
   }
 
-  const handleCopy = (val: string, key: string) => {
-    navigator.clipboard.writeText(val)
-    setCopied(key)
-    setTimeout(() => setCopied(null), 1500)
-  }
-
-  const exportCSS = () => {
+  const cssVars = () => {
     const vars = palette.map(p => `  ${p.cssVar}: ${p.hex};`).join('\n')
     const scaleVars = scale.map(s => `  --color-primary-${s.step}: ${s.hex};`).join('\n')
-    const css = `:root {\n${vars}\n${scaleVars}\n}`
-    handleCopy(css, 'css')
+    return `:root {\n${vars}\n${scaleVars}\n}`
   }
 
   const isLight = (hex: string) => hexToHsl(hex)[2] > 60
@@ -124,10 +116,10 @@ export default function ColorSystem() {
             <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">{t('colorScale')}</h2>
             <div className="grid grid-cols-5 gap-2">
               {scale.map(s => (
-                <button key={s.step} onClick={() => handleCopy(formatColor(s.hex), `scale-${s.step}`)} className="group relative rounded-xl overflow-hidden" style={{ background: s.hex, height: 72 }}>
+                <button key={s.step} onClick={() => void navigator.clipboard.writeText(formatColor(s.hex))} className="group relative rounded-xl overflow-hidden" style={{ background: s.hex, height: 72 }}>
                   <div className={`absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity ${isLight(s.hex) ? 'text-gray-800' : 'text-white'}`}>
                     <span className="text-xs font-bold">{s.step}</span>
-                    <span className="text-xs">{copied === `scale-${s.step}` ? '✓' : formatColor(s.hex)}</span>
+                    <span className="text-xs">{formatColor(s.hex)}</span>
                   </div>
                   <div className={`absolute bottom-1 left-0 right-0 text-center text-xs font-medium ${isLight(s.hex) ? 'text-gray-700' : 'text-white/80'}`}>{s.step}</div>
                 </button>
@@ -141,10 +133,13 @@ export default function ColorSystem() {
           <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('palette')}</h2>
-              <button onClick={exportCSS} className="flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-700 border border-indigo-200 rounded-lg px-3 py-1.5">
-                {copied === 'css' ? <Check className="w-3.5 h-3.5" /> : <Download className="w-3.5 h-3.5" />}
-                {copied === 'css' ? t('copied') : t('exportCSS')}
-              </button>
+              <CopyButton
+                variant="inline"
+                value={cssVars()}
+                label={t('exportCSS')}
+                copiedLabel={t('copied')}
+                className="!text-indigo-600 hover:!text-indigo-700 border border-indigo-200 rounded-lg px-3 py-1.5"
+              />
             </div>
             <div className="grid grid-cols-1 gap-2">
               {palette.map(c => (
@@ -154,10 +149,12 @@ export default function ColorSystem() {
                     <div className="text-sm font-medium text-gray-700 dark:text-gray-200">{c.label}</div>
                     <div className="text-xs text-gray-400 font-mono">{c.cssVar}</div>
                   </div>
-                  <button onClick={() => handleCopy(formatColor(c.hex), c.cssVar)} className="flex items-center gap-1 text-xs text-gray-400 hover:text-indigo-600 transition-colors">
-                    {copied === c.cssVar ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span className="font-mono">{formatColor(c.hex)}</span>
-                  </button>
+                  <CopyButton
+                    variant="inline"
+                    value={formatColor(c.hex)}
+                    label={formatColor(c.hex)}
+                    className="!text-gray-400 hover:!text-indigo-600 font-mono"
+                  />
                 </div>
               ))}
             </div>

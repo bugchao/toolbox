@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
-import { PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Copy, Download, RefreshCw, Check, ChevronDown, ChevronRight } from 'lucide-react'
+import { Download, RefreshCw, ChevronDown, ChevronRight } from 'lucide-react'
 import DiffMatchPatch from 'diff-match-patch'
 
 interface DiffLine {
@@ -17,7 +17,6 @@ const CodeDiff: React.FC = () => {
   const [language, setLanguage] = useState('javascript')
   const [showLineNumbers, setShowLineNumbers] = useState(true)
   const [collapseUnchanged, setCollapseUnchanged] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   const dmp = useMemo(() => new DiffMatchPatch(), [])
 
@@ -112,23 +111,12 @@ const CodeDiff: React.FC = () => {
     return { additions, deletions, unchanged, total: diffLines.length }
   }, [diffLines])
 
-  const copyDiff = async () => {
-    const diffText = diffLines.map(line => {
-      const prefix = line.type === 'insert' ? '+ ' : line.type === 'delete' ? '- ' : '  '
-      return prefix + line.content
-    }).join('\n')
-    
-    await navigator.clipboard.writeText(diffText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const diffText = diffLines.map(line => {
+    const prefix = line.type === 'insert' ? '+ ' : line.type === 'delete' ? '- ' : '  '
+    return prefix + line.content
+  }).join('\n')
 
   const downloadDiff = () => {
-    const diffText = diffLines.map(line => {
-      const prefix = line.type === 'insert' ? '+ ' : line.type === 'delete' ? '- ' : '  '
-      return prefix + line.content
-    }).join('\n')
-    
     const blob = new Blob([diffText], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -207,14 +195,14 @@ const CodeDiff: React.FC = () => {
             </label>
 
             <div className="flex gap-2 ml-auto">
-              <button
-                onClick={copyDiff}
+              <CopyButton
+                variant="button"
+                value={diffText}
                 disabled={!diffLines.length}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? t('copied') : t('copy')}
-              </button>
+                label={t('copy')}
+                copiedLabel={t('copied')}
+                className="!bg-indigo-600 !text-white hover:!bg-indigo-700"
+              />
 
               <button
                 onClick={downloadDiff}
