@@ -67,6 +67,7 @@
 | 图片转 PDF | `/image-to-pdf` | `tools/tool-image-to-pdf` |
 | 图像处理实验工作台（效果管线/撤销重做/流程保存） | `/image-pipeline-lab` | `tools/tool-image-pipeline-lab` → ImagePipelineLab |
 | 愤怒的小鸟（Bird Smash 小游戏） | `/bird-smash` | `tools/tool-bird-smash` |
+| 图片文件大小精确调整（增大/压缩到目标 KB） | `/image-kb-resizer` | `tools/tool-image-kb-resizer` → ImageKbResizer |
 
 ### 研发工具
 
@@ -256,6 +257,7 @@
 | DHCP 网络扫描 | `/dhcp-scan` | `tools/tool-dhcp-scan` → DhcpScan |
 | IP 地址变更记录 | `/ipam-changelog` | `tools/tool-ipam-changelog` → IpamChangelog |
 | IP 地址扫描 | `/ipam-scan` | `tools/tool-ipam-scan` → IpamScan |
+| 全方位 HTTPS 检测（评级/证书详情/协议套件/漏洞探测/握手模拟/IPv6/CDN/邮件/国密/后量子） | `/https-inspector` | `tools/tool-https-inspector` → HttpsInspector |
 
 ### 资讯工具
 
