@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import {
   ArrowLeftRight,
   BookMarked,
-  ClipboardCopy,
   Columns2,
   Eye,
   FileText,
@@ -246,11 +245,6 @@ const AiTranslator: React.FC = () => {
     })
     return acc
   }, [provider, providerId, providerCfg, source, target, glossaryTick])
-
-  const copyOutput = async () => {
-    if (!output) return
-    try { await navigator.clipboard.writeText(output) } catch { /* ignore */ }
-  }
 
   // 卸载时停止朗读，避免残音
   useEffect(() => () => { stopSpeaking() }, [])
@@ -501,14 +495,14 @@ const AiTranslator: React.FC = () => {
                       {speakingPanel === 'output' ? t('panel.stopSpeak') : t('panel.speak')}
                     </button>
                   )}
-                  <button
-                    type="button"
-                    onClick={copyOutput}
+                  <CopyButton
+                    variant="inline"
+                    value={output}
                     disabled={!output}
-                    className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                  >
-                    <ClipboardCopy className="h-3 w-3" /> {t('panel.copy')}
-                  </button>
+                    size="sm"
+                    label={t('panel.copy')}
+                    copiedLabel={t('panel.copied')}
+                  />
                 </div>
               </div>
               {outputView === 'rendered' && output ? (
@@ -526,16 +520,14 @@ const AiTranslator: React.FC = () => {
                     {t('panel.output')} · {outputB.length}
                   </span>
                   <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        if (!outputB) return
-                        try { await navigator.clipboard.writeText(outputB) } catch { /* ignore */ }
-                      }}
+                    <CopyButton
+                      variant="inline"
+                      value={outputB}
                       disabled={!outputB}
-                      className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                    >
-                      <ClipboardCopy className="h-3 w-3" /> {t('panel.copy')}
+                      size="sm"
+                      label={t('panel.copy')}
+                      copiedLabel={t('panel.copied')}
+                    />
                     </button>
                   </div>
                 </div>

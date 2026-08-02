@@ -2,14 +2,12 @@ import React, { useCallback, useMemo, useState } from 'react'
 import {
   Plus,
   Trash2,
-  Copy,
-  Check,
   Download,
   Play,
   Sparkles,
   GripVertical,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -71,7 +69,6 @@ const FakeDataGen: React.FC = () => {
   )
 
   const [output, setOutput] = useState('')
-  const [copied, setCopied] = useState(false)
   const [generating, setGenerating] = useState(false)
 
   const updateFields = useCallback(
@@ -133,16 +130,6 @@ const FakeDataGen: React.FC = () => {
     }, 0)
   }, [data])
 
-  const copyOutput = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
 
   const downloadOutput = () => {
     const ext =
@@ -335,15 +322,16 @@ const FakeDataGen: React.FC = () => {
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-semibold text-gray-800">{t('output.title')}</h3>
           <div className="flex gap-1">
-            <button
-              type="button"
-              onClick={copyOutput}
+            <CopyButton
+              value={output}
               disabled={!output}
-              className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
-            >
-              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              {copied ? t('output.copied') : t('output.copy')}
-            </button>
+              size="sm"
+              variant="button"
+              buttonVariant="ghost"
+              label={t('output.copy')}
+              copiedLabel={t('output.copied')}
+              className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+            />
             <button
               type="button"
               onClick={downloadOutput}

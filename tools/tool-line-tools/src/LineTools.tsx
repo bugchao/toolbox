@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, ListOrdered } from 'lucide-react'
+import { ListOrdered } from 'lucide-react'
 import {
   dedupe,
   filterLines,
@@ -33,7 +33,6 @@ const LineTools: React.FC = () => {
   const [filter, setFilter] = useState('')
   const [filterRegex, setFilterRegex] = useState(false)
   const [filterExclude, setFilterExclude] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   const lines = useMemo(() => fromText(text), [text])
   const st = useMemo(() => stats(lines), [lines])
@@ -44,13 +43,6 @@ const LineTools: React.FC = () => {
 
   const onFilter = () => apply((l) => filterLines(l, filter, { regex: filterRegex, exclude: filterExclude, caseInsensitive }))
 
-  const onCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   const Btn: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
     <button
@@ -110,10 +102,7 @@ const LineTools: React.FC = () => {
             <span>
               {t('stats.total', { n: st.total })} · {t('stats.unique', { n: st.unique })} · {t('stats.blank', { n: st.blank })} · {t('stats.chars', { n: st.chars })}
             </span>
-            <button type="button" onClick={() => void onCopy()} className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200">
-              {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-              {copied ? t('copied') : t('copy')}
-            </button>
+            <CopyButton variant="inline" size="sm" value={text} label={t('copy')} copiedLabel={t('copied')} />
           </div>
           <TextArea value={text} onChange={(e) => setText(e.target.value)} rows={16} spellCheck={false} className="!font-mono !text-xs" />
           <div className="mt-2">

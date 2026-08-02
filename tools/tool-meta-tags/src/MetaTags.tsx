@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Button,
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -10,7 +11,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, ImageOff, Tags } from 'lucide-react'
+import { ImageOff, Tags } from 'lucide-react'
 import {
   emptyForm,
   extractDomain,
@@ -25,7 +26,6 @@ const DESC_MAX = 160
 const MetaTags: React.FC = () => {
   const { t } = useTranslation('toolMetaTags')
   const [form, setForm] = useState<MetaTagsForm>(emptyForm)
-  const [copied, setCopied] = useState(false)
   const [imgBroken, setImgBroken] = useState(false)
 
   const update = <K extends keyof MetaTagsForm>(key: K, value: MetaTagsForm[K]) => {
@@ -40,17 +40,6 @@ const MetaTags: React.FC = () => {
   const descLen = form.description.trim().length
   const titleTooLong = titleLen > TITLE_MAX
   const descTooLong = descLen > DESC_MAX
-
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1400)
-    } catch {
-      /* ignore */
-    }
-  }
 
   const onReset = () => {
     setForm(emptyForm)
@@ -295,12 +284,15 @@ const MetaTags: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               {t('output.heading')}
             </h2>
-            <Button variant="primary" size="sm" onClick={onCopy} disabled={!output}>
-              <span className="inline-flex items-center gap-1.5">
-                {copied ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                {copied ? t('output.copied') : t('output.copy')}
-              </span>
-            </Button>
+            <CopyButton
+              variant="button"
+              buttonVariant="primary"
+              size="sm"
+              value={output}
+              disabled={!output}
+              label={t('output.copy')}
+              copiedLabel={t('output.copied')}
+            />
           </div>
           {output ? (
             <TextArea

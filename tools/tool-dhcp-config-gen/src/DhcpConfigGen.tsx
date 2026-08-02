@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { Copy, Check, Download } from 'lucide-react'
+import { Download } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 
 type Platform = 'isc' | 'windows' | 'dnsmasq'
 
@@ -111,7 +112,6 @@ function Field({ label, value, onChange, placeholder, type = 'text' }: FieldProp
 export function DhcpConfigGen() {
   const [config, setConfig] = useState<DhcpConfig>(DEFAULT)
   const [platform, setPlatform] = useState<Platform>('isc')
-  const [copied, setCopied] = useState(false)
 
   const update = useCallback((field: keyof DhcpConfig) => (value: string) => {
     setConfig(prev => ({ ...prev, [field]: field === 'leaseTime' ? parseInt(value) || 0 : value }))
@@ -120,12 +120,6 @@ export function DhcpConfigGen() {
   const output = platform === 'isc' ? generateIsc(config)
     : platform === 'dnsmasq' ? generateDnsmasq(config)
     : generateWindows(config)
-
-  const copy = useCallback(async () => {
-    await navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }, [output])
 
   const download = useCallback(() => {
     const ext = platform === 'windows' ? 'ps1' : 'conf'
@@ -175,11 +169,7 @@ export function DhcpConfigGen() {
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-gray-900 dark:text-gray-100">生成配置</h2>
           <div className="flex gap-2">
-            <button onClick={copy}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 transition-colors">
-              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-              {copied ? '已复制' : '复制'}
-            </button>
+            <CopyButton variant="button" value={output} label="复制" copiedLabel="已复制" />
             <button onClick={download}
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors">
               <Download className="w-4 h-4" /> 下载

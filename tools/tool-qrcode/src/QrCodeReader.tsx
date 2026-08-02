@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { Upload, Camera, Copy } from 'lucide-react'
+import { Upload, Camera } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 import jsQR from 'jsqr'
 
 const QrCodeReader: React.FC = () => {
@@ -89,15 +90,6 @@ const QrCodeReader: React.FC = () => {
     requestAnimationFrame(scanFrame)
   }
 
-  const copyToClipboard = async () => {
-    if (!result) return
-    try {
-      await navigator.clipboard.writeText(result)
-      alert('内容已复制到剪贴板')
-    } catch (err) {
-      alert('复制失败，请手动复制')
-    }
-  }
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -176,13 +168,10 @@ const QrCodeReader: React.FC = () => {
                 className="input h-64 resize-none font-mono text-sm"
               />
               {result && (
-                <button
-                  onClick={copyToClipboard}
-                  className="absolute top-2 right-2 p-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 rounded-lg text-gray-700 dark:text-gray-200"
-                  title="复制到剪贴板"
-                >
-                  <Copy className="w-4 h-4" />
-                </button>
+                <CopyButton
+                  value={result}
+                  className="absolute top-2 right-2 !p-2 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 !rounded-lg !text-gray-700 dark:!text-gray-200"
+                />
               )}
             </div>
           </div>

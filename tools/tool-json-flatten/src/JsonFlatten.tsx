@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, ListTree } from 'lucide-react'
+import { ListTree } from 'lucide-react'
 import { flatten, parseJson, toCsv } from './lib/jsonFlatten'
 
 type Mode = 'flat' | 'csv'
@@ -15,7 +15,6 @@ const JsonFlatten: React.FC = () => {
   const { t } = useTranslation('toolJsonFlatten')
   const [mode, setMode] = useState<Mode>('flat')
   const [input, setInput] = useState(SAMPLE)
-  const [copied, setCopied] = useState(false)
 
   const parsed = useMemo(() => parseJson(input), [input])
 
@@ -32,16 +31,6 @@ const JsonFlatten: React.FC = () => {
     return Array.isArray(parsed.value) ? parsed.value.length : 1
   }, [parsed])
 
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -87,15 +76,14 @@ const JsonFlatten: React.FC = () => {
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('io.output')}</h2>
-              <button
-                type="button"
-                onClick={() => void onCopy()}
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={output}
                 disabled={!output}
-                className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-              >
-                {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                {copied ? t('toolbar.copied') : t('toolbar.copy')}
-              </button>
+                label={t('toolbar.copy')}
+                copiedLabel={t('toolbar.copied')}
+              />
             </div>
             <TextArea value={output} readOnly rows={18} spellCheck={false} className="!font-mono !text-xs" />
           </Card>

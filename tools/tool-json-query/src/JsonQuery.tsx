@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { queryJson } from './lib/jsonpath'
 
 const SAMPLE = JSON.stringify({
@@ -27,7 +27,6 @@ const JsonQuery: React.FC = () => {
   const { t } = useTranslation('toolJsonQuery')
   const [json, setJson] = useState(SAMPLE)
   const [path, setPath] = useState('store.books[*].title')
-  const [copied, setCopied] = useState(false)
 
   const result = useMemo(() => queryJson(json, path), [json, path])
 
@@ -37,14 +36,6 @@ const JsonQuery: React.FC = () => {
     return JSON.stringify(result.matches, null, 2)
   }, [result])
 
-  const onCopy = async () => {
-    if (!outputText) return
-    try {
-      await navigator.clipboard.writeText(outputText)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -88,10 +79,14 @@ const JsonQuery: React.FC = () => {
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('io.result')}</h2>
-              <button type="button" onClick={() => void onCopy()} disabled={!outputText} className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30">
-                {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                {copied ? t('io.copied') : t('io.copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={outputText}
+                disabled={!outputText}
+                label={t('io.copy')}
+                copiedLabel={t('io.copied')}
+              />
             </div>
             {result.ok && result.matches.length === 0 ? (
               <div className="rounded-md border border-dashed border-gray-300 p-8 text-center text-xs text-gray-400 dark:border-gray-700">{t('io.noMatch')}</div>

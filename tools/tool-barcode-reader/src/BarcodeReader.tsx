@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface BarcodeResult {
   code: string;
@@ -56,11 +57,6 @@ export default function BarcodeReader() {
     if (code.length === 12) return 'UPC-A';
     if (code.length === 6) return 'UPC-E';
     return 'Unknown';
-  };
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    alert('已复制到剪贴板！');
   };
 
   const searchOnline = (code: string) => {
@@ -149,12 +145,13 @@ export default function BarcodeReader() {
             </div>
 
             <div className="flex gap-2">
-              <button
-                onClick={() => copyToClipboard(result.code)}
-                className="flex-1 bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors"
-              >
-                📋 复制
-              </button>
+              <CopyButton
+                variant="button"
+                value={result.code}
+                label="📋 复制"
+                copiedLabel="✅ 已复制"
+                className="flex-1 justify-center !bg-blue-500 !text-white hover:!bg-blue-600"
+              />
               <button
                 onClick={() => searchOnline(result.code)}
                 className="flex-1 bg-green-500 text-white py-2 rounded-lg font-medium hover:bg-green-600 transition-colors"
@@ -194,12 +191,13 @@ export default function BarcodeReader() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <button
-                      onClick={() => copyToClipboard(item.code)}
-                      className="text-blue-500 hover:text-blue-700 text-sm"
-                    >
-                      复制
-                    </button>
+                    <CopyButton
+                      variant="inline"
+                      value={item.code}
+                      label="复制"
+                      copiedLabel="已复制"
+                      className="!text-blue-500 hover:!text-blue-700 text-sm"
+                    />
                     <button
                       onClick={() => searchOnline(item.code)}
                       className="text-green-500 hover:text-green-700 text-sm"

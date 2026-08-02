@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Bug, Copy, Check, Trash2, AlertTriangle, AlertCircle, Info } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Bug, Trash2, AlertTriangle, AlertCircle, Info } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface BugResult {
   errorType: string
@@ -121,20 +121,15 @@ export default function BugAnalyzer() {
   const { t } = useTranslation('toolBugAnalyzer')
   const [input, setInput] = useState('')
   const [result, setResult] = useState<BugResult | null>(null)
-  const [copied, setCopied] = useState(false)
 
   const handleAnalyze = () => {
     if (!input.trim()) return
     setResult(analyze(input))
   }
 
-  const handleCopy = () => {
-    if (!result) return
-    const text = `错误类型：${result.errorType}\n\n可能原因：\n${result.causes.map(c => '• ' + c).join('\n')}\n\n修复建议：\n${result.fixes.map(f => '• ' + f).join('\n')}`
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const resultText = result
+    ? `错误类型：${result.errorType}\n\n可能原因：\n${result.causes.map(c => '• ' + c).join('\n')}\n\n修复建议：\n${result.fixes.map(f => '• ' + f).join('\n')}`
+    : ''
 
   const sev = result ? SEVERITY_CONFIG[result.severity] : null
 
@@ -200,10 +195,14 @@ export default function BugAnalyzer() {
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('fix')}</h3>
-                <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-indigo-600">
-                  {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? t('copied') : t('copy')}
-                </button>
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={resultText}
+                  label={t('copy')}
+                  copiedLabel={t('copied')}
+                  className="!text-gray-500 hover:!text-indigo-600"
+                />
               </div>
               <ul className="space-y-2">
                 {result.fixes.map((f, i) => (

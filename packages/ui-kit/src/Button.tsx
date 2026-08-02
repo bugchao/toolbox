@@ -1,4 +1,5 @@
 import React from 'react'
+import Spinner from './Spinner'
 
 export interface ButtonProps {
   onClick?: () => void
@@ -6,6 +7,8 @@ export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   disabled?: boolean
+  /** 为 true 时禁用按钮并在文案前显示 Spinner，替代各工具手写的 loading 图标切换 */
+  loading?: boolean
   className?: string
   children: React.ReactNode
 }
@@ -35,12 +38,19 @@ const baseClasses =
 /**
  * 按钮，统一浅色/暗色主题
  */
+const spinnerSizeBySize = {
+  sm: 'sm',
+  md: 'sm',
+  lg: 'md',
+} as const
+
 const Button: React.FC<ButtonProps> = ({
   onClick,
   type = 'button',
   variant = 'primary',
   size = 'md',
   disabled = false,
+  loading = false,
   className = '',
   children,
 }) => {
@@ -48,10 +58,17 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
     >
-      {children}
+      {loading ? (
+        <span className="inline-flex items-center gap-2">
+          <Spinner size={spinnerSizeBySize[size]} />
+          {children}
+        </span>
+      ) : (
+        children
+      )}
     </button>
   )
 }

@@ -4,14 +4,12 @@ import {
   Lock,
   Unlock,
   Shuffle,
-  Copy,
-  Check,
   Eye,
   EyeOff,
   Info,
   AlertCircle,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -83,7 +81,6 @@ const AesCipher: React.FC = () => {
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
   const [running, setRunning] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   const update = useCallback(
     <K extends keyof PersistedState>(key: K, value: PersistedState[K]) => {
@@ -209,17 +206,6 @@ const AesCipher: React.FC = () => {
     input,
     t,
   ])
-
-  const copyOutput = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
 
   // When switching encoding for a field, try to re-encode existing value across encodings
   const recodeField = (cur: string, from: Encoding, to: Encoding): string => {
@@ -517,15 +503,15 @@ const AesCipher: React.FC = () => {
             <label className="text-sm font-medium text-gray-700">
               {direction === 'encrypt' ? t('io.ciphertext') : t('io.plaintext')}
             </label>
-            <button
-              type="button"
-              onClick={copyOutput}
+            <CopyButton
+              value={output}
               disabled={!output}
-              className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
-            >
-              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              {copied ? t('copied') : t('copy')}
-            </button>
+              size="sm"
+              buttonVariant="ghost"
+              label={t('copy')}
+              copiedLabel={t('copied')}
+              className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+            />
           </div>
           <textarea
             value={output}

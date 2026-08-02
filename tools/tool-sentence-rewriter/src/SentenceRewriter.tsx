@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PenLine, Copy, Check, Trash2, Sparkles } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PenLine, Trash2, Sparkles } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type Style = 'formal' | 'casual' | 'concise' | 'elaborate' | 'persuasive' | 'poetic'
 
@@ -69,7 +69,6 @@ export default function SentenceRewriter() {
   const [input, setInput] = useState('')
   const [style, setStyle] = useState<Style>('formal')
   const [results, setResults] = useState<Partial<Record<Style, string>>>({})
-  const [copied, setCopied] = useState<string | null>(null)
 
   const handleRewrite = () => {
     if (!input.trim()) return
@@ -78,11 +77,6 @@ export default function SentenceRewriter() {
     setResults(all)
   }
 
-  const handleCopy = (s: Style, text: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(s)
-    setTimeout(() => setCopied(null), 2000)
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -123,11 +117,14 @@ export default function SentenceRewriter() {
               <div key={s} className={`rounded-xl border p-4 ${STYLE_COLORS[s]}`}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-semibold">{t(s)}</span>
-                  <button onClick={() => handleCopy(s, results[s] || '')}
-                    className="flex items-center gap-1 text-xs opacity-70 hover:opacity-100">
-                    {copied === s ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                    {copied === s ? t('copied') : t('copy')}
-                  </button>
+                  <CopyButton
+                    variant="inline"
+                    size="sm"
+                    value={results[s] || ''}
+                    label={t('copy')}
+                    copiedLabel={t('copied')}
+                    className="opacity-70 hover:opacity-100"
+                  />
                 </div>
                 <p className="text-sm leading-relaxed">{results[s]}</p>
               </div>

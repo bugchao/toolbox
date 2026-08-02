@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Key, Copy, Download, AlertTriangle, Check } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Key, Download, AlertTriangle } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type KeySize = 1024 | 2048 | 4096
 type OutputFormat = 'PKCS#1' | 'PKCS#8'
@@ -45,13 +45,9 @@ export default function RsaKeygen() {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('PKCS#1')
   const [keyPair, setKeyPair] = useState<KeyPair | null>(null)
   const [generating, setGenerating] = useState(false)
-  const [copiedPublic, setCopiedPublic] = useState(false)
-  const [copiedPrivate, setCopiedPrivate] = useState(false)
 
   const generateKeys = async () => {
     setGenerating(true)
-    setCopiedPublic(false)
-    setCopiedPrivate(false)
     
     try {
       // 生成 RSA 密钥对
@@ -92,21 +88,6 @@ export default function RsaKeygen() {
       alert(t('generateError'))
     } finally {
       setGenerating(false)
-    }
-  }
-
-  const copyToClipboard = async (text: string, isPublic: boolean) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      if (isPublic) {
-        setCopiedPublic(true)
-        setTimeout(() => setCopiedPublic(false), 2000)
-      } else {
-        setCopiedPrivate(true)
-        setTimeout(() => setCopiedPrivate(false), 2000)
-      }
-    } catch (error) {
-      console.error('Copy failed:', error)
     }
   }
 
@@ -222,13 +203,14 @@ export default function RsaKeygen() {
                   {t('publicKey')}
                 </h3>
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => copyToClipboard(keyPair.publicKey, true)}
-                    className="px-3 py-1.5 text-xs bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-1.5 transition-colors"
-                  >
-                    {copiedPublic ? <Check size={14} /> : <Copy size={14} />}
-                    {copiedPublic ? t('copied') : t('copy')}
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    size="sm"
+                    value={keyPair.publicKey}
+                    label={t('copy')}
+                    copiedLabel={t('copied')}
+                    className="!bg-green-600 hover:!bg-green-700 !text-white"
+                  />
                   <button
                     onClick={() => downloadKey(keyPair.publicKey, 'public_key.pem')}
                     className="px-3 py-1.5 text-xs bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-1.5 transition-colors"
@@ -252,13 +234,14 @@ export default function RsaKeygen() {
                   {t('privateKey')}
                 </h3>
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => copyToClipboard(keyPair.privateKey, false)}
-                    className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-1.5 transition-colors"
-                  >
-                    {copiedPrivate ? <Check size={14} /> : <Copy size={14} />}
-                    {copiedPrivate ? t('copied') : t('copy')}
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    size="sm"
+                    value={keyPair.privateKey}
+                    label={t('copy')}
+                    copiedLabel={t('copied')}
+                    className="!bg-red-600 hover:!bg-red-700 !text-white"
+                  />
                   <button
                     onClick={() => downloadKey(keyPair.privateKey, 'private_key.pem')}
                     className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center gap-1.5 transition-colors"

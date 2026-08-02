@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, ArrowLeftRight } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { ArrowLeftRight } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type Base = 2 | 8 | 10 | 16
 
@@ -28,7 +28,6 @@ function isValid(val: string, base: Base): boolean {
 export default function BaseConverter() {
   const { t } = useTranslation('toolBaseConverter')
   const [source, setSource] = useState<{ base: Base; value: string }>({ base: 10, value: '' })
-  const [copied, setCopied] = useState<Base | null>(null)
 
   const decimal = source.value && isValid(source.value, source.base)
     ? parseInt(source.value, source.base)
@@ -42,12 +41,6 @@ export default function BaseConverter() {
       case 10: return decimal.toString(10)
       case 16: return decimal.toString(16).toUpperCase()
     }
-  }
-
-  const copy = (base: Base) => {
-    navigator.clipboard.writeText(convert(base))
-    setCopied(base)
-    setTimeout(() => setCopied(null), 1500)
   }
 
   return (
@@ -68,9 +61,11 @@ export default function BaseConverter() {
                   {t(`${f.base === 2 ? 'binary' : f.base === 8 ? 'octal' : f.base === 10 ? 'decimal' : 'hex'}`)}
                   <span className="ml-1 text-gray-300">({f.prefix || '无前缀'})</span>
                 </span>
-                <button onClick={() => copy(f.base)} className="text-gray-300 hover:text-indigo-500 transition-colors">
-                  {copied === f.base ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                </button>
+                <CopyButton
+                  value={convert(f.base)}
+                  size="sm"
+                  className="!text-gray-300 hover:!text-indigo-500"
+                />
               </div>
               <input
                 value={val}

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Card, PageHero, Button, Input, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeftRight, Check, Copy, Wand2, X } from 'lucide-react'
+import { ArrowLeftRight, Check, Wand2, X } from 'lucide-react'
 import {
   adjustForegroundToRatio,
   contrastRatio,
@@ -41,14 +41,6 @@ const ContrastChecker: React.FC = () => {
     setFgHex(toHex(next))
   }
 
-  const copy = async (value: string) => {
-    try {
-      await navigator.clipboard.writeText(value)
-    } catch {
-      // ignore
-    }
-  }
-
   return (
     <div className="relative min-h-[60vh]">
       <ParticlesBackground preset="minimal" className="absolute inset-0" />
@@ -67,7 +59,6 @@ const ContrastChecker: React.FC = () => {
                 hex={fgHex}
                 valid={fgRgb !== null}
                 onChange={setFgHex}
-                onCopy={copy}
                 channel="foreground"
               />
               <ColorRow
@@ -75,7 +66,6 @@ const ContrastChecker: React.FC = () => {
                 hex={bgHex}
                 valid={bgRgb !== null}
                 onChange={setBgHex}
-                onCopy={copy}
                 channel="background"
               />
 
@@ -153,10 +143,9 @@ type ColorRowProps = {
   valid: boolean
   channel: Channel
   onChange: (v: string) => void
-  onCopy: (v: string) => void
 }
 
-const ColorRow: React.FC<ColorRowProps> = ({ label, hex, valid, onChange, onCopy }) => {
+const ColorRow: React.FC<ColorRowProps> = ({ label, hex, valid, onChange }) => {
   // 颜色选择器需要严格的 #rrggbb 形式
   const pickerValue = valid ? normalizeHex(hex) : '#000000'
   return (
@@ -185,9 +174,7 @@ const ColorRow: React.FC<ColorRowProps> = ({ label, hex, valid, onChange, onCopy
           spellCheck={false}
           className="font-mono uppercase"
         />
-        <Button variant="ghost" size="sm" onClick={() => onCopy(hex)}>
-          <Copy className="h-4 w-4" />
-        </Button>
+        <CopyButton variant="button" buttonVariant="ghost" size="sm" value={hex} />
       </div>
     </div>
   )

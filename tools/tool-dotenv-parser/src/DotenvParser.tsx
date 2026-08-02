@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Button,
   Card,
+  CopyButton,
   DataTable,
   NoticeCard,
   PageHero,
@@ -11,7 +12,7 @@ import {
   type DataTableColumn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, FileKey2, ShieldCheck, TriangleAlert } from 'lucide-react'
+import { FileKey2, ShieldCheck, TriangleAlert } from 'lucide-react'
 import {
   parseInput,
   serialize,
@@ -47,7 +48,6 @@ const DotenvParser: React.FC = () => {
   const [inputFormat, setInputFormat] = useState<InputFormat>('env')
   const [text, setText] = useState<string>('')
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('json')
-  const [copied, setCopied] = useState(false)
 
   const parsed = useMemo(
     () => (text.trim() ? parseInput(text, inputFormat) : null),
@@ -66,17 +66,6 @@ const DotenvParser: React.FC = () => {
     () => (result ? serialize(result.entries, outputFormat) : ''),
     [result, outputFormat]
   )
-
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
 
   const loadSample = () => {
     setText(inputFormat === 'json' ? SAMPLE_JSON : SAMPLE_ENV)
@@ -223,14 +212,14 @@ const DotenvParser: React.FC = () => {
                 <pre className="max-h-80 overflow-auto rounded-xl border border-gray-200 bg-gray-50 p-4 font-mono text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-800/60 dark:text-gray-100">
                   {output}
                 </pre>
-                <button
-                  type="button"
-                  onClick={onCopy}
-                  className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-md bg-white/80 px-2 py-1 text-xs text-gray-600 shadow-sm backdrop-blur hover:text-gray-900 dark:bg-gray-900/70 dark:text-gray-300 dark:hover:text-gray-100"
-                >
-                  {copied ? <Check className="h-3.5 w-3.5" /> : <ClipboardCopy className="h-3.5 w-3.5" />}
-                  {copied ? t('output.copied') : t('output.copy')}
-                </button>
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={output}
+                  label={t('output.copy')}
+                  copiedLabel={t('output.copied')}
+                  className="absolute right-2 top-2 rounded-md bg-white/80 px-2 py-1 !text-gray-600 shadow-sm backdrop-blur hover:!text-gray-900 dark:bg-gray-900/70 dark:!text-gray-300 dark:hover:!text-gray-100"
+                />
               </div>
             ) : (
               <p className="rounded-xl border border-dashed border-gray-200 p-6 text-center text-sm text-gray-400 dark:border-gray-700 dark:text-gray-500">

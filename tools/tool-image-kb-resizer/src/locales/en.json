@@ -1,0 +1,23 @@
+{
+  "title": "Image KB Resizer",
+  "description": "Resize an image to an exact target file size in KB — increase or compress, visual content unchanged",
+  "dropHint": "Drag an image here, or click to select a file",
+  "supportedFormats": "Supports JPG / PNG / WEBP / GIF / BMP",
+  "originalSize": "Original size",
+  "targetSizeLabel": "Target size (KB)",
+  "targetSizePlaceholder": "Enter target size, 1~10000",
+  "outputFormat": "Output format",
+  "formatSame": "Keep original format",
+  "formatJpeg": "JPEG",
+  "formatPng": "PNG",
+  "formatWebp": "WEBP",
+  "process": "Process",
+  "processing": "Processing",
+  "actualSize": "Actual size",
+  "changeRate": "Change",
+  "download": "Download",
+  "approximateNotice": "PNG is lossless, so compressing cannot hit the target size exactly — this is the closest size achieved",
+  "errorInvalidFile": "Please select an image file",
+  "errorTargetTooSmall": "Target size must be greater than 0",
+  "errorProcessFailed": "Processing failed, please try again"
+}

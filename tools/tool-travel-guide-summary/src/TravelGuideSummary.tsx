@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface GuideSummary {
   destination: string;
@@ -120,10 +121,10 @@ ${summary.tips.map(t => `- ${t}`).join('\n')}
     URL.revokeObjectURL(url);
   };
 
-  const copyToClipboard = () => {
-    if (!summary) return;
+  const buildSummaryText = () => {
+    if (!summary) return '';
 
-    const content = `${summary.destination} 旅行攻略总结
+    return `${summary.destination} 旅行攻略总结
 
 概览：${summary.overview}
 
@@ -145,9 +146,6 @@ ${summary.food.map(f => `• ${f}`).join('\n')}
 
 建议：
 ${summary.tips.map(t => `• ${t}`).join('\n')}`;
-
-    navigator.clipboard.writeText(content);
-    alert('已复制到剪贴板！');
   };
 
   return (
@@ -242,12 +240,13 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
               <h2 className="text-xl font-semibold">📖 攻略总结</h2>
               {summary && (
                 <div className="flex gap-2">
-                  <button
-                    onClick={copyToClipboard}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors"
-                  >
-                    📋 复制
-                  </button>
+                  <CopyButton
+                    variant="button"
+                    value={buildSummaryText()}
+                    label="📋 复制"
+                    copiedLabel="✅ 已复制"
+                    className="!bg-blue-500 !text-white hover:!bg-blue-600"
+                  />
                   <button
                     onClick={exportSummary}
                     className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"

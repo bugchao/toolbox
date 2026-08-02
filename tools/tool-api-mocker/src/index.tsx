@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface MockEndpoint {
   id: string;
@@ -88,11 +89,6 @@ const APIMocker: React.FC = () => {
     } catch (e) {
       alert('JSON 格式错误');
     }
-  };
-
-  const copyEndpoint = (endpoint: MockEndpoint) => {
-    const text = `${endpoint.method} ${endpoint.path}\nStatus: ${endpoint.statusCode}\n\n${endpoint.response}`;
-    navigator.clipboard.writeText(text);
   };
 
   return (
@@ -217,12 +213,13 @@ const APIMocker: React.FC = () => {
                   <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto">
                     {endpoint.response}
                   </pre>
-                  <button
-                    onClick={() => copyEndpoint(endpoint)}
-                    className="mt-2 text-sm text-blue-500 hover:text-blue-700"
-                  >
-                    复制
-                  </button>
+                  <CopyButton
+                    variant="inline"
+                    value={`${endpoint.method} ${endpoint.path}\nStatus: ${endpoint.statusCode}\n\n${endpoint.response}`}
+                    label="复制"
+                    copiedLabel="已复制"
+                    className="mt-2 text-sm !text-blue-500 hover:!text-blue-700"
+                  />
                 </div>
               ))}
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 type SchemeType = 'monochromatic' | 'complementary' | 'analogous' | 'triadic' | 'tetradic';
 
@@ -177,12 +178,13 @@ const ColorScheme: React.FC = () => {
                     onClick={() => copyColor(color)}
                   />
                   <div className="font-mono text-sm">{color}</div>
-                  <button
-                    onClick={() => copyColor(color)}
-                    className="text-xs text-blue-500 hover:text-blue-700"
-                  >
-                    复制
-                  </button>
+                  <CopyButton
+                    variant="inline"
+                    value={color}
+                    label="复制"
+                    copiedLabel="已复制"
+                    className="text-xs !text-blue-500 hover:!text-blue-700"
+                  />
                 </div>
               ))}
             </div>

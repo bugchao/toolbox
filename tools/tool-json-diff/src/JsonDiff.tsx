@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeftRight, Check, ClipboardCopy, GitCompareArrows } from 'lucide-react'
+import { ArrowLeftRight, Check, GitCompareArrows } from 'lucide-react'
 import { diffJson, parseJson, summarize, type DiffEntry, type DiffType } from './lib/jsonDiff'
 
 const SAMPLE_LEFT = `{
@@ -35,7 +35,6 @@ const JsonDiff: React.FC = () => {
   const [left, setLeft] = useState(SAMPLE_LEFT)
   const [right, setRight] = useState(SAMPLE_RIGHT)
   const [hideUnchanged, setHideUnchanged] = useState(true)
-  const [copied, setCopied] = useState(false)
 
   const leftParsed = useMemo(() => parseJson(left), [left])
   const rightParsed = useMemo(() => parseJson(right), [right])
@@ -64,24 +63,16 @@ const JsonDiff: React.FC = () => {
     setRight(SAMPLE_RIGHT)
   }
 
-  const onCopy = async () => {
-    if (!diff) return
-    const text = visible
-      .map((e) => {
-        if (e.type === 'added') return `+ ${e.path}: ${fmt(e.right)}`
-        if (e.type === 'removed') return `- ${e.path}: ${fmt(e.left)}`
-        if (e.type === 'changed') return `~ ${e.path}: ${fmt(e.left)} -> ${fmt(e.right)}`
-        return `  ${e.path}: ${fmt(e.left)}`
-      })
-      .join('\n')
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
+  const diffText = diff
+    ? visible
+        .map((e) => {
+          if (e.type === 'added') return `+ ${e.path}: ${fmt(e.right)}`
+          if (e.type === 'removed') return `- ${e.path}: ${fmt(e.left)}`
+          if (e.type === 'changed') return `~ ${e.path}: ${fmt(e.left)} -> ${fmt(e.right)}`
+          return `  ${e.path}: ${fmt(e.left)}`
+        })
+        .join('\n')
+    : ''
 
   return (
     <div className="relative min-h-[60vh]">
@@ -128,14 +119,14 @@ const JsonDiff: React.FC = () => {
               {t('toolbar.hideUnchanged')}
             </label>
             {diff && (
-              <button
-                type="button"
-                onClick={() => void onCopy()}
-                className="ml-auto inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-              >
-                {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                {copied ? t('toolbar.copied') : t('toolbar.copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={diffText}
+                label={t('toolbar.copy')}
+                copiedLabel={t('toolbar.copied')}
+                className="ml-auto"
+              />
             )}
           </div>
 

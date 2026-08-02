@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Code2, Plus, Trash2, Copy, Check, RotateCcw } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Code2, Plus, Trash2, RotateCcw } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 type QueryType = 'query' | 'mutation' | 'subscription'
 
@@ -45,7 +45,6 @@ export default function GraphqlBuilder() {
   const [fields, setFields] = useState<Field[]>([{ id: genId(), name: '', isNested: false, nestedFields: [] }])
   const [variables, setVariables] = useState<Variable[]>([])
   const [output, setOutput] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const addField = () => setFields(f => [...f, { id: genId(), name: '', isNested: false, nestedFields: [] }])
   const removeField = (id: string) => setFields(f => f.filter(x => x.id !== id))
@@ -60,11 +59,6 @@ export default function GraphqlBuilder() {
 
   const handleGenerate = () => setOutput(buildQuery(queryType, opName, typeName, fields, variables))
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
 
   const handleReset = () => {
     setQueryType('query'); setOpName(''); setTypeName('')
@@ -175,10 +169,14 @@ export default function GraphqlBuilder() {
           <div className="bg-gray-900 rounded-2xl p-5 relative">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-gray-400">{t('output')}</span>
-              <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-white">
-                {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? t('copied') : t('copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={output}
+                label={t('copy')}
+                copiedLabel={t('copied')}
+                className="!text-gray-400 hover:!text-white"
+              />
             </div>
             <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">{output}</pre>
           </div>

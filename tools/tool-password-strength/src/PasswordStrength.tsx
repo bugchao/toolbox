@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Eye, EyeOff, Copy, Check, ShieldCheck, RefreshCw } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Eye, EyeOff, ShieldCheck, RefreshCw } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 function analyze(pwd: string) {
   const checks = {
@@ -46,9 +46,7 @@ export default function PasswordStrength() {
   const { t } = useTranslation('toolPasswordStrength')
   const [pwd, setPwd] = useState('')
   const [show, setShow] = useState(false)
-  const [copied, setCopied] = useState(false)
   const [generated, setGenerated] = useState('')
-  const [copiedGen, setCopiedGen] = useState(false)
 
   const { checks, score } = analyze(pwd)
   const pct = Math.round(score / 8 * 100)
@@ -61,11 +59,6 @@ export default function PasswordStrength() {
   ]
   const level = [...levels].reverse().find(l => pct >= l.min) || levels[0]
 
-  const copy = (text: string, setFn: (v: boolean) => void) => {
-    navigator.clipboard.writeText(text)
-    setFn(true)
-    setTimeout(() => setFn(false), 1500)
-  }
 
   const suggestions: string[] = []
   if (!checks.length) suggestions.push('密码长度至少8位')
@@ -90,9 +83,7 @@ export default function PasswordStrength() {
             <button onClick={() => setShow(s => !s)} className="text-gray-400 hover:text-gray-600 px-2">
               {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
-            <button onClick={() => copy(pwd, setCopied)} className="text-gray-400 hover:text-indigo-500 px-1">
-              {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-            </button>
+            <CopyButton value={pwd} className="!text-gray-400 hover:!text-indigo-500 px-1" />
           </div>
           {pwd && (
             <>
@@ -130,9 +121,7 @@ export default function PasswordStrength() {
           {generated && (
             <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700 rounded-lg px-3 py-2">
               <span className="flex-1 font-mono text-sm text-gray-800 dark:text-gray-200 break-all">{generated}</span>
-              <button onClick={() => copy(generated, setCopiedGen)} className="text-gray-400 hover:text-indigo-500 shrink-0">
-                {copiedGen ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-              </button>
+              <CopyButton value={generated} className="!text-gray-400 hover:!text-indigo-500 shrink-0" />
             </div>
           )}
         </div>

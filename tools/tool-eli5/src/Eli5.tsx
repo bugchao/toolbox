@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Baby } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Baby } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Eli5Item {
   term: string
@@ -55,7 +55,6 @@ export default function Eli5() {
   const { t } = useTranslation('toolEli5')
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('全部')
-  const [copied, setCopied] = useState<string | null>(null)
   const [expanded, setExpanded] = useState<Record<number, boolean>>({})
 
   const filtered = DATA.filter(d => {
@@ -63,12 +62,6 @@ export default function Eli5() {
     const q = search.toLowerCase()
     return matchCat && (!q || d.term.toLowerCase().includes(q) || d.explanation.toLowerCase().includes(q))
   })
-
-  const copy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(id)
-    setTimeout(() => setCopied(null), 1500)
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -97,10 +90,12 @@ export default function Eli5() {
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">{d.explanation}</p>
                 </div>
-                <button onClick={e => { e.stopPropagation(); copy(`${d.term}\n解释：${d.explanation}\n类比：${d.analogy}`, String(i)) }}
-                  className="shrink-0 text-gray-300 hover:text-indigo-500">
-                  {copied === String(i) ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-                </button>
+                <div onClick={e => e.stopPropagation()} className="shrink-0">
+                  <CopyButton
+                    value={`${d.term}\n解释：${d.explanation}\n类比：${d.analogy}`}
+                    className="!text-gray-300 hover:!text-indigo-500"
+                  />
+                </div>
               </div>
               {expanded[i] && (
                 <div className="px-4 pb-4 pt-0">

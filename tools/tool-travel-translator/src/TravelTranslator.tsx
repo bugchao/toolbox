@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Languages } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Languages } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Phrase {
   zh: string
@@ -68,7 +68,6 @@ export default function TravelTranslator() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('全部')
   const [activeLangs, setActiveLangs] = useState(['zh', 'en', 'ja'])
-  const [copied, setCopied] = useState<string | null>(null)
 
   const filtered = PHRASES.filter(p => {
     const matchCat = category === '全部' || p.category === category
@@ -83,11 +82,6 @@ export default function TravelTranslator() {
     )
   }
 
-  const copy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(id)
-    setTimeout(() => setCopied(null), 1500)
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -132,10 +126,7 @@ export default function TravelTranslator() {
                     <div key={lang} className="flex items-center gap-3 px-3 py-2.5">
                       <span className="text-xs text-gray-400 w-12 shrink-0">{LANGS.find(l => l.key === lang)?.label}</span>
                       <span className="flex-1 text-sm text-gray-800 dark:text-gray-200">{text}</span>
-                      <button onClick={() => copy(text, id)}
-                        className="shrink-0 text-gray-300 hover:text-indigo-500 transition-colors">
-                        {copied === id ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                      </button>
+                      <CopyButton value={text} className="shrink-0 !text-gray-300 hover:!text-indigo-500" />
                     </div>
                   )
                 })}

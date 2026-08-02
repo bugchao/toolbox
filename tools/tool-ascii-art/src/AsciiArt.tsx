@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Type, Download } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Type, Download } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 // 简易 ASCII 字体（3行高度大字符）
 const FONTS: Record<string, Record<string, string[]>> = {
@@ -62,15 +62,8 @@ export default function AsciiArt() {
   const { t } = useTranslation('toolAsciiArt')
   const [input, setInput] = useState('HELLO')
   const [font, setFont] = useState('Block')
-  const [copied, setCopied] = useState(false)
 
   const output = renderText(input, font)
-
-  const copy = () => {
-    navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
 
   const download = () => {
     const blob = new Blob([output], { type: 'text/plain' })
@@ -97,11 +90,14 @@ export default function AsciiArt() {
           <pre className="text-green-400 text-xs leading-tight font-mono whitespace-pre">{output}</pre>
         </div>
         <div className="flex gap-3">
-          <button onClick={copy}
-            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm text-gray-600 hover:border-indigo-400">
-            {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-            {copied ? t('copied') : t('copy')}
-          </button>
+          <CopyButton
+            variant="button"
+            buttonVariant="ghost"
+            value={output}
+            label={t('copy')}
+            copiedLabel={t('copied')}
+            className="!bg-white dark:!bg-gray-800 border border-gray-200 dark:border-gray-700 !rounded-xl !text-gray-600 hover:!border-indigo-400"
+          />
           <button onClick={download}
             className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm text-gray-600 hover:border-indigo-400">
             <Download className="w-4 h-4" />{t('download')}

@@ -4,14 +4,12 @@ import {
   Image as ImageIcon,
   Twitter,
   Search,
-  Copy,
-  Check,
   Download,
   RotateCcw,
   ChevronDown,
   Code2,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -176,7 +174,6 @@ const MetaTagGen: React.FC = () => {
   )
 
   const [previewTab, setPreviewTab] = useState<PreviewTab>('google')
-  const [copied, setCopied] = useState(false)
   const [openSeo, setOpenSeo] = useState(true)
   const [openOg, setOpenOg] = useState(true)
   const [openTwitter, setOpenTwitter] = useState(true)
@@ -194,17 +191,6 @@ const MetaTagGen: React.FC = () => {
   const previewDesc = data.ogDescription.trim() || data.description
   const previewUrl = data.ogUrl.trim() || data.canonical
   const previewDomain = safeHostname(previewUrl, t('preview.domain'))
-
-  const copyHtml = useCallback(async () => {
-    if (!html) return
-    try {
-      await navigator.clipboard.writeText(html)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }, [html])
 
   const downloadHtml = useCallback(() => {
     const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
@@ -529,14 +515,14 @@ const MetaTagGen: React.FC = () => {
             <Code2 className="w-4 h-4" /> {t('section.output')}
           </h2>
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={copyHtml}
-              className="px-3 py-1.5 text-xs font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors flex items-center gap-1.5"
-            >
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? t('copied') : t('copy')}
-            </button>
+            <CopyButton
+              variant="button"
+              size="sm"
+              value={html}
+              label={t('copy')}
+              copiedLabel={t('copied')}
+              className="!bg-indigo-600 !text-white hover:!bg-indigo-700"
+            />
             <button
               type="button"
               onClick={downloadHtml}

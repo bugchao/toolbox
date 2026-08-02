@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, Switch } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, Switch } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Download, ShieldCheck, Trash2 } from 'lucide-react'
+import { Download, ShieldCheck, Trash2 } from 'lucide-react'
 import {
   buildHtpasswdFile,
   computeHash,
@@ -27,8 +27,6 @@ const Htpasswd: React.FC = () => {
   const [entry, setEntry] = useState<HtpasswdEntry | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
-  const [copiedEntry, setCopiedEntry] = useState(false)
-  const [copiedAll, setCopiedAll] = useState(false)
 
   const [entries, setEntries] = useState<HtpasswdEntry[]>([])
 
@@ -72,16 +70,6 @@ const Htpasswd: React.FC = () => {
       const withoutDup = prev.filter((e) => e.username !== result.username)
       return [...withoutDup, result]
     })
-  }
-
-  const copy = async (text: string, mark: (v: boolean) => void) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      mark(true)
-      window.setTimeout(() => mark(false), 1200)
-    } catch {
-      /* ignore */
-    }
   }
 
   const fileContent = buildHtpasswdFile(entries)
@@ -198,14 +186,13 @@ const Htpasswd: React.FC = () => {
               <code className="flex-1 overflow-x-auto rounded-md bg-gray-100 px-3 py-2 font-mono text-xs text-gray-800 dark:bg-gray-800 dark:text-gray-100">
                 {formatEntry(entry.username, entry.hash)}
               </code>
-              <Button
+              <CopyButton
+                variant="button"
                 size="sm"
-                variant="secondary"
-                onClick={() => copy(formatEntry(entry.username, entry.hash), setCopiedEntry)}
-              >
-                {copiedEntry ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                <span className="ml-1">{copiedEntry ? t('result.copied') : t('result.copy')}</span>
-              </Button>
+                value={formatEntry(entry.username, entry.hash)}
+                label={t('result.copy')}
+                copiedLabel={t('result.copied')}
+              />
             </div>
           ) : (
             <p className="text-sm text-gray-500 dark:text-gray-400">{t('result.empty')}</p>
@@ -217,10 +204,13 @@ const Htpasswd: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('list.heading')}</h2>
             {entries.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                <Button size="sm" variant="secondary" onClick={() => copy(fileContent, setCopiedAll)}>
-                  {copiedAll ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                  <span className="ml-1">{copiedAll ? t('result.copied') : t('list.copyAll')}</span>
-                </Button>
+                <CopyButton
+                  variant="button"
+                  size="sm"
+                  value={fileContent}
+                  label={t('list.copyAll')}
+                  copiedLabel={t('result.copied')}
+                />
                 <Button size="sm" onClick={onDownload}>
                   <Download className="h-4 w-4" />
                   <span className="ml-1">{t('list.download')}</span>

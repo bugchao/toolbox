@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 const SQLFormatter: React.FC = () => {
   const [input, setInput] = useState('');
@@ -64,10 +65,6 @@ const SQLFormatter: React.FC = () => {
     setOutput(minified);
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(output);
-  };
-
   return (
     <div className="max-w-6xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow-lg p-6">
@@ -121,13 +118,14 @@ const SQLFormatter: React.FC = () => {
             压缩
           </button>
           
-          <button
-            onClick={copyToClipboard}
+          <CopyButton
+            variant="button"
+            value={output}
             disabled={!output}
-            className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 disabled:opacity-50"
-          >
-            复制结果
-          </button>
+            label="复制结果"
+            copiedLabel="已复制"
+            className="!bg-gray-500 !text-white hover:!bg-gray-600"
+          />
           
           <button
             onClick={() => { setInput(''); setOutput(''); }}

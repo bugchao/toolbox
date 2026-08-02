@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Palette, Copy, Download, Plus, Trash2 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Palette, Download, Plus, Trash2 } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface ColorStop {
   id: string
@@ -53,14 +53,6 @@ export default function GradientGen() {
     }
   }, [gradientType, angle, colorStops])
 
-  const copyCSS = async () => {
-    try {
-      await navigator.clipboard.writeText(cssCode)
-      alert(t('copied') || 'CSS 已复制')
-    } catch (err) {
-      console.error('Copy failed:', err)
-    }
-  }
 
   const exportImage = () => {
     const canvas = canvasRef.current
@@ -223,24 +215,22 @@ export default function GradientGen() {
               <pre className="p-3 bg-gray-100 dark:bg-gray-900 rounded-lg text-xs text-gray-800 dark:text-gray-200 overflow-x-auto">
                 {cssCode}
               </pre>
-              <button
-                onClick={copyCSS}
-                className="absolute top-2 right-2 p-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
-              >
-                <Copy size={14} />
-              </button>
+              <CopyButton
+                value={cssCode}
+                className="absolute top-2 right-2 !p-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 !rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              />
             </div>
           </div>
 
           {/* 操作按钮 */}
           <div className="flex gap-3 pt-2">
-            <button
-              onClick={copyCSS}
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium"
-            >
-              <Copy size={18} />
-              {t('copyCSS') || '复制 CSS'}
-            </button>
+            <CopyButton
+              variant="button"
+              value={cssCode}
+              label={t('copyCSS') || '复制 CSS'}
+              copiedLabel="已复制"
+              className="flex-1 justify-center !bg-indigo-600 !text-white hover:!bg-indigo-700"
+            />
             <button
               onClick={exportImage}
               className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium"

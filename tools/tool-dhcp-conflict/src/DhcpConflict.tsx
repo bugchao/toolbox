@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { AlertTriangle, CheckCircle, Copy, Check } from 'lucide-react'
+import { AlertTriangle, CheckCircle } from 'lucide-react'
+import { CopyButton } from '@toolbox/ui-kit'
 
 function ipToNum(ip: string): number {
   const parts = ip.trim().split('.')
@@ -22,7 +23,6 @@ interface ConflictResult {
 export function DhcpConflict() {
   const [input, setInput] = useState('192.168.1.100\n192.168.1.101\n192.168.1.100\n192.168.1.102\n192.168.1.101')
   const [results, setResults] = useState<{ conflicts: ConflictResult[]; invalid: string[]; total: number } | null>(null)
-  const [copied, setCopied] = useState(false)
 
   const analyze = useCallback(() => {
     const lines = input.split('\n').map(l => l.trim()).filter(Boolean)
@@ -48,13 +48,9 @@ export function DhcpConflict() {
     setResults({ conflicts, invalid, total: lines.length })
   }, [input])
 
-  const copyConflicts = useCallback(async () => {
-    if (!results) return
-    const text = results.conflicts.map(c => `${c.ip} (第 ${c.lines.join(', ')} 行)`).join('\n')
-    await navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }, [results])
+  const conflictsText = results
+    ? results.conflicts.map(c => `${c.ip} (第 ${c.lines.join(', ')} 行)`).join('\n')
+    : ''
 
   return (
     <div className="max-w-2xl mx-auto p-6 space-y-6">
@@ -109,11 +105,14 @@ export function DhcpConflict() {
                   <AlertTriangle className="w-4 h-4 text-red-500" />
                   <span className="text-sm font-medium text-red-700 dark:text-red-400">发现 {results.conflicts.length} 个冲突 IP</span>
                 </div>
-                <button onClick={copyConflicts}
-                  className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-200 transition-colors">
-                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? '已复制' : '复制'}
-                </button>
+                <CopyButton
+                  variant="button"
+                  size="sm"
+                  value={conflictsText}
+                  label="复制"
+                  copiedLabel="已复制"
+                  className="!bg-red-100 dark:!bg-red-900/30 !text-red-700 dark:!text-red-400 hover:!bg-red-200"
+                />
               </div>
               <div className="divide-y divide-gray-100 dark:divide-gray-700">
                 {results.conflicts.map(c => (

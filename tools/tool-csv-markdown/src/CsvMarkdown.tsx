@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeftRight, Check, ClipboardCopy, Eraser, FlipVertical2, Table as TableIcon } from 'lucide-react'
+import { ArrowLeftRight, Eraser, FlipVertical2, Table as TableIcon } from 'lucide-react'
 import {
   parseCsv,
   parseMarkdown,
@@ -30,7 +30,6 @@ const CsvMarkdown: React.FC = () => {
   const [pretty, setPretty] = useState(true)
   const [csvError, setCsvError] = useState<string | null>(null)
   const [mdError, setMdError] = useState<string | null>(null)
-  const [copied, setCopied] = useState<'csv' | 'md' | null>(null)
   const skipCsvSync = useRef(false)
   const skipMdSync = useRef(false)
   const lastEdited = useRef<'csv' | 'md'>('csv')
@@ -98,15 +97,6 @@ const CsvMarkdown: React.FC = () => {
     lastEdited.current = 'csv'
     setCsv(newCsv)
     syncFromCsv(newCsv)
-  }
-
-  const onCopy = async (side: 'csv' | 'md', text: string) => {
-    if (!text) return
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopied(side)
-      window.setTimeout(() => setCopied((c) => (c === side ? null : c)), 1200)
-    } catch { /* ignore */ }
   }
 
   const onClear = () => {
@@ -190,15 +180,14 @@ const CsvMarkdown: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>CSV · {csv.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('csv', csv)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={csv}
                   disabled={!csv}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'csv' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'csv' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={csv}
@@ -218,15 +207,14 @@ const CsvMarkdown: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                 <span>Markdown · {md.length}</span>
-                <button
-                  type="button"
-                  onClick={() => onCopy('md', md)}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={md}
                   disabled={!md}
-                  className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied === 'md' ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied === 'md' ? t('copy.copied') : t('copy.copy')}
-                </button>
+                  label={t('copy.copy')}
+                  copiedLabel={t('copy.copied')}
+                />
               </div>
               <TextArea
                 value={md}

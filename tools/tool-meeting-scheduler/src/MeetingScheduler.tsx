@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CalendarRange, Plus, Trash2, Copy, Check, RotateCcw } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CalendarRange, Plus, Trash2, RotateCcw } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 const TIMEZONES = [
   { label: 'UTC+0 伦敦', value: 0 },
@@ -53,7 +53,6 @@ export default function MeetingScheduler() {
   const [form, setForm] = useState({ name: '', timezone: 8, workStart: 9, workEnd: 18 })
   const [duration, setDuration] = useState(60)
   const [slots, setSlots] = useState<Slot[] | null>(null)
-  const [copied, setCopied] = useState<number | null>(null)
 
   const handleAdd = () => {
     if (!form.name.trim()) return
@@ -92,12 +91,7 @@ export default function MeetingScheduler() {
     setSlots(available)
   }
 
-  const handleCopy = (slot: Slot, i: number) => {
-    const text = slot.times.map(t => `${t.name}: ${t.local}`).join('\n')
-    navigator.clipboard.writeText(text)
-    setCopied(i)
-    setTimeout(() => setCopied(null), 2000)
-  }
+  const slotText = (slot: Slot) => slot.times.map(t => `${t.name}: ${t.local}`).join('\n')
 
   const inputCls = 'border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500'
 
@@ -174,9 +168,7 @@ export default function MeetingScheduler() {
                   <li key={i} className="border border-gray-100 dark:border-gray-700 rounded-xl p-3">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-medium text-indigo-600">{t('allAvailable')} · UTC {fmt(slot.utcHour)}</span>
-                      <button onClick={() => handleCopy(slot, i)} className="text-gray-400 hover:text-indigo-600">
-                        {copied === i ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-                      </button>
+                      <CopyButton value={slotText(slot)} className="!text-gray-400 hover:!text-indigo-600" />
                     </div>
                     <ul className="space-y-0.5">
                       {slot.times.map(t => (

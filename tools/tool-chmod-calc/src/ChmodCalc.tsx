@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import {
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -8,7 +9,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, Copy, FileLock2 } from 'lucide-react'
+import { FileLock2 } from 'lucide-react'
 import {
   CLASS_IDS,
   PERM_IDS,
@@ -33,7 +34,6 @@ const ChmodCalc: React.FC = () => {
   const [octalInput, setOctalInput] = useState<string>(() => toOctal(createDefaultState()))
   const [octalError, setOctalError] = useState(false)
   const [filename, setFilename] = useState('filename')
-  const [copied, setCopied] = useState<OutputId | null>(null)
 
   const octal = useMemo(() => toOctal(state), [state])
   const symbolic = useMemo(() => toSymbolic(state), [state])
@@ -79,16 +79,6 @@ const ChmodCalc: React.FC = () => {
       setOctalError(false)
     } else {
       setOctalError(true)
-    }
-  }, [])
-
-  const onCopy = useCallback(async (id: OutputId, value: string) => {
-    try {
-      await navigator.clipboard.writeText(value)
-      setCopied(id)
-      window.setTimeout(() => setCopied((c) => (c === id ? null : c)), 1200)
-    } catch {
-      /* ignore */
     }
   }, [])
 
@@ -254,12 +244,9 @@ const ChmodCalc: React.FC = () => {
           </h2>
           <div className="space-y-2">
             {outputs.map(({ id, label, value }) => (
-              <button
+              <div
                 key={id}
-                type="button"
-                onClick={() => void onCopy(id, value)}
-                title={copied === id ? t('output.copied') : t('output.copy')}
-                className="group flex w-full items-center gap-3 rounded-md border border-gray-200 px-3 py-2.5 text-left transition hover:border-indigo-300 dark:border-gray-700 dark:hover:border-indigo-700"
+                className="flex w-full items-center gap-3 rounded-md border border-gray-200 px-3 py-2.5 transition hover:border-indigo-300 dark:border-gray-700 dark:hover:border-indigo-700"
               >
                 <span className="w-24 shrink-0 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                   {label}
@@ -267,14 +254,13 @@ const ChmodCalc: React.FC = () => {
                 <code className="flex-1 truncate font-mono text-sm text-gray-800 dark:text-gray-100">
                   {value}
                 </code>
-                <span className="shrink-0 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200">
-                  {copied === id ? (
-                    <Check className="h-4 w-4 text-emerald-500" />
-                  ) : (
-                    <Copy className="h-4 w-4" />
-                  )}
-                </span>
-              </button>
+                <CopyButton
+                  value={value}
+                  label={t('output.copy')}
+                  copiedLabel={t('output.copied')}
+                  className="shrink-0"
+                />
+              </div>
             ))}
           </div>
         </Card>

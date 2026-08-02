@@ -2,14 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import {
   FileSignature,
   Shuffle,
-  Copy,
-  Check,
   Info,
   AlertCircle,
   ShieldCheck,
   ShieldX,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -104,7 +102,6 @@ const HmacSign: React.FC = () => {
   const [output, setOutput] = useState('')
   const [verifyResult, setVerifyResult] = useState<'match' | 'mismatch' | null>(null)
   const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
   const [running, setRunning] = useState(false)
 
   const update = useCallback(
@@ -185,16 +182,6 @@ const HmacSign: React.FC = () => {
     }
   }
 
-  const copyOutput = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      /* ignore */
-    }
-  }
 
   if (loading) {
     return (
@@ -336,15 +323,16 @@ const HmacSign: React.FC = () => {
       <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium text-gray-700">{t('field.output')}</label>
-          <button
-            type="button"
-            onClick={copyOutput}
+          <CopyButton
+            value={output}
             disabled={!output}
-            className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
-          >
-            {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-            {copied ? t('copied') : t('copy')}
-          </button>
+            size="sm"
+            variant="button"
+            buttonVariant="ghost"
+            label={t('copy')}
+            copiedLabel={t('copied')}
+            className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+          />
         </div>
         <textarea
           value={output}

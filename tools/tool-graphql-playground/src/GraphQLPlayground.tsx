@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { Play, Book, History, Settings, Download, Trash2, Copy, Check } from 'lucide-react';
+import { Play, Book, History, Settings, Download, Trash2 } from 'lucide-react';
+import { CopyButton } from '@toolbox/ui-kit';
 
 interface QueryHistory {
   id: string;
@@ -41,7 +42,6 @@ query {
   const [activeTab, setActiveTab] = useState<'result' | 'schema' | 'history'>('result');
   const [history, setHistory] = useState<QueryHistory[]>([]);
   const [schema, setSchema] = useState<SchemaType[]>([]);
-  const [copied, setCopied] = useState(false);
 
   const executeQuery = async () => {
     setLoading(true);
@@ -163,13 +163,6 @@ query {
     }
   };
 
-  const copyResult = () => {
-    if (result) {
-      navigator.clipboard.writeText(JSON.stringify(result, null, 2));
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   const loadHistoryItem = (item: QueryHistory) => {
     setQuery(item.query);
@@ -333,13 +326,13 @@ query {
                 <h3 className="font-semibold">Response</h3>
                 <div className="flex gap-2">
                   {result && (
-                    <button
-                      onClick={copyResult}
-                      className="text-sm text-blue-500 hover:underline flex items-center gap-1"
-                    >
-                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      {copied ? '已复制' : '复制'}
-                    </button>
+                    <CopyButton
+                      variant="inline"
+                      value={JSON.stringify(result, null, 2)}
+                      label="复制"
+                      copiedLabel="已复制"
+                      className="text-sm !text-blue-500 hover:underline"
+                    />
                   )}
                 </div>
               </div>

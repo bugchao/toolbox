@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Dice5, Pilcrow, Sparkles } from 'lucide-react'
+import { Dice5, Pilcrow, Sparkles } from 'lucide-react'
 import { generate, type Flavor, type Unit } from './lib/generator'
 import { formatParagraphs, type Format } from './lib/format'
 
@@ -16,7 +16,6 @@ const LoremIpsum: React.FC = () => {
   const [htmlParagraphs, setHtmlParagraphs] = useState(true)
   const [seedInput, setSeedInput] = useState('')
   const [tick, setTick] = useState(0) // 无 seed 时点「重新生成」换内容
-  const [copied, setCopied] = useState(false)
 
   const seed = seedInput.trim() === '' ? undefined : Number(seedInput.trim())
   const seedLocked = seed != null && Number.isFinite(seed)
@@ -35,14 +34,6 @@ const LoremIpsum: React.FC = () => {
     })
   }, [flavor, unit, count, startWithClassic, format, headingEvery, htmlParagraphs, seed, seedLocked, tick])
 
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -170,12 +161,14 @@ const LoremIpsum: React.FC = () => {
                 {t('actions.regenerate')}
               </span>
             </Button>
-            <Button variant="ghost" onClick={onCopy} disabled={!output}>
-              <span className="inline-flex items-center gap-1.5">
-                {copied ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                {copied ? t('actions.copied') : t('actions.copy')}
-              </span>
-            </Button>
+            <CopyButton
+              variant="button"
+              buttonVariant="ghost"
+              value={output}
+              disabled={!output}
+              label={t('actions.copy')}
+              copiedLabel={t('actions.copied')}
+            />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               {t('actions.charCount', { n: output.length })}
             </span>

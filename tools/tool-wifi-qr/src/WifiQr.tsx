@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import {
   Button,
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -10,7 +11,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, Download, QrCode, Wifi } from 'lucide-react'
+import { Download, QrCode, Wifi } from 'lucide-react'
 import QRCode from 'qrcode'
 import { buildWifiString, type WifiAuth } from './lib/wifiQr'
 
@@ -32,7 +33,6 @@ const WifiQr: React.FC = () => {
 
   const [dataUrl, setDataUrl] = useState('')
   const [renderError, setRenderError] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   const wifiString = useMemo(
     () => buildWifiString({ ssid, password, auth, hidden }),
@@ -80,17 +80,6 @@ const WifiQr: React.FC = () => {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
-  }
-
-  const onCopy = async () => {
-    if (!wifiString) return
-    try {
-      await navigator.clipboard.writeText(wifiString)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
   }
 
   return (
@@ -227,12 +216,13 @@ const WifiQr: React.FC = () => {
                       {t('preview.download')}
                     </span>
                   </Button>
-                  <Button variant="secondary" onClick={() => void onCopy()}>
-                    <span className="inline-flex items-center gap-1">
-                      {copied ? <Check className="h-4 w-4" /> : <ClipboardCopy className="h-4 w-4" />}
-                      {copied ? t('preview.copied') : t('preview.copy')}
-                    </span>
-                  </Button>
+                  <CopyButton
+                    variant="button"
+                    value={wifiString}
+                    disabled={!wifiString}
+                    label={t('preview.copy')}
+                    copiedLabel={t('preview.copied')}
+                  />
                 </div>
 
                 <div>

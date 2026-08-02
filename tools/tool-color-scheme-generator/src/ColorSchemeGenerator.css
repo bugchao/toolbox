@@ -137,11 +137,17 @@
 }
 
 .color-value {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
   font-size: 18px;
   font-weight: 700;
   font-family: monospace;
   margin-bottom: 8px;
   color: #333;
+  cursor: pointer;
 }
 
 .color-formats {
@@ -149,14 +155,24 @@
   color: #666;
 }
 
-.color-formats div {
+.color-formats div,
+.color-formats button {
   margin-top: 4px;
   padding: 4px;
   border-radius: 4px;
   transition: background 0.2s;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
 }
 
-.color-formats div:hover {
+.color-formats div:hover,
+.color-formats button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 

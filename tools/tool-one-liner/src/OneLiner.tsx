@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Lightbulb } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Lightbulb } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 interface Concept { term: string; oneLiner: string; category: string }
 
@@ -50,7 +50,6 @@ export default function OneLiner() {
   const { t } = useTranslation('toolOneLiner')
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('全部')
-  const [copied, setCopied] = useState<string | null>(null)
 
   const filtered = CONCEPTS.filter(c => {
     const matchCat = category === '全部' || c.category === category
@@ -59,11 +58,6 @@ export default function OneLiner() {
     return matchCat && matchSearch
   })
 
-  const copy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(id)
-    setTimeout(() => setCopied(null), 1500)
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -90,10 +84,10 @@ export default function OneLiner() {
                 </div>
                 <p className="text-sm text-gray-700 dark:text-gray-300">{c.oneLiner}</p>
               </div>
-              <button onClick={() => copy(`${c.term}：${c.oneLiner}`, String(i))}
-                className="shrink-0 text-gray-300 hover:text-indigo-500 transition-colors pt-0.5">
-                {copied === String(i) ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-              </button>
+              <CopyButton
+                value={`${c.term}：${c.oneLiner}`}
+                className="shrink-0 !text-gray-300 hover:!text-indigo-500 pt-0.5"
+              />
             </div>
           ))}
         </div>

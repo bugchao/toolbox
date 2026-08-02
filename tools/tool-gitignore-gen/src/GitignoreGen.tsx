@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Button,
   Card,
+  CopyButton,
   Input,
   NoticeCard,
   PageHero,
@@ -10,7 +11,7 @@ import {
   cn,
 } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, Copy, Download, FolderGit2 } from 'lucide-react'
+import { Check, Download, FolderGit2 } from 'lucide-react'
 import {
   TEMPLATES,
   TEMPLATE_GROUPS,
@@ -22,7 +23,6 @@ const GitignoreGen: React.FC = () => {
   const { t } = useTranslation('toolGitignoreGen')
   const [selected, setSelected] = useState<string[]>(['node', 'macos'])
   const [search, setSearch] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const filtered = useMemo<GitignoreTemplate[]>(() => {
     const q = search.trim().toLowerCase()
@@ -55,16 +55,6 @@ const GitignoreGen: React.FC = () => {
     )
   }
 
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* ignore */
-    }
-  }
 
   const onDownload = () => {
     if (!output) return
@@ -168,16 +158,13 @@ const GitignoreGen: React.FC = () => {
             </div>
             {output && (
               <div className="flex items-center gap-2">
-                <Button variant="secondary" size="sm" onClick={() => void onCopy()}>
-                  <span className="inline-flex items-center gap-1.5">
-                    {copied ? (
-                      <Check className="h-3.5 w-3.5 text-emerald-500" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5" />
-                    )}
-                    {copied ? t('output.copied') : t('output.copy')}
-                  </span>
-                </Button>
+                <CopyButton
+                  variant="button"
+                  size="sm"
+                  value={output}
+                  label={t('output.copy')}
+                  copiedLabel={t('output.copied')}
+                />
                 <Button variant="primary" size="sm" onClick={onDownload}>
                   <span className="inline-flex items-center gap-1.5">
                     <Download className="h-3.5 w-3.5" />

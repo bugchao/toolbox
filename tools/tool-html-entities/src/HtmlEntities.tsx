@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardPaste, Code2, Copy, Eraser, ArrowLeftRight } from 'lucide-react'
+import { ClipboardPaste, Code2, Eraser, ArrowLeftRight } from 'lucide-react'
 import { decodeHtml, encodeHtml, type EncodeMode } from './lib/entities'
 
 type Mode = 'encode' | 'decode'
@@ -22,7 +22,6 @@ const HtmlEntities: React.FC = () => {
   const [mode, setMode] = useState<Mode>('encode')
   const [encodeMode, setEncodeMode] = useState<EncodeMode>('minimal')
   const [input, setInput] = useState('')
-  const [copied, setCopied] = useState(false)
 
   // 输出：编码模式下做 encode，解码模式下做 decode。每次输入或选项变化都实时同步。
   const output = useMemo(() => {
@@ -44,17 +43,6 @@ const HtmlEntities: React.FC = () => {
   const onPasteSample = useCallback(() => {
     setInput(mode === 'encode' ? SAMPLE_ENCODE : SAMPLE_DECODE)
   }, [mode])
-
-  const onCopy = useCallback(async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch {
-      /* 剪贴板 API 在某些上下文不可用，静默失败 */
-    }
-  }, [output])
 
   return (
     <div className="relative min-h-[60vh]">
@@ -186,12 +174,15 @@ const HtmlEntities: React.FC = () => {
               aria-label={mode === 'encode' ? t('output.encodeHeading') : t('output.decodeHeading')}
             />
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={onCopy} disabled={!output}>
-                <span className="inline-flex items-center gap-1.5 text-xs">
-                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  {copied ? t('actions.copied') : t('actions.copy')}
-                </span>
-              </Button>
+              <CopyButton
+                variant="button"
+                buttonVariant="ghost"
+                size="sm"
+                value={output}
+                disabled={!output}
+                label={t('actions.copy')}
+                copiedLabel={t('actions.copied')}
+              />
             </div>
           </Card>
         </div>

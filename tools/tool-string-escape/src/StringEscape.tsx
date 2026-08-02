@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ArrowDownUp, Check, ClipboardCopy, Quote } from 'lucide-react'
+import { ArrowDownUp, Quote } from 'lucide-react'
 import { escape, unescape, type EscapeLang } from './lib/escape'
 
 const LANGS: EscapeLang[] = ['json', 'js', 'cstyle', 'shell', 'sql', 'regex']
@@ -12,7 +12,6 @@ const StringEscape: React.FC = () => {
   const [lang, setLang] = useState<EscapeLang>('json')
   const [mode, setMode] = useState<Mode>('escape')
   const [input, setInput] = useState('Hello "World"\nTab\there\tend')
-  const [copied, setCopied] = useState(false)
 
   const output = useMemo(() => {
     try {
@@ -21,15 +20,6 @@ const StringEscape: React.FC = () => {
       return `⚠ ${(e as Error).message}`
     }
   }, [lang, mode, input])
-
-  const onCopy = async () => {
-    if (!output) return
-    try {
-      await navigator.clipboard.writeText(output)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   const swap = () => {
     setInput(output)
@@ -108,15 +98,14 @@ const StringEscape: React.FC = () => {
             <div className="flex flex-col">
               <div className="mb-1 flex items-center justify-between">
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-200">{t('io.output')}</span>
-                <button
-                  type="button"
-                  onClick={() => void onCopy()}
+                <CopyButton
+                  variant="inline"
+                  size="sm"
+                  value={output}
                   disabled={!output}
-                  className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30"
-                >
-                  {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                  {copied ? t('io.copied') : t('io.copy')}
-                </button>
+                  label={t('io.copy')}
+                  copiedLabel={t('io.copied')}
+                />
               </div>
               <TextArea value={output} readOnly rows={12} spellCheck={false} className="!font-mono !text-xs" />
             </div>

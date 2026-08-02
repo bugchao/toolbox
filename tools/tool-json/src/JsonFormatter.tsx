@@ -2,16 +2,14 @@ import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   AlertCircle,
-  Check,
   Code2,
-  Copy,
   Download,
   Eraser,
   Minimize2,
   Network,
   RefreshCw,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 import type { LayoutDirection } from 'jsoncrack-react'
 
 import JsonEditor from './JsonEditor'
@@ -42,7 +40,6 @@ const JsonFormatter: React.FC = () => {
   const { t } = useTranslation(I18N_NAMESPACE)
   const [input, setInput] = useState<string>(SAMPLE_JSON)
   const [error, setError] = useState('')
-  const [copied, setCopied] = useState(false)
   const [indentSize, setIndentSize] = useState(2)
   const [viewMode, setViewMode] = useState<ViewMode>('text')
   const [layoutDirection, setLayoutDirection] = useState<LayoutDirection>('RIGHT')
@@ -92,13 +89,6 @@ const JsonFormatter: React.FC = () => {
     }
     setInput(JSON.stringify(p.value))
     setError('')
-  }
-
-  const copyResult = async () => {
-    if (!formatted) return
-    await navigator.clipboard.writeText(formatted)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   const downloadJson = () => {
@@ -153,14 +143,14 @@ const JsonFormatter: React.FC = () => {
           {t('minify')}
         </button>
 
-        <button
-          onClick={copyResult}
+        <CopyButton
+          variant="button"
+          value={formatted}
           disabled={!formatted}
-          className="px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-1.5"
-        >
-          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-          {copied ? t('copied') : t('copyResult')}
-        </button>
+          label={t('copyResult')}
+          copiedLabel={t('copied')}
+          className="!bg-green-600 !text-white hover:!bg-green-700"
+        />
 
         <button
           onClick={downloadJson}

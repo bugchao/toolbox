@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Copy, Check, Radio, Play, Square } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Radio, Play, Square } from 'lucide-react'
+import { CopyButton, PageHero } from '@toolbox/ui-kit'
 
 const MORSE: Record<string, string> = {
   A:'.-', B:'-...', C:'-.-.', D:'-..', E:'.', F:'..-.', G:'--.', H:'....', I:'..', J:'.---',
@@ -26,7 +26,6 @@ export default function MorseCode() {
   const { t } = useTranslation('toolMorseCode')
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')
   const [input, setInput] = useState('')
-  const [copied, setCopied] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState(1)
   const stopRef = useRef(false)
@@ -34,11 +33,6 @@ export default function MorseCode() {
 
   const output = mode === 'encode' ? textToMorse(input) : morseToText(input)
 
-  const copy = () => {
-    navigator.clipboard.writeText(output)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
-  }
 
   const playMorse = async () => {
     const morse = mode === 'encode' ? output : textToMorse(output)
@@ -95,9 +89,7 @@ export default function MorseCode() {
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
             <div className="flex items-start justify-between gap-2">
               <p className="text-sm font-mono text-gray-800 dark:text-gray-200 break-all">{output}</p>
-              <button onClick={copy} className="shrink-0 text-gray-300 hover:text-indigo-500">
-                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
-              </button>
+              <CopyButton value={output} className="shrink-0 !text-gray-300 hover:!text-indigo-500" />
             </div>
           </div>
         )}

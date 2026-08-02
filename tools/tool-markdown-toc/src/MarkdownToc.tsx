@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Card, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Check, ClipboardCopy, ListTree } from 'lucide-react'
+import { ListTree } from 'lucide-react'
 import { buildToc, extractHeadings } from './lib/toc'
 
 const SAMPLE = `# Getting Started
@@ -30,7 +30,6 @@ const MarkdownToc: React.FC = () => {
   const [maxLevel, setMaxLevel] = useState(6)
   const [ordered, setOrdered] = useState(false)
   const [links, setLinks] = useState(true)
-  const [copied, setCopied] = useState(false)
 
   const headings = useMemo(() => extractHeadings(input), [input])
   const toc = useMemo(
@@ -38,14 +37,6 @@ const MarkdownToc: React.FC = () => {
     [headings, minLevel, maxLevel, ordered, links],
   )
 
-  const onCopy = async () => {
-    if (!toc) return
-    try {
-      await navigator.clipboard.writeText(toc)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
-    } catch { /* ignore */ }
-  }
 
   return (
     <div className="relative min-h-[60vh]">
@@ -89,10 +80,7 @@ const MarkdownToc: React.FC = () => {
           <Card>
             <div className="mb-2 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('io.toc')}</h2>
-              <button type="button" onClick={() => void onCopy()} disabled={!toc} className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-30">
-                {copied ? <Check className="h-3 w-3" /> : <ClipboardCopy className="h-3 w-3" />}
-                {copied ? t('io.copied') : t('io.copy')}
-              </button>
+              <CopyButton variant="inline" size="sm" value={toc} disabled={!toc} label={t('io.copy')} copiedLabel={t('io.copied')} />
             </div>
             {toc ? (
               <TextArea value={toc} readOnly rows={18} spellCheck={false} className="!font-mono !text-xs" />

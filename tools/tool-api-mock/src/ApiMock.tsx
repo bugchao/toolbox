@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CopyButton } from '@toolbox/ui-kit';
 import './ApiMock.css';
 
 interface MockTemplate {
@@ -132,11 +133,6 @@ export const ApiMock: React.FC = () => {
     setMockUrl(url);
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    alert('已复制到剪贴板');
-  };
-
   const formatJson = () => {
     try {
       const parsed = JSON.parse(mockData);
@@ -221,7 +217,7 @@ export const ApiMock: React.FC = () => {
               <div className="editor-actions">
                 <button onClick={formatJson}>格式化</button>
                 <button onClick={minifyJson}>压缩</button>
-                <button onClick={() => copyToClipboard(mockData)}>复制</button>
+                <CopyButton variant="button" buttonVariant="ghost" size="sm" value={mockData} label="复制" copiedLabel="已复制" />
               </div>
             </div>
             <textarea
@@ -257,7 +253,7 @@ export const ApiMock: React.FC = () => {
             <h3>cURL 命令示例</h3>
             <div className="curl-command">
               <pre>{generateCurlCommand()}</pre>
-              <button onClick={() => copyToClipboard(generateCurlCommand())}>复制</button>
+              <CopyButton variant="button" buttonVariant="ghost" size="sm" value={generateCurlCommand()} label="复制" copiedLabel="已复制" />
             </div>
           </div>
         </div>
