@@ -3,3 +3,15 @@ packages:
   - 'packages/*'
   - 'services/*'
   - 'tools/*'
+
+onlyBuiltDependencies:
+  - '@tsparticles/engine'
+  - better-sqlite3
+  - bufferutil
+  - core-js
+  - esbuild
+  - onnxruntime-node
+  - protobufjs
+  - sharp
+  - tesseract.js
+  - utf-8-validate
