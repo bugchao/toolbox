@@ -528,7 +528,6 @@ const AiTranslator: React.FC = () => {
                       label={t('panel.copy')}
                       copiedLabel={t('panel.copied')}
                     />
-                    </button>
                   </div>
                 </div>
                 <TextArea value={outputB} readOnly placeholder={t('panel.outputPlaceholder')} rows={12} />
