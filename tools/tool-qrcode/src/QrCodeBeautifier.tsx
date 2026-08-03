@@ -18,6 +18,69 @@ const QrCodeBeautifier: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // 在 (x, y) 处画一个边长 size 的“模块”，按 dotStyle 选择方形/圆角/圆点
+  const drawModule = (
+    ctx: CanvasRenderingContext2D,
+    style: 'square' | 'rounded' | 'dots',
+    x: number,
+    y: number,
+    size: number,
+  ) => {
+    if (style === 'dots') {
+      const r = size / 2;
+      ctx.beginPath();
+      ctx.arc(x + r, y + r, r * 0.92, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (style === 'rounded') {
+      const r = size * 0.3;
+      ctx.beginPath();
+      ctx.roundRect(x, y, size, size, r);
+      ctx.fill();
+    } else {
+      ctx.fillRect(x, y, size, size);
+    }
+  };
+
+  // 定位角「眼睛」：7x7 外框 + 5x5 镂空 + 3x3 内芯，三层同风格叠画
+  const drawEye = (
+    ctx: CanvasRenderingContext2D,
+    style: 'square' | 'rounded' | 'circle',
+    left: number,
+    top: number,
+    moduleSize: number,
+    dark: string,
+    light: string,
+  ) => {
+    const drawLayer = (span: number, offset: number, color: string) => {
+      const x = left + offset * moduleSize;
+      const y = top + offset * moduleSize;
+      const size = span * moduleSize;
+      ctx.fillStyle = color;
+      if (style === 'circle') {
+        const r = size / 2;
+        ctx.beginPath();
+        ctx.arc(x + r, y + r, r, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (style === 'rounded') {
+        ctx.beginPath();
+        ctx.roundRect(x, y, size, size, size * 0.22);
+        ctx.fill();
+      } else {
+        ctx.fillRect(x, y, size, size);
+      }
+    };
+    drawLayer(7, 0, dark);
+    drawLayer(5, 1, light);
+    drawLayer(3, 2, dark);
+  };
+
+  const isInsideEye = (row: number, col: number, moduleCount: number) => {
+    const inTopLeft = row < 7 && col < 7;
+    const inTopRight = row < 7 && col >= moduleCount - 7;
+    const inBottomLeft = row >= moduleCount - 7 && col < 7;
+    return inTopLeft || inTopRight || inBottomLeft;
+  };
+
   const generateQrCode = async () => {
     if (!text.trim()) {
       alert('请输入要生成二维码的内容');
@@ -35,46 +98,67 @@ const QrCodeBeautifier: React.FC = () => {
       canvas.width = qrSize;
       canvas.height = qrSize;
 
-      // 生成基础二维码
-      const qrDataUrl = await QRCode.toDataURL(text, {
-        width: qrSize,
-        margin: 1,
-        color: {
-          dark: foregroundColor,
-          light: backgroundColor,
-        },
-        errorCorrectionLevel: errorCorrection,
-      });
+      // 拿到原始模块矩阵（而不是现成的 dataURL），才能按模块自定义形状
+      const qr = QRCode.create(text, { errorCorrectionLevel: errorCorrection });
+      const moduleCount = qr.modules.size;
+      const margin = 1; // 静区，单位：模块
+      const totalModules = moduleCount + margin * 2;
+      const moduleSize = qrSize / totalModules;
 
-      const qrImage = new Image();
-      qrImage.onload = () => {
-        ctx.drawImage(qrImage, 0, 0, qrSize, qrSize);
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, qrSize, qrSize);
 
-        // 如果有Logo，添加到中心
-        if (logoImage) {
-          const logoImg = new Image();
-          logoImg.onload = () => {
-            const logoX = (qrSize - logoSize) / 2;
-            const logoY = (qrSize - logoSize) / 2;
-            
-            // 画白色背景
-            ctx.fillStyle = backgroundColor;
-            ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);
-            
-            ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
-            
-            const finalUrl = canvas.toDataURL('image/png');
-            setQrCodeUrl(finalUrl);
-            setIsGenerating(false);
-          };
-          logoImg.src = logoImage;
-        } else {
+      ctx.fillStyle = foregroundColor;
+      for (let row = 0; row < moduleCount; row++) {
+        for (let col = 0; col < moduleCount; col++) {
+          if (!qr.modules.get(row, col)) continue;
+          if (isInsideEye(row, col, moduleCount)) continue;
+          const x = (col + margin) * moduleSize;
+          const y = (row + margin) * moduleSize;
+          drawModule(ctx, dotStyle, x, y, moduleSize);
+        }
+      }
+
+      const eyeOrigins: Array<[number, number]> = [
+        [0, 0],
+        [0, moduleCount - 7],
+        [moduleCount - 7, 0],
+      ];
+      for (const [row, col] of eyeOrigins) {
+        drawEye(
+          ctx,
+          eyeStyle,
+          (col + margin) * moduleSize,
+          (row + margin) * moduleSize,
+          moduleSize,
+          foregroundColor,
+          backgroundColor,
+        );
+      }
+
+      // 如果有Logo，添加到中心
+      if (logoImage) {
+        const logoImg = new Image();
+        logoImg.onload = () => {
+          const logoX = (qrSize - logoSize) / 2;
+          const logoY = (qrSize - logoSize) / 2;
+
+          // 画白色背景
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(logoX - 4, logoY - 4, logoSize + 8, logoSize + 8);
+
+          ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+
           const finalUrl = canvas.toDataURL('image/png');
           setQrCodeUrl(finalUrl);
           setIsGenerating(false);
-        }
-      };
-      qrImage.src = qrDataUrl;
+        };
+        logoImg.src = logoImage;
+      } else {
+        const finalUrl = canvas.toDataURL('image/png');
+        setQrCodeUrl(finalUrl);
+        setIsGenerating(false);
+      }
     } catch (error) {
       console.error('生成二维码失败:', error);
       alert('生成二维码失败，请重试');
@@ -325,9 +409,6 @@ const QrCodeBeautifier: React.FC = () => {
                   <option value="circle">圆形</option>
                 </select>
               </div>
-            </div>
-            <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg text-sm text-yellow-700 dark:text-yellow-300">
-              ⚠️ 圆点/圆角样式功能正在开发中，敬请期待
             </div>
           </div>
         </div>

@@ -3,7 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Upload, Download, FileText, Scissors, Merge, Image, FileCode, X, Check, Loader2, ChevronDown, File } from 'lucide-react'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import JSZip from 'jszip'
+import * as pdfjsLib from 'pdfjs-dist'
+import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 import { PageHero } from '@toolbox/ui-kit'
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
 
 type ToolMode = 'merge' | 'split' | 'to-image' | 'to-text' | 'compress'
 
@@ -126,6 +130,108 @@ const PdfTools: React.FC = () => {
     return zipContent
   }
 
+  const renderPageToCanvas = async (page: pdfjsLib.PDFPageProxy, scale: number): Promise<HTMLCanvasElement> => {
+    const viewport = page.getViewport({ scale })
+    const canvas = document.createElement('canvas')
+    canvas.width = viewport.width
+    canvas.height = viewport.height
+    const context = canvas.getContext('2d')
+    if (!context) throw new Error('无法创建画布上下文')
+    await page.render({ canvasContext: context, viewport }).promise
+    return canvas
+  }
+
+  const canvasToBlob = (canvas: HTMLCanvasElement, type: string, quality?: number): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (blob) resolve(blob)
+        else reject(new Error('图片编码失败'))
+      }, type, quality)
+    })
+  }
+
+  const pdfToImages = async () => {
+    if (files.length !== 1) {
+      throw new Error('请上传1个PDF文件进行转换')
+    }
+    const file = files[0]
+    const arrayBuffer = await readFileAsArrayBuffer(file.file)
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+    const baseName = file.name.replace(/\.pdf$/i, '')
+
+    if (pdf.numPages === 1) {
+      const page = await pdf.getPage(1)
+      const canvas = await renderPageToCanvas(page, 2)
+      const blob = await canvasToBlob(canvas, 'image/png')
+      setFiles((prev) => prev.map((f) => (f.id === file.id ? { ...f, progress: 100 } : f)))
+      setOutputFilename(`${baseName}.png`)
+      return blob
+    }
+
+    const zip = new JSZip()
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i)
+      const canvas = await renderPageToCanvas(page, 2)
+      const blob = await canvasToBlob(canvas, 'image/png')
+      zip.file(`${baseName}_page_${i}.png`, blob)
+      setFiles((prev) => prev.map((f) => (f.id === file.id ? { ...f, progress: Math.round((i / pdf.numPages) * 100) } : f)))
+    }
+    const zipContent = await zip.generateAsync({ type: 'blob' })
+    setOutputFilename(`${baseName}_images.zip`)
+    return zipContent
+  }
+
+  const pdfToText = async () => {
+    if (files.length !== 1) {
+      throw new Error('请上传1个PDF文件进行转换')
+    }
+    const file = files[0]
+    const arrayBuffer = await readFileAsArrayBuffer(file.file)
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+    let text = ''
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i)
+      const content = await page.getTextContent()
+      const pageText = content.items
+        .map((item) => ('str' in item ? item.str : ''))
+        .join(' ')
+      text += `--- 第 ${i} 页 ---\n${pageText}\n\n`
+      setFiles((prev) => prev.map((f) => (f.id === file.id ? { ...f, progress: Math.round((i / pdf.numPages) * 100) } : f)))
+    }
+    setOutputFilename(`${file.name.replace(/\.pdf$/i, '')}.txt`)
+    return new Blob([text.trim()], { type: 'text/plain;charset=utf-8' })
+  }
+
+  // 纯前端压缩思路：把每页重新栅格化为有损 JPEG 再拼回 PDF，对图片/扫描件类 PDF 效果明显，
+  // 代价是文字会失去可选中/可搜索特性——这是不引入服务端 PDF 处理的前提下能做到的最简单有效方案
+  const compressPdf = async () => {
+    if (files.length !== 1) {
+      throw new Error('请上传1个PDF文件进行压缩')
+    }
+    const file = files[0]
+    const arrayBuffer = await readFileAsArrayBuffer(file.file)
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+    const outDoc = await PDFDocument.create()
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i)
+      const canvas = await renderPageToCanvas(page, 1.5)
+      const jpegBlob = await canvasToBlob(canvas, 'image/jpeg', 0.72)
+      const jpegBytes = new Uint8Array(await jpegBlob.arrayBuffer())
+      const jpegImage = await outDoc.embedJpg(jpegBytes)
+
+      const viewport = page.getViewport({ scale: 1 })
+      const pdfPage = outDoc.addPage([viewport.width, viewport.height])
+      pdfPage.drawImage(jpegImage, { x: 0, y: 0, width: viewport.width, height: viewport.height })
+
+      setFiles((prev) => prev.map((f) => (f.id === file.id ? { ...f, progress: Math.round((i / pdf.numPages) * 100) } : f)))
+    }
+
+    const pdfBytes = await outDoc.save()
+    setOutputFilename(`${file.name.replace(/\.pdf$/i, '')}_compressed.pdf`)
+    return new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' })
+  }
+
   const processFiles = async () => {
     if (files.length === 0) {
       setError('请先上传PDF文件')
@@ -147,8 +253,15 @@ const PdfTools: React.FC = () => {
         case 'split':
           resultBlob = await splitPdf()
           break
-        default:
-          throw new Error('该功能正在开发中，敬请期待')
+        case 'to-image':
+          resultBlob = await pdfToImages()
+          break
+        case 'to-text':
+          resultBlob = await pdfToText()
+          break
+        case 'compress':
+          resultBlob = await compressPdf()
+          break
       }
 
       const url = URL.createObjectURL(resultBlob)
@@ -189,9 +302,9 @@ const PdfTools: React.FC = () => {
   const tools = [
     { value: 'merge', label: 'PDF合并', icon: Merge, description: '将多个PDF文件合并为一个' },
     { value: 'split', label: 'PDF分割', icon: Scissors, description: '将PDF按页面分割为多个文件' },
-    { value: 'to-image', label: 'PDF转图片', icon: Image, description: '将PDF每页转换为图片格式', disabled: true },
-    { value: 'to-text', label: 'PDF转文字', icon: FileCode, description: '提取PDF中的文本内容', disabled: true },
-    { value: 'compress', label: 'PDF压缩', icon: FileText, description: '压缩PDF文件大小，保持画质', disabled: true },
+    { value: 'to-image', label: 'PDF转图片', icon: Image, description: '将PDF每页转换为PNG图片' },
+    { value: 'to-text', label: 'PDF转文字', icon: FileCode, description: '提取PDF中的文本内容' },
+    { value: 'compress', label: 'PDF压缩', icon: FileText, description: '重新栅格化每页以减小体积' },
   ]
 
   return (
@@ -208,17 +321,12 @@ const PdfTools: React.FC = () => {
             <button
               key={tool.value}
               onClick={() => {
-                if (!tool.disabled) {
-                  setMode(tool.value as ToolMode)
-                  clearAll()
-                }
+                setMode(tool.value as ToolMode)
+                clearAll()
               }}
-              disabled={tool.disabled}
               className={`p-4 rounded-lg border-2 transition-all text-left ${
                 mode === tool.value
                   ? 'border-indigo-600 bg-indigo-50'
-                  : tool.disabled
-                  ? 'border-gray-200 bg-gray-50 opacity-50 cursor-not-allowed'
                   : 'border-gray-200 hover:border-indigo-300 hover:bg-gray-50'
               }`}
             >
@@ -227,7 +335,6 @@ const PdfTools: React.FC = () => {
                 {tool.label}
               </div>
               <div className="text-xs text-gray-500 mt-1">{tool.description}</div>
-              {tool.disabled && <div className="text-xs text-orange-500 mt-1">开发中</div>}
             </button>
           ))}
         </div>
@@ -370,6 +477,18 @@ const PdfTools: React.FC = () => {
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             PDF分割：上传单个PDF文件，将每页分割为独立的PDF文件，打包为ZIP下载
+          </li>
+          <li className="flex items-start">
+            <span className="text-indigo-600 mr-2">•</span>
+            PDF转图片：每页导出为PNG，单页直接下载图片，多页自动打包为ZIP
+          </li>
+          <li className="flex items-start">
+            <span className="text-indigo-600 mr-2">•</span>
+            PDF转文字：按页提取文本内容，导出为TXT文件
+          </li>
+          <li className="flex items-start">
+            <span className="text-indigo-600 mr-2">•</span>
+            PDF压缩：将每页重新渲染为有损JPEG再拼回PDF，对图片/扫描件类文件效果明显；压缩后文字将不再可选中/可搜索
           </li>
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
