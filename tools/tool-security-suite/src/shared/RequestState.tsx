@@ -1,10 +1,10 @@
 import React from 'react'
-import { Loader2, TriangleAlert } from 'lucide-react'
-import { Card } from '@toolbox/ui-kit'
+import { TriangleAlert } from 'lucide-react'
+import { Card, Spinner } from '@toolbox/ui-kit'
 
 export const LoadingCard: React.FC<{ text: string }> = ({ text }) => (
   <Card className="text-center">
-    <Loader2 className="mx-auto h-10 w-10 animate-spin text-indigo-500" />
+    <Spinner size="lg" className="mx-auto text-indigo-500" />
     <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">{text}</div>
   </Card>
 )

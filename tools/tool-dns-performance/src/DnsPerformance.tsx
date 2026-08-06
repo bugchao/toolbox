@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { Activity, Loader2, Info } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { Activity, Info } from 'lucide-react'
 
 const RUNS = 5
 const RECORD_TYPES = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'TXT'] as const
@@ -184,7 +184,7 @@ const DnsPerformance: React.FC = () => {
           disabled={loading || (selectedPresets.size === 0 && !customDoH.trim())}
           className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed text-white rounded-lg font-medium flex items-center gap-2"
         >
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Activity className="w-5 h-5" />}
+          {loading ? <Spinner size="md" /> : <Activity className="w-5 h-5" />}
           {loading ? t('loading') : t('test_btn')}
         </button>
       </div>

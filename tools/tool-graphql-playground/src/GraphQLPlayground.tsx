@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Play, Book, History, Settings, Download, Trash2 } from 'lucide-react';
-import { CopyButton } from '@toolbox/ui-kit';
+import { CopyButton, Spinner } from '@toolbox/ui-kit';
 
 interface QueryHistory {
   id: string;
@@ -343,7 +343,7 @@ query {
               )}
               {loading && (
                 <div className="text-center py-8 text-gray-500">
-                  <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full mr-2"></div>
+                  <Spinner size="md" className="mr-2" />
                   Executing query...
                 </div>
               )}

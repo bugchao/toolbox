@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Upload, Play, Pause, Square, Scissors, Download, Trash2 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import WaveSurfer from 'wavesurfer.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js'
 
@@ -10,8 +10,7 @@ export default function AudioCutter() {
   const waveformRef = useRef<HTMLDivElement>(null)
   const wavesurferRef = useRef<WaveSurfer | null>(null)
   const regionsPluginRef = useRef<any>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  
+
   const [audioFile, setAudioFile] = useState<File | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
@@ -71,10 +70,7 @@ export default function AudioCutter() {
     }
   }, [])
 
-  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
+  const loadFile = async (file: File) => {
     const validTypes = ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/aac', 'audio/mp4']
     if (!validTypes.includes(file.type) && !file.name.match(/\.(mp3|wav|ogg|aac|m4a)$/i)) {
       alert(t('invalidFormat') || '不支持的音频格式')
@@ -83,29 +79,18 @@ export default function AudioCutter() {
 
     setAudioFile(file)
     const url = URL.createObjectURL(file)
-    
+
     if (wavesurferRef.current) {
       await wavesurferRef.current.load(url)
     }
   }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    const file = e.dataTransfer.files[0]
-    if (file && file.type.startsWith('audio/')) {
-      const input = fileInputRef.current
-      if (input) {
-        const dataTransfer = new DataTransfer()
-        dataTransfer.items.add(file)
-        input.files = dataTransfer.files
-        handleFileSelect({ target: input } as any)
-      }
-    }
-  }
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-  }
+  const { inputRef: fileInputRef, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => {
+      const file = files[0]
+      if (file) void loadFile(file)
+    },
+  })
 
   const togglePlayPause = () => {
     if (wavesurferRef.current) {
@@ -275,10 +260,9 @@ export default function AudioCutter() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
           {!audioFile ? (
             <div
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
+              {...dropzoneProps}
               className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-12 text-center cursor-pointer hover:border-purple-500 transition-colors"
-              onClick={() => fileInputRef.current?.click()}
+              onClick={openPicker}
             >
               <Upload className="w-16 h-16 mx-auto mb-4 text-gray-400" />
               <p className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -287,13 +271,7 @@ export default function AudioCutter() {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {t('supportedFormats')}
               </p>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="audio/*,.mp3,.wav,.ogg,.aac,.m4a"
-                onChange={handleFileSelect}
-                className="hidden"
-              />
+              <input {...inputProps} accept="audio/*,.mp3,.wav,.ogg,.aac,.m4a" />
             </div>
           ) : (
             <div className="space-y-6">
@@ -388,7 +366,7 @@ export default function AudioCutter() {
                 >
                   {isProcessing ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <Spinner size="md" />
                       {t('processing')}
                     </>
                   ) : (

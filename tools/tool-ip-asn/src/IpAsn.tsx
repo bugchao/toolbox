@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Search, Loader2, Globe, Building2, Wifi, MapPin } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Search, Globe, Building2, Wifi, MapPin } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
 
 export const I18N_NAMESPACE = 'toolIpAsn'
 
@@ -93,7 +93,7 @@ const IpAsn: React.FC = () => {
                 disabled={loading}
                 className="px-6 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 font-medium disabled:opacity-50 flex items-center"
               >
-                {loading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <Search className="w-5 h-5 mr-2" />}
+                {loading ? <Spinner size="sm" className="mr-2" /> : <Search className="w-5 h-5 mr-2" />}
                 {t('query')}
               </button>
             </div>
@@ -108,7 +108,7 @@ const IpAsn: React.FC = () => {
 
       {loading && (
         <div className="card text-center py-12">
-          <Loader2 className="w-12 h-12 text-indigo-600 dark:text-indigo-400 animate-spin mx-auto mb-4" />
+          <Spinner size="lg" className="text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
           <p className="text-gray-600 dark:text-gray-400">{t('loading')}</p>
         </div>
       )}

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Video, Upload, Download, X, AlertCircle, Loader2 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Video, Upload, Download, X, AlertCircle } from 'lucide-react'
+import { PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 
@@ -84,10 +84,7 @@ export default function VideoCompressor() {
   const [loadStage, setLoadStage] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [estimatedTime, setEstimatedTime] = useState<number | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const dragCounter = useRef(0)
   const loadPromiseRef = useRef<Promise<boolean> | null>(null)
-  const [isDragging, setIsDragging] = useState(false)
 
   useEffect(() => {
     return () => {
@@ -199,40 +196,12 @@ export default function VideoCompressor() {
     })
   }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsDragging(false)
-    dragCounter.current = 0
-
-    const file = e.dataTransfer.files[0]
-    if (file) {
-      handleFileSelect(file)
-    }
-  }
-
-  const handleDragEnter = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    dragCounter.current++
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      setIsDragging(true)
-    }
-  }
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    dragCounter.current--
-    if (dragCounter.current === 0) {
-      setIsDragging(false)
-    }
-  }
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-  }
+  const { isDragActive, inputRef: fileInputRef, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => {
+      const file = files[0]
+      if (file) handleFileSelect(file)
+    },
+  })
 
   const getQualityParams = (quality: CompressionQuality): string[] => {
     switch (quality) {
@@ -361,12 +330,9 @@ export default function VideoCompressor() {
         {/* Upload Area */}
         {!originalVideo && (
           <div
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
+            {...dropzoneProps}
             className={`bg-white dark:bg-gray-800 rounded-xl border-2 border-dashed p-12 text-center transition-colors ${
-              isDragging
+              isDragActive
                 ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20'
                 : 'border-gray-300 dark:border-gray-600 hover:border-indigo-400'
             }`}
@@ -381,15 +347,9 @@ export default function VideoCompressor() {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               {t('maxSize')}
             </p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="video/*"
-              onChange={(e) => e.target.files?.[0] && handleFileSelect(e.target.files[0])}
-              className="hidden"
-            />
+            <input {...inputProps} accept="video/*" />
             <button
-              onClick={() => fileInputRef.current?.click()}
+              onClick={openPicker}
               className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium"
             >
               {t('uploadArea')}
@@ -410,7 +370,7 @@ export default function VideoCompressor() {
                   disabled={loading}
                   className="mt-3 inline-flex items-center gap-2 rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
                 >
-                  {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {loading && <Spinner size="sm" />}
                   {t('retryLoad')}
                 </button>
               )}
@@ -490,7 +450,7 @@ export default function VideoCompressor() {
               >
                 {loading ? (
                   <span className="inline-flex items-center justify-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Spinner size="sm" />
                     {t('loadingFFmpeg')} {loadProgress}%
                   </span>
                 ) : (

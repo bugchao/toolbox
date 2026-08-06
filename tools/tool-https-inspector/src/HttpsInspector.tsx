@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { PageHero, Button, Input, Card, StatusBadge } from '@toolbox/ui-kit'
+import { PageHero, Button, Input, Card, StatusBadge, Spinner } from '@toolbox/ui-kit'
 import type { StatusLevel } from '@toolbox/ui-kit'
-import { ShieldCheck, Loader2, AlertCircle } from 'lucide-react'
+import { ShieldCheck, AlertCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 interface ModuleBase {
@@ -227,7 +227,7 @@ export default function HttpsInspector() {
               disabled={loading}
             />
             <Button onClick={handleCheck} disabled={loading || !domain.trim()} className="min-w-[100px]">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{t('checking')}</> : t('check')}
+              {loading ? <><Spinner size="sm" className="mr-2" />{t('checking')}</> : t('check')}
             </Button>
           </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, RotateCw, FlipHorizontal, FlipVertical, X, Plus } from 'lucide-react';
+import { Spinner } from '@toolbox/ui-kit';
 
 interface RotateImage {
   id: string;
@@ -366,7 +367,7 @@ const ImageRotator: React.FC = () => {
                 />
                 {image.status === 'processing' && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
+                    <Spinner size="lg" className="!h-12 !w-12 text-white" />
                   </div>
                 )}
                 <button

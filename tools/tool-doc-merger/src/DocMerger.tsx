@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FileText, Upload, Trash2, Download, GripVertical, AlertCircle } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, useFileDropzone } from '@toolbox/ui-kit'
 import { PDFDocument } from 'pdf-lib'
 
 interface PDFFile {
@@ -14,17 +14,14 @@ interface PDFFile {
 
 export default function DocMerger() {
   const { t } = useTranslation('toolDocMerger')
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  
+
   const [files, setFiles] = useState<PDFFile[]>([])
   const [merging, setMerging] = useState(false)
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null)
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const handleFileSelect = async (selectedFiles: FileList | null) => {
-    if (!selectedFiles) return
-    
+  const handleFileSelect = async (selectedFiles: File[]) => {
     setError(null)
     const newFiles: PDFFile[] = []
     
@@ -57,14 +54,9 @@ export default function DocMerger() {
     setFiles([...files, ...newFiles])
   }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    handleFileSelect(e.dataTransfer.files)
-  }
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-  }
+  const { openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => void handleFileSelect(files),
+  })
 
   const removeFile = (id: string) => {
     setFiles(files.filter(f => f.id !== id))
@@ -158,22 +150,14 @@ export default function DocMerger() {
         {/* Upload Area */}
         <div
           className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer bg-white"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onClick={() => fileInputRef.current?.click()}
+          {...dropzoneProps}
+          onClick={openPicker}
         >
           <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
           <h3 className="text-lg font-semibold mb-2">{t('uploadArea.title')}</h3>
           <p className="text-gray-600 mb-2">{t('uploadArea.description')}</p>
           <p className="text-sm text-gray-500">{t('uploadArea.hint')}</p>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="application/pdf"
-            multiple
-            className="hidden"
-            onChange={(e) => handleFileSelect(e.target.files)}
-          />
+          <input {...inputProps} accept="application/pdf" multiple />
         </div>
 
         {/* Error Message */}

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, Spinner, TextArea } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import {
   ArrowLeftRight,
@@ -8,7 +8,6 @@ import {
   Eye,
   FileText,
   History,
-  Loader2,
   Send,
   Settings,
   Sparkles,
@@ -573,7 +572,7 @@ const AiTranslator: React.FC = () => {
             </span>
             {busy && (
               <span className="inline-flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400">
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                <Spinner size="sm" />
                 {progress ? t('action.loadingWebllm', { pct: Math.round(progress.loaded * 100) }) : t('action.streaming')}
               </span>
             )}

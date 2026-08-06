@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import {
   Button,
   Card,
-  CopyButton,
   Input,
   NoticeCard,
+  OutputPanel,
   PageHero,
   ParticlesBackground,
   Switch,
@@ -383,27 +383,19 @@ const UrlQuery: React.FC = () => {
 
             {/* 输出 */}
             <div className="space-y-2 border-t border-gray-200 pt-4 dark:border-gray-700">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {t('output.label')}
-                </span>
-                <div className="flex items-center gap-3">
+              <OutputPanel
+                label={t('output.label')}
+                value={outputUrl}
+                placeholder=" "
+                copyLabel={t('output.copy')}
+                copiedLabel={t('output.copied')}
+                actions={
                   <span className="text-xs text-gray-500 dark:text-gray-400">
                     {t('output.length', { count: outputUrl.length })}
                   </span>
-                  <CopyButton
-                    variant="button"
-                    buttonVariant="ghost"
-                    size="sm"
-                    value={outputUrl}
-                    label={t('output.copy')}
-                    copiedLabel={t('output.copied')}
-                  />
-                </div>
-              </div>
-              <pre className="overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 font-mono text-xs leading-6 text-gray-800 dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-100">
-                {outputUrl || ' '}
-              </pre>
+                }
+                className="overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 font-mono text-xs leading-6 text-gray-800 dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-100"
+              />
             </div>
           </div>
         </Card>

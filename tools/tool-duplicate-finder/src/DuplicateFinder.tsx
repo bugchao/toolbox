@@ -1,8 +1,7 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
   Upload,
   Copy as CopyIcon,
-  Loader2,
   Trash2,
   Download,
   ChevronDown,
@@ -10,7 +9,7 @@ import {
   Info,
   Star,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 
 const NAMESPACE = 'toolDuplicateFinder'
@@ -45,12 +44,10 @@ function bytesToHex(buf: ArrayBuffer): string {
 
 const DuplicateFinder: React.FC = () => {
   const { t } = useTranslation(NAMESPACE)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [entries, setEntries] = useState<FileEntry[]>([])
   const [keepIds, setKeepIds] = useState<Record<string, string>>({}) // hash -> keep id
   const [uniqueOpen, setUniqueOpen] = useState(false)
-  const [dragOver, setDragOver] = useState(false)
 
   // ── 分组 + 派生统计 ──
   interface Analysis {
@@ -172,18 +169,9 @@ const DuplicateFinder: React.FC = () => {
     await Promise.all(Array.from({ length: Math.min(concurrency, toHash.length) }, worker))
   }, [])
 
-  const onSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files ?? [])
-    if (files.length > 0) void processFiles(files)
-    if (fileInputRef.current) fileInputRef.current.value = ''
-  }
-
-  const onDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setDragOver(false)
-    const files = Array.from(e.dataTransfer.files)
-    if (files.length > 0) void processFiles(files)
-  }
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => void processFiles(files),
+  })
 
   const removeEntry = (id: string) => {
     setEntries((prev) => prev.filter((e) => e.id !== id))
@@ -257,14 +245,9 @@ const DuplicateFinder: React.FC = () => {
 
       {/* 拖拽区 */}
       <section
-        onDragOver={(e) => {
-          e.preventDefault()
-          setDragOver(true)
-        }}
-        onDragLeave={() => setDragOver(false)}
-        onDrop={onDrop}
+        {...dropzoneProps}
         className={`rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
-          dragOver
+          isDragActive
             ? 'border-indigo-500 bg-indigo-50'
             : 'border-gray-300 bg-white hover:border-gray-400'
         }`}
@@ -274,18 +257,12 @@ const DuplicateFinder: React.FC = () => {
         <p className="text-xs text-gray-400 mb-3">{t('drop.tip')}</p>
         <button
           type="button"
-          onClick={() => fileInputRef.current?.click()}
+          onClick={openPicker}
           className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
         >
           {t('drop.choose')}
         </button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          onChange={onSelectFiles}
-          className="hidden"
-        />
+        <input {...inputProps} multiple />
       </section>
 
       {/* Stats */}
@@ -311,7 +288,7 @@ const DuplicateFinder: React.FC = () => {
             value={
               analysis.hashingCount > 0 ? (
                 <span className="inline-flex items-center gap-1">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {analysis.hashingCount}
                 </span>
               ) : (

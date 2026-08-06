@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { Search, Loader2, Play, CheckCircle, XCircle } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { Search, Play, CheckCircle, XCircle } from 'lucide-react'
 
 // Simple UI for DNS Propagation
 const DnsPropagation: React.FC = () => {
@@ -142,7 +142,7 @@ const DnsPropagation: React.FC = () => {
                             disabled={loading}
                             className="w-full md:w-auto px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 transition-colors"
                         >
-                            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
+                            {loading ? <Spinner size="md" /> : <Search className="w-5 h-5" />}
                             {t('start_check')}
                         </button>
                     </div>

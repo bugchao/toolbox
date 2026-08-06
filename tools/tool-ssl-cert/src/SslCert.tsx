@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
-import { ShieldCheck, Loader2, AlertCircle, CheckCircle, XCircle, Clock, Lock } from 'lucide-react';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
+import { ShieldCheck, AlertCircle, CheckCircle, XCircle, Clock, Lock } from 'lucide-react';
 
 interface CertInfo {
   subject: { CN?: string; O?: string; C?: string };
@@ -103,7 +103,7 @@ export default function SslCert() {
               disabled={loading}
             />
             <Button onClick={handleQuery} disabled={loading || !domain.trim()} className="min-w-[100px]">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />检测中</> : '检测'}
+              {loading ? <><Spinner size="sm" className="mr-2" />检测中</> : '检测'}
             </Button>
           </div>
 

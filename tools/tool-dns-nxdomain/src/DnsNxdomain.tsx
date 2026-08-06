@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
 import { useTranslation } from 'react-i18next';
-import { AlertCircle, CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 interface QueryResult {
   domain: string;
@@ -83,7 +83,7 @@ export default function DnsNxdomain() {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     检测中
                   </>
                 ) : (

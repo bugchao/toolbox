@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Upload, Download, Settings, X, FileImage, GitCompareArrows } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Modal, PageHero } from '@toolbox/ui-kit'
 
 interface ProcessedImage {
   id: string
@@ -559,14 +559,7 @@ const CompareModal: React.FC<{
 }> = ({ image, onClose, t }) => {
   const [pos, setPos] = useState(50)
   return (
-    <div
-      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      <div
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-3xl w-full p-4"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Modal onClose={onClose} overlayClassName="bg-black/70 p-4" className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-3xl w-full p-4">
         <div className="flex justify-between items-center mb-3">
           <h3 className="font-semibold">{t('compareTitle')}</h3>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200">
@@ -610,8 +603,7 @@ const CompareModal: React.FC<{
           className="w-full mt-3 cursor-pointer"
         />
         <p className="text-center text-xs text-gray-500 mt-1">{t('dragToCompare')}</p>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

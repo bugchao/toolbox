@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Upload, Download, FileText, Scissors, Merge, Image, FileCode, X, Check, Loader2, ChevronDown, File } from 'lucide-react'
+import { Upload, Download, FileText, Scissors, Merge, Image, FileCode, X, Check, ChevronDown, File } from 'lucide-react'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import JSZip from 'jszip'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
 
@@ -394,7 +394,7 @@ const PdfTools: React.FC = () => {
                   <div className="flex items-center space-x-3">
                     {file.status === 'processing' && (
                       <div className="flex items-center space-x-2">
-                        <Loader2 className="w-4 h-4 text-indigo-600 animate-spin" />
+                        <Spinner size="sm" className="text-indigo-600" />
                         <span className="text-sm text-gray-600">{file.progress}%</span>
                       </div>
                     )}
@@ -436,7 +436,7 @@ const PdfTools: React.FC = () => {
             >
               {processing ? (
                 <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  <Spinner size="sm" className="mr-2" />
                   处理中...
                 </>
               ) : (

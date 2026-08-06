@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { 
   BookOpen, 
@@ -367,7 +367,7 @@ export default function StudyPlanner() {
             >
               {isGenerating ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <Spinner size="sm" className="text-white" />
                   {t('generating')}
                 </>
               ) : (

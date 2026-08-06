@@ -1,11 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { Button } from '@toolbox/ui-kit'
+import { Button, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import {
   Archive,
   Download,
   FileText,
-  Loader2,
   Square,
   Trash2,
   Upload,
@@ -63,11 +62,10 @@ const FilesPanel: React.FC<Props> = ({ translateChunk }) => {
   const [skipped, setSkipped] = useState<string[]>([])
   const abortRef = useRef<AbortController | null>(null)
 
-  const handleFiles = useCallback(async (list: FileList | null) => {
-    if (!list) return
+  const handleFiles = useCallback(async (list: File[]) => {
     const skip: string[] = []
     const accepted: File[] = []
-    for (const f of Array.from(list)) {
+    for (const f of list) {
       const lower = f.name.toLowerCase()
       const okExt = /\.(txt|md|markdown|mdx)$/i.test(lower)
       const okType = !f.type || f.type.startsWith('text/')
@@ -177,7 +175,7 @@ const FilesPanel: React.FC<Props> = ({ translateChunk }) => {
 
   return (
     <div className="space-y-4">
-      <DropZone onFiles={(list) => handleFiles(list)} />
+      <DropZone onFiles={(files) => handleFiles(files)} />
 
       {skipped.length > 0 && (
         <div className="rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
@@ -273,7 +271,7 @@ const FilesPanel: React.FC<Props> = ({ translateChunk }) => {
         </Button>
         {busy && (
           <span className="inline-flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400">
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            <Spinner size="sm" />
             {t('files.translating')}
           </span>
         )}
@@ -302,29 +300,18 @@ const StatusBadge: React.FC<{ status: FileStatus; failedChunks: number }> = ({ s
   return <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${map[status]}`}>{label}</span>
 }
 
-const DropZone: React.FC<{ onFiles: (l: FileList | null) => void }> = ({ onFiles }) => {
+const DropZone: React.FC<{ onFiles: (files: File[]) => void }> = ({ onFiles }) => {
   const { t } = useTranslation('toolAiTranslator')
+  const { dropzoneProps, inputProps } = useFileDropzone({ onFiles })
   return (
     <label
-      htmlFor="ai-translator-file-input"
-      onDrop={(e) => {
-        e.preventDefault()
-        onFiles(e.dataTransfer.files)
-      }}
-      onDragOver={(e) => e.preventDefault()}
+      {...dropzoneProps}
       className="flex h-36 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-indigo-50/50 text-center transition-colors hover:border-indigo-400 hover:bg-indigo-50 dark:border-indigo-700 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30"
     >
       <Upload className="mb-2 h-7 w-7 text-indigo-500" />
       <span className="font-medium text-indigo-700 dark:text-indigo-200">{t('files.dropCta')}</span>
       <span className="mt-1 text-xs text-indigo-500/80 dark:text-indigo-300/80">{t('files.dropHint')}</span>
-      <input
-        id="ai-translator-file-input"
-        type="file"
-        accept={ACCEPT}
-        multiple
-        className="hidden"
-        onChange={(e) => onFiles(e.target.files)}
-      />
+      <input {...inputProps} accept={ACCEPT} multiple />
     </label>
   )
 }

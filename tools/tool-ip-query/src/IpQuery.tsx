@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Search, MapPin, Globe, Wifi, Calendar, Info, Loader2 } from 'lucide-react'
-import { CopyButton, PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
+import { Search, MapPin, Globe, Wifi, Calendar, Info } from 'lucide-react'
+import { CopyButton, PageHero, QueryHistory, useQueryHistory, ToolTabView, Spinner } from '@toolbox/ui-kit'
 
 export const I18N_NAMESPACE = 'toolIpQuery'
 
@@ -169,7 +169,7 @@ const IpQuery: React.FC = () => {
                 disabled={loading}
                 className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                {loading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <Search className="w-5 h-5 mr-2" />}
+                {loading ? <Spinner size="sm" className="mr-2" /> : <Search className="w-5 h-5 mr-2" />}
                 {t('query')}
               </button>
             </div>
@@ -185,7 +185,7 @@ const IpQuery: React.FC = () => {
 
       {loading && (
         <div className="card text-center py-12">
-          <Loader2 className="w-12 h-12 text-indigo-600 dark:text-indigo-400 animate-spin mx-auto mb-4" />
+          <Spinner size="lg" className="text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
           <p className="text-gray-600 dark:text-gray-400">{t('loading')}</p>
         </div>
       )}

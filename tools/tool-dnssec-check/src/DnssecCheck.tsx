@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { ShieldCheck, Loader2, ShieldAlert, CheckCircle } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { ShieldCheck, ShieldAlert, CheckCircle } from 'lucide-react'
 
 const GOOGLE_DOH = 'https://dns.google/resolve'
 
@@ -76,7 +76,7 @@ const DnssecCheck: React.FC = () => {
               disabled={loading}
               className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-lg font-medium flex items-center justify-center gap-2"
             >
-              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <ShieldCheck className="w-5 h-5" />}
+              {loading ? <Spinner size="md" /> : <ShieldCheck className="w-5 h-5" />}
               {loading ? t('loading') : t('check_btn')}
             </button>
           </div>

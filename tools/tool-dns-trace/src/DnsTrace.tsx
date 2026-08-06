@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
-import { Loader2, Play } from 'lucide-react'
+import { PageHero, QueryHistory, useQueryHistory, ToolTabView, Spinner } from '@toolbox/ui-kit'
+import { Play } from 'lucide-react'
 
 // Simple UI for DNS trace
 const DnsTrace: React.FC = () => {
@@ -128,7 +128,7 @@ const DnsTrace: React.FC = () => {
                             disabled={loading}
                             className="w-full md:w-auto px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 transition-colors"
                         >
-                            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5" />}
+                            {loading ? <Spinner size="md" /> : <Play className="w-5 h-5" />}
                             {t('start_trace')}
                         </button>
                     </div>

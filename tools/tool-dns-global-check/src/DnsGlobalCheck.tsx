@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { Globe, Loader2, CheckCircle, XCircle } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { Globe, CheckCircle, XCircle } from 'lucide-react'
 
 interface DoHProvider {
   name: string
@@ -108,7 +108,7 @@ const DnsGlobalCheck: React.FC = () => {
               disabled={loading}
               className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-lg font-medium flex items-center justify-center gap-2"
             >
-              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Globe className="w-5 h-5" />}
+              {loading ? <Spinner size="md" /> : <Globe className="w-5 h-5" />}
               {loading ? t('loading') : t('query_btn')}
             </button>
           </div>

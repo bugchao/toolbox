@@ -9,7 +9,7 @@ import {
   X,
   CalendarDays,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { Modal, PageHero } from '@toolbox/ui-kit'
 import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
 
@@ -76,16 +76,6 @@ const HolidayCountdown: React.FC = () => {
   }, [])
 
   const [selectedKey, setSelectedKey] = useState<string | null>(null)
-
-  // Escape 关闭详情 modal
-  useEffect(() => {
-    if (!selectedKey) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedKey(null)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [selectedKey])
 
   const [draft, setDraft] = useState<{
     name: string
@@ -513,16 +503,7 @@ interface ScheduleModalProps {
 }
 const ScheduleModal: React.FC<ScheduleModalProps> = ({ item, onClose, now, isZh, t }) => {
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[80vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <Modal onClose={onClose} className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[80vh] flex flex-col">
         <header className="flex items-center gap-2 p-4 border-b border-gray-200">
           <span className="text-2xl">{item.emoji}</span>
           <div className="flex-1 min-w-0">
@@ -597,8 +578,7 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({ item, onClose, now, isZh,
         <footer className="p-3 border-t border-gray-100 text-xs text-gray-400 text-center">
           {t('modal.footer', { count: item.schedule.length })}
         </footer>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

@@ -6,7 +6,6 @@ import {
   Compass,
   Droplets,
   MapPin,
-  RefreshCw,
   Search,
   Sun,
   Thermometer,
@@ -19,6 +18,7 @@ import {
   Input,
   NoticeCard,
   PageHero,
+  Spinner,
 } from '@toolbox/ui-kit'
 
 type RangeMode = '7d' | '30d' | 'custom'
@@ -481,7 +481,7 @@ export default function WeatherTool() {
               disabled={locating || loading}
               className="w-full shrink-0 whitespace-nowrap sm:w-auto sm:min-w-[148px]"
             >
-              {locating ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Compass className="mr-2 h-4 w-4" />}
+              {locating ? <Spinner size="sm" className="mr-2" /> : <Compass className="mr-2 h-4 w-4" />}
               {locating ? t('locating') : t('useIpLocation')}
             </Button>
           </div>

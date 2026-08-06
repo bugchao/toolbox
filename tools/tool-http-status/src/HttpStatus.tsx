@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
-import { Activity, Loader2, AlertCircle, CheckCircle, XCircle, ArrowRight, Clock } from 'lucide-react';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
+import { Activity, AlertCircle, CheckCircle, XCircle, ArrowRight, Clock } from 'lucide-react';
 
 interface RedirectStep {
   url: string;
@@ -110,7 +110,7 @@ export default function HttpStatus() {
               disabled={loading}
             />
             <Button onClick={handleQuery} disabled={loading || !url.trim()} className="min-w-[100px]">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />检测中</> : '检测'}
+              {loading ? <><Spinner size="sm" className="mr-2" />检测中</> : '检测'}
             </Button>
           </div>
 

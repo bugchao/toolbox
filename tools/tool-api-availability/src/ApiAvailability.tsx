@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { Plus, Trash2, Activity, RefreshCw, CheckCircle, XCircle, AlertTriangle } from 'lucide-react'
+import { Plus, Trash2, Activity, CheckCircle, XCircle, AlertTriangle } from 'lucide-react'
+import { Spinner } from '@toolbox/ui-kit'
 
 interface ApiEndpoint {
   id: string
@@ -117,7 +118,7 @@ export function ApiAvailability() {
 
         <button onClick={test} disabled={loading || !endpoints.length}
           className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg font-medium transition-colors">
-          {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Activity className="w-4 h-4" />}
+          {loading ? <Spinner size="sm" /> : <Activity className="w-4 h-4" />}
           {loading ? '检测中...' : '开始检测'}
         </button>
       </div>

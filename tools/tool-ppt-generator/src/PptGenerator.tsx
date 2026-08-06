@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero } from '@toolbox/ui-kit'
-import { FileText, Loader2, Sparkles, Download, Palette } from 'lucide-react'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { FileText, Sparkles, Download, Palette } from 'lucide-react'
 import PptxGenJS from 'pptxgenjs'
 import { parseOutline } from './outline'
 
@@ -226,7 +226,7 @@ const PptGenerator: React.FC = () => {
               disabled={loading}
               className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-lg font-medium transition-colors"
             >
-              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+              {loading ? <Spinner size="sm" /> : <Download className="w-5 h-5" />}
               {loading ? t('loading') : t('gen_ppt_btn')}
             </button>
           </div>

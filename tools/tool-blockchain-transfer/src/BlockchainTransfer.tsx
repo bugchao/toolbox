@@ -6,6 +6,8 @@ import {
   Input,
   Card,
   ParticlesBackground,
+  Spinner,
+  CopyButton,
 } from '@toolbox/ui-kit'
 import {
   Coins,
@@ -14,8 +16,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   ExternalLink,
-  Loader2,
-  Copy,
   LogOut,
   RefreshCw,
   Info,
@@ -146,14 +146,6 @@ const BlockchainTransfer: React.FC = () => {
       }
     } finally {
       setSending(false)
-    }
-  }
-
-  const handleCopy = (text: string) => {
-    try {
-      navigator.clipboard?.writeText(text)
-    } catch {
-      // ignore
     }
   }
 
@@ -291,14 +283,14 @@ const BlockchainTransfer: React.FC = () => {
                         <CheckCircle2 className="w-4 h-4" />
                         {t('wallet.connected')}
                       </span>
-                      <button
-                        type="button"
-                        onClick={() => handleCopy(account)}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white/70 dark:bg-gray-800/60 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors"
-                      >
-                        <Copy className="w-3.5 h-3.5" />
-                        {t('wallet.copy')}
-                      </button>
+                      <CopyButton
+                        variant="inline"
+                        size="sm"
+                        value={account}
+                        label={t('wallet.copy')}
+                        copiedLabel={t('wallet.copied')}
+                        className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 !text-gray-700 dark:!text-gray-200 bg-white/70 dark:bg-gray-800/60 hover:border-indigo-400 hover:!text-indigo-600 dark:hover:!text-indigo-300"
+                      />
                       <button
                         type="button"
                         onClick={handleSwitchAccount}
@@ -324,7 +316,7 @@ const BlockchainTransfer: React.FC = () => {
                     >
                       {active.connecting ? (
                         <span className="inline-flex items-center gap-2">
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Spinner size="sm" />
                           {t('wallet.connecting')}
                         </span>
                       ) : (
@@ -453,7 +445,7 @@ const BlockchainTransfer: React.FC = () => {
               >
                 {sending ? (
                   <span className="inline-flex items-center justify-center gap-2">
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <Spinner size="md" />
                     {t('form.sending')}
                   </span>
                 ) : (
@@ -482,14 +474,14 @@ const BlockchainTransfer: React.FC = () => {
                     <code className="font-mono text-gray-900 dark:text-gray-100 break-all">
                       {short(txHash, 10, 8)}
                     </code>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy(txHash)}
-                      className="text-gray-500 hover:text-indigo-500"
-                      aria-label="copy"
-                    >
-                      <Copy className="w-3.5 h-3.5" />
-                    </button>
+                    <CopyButton
+                      variant="icon"
+                      size="sm"
+                      value={txHash}
+                      label={t('wallet.copy')}
+                      copiedLabel={t('wallet.copied')}
+                      className="!text-gray-500 hover:!text-indigo-500"
+                    />
                     {explorerUrl && (
                       <a
                         href={explorerUrl}

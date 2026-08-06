@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
-import { PageHero, Button, Input, Card, StatusBadge } from '@toolbox/ui-kit'
-import { Maximize2, Upload, Download, AlertCircle, Loader2 } from 'lucide-react'
+import React, { useState } from 'react'
+import { PageHero, Button, Input, Card, StatusBadge, Spinner, useFileDropzone } from '@toolbox/ui-kit'
+import { Maximize2, Upload, Download, AlertCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { loadImage, encodeToTarget } from './lib/encode'
 import type { OutputFormat } from './lib/types'
@@ -21,9 +21,6 @@ export default function ImageKbResizer() {
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<{ blob: Blob; actualSize: number; approximate: boolean } | null>(null)
-  const [dragActive, setDragActive] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
   const pickFile = (f: File | undefined | null) => {
     if (!f || !f.type.startsWith('image/')) {
       setError(t('errorInvalidFile'))
@@ -33,6 +30,10 @@ export default function ImageKbResizer() {
     setResult(null)
     setError(null)
   }
+
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => pickFile(files[0]),
+  })
 
   const handleProcess = async () => {
     if (!file) return
@@ -78,30 +79,15 @@ export default function ImageKbResizer() {
         <Card className="max-w-3xl mx-auto mt-8 p-6 space-y-5">
           <div
             className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-              dragActive ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-300 dark:border-gray-600'
+              isDragActive ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-300 dark:border-gray-600'
             }`}
-            onClick={() => fileInputRef.current?.click()}
-            onDragOver={(e) => {
-              e.preventDefault()
-              setDragActive(true)
-            }}
-            onDragLeave={() => setDragActive(false)}
-            onDrop={(e) => {
-              e.preventDefault()
-              setDragActive(false)
-              pickFile(e.dataTransfer.files?.[0])
-            }}
+            {...dropzoneProps}
+            onClick={openPicker}
           >
             <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
             <p className="text-sm text-gray-600 dark:text-gray-400">{file ? file.name : t('dropHint')}</p>
             <p className="text-xs text-gray-400 mt-1">{t('supportedFormats')}</p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => pickFile(e.target.files?.[0])}
-            />
+            <input {...inputProps} accept="image/*" />
           </div>
 
           {file && (
@@ -146,7 +132,7 @@ export default function ImageKbResizer() {
           <Button onClick={handleProcess} disabled={!file || processing || !targetKb} className="w-full">
             {processing ? (
               <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                <Spinner size="sm" className="mr-2" />
                 {t('processing')}
               </>
             ) : (

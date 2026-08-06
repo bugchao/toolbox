@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, Input, NoticeCard, PageHero, ParticlesBackground, TextArea, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { Download, FileDigit, FileText, Type, Upload } from 'lucide-react'
 import {
@@ -29,9 +29,9 @@ const Base64File: React.FC = () => {
   const [decodeName, setDecodeName] = useState('decoded')
 
   // —— 编码方向 ——
-  const onFiles = async (list: FileList | null) => {
+  const onFiles = async (files: File[]) => {
     setEncodeError(null)
-    const f = list?.[0]
+    const f = files[0]
     if (!f) return
     if (f.size > MAX_BYTES) {
       setEncodeError(t('encode.tooLarge', { max: formatSize(MAX_BYTES) }))
@@ -45,6 +45,8 @@ const Base64File: React.FC = () => {
       base64: bytesToBase64(buf),
     })
   }
+
+  const { dropzoneProps, inputProps } = useFileDropzone({ onFiles: (files) => void onFiles(files) })
 
   // —— 解码方向 ——
   const decoded = useMemo(() => {
@@ -130,9 +132,7 @@ const Base64File: React.FC = () => {
           {mode === 'encode' ? (
             <div className="space-y-4">
               <label
-                htmlFor="base64-file-input"
-                onDrop={(e) => { e.preventDefault(); void onFiles(e.dataTransfer.files) }}
-                onDragOver={(e) => e.preventDefault()}
+                {...dropzoneProps}
                 className="flex h-36 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-indigo-50/50 text-center transition-colors hover:border-indigo-400 hover:bg-indigo-50 dark:border-indigo-700 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30"
               >
                 <Upload className="mb-2 h-7 w-7 text-indigo-500" />
@@ -140,12 +140,7 @@ const Base64File: React.FC = () => {
                 <span className="mt-1 text-xs text-indigo-500/80 dark:text-indigo-300/80">
                   {t('encode.dropHint', { max: formatSize(MAX_BYTES) })}
                 </span>
-                <input
-                  id="base64-file-input"
-                  type="file"
-                  className="hidden"
-                  onChange={(e) => void onFiles(e.target.files)}
-                />
+                <input {...inputProps} />
               </label>
 
               {encodeError && (

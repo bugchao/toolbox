@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
 import { useTranslation } from 'react-i18next';
-import { Server, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
+import { Server, AlertCircle, CheckCircle } from 'lucide-react';
 
 interface NsRecord {
   nameserver: string;
@@ -94,7 +94,7 @@ export default function DnsNs() {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     查询中
                   </>
                 ) : (

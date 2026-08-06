@@ -13,6 +13,7 @@
     "reconnect": "重新连接",
     "switchAccount": "切换账户",
     "copy": "复制地址",
+    "copied": "已复制",
     "notConnected": "尚未连接",
     "notInstalled": "未检测到 {{wallet}} 插件",
     "install": "去安装",

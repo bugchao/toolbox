@@ -8,15 +8,15 @@ import {
   Card,
   ParticlesBackground,
   NoticeCard,
+  Spinner,
+  CopyButton,
 } from '@toolbox/ui-kit'
 import {
   Database,
   Wallet,
-  Copy,
   ExternalLink,
   CheckCircle2,
   AlertTriangle,
-  Loader2,
   Lock,
   Unlock,
   ArrowRight,
@@ -394,18 +394,6 @@ const WalletBar: React.FC<WalletBarProps> = ({
   onSwitchSepolia,
   t,
 }) => {
-  const [copied, setCopied] = useState(false)
-  const onCopy = () => {
-    if (!account) return
-    try {
-      navigator.clipboard?.writeText(account)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1200)
-    } catch {
-      // ignore
-    }
-  }
-
   return (
     <Card padded={false}>
       <div className="p-4 flex items-center justify-between gap-3 flex-wrap">
@@ -453,14 +441,14 @@ const WalletBar: React.FC<WalletBarProps> = ({
             </a>
           ) : account ? (
             <>
-              <button
-                type="button"
-                onClick={onCopy}
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white/70 dark:bg-gray-800/60 hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors"
-              >
-                <Copy className="w-3.5 h-3.5" />
-                {copied ? t('wallet.copied') : t('wallet.account')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={account}
+                label={t('wallet.account')}
+                copiedLabel={t('wallet.copied')}
+                className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 !text-gray-700 dark:!text-gray-200 bg-white/70 dark:bg-gray-800/60 hover:border-indigo-400 hover:!text-indigo-600 dark:hover:!text-indigo-300"
+              />
               {!isSepolia && (
                 <Button onClick={onSwitchSepolia} variant="primary" size="sm">
                   <Network className="w-4 h-4" />
@@ -472,7 +460,7 @@ const WalletBar: React.FC<WalletBarProps> = ({
             <Button onClick={onConnect} disabled={connecting} variant="primary">
               {connecting ? (
                 <span className="inline-flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {t('wallet.connecting')}
                 </span>
               ) : (
@@ -935,7 +923,7 @@ const StoragePanel: React.FC<StoragePanelProps> = ({
             >
               {writing ? (
                 <span className="inline-flex items-center justify-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {t('storage.writing')}
                 </span>
               ) : (
@@ -971,7 +959,7 @@ const StoragePanel: React.FC<StoragePanelProps> = ({
             <Button onClick={handleRead} disabled={reading} className="w-full" variant="secondary">
               {reading ? (
                 <span className="inline-flex items-center justify-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {t('storage.reading')}
                 </span>
               ) : (
@@ -1323,7 +1311,7 @@ const EventLogPanel: React.FC<EventLogPanelProps> = ({
             >
               {writing ? (
                 <span className="inline-flex items-center justify-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {t('logs.writing')}
                 </span>
               ) : (
@@ -1390,7 +1378,7 @@ const EventLogPanel: React.FC<EventLogPanelProps> = ({
             >
               {querying ? (
                 <span className="inline-flex items-center justify-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Spinner size="sm" />
                   {t('logs.subgraphFetching')}
                 </span>
               ) : (
@@ -1489,7 +1477,6 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
   const [ciphertext, setCiphertext] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState<'enc' | 'dec' | null>(null)
-  const [copied, setCopied] = useState<'pt' | 'ct' | null>(null)
 
   const handleEncrypt = async () => {
     setError(null)
@@ -1517,17 +1504,6 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
     }
   }
 
-  const handleCopy = (which: 'pt' | 'ct') => {
-    const text = which === 'pt' ? plaintext : ciphertext
-    try {
-      navigator.clipboard?.writeText(text)
-      setCopied(which)
-      setTimeout(() => setCopied(null), 1200)
-    } catch {
-      // ignore
-    }
-  }
-
   return (
     <div className="space-y-4">
       <NoticeCard tone="warning" icon={AlertTriangle} title={t('cipher.warning')} />
@@ -1543,14 +1519,14 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
               <label className="text-xs text-gray-600 dark:text-gray-300">
                 {t('cipher.plaintext')}
               </label>
-              <button
-                type="button"
-                className="text-[11px] text-gray-500 hover:text-indigo-500"
-                onClick={() => handleCopy('pt')}
-              >
-                <Copy className="w-3 h-3 inline" />{' '}
-                {copied === 'pt' ? t('cipher.copied') : t('cipher.copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={plaintext}
+                label={t('cipher.copy')}
+                copiedLabel={t('cipher.copied')}
+                className="text-[11px] !text-gray-500 hover:!text-indigo-500"
+              />
             </div>
             <TextArea
               value={plaintext}
@@ -1564,14 +1540,14 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
               <label className="text-xs text-gray-600 dark:text-gray-300">
                 {t('cipher.ciphertext')}
               </label>
-              <button
-                type="button"
-                className="text-[11px] text-gray-500 hover:text-indigo-500"
-                onClick={() => handleCopy('ct')}
-              >
-                <Copy className="w-3 h-3 inline" />{' '}
-                {copied === 'ct' ? t('cipher.copied') : t('cipher.copy')}
-              </button>
+              <CopyButton
+                variant="inline"
+                size="sm"
+                value={ciphertext}
+                label={t('cipher.copy')}
+                copiedLabel={t('cipher.copied')}
+                className="text-[11px] !text-gray-500 hover:!text-indigo-500"
+              />
             </div>
             <TextArea
               value={ciphertext}
@@ -1592,7 +1568,7 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
           <div className="flex items-center gap-2 justify-end">
             <Button onClick={handleEncrypt} disabled={busy !== null || !password}>
               {busy === 'enc' ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Spinner size="sm" />
               ) : (
                 <>
                   {t('cipher.encrypt')}
@@ -1602,7 +1578,7 @@ const CipherPanel: React.FC<{ t: ReturnType<typeof useTranslation>['t'] }> = ({ 
             </Button>
             <Button onClick={handleDecrypt} disabled={busy !== null || !password} variant="secondary">
               {busy === 'dec' ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Spinner size="sm" />
               ) : (
                 <>
                   <ArrowLeft className="w-4 h-4" />

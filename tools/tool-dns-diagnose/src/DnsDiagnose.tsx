@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PageHero, DnsQueryForm, QueryHistory, useQueryHistory, ToolTabView } from '@toolbox/ui-kit'
+import { PageHero, DnsQueryForm, QueryHistory, useQueryHistory, ToolTabView, Spinner } from '@toolbox/ui-kit'
 import type { QueryHistoryRecord } from '@toolbox/ui-kit'
-import { CheckCircle2, XCircle, AlertTriangle, Loader2 } from 'lucide-react'
+import { CheckCircle2, XCircle, AlertTriangle } from 'lucide-react'
 
 interface DiagnosisStep {
   name: string
@@ -132,7 +132,7 @@ const DnsDiagnose: React.FC = () => {
       case 'warning':
         return <AlertTriangle className="w-5 h-5 text-yellow-500" />
       case 'pending':
-        return <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
+        return <Spinner size="md" className="text-gray-400" />
       default:
         return null
     }

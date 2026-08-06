@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Card } from '@toolbox/ui-kit'
+import { Button, Card, Modal } from '@toolbox/ui-kit'
 import { Eye, EyeOff, X } from 'lucide-react'
 import type { AIProvider } from '../types'
 import { saveApiKey, getApiKey, deleteApiKey, saveBaseURL, getBaseURL, deleteBaseURL } from '../utils/storage'
@@ -167,8 +167,7 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+    <Modal onClose={onClose} overlayClassName="bg-black/50" className="w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
         <Card className="relative">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -307,8 +306,7 @@ const ApiKeyConfig: React.FC<ApiKeyConfigProps> = ({ isOpen, onClose }) => {
             </Button>
           </div>
         </Card>
-      </div>
-    </div>
+    </Modal>
   )
 }
 

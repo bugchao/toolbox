@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
 import { useTranslation } from 'react-i18next';
-import { Mail, CheckCircle, Loader2, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 
 interface MxRecord {
   exchange: string;
@@ -88,7 +88,7 @@ export default function DomainMx() {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     查询中
                   </>
                 ) : (

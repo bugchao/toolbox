@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
-import { Radio, Loader2, AlertCircle, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
+import { Radio, AlertCircle, CheckCircle, XCircle, Clock } from 'lucide-react';
 
 interface PingRecord {
   seq: number;
@@ -101,7 +101,7 @@ export default function Ping() {
                 ))}
               </select>
               <Button onClick={handlePing} disabled={loading || !host.trim()} className="min-w-[90px]">
-                {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />测试中</> : 'Ping'}
+                {loading ? <><Spinner size="sm" className="mr-2" />测试中</> : 'Ping'}
               </Button>
             </div>
           </div>

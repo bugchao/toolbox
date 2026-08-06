@@ -7,6 +7,7 @@ import {
   ParticlesBackground,
   PropertyGrid,
   formatBytes,
+  useFileDropzone,
 } from '@toolbox/ui-kit'
 import type { PropertyGridItem } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
@@ -70,10 +71,8 @@ function buildCleanName(originalName: string, sourceMime: string): string {
 
 const ExifCleaner: React.FC = () => {
   const { t, i18n } = useTranslation('toolExifCleaner')
-  const inputRef = useRef<HTMLInputElement | null>(null)
   const [items, setItems] = useState<QueueItem[]>([])
   const [errors, setErrors] = useState<string[]>([])
-  const [dragOver, setDragOver] = useState(false)
   const [batchBusy, setBatchBusy] = useState(false)
 
   // Track every created object URL so we can revoke them on unmount.
@@ -125,9 +124,7 @@ const ExifCleaner: React.FC = () => {
   )
 
   const ingestFiles = useCallback(
-    async (fileList: FileList | File[] | null) => {
-      if (!fileList) return
-      const files = Array.from(fileList)
+    async (files: File[]) => {
       const accepted: QueueItem[] = []
       const newErrors: string[] = []
       for (const file of files) {
@@ -177,28 +174,9 @@ const ExifCleaner: React.FC = () => {
     [t],
   )
 
-  const onDrop: React.DragEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault()
-    setDragOver(false)
-    void ingestFiles(e.dataTransfer.files)
-  }
-
-  const onDragOver: React.DragEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault()
-    if (!dragOver) setDragOver(true)
-  }
-
-  const onDragLeave: React.DragEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault()
-    setDragOver(false)
-  }
-
-  const onPickClick = () => inputRef.current?.click()
-
-  const onPickChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    void ingestFiles(e.target.files)
-    if (e.target) e.target.value = ''
-  }
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => void ingestFiles(files),
+  })
 
   const toggleDetails = (id: string) => {
     setItems((prev) => prev.map((row) => (row.id === id ? { ...row, expanded: !row.expanded } : row)))
@@ -347,13 +325,11 @@ const ExifCleaner: React.FC = () => {
             {t('upload.heading')}
           </h2>
           <div
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-            onDragLeave={onDragLeave}
-            onClick={onPickClick}
+            {...dropzoneProps}
+            onClick={openPicker}
             className={[
               'flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-6 py-10 text-center transition-colors',
-              dragOver
+              isDragActive
                 ? 'border-sky-500 bg-sky-50 dark:bg-sky-950/30'
                 : 'border-gray-300 dark:border-gray-700 hover:border-sky-400 hover:bg-sky-50/40 dark:hover:bg-sky-950/20',
             ].join(' ')}
@@ -364,12 +340,9 @@ const ExifCleaner: React.FC = () => {
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400">{t('upload.hint')}</div>
             <input
-              ref={inputRef}
-              type="file"
+              {...inputProps}
               multiple
               accept={ACCEPTED_TYPES}
-              className="hidden"
-              onChange={onPickChange}
               onClick={(e) => e.stopPropagation()}
             />
           </div>

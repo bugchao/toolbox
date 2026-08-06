@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Eye } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, useFileDropzone } from '@toolbox/ui-kit'
 
 type SimType = 'normal' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia'
 
@@ -27,8 +27,6 @@ export default function ColorBlindSim() {
   const { t } = useTranslation('toolColorBlindSim')
   const [simType, setSimType] = useState<SimType>('protanopia')
   const [imageSrc, setImageSrc] = useState<string | null>(null)
-  const [dragging, setDragging] = useState(false)
-  const fileRef = useRef<HTMLInputElement>(null)
   const origCanvasRef = useRef<HTMLCanvasElement>(null)
   const simCanvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -77,12 +75,12 @@ export default function ColorBlindSim() {
     reader.readAsDataURL(file)
   }
 
-  const onDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setDragging(false)
-    const file = e.dataTransfer.files[0]
-    if (file) loadFile(file)
-  }
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => {
+      const f = files[0]
+      if (f) loadFile(f)
+    },
+  })
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -92,16 +90,14 @@ export default function ColorBlindSim() {
         {/* 上传 */}
         {!imageSrc && (
           <div
-            onClick={() => fileRef.current?.click()}
-            onDragOver={e => { e.preventDefault(); setDragging(true) }}
-            onDragLeave={() => setDragging(false)}
-            onDrop={onDrop}
+            {...dropzoneProps}
+            onClick={openPicker}
             className={`cursor-pointer rounded-2xl border-2 border-dashed p-12 text-center transition-colors ${
-              dragging ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-indigo-400'
+              isDragActive ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-indigo-400'
             }`}>
             <Eye className="w-12 h-12 mx-auto mb-3 text-gray-300" />
             <p className="text-sm text-gray-500">{t('uploadHint')}</p>
-            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) loadFile(f) }} />
+            <input {...inputProps} accept="image/*" />
           </div>
         )}
 

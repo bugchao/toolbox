@@ -13,6 +13,7 @@
     "reconnect": "Reconnect",
     "switchAccount": "Switch Account",
     "copy": "Copy Address",
+    "copied": "Copied",
     "notConnected": "Not connected",
     "notInstalled": "{{wallet}} extension not detected",
     "install": "Install",

@@ -47,6 +47,8 @@
   },
   "output": {
     "css": "CSS rule",
-    "tailwind": "Tailwind arbitrary value"
+    "tailwind": "Tailwind arbitrary value",
+    "copy": "Copy",
+    "copied": "Copied"
   }
 }

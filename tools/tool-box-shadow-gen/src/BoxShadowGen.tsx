@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, NoticeCard, OutputPanel, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import {
   ArrowDown,
@@ -270,8 +270,18 @@ const BoxShadowGen: React.FC = () => {
             </div>
 
             <div className="mt-5 space-y-3 border-t border-gray-200 pt-4 dark:border-gray-700">
-              <OutputBlock label={t('output.css')} value={cssRule} />
-              <OutputBlock label={t('output.tailwind')} value={tailwindValue} />
+              <OutputPanel
+                label={t('output.css')}
+                value={cssRule}
+                copyLabel={t('output.copy')}
+                copiedLabel={t('output.copied')}
+              />
+              <OutputPanel
+                label={t('output.tailwind')}
+                value={tailwindValue}
+                copyLabel={t('output.copy')}
+                copiedLabel={t('output.copied')}
+              />
             </div>
           </Card>
         </div>
@@ -330,21 +340,6 @@ const SelectField: React.FC<{
       ))}
     </select>
   </label>
-)
-
-const OutputBlock: React.FC<{
-  label: string
-  value: string
-}> = ({ label, value }) => (
-  <div>
-    <div className="mb-1.5 flex items-center justify-between">
-      <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
-      <CopyButton variant="button" buttonVariant="ghost" size="sm" value={value} />
-    </div>
-    <pre className="overflow-x-auto rounded-md border border-gray-200 bg-gray-50 p-3 text-xs text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
-      <code>{value}</code>
-    </pre>
-  </div>
 )
 
 export default BoxShadowGen

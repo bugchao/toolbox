@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
 import { useTranslation } from 'react-i18next';
-import { Globe, Loader2, AlertCircle, CheckCircle, ShieldCheck, ShieldAlert, Info } from 'lucide-react';
+import { Globe, AlertCircle, CheckCircle, ShieldCheck, ShieldAlert, Info } from 'lucide-react';
 
 interface HeaderItem {
   name: string;
@@ -137,7 +137,7 @@ export default function HttpHeaders() {
               disabled={loading}
             />
             <Button onClick={handleQuery} disabled={loading || !url.trim()} className="min-w-[100px]">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />检测中</> : '检测'}
+              {loading ? <><Spinner size="sm" className="mr-2" />检测中</> : '检测'}
             </Button>
           </div>
 

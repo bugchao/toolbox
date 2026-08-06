@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Download, User, Briefcase, GraduationCap, Award, Book, Phone, Mail, Globe, MapPin, Link2, Plus, Trash2, Eye, FileText, Settings } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import { CopyButton, PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, Spinner } from '@toolbox/ui-kit'
 
 interface Experience {
   id: string
@@ -455,7 +455,7 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             >
               {exporting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <Spinner size="sm" className="text-white mr-2" />
                   导出中...
                 </>
               ) : (

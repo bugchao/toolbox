@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Loader, CheckCircle, AlertCircle } from 'lucide-react'
-import { Card, Button } from '@toolbox/ui-kit'
+import { CheckCircle, AlertCircle } from 'lucide-react'
+import { Card, Button, Spinner } from '@toolbox/ui-kit'
 import type { AIProvider, ResponseStatus } from '../types'
 
 export interface ResponsePanelProps {
@@ -36,7 +36,7 @@ const ResponsePanel: React.FC<ResponsePanelProps> = ({
   const getStatusIcon = () => {
     switch (status) {
       case 'loading':
-        return <Loader className="w-5 h-5 animate-spin" data-testid="loading-icon" />
+        return <Spinner size="md" data-testid="loading-icon" />
       case 'success':
         return <CheckCircle className="w-5 h-5 text-green-500" data-testid="success-icon" />
       case 'error':

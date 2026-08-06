@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
 import { useTranslation } from 'react-i18next';
-import { FileText, CheckCircle, Loader2, AlertCircle, Shield, Mail, Key } from 'lucide-react';
+import { FileText, CheckCircle, AlertCircle, Shield, Mail, Key } from 'lucide-react';
 
 interface TxtRecord {
   value: string;
@@ -122,7 +122,7 @@ export default function DomainTxt() {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     查询中
                   </>
                 ) : (

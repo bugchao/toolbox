@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, NoticeCard, PageHero, ParticlesBackground, Spinner } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import CodeMirror from '@uiw/react-codemirror'
 import { EditorView } from '@codemirror/view'
@@ -10,7 +10,6 @@ import {
   Download,
   GitBranch,
   History,
-  Loader2,
   Maximize2,
   Minimize2,
   Play,
@@ -418,7 +417,7 @@ const Mermaid: React.FC = () => {
                 </span>
                 {rendering && (
                   <span className="inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-400">
-                    <Loader2 className="h-3 w-3 animate-spin" />
+                    <Spinner size="sm" />
                     {t('editor.rendering')}
                   </span>
                 )}

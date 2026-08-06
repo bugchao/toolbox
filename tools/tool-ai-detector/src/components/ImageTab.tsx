@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Upload, X } from 'lucide-react'
+import { useFileDropzone } from '@toolbox/ui-kit'
 import { analyzeImage, type ImageAnalysis } from '../lib/imageFeatures'
 import { aggregate, type ScoreResult } from '../lib/score'
 import ResultPanel from './ResultPanel'
@@ -69,14 +70,9 @@ const ImageTab: React.FC = () => {
     [t],
   )
 
-  const onDrop = useCallback(
-    (e: React.DragEvent<HTMLDivElement>) => {
-      e.preventDefault()
-      const f = e.dataTransfer.files?.[0]
-      if (f) accept(f)
-    },
-    [accept],
-  )
+  const { dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => accept(files[0] ?? null),
+  })
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
@@ -109,9 +105,7 @@ const ImageTab: React.FC = () => {
           </div>
         ) : (
           <label
-            htmlFor="ai-detector-image-input"
-            onDrop={onDrop}
-            onDragOver={(e) => e.preventDefault()}
+            {...dropzoneProps}
             className="flex h-72 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-indigo-300 bg-indigo-50/50 text-center transition-colors hover:border-indigo-400 hover:bg-indigo-50 dark:border-indigo-700 dark:bg-indigo-900/20 dark:hover:bg-indigo-900/30"
           >
             <Upload className="mb-2 h-8 w-8 text-indigo-500" />
@@ -121,13 +115,7 @@ const ImageTab: React.FC = () => {
             <span className="mt-1 text-xs text-indigo-500/80 dark:text-indigo-300/80">
               {t('image.dragHint')}
             </span>
-            <input
-              id="ai-detector-image-input"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => accept(e.target.files?.[0] ?? null)}
-            />
+            <input {...inputProps} accept="image/*" />
           </label>
         )}
         {error && (

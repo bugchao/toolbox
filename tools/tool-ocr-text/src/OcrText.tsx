@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import { CopyButton, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, ParticlesBackground, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { Upload, Loader2, X, Languages } from 'lucide-react'
+import { Upload, X, Languages } from 'lucide-react'
 import { createWorker, PSM } from 'tesseract.js'
 
 interface RecognitionResult {
@@ -20,7 +20,6 @@ type LanguageOption = 'auto' | 'chi_sim' | 'eng' | 'chi_sim+eng'
 const OcrText: React.FC = () => {
   const { t } = useTranslation('toolOcrText')
   const [results, setResults] = useState<RecognitionResult[]>([])
-  const [isDragging, setIsDragging] = useState(false)
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>('auto')
 
   const languageOptions: { value: LanguageOption; label: string }[] = [
@@ -103,12 +102,8 @@ const OcrText: React.FC = () => {
   )
 
   const handleFiles = useCallback(
-    (files: FileList | null) => {
-      if (!files) return
-
-      const imageFiles = Array.from(files).filter((file) =>
-        file.type.startsWith('image/')
-      )
+    (files: File[]) => {
+      const imageFiles = files.filter((file) => file.type.startsWith('image/'))
 
       if (imageFiles.length === 0) {
         alert(t('error.invalidFile'))
@@ -120,32 +115,7 @@ const OcrText: React.FC = () => {
     [processImage, t]
   )
 
-  const handleDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault()
-      setIsDragging(false)
-      handleFiles(e.dataTransfer.files)
-    },
-    [handleFiles]
-  )
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }, [])
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }, [])
-
-  const handleFileInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      handleFiles(e.target.files)
-      e.target.value = ''
-    },
-    [handleFiles]
-  )
+  const { isDragActive, dropzoneProps, inputProps } = useFileDropzone({ onFiles: handleFiles })
 
   const removeResult = useCallback((id: string) => {
     setResults((prev) => {
@@ -189,26 +159,17 @@ const OcrText: React.FC = () => {
         {/* Upload Area */}
         <div className="max-w-4xl mx-auto px-4">
           <div
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
+            {...dropzoneProps}
             className={`
               relative border-2 border-dashed rounded-lg p-12 text-center transition-colors
               ${
-                isDragging
+                isDragActive
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
                   : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800'
               }
             `}
           >
-            <input
-              type="file"
-              id="file-input"
-              multiple
-              accept="image/*"
-              onChange={handleFileInput}
-              className="hidden"
-            />
+            <input {...inputProps} id="file-input" multiple accept="image/*" />
             <label
               htmlFor="file-input"
               className="cursor-pointer flex flex-col items-center gap-4"
@@ -260,7 +221,7 @@ const OcrText: React.FC = () => {
                   <div className="flex flex-col">
                     {result.status === 'processing' && (
                       <div className="flex-1 flex flex-col items-center justify-center gap-3">
-                        <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+                        <Spinner size="lg" className="text-blue-600" />
                         <div className="w-full max-w-xs">
                           <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                             <div

@@ -3,6 +3,7 @@ import React from 'react'
 export interface SpinnerProps {
   size?: 'sm' | 'md' | 'lg'
   className?: string
+  'data-testid'?: string
 }
 
 const SIZE_CLASSES: Record<NonNullable<SpinnerProps['size']>, string> = {
@@ -16,11 +17,12 @@ const SIZE_CLASSES: Record<NonNullable<SpinnerProps['size']>, string> = {
  * `border-2 border-t-transparent rounded-full animate-spin` 手写样式。
  * 颜色继承自 currentColor，放进带 text-* 的容器即可换色。
  */
-export default function Spinner({ size = 'md', className = '' }: SpinnerProps) {
+export default function Spinner({ size = 'md', className = '', 'data-testid': testId }: SpinnerProps) {
   return (
     <span
       role="status"
       aria-label="loading"
+      data-testid={testId}
       className={`inline-block shrink-0 rounded-full border-current border-t-transparent animate-spin ${SIZE_CLASSES[size]} ${className}`}
     />
   )

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { useToolStorage } from '@toolbox/storage'
-import { Button, Card, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Button, Card, PageHero, ParticlesBackground, useFileDropzone } from '@toolbox/ui-kit'
 import {
   ArrowDown,
   ArrowUp,
@@ -38,7 +38,6 @@ const ImagePipelineLab: React.FC = () => {
   const [saveName, setSaveName] = useState('')
   const [error, setError] = useState('')
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const importInputRef = useRef<HTMLInputElement>(null)
 
   const steps = history.present
@@ -63,6 +62,13 @@ const ImagePipelineLab: React.FC = () => {
     },
     [t],
   )
+
+  const { openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => {
+      const file = files[0]
+      if (file) loadFile(file)
+    },
+  })
 
   useEffect(() => {
     if (image && canvasRef.current) applyPipeline(image, steps, canvasRef.current)
@@ -136,13 +142,8 @@ const ImagePipelineLab: React.FC = () => {
             <div className="space-y-4">
               <div
                 className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-gray-300 p-6 text-gray-500 transition-colors hover:border-indigo-400 dark:border-gray-600 dark:text-gray-400"
-                onClick={() => fileInputRef.current?.click()}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault()
-                  const file = e.dataTransfer.files[0]
-                  if (file) loadFile(file)
-                }}
+                {...dropzoneProps}
+                onClick={openPicker}
               >
                 <ImagePlus className="h-8 w-8" />
                 <span>{t('upload.hint')}</span>
@@ -152,17 +153,7 @@ const ImagePipelineLab: React.FC = () => {
                   </span>
                 )}
               </div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files?.[0]
-                  if (file) loadFile(file)
-                  e.target.value = ''
-                }}
-              />
+              <input {...inputProps} accept="image/*" />
               {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
               {image ? (
                 <canvas ref={canvasRef} className="h-auto max-w-full rounded-lg border border-gray-200 dark:border-gray-700" />

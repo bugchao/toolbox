@@ -7,12 +7,11 @@ import {
   X,
   ArrowUp,
   ArrowDown,
-  Loader2,
   FileIcon,
   Info,
   Package,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import JSZip from 'jszip'
 
@@ -286,7 +285,7 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
               disabled={busy || numParts === 0}
               className="px-4 py-2 text-sm font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-300 transition-colors flex items-center gap-2"
             >
-              {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <Package className="w-4 h-4" />}
+              {busy ? <Spinner size="sm" /> : <Package className="w-4 h-4" />}
               {t('split.downloadZip')}
             </button>
             <button
@@ -442,7 +441,7 @@ const MergePanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
               disabled={busy || files.length === 0 || !outputName.trim()}
               className="px-5 py-2.5 text-sm font-medium bg-emerald-600 text-white rounded-md hover:bg-emerald-700 disabled:bg-gray-300 transition-colors flex items-center gap-2"
             >
-              {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <Combine className="w-4 h-4" />}
+              {busy ? <Spinner size="sm" /> : <Combine className="w-4 h-4" />}
               {t('merge.run')}
             </button>
           </div>

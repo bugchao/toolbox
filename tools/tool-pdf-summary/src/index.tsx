@@ -1,7 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FileSearch, Loader2, Trash2, Upload, Zap } from 'lucide-react'
-import { CopyButton, PageHero } from '@toolbox/ui-kit'
+import { FileSearch, Trash2, Upload, Zap } from 'lucide-react'
+import { CopyButton, PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
@@ -85,7 +85,6 @@ export default function PdfSummary() {
   const [keywords, setKeywords] = useState<string[]>([])
   const [busy, setBusy] = useState<'extract' | 'summarize' | null>(null)
   const [error, setError] = useState('')
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const onPick = (f: File | null) => {
     setError('')
@@ -108,10 +107,9 @@ export default function PdfSummary() {
     setFile(f)
   }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    onPick(e.dataTransfer.files?.[0] ?? null)
-  }
+  const { openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => onPick(files[0] ?? null),
+  })
 
   const run = useCallback(async () => {
     if (!file) return
@@ -152,8 +150,7 @@ export default function PdfSummary() {
 
       <div className="container mx-auto max-w-4xl px-4 pb-12 space-y-6">
         <div
-          onDrop={handleDrop}
-          onDragOver={(e) => e.preventDefault()}
+          {...dropzoneProps}
           className="rounded-xl border-2 border-dashed border-indigo-300 bg-white p-8 text-center transition hover:border-indigo-500 dark:border-indigo-700 dark:bg-gray-800 dark:hover:border-indigo-400"
         >
           <Upload className="mx-auto mb-3 h-10 w-10 text-indigo-500" />
@@ -161,7 +158,7 @@ export default function PdfSummary() {
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('upload.limit')}</p>
           <div className="mt-4 flex justify-center gap-2">
             <button
-              onClick={() => inputRef.current?.click()}
+              onClick={openPicker}
               className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
             >
               {file ? t('upload.replace') : t('upload.select')}
@@ -182,13 +179,7 @@ export default function PdfSummary() {
               <span>{(file.size / 1024 / 1024).toFixed(2)} MB</span>
             </div>
           )}
-          <input
-            ref={inputRef}
-            type="file"
-            accept="application/pdf,.pdf"
-            className="hidden"
-            onChange={(e) => onPick(e.target.files?.[0] ?? null)}
-          />
+          <input {...inputProps} accept="application/pdf,.pdf" />
         </div>
 
         {error && (
@@ -222,11 +213,11 @@ export default function PdfSummary() {
             >
               {busy === 'extract' ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> {t('actions.extracting')}
+                  <Spinner size="sm" /> {t('actions.extracting')}
                 </>
               ) : busy === 'summarize' ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> {t('actions.summarizing')}
+                  <Spinner size="sm" /> {t('actions.summarizing')}
                 </>
               ) : (
                 <>

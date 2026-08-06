@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, Switch } from '@toolbox/ui-kit'
+import { Button, Card, CopyButton, NoticeCard, PageHero, ParticlesBackground, Switch, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { Download, ImagePlus, RefreshCw } from 'lucide-react'
 import JSZip from 'jszip'
@@ -59,7 +59,6 @@ function downloadBlob(blob: Blob, filename: string): void {
 
 const FaviconGenerator: React.FC = () => {
   const { t } = useTranslation('toolFaviconGenerator')
-  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const [image, setImage] = useState<LoadedImage | null>(null)
   const [transparent, setTransparent] = useState(true)
@@ -78,9 +77,9 @@ const FaviconGenerator: React.FC = () => {
   const padding = maskable && image?.isSvg ? 0.1 : 0
 
   const handleFiles = useCallback(
-    async (files: FileList | null) => {
-      if (!files || files.length === 0) return
+    async (files: File[]) => {
       const file = files[0]
+      if (!file) return
       setError(null)
       try {
         const loaded = await readFileAsImage(file)
@@ -94,16 +93,9 @@ const FaviconGenerator: React.FC = () => {
     [t],
   )
 
-  const onPickClick = () => inputRef.current?.click()
-
-  const onDrop: React.DragEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault()
-    void handleFiles(e.dataTransfer.files)
-  }
-
-  const onDragOver: React.DragEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault()
-  }
+  const { openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => void handleFiles(files),
+  })
 
   const buildAllPngs = useCallback(
     async (img: LoadedImage) => {
@@ -162,9 +154,8 @@ const FaviconGenerator: React.FC = () => {
               {t('upload.heading')}
             </h2>
             <div
-              onDrop={onDrop}
-              onDragOver={onDragOver}
-              onClick={onPickClick}
+              {...dropzoneProps}
+              onClick={openPicker}
               className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 px-6 py-10 text-center transition-colors hover:border-sky-400 hover:bg-sky-50/40 dark:hover:bg-sky-950/20"
             >
               <ImagePlus className="h-8 w-8 text-sky-500" />
@@ -181,11 +172,8 @@ const FaviconGenerator: React.FC = () => {
                 </div>
               ) : null}
               <input
-                ref={inputRef}
-                type="file"
+                {...inputProps}
                 accept="image/png,image/jpeg,image/webp,image/svg+xml"
-                className="hidden"
-                onChange={(e) => void handleFiles(e.target.files)}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>

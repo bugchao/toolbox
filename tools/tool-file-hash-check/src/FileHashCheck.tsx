@@ -1,16 +1,15 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
   FileCheck2,
   Upload,
   X,
-  Loader2,
   ShieldCheck,
   ShieldX,
   Trash2,
   Download,
   Info,
 } from 'lucide-react'
-import { CopyButton, PageHero } from '@toolbox/ui-kit'
+import { CopyButton, PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -37,8 +36,6 @@ const FileHashCheck: React.FC = () => {
 
   const [entries, setEntries] = useState<FileEntry[]>([])
   const [expected, setExpected] = useState('')
-  const [dragOver, setDragOver] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const expectedNormalized = useMemo(() => expected.trim().toLowerCase(), [expected])
   const expectedAlgo = useMemo(() => detectAlgo(expectedNormalized), [expectedNormalized])
@@ -74,18 +71,9 @@ const FileHashCheck: React.FC = () => {
     }
   }, [])
 
-  const onSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files ?? [])
-    if (files.length > 0) void processFiles(files)
-    if (fileInputRef.current) fileInputRef.current.value = ''
-  }
-
-  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setDragOver(false)
-    const files = Array.from(e.dataTransfer.files)
-    if (files.length > 0) void processFiles(files)
-  }
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => void processFiles(files),
+  })
 
   const removeEntry = (id: string) => {
     setEntries((prev) => prev.filter((e) => e.id !== id))
@@ -121,14 +109,9 @@ const FileHashCheck: React.FC = () => {
 
       {/* Drop zone */}
       <section
-        onDragOver={(e) => {
-          e.preventDefault()
-          setDragOver(true)
-        }}
-        onDragLeave={() => setDragOver(false)}
-        onDrop={onDrop}
+        {...dropzoneProps}
         className={`rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
-          dragOver
+          isDragActive
             ? 'border-indigo-500 bg-indigo-50'
             : 'border-gray-300 bg-white hover:border-gray-400'
         }`}
@@ -137,18 +120,12 @@ const FileHashCheck: React.FC = () => {
         <p className="text-sm text-gray-700 mb-2">{t('drop.hint')}</p>
         <button
           type="button"
-          onClick={() => fileInputRef.current?.click()}
+          onClick={openPicker}
           className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
         >
           {t('drop.choose')}
         </button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          onChange={onSelectFiles}
-          className="hidden"
-        />
+        <input {...inputProps} multiple />
       </section>
 
       {/* Expected hash compare */}
@@ -265,7 +242,7 @@ const FileRow: React.FC<FileRowProps> = ({
         </span>
         <span className="text-xs text-gray-400 shrink-0">{formatSize(entry.size)}</span>
         {entry.status === 'hashing' && (
-          <Loader2 className="w-4 h-4 text-gray-400 animate-spin shrink-0" />
+          <Spinner size="sm" className="text-gray-400 shrink-0" />
         )}
         {matchedAlgo && (
           <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-emerald-100 text-emerald-700 border border-emerald-300">

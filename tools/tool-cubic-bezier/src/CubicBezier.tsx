@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { Card, CopyButton, NoticeCard, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
+import { Card, NoticeCard, OutputPanel, PageHero, ParticlesBackground } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { Spline } from 'lucide-react'
 import {
@@ -139,22 +139,12 @@ const CubicBezier: React.FC = () => {
             </div>
 
             <div className="mt-4">
-              <div className="mb-1.5 flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {t('output.code')}
-                </span>
-                <CopyButton
-                  variant="button"
-                  buttonVariant="ghost"
-                  size="sm"
-                  value={cssValue}
-                  label={t('output.copy')}
-                  copiedLabel={t('output.copied')}
-                />
-              </div>
-              <pre className="overflow-x-auto rounded-md border border-gray-200 bg-gray-50 p-3 text-xs text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
-                <code>{cssValue}</code>
-              </pre>
+              <OutputPanel
+                label={t('output.code')}
+                value={cssValue}
+                copyLabel={t('output.copy')}
+                copiedLabel={t('output.copied')}
+              />
             </div>
 
             <div className="mt-4 border-t border-gray-200 pt-3 dark:border-gray-700">

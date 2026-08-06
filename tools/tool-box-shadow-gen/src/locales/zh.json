@@ -47,6 +47,8 @@
   },
   "output": {
     "css": "CSS 规则",
-    "tailwind": "Tailwind 任意值"
+    "tailwind": "Tailwind 任意值",
+    "copy": "复制",
+    "copied": "已复制"
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { Activity, Plus, Trash2, RefreshCw } from 'lucide-react'
+import { Activity, Plus, Trash2 } from 'lucide-react'
+import { Spinner } from '@toolbox/ui-kit'
 
 interface LatencyResult {
   target: string
@@ -109,7 +110,7 @@ export function ServerLatency() {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <button onClick={runTest} disabled={loading || !targets.length}
           className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white rounded-lg font-medium transition-colors">
-          {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Activity className="w-4 h-4" />}
+          {loading ? <Spinner size="sm" /> : <Activity className="w-4 h-4" />}
           {loading ? '测试中...' : '开始测试'}
         </button>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Type, Image as ImageIcon, X, Plus, Trash2, Settings } from 'lucide-react';
+import { Spinner } from '@toolbox/ui-kit';
 
 interface WatermarkImage {
   id: string;
@@ -570,7 +571,7 @@ const ImageWatermark: React.FC = () => {
                 <img src={image.processedUrl || image.previewUrl} alt={image.originalFile.name} className="w-full h-full object-contain" />
                 {image.status === 'processing' && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white" />
+                    <Spinner size="lg" className="!h-12 !w-12 text-white" />
                   </div>
                 )}
                 <button onClick={() => removeImage(image.id)} className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { Shield, CheckCircle, XCircle, AlertTriangle } from 'lucide-react'
+import { Spinner } from '@toolbox/ui-kit'
 
 interface CheckItem {
   name: string
@@ -96,7 +97,7 @@ export function SecurityDomainScore() {
       {loading && (
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 text-center">
           <div className="inline-flex items-center gap-3 text-gray-500">
-            <div className="w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+            <Spinner size="md" className="text-indigo-500" />
             正在检测安全配置...
           </div>
         </div>

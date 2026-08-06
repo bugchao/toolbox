@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { PageHero, Button, Input, Card } from '@toolbox/ui-kit';
-import { Wifi, Loader2, AlertCircle, CheckCircle, XCircle, Plus, X } from 'lucide-react';
+import { PageHero, Button, Input, Card, Spinner } from '@toolbox/ui-kit';
+import { Wifi, AlertCircle, CheckCircle, XCircle, Plus, X } from 'lucide-react';
 
 interface PortResult {
   port: number;
@@ -120,7 +120,7 @@ export default function TcpPort() {
                 disabled={loading}
               />
               <Button onClick={handleQuery} disabled={loading || !host.trim()} className="min-w-[100px]">
-                {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />检测中</> : '检测'}
+                {loading ? <><Spinner size="sm" className="mr-2" />检测中</> : '检测'}
               </Button>
             </div>
 

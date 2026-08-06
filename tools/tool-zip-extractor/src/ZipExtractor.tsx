@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import {
   Upload,
   FolderArchive,
@@ -12,9 +12,8 @@ import {
   ChevronRight,
   ChevronDown,
   Eye,
-  Loader2,
 } from 'lucide-react'
-import { PageHero } from '@toolbox/ui-kit'
+import { PageHero, Spinner, useFileDropzone } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import JSZip from 'jszip'
 
@@ -60,7 +59,6 @@ function fmtSize(b: number): string {
 
 const ZipExtractor: React.FC = () => {
   const { t } = useTranslation(NAMESPACE)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [zipName, setZipName] = useState('')
   const [tree, setTree] = useState<DirNode | null>(null)
@@ -73,7 +71,6 @@ const ZipExtractor: React.FC = () => {
     | { kind: 'image'; name: string; dataUrl: string }
     | { kind: 'binary'; name: string; size: number }
   >(null)
-  const [dragOver, setDragOver] = useState(false)
 
   const totalStats = useMemo(() => {
     if (!tree) return null
@@ -174,17 +171,12 @@ const ZipExtractor: React.FC = () => {
     }
   }, [zipName, t])
 
-  const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0]
-    if (f) void loadZip(f)
-    if (fileInputRef.current) fileInputRef.current.value = ''
-  }
-  const onDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setDragOver(false)
-    const f = e.dataTransfer.files?.[0]
-    if (f) void loadZip(f)
-  }
+  const { isDragActive, openPicker, dropzoneProps, inputProps } = useFileDropzone({
+    onFiles: (files) => {
+      const f = files[0]
+      if (f) void loadZip(f)
+    },
+  })
 
   const toggleDir = (path: string) => {
     setExpandedDirs((prev) => {
@@ -240,14 +232,9 @@ const ZipExtractor: React.FC = () => {
 
       {!tree && !loading && (
         <section
-          onDragOver={(e) => {
-            e.preventDefault()
-            setDragOver(true)
-          }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={onDrop}
+          {...dropzoneProps}
           className={`rounded-2xl border-2 border-dashed p-12 text-center transition-colors ${
-            dragOver
+            isDragActive
               ? 'border-indigo-500 bg-indigo-50'
               : 'border-gray-300 bg-white hover:border-gray-400'
           }`}
@@ -257,25 +244,19 @@ const ZipExtractor: React.FC = () => {
           <p className="text-xs text-gray-400 mb-3">{t('drop.tip')}</p>
           <button
             type="button"
-            onClick={() => fileInputRef.current?.click()}
+            onClick={openPicker}
             className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
           >
             <Upload className="w-4 h-4 inline -mt-0.5 mr-1.5" />
             {t('drop.choose')}
           </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".zip,application/zip,application/x-zip-compressed"
-            onChange={onSelectFile}
-            className="hidden"
-          />
+          <input {...inputProps} accept=".zip,application/zip,application/x-zip-compressed" />
         </section>
       )}
 
       {loading && (
         <section className="rounded-lg border border-gray-200 bg-white p-12 text-center">
-          <Loader2 className="w-8 h-8 text-indigo-500 mx-auto animate-spin mb-2" />
+          <Spinner size="lg" className="text-indigo-500 mx-auto mb-2" />
           <p className="text-sm text-gray-600">{t('parsing', { name: zipName })}</p>
         </section>
       )}
