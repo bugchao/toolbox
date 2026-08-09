@@ -1,4 +1,23 @@
 {
-  "title": "DnsConfig",
-  "description": "TODO: Add an English description"
+  "title": "DNS Config Assistant",
+  "description": "Common public DNS list, multi-DNS latency test, copyable config scripts for Mac/Linux/Windows",
+  "providers_title": "Common Public DNS",
+  "test_latency": "Test Latency",
+  "testing": "Testing…",
+  "latency_avg": "Avg Latency",
+  "latency_min": "Min",
+  "latency_max": "Max",
+  "latency_failed": "Test failed",
+  "no_doh": "No DoH endpoint, cannot test",
+  "config_title": "Config Script",
+  "select_provider_hint": "Select a DNS provider above, or enter a custom IP",
+  "custom_ip_placeholder": "Custom DNS IP(s), comma-separated",
+  "platform_mac": "macOS",
+  "platform_linux": "Linux",
+  "platform_windows": "Windows",
+  "linux_variant_nmcli": "nmcli",
+  "linux_variant_netplan": "netplan",
+  "linux_variant_resolv_conf": "/etc/resolv.conf",
+  "copy": "Copy",
+  "copied": "Copied"
 }
