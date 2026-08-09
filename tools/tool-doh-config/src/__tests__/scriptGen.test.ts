@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { genFirefoxConfig, genChromeEdgeConfig, genWindowsConfig, genLinuxConfig } from '../lib/scriptGen'
+import { genFirefoxConfig, genChromeEdgeConfig, genMacConfig, genWindowsConfig, genLinuxConfig } from '../lib/scriptGen'
 
 const URL = 'https://cloudflare-dns.com/dns-query'
 
@@ -14,6 +14,29 @@ describe('genFirefoxConfig', () => {
 describe('genChromeEdgeConfig', () => {
   it('includes the URL for the custom secure DNS field', () => {
     expect(genChromeEdgeConfig(URL)).toContain(URL)
+  })
+})
+
+describe('genMacConfig', () => {
+  it('produces a valid DNSSettings configuration profile for the given URL', () => {
+    const script = genMacConfig(URL, 'uuid-payload', 'uuid-profile')
+    expect(script).toContain('<key>DNSProtocol</key>')
+    expect(script).toContain('<string>HTTPS</string>')
+    expect(script).toContain('<key>ServerURL</key>')
+    expect(script).toContain(`<string>${URL}</string>`)
+    expect(script).toContain('com.apple.dnsSettings.managed')
+  })
+
+  it('uses distinct UUIDs for the payload and the enclosing profile', () => {
+    const script = genMacConfig(URL, 'uuid-payload', 'uuid-profile')
+    expect(script).toContain('uuid-payload')
+    expect(script).toContain('uuid-profile')
+  })
+
+  it('generates fresh UUIDs by default so two profiles never collide', () => {
+    const a = genMacConfig(URL)
+    const b = genMacConfig(URL)
+    expect(a).not.toBe(b)
   })
 })
 

@@ -6,7 +6,7 @@ export interface DohProvider {
   needsJsonAccept: boolean
 }
 
-export type ConfigTarget = 'firefox' | 'chrome-edge' | 'windows' | 'linux'
+export type ConfigTarget = 'firefox' | 'chrome-edge' | 'macos' | 'windows' | 'linux'
 
 export interface LatencyResult {
   id: string
