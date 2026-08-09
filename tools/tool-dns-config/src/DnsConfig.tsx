@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { PageHero, ParticlesBackground, CopyButton, Spinner } from '@toolbox/ui-kit'
+import { PageHero, ParticlesBackground, CopyButton, Spinner, StatusBadge } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { Server } from 'lucide-react'
 import { DNS_PROVIDERS } from './lib/providers'
@@ -123,8 +123,8 @@ const DnsConfig: React.FC = () => {
                         <td className="py-2 text-right font-mono text-gray-600 dark:text-gray-400">{r.max} ms</td>
                       </>
                     ) : (
-                      <td colSpan={3} className="py-2 text-right text-gray-400 dark:text-gray-500">
-                        {t('latency_failed')}
+                      <td colSpan={3} className="py-2 text-right">
+                        <StatusBadge level="danger" label={t('latency_failed')} />
                       </td>
                     )}
                   </tr>
