@@ -3,6 +3,9 @@ export interface DohProvider {
   name: string
   url: string
   description: string
+  /** 'json': Google/Cloudflare 风格 JSON API；'wire': RFC 8484 标准二进制协议 */
+  protocol: 'json' | 'wire'
+  /** 仅 protocol==='json' 时生效 */
   needsJsonAccept: boolean
 }
 
