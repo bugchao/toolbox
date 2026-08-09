@@ -2,7 +2,7 @@
 
 ## MODIFIED Requirements
 
-### Requirement: DoH 连通性/延迟测试与实际查询
+### Requirement: DoH 连通性/延迟测试
 
 工具 SHALL 支持对列表中任意勾选的多个 DoH 提供商（及用户输入的自定义 endpoint）做连通性、延迟与实际 DNS 查询测试：用户可指定查询域名（默认 `google.com`）与记录类型（A/AAAA/CNAME/MX/TXT/NS，默认 A），工具通过浏览器 `fetch` 对每个勾选的 endpoint 发起真实 DoH 查询，计算平均/最小/最大响应时间并解析出查询结果（记录值列表），按延迟从低到高排序展示；请求失败、超时或解析出的响应中不含有效 `Answer` 记录的 endpoint SHALL 标记为不可用而非影响其余结果。
 
