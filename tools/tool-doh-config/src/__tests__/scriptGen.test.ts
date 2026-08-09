@@ -38,6 +38,19 @@ describe('genMacConfig', () => {
     const b = genMacConfig(URL)
     expect(a).not.toBe(b)
   })
+
+  it('applies system-wide scope, not just the current user', () => {
+    const script = genMacConfig(URL)
+    expect(script).toContain('<key>PayloadScope</key>')
+    expect(script).toContain('<string>System</string>')
+  })
+
+  it('excludes captive.apple.com from on-demand DoH so captive portal login pages still work', () => {
+    const script = genMacConfig(URL)
+    expect(script).toContain('<key>OnDemandRules</key>')
+    expect(script).toContain('NeverConnect')
+    expect(script).toContain('captive.apple.com')
+  })
 })
 
 describe('genWindowsConfig', () => {

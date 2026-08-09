@@ -13,6 +13,8 @@ export function genChromeEdgeConfig(url: string): string {
   ].join('\n')
 }
 
+// 参考真实的已签名 NextDNS .mobileconfig 结构（PayloadScope=System 才是系统级生效；
+// OnDemandRules 排除 captive.apple.com 是为了不破坏 Wi-Fi 强制门户登录页的检测/加载）。
 export function genMacConfig(url: string, payloadUuid: string = crypto.randomUUID(), profileUuid: string = crypto.randomUUID()): string {
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -29,6 +31,28 @@ export function genMacConfig(url: string, payloadUuid: string = crypto.randomUUI
     '\t\t\t\t<key>ServerURL</key>',
     `\t\t\t\t<string>${url}</string>`,
     '\t\t\t</dict>',
+    '\t\t\t<key>OnDemandRules</key>',
+    '\t\t\t<array>',
+    '\t\t\t\t<dict>',
+    '\t\t\t\t\t<key>Action</key>',
+    '\t\t\t\t\t<string>EvaluateConnection</string>',
+    '\t\t\t\t\t<key>ActionParameters</key>',
+    '\t\t\t\t\t<array>',
+    '\t\t\t\t\t\t<dict>',
+    '\t\t\t\t\t\t\t<key>DomainAction</key>',
+    '\t\t\t\t\t\t\t<string>NeverConnect</string>',
+    '\t\t\t\t\t\t\t<key>Domains</key>',
+    '\t\t\t\t\t\t\t<array>',
+    '\t\t\t\t\t\t\t\t<string>captive.apple.com</string>',
+    '\t\t\t\t\t\t\t</array>',
+    '\t\t\t\t\t\t</dict>',
+    '\t\t\t\t\t</array>',
+    '\t\t\t\t</dict>',
+    '\t\t\t\t<dict>',
+    '\t\t\t\t\t<key>Action</key>',
+    '\t\t\t\t\t<string>Connect</string>',
+    '\t\t\t\t</dict>',
+    '\t\t\t</array>',
     '\t\t\t<key>PayloadDescription</key>',
     '\t\t\t<string>Configures DNS over HTTPS</string>',
     '\t\t\t<key>PayloadDisplayName</key>',
@@ -43,10 +67,14 @@ export function genMacConfig(url: string, payloadUuid: string = crypto.randomUUI
     '\t\t\t<integer>1</integer>',
     '\t\t</dict>',
     '\t</array>',
+    '\t<key>PayloadDescription</key>',
+    '\t<string>Configures DNS over HTTPS</string>',
     '\t<key>PayloadDisplayName</key>',
     '\t<string>DNS over HTTPS</string>',
     '\t<key>PayloadIdentifier</key>',
     `\t<string>com.toolbox.dnsoverhttps.${profileUuid}</string>`,
+    '\t<key>PayloadScope</key>',
+    '\t<string>System</string>',
     '\t<key>PayloadType</key>',
     '\t<string>Configuration</string>',
     '\t<key>PayloadUUID</key>',
