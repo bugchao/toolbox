@@ -1,4 +1,20 @@
 {
-  "title": "DohConfig",
-  "description": "TODO: Add an English description"
+  "title": "DoH Config Assistant",
+  "description": "Common DoH providers, connectivity/latency test, copyable config snippets for Firefox/Chrome-Edge/Windows/Linux",
+  "providers_title": "Common DoH Providers",
+  "test_latency": "Test Latency",
+  "testing": "Testing…",
+  "latency_avg": "Avg Latency",
+  "latency_min": "Min",
+  "latency_max": "Max",
+  "latency_failed": "Test failed",
+  "config_title": "Config Snippet",
+  "select_provider_hint": "Select a DoH provider above, or enter a custom endpoint URL",
+  "custom_url_placeholder": "Custom DoH endpoint URL",
+  "target_firefox": "Firefox",
+  "target_chrome_edge": "Chrome / Edge",
+  "target_windows": "Windows",
+  "target_linux": "Linux",
+  "copy": "Copy",
+  "copied": "Copied"
 }

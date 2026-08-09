@@ -1,4 +1,20 @@
 {
-  "title": "DohConfig",
-  "description": "TODO: 补充中文描述"
+  "title": "DoH 配置助手",
+  "description": "常用 DoH 提供商列表、连通性/延迟测试，Firefox/Chrome-Edge/Windows/Linux 一键复制配置片段",
+  "providers_title": "常用 DoH 提供商",
+  "test_latency": "测试延迟",
+  "testing": "测试中…",
+  "latency_avg": "平均延迟",
+  "latency_min": "最小",
+  "latency_max": "最大",
+  "latency_failed": "测试失败",
+  "config_title": "配置片段",
+  "select_provider_hint": "先在上方勾选一个 DoH 提供商，或直接输入自定义 endpoint URL",
+  "custom_url_placeholder": "自定义 DoH endpoint URL",
+  "target_firefox": "Firefox",
+  "target_chrome_edge": "Chrome / Edge",
+  "target_windows": "Windows",
+  "target_linux": "Linux",
+  "copy": "复制",
+  "copied": "已复制"
 }
