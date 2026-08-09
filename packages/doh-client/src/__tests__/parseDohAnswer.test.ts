@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseDohAnswer } from '../lib/parseDoh'
+import { parseDohAnswer } from '../index'
 
 describe('parseDohAnswer', () => {
   it('extracts data from a normal A-record response', () => {
