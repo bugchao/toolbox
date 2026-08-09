@@ -1,4 +1,20 @@
 {
-  "title": "Calendar",
-  "description": "TODO: 补充中文描述"
+  "title": "万年历",
+  "description": "公历/农历双显、24 节气与传统节日标注、月视图切换",
+  "prev_month": "上一月",
+  "next_month": "下一月",
+  "today": "今天",
+  "month_title": "{{year}}年{{month}}月",
+  "weekday_sun": "日",
+  "weekday_mon": "一",
+  "weekday_tue": "二",
+  "weekday_wed": "三",
+  "weekday_thu": "四",
+  "weekday_fri": "五",
+  "weekday_sat": "六",
+  "detail_title": "日期详情",
+  "detail_solar": "公历",
+  "detail_lunar": "农历",
+  "detail_solar_term": "节气",
+  "detail_festival": "节日"
 }
