@@ -1,0 +1,20 @@
+{
+  "title": "Perpetual Calendar",
+  "description": "Gregorian/lunar calendar with solar terms and traditional festivals, month view",
+  "prev_month": "Previous month",
+  "next_month": "Next month",
+  "today": "Today",
+  "month_title": "{{month}}/{{year}}",
+  "weekday_sun": "Sun",
+  "weekday_mon": "Mon",
+  "weekday_tue": "Tue",
+  "weekday_wed": "Wed",
+  "weekday_thu": "Thu",
+  "weekday_fri": "Fri",
+  "weekday_sat": "Sat",
+  "detail_title": "Date Details",
+  "detail_solar": "Gregorian",
+  "detail_lunar": "Lunar",
+  "detail_solar_term": "Solar Term",
+  "detail_festival": "Festival"
+}

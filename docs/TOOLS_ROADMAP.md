@@ -69,6 +69,7 @@
 | 愤怒的小鸟（Bird Smash 小游戏） | `/bird-smash` | `tools/tool-bird-smash` |
 | 图片文件大小精确调整（增大/压缩到目标 KB） | `/image-kb-resizer` | `tools/tool-image-kb-resizer` → ImageKbResizer |
 | 身份证号解析/校验（地区/生日/年龄/性别/生肖星座） | `/id-card-parser` | `tools/tool-id-card-parser` → IdCardParser |
+| 万年历（公历/农历双显、24 节气与传统节日标注、月视图切换） | `/calendar` | `tools/tool-calendar` → Calendar |
 
 ### 研发工具
 
@@ -401,7 +402,7 @@
 | ~~家庭任务分配工具~~ | life | `/family-tasks` | **已上线** | - | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
 | 条形码识别 | utility | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
-| 万年历（类 Apple 日历） | utility | `/calendar` | 待开发 | P2 | 参考 Apple 日历：公历/农历双显、节假日/节气标注、月视图切换；对标 toolight.cn/common/idcard 类站点的万年历入口 |
+| ~~万年历（类 Apple 日历）~~ | utility | `/calendar` | **已上线** | - | 公历/农历双显、24 节气/传统节日标注、月视图切换 |
 | **── 实用：图像处理（已完成 6 个）──** | | | | | |
 | ~~图片水印~~ | utility | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
 | ~~图片裁剪~~ | utility | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
