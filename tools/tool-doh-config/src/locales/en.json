@@ -8,6 +8,8 @@
   "latency_min": "Min",
   "latency_max": "Max",
   "latency_failed": "Test failed",
+  "domain_placeholder": "Query domain, e.g. google.com",
+  "query_answer": "Query Result",
   "config_title": "Config Snippet",
   "select_provider_hint": "Select a DoH provider above, or enter a custom endpoint URL",
   "custom_url_placeholder": "Custom DoH endpoint URL",

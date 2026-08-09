@@ -15,4 +15,5 @@ export interface LatencyResult {
   min: number
   max: number
   ok: boolean
+  answers: string[]
 }

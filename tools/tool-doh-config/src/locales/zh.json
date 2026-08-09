@@ -8,6 +8,8 @@
   "latency_min": "最小",
   "latency_max": "最大",
   "latency_failed": "测试失败",
+  "domain_placeholder": "查询域名，如 google.com",
+  "query_answer": "解析结果",
   "config_title": "配置片段",
   "select_provider_hint": "先在上方勾选一个 DoH 提供商，或直接输入自定义 endpoint URL",
   "custom_url_placeholder": "自定义 DoH endpoint URL",
