@@ -2,6 +2,8 @@
   "title": "DNS 配置助手",
   "description": "常用公共 DNS 列表、多 DNS 延迟测试，Mac/Linux/Windows 一键复制配置脚本",
   "providers_title": "常用公共 DNS",
+  "select_all": "全选",
+  "deselect_all": "取消全选",
   "test_latency": "测试延迟",
   "testing": "测试中…",
   "latency_avg": "平均延迟",

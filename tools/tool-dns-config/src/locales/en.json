@@ -2,6 +2,8 @@
   "title": "DNS Config Assistant",
   "description": "Common public DNS list, multi-DNS latency test, copyable config scripts for Mac/Linux/Windows",
   "providers_title": "Common Public DNS",
+  "select_all": "Select All",
+  "deselect_all": "Deselect All",
   "test_latency": "Test Latency",
   "testing": "Testing…",
   "latency_avg": "Avg Latency",

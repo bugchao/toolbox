@@ -31,6 +31,11 @@ const DnsConfig: React.FC = () => {
     })
   }
 
+  const allSelected = selected.size === DNS_PROVIDERS.length
+  const toggleAll = () => {
+    setSelected(allSelected ? new Set() : new Set(DNS_PROVIDERS.map((p) => p.id)))
+  }
+
   const handleTestLatency = async () => {
     const targets = DNS_PROVIDERS.filter((p) => selected.has(p.id))
     const d = domain.trim()
@@ -70,7 +75,16 @@ const DnsConfig: React.FC = () => {
         <PageHero title={t('title')} description={t('description')} icon={Server} />
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">{t('providers_title')}</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('providers_title')}</h2>
+            <button
+              type="button"
+              onClick={toggleAll}
+              className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+            >
+              {allSelected ? t('deselect_all') : t('select_all')}
+            </button>
+          </div>
           <div className="space-y-2">
             {DNS_PROVIDERS.map((p) => (
               <div
