@@ -9,6 +9,8 @@
   "latency_max": "Max",
   "latency_failed": "Test failed",
   "no_doh": "No DoH endpoint, cannot test",
+  "domain_placeholder": "Query domain, e.g. google.com",
+  "query_answer": "Query Result",
   "config_title": "Config Script",
   "select_provider_hint": "Select a DNS provider above, or enter a custom IP",
   "custom_ip_placeholder": "Custom DNS IP(s), comma-separated",

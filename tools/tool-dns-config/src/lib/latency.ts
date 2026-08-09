@@ -1,30 +1,35 @@
 import type { DnsProvider, LatencyResult } from './types'
+import { parseDohAnswer } from './parseDoh'
 
 const RUNS = 3
-const TEST_DOMAIN = 'google.com'
 
-async function measureOne(provider: DnsProvider): Promise<number> {
+async function queryOnce(provider: DnsProvider, domain: string, type: string): Promise<{ ms: number; answers: string[] }> {
   const start = performance.now()
-  const url = `${provider.doHUrl}?name=${encodeURIComponent(TEST_DOMAIN)}&type=A`
-  await fetch(url, { headers: provider.needsJsonAccept ? { Accept: 'application/dns-json' } : {} })
-  return Math.round(performance.now() - start)
+  const url = `${provider.doHUrl}?name=${encodeURIComponent(domain)}&type=${type}`
+  const res = await fetch(url, { headers: provider.needsJsonAccept ? { Accept: 'application/dns-json' } : {} })
+  const ms = Math.round(performance.now() - start)
+  const answers = parseDohAnswer(await res.json())
+  return { ms, answers }
 }
 
-export async function measureProvider(provider: DnsProvider): Promise<LatencyResult> {
+export async function measureProvider(provider: DnsProvider, domain: string, type: string): Promise<LatencyResult> {
   if (!provider.doHUrl) {
-    return { id: provider.id, name: provider.name, avg: 0, min: 0, max: 0, ok: false }
+    return { id: provider.id, name: provider.name, avg: 0, min: 0, max: 0, ok: false, answers: [] }
   }
   const times: number[] = []
+  let answers: string[] = []
   for (let i = 0; i < RUNS; i++) {
     try {
-      times.push(await measureOne(provider))
+      const r = await queryOnce(provider, domain, type)
+      times.push(r.ms)
+      if (r.answers.length > 0) answers = r.answers
     } catch {
       // ignore single-run failure, judged by remaining successes below
     }
   }
-  if (times.length === 0) {
-    return { id: provider.id, name: provider.name, avg: 0, min: 0, max: 0, ok: false }
+  if (times.length === 0 || answers.length === 0) {
+    return { id: provider.id, name: provider.name, avg: 0, min: 0, max: 0, ok: false, answers: [] }
   }
   const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length)
-  return { id: provider.id, name: provider.name, avg, min: Math.min(...times), max: Math.max(...times), ok: true }
+  return { id: provider.id, name: provider.name, avg, min: Math.min(...times), max: Math.max(...times), ok: true, answers }
 }

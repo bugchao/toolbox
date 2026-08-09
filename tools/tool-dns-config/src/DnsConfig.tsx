@@ -8,11 +8,14 @@ import { genMacScript, genLinuxScript, genWindowsScript } from './lib/scriptGen'
 import type { LatencyResult, LinuxVariant } from './lib/types'
 
 type Platform = 'mac' | 'linux' | 'windows'
+const RECORD_TYPES = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'TXT'] as const
 
 const DnsConfig: React.FC = () => {
   const { t } = useTranslation('toolDnsConfig')
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [customIps, setCustomIps] = useState('')
+  const [domain, setDomain] = useState('google.com')
+  const [recordType, setRecordType] = useState<string>('A')
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<LatencyResult[]>([])
   const [scriptFor, setScriptFor] = useState<string | null>(null)
@@ -30,10 +33,11 @@ const DnsConfig: React.FC = () => {
 
   const handleTestLatency = async () => {
     const targets = DNS_PROVIDERS.filter((p) => selected.has(p.id))
-    if (targets.length === 0) return
+    const d = domain.trim()
+    if (targets.length === 0 || !d) return
     setLoading(true)
     try {
-      const all = await Promise.all(targets.map(measureProvider))
+      const all = await Promise.all(targets.map((p) => measureProvider(p, d, recordType)))
       all.sort((a, b) => (a.ok === b.ok ? a.avg - b.avg : a.ok ? -1 : 1))
       setResults(all)
     } finally {
@@ -92,10 +96,29 @@ const DnsConfig: React.FC = () => {
             ))}
           </div>
 
+          <div className="flex flex-wrap gap-3 mt-4 mb-1">
+            <input
+              type="text"
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+              placeholder={t('domain_placeholder')}
+              className="flex-1 min-w-[10rem] px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+            />
+            <select
+              value={recordType}
+              onChange={(e) => setRecordType(e.target.value)}
+              className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+            >
+              {RECORD_TYPES.map((rt) => (
+                <option key={rt} value={rt}>{rt}</option>
+              ))}
+            </select>
+          </div>
+
           <button
             type="button"
             onClick={handleTestLatency}
-            disabled={loading || selected.size === 0}
+            disabled={loading || selected.size === 0 || !domain.trim()}
             className="mt-4 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed text-white rounded-lg text-sm font-medium flex items-center gap-2"
           >
             {loading && <Spinner size="sm" />}
@@ -110,6 +133,7 @@ const DnsConfig: React.FC = () => {
                   <th className="text-right py-2 font-semibold text-gray-700 dark:text-gray-300">{t('latency_avg')}</th>
                   <th className="text-right py-2 font-semibold text-gray-700 dark:text-gray-300">{t('latency_min')}</th>
                   <th className="text-right py-2 font-semibold text-gray-700 dark:text-gray-300">{t('latency_max')}</th>
+                  <th className="text-left py-2 pl-4 font-semibold text-gray-700 dark:text-gray-300">{t('query_answer')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,9 +145,10 @@ const DnsConfig: React.FC = () => {
                         <td className="py-2 text-right font-mono text-indigo-600 dark:text-indigo-400">{r.avg} ms</td>
                         <td className="py-2 text-right font-mono text-gray-600 dark:text-gray-400">{r.min} ms</td>
                         <td className="py-2 text-right font-mono text-gray-600 dark:text-gray-400">{r.max} ms</td>
+                        <td className="py-2 pl-4 font-mono text-xs text-gray-600 dark:text-gray-400">{r.answers.join(', ')}</td>
                       </>
                     ) : (
-                      <td colSpan={3} className="py-2 text-right">
+                      <td colSpan={4} className="py-2 text-right">
                         <StatusBadge level="danger" label={t('latency_failed')} />
                       </td>
                     )}
