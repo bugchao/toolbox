@@ -258,6 +258,7 @@
 | IP 地址变更记录 | `/ipam-changelog` | `tools/tool-ipam-changelog` → IpamChangelog |
 | IP 地址扫描 | `/ipam-scan` | `tools/tool-ipam-scan` → IpamScan |
 | 全方位 HTTPS 检测（评级/证书详情/协议套件/漏洞探测/握手模拟/IPv6/CDN/邮件/国密/后量子） | `/https-inspector` | `tools/tool-https-inspector` → HttpsInspector |
+| DoH 配置助手（常用 DoH 提供商 + 连通性/延迟测试 + Firefox/Chrome-Edge/Windows/Linux 配置片段一键复制） | `/doh-config` | `tools/tool-doh-config` → DohConfig |
 
 ### 资讯工具
 
