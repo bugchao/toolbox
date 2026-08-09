@@ -68,6 +68,7 @@
 | 图像处理实验工作台（效果管线/撤销重做/流程保存） | `/image-pipeline-lab` | `tools/tool-image-pipeline-lab` → ImagePipelineLab |
 | 愤怒的小鸟（Bird Smash 小游戏） | `/bird-smash` | `tools/tool-bird-smash` |
 | 图片文件大小精确调整（增大/压缩到目标 KB） | `/image-kb-resizer` | `tools/tool-image-kb-resizer` → ImageKbResizer |
+| 身份证号解析/校验（地区/生日/年龄/性别/生肖星座） | `/id-card-parser` | `tools/tool-id-card-parser` → IdCardParser |
 
 ### 研发工具
 
@@ -258,6 +259,7 @@
 | IP 地址变更记录 | `/ipam-changelog` | `tools/tool-ipam-changelog` → IpamChangelog |
 | IP 地址扫描 | `/ipam-scan` | `tools/tool-ipam-scan` → IpamScan |
 | 全方位 HTTPS 检测（评级/证书详情/协议套件/漏洞探测/握手模拟/IPv6/CDN/邮件/国密/后量子） | `/https-inspector` | `tools/tool-https-inspector` → HttpsInspector |
+| DNS 配置助手（常用公共 DNS + 多 DNS 延迟测试 + Mac/Linux/Windows 配置脚本一键复制） | `/dns-config` | `tools/tool-dns-config` → DnsConfig |
 | DoH 配置助手（常用 DoH 提供商 + 连通性/延迟测试 + Firefox/Chrome-Edge/Windows/Linux 配置片段一键复制） | `/doh-config` | `tools/tool-doh-config` → DohConfig |
 
 ### 资讯工具
@@ -399,6 +401,7 @@
 | ~~家庭任务分配工具~~ | life | `/family-tasks` | **已上线** | - | 家务分配与追踪 |
 | **── 生活：实用补充 ──** | | | | | |
 | 条形码识别 | utility | `/barcode-reader` | **已上线** | P1 | 条形码扫描与解析 |
+| 万年历（类 Apple 日历） | utility | `/calendar` | 待开发 | P2 | 参考 Apple 日历：公历/农历双显、节假日/节气标注、月视图切换；对标 toolight.cn/common/idcard 类站点的万年历入口 |
 | **── 实用：图像处理（已完成 6 个）──** | | | | | |
 | ~~图片水印~~ | utility | `/image-watermark` | **已上线** | - | 文字/Logo 水印，5 种位置，批量处理 |
 | ~~图片裁剪~~ | utility | `/image-cropper` | **已上线** | - | 自由裁剪 +7 种预设比例，旋转翻转 |
