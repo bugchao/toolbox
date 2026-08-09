@@ -52,7 +52,7 @@ export const DOH_PROVIDERS: DohProvider[] = [
   {
     id: 'lookz',
     name: 'Lookz DoH',
-    url: 'https://10165bb73afee35ab46d689caf30ac70.dns-proxy.lookz.cn/dns-query',
+    url: 'https://common.dns-proxy.lookz.cn/dns-query',
     description: '自建 DoH 服务，标准 RFC 8484 二进制协议',
     protocol: 'wire',
     needsJsonAccept: false,
