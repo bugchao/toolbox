@@ -23,5 +23,15 @@
   "linux_variant_netplan": "netplan",
   "linux_variant_resolv_conf": "/etc/resolv.conf",
   "copy": "复制",
-  "copied": "已复制"
+  "copied": "已复制",
+  "add_custom_provider": "添加自定义提供商",
+  "custom_provider_name_placeholder": "名称",
+  "custom_provider_ipv4_placeholder": "IPv4 地址，逗号分隔（必填）",
+  "custom_provider_ipv6_placeholder": "IPv6 地址，逗号分隔（可选）",
+  "custom_provider_doh_placeholder": "DoH endpoint URL（可选，用于测速）",
+  "custom_provider_tag": "自定义",
+  "needs_json_accept_label": "需要 Accept: application/dns-json 请求头",
+  "save_provider": "保存",
+  "cancel": "取消",
+  "remove_provider": "删除"
 }

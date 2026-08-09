@@ -23,5 +23,15 @@
   "linux_variant_netplan": "netplan",
   "linux_variant_resolv_conf": "/etc/resolv.conf",
   "copy": "Copy",
-  "copied": "Copied"
+  "copied": "Copied",
+  "add_custom_provider": "Add Custom Provider",
+  "custom_provider_name_placeholder": "Name",
+  "custom_provider_ipv4_placeholder": "IPv4 address(es), comma-separated (required)",
+  "custom_provider_ipv6_placeholder": "IPv6 address(es), comma-separated (optional)",
+  "custom_provider_doh_placeholder": "DoH endpoint URL (optional, for latency test)",
+  "custom_provider_tag": "Custom",
+  "needs_json_accept_label": "Needs Accept: application/dns-json header",
+  "save_provider": "Save",
+  "cancel": "Cancel",
+  "remove_provider": "Remove"
 }
