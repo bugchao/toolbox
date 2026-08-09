@@ -18,7 +18,7 @@ export async function measureProvider(provider: DnsProvider, domain: string, typ
       // ignore single-run failure, judged by remaining successes below
     }
   }
-  if (times.length === 0 || answers.length === 0) {
+  if (times.length === 0) {
     return { id: provider.id, name: provider.name, avg: 0, min: 0, max: 0, ok: false, answers: [] }
   }
   const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length)
