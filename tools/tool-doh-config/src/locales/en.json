@@ -21,5 +21,6 @@
   "target_windows": "Windows",
   "target_linux": "Linux",
   "copy": "Copy",
-  "copied": "Copied"
+  "copied": "Copied",
+  "download": "Download"
 }

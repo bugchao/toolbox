@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import { PageHero, ParticlesBackground, CopyButton, Spinner, StatusBadge } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
-import { ShieldCheck } from 'lucide-react'
+import { ShieldCheck, Download } from 'lucide-react'
 import { DOH_PROVIDERS } from './lib/providers'
 import { measureProvider } from './lib/latency'
 import { genFirefoxConfig, genChromeEdgeConfig, genMacConfig, genWindowsConfig, genLinuxConfig } from './lib/scriptGen'
+import { downloadText } from './lib/download'
 import type { LatencyResult, ConfigTarget } from './lib/types'
 
 const TARGETS: ConfigTarget[] = ['firefox', 'chrome-edge', 'macos', 'windows', 'linux']
@@ -207,7 +208,17 @@ const DohConfig: React.FC = () => {
               <pre className="bg-gray-900 text-gray-100 rounded-lg p-4 text-xs overflow-x-auto whitespace-pre-wrap">
                 {snippet}
               </pre>
-              <div className="absolute top-2 right-2">
+              <div className="absolute top-2 right-2 flex gap-2">
+                {target === 'macos' && (
+                  <button
+                    type="button"
+                    onClick={() => downloadText(snippet, 'doh.mobileconfig', 'application/x-apple-aspen-config')}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-gray-700 hover:bg-gray-600 text-gray-100"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    {t('download')}
+                  </button>
+                )}
                 <CopyButton value={snippet} label={t('copy')} copiedLabel={t('copied')} variant="button" size="sm" />
               </div>
             </div>

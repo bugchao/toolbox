@@ -21,5 +21,6 @@
   "target_windows": "Windows",
   "target_linux": "Linux",
   "copy": "复制",
-  "copied": "已复制"
+  "copied": "已复制",
+  "download": "下载"
 }
