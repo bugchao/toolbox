@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { ShieldCheck } from 'lucide-react'
 import { DOH_PROVIDERS } from './lib/providers'
 import { measureProvider } from './lib/latency'
-import { genFirefoxConfig, genChromeEdgeConfig, genWindowsConfig, genLinuxConfig } from './lib/scriptGen'
+import { genFirefoxConfig, genChromeEdgeConfig, genMacConfig, genWindowsConfig, genLinuxConfig } from './lib/scriptGen'
 import type { LatencyResult, ConfigTarget } from './lib/types'
 
-const TARGETS: ConfigTarget[] = ['firefox', 'chrome-edge', 'windows', 'linux']
+const TARGETS: ConfigTarget[] = ['firefox', 'chrome-edge', 'macos', 'windows', 'linux']
 const RECORD_TYPES = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'TXT'] as const
 
 const DohConfig: React.FC = () => {
@@ -56,6 +56,7 @@ const DohConfig: React.FC = () => {
     if (!activeUrl) return ''
     if (target === 'firefox') return genFirefoxConfig(activeUrl)
     if (target === 'chrome-edge') return genChromeEdgeConfig(activeUrl)
+    if (target === 'macos') return genMacConfig(activeUrl)
     if (target === 'windows') return genWindowsConfig(activeUrl)
     return genLinuxConfig(activeUrl)
   }, [activeUrl, target])
