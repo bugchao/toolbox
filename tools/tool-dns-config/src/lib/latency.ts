@@ -1,14 +1,7 @@
-import { timedFetch, parseDohAnswer } from '@toolbox/doh-client'
+import { queryDohJson } from '@toolbox/doh-client'
 import type { DnsProvider, LatencyResult } from './types'
 
 const RUNS = 3
-
-async function queryOnce(provider: DnsProvider, domain: string, type: string): Promise<{ ms: number; answers: string[] }> {
-  const url = `${provider.doHUrl}?name=${encodeURIComponent(domain)}&type=${type}`
-  const { ms, response } = await timedFetch(url, provider.needsJsonAccept)
-  const answers = parseDohAnswer(await response.json())
-  return { ms, answers }
-}
 
 export async function measureProvider(provider: DnsProvider, domain: string, type: string): Promise<LatencyResult> {
   if (!provider.doHUrl) {
@@ -18,7 +11,7 @@ export async function measureProvider(provider: DnsProvider, domain: string, typ
   let answers: string[] = []
   for (let i = 0; i < RUNS; i++) {
     try {
-      const r = await queryOnce(provider, domain, type)
+      const r = await queryDohJson(provider.doHUrl, domain, type, provider.needsJsonAccept)
       times.push(r.ms)
       if (r.answers.length > 0) answers = r.answers
     } catch {

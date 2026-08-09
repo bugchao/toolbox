@@ -1,13 +1,11 @@
-import { timedFetch, parseDohAnswer } from '@toolbox/doh-client'
+import { queryDohJson, queryDohWire } from '@toolbox/doh-client'
 import type { DohProvider, LatencyResult } from './types'
 
 const RUNS = 3
 
-async function queryOnce(provider: DohProvider, domain: string, type: string): Promise<{ ms: number; answers: string[] }> {
-  const url = `${provider.url}?name=${encodeURIComponent(domain)}&type=${type}`
-  const { ms, response } = await timedFetch(url, provider.needsJsonAccept)
-  const answers = parseDohAnswer(await response.json())
-  return { ms, answers }
+function queryOnce(provider: DohProvider, domain: string, type: string): Promise<{ ms: number; answers: string[] }> {
+  if (provider.protocol === 'wire') return queryDohWire(provider.url, domain, type)
+  return queryDohJson(provider.url, domain, type, provider.needsJsonAccept)
 }
 
 export async function measureProvider(provider: DohProvider, domain: string, type: string): Promise<LatencyResult> {
