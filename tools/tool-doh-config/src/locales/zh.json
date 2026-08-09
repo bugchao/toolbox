@@ -22,5 +22,15 @@
   "target_linux": "Linux",
   "copy": "复制",
   "copied": "已复制",
-  "download": "下载"
+  "download": "下载",
+  "add_custom_provider": "添加自定义提供商",
+  "custom_provider_name_placeholder": "名称",
+  "custom_provider_url_placeholder": "endpoint URL",
+  "custom_provider_tag": "自定义",
+  "protocol_json": "JSON API",
+  "protocol_wire": "RFC 8484 二进制",
+  "needs_json_accept_label": "需要 Accept: application/dns-json 请求头",
+  "save_provider": "保存",
+  "cancel": "取消",
+  "remove_provider": "删除"
 }

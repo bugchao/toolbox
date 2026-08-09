@@ -1,18 +1,22 @@
 import React, { useMemo, useState } from 'react'
 import { PageHero, ParticlesBackground, CopyButton, Spinner, StatusBadge } from '@toolbox/ui-kit'
+import { useToolStorage } from '@toolbox/storage'
 import { useTranslation } from 'react-i18next'
-import { ShieldCheck, Download } from 'lucide-react'
+import { ShieldCheck, Download, Plus, Trash2 } from 'lucide-react'
 import { DOH_PROVIDERS } from './lib/providers'
 import { measureProvider } from './lib/latency'
 import { genFirefoxConfig, genChromeEdgeConfig, genMacConfig, genWindowsConfig, genLinuxConfig } from './lib/scriptGen'
 import { downloadText } from './lib/download'
-import type { LatencyResult, ConfigTarget } from './lib/types'
+import type { DohProvider, LatencyResult, ConfigTarget } from './lib/types'
 
 const TARGETS: ConfigTarget[] = ['firefox', 'chrome-edge', 'macos', 'windows', 'linux']
 const RECORD_TYPES = ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'TXT'] as const
 
 const DohConfig: React.FC = () => {
   const { t } = useTranslation('toolDohConfig')
+  const { data: customProviders, save: saveCustomProviders } = useToolStorage<DohProvider[]>('doh-config', 'customProviders', [])
+  const allProviders = useMemo(() => [...DOH_PROVIDERS, ...customProviders], [customProviders])
+
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [customUrl, setCustomUrl] = useState('')
   const [domain, setDomain] = useState('google.com')
@@ -21,6 +25,12 @@ const DohConfig: React.FC = () => {
   const [results, setResults] = useState<LatencyResult[]>([])
   const [configFor, setConfigFor] = useState<string | null>(null)
   const [target, setTarget] = useState<ConfigTarget>('firefox')
+
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [newName, setNewName] = useState('')
+  const [newUrl, setNewUrl] = useState('')
+  const [newProtocol, setNewProtocol] = useState<'json' | 'wire'>('json')
+  const [newNeedsJsonAccept, setNewNeedsJsonAccept] = useState(true)
 
   const toggleSelected = (id: string) => {
     setSelected((prev) => {
@@ -31,13 +41,42 @@ const DohConfig: React.FC = () => {
     })
   }
 
-  const allSelected = selected.size === DOH_PROVIDERS.length
+  const allSelected = selected.size === allProviders.length
   const toggleAll = () => {
-    setSelected(allSelected ? new Set() : new Set(DOH_PROVIDERS.map((p) => p.id)))
+    setSelected(allSelected ? new Set() : new Set(allProviders.map((p) => p.id)))
+  }
+
+  const addCustomProvider = () => {
+    const name = newName.trim()
+    const url = newUrl.trim()
+    if (!name || !url) return
+    const provider: DohProvider = {
+      id: crypto.randomUUID(),
+      name,
+      url,
+      description: t('custom_provider_tag'),
+      protocol: newProtocol,
+      needsJsonAccept: newProtocol === 'json' ? newNeedsJsonAccept : false,
+    }
+    saveCustomProviders([...customProviders, provider])
+    setNewName('')
+    setNewUrl('')
+    setNewProtocol('json')
+    setNewNeedsJsonAccept(true)
+    setShowAddForm(false)
+  }
+
+  const removeCustomProvider = (id: string) => {
+    saveCustomProviders(customProviders.filter((p) => p.id !== id))
+    setSelected((prev) => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
   }
 
   const handleTestLatency = async () => {
-    const targets = DOH_PROVIDERS.filter((p) => selected.has(p.id))
+    const targets = allProviders.filter((p) => selected.has(p.id))
     const d = domain.trim()
     if (targets.length === 0 || !d) return
     setLoading(true)
@@ -52,11 +91,11 @@ const DohConfig: React.FC = () => {
 
   const activeUrl = useMemo(() => {
     if (configFor) {
-      const p = DOH_PROVIDERS.find((x) => x.id === configFor)
+      const p = allProviders.find((x) => x.id === configFor)
       return p ? p.url : ''
     }
     return customUrl.trim()
-  }, [configFor, customUrl])
+  }, [configFor, customUrl, allProviders])
 
   const snippet = useMemo(() => {
     if (!activeUrl) return ''
@@ -85,29 +124,108 @@ const DohConfig: React.FC = () => {
             </button>
           </div>
           <div className="space-y-2">
-            {DOH_PROVIDERS.map((p) => (
-              <div
-                key={p.id}
-                className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30"
-              >
+            {allProviders.map((p) => {
+              const isCustom = customProviders.some((c) => c.id === p.id)
+              return (
+                <div
+                  key={p.id}
+                  className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selected.has(p.id)}
+                    onChange={() => toggleSelected(p.id)}
+                    className="rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setConfigFor(p.id)}
+                    className={`flex-1 text-left text-sm ${configFor === p.id ? 'text-indigo-600 dark:text-indigo-400 font-medium' : 'text-gray-800 dark:text-gray-200'}`}
+                  >
+                    {p.name}
+                    <span className="text-gray-400 dark:text-gray-500 font-mono ml-2 text-xs">{p.url}</span>
+                  </button>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">{p.description}</span>
+                  {isCustom && (
+                    <button
+                      type="button"
+                      onClick={() => removeCustomProvider(p.id)}
+                      aria-label={t('remove_provider')}
+                      className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          {showAddForm ? (
+            <div className="mt-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700 space-y-2">
+              <div className="flex flex-wrap gap-2">
                 <input
-                  type="checkbox"
-                  checked={selected.has(p.id)}
-                  onChange={() => toggleSelected(p.id)}
-                  className="rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
+                  type="text"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  placeholder={t('custom_provider_name_placeholder')}
+                  className="flex-1 min-w-[8rem] px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
                 />
+                <select
+                  value={newProtocol}
+                  onChange={(e) => setNewProtocol(e.target.value as 'json' | 'wire')}
+                  className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+                >
+                  <option value="json">{t('protocol_json')}</option>
+                  <option value="wire">{t('protocol_wire')}</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                value={newUrl}
+                onChange={(e) => setNewUrl(e.target.value)}
+                placeholder={t('custom_provider_url_placeholder')}
+                className="w-full px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm font-mono focus:ring-2 focus:ring-indigo-500 outline-none"
+              />
+              {newProtocol === 'json' && (
+                <label className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+                  <input
+                    type="checkbox"
+                    checked={newNeedsJsonAccept}
+                    onChange={(e) => setNewNeedsJsonAccept(e.target.checked)}
+                    className="rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  {t('needs_json_accept_label')}
+                </label>
+              )}
+              <div className="flex gap-2">
                 <button
                   type="button"
-                  onClick={() => setConfigFor(p.id)}
-                  className={`flex-1 text-left text-sm ${configFor === p.id ? 'text-indigo-600 dark:text-indigo-400 font-medium' : 'text-gray-800 dark:text-gray-200'}`}
+                  onClick={addCustomProvider}
+                  disabled={!newName.trim() || !newUrl.trim()}
+                  className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-not-allowed text-white rounded-lg text-xs font-medium"
                 >
-                  {p.name}
-                  <span className="text-gray-400 dark:text-gray-500 font-mono ml-2 text-xs">{p.url}</span>
+                  {t('save_provider')}
                 </button>
-                <span className="text-xs text-gray-400 dark:text-gray-500">{p.description}</span>
+                <button
+                  type="button"
+                  onClick={() => setShowAddForm(false)}
+                  className="px-4 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-lg text-xs font-medium"
+                >
+                  {t('cancel')}
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowAddForm(true)}
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              {t('add_custom_provider')}
+            </button>
+          )}
 
           <div className="flex flex-wrap gap-3 mt-4 mb-1">
             <input
