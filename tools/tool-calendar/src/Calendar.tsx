@@ -18,20 +18,23 @@ interface DayCell {
 
 const WEEKDAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
+function toDateKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+}
+
 function buildMonth(year: number, month: number, todayKey: string): DayCell[] {
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const cells: DayCell[] = []
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month, day)
     const lunar = solarToLunar(date)
-    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
     cells.push({
       date,
       day,
       lunar,
       solarTerm: getSolarTerm(date),
       festival: getFestival(date, lunar),
-      isToday: dateKey === todayKey,
+      isToday: toDateKey(date) === todayKey,
     })
   }
   return cells
@@ -44,7 +47,7 @@ const Calendar: React.FC = () => {
   const [month, setMonth] = useState(today.getMonth())
   const [selected, setSelected] = useState<DayCell | null>(null)
 
-  const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+  const todayKey = toDateKey(today)
   const cells = useMemo(() => buildMonth(year, month, todayKey), [year, month, todayKey])
   const leadingBlanks = new Date(year, month, 1).getDay()
 
