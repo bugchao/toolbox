@@ -148,7 +148,11 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
     // tools/*/src（单层）：避免 ** 下探到 tools/<x>/node_modules 里依赖自带的测试文件
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}', '../../tools/*/src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    include: [
+      'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
+      '../../tools/*/src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
+      '../../packages/doh-client/src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
+    ],
   },
   resolve: {
     alias: {
@@ -159,6 +163,7 @@ export default defineConfig({
       '@toolbox/tool-registry': path.join(root, 'packages/tool-registry/src/index.ts'),
       '@toolbox/ui-kit': path.join(root, 'packages/ui-kit/src/index.ts'),
       '@toolbox/storage': path.join(root, 'packages/storage/src/index.ts'),
+      '@toolbox/doh-client': path.join(root, 'packages/doh-client/src/index.ts'),
       react: path.join(root, 'apps/web/node_modules/react'),
       'react-dom': path.join(root, 'apps/web/node_modules/react-dom'),
       'lucide-react': path.join(root, 'apps/web/node_modules/lucide-react'),

@@ -1,14 +1,12 @@
+import { timedFetch, parseDohAnswer } from '@toolbox/doh-client'
 import type { DohProvider, LatencyResult } from './types'
-import { parseDohAnswer } from './parseDoh'
 
 const RUNS = 3
 
 async function queryOnce(provider: DohProvider, domain: string, type: string): Promise<{ ms: number; answers: string[] }> {
-  const start = performance.now()
   const url = `${provider.url}?name=${encodeURIComponent(domain)}&type=${type}`
-  const res = await fetch(url, { headers: provider.needsJsonAccept ? { Accept: 'application/dns-json' } : {} })
-  const ms = Math.round(performance.now() - start)
-  const answers = parseDohAnswer(await res.json())
+  const { ms, response } = await timedFetch(url, provider.needsJsonAccept)
+  const answers = parseDohAnswer(await response.json())
   return { ms, answers }
 }
 

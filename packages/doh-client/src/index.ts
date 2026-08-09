@@ -1,3 +1,10 @@
+export async function timedFetch(url: string, needsJsonAccept: boolean): Promise<{ ms: number; response: Response }> {
+  const start = performance.now()
+  const response = await fetch(url, { headers: needsJsonAccept ? { Accept: 'application/dns-json' } : {} })
+  const ms = Math.round(performance.now() - start)
+  return { ms, response }
+}
+
 interface DohAnswer {
   data?: string
 }

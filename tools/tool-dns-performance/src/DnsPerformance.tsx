@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { timedFetch } from '@toolbox/doh-client'
 import { Activity, Info } from 'lucide-react'
 
 const RUNS = 5
@@ -35,9 +36,8 @@ const PRESET_PROVIDERS: DoHProvider[] = [
 ]
 
 async function measureOne(url: string, needsJsonAccept: boolean): Promise<number> {
-  const start = performance.now()
-  await fetch(url, { headers: needsJsonAccept ? { Accept: 'application/dns-json' } : {} })
-  return Math.round(performance.now() - start)
+  const { ms } = await timedFetch(url, needsJsonAccept)
+  return ms
 }
 
 function buildCustomUrl(base: string, domain: string, type: string): string {
