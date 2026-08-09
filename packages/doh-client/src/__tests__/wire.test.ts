@@ -69,4 +69,28 @@ describe('buildDnsQuery', () => {
     const response = new Uint8Array([...header, ...query.slice(12), ...answer])
     expect(parseDnsMessage(response)).toEqual(['10.10.10.10'])
   })
+
+  it('throws instead of silently corrupting a non-ASCII (IDN) label', () => {
+    // charCodeAt('中') = 20013 → mod-256 into Uint8Array would silently send a
+    // different, wrong domain instead of failing loudly.
+    expect(() => buildDnsQuery('中国.cn', 'A')).toThrow(/ASCII/)
+  })
+
+  it('throws instead of encoding a label longer than 63 bytes', () => {
+    expect(() => buildDnsQuery(`${'a'.repeat(64)}.com`, 'A')).toThrow(/63 bytes/)
+  })
+})
+
+describe('formatRdata (TXT)', () => {
+  it('decodes multi-byte UTF-8 TXT content instead of mangling it as Latin-1', () => {
+    // header ANCOUNT=1, question "a.com" TXT, one TXT answer containing UTF-8 for "café"
+    const utf8 = Array.from(new TextEncoder().encode('café'))
+    const txtHex = [utf8.length, ...utf8].map((b) => b.toString(16).padStart(2, '0')).join('')
+    const bytes = hexToBytes(
+      '0000 8180 0001 0001 0000 0000' + // header, ANCOUNT=1
+      '0161 03636f6d00 0010 0001' + // question: "a.com" TXT IN
+      `c00c 0010 0001 00000000 ${(utf8.length + 1).toString(16).padStart(4, '0')} ${txtHex}`
+    )
+    expect(parseDnsMessage(bytes)).toEqual(['café'])
+  })
 })

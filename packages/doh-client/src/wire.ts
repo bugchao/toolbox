@@ -4,11 +4,17 @@
 
 const TYPE_CODES: Record<string, number> = { A: 1, NS: 2, CNAME: 5, MX: 15, TXT: 16, AAAA: 28 }
 const TYPE_NAMES: Record<number, string> = Object.fromEntries(Object.entries(TYPE_CODES).map(([k, v]) => [v, k]))
+const decoder = new TextDecoder()
 
 function encodeName(name: string): number[] {
   const bytes: number[] = []
   for (const label of name.split('.')) {
     if (label.length === 0) continue
+    // ponytail: no punycode/IDN support — reject rather than silently truncate
+    // (charCodeAt → Uint8Array would mod-256 any non-ASCII code point into a
+    // different, wrong label instead of throwing).
+    if (!/^[\x00-\x7f]*$/.test(label)) throw new Error(`DNS label is not ASCII (IDN needs punycode first): "${label}"`)
+    if (label.length > 63) throw new Error(`DNS label exceeds 63 bytes: "${label}"`)
     bytes.push(label.length)
     for (let i = 0; i < label.length; i++) bytes.push(label.charCodeAt(i))
   }
@@ -83,7 +89,7 @@ function formatRdata(bytes: Uint8Array, type: number, rdataOffset: number, rdlen
     const parts: string[] = []
     while (pos < end) {
       const len = bytes[pos]
-      parts.push(String.fromCharCode(...bytes.slice(pos + 1, pos + 1 + len)))
+      parts.push(decoder.decode(bytes.slice(pos + 1, pos + 1 + len)))
       pos += 1 + len
     }
     return parts.join('')
