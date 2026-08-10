@@ -9,7 +9,7 @@ pnpm install
 pnpm dev
 ```
 
-默认打开 `http://localhost:3000`。
+默认打开 `http://localhost:5178`。
 
 ## 常用命令
 
