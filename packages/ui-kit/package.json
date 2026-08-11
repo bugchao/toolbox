@@ -13,6 +13,7 @@
     "react-i18next": "^15.0.0"
   },
   "dependencies": {
+    "@toolbox/storage": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@tsparticles/engine": "^3.0.0",
     "@tsparticles/react": "^3.0.0",

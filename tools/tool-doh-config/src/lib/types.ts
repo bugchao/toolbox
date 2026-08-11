@@ -1,13 +1,22 @@
-export interface DohProvider {
+interface DohProviderBase {
   id: string
   name: string
   url: string
   description: string
-  /** 'json': Google/Cloudflare 风格 JSON API；'wire': RFC 8484 标准二进制协议 */
-  protocol: 'json' | 'wire'
-  /** 仅 protocol==='json' 时生效 */
+}
+
+/** Google/Cloudflare 风格 JSON API */
+export interface DohProviderJson extends DohProviderBase {
+  protocol: 'json'
   needsJsonAccept: boolean
 }
+
+/** RFC 8484 标准二进制协议 */
+export interface DohProviderWire extends DohProviderBase {
+  protocol: 'wire'
+}
+
+export type DohProvider = DohProviderJson | DohProviderWire
 
 export type ConfigTarget = 'firefox' | 'chrome-edge' | 'macos' | 'windows' | 'linux'
 

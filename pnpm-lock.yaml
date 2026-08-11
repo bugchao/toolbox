@@ -601,6 +601,9 @@ importers:
       '@react-spring/web':
         specifier: ^9.7.3
         version: 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@toolbox/storage':
+        specifier: workspace:*
+        version: link:../storage
       '@tsparticles/engine':
         specifier: ^3.0.0
         version: 3.9.1
@@ -2935,9 +2938,6 @@ importers:
       '@toolbox/doh-client':
         specifier: workspace:*
         version: link:../../packages/doh-client
-      '@toolbox/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
       '@toolbox/tool-registry':
         specifier: workspace:*
         version: link:../../packages/tool-registry
@@ -3431,9 +3431,6 @@ importers:
       '@toolbox/doh-client':
         specifier: workspace:*
         version: link:../../packages/doh-client
-      '@toolbox/storage':
-        specifier: workspace:*
-        version: link:../../packages/storage
       '@toolbox/tool-registry':
         specifier: workspace:*
         version: link:../../packages/tool-registry

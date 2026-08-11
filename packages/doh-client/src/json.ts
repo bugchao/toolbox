@@ -29,6 +29,7 @@ export async function queryDohJson(
   needsJsonAccept: boolean
 ): Promise<{ ms: number; answers: string[] }> {
   const { ms, response } = await timedFetch(`${url}?name=${encodeURIComponent(domain)}&type=${type}`, needsJsonAccept)
+  if (!response.ok) throw new Error(`DoH request failed: HTTP ${response.status}`)
   const answers = parseDohAnswer(await response.json())
   return { ms, answers }
 }

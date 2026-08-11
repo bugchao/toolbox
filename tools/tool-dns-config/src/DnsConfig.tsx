@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { PageHero, ParticlesBackground, CopyButton, Spinner, StatusBadge } from '@toolbox/ui-kit'
-import { useToolStorage } from '@toolbox/storage'
+import { PageHero, ParticlesBackground, CopyButton, Spinner, StatusBadge, useCustomProviders } from '@toolbox/ui-kit'
 import { useTranslation } from 'react-i18next'
 import { Server, Plus, Trash2 } from 'lucide-react'
 import { DNS_PROVIDERS } from './lib/providers'
@@ -17,10 +16,17 @@ function splitAddresses(input: string): string[] {
 
 const DnsConfig: React.FC = () => {
   const { t } = useTranslation('toolDnsConfig')
-  const { data: customProviders, save: saveCustomProviders } = useToolStorage<DnsProvider[]>('dns-config', 'customProviders', [])
-  const allProviders = useMemo(() => [...DNS_PROVIDERS, ...customProviders], [customProviders])
+  const {
+    allProviders,
+    isCustom,
+    addProvider,
+    removeProvider,
+    selected,
+    toggleSelected,
+    allSelected,
+    toggleAll,
+  } = useCustomProviders<DnsProvider>('dns-config', DNS_PROVIDERS)
 
-  const [selected, setSelected] = useState<Set<string>>(new Set())
   const [customIps, setCustomIps] = useState('')
   const [domain, setDomain] = useState('google.com')
   const [recordType, setRecordType] = useState<string>('A')
@@ -37,20 +43,6 @@ const DnsConfig: React.FC = () => {
   const [newDoHUrl, setNewDoHUrl] = useState('')
   const [newNeedsJsonAccept, setNewNeedsJsonAccept] = useState(true)
 
-  const toggleSelected = (id: string) => {
-    setSelected((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
-      return next
-    })
-  }
-
-  const allSelected = selected.size === allProviders.length
-  const toggleAll = () => {
-    setSelected(allSelected ? new Set() : new Set(allProviders.map((p) => p.id)))
-  }
-
   const addCustomProvider = () => {
     const name = newName.trim()
     const ipv4 = splitAddresses(newIpv4)
@@ -65,22 +57,13 @@ const DnsConfig: React.FC = () => {
       doHUrl: newDoHUrl.trim(),
       needsJsonAccept: newNeedsJsonAccept,
     }
-    saveCustomProviders([...customProviders, provider])
+    addProvider(provider)
     setNewName('')
     setNewIpv4('')
     setNewIpv6('')
     setNewDoHUrl('')
     setNewNeedsJsonAccept(true)
     setShowAddForm(false)
-  }
-
-  const removeCustomProvider = (id: string) => {
-    saveCustomProviders(customProviders.filter((p) => p.id !== id))
-    setSelected((prev) => {
-      const next = new Set(prev)
-      next.delete(id)
-      return next
-    })
   }
 
   const handleTestLatency = async () => {
@@ -133,41 +116,38 @@ const DnsConfig: React.FC = () => {
             </button>
           </div>
           <div className="space-y-2">
-            {allProviders.map((p) => {
-              const isCustom = customProviders.some((c) => c.id === p.id)
-              return (
-                <div
-                  key={p.id}
-                  className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30"
+            {allProviders.map((p) => (
+              <div
+                key={p.id}
+                className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30"
+              >
+                <input
+                  type="checkbox"
+                  checked={selected.has(p.id)}
+                  onChange={() => toggleSelected(p.id)}
+                  className="rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setScriptFor(p.id)}
+                  className={`flex-1 text-left text-sm ${scriptFor === p.id ? 'text-indigo-600 dark:text-indigo-400 font-medium' : 'text-gray-800 dark:text-gray-200'}`}
                 >
-                  <input
-                    type="checkbox"
-                    checked={selected.has(p.id)}
-                    onChange={() => toggleSelected(p.id)}
-                    className="rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
-                  />
+                  {p.name}
+                  <span className="text-gray-400 dark:text-gray-500 font-mono ml-2 text-xs">{p.ipv4.join(', ')}</span>
+                </button>
+                <span className="text-xs text-gray-400 dark:text-gray-500">{p.description}</span>
+                {isCustom(p.id) && (
                   <button
                     type="button"
-                    onClick={() => setScriptFor(p.id)}
-                    className={`flex-1 text-left text-sm ${scriptFor === p.id ? 'text-indigo-600 dark:text-indigo-400 font-medium' : 'text-gray-800 dark:text-gray-200'}`}
+                    onClick={() => removeProvider(p.id)}
+                    aria-label={t('remove_provider')}
+                    className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
                   >
-                    {p.name}
-                    <span className="text-gray-400 dark:text-gray-500 font-mono ml-2 text-xs">{p.ipv4.join(', ')}</span>
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{p.description}</span>
-                  {isCustom && (
-                    <button
-                      type="button"
-                      onClick={() => removeCustomProvider(p.id)}
-                      aria-label={t('remove_provider')}
-                      className="p-1 rounded text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
-              )
-            })}
+                )}
+              </div>
+            ))}
           </div>
 
           {showAddForm ? (

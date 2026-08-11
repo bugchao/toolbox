@@ -139,6 +139,7 @@ export async function queryDohWire(url: string, domain: string, type: string): P
   const start = performance.now()
   const response = await fetch(`${url}?dns=${dnsParam}`, { headers: { Accept: 'application/dns-message' } })
   const ms = Math.round(performance.now() - start)
+  if (!response.ok) throw new Error(`DoH request failed: HTTP ${response.status}`)
   const bytes = new Uint8Array(await response.arrayBuffer())
   return { ms, answers: parseDnsMessage(bytes) }
 }
