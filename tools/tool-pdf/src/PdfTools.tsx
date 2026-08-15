@@ -6,6 +6,7 @@ import JSZip from 'jszip'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 import { PageHero, Spinner } from '@toolbox/ui-kit'
+import { resolveMergeFilename, type MergeNameStrategy } from './lib/filename'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
 
@@ -32,7 +33,9 @@ const PdfTools: React.FC = () => {
   const [error, setError] = useState('')
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [outputFilename, setOutputFilename] = useState('output.pdf')
-  
+  const [mergeNameStrategy, setMergeNameStrategy] = useState<MergeNameStrategy>('collection')
+  const [customMergeName, setCustomMergeName] = useState('')
+
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +67,8 @@ const PdfTools: React.FC = () => {
     setProcessed(false)
     setDownloadUrl(null)
     setError('')
+    setMergeNameStrategy('collection')
+    setCustomMergeName('')
   }
 
   const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> => {
@@ -97,6 +102,7 @@ const PdfTools: React.FC = () => {
 
     const pdfBytes = await mergedPdf.save()
     const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: 'application/pdf' })
+    setOutputFilename(resolveMergeFilename(mergeNameStrategy, customMergeName, files.map((f) => f.name)))
     return blob
   }
 
@@ -419,6 +425,47 @@ const PdfTools: React.FC = () => {
           </div>
         )}
 
+        {/* 合并导出文件名 */}
+        {mode === 'merge' && files.length > 0 && (
+          <div className="mt-6">
+            <h3 className="font-medium text-gray-900 mb-3">导出文件名</h3>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {([
+                { value: 'collection', label: '文件合集' },
+                { value: 'summary', label: '文件名摘要' },
+                { value: 'custom', label: '自定义' },
+              ] as { value: MergeNameStrategy; label: string }[]).map(({ value, label }) => (
+                <button
+                  key={value}
+                  onClick={() => setMergeNameStrategy(value)}
+                  className={`px-4 py-1.5 rounded-lg text-sm font-medium border-2 transition-colors ${
+                    mergeNameStrategy === value
+                      ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
+                      : 'border-gray-200 text-gray-600 hover:border-indigo-300'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            {mergeNameStrategy === 'custom' && (
+              <input
+                type="text"
+                value={customMergeName}
+                onChange={(e) => setCustomMergeName(e.target.value)}
+                placeholder="输入文件名（无需加 .pdf）"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none mb-2"
+              />
+            )}
+            <p className="text-sm text-gray-500">
+              导出文件名：
+              <span className="font-mono text-gray-700">
+                {resolveMergeFilename(mergeNameStrategy, customMergeName, files.map((f) => f.name))}
+              </span>
+            </p>
+          </div>
+        )}
+
         {/* 错误提示 */}
         {error && (
           <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
@@ -472,7 +519,7 @@ const PdfTools: React.FC = () => {
         <ul className="space-y-2 text-gray-600">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
-            PDF合并：选择多个PDF文件，点击开始处理，将按上传顺序合并为一个PDF
+            PDF合并：选择多个PDF文件，点击开始处理，将按上传顺序合并为一个PDF；导出文件名可选「文件合集」「文件名摘要」两种自动命名，也可以完全自定义
           </li>
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
