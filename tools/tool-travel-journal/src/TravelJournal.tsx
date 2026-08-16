@@ -142,59 +142,59 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
 
   if (step === 'input') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">📖 游记自动生成</h1>
-            <p className="text-gray-600">记录每一天的旅行，自动生成精美游记</p>
+            <h1 className="text-4xl font-bold text-ink mb-2">📖 游记自动生成</h1>
+            <p className="text-ink-muted">记录每一天的旅行，自动生成精美游记</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">基本信息</h2>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">目的地 *</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">目的地 *</label>
                 <input
                   type="text"
                   value={journalData.destination}
                   onChange={(e) => setJournalData({ ...journalData, destination: e.target.value })}
                   placeholder="例如：日本东京"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">开始日期 *</label>
+                  <label className="block text-sm font-medium text-ink-muted mb-2">开始日期 *</label>
                   <input
                     type="date"
                     value={journalData.startDate}
                     onChange={(e) => setJournalData({ ...journalData, startDate: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">结束日期 *</label>
+                  <label className="block text-sm font-medium text-ink-muted mb-2">结束日期 *</label>
                   <input
                     type="date"
                     value={journalData.endDate}
                     onChange={(e) => setJournalData({ ...journalData, endDate: e.target.value })}
                     min={journalData.startDate}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">同行伙伴</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">同行伙伴</label>
                 <input
                   type="text"
                   value={journalData.travelers}
                   onChange={(e) => setJournalData({ ...journalData, travelers: e.target.value })}
                   placeholder="例如：家人、朋友、爱人（可选）"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
 
@@ -213,17 +213,17 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
 
   if (step === 'days') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">{journalData.destination} 旅行日记</h1>
-            <p className="text-gray-600">{journalData.startDate} 至 {journalData.endDate}</p>
+            <h1 className="text-3xl font-bold text-ink mb-2">{journalData.destination} 旅行日记</h1>
+            <p className="text-ink-muted">{journalData.startDate} 至 {journalData.endDate}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* 日期导航 */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-xl shadow-lg p-4 sticky top-4">
+              <div className="bg-surface rounded-xl shadow-lg p-4 sticky top-4">
                 <h3 className="font-semibold mb-3">选择日期</h3>
                 <div className="space-y-2">
                   {journalData.days.map((day) => (
@@ -233,7 +233,7 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
                       className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                         currentDay.day === day.day
                           ? 'bg-purple-500 text-white'
-                          : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                          : 'bg-surface-muted hover:bg-surface-inset text-ink-muted'
                       }`}
                     >
                       <div className="font-medium">Day {day.day}</div>
@@ -253,14 +253,14 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
 
             {/* 当日记录 */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-surface rounded-xl shadow-lg p-6">
                 <h2 className="text-xl font-semibold mb-4">
                   Day {currentDay.day} - {currentDay.date}
                 </h2>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">今日活动</label>
+                    <label className="block text-sm font-medium text-ink-muted mb-2">今日活动</label>
                     {currentDay.activities.map((activity, index) => (
                       <div key={index} className="flex gap-2 mb-2">
                         <input
@@ -268,12 +268,12 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
                           value={activity}
                           onChange={(e) => updateActivity(index, e.target.value)}
                           placeholder={`活动 ${index + 1}`}
-                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                         />
                         {currentDay.activities.length > 1 && (
                           <button
                             onClick={() => removeActivity(index)}
-                            className="px-3 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                            className="px-3 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
                           >
                             删除
                           </button>
@@ -289,24 +289,24 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">拍摄照片数</label>
+                    <label className="block text-sm font-medium text-ink-muted mb-2">拍摄照片数</label>
                     <input
                       type="number"
                       value={currentDay.photos}
                       onChange={(e) => setCurrentDay({ ...currentDay, photos: Number(e.target.value) })}
                       min="0"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">今日感想</label>
+                    <label className="block text-sm font-medium text-ink-muted mb-2">今日感想</label>
                     <textarea
                       value={currentDay.notes}
                       onChange={(e) => setCurrentDay({ ...currentDay, notes: e.target.value })}
                       placeholder="记录今天的感受、有趣的事情、美食体验等..."
                       rows={6}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                     />
                   </div>
 
@@ -326,14 +326,14 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">游记预览</h1>
+          <h1 className="text-3xl font-bold text-ink mb-2">游记预览</h1>
           <div className="flex justify-center gap-2">
             <button
               onClick={() => setStep('days')}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 bg-surface-inset text-ink-muted rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
               返回编辑
             </button>
@@ -353,15 +353,15 @@ ${day.photos > 0 ? `📷 拍摄了 ${day.photos} 张照片` : ''}
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
+        <div className="bg-surface rounded-xl shadow-lg p-8">
+          <pre className="whitespace-pre-wrap font-sans text-ink leading-relaxed">
             {generatedJournal}
           </pre>
         </div>
 
-        <div className="mt-6 bg-purple-50 border border-purple-200 rounded-lg p-4">
-          <h3 className="font-semibold text-purple-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-purple-700 space-y-1">
+        <div className="mt-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+          <h3 className="font-semibold text-purple-800 dark:text-purple-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-purple-700 dark:text-purple-300 space-y-1">
             <li>• 游记已生成为 Markdown 格式，可直接用于博客或公众号</li>
             <li>• 可以返回编辑修改任意一天的内容</li>
             <li>• 下载后可以添加照片和更多细节</li>

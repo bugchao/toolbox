@@ -94,44 +94,44 @@ export default function TripPlanner() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">✈️ AI 行程规划器</h1>
-          <p className="text-gray-600">输入预算和天数，AI 生成个性化旅行计划</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">✈️ AI 行程规划器</h1>
+          <p className="text-ink-muted">输入预算和天数，AI 生成个性化旅行计划</p>
         </div>
 
         {/* 输入表单 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">规划你的旅行</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">目的地 *</label>
+              <label className="block text-sm font-medium text-ink-muted mb-2">目的地 *</label>
               <input
                 type="text"
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder="例如：日本东京"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">旅行天数</label>
+              <label className="block text-sm font-medium text-ink-muted mb-2">旅行天数</label>
               <input
                 type="number"
                 value={days}
                 onChange={(e) => setDays(Number(e.target.value))}
                 min="1"
                 max="30"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink-muted mb-2">
               预算 (¥{budget})
             </label>
             <input
@@ -143,14 +143,14 @@ export default function TripPlanner() {
               onChange={(e) => setBudget(Number(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="flex justify-between text-xs text-ink-muted mt-1">
               <span>¥1,000</span>
               <span>¥20,000</span>
             </div>
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">兴趣标签 *</label>
+            <label className="block text-sm font-medium text-ink-muted mb-2">兴趣标签 *</label>
             <div className="flex flex-wrap gap-2">
               {interestOptions.map((interest) => (
                 <button
@@ -159,7 +159,7 @@ export default function TripPlanner() {
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                     interests.includes(interest)
                       ? 'bg-orange-500 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   {interest}
@@ -181,23 +181,23 @@ export default function TripPlanner() {
         {tripPlan && (
           <div className="space-y-6">
             {/* 概览 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-xl font-semibold mb-4">行程概览</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-orange-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">目的地</div>
+                <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">目的地</div>
                   <div className="text-lg font-bold text-orange-600">{tripPlan.destination}</div>
                 </div>
-                <div className="bg-yellow-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">天数</div>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">天数</div>
                   <div className="text-lg font-bold text-yellow-600">{tripPlan.days} 天</div>
                 </div>
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">总预算</div>
+                <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">总预算</div>
                   <div className="text-lg font-bold text-green-600">¥{tripPlan.budget}</div>
                 </div>
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">日均预算</div>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">日均预算</div>
                   <div className="text-lg font-bold text-blue-600">
                     ¥{Math.floor(tripPlan.budget / tripPlan.days)}
                   </div>
@@ -207,15 +207,15 @@ export default function TripPlanner() {
 
             {/* 每日行程 */}
             {tripPlan.plan.map((dayPlan) => (
-              <div key={dayPlan.day} className="bg-white rounded-xl shadow-lg p-6">
+              <div key={dayPlan.day} className="bg-surface rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Day {dayPlan.day}</h3>
 
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm font-medium text-gray-700 mb-2">📍 活动安排</div>
+                    <div className="text-sm font-medium text-ink-muted mb-2">📍 活动安排</div>
                     <ul className="space-y-1">
                       {dayPlan.activities.map((activity, index) => (
-                        <li key={index} className="text-sm text-gray-600 pl-4">
+                        <li key={index} className="text-sm text-ink-muted pl-4">
                           • {activity}
                         </li>
                       ))}
@@ -223,25 +223,25 @@ export default function TripPlanner() {
                   </div>
 
                   <div>
-                    <div className="text-sm font-medium text-gray-700 mb-2">🍽️ 餐饮推荐</div>
+                    <div className="text-sm font-medium text-ink-muted mb-2">🍽️ 餐饮推荐</div>
                     <div className="grid grid-cols-3 gap-2 text-sm">
-                      <div className="bg-orange-50 p-2 rounded">
-                        <div className="text-xs text-gray-600">早餐</div>
-                        <div className="text-gray-700">{dayPlan.meals.breakfast}</div>
+                      <div className="bg-orange-50 dark:bg-orange-900/20 p-2 rounded">
+                        <div className="text-xs text-ink-muted">早餐</div>
+                        <div className="text-ink">{dayPlan.meals.breakfast}</div>
                       </div>
-                      <div className="bg-yellow-50 p-2 rounded">
-                        <div className="text-xs text-gray-600">午餐</div>
-                        <div className="text-gray-700">{dayPlan.meals.lunch}</div>
+                      <div className="bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded">
+                        <div className="text-xs text-ink-muted">午餐</div>
+                        <div className="text-ink">{dayPlan.meals.lunch}</div>
                       </div>
-                      <div className="bg-green-50 p-2 rounded">
-                        <div className="text-xs text-gray-600">晚餐</div>
-                        <div className="text-gray-700">{dayPlan.meals.dinner}</div>
+                      <div className="bg-green-50 dark:bg-green-900/20 p-2 rounded">
+                        <div className="text-xs text-ink-muted">晚餐</div>
+                        <div className="text-ink">{dayPlan.meals.dinner}</div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t">
-                    <div className="text-sm text-gray-600">
+                  <div className="flex items-center justify-between pt-2 border-t border-edge">
+                    <div className="text-sm text-ink-muted">
                       🏨 住宿：{dayPlan.accommodation}
                     </div>
                     <div className="text-sm font-semibold text-orange-600">
@@ -253,11 +253,11 @@ export default function TripPlanner() {
             ))}
 
             {/* 旅行贴士 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h3 className="text-lg font-semibold mb-4">💡 旅行贴士</h3>
               <ul className="space-y-2">
                 {tripPlan.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                  <li key={index} className="flex items-start gap-2 text-sm text-ink">
                     <span className="text-orange-500 mt-0.5">•</span>
                     <span>{tip}</span>
                   </li>
@@ -268,9 +268,9 @@ export default function TripPlanner() {
         )}
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
-          <h3 className="font-semibold text-orange-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-orange-700 space-y-1">
+        <div className="mt-6 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+          <h3 className="font-semibold text-orange-800 dark:text-orange-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
             <li>• AI 根据你的预算和兴趣生成个性化行程</li>
             <li>• 行程仅供参考，实际游玩请根据情况调整</li>
             <li>• 建议提前预订机票、酒店和热门景点门票</li>

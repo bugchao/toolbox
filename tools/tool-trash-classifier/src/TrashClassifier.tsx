@@ -148,7 +148,7 @@ const TrashClassifier: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-sm text-gray-400 py-12">{t('loading')}</div>
+        <div className="text-center text-sm text-ink-subtle py-12">{t('loading')}</div>
       </div>
     )
   }
@@ -158,10 +158,10 @@ const TrashClassifier: React.FC = () => {
       <PageHero title={t('title')} description={t('description')} />
 
       {/* 搜索 */}
-      <section className="rounded-2xl border border-gray-200 bg-gradient-to-br from-emerald-50 via-white to-sky-50 p-6">
+      <section className="rounded-2xl border border-edge bg-gradient-to-br from-emerald-50 dark:from-emerald-950/30 via-white dark:via-surface to-sky-50 dark:to-sky-950/30 p-6">
         <div className="flex gap-2 items-center">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-subtle" />
             <input
               type="text"
               value={query}
@@ -169,14 +169,14 @@ const TrashClassifier: React.FC = () => {
               onKeyDown={(e) => e.key === 'Enter' && onSearch(query)}
               onBlur={() => query.trim() && recordSearch(query)}
               placeholder={t('search.placeholder')}
-              className="w-full pl-9 pr-3 py-2.5 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full pl-9 pr-3 py-2.5 text-base border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
               autoFocus
             />
           </div>
           <button
             type="button"
             onClick={onRandom}
-            className="px-3 py-2.5 text-sm bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-1.5"
+            className="px-3 py-2.5 text-sm bg-surface text-ink-muted border border-edge-strong rounded-md hover:bg-surface-muted transition-colors flex items-center gap-1.5"
             title={t('search.random')}
           >
             <Shuffle className="w-4 h-4" />
@@ -190,13 +190,13 @@ const TrashClassifier: React.FC = () => {
             {topMatch ? (
               <ResultCard item={topMatch.item} isZh={isZh} t={t} />
             ) : (
-              <div className="text-sm text-gray-500 bg-white/60 rounded-md border border-gray-200 p-4 text-center">
+              <div className="text-sm text-ink-muted bg-surface/60 rounded-md border border-edge p-4 text-center">
                 {t('search.notFound')}
               </div>
             )}
             {otherMatches.length > 0 && (
               <div className="mt-3">
-                <div className="text-xs text-gray-500 mb-1.5">{t('search.related')}：</div>
+                <div className="text-xs text-ink-muted mb-1.5">{t('search.related')}：</div>
                 <div className="flex flex-wrap gap-1.5">
                   {otherMatches.map(({ item }) => (
                     <button
@@ -241,19 +241,19 @@ const TrashClassifier: React.FC = () => {
 
       {/* 浏览展开列表（展开的那个分类） */}
       {data.browseOpen && (
-        <section className="rounded-lg border border-gray-200 bg-white p-4">
+        <section className="rounded-lg border border-edge bg-surface p-4">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xl">{CATEGORIES[data.browseOpen].emoji}</span>
-            <h3 className="text-sm font-semibold text-gray-800">
+            <h3 className="text-sm font-semibold text-ink">
               {isZh ? CATEGORIES[data.browseOpen].zh : CATEGORIES[data.browseOpen].en}
             </h3>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-ink-subtle">
               ({itemsByCategory[data.browseOpen].length} {t('browse.entries')})
             </span>
             <button
               type="button"
               onClick={() => save({ ...data, browseOpen: null })}
-              className="ml-auto text-xs text-gray-500 hover:text-gray-800"
+              className="ml-auto text-xs text-ink-muted hover:text-ink"
             >
               {t('browse.collapse')}
             </button>
@@ -264,7 +264,7 @@ const TrashClassifier: React.FC = () => {
                 key={it.name}
                 type="button"
                 onClick={() => setQuery(it.name)}
-                className="px-2 py-1 text-xs bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md text-gray-700 transition-colors"
+                className="px-2 py-1 text-xs bg-surface-muted hover:bg-surface-inset border border-edge rounded-md text-ink-muted transition-colors"
                 title={it.hint}
               >
                 {it.name}
@@ -275,22 +275,22 @@ const TrashClassifier: React.FC = () => {
       )}
 
       {/* 自定义条目 */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setCustomOpen((v) => !v)}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-lg transition-colors"
         >
           <Plus className="w-4 h-4" />
           {t('custom.title')} ({data.customs.length})
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               customOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {customOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
+          <div className="px-4 pb-4 border-t border-edge pt-3 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_2fr_auto] gap-2">
               <input
                 type="text"
@@ -298,14 +298,14 @@ const TrashClassifier: React.FC = () => {
                 onChange={(e) => setDraftCustom({ ...draftCustom, name: e.target.value })}
                 onKeyDown={(e) => e.key === 'Enter' && addCustom()}
                 placeholder={t('custom.namePlaceholder')}
-                className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="px-3 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <select
                 value={draftCustom.category}
                 onChange={(e) =>
                   setDraftCustom({ ...draftCustom, category: e.target.value as TrashCategory })
                 }
-                className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
                 {ALL_CATS.map((c) => (
                   <option key={c} value={c}>
@@ -318,7 +318,7 @@ const TrashClassifier: React.FC = () => {
                 value={draftCustom.hint}
                 onChange={(e) => setDraftCustom({ ...draftCustom, hint: e.target.value })}
                 placeholder={t('custom.hintPlaceholder')}
-                className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="px-3 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <button
                 type="button"
@@ -331,7 +331,7 @@ const TrashClassifier: React.FC = () => {
               </button>
             </div>
             {data.customs.length > 0 ? (
-              <ul className="divide-y divide-gray-100">
+              <ul className="divide-y divide-edge">
                 {data.customs.map((c) => (
                   <li key={c.id} className="py-2 flex items-center gap-3 text-sm">
                     <span
@@ -339,12 +339,12 @@ const TrashClassifier: React.FC = () => {
                     >
                       {CATEGORIES[c.category].emoji} {isZh ? CATEGORIES[c.category].zh : CATEGORIES[c.category].en}
                     </span>
-                    <span className="text-gray-800">{c.name}</span>
-                    {c.hint && <span className="text-xs text-gray-500">{c.hint}</span>}
+                    <span className="text-ink">{c.name}</span>
+                    {c.hint && <span className="text-xs text-ink-muted">{c.hint}</span>}
                     <button
                       type="button"
                       onClick={() => removeCustom(c.id)}
-                      className="ml-auto text-gray-400 hover:text-red-500"
+                      className="ml-auto text-ink-subtle hover:text-red-500"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -352,7 +352,7 @@ const TrashClassifier: React.FC = () => {
                 ))}
               </ul>
             ) : (
-              <p className="text-xs text-gray-400">{t('custom.empty')}</p>
+              <p className="text-xs text-ink-subtle">{t('custom.empty')}</p>
             )}
           </div>
         )}
@@ -360,29 +360,29 @@ const TrashClassifier: React.FC = () => {
 
       {/* 历史 */}
       {data.history.length > 0 && (
-        <section className="rounded-lg border border-gray-200 bg-white">
+        <section className="rounded-lg border border-edge bg-surface">
           <button
             type="button"
             onClick={() => setHistoryOpen((v) => !v)}
-            className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+            className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-lg transition-colors"
           >
             <History className="w-4 h-4" />
             {t('history.title')} ({data.history.length})
             <ChevronDown
-              className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+              className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
                 historyOpen ? 'rotate-180' : ''
               }`}
             />
           </button>
           {historyOpen && (
-            <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+            <div className="px-4 pb-4 border-t border-edge pt-3">
               <div className="flex flex-wrap gap-1.5">
                 {data.history.map((h, i) => (
                   <button
                     key={`${h}-${i}`}
                     type="button"
                     onClick={() => setQuery(h)}
-                    className="px-2 py-1 text-xs bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md text-gray-700 transition-colors"
+                    className="px-2 py-1 text-xs bg-surface-muted hover:bg-surface-inset border border-edge rounded-md text-ink-muted transition-colors"
                   >
                     {h}
                   </button>
@@ -391,7 +391,7 @@ const TrashClassifier: React.FC = () => {
               <button
                 type="button"
                 onClick={clearHistory}
-                className="mt-2 text-xs text-gray-500 hover:text-red-600 inline-flex items-center gap-1"
+                className="mt-2 text-xs text-ink-muted hover:text-red-600 inline-flex items-center gap-1"
               >
                 <Trash2 className="w-3 h-3" /> {t('history.clear')}
               </button>
@@ -400,7 +400,7 @@ const TrashClassifier: React.FC = () => {
         </section>
       )}
 
-      <p className="text-xs text-gray-400 text-center flex items-center justify-center gap-1">
+      <p className="text-xs text-ink-subtle text-center flex items-center justify-center gap-1">
         <Info className="w-3 h-3" /> {t('disclaimer')}
       </p>
     </div>
@@ -415,7 +415,7 @@ interface ResultCardProps {
 const ResultCard: React.FC<ResultCardProps> = ({ item, isZh, t }) => {
   const meta = CATEGORIES[item.category]
   return (
-    <div className={`rounded-xl border-2 ${meta.ringColor} p-5 bg-white/80`}>
+    <div className={`rounded-xl border-2 ${meta.ringColor} p-5 bg-surface/80`}>
       <div className="flex items-start gap-4">
         <div className="text-5xl">{meta.emoji}</div>
         <div className="flex-1 min-w-0">
@@ -425,14 +425,14 @@ const ResultCard: React.FC<ResultCardProps> = ({ item, isZh, t }) => {
           <div className="text-2xl font-bold mt-0.5">
             {isZh ? meta.zh : meta.en}
           </div>
-          <div className="text-sm text-gray-700 mt-1">{item.name}</div>
+          <div className="text-sm text-ink mt-1">{item.name}</div>
           {item.hint && (
-            <div className="mt-2 text-xs px-2 py-1 rounded bg-white/70 text-gray-600 border border-gray-200 inline-block">
+            <div className="mt-2 text-xs px-2 py-1 rounded bg-surface/70 text-ink-muted border border-edge inline-block">
               💡 {item.hint}
             </div>
           )}
           {item.aliases && item.aliases.length > 0 && (
-            <div className="mt-2 text-xs text-gray-500">
+            <div className="mt-2 text-xs text-ink-muted">
               {t('result.aliases')}: {item.aliases.slice(0, 5).join(' / ')}
             </div>
           )}

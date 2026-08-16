@@ -43,7 +43,7 @@ export default function WaterReminder() {
   // 保存记录到 localStorage（仅在加载完成后）
   useEffect(() => {
     if (!isLoaded) return;
-    
+
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     } catch (error) {
@@ -109,7 +109,7 @@ export default function WaterReminder() {
   // 准备图表数据（按小时统计）
   const getChartData = () => {
     const hourlyData: { [key: string]: number } = {};
-    
+
     records.forEach(record => {
       const hour = record.time.split(':')[0];
       hourlyData[hour] = (hourlyData[hour] || 0) + record.amount;
@@ -148,32 +148,32 @@ export default function WaterReminder() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">💧 饮水提醒工具</h1>
-          <p className="text-gray-600">记录每日饮水量，养成健康饮水习惯</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">💧 饮水提醒工具</h1>
+          <p className="text-ink-muted">记录每日饮水量，养成健康饮水习惯</p>
         </div>
 
         {/* 进度卡片 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-sm text-gray-600 mb-1">今日饮水量</div>
+              <div className="text-sm text-ink-muted mb-1">今日饮水量</div>
               <div className="text-4xl font-bold text-blue-600">{totalToday} ml</div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-gray-600 mb-1">目标</div>
-              <div className="text-2xl font-semibold text-gray-700">{dailyGoal} ml</div>
+              <div className="text-sm text-ink-muted mb-1">目标</div>
+              <div className="text-2xl font-semibold text-ink">{dailyGoal} ml</div>
             </div>
           </div>
 
           <div className="mb-2">
-            <div className="flex justify-between text-sm text-gray-600 mb-1">
+            <div className="flex justify-between text-sm text-ink-muted mb-1">
               <span>进度</span>
               <span>{Math.round(progress)}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-4">
+            <div className="w-full bg-surface-inset rounded-full h-4">
               <div
                 className="bg-gradient-to-r from-blue-400 to-cyan-400 h-4 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
@@ -182,15 +182,15 @@ export default function WaterReminder() {
           </div>
 
           {totalToday >= dailyGoal && (
-            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-center">
-              <span className="text-green-700 font-medium">🎉 恭喜！今日目标已达成</span>
+            <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-center">
+              <span className="text-green-700 dark:text-green-300 font-medium">🎉 恭喜！今日目标已达成</span>
             </div>
           )}
         </div>
 
         {/* 饮水趋势图表 */}
         {records.length > 0 && getChartData().length > 0 && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
             <h2 className="text-lg font-semibold mb-4">📊 今日饮水分布</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={getChartData()}>
@@ -206,22 +206,22 @@ export default function WaterReminder() {
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
-            <p className="text-sm text-gray-500 text-center mt-2">
+            <p className="text-sm text-ink-muted text-center mt-2">
               每小时饮水量统计
             </p>
           </div>
         )}
 
         {/* 快捷添加 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">快捷记录</h2>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
             {[100, 200, 250, 500].map((amount) => (
               <button
                 key={amount}
                 onClick={() => addWater(amount)}
-                className="bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-blue-200 text-blue-700 py-4 rounded-lg font-semibold transition-colors"
+                className="bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/20 dark:hover:from-blue-900/30 dark:hover:to-cyan-900/30 border-2 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 py-4 rounded-lg font-semibold transition-colors"
               >
                 <div className="text-2xl mb-1">💧</div>
                 <div>{amount} ml</div>
@@ -235,7 +235,7 @@ export default function WaterReminder() {
               value={customAmount}
               onChange={(e) => setCustomAmount(Number(e.target.value))}
               placeholder="自定义毫升数"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <button
               onClick={() => addWater(customAmount)}
@@ -247,12 +247,12 @@ export default function WaterReminder() {
         </div>
 
         {/* 设置 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">设置</h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink-muted mb-2">
                 每日目标 (ml)
               </label>
               <input
@@ -260,12 +260,12 @@ export default function WaterReminder() {
                 value={dailyGoal}
                 onChange={(e) => setDailyGoal(Number(e.target.value))}
                 step="100"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink-muted mb-2">
                 提醒间隔 (分钟)
               </label>
               <input
@@ -274,12 +274,12 @@ export default function WaterReminder() {
                 onChange={(e) => setReminderInterval(Number(e.target.value))}
                 min="15"
                 step="15"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-700">启用提醒</span>
+              <span className="text-sm font-medium text-ink-muted">启用提醒</span>
               <button
                 onClick={() => {
                   if (!reminderEnabled) {
@@ -291,7 +291,7 @@ export default function WaterReminder() {
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                   reminderEnabled
                     ? 'bg-green-500 text-white hover:bg-green-600'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    : 'bg-surface-inset text-ink-muted hover:bg-gray-300 dark:hover:bg-gray-500'
                 }`}
               >
                 {reminderEnabled ? '已启用' : '已关闭'}
@@ -301,7 +301,7 @@ export default function WaterReminder() {
         </div>
 
         {/* 今日记录 */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold">今日记录</h2>
             <div className="flex gap-2">
@@ -327,21 +327,21 @@ export default function WaterReminder() {
           {records.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">💧</div>
-              <p className="text-gray-500">还没有饮水记录</p>
-              <p className="text-sm text-gray-400 mt-2">点击上方按钮开始记录</p>
+              <p className="text-ink-muted">还没有饮水记录</p>
+              <p className="text-sm text-ink-subtle mt-2">点击上方按钮开始记录</p>
             </div>
           ) : (
             <div className="space-y-2">
               {records.map((record) => (
                 <div
                   key={record.id}
-                  className="flex items-center justify-between p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                  className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div className="text-2xl">💧</div>
                     <div>
-                      <div className="font-medium text-gray-800">{record.amount} ml</div>
-                      <div className="text-sm text-gray-600">{record.time}</div>
+                      <div className="font-medium text-ink">{record.amount} ml</div>
+                      <div className="text-sm text-ink-muted">{record.time}</div>
                     </div>
                   </div>
                   <button
@@ -357,9 +357,9 @@ export default function WaterReminder() {
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">💡 饮水建议</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 饮水建议</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
             <li>• 成年人建议每天饮水 1500-2000ml</li>
             <li>• 少量多次饮水，避免一次性大量饮水</li>
             <li>• 运动后、天气炎热时需要增加饮水量</li>

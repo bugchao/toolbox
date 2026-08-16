@@ -187,11 +187,11 @@ export default function TravelConversation() {
 
   if (!selectedScenario) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">💬 旅行对话模拟</h1>
-            <p className="text-gray-600">选择场景，练习旅行中的常用英语对话</p>
+            <h1 className="text-4xl font-bold text-ink mb-2">💬 旅行对话模拟</h1>
+            <p className="text-ink-muted">选择场景，练习旅行中的常用英语对话</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -199,19 +199,19 @@ export default function TravelConversation() {
               <button
                 key={scenario.id}
                 onClick={() => startConversation(scenario)}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all text-left"
+                className="bg-surface rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all text-left"
               >
                 <div className="text-6xl mb-4">{scenario.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{scenario.name}</h3>
-                <p className="text-gray-600 text-sm mb-4">{scenario.description}</p>
+                <h3 className="text-xl font-bold text-ink mb-2">{scenario.name}</h3>
+                <p className="text-ink-muted text-sm mb-4">{scenario.description}</p>
                 <div className="text-blue-600 font-medium">开始练习 →</div>
               </button>
             ))}
           </div>
 
-          <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-800 mb-2">💡 使用提示</h3>
-            <ul className="text-sm text-blue-700 space-y-1">
+          <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 使用提示</h3>
+            <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
               <li>• 选择旅行场景，模拟真实对话情境</li>
               <li>• 可以自由输入英文对话，或使用预设短语</li>
               <li>• AI 会根据场景给出合适的回复</li>
@@ -224,9 +224,9 @@ export default function TravelConversation() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="bg-surface rounded-xl shadow-lg overflow-hidden">
           {/* 头部 */}
           <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-4">
             <div className="flex items-center justify-between">
@@ -247,7 +247,7 @@ export default function TravelConversation() {
           </div>
 
           {/* 对话区域 */}
-          <div className="h-96 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="h-96 overflow-y-auto p-4 space-y-4 bg-surface-muted">
             {messages.map(message => (
               <div
                 key={message.id}
@@ -257,11 +257,11 @@ export default function TravelConversation() {
                   className={`max-w-xs px-4 py-2 rounded-lg ${
                     message.role === 'user'
                       ? 'bg-blue-500 text-white'
-                      : 'bg-white text-gray-800 shadow'
+                      : 'bg-surface text-ink shadow'
                   }`}
                 >
                   <p className="text-sm">{message.content}</p>
-                  <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
+                  <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-blue-100' : 'text-ink-muted'}`}>
                     {message.timestamp.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -271,12 +271,12 @@ export default function TravelConversation() {
 
           {/* 常用短语 */}
           {showPhrases && (
-            <div className="border-t border-gray-200 p-4 bg-white">
+            <div className="border-t border-edge p-4 bg-surface">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-gray-800">💡 常用短语</h3>
+                <h3 className="font-semibold text-ink">💡 常用短语</h3>
                 <button
                   onClick={() => setShowPhrases(false)}
-                  className="text-sm text-gray-500 hover:text-gray-700"
+                  className="text-sm text-ink-muted hover:text-ink"
                 >
                   隐藏
                 </button>
@@ -286,10 +286,10 @@ export default function TravelConversation() {
                   <button
                     key={index}
                     onClick={() => usePhrase(phrase)}
-                    className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 rounded-lg text-sm transition-colors"
+                    className="w-full text-left px-3 py-2 bg-surface-muted hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg text-sm transition-colors"
                   >
-                    <div className="font-medium text-gray-800">{phrase.question}</div>
-                    <div className="text-gray-500 text-xs mt-1">{phrase.answer}</div>
+                    <div className="font-medium text-ink">{phrase.question}</div>
+                    <div className="text-ink-muted text-xs mt-1">{phrase.answer}</div>
                   </button>
                 ))}
               </div>
@@ -297,7 +297,7 @@ export default function TravelConversation() {
           )}
 
           {!showPhrases && (
-            <div className="border-t border-gray-200 p-2 bg-white">
+            <div className="border-t border-edge p-2 bg-surface">
               <button
                 onClick={() => setShowPhrases(true)}
                 className="text-sm text-blue-600 hover:text-blue-700"
@@ -308,7 +308,7 @@ export default function TravelConversation() {
           )}
 
           {/* 输入区域 */}
-          <div className="border-t border-gray-200 p-4 bg-white">
+          <div className="border-t border-edge p-4 bg-surface">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -316,7 +316,7 @@ export default function TravelConversation() {
                 onChange={(e) => setUserInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && sendMessage(userInput)}
                 placeholder="输入你的英文对话..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <button
                 onClick={() => sendMessage(userInput)}

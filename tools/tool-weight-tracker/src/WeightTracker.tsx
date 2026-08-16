@@ -80,21 +80,21 @@ function classifyBMI(bmi: number): {
   if (bmi < 18.5)
     return {
       key: 'underweight',
-      badge: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+      badge: 'bg-cyan-100 text-cyan-700 border-cyan-200 dark:bg-cyan-900/30 dark:text-cyan-300 dark:border-cyan-700',
     }
   if (bmi < 24)
     return {
       key: 'normal',
-      badge: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      badge: 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700',
     }
   if (bmi < 28)
     return {
       key: 'overweight',
-      badge: 'bg-amber-100 text-amber-700 border-amber-200',
+      badge: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-700',
     }
   return {
     key: 'obese',
-    badge: 'bg-red-100 text-red-700 border-red-200',
+    badge: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700',
   }
 }
 
@@ -322,7 +322,7 @@ const WeightTracker: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-gray-500 py-10">{t('loading')}</div>
+        <div className="text-center text-ink-muted py-10">{t('loading')}</div>
       </div>
     )
   }
@@ -332,14 +332,14 @@ const WeightTracker: React.FC = () => {
       <PageHero title={t('title')} description={t('description')} />
 
       {/* Quick log */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4">
-        <h2 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface p-4">
+        <h2 className="text-sm font-semibold text-ink-muted mb-3 flex items-center gap-2">
           <Scale className="w-4 h-4 text-indigo-500" />
           {t('section.quickLog')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_2fr_auto] gap-3">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">
+            <label className="block text-xs text-ink-muted mb-1">
               {t('field.date')}
             </label>
             <input
@@ -347,11 +347,11 @@ const WeightTracker: React.FC = () => {
               value={date}
               max={todayISO()}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full md:w-40 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full md:w-40 px-3 py-2 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">
+            <label className="block text-xs text-ink-muted mb-1">
               {t('field.weight')} ({unit})
             </label>
             <input
@@ -365,11 +365,11 @@ const WeightTracker: React.FC = () => {
                 if (e.key === 'Enter') handleRecord()
               }}
               placeholder={unit === 'kg' ? '65.0' : '143.3'}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">
+            <label className="block text-xs text-ink-muted mb-1">
               {t('field.note')}
             </label>
             <input
@@ -380,7 +380,7 @@ const WeightTracker: React.FC = () => {
                 if (e.key === 'Enter') handleRecord()
               }}
               placeholder={t('field.notePlaceholder')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div className="flex md:items-end">
@@ -433,11 +433,11 @@ const WeightTracker: React.FC = () => {
         </div>
 
         {/* BMI */}
-        <div className="rounded-lg border border-gray-200 bg-white p-4 flex flex-col justify-between">
-          <div className="text-xs text-gray-500">{t('bmi.label')}</div>
+        <div className="rounded-lg border border-edge bg-surface p-4 flex flex-col justify-between">
+          <div className="text-xs text-ink-muted">{t('bmi.label')}</div>
           {bmiClass ? (
             <div className="mt-2 flex items-baseline gap-3">
-              <span className="text-3xl font-bold text-gray-800 tabular-nums">
+              <span className="text-3xl font-bold text-ink tabular-nums">
                 {bmi.toFixed(1)}
               </span>
               <span
@@ -447,7 +447,7 @@ const WeightTracker: React.FC = () => {
               </span>
             </div>
           ) : (
-            <div className="mt-2 text-sm text-gray-400">{t('metrics.noData')}</div>
+            <div className="mt-2 text-sm text-ink-subtle">{t('metrics.noData')}</div>
           )}
           {/* BMI segments bar */}
           <div className="mt-3">
@@ -457,7 +457,7 @@ const WeightTracker: React.FC = () => {
               <div className="flex-1 bg-amber-200" />
               <div className="flex-1 bg-red-200" />
             </div>
-            <div className="flex justify-between text-[10px] text-gray-400 mt-1 tabular-nums">
+            <div className="flex justify-between text-[10px] text-ink-subtle mt-1 tabular-nums">
               <span>18.5</span>
               <span>24</span>
               <span>28</span>
@@ -467,9 +467,9 @@ const WeightTracker: React.FC = () => {
       </section>
 
       {/* Goal progress */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4">
+      <section className="rounded-lg border border-edge bg-surface p-4">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-ink-muted flex items-center gap-2">
             <Target className="w-4 h-4 text-emerald-500" />
             {t('progress.label')}
           </h2>
@@ -477,21 +477,21 @@ const WeightTracker: React.FC = () => {
             {progressPct.toFixed(0)}%
           </span>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+        <div className="w-full bg-surface-inset rounded-full h-3 overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all"
             style={{ width: `${progressPct}%` }}
           />
         </div>
-        <div className="flex justify-between text-xs text-gray-500 mt-1.5 tabular-nums">
+        <div className="flex justify-between text-xs text-ink-muted mt-1.5 tabular-nums">
           <span>{t('progress.fromStart', { w: w(firstKg) })}</span>
           <span>{t('progress.toTarget', { w: w(targetKg) })}</span>
         </div>
       </section>
 
       {/* Trend chart */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4">
-        <h2 className="text-sm font-semibold text-gray-700 mb-3">
+      <section className="rounded-lg border border-edge bg-surface p-4">
+        <h2 className="text-sm font-semibold text-ink-muted mb-3">
           {t('section.trend')}
         </h2>
         {chart ? (
@@ -599,32 +599,32 @@ const WeightTracker: React.FC = () => {
             </svg>
           </div>
         ) : (
-          <div className="py-10 text-center text-sm text-gray-400">
+          <div className="py-10 text-center text-sm text-ink-subtle">
             {t('empty.trend')}
           </div>
         )}
       </section>
 
       {/* Profile (collapsible) */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setProfileOpen((v) => !v)}
           aria-expanded={profileOpen}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors text-left"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-lg transition-colors text-left"
         >
           <User className="w-4 h-4" />
           {t('section.profile')}
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               profileOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {profileOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100 pt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="px-4 pb-4 border-t border-edge pt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs text-ink-muted mb-1">
                 {t('field.height')} ({heightUnitLabel})
               </label>
               <input
@@ -638,11 +638,11 @@ const WeightTracker: React.FC = () => {
                   const cm = data.profile.unit === 'lb' ? v * CM_PER_IN : v
                   setProfile({ height: cm })
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs text-ink-muted mb-1">
                 {t('field.target')} ({unit})
               </label>
               <input
@@ -655,17 +655,17 @@ const WeightTracker: React.FC = () => {
                   if (!Number.isFinite(v) || v <= 0) return
                   setProfile({ targetWeight: displayToKg(v, unit) })
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs text-ink-muted mb-1">
                 {t('field.unit')}
               </label>
               <select
                 value={unit}
                 onChange={(e) => setProfile({ unit: e.target.value as Unit })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md text-sm bg-surface focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="kg">{t('unitLabel.kg')}</option>
                 <option value="lb">{t('unitLabel.lb')}</option>
@@ -676,18 +676,18 @@ const WeightTracker: React.FC = () => {
       </section>
 
       {/* History (collapsible) */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <div className="flex items-stretch">
           <button
             type="button"
             onClick={() => setHistoryOpen((v) => !v)}
             aria-expanded={historyOpen}
-            className="flex-1 flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-l-lg transition-colors text-left"
+            className="flex-1 flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-l-lg transition-colors text-left"
           >
             <History className="w-4 h-4" />
             {t('section.history')} ({sortedEntries.length})
             <ChevronDown
-              className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+              className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
                 historyOpen ? 'rotate-180' : ''
               }`}
             />
@@ -696,7 +696,7 @@ const WeightTracker: React.FC = () => {
             <button
               type="button"
               onClick={handleClearAll}
-              className="px-3 my-2 mr-3 text-xs text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-300 rounded transition-colors flex items-center gap-1"
+              className="px-3 my-2 mr-3 text-xs text-ink-muted hover:text-red-600 border border-edge hover:border-red-300 dark:hover:border-red-700 rounded transition-colors flex items-center gap-1"
             >
               <Trash2 className="w-3 h-3" />
               {t('action.clearAll')}
@@ -704,13 +704,13 @@ const WeightTracker: React.FC = () => {
           )}
         </div>
         {historyOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100">
+          <div className="px-4 pb-4 border-t border-edge">
             {sortedEntries.length === 0 ? (
-              <div className="py-6 text-center text-sm text-gray-400">
+              <div className="py-6 text-center text-sm text-ink-subtle">
                 {t('empty.history')}
               </div>
             ) : (
-              <ul className="divide-y divide-gray-100 max-h-96 overflow-y-auto">
+              <ul className="divide-y divide-edge max-h-96 overflow-y-auto">
                 {historyDesc.map((row) => {
                   const diffKg = row.diff
                   let diffEl: React.ReactNode = null
@@ -718,7 +718,7 @@ const WeightTracker: React.FC = () => {
                     const dispDiff = kgToDisplay(diffKg, unit)
                     if (Math.abs(dispDiff) < 0.05) {
                       diffEl = (
-                        <span className="text-xs text-gray-400 inline-flex items-center gap-0.5">
+                        <span className="text-xs text-ink-subtle inline-flex items-center gap-0.5">
                           <Minus className="w-3 h-3" />
                           {t('diff.same')}
                         </span>
@@ -744,16 +744,16 @@ const WeightTracker: React.FC = () => {
                       key={row.date}
                       className="py-2 grid grid-cols-[auto_auto_1fr_auto] items-center gap-3 text-sm"
                     >
-                      <span className="font-mono text-xs text-gray-500 tabular-nums shrink-0">
+                      <span className="font-mono text-xs text-ink-muted tabular-nums shrink-0">
                         {row.date}
                       </span>
-                      <span className="font-semibold text-gray-800 tabular-nums shrink-0">
+                      <span className="font-semibold text-ink tabular-nums shrink-0">
                         {fmt1(kgToDisplay(row.weight, unit))} {unit}
                       </span>
                       <span className="flex items-center gap-3 min-w-0">
                         {diffEl}
                         {row.note && (
-                          <span className="text-xs text-gray-500 truncate">
+                          <span className="text-xs text-ink-muted truncate">
                             {row.note}
                           </span>
                         )}
@@ -761,7 +761,7 @@ const WeightTracker: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => handleDeleteEntry(row.date)}
-                        className="text-xs text-gray-400 hover:text-red-600 inline-flex items-center gap-1 shrink-0"
+                        className="text-xs text-ink-subtle hover:text-red-600 inline-flex items-center gap-1 shrink-0"
                         aria-label={t('action.delete')}
                       >
                         <Trash2 className="w-3 h-3" />
@@ -792,10 +792,10 @@ const MetricCard: React.FC<MetricCardProps> = ({ label, value, tone = 'neutral' 
       ? 'text-emerald-600'
       : tone === 'up'
         ? 'text-red-500'
-        : 'text-gray-800'
+        : 'text-ink'
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-3">
-      <div className="text-xs text-gray-500">{label}</div>
+    <div className="rounded-lg border border-edge bg-surface p-3">
+      <div className="text-xs text-ink-muted">{label}</div>
       <div className={`mt-1 text-lg font-semibold tabular-nums ${toneCls}`}>
         {value}
       </div>

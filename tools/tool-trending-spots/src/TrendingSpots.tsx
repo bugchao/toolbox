@@ -159,34 +159,34 @@ export default function TrendingSpots() {
   const filteredSpots = getFilteredSpots();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📸 网红景点生成器</h1>
-          <p className="text-gray-600">发现热门打卡点，记录美好瞬间</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">📸 网红景点生成器</h1>
+          <p className="text-ink-muted">发现热门打卡点，记录美好瞬间</p>
         </div>
 
         {/* 筛选区域 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">🔍 搜索景点</label>
+              <label className="block text-sm font-medium text-ink-muted mb-2">🔍 搜索景点</label>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="输入景点名称、标签或关键词..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">🏙️ 城市</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">🏙️ 城市</label>
                 <select
                   value={selectedCity}
                   onChange={(e) => setSelectedCity(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   {CITIES.map(city => (
                     <option key={city} value={city}>{city}</option>
@@ -195,11 +195,11 @@ export default function TrendingSpots() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">🎯 分类</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">🎯 分类</label>
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   {CATEGORIES.map(category => (
                     <option key={category} value={category}>{category}</option>
@@ -212,7 +212,7 @@ export default function TrendingSpots() {
               <button
                 onClick={() => setSortBy('popularity')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  sortBy === 'popularity' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  sortBy === 'popularity' ? 'bg-purple-500 text-white' : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 🔥 热度排序
@@ -220,7 +220,7 @@ export default function TrendingSpots() {
               <button
                 onClick={() => setSortBy('name')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  sortBy === 'name' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  sortBy === 'name' ? 'bg-purple-500 text-white' : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 🔤 名称排序
@@ -230,7 +230,7 @@ export default function TrendingSpots() {
         </div>
 
         {/* 景点列表 */}
-        <div className="mb-4 text-gray-600">
+        <div className="mb-4 text-ink-muted">
           找到 <span className="font-semibold text-purple-600">{filteredSpots.length}</span> 个网红景点
         </div>
 
@@ -239,50 +239,50 @@ export default function TrendingSpots() {
             {filteredSpots.map(spot => (
               <div
                 key={spot.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                className="bg-surface rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
               >
-                <div className="h-48 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-8xl">
+                <div className="h-48 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center text-8xl">
                   {spot.imageUrl}
                 </div>
 
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800 mb-1">{spot.name}</h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <h3 className="text-xl font-bold text-ink mb-1">{spot.name}</h3>
+                      <div className="flex items-center gap-2 text-sm text-ink-muted">
                         <span>📍 {spot.city}</span>
                         <span>•</span>
                         <span>{spot.category}</span>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 bg-red-50 px-3 py-1 rounded-full">
+                    <div className="flex items-center gap-1 bg-red-50 dark:bg-red-900/20 px-3 py-1 rounded-full">
                       <span className="text-red-500 font-bold">{spot.popularity}</span>
                       <span className="text-xs text-red-500">🔥</span>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{spot.description}</p>
+                  <p className="text-ink-muted text-sm mb-4 line-clamp-3">{spot.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {spot.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-purple-50 text-purple-600 text-xs rounded-full font-medium"
+                        className="px-3 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 text-xs rounded-full font-medium"
                       >
                         #{tag}
                       </span>
                     ))}
                   </div>
 
-                  <div className="border-t border-gray-100 pt-4 space-y-3">
+                  <div className="border-t border-edge pt-4 space-y-3">
                     <div>
-                      <div className="text-sm font-semibold text-gray-700 mb-1">⏰ 最佳时间</div>
-                      <div className="text-sm text-gray-600">{spot.bestTime}</div>
+                      <div className="text-sm font-semibold text-ink-muted mb-1">⏰ 最佳时间</div>
+                      <div className="text-sm text-ink-muted">{spot.bestTime}</div>
                     </div>
 
                     <div>
-                      <div className="text-sm font-semibold text-gray-700 mb-2">💡 游玩建议</div>
-                      <ul className="text-sm text-gray-600 space-y-1">
+                      <div className="text-sm font-semibold text-ink-muted mb-2">💡 游玩建议</div>
+                      <ul className="text-sm text-ink-muted space-y-1">
                         {spot.tips.slice(0, 2).map((tip, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <span className="text-purple-500 mt-0.5">•</span>
@@ -301,17 +301,17 @@ export default function TrendingSpots() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+          <div className="bg-surface rounded-xl shadow-lg p-12 text-center">
             <div className="text-6xl mb-4">🔍</div>
-            <p className="text-gray-600 text-lg">没有找到符合条件的景点</p>
-            <p className="text-gray-500 text-sm mt-2">试试调整筛选条件或搜索关键词</p>
+            <p className="text-ink-muted text-lg">没有找到符合条件的景点</p>
+            <p className="text-ink-muted text-sm mt-2">试试调整筛选条件或搜索关键词</p>
           </div>
         )}
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-purple-50 border border-purple-200 rounded-lg p-4">
-          <h3 className="font-semibold text-purple-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-purple-700 space-y-1">
+        <div className="mt-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+          <h3 className="font-semibold text-purple-800 dark:text-purple-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-purple-700 dark:text-purple-300 space-y-1">
             <li>• 根据城市和分类快速筛选感兴趣的景点</li>
             <li>• 查看最佳拍照时间和游玩建议，提升旅行体验</li>
             <li>• 热度排序帮你找到当下最火的打卡点</li>

@@ -171,65 +171,65 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">✍️ 旅行故事生成</h1>
-          <p className="text-gray-600">AI 帮你把旅行经历变成精彩故事</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">✍️ 旅行故事生成</h1>
+          <p className="text-ink-muted">AI 帮你把旅行经历变成精彩故事</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* 输入区域 */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">📝 填写旅行信息</h2>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">目的地 *</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">目的地 *</label>
                 <input
                   type="text"
                   value={input.destination}
                   onChange={(e) => setInput({ ...input, destination: e.target.value })}
                   placeholder="例如：巴黎、东京、丽江..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">旅行时长</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">旅行时长</label>
                 <input
                   type="text"
                   value={input.duration}
                   onChange={(e) => setInput({ ...input, duration: e.target.value })}
                   placeholder="例如：3天2夜、一周、一个月..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">同行伙伴</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">同行伙伴</label>
                 <input
                   type="text"
                   value={input.companions}
                   onChange={(e) => setInput({ ...input, companions: e.target.value })}
                   placeholder="例如：家人、朋友、爱人..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">旅行亮点 *</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">旅行亮点 *</label>
                 <textarea
                   value={input.highlights}
                   onChange={(e) => setInput({ ...input, highlights: e.target.value })}
                   placeholder="每行一个亮点，例如：&#10;登上埃菲尔铁塔看日落&#10;在塞纳河边散步&#10;品尝正宗法式大餐"
                   rows={6}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">旅行氛围</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">旅行氛围</label>
                 <div className="grid grid-cols-3 gap-2">
                   {MOODS.map(mood => (
                     <button
@@ -238,7 +238,7 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
                       className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                         input.mood === mood.value
                           ? 'bg-orange-500 text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                       }`}
                     >
                       {mood.emoji} {mood.label}
@@ -248,7 +248,7 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">写作风格</label>
+                <label className="block text-sm font-medium text-ink-muted mb-2">写作风格</label>
                 <div className="space-y-2">
                   {STYLES.map(style => (
                     <button
@@ -257,11 +257,11 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
                       className={`w-full px-4 py-3 rounded-lg text-left transition-colors ${
                         input.style === style.value
                           ? 'bg-orange-500 text-white'
-                          : 'bg-gray-50 hover:bg-gray-100'
+                          : 'bg-surface-muted hover:bg-surface-inset'
                       }`}
                     >
                       <div className="font-medium">{style.label}</div>
-                      <div className={`text-sm ${input.style === style.value ? 'text-orange-100' : 'text-gray-500'}`}>
+                      <div className={`text-sm ${input.style === style.value ? 'text-orange-100' : 'text-ink-muted'}`}>
                         {style.desc}
                       </div>
                     </button>
@@ -280,7 +280,7 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
           </div>
 
           {/* 输出区域 */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">📖 生成的故事</h2>
               {story && (
@@ -304,12 +304,12 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
 
             {story ? (
               <div className="prose prose-sm max-w-none">
-                <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-lg">
+                <pre className="whitespace-pre-wrap font-sans text-ink leading-relaxed bg-surface-muted p-4 rounded-lg">
                   {story}
                 </pre>
               </div>
             ) : (
-              <div className="h-full flex items-center justify-center text-gray-400 text-center py-20">
+              <div className="h-full flex items-center justify-center text-ink-subtle text-center py-20">
                 <div>
                   <div className="text-6xl mb-4">✍️</div>
                   <p>填写左侧信息，生成你的旅行故事</p>
@@ -320,9 +320,9 @@ ${moodTexts[mood as keyof typeof moodTexts]}。
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
-          <h3 className="font-semibold text-orange-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-orange-700 space-y-1">
+        <div className="mt-6 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+          <h3 className="font-semibold text-orange-800 dark:text-orange-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
             <li>• 填写的信息越详细，生成的故事越精彩</li>
             <li>• 可以选择不同的写作风格，找到最适合你的表达方式</li>
             <li>• 生成后可以复制或下载，方便分享到社交平台</li>

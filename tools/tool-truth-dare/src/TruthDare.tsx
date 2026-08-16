@@ -25,10 +25,10 @@ const NAMESPACE = 'toolTruthDare'
 
 const DIFFICULTIES: PromptDifficulty[] = ['mild', 'normal', 'spicy', 'wild']
 const DIFFICULTY_COLOR: Record<PromptDifficulty, string> = {
-  mild: 'bg-emerald-100 text-emerald-700 border-emerald-300',
-  normal: 'bg-sky-100 text-sky-700 border-sky-300',
-  spicy: 'bg-amber-100 text-amber-700 border-amber-300',
-  wild: 'bg-rose-100 text-rose-700 border-rose-300',
+  mild: 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700',
+  normal: 'bg-sky-100 text-sky-700 border-sky-300 dark:bg-sky-900/30 dark:text-sky-300 dark:border-sky-700',
+  spicy: 'bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-700',
+  wild: 'bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-700',
 }
 const TYPE_COLOR: Record<PromptType, string> = {
   truth: 'bg-indigo-600 text-white',
@@ -261,9 +261,9 @@ const TruthDare: React.FC = () => {
       <PageHero title={t('title')} description={t('description')} />
 
       {/* Filters */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm font-medium text-gray-700 shrink-0">{t('typeLabel')}:</span>
+          <span className="text-sm font-medium text-ink-muted shrink-0">{t('typeLabel')}:</span>
           {(['truth', 'dare'] as PromptType[]).map((typ) => {
             const on = data.enabledTypes.includes(typ)
             return (
@@ -276,7 +276,7 @@ const TruthDare: React.FC = () => {
                     ? typ === 'truth'
                       ? 'bg-indigo-600 text-white border-indigo-600'
                       : 'bg-pink-600 text-white border-pink-600'
-                    : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
+                    : 'bg-surface text-ink-muted border-edge-strong hover:border-gray-400 dark:hover:border-gray-500'
                 }`}
               >
                 {typ === 'truth' ? (
@@ -291,7 +291,7 @@ const TruthDare: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm font-medium text-gray-700 shrink-0">{t('difficultyLabel')}:</span>
+          <span className="text-sm font-medium text-ink-muted shrink-0">{t('difficultyLabel')}:</span>
           {DIFFICULTIES.map((d) => {
             const on = data.enabledDifficulties.includes(d)
             return (
@@ -300,7 +300,7 @@ const TruthDare: React.FC = () => {
                 type="button"
                 onClick={() => toggleDifficulty(d)}
                 className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                  on ? DIFFICULTY_COLOR[d] : 'bg-white text-gray-400 border-gray-200'
+                  on ? DIFFICULTY_COLOR[d] : 'bg-surface text-ink-subtle border-edge'
                 }`}
               >
                 {t(`difficulty.${d}`)}
@@ -309,7 +309,7 @@ const TruthDare: React.FC = () => {
           })}
         </div>
 
-        <div className="text-xs text-gray-400 pt-1">
+        <div className="text-xs text-ink-subtle pt-1">
           {t('poolStatus', { used: usedCount, total: totalCount })}
           {availablePrompts.length === 0 && filteredPrompts.length > 0 && (
             <>
@@ -328,25 +328,25 @@ const TruthDare: React.FC = () => {
       </section>
 
       {/* Prompt card + current player */}
-      <section className="rounded-2xl border border-gray-200 bg-gradient-to-br from-indigo-50 via-white to-pink-50 p-6 md:p-8 min-h-[260px] flex flex-col items-center justify-center text-center gap-4">
+      <section className="rounded-2xl border border-edge bg-gradient-to-br from-indigo-50 dark:from-indigo-950/30 via-white dark:via-surface to-pink-50 dark:to-pink-950/30 p-6 md:p-8 min-h-[260px] flex flex-col items-center justify-center text-center gap-4">
         {currentPlayer && (
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-ink-muted">
             <button
               type="button"
               onClick={prevPlayer}
-              className="p-1 rounded hover:bg-white/60"
+              className="p-1 rounded hover:bg-white/60 dark:hover:bg-white/10"
               title={t('prevPlayer')}
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <CircleUserRound className="w-4 h-4 text-indigo-500" />
-            <span className="font-medium text-gray-800">
+            <span className="font-medium text-ink">
               {t('currentTurn', { player: currentPlayer })}
             </span>
             <button
               type="button"
               onClick={nextPlayer}
-              className="p-1 rounded hover:bg-white/60"
+              className="p-1 rounded hover:bg-white/60 dark:hover:bg-white/10"
               title={t('nextPlayer')}
             >
               <ChevronRight className="w-4 h-4" />
@@ -355,14 +355,14 @@ const TruthDare: React.FC = () => {
         )}
 
         {!current && !exhausted && (
-          <div className="text-gray-400 text-sm flex flex-col items-center gap-2">
+          <div className="text-ink-subtle text-sm flex flex-col items-center gap-2">
             <Sparkles className="w-8 h-8 text-indigo-300" />
             <span>{t('emptyHint')}</span>
           </div>
         )}
 
         {exhausted && (
-          <div className="text-gray-500 text-sm flex flex-col items-center gap-3">
+          <div className="text-ink-muted text-sm flex flex-col items-center gap-3">
             <Sparkles className="w-8 h-8 text-amber-400" />
             <p>{t('exhaustedHint')}</p>
             <button
@@ -396,7 +396,7 @@ const TruthDare: React.FC = () => {
               </span>
             </div>
             <p
-              className={`text-xl md:text-2xl font-medium text-gray-800 leading-relaxed transition-opacity ${
+              className={`text-xl md:text-2xl font-medium text-ink leading-relaxed transition-opacity ${
                 drawing ? 'opacity-50' : 'opacity-100'
               }`}
             >
@@ -429,23 +429,23 @@ const TruthDare: React.FC = () => {
       </section>
 
       {/* Players (collapsible) */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setPlayersOpen((v) => !v)}
           aria-expanded={playersOpen}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-lg transition-colors"
         >
           <Users className="w-4 h-4" />
           {t('playersLabel')} ({data.players.length})
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               playersOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {playersOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100 space-y-3 pt-3">
+          <div className="px-4 pb-4 border-t border-edge space-y-3 pt-3">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -453,7 +453,7 @@ const TruthDare: React.FC = () => {
                 onChange={(e) => setNewPlayer(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
                 placeholder={t('playerPlaceholder')}
-                className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="flex-1 px-3 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button
                 type="button"
@@ -472,8 +472,8 @@ const TruthDare: React.FC = () => {
                     key={`${p}-${i}`}
                     className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm border ${
                       i === data.currentPlayerIndex
-                        ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
-                        : 'bg-gray-50 border-gray-200 text-gray-700'
+                        ? 'bg-indigo-50 border-indigo-300 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-700 dark:text-indigo-300'
+                        : 'bg-surface-muted border-edge text-ink-muted'
                     }`}
                   >
                     <CircleUserRound className="w-3.5 h-3.5" />
@@ -481,7 +481,7 @@ const TruthDare: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => removePlayer(i)}
-                      className="ml-1 text-gray-400 hover:text-red-500"
+                      className="ml-1 text-ink-subtle hover:text-red-500"
                       title={t('removePlayer')}
                     >
                       <Trash2 className="w-3 h-3" />
@@ -490,37 +490,37 @@ const TruthDare: React.FC = () => {
                 ))}
               </ul>
             ) : (
-              <p className="text-xs text-gray-400">{t('noPlayers')}</p>
+              <p className="text-xs text-ink-subtle">{t('noPlayers')}</p>
             )}
           </div>
         )}
       </section>
 
       {/* Custom prompts (collapsible) */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setCustomOpen((v) => !v)}
           aria-expanded={customOpen}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink-muted hover:bg-surface-muted rounded-lg transition-colors"
         >
           <History className="w-4 h-4" />
           {t('customLabel')} ({data.customPrompts.length})
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               customOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {customOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100 space-y-3 pt-3">
+          <div className="px-4 pb-4 border-t border-edge space-y-3 pt-3">
             <div className="grid grid-cols-1 md:grid-cols-[auto_auto_1fr_auto] gap-2 items-center">
               <select
                 value={draftPrompt.type}
                 onChange={(e) =>
                   setDraftPrompt({ ...draftPrompt, type: e.target.value as PromptType })
                 }
-                className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="truth">{t('type.truth')}</option>
                 <option value="dare">{t('type.dare')}</option>
@@ -533,7 +533,7 @@ const TruthDare: React.FC = () => {
                     difficulty: e.target.value as PromptDifficulty,
                   })
                 }
-                className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {DIFFICULTIES.map((d) => (
                   <option key={d} value={d}>
@@ -547,7 +547,7 @@ const TruthDare: React.FC = () => {
                 onChange={(e) => setDraftPrompt({ ...draftPrompt, text: e.target.value })}
                 onKeyDown={(e) => e.key === 'Enter' && addCustomPrompt()}
                 placeholder={t('customPlaceholder')}
-                className="px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="px-3 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button
                 type="button"
@@ -560,7 +560,7 @@ const TruthDare: React.FC = () => {
               </button>
             </div>
             {data.customPrompts.length > 0 ? (
-              <ul className="divide-y divide-gray-100 max-h-72 overflow-y-auto">
+              <ul className="divide-y divide-edge max-h-72 overflow-y-auto">
                 {data.customPrompts.map((c) => (
                   <li key={c.id} className="py-2 flex items-start gap-3 text-sm">
                     <span
@@ -578,11 +578,11 @@ const TruthDare: React.FC = () => {
                     >
                       {t(`difficulty.${c.difficulty}`)}
                     </span>
-                    <span className="flex-1 text-gray-700">{c[lang]}</span>
+                    <span className="flex-1 text-ink">{c[lang]}</span>
                     <button
                       type="button"
                       onClick={() => removeCustomPrompt(c.id)}
-                      className="text-gray-400 hover:text-red-500 shrink-0"
+                      className="text-ink-subtle hover:text-red-500 shrink-0"
                       title={t('removeCustom')}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -591,7 +591,7 @@ const TruthDare: React.FC = () => {
                 ))}
               </ul>
             ) : (
-              <p className="text-xs text-gray-400">{t('noCustom')}</p>
+              <p className="text-xs text-ink-subtle">{t('noCustom')}</p>
             )}
           </div>
         )}
@@ -612,7 +612,7 @@ const TruthDare: React.FC = () => {
           <button
             type="button"
             onClick={nextPlayer}
-            className="px-5 py-3 text-base font-medium bg-white text-gray-700 rounded-full shadow border border-gray-200 hover:bg-gray-50 transition-colors flex items-center gap-2"
+            className="px-5 py-3 text-base font-medium bg-surface text-ink-muted rounded-full shadow border border-edge hover:bg-surface-muted transition-colors flex items-center gap-2"
           >
             <ChevronRight className="w-5 h-5" />
             {t('passToNext')}

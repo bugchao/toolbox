@@ -149,16 +149,16 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📋 旅行攻略总结器</h1>
-          <p className="text-gray-600">AI 提取攻略要点，生成结构化总结</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">📋 旅行攻略总结器</h1>
+          <p className="text-ink-muted">AI 提取攻略要点，生成结构化总结</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* 输入区域 */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">📝 输入攻略内容</h2>
 
             <div className="flex gap-2 mb-4">
@@ -167,7 +167,7 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
                   inputMode === 'text'
                     ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 文本输入
@@ -177,7 +177,7 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
                   inputMode === 'url'
                     ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 链接输入
@@ -186,7 +186,7 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
 
             {inputMode === 'text' ? (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink-muted mb-2">
                   粘贴攻略内容
                 </label>
                 <textarea
@@ -194,12 +194,12 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="粘贴旅行攻略文本，可以是游记、攻略文章、笔记等..."
                   rows={15}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
                 />
               </div>
             ) : (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink-muted mb-2">
                   输入攻略链接
                 </label>
                 <input
@@ -207,9 +207,9 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://example.com/travel-guide"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-ink-muted mt-2">
                   支持马蜂窝、穷游、小红书等旅游网站链接
                 </p>
               </div>
@@ -223,9 +223,9 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
               {generating ? '生成中...' : '✨ 生成攻略总结'}
             </button>
 
-            <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-              <h3 className="font-semibold text-green-800 text-sm mb-2">💡 支持的内容</h3>
-              <ul className="text-xs text-green-700 space-y-1">
+            <div className="mt-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
+              <h3 className="font-semibold text-green-800 dark:text-green-300 text-sm mb-2">💡 支持的内容</h3>
+              <ul className="text-xs text-green-700 dark:text-green-300 space-y-1">
                 <li>• 旅游攻略文章</li>
                 <li>• 游记博客</li>
                 <li>• 旅行笔记</li>
@@ -235,7 +235,7 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
           </div>
 
           {/* 输出区域 */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">📖 攻略总结</h2>
               {summary && (
@@ -260,30 +260,30 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
             {summary ? (
               <div className="space-y-6 max-h-[600px] overflow-y-auto">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{summary.destination}</h3>
-                  <p className="text-gray-600">{summary.overview}</p>
+                  <h3 className="text-2xl font-bold text-ink mb-2">{summary.destination}</h3>
+                  <p className="text-ink-muted">{summary.overview}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-green-50 p-3 rounded-lg">
-                    <div className="text-sm text-gray-600 mb-1">最佳时间</div>
-                    <div className="font-semibold text-gray-800">{summary.bestTime}</div>
+                  <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+                    <div className="text-sm text-ink-muted mb-1">最佳时间</div>
+                    <div className="font-semibold text-ink">{summary.bestTime}</div>
                   </div>
-                  <div className="bg-green-50 p-3 rounded-lg">
-                    <div className="text-sm text-gray-600 mb-1">建议时长</div>
-                    <div className="font-semibold text-gray-800">{summary.duration}</div>
+                  <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+                    <div className="text-sm text-ink-muted mb-1">建议时长</div>
+                    <div className="font-semibold text-ink">{summary.duration}</div>
                   </div>
-                  <div className="bg-green-50 p-3 rounded-lg col-span-2">
-                    <div className="text-sm text-gray-600 mb-1">预算参考</div>
-                    <div className="font-semibold text-gray-800">{summary.budget}</div>
+                  <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg col-span-2">
+                    <div className="text-sm text-ink-muted mb-1">预算参考</div>
+                    <div className="font-semibold text-ink">{summary.budget}</div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">🎯 必游景点</h4>
+                  <h4 className="font-semibold text-ink mb-2">🎯 必游景点</h4>
                   <ul className="space-y-2">
                     {summary.highlights.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      <li key={index} className="flex items-start gap-2 text-sm text-ink">
                         <span className="text-green-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
@@ -292,10 +292,10 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">🚇 交通指南</h4>
+                  <h4 className="font-semibold text-ink mb-2">🚇 交通指南</h4>
                   <ul className="space-y-2">
                     {summary.transportation.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      <li key={index} className="flex items-start gap-2 text-sm text-ink">
                         <span className="text-green-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
@@ -304,10 +304,10 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">🏨 住宿推荐</h4>
+                  <h4 className="font-semibold text-ink mb-2">🏨 住宿推荐</h4>
                   <ul className="space-y-2">
                     {summary.accommodation.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      <li key={index} className="flex items-start gap-2 text-sm text-ink">
                         <span className="text-green-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
@@ -316,10 +316,10 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">🍜 美食推荐</h4>
+                  <h4 className="font-semibold text-ink mb-2">🍜 美食推荐</h4>
                   <ul className="space-y-2">
                     {summary.food.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      <li key={index} className="flex items-start gap-2 text-sm text-ink">
                         <span className="text-green-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
@@ -328,10 +328,10 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">💡 实用建议</h4>
+                  <h4 className="font-semibold text-ink mb-2">💡 实用建议</h4>
                   <ul className="space-y-2">
                     {summary.tips.map((item, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                      <li key={index} className="flex items-start gap-2 text-sm text-ink">
                         <span className="text-green-500 mt-0.5">•</span>
                         <span>{item}</span>
                       </li>
@@ -340,7 +340,7 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
                 </div>
               </div>
             ) : (
-              <div className="h-full flex items-center justify-center text-gray-400 text-center py-20">
+              <div className="h-full flex items-center justify-center text-ink-subtle text-center py-20">
                 <div>
                   <div className="text-6xl mb-4">📋</div>
                   <p>输入攻略内容，生成结构化总结</p>
@@ -351,9 +351,9 @@ ${summary.tips.map(t => `• ${t}`).join('\n')}`;
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
-          <h3 className="font-semibold text-green-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-green-700 space-y-1">
+        <div className="mt-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+          <h3 className="font-semibold text-green-800 dark:text-green-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
             <li>• AI 自动提取攻略中的关键信息，生成结构化总结</li>
             <li>• 支持文本粘贴和链接抓取两种方式</li>
             <li>• 总结包含景点、交通、住宿、美食、建议等维度</li>
