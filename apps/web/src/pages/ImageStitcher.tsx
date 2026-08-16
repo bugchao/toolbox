@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, Download, LayoutGrid, Columns, Rows, X, Plus, Trash2 } from 'lucide-react';
 
 interface StitchImage {
@@ -10,6 +11,7 @@ interface StitchImage {
 }
 
 const ImageStitcher: React.FC = () => {
+  const { t } = useTranslation('imageStitcher');
   const [images, setImages] = useState<StitchImage[]>([]);
   const [direction, setDirection] = useState<'horizontal' | 'vertical'>('horizontal');
   const [gap, setGap] = useState(0);
@@ -148,20 +150,20 @@ const ImageStitcher: React.FC = () => {
     <div className="max-w-7xl mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">图片拼接工具</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
         <p className="text-ink-muted">
-          将多张图片横向或纵向拼接成一张，支持自定义间距和背景色
+          {t('description')}
         </p>
       </div>
 
       {/* Settings */}
       <div className="mb-6 bg-surface rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">拼接设置</h2>
-        
+        <h2 className="text-lg font-semibold mb-4">{t('settingsTitle')}</h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Direction */}
           <div>
-            <label className="block text-sm font-medium mb-3">拼接方向</label>
+            <label className="block text-sm font-medium mb-3">{t('direction')}</label>
             <div className="flex gap-2">
               <button
                 onClick={() => setDirection('horizontal')}
@@ -172,7 +174,7 @@ const ImageStitcher: React.FC = () => {
                 }`}
               >
                 <Columns className="w-5 h-5" />
-                横向
+                {t('horizontal')}
               </button>
               <button
                 onClick={() => setDirection('vertical')}
@@ -183,14 +185,14 @@ const ImageStitcher: React.FC = () => {
                 }`}
               >
                 <Rows className="w-5 h-5" />
-                纵向
+                {t('vertical')}
               </button>
             </div>
           </div>
 
           {/* Gap */}
           <div>
-            <label className="block text-sm font-medium mb-3">间距 ({gap}px)</label>
+            <label className="block text-sm font-medium mb-3">{t('gap', { gap })}</label>
             <input
               type="range"
               min="0"
@@ -211,7 +213,7 @@ const ImageStitcher: React.FC = () => {
 
           {/* Background Color */}
           <div>
-            <label className="block text-sm font-medium mb-3">背景色</label>
+            <label className="block text-sm font-medium mb-3">{t('backgroundColor')}</label>
             <div className="flex gap-2">
               <input
                 type="color"
@@ -238,8 +240,8 @@ const ImageStitcher: React.FC = () => {
           className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
           <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
-          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-ink-muted">至少需要 2 张图片，支持批量上传</p>
+          <p className="text-lg font-medium text-ink mb-2">{t('uploadHint')}</p>
+          <p className="text-sm text-ink-muted">{t('uploadFormats')}</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -255,13 +257,13 @@ const ImageStitcher: React.FC = () => {
       {images.length > 0 && (
         <div className="mb-6 bg-surface rounded-lg shadow p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">图片列表 ({images.length}张)</h2>
+            <h2 className="text-lg font-semibold">{t('imageListTitle', { count: images.length })}</h2>
             <button
               onClick={clearAll}
               className="text-sm text-red-500 hover:text-red-600 flex items-center gap-1"
             >
               <Trash2 className="w-4 h-4" />
-              清空
+              {t('clear')}
             </button>
           </div>
 
@@ -280,7 +282,7 @@ const ImageStitcher: React.FC = () => {
                     onClick={() => moveImage(index, 'up')}
                     disabled={index === 0}
                     className="p-2 bg-white rounded-full disabled:opacity-50"
-                    title="上移"
+                    title={t('moveUp')}
                   >
                     <Rows className="w-4 h-4 rotate-90" />
                   </button>
@@ -288,14 +290,14 @@ const ImageStitcher: React.FC = () => {
                     onClick={() => moveImage(index, 'down')}
                     disabled={index === images.length - 1}
                     className="p-2 bg-white rounded-full disabled:opacity-50"
-                    title="下移"
+                    title={t('moveDown')}
                   >
                     <Rows className="w-4 h-4 -rotate-90" />
                   </button>
                   <button
                     onClick={() => removeImage(image.id)}
                     className="p-2 bg-red-500 text-white rounded-full"
-                    title="删除"
+                    title={t('remove')}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -321,16 +323,16 @@ const ImageStitcher: React.FC = () => {
             className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
           >
             <LayoutGrid className="w-5 h-5" />
-            {isProcessing ? '拼接中...' : '开始拼接'}
+            {isProcessing ? t('stitching') : t('startStitch')}
           </button>
-          
+
           {resultUrl && (
             <button
               onClick={handleDownload}
               className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
-              下载结果
+              {t('downloadResult')}
             </button>
           )}
         </div>
@@ -339,9 +341,9 @@ const ImageStitcher: React.FC = () => {
       {/* Result Preview */}
       {resultUrl && (
         <div className="bg-surface rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">拼接结果</h2>
+          <h2 className="text-lg font-semibold mb-4">{t('resultTitle')}</h2>
           <div className="bg-surface-inset rounded-lg overflow-auto max-h-96 flex items-center justify-center p-4">
-            <img src={resultUrl} alt="Stitched result" className="max-w-full max-h-80 object-contain" />
+            <img src={resultUrl} alt={t('resultAlt')} className="max-w-full max-h-80 object-contain" />
           </div>
         </div>
       )}

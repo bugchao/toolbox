@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, Download, Sparkles, X, Plus, Sliders } from 'lucide-react';
 
 interface FilterImage {
@@ -24,60 +25,62 @@ interface FilterSettings {
   invert: number;
 }
 
-const PRESET_FILTERS: { name: string; settings: FilterSettings }[] = [
+const PRESET_FILTERS: { id: string; settings: FilterSettings }[] = [
   {
-    name: '原图',
+    id: 'original',
     settings: { brightness: 100, contrast: 100, saturation: 100, sepia: 0, grayscale: 0, blur: 0, hueRotate: 0, invert: 0 },
   },
   {
-    name: '鲜艳',
+    id: 'vivid',
     settings: { brightness: 110, contrast: 120, saturation: 130, sepia: 0, grayscale: 0, blur: 0, hueRotate: 0, invert: 0 },
   },
   {
-    name: '柔和',
+    id: 'soft',
     settings: { brightness: 105, contrast: 90, saturation: 110, sepia: 0, grayscale: 0, blur: 0.5, hueRotate: 0, invert: 0 },
   },
   {
-    name: '复古',
+    id: 'vintage',
     settings: { brightness: 90, contrast: 110, saturation: 80, sepia: 60, grayscale: 0, blur: 0, hueRotate: 0, invert: 0 },
   },
   {
-    name: '黑白',
+    id: 'blackwhite',
     settings: { brightness: 100, contrast: 120, saturation: 0, sepia: 0, grayscale: 100, blur: 0, hueRotate: 0, invert: 0 },
   },
   {
-    name: '棕褐色',
+    id: 'sepia',
     settings: { brightness: 100, contrast: 100, saturation: 100, sepia: 100, grayscale: 0, blur: 0, hueRotate: 0, invert: 0 },
   },
   {
-    name: '冷色',
+    id: 'cool',
     settings: { brightness: 100, contrast: 100, saturation: 100, sepia: 0, grayscale: 0, blur: 0, hueRotate: 30, invert: 0 },
   },
   {
-    name: '暖色',
+    id: 'warm',
     settings: { brightness: 105, contrast: 100, saturation: 110, sepia: 30, grayscale: 0, blur: 0, hueRotate: -20, invert: 0 },
   },
   {
-    name: '梦幻',
+    id: 'dreamy',
     settings: { brightness: 110, contrast: 90, saturation: 120, sepia: 20, grayscale: 0, blur: 1, hueRotate: 10, invert: 0 },
   },
   {
-    name: '胶片',
+    id: 'film',
     settings: { brightness: 95, contrast: 110, saturation: 90, sepia: 20, grayscale: 0, blur: 0.5, hueRotate: 0, invert: 0 },
   },
   {
-    name: '负片',
+    id: 'negative',
     settings: { brightness: 100, contrast: 100, saturation: 100, sepia: 0, grayscale: 0, blur: 0, hueRotate: 0, invert: 100 },
   },
   {
-    name: '朦胧',
+    id: 'hazy',
     settings: { brightness: 115, contrast: 80, saturation: 80, sepia: 0, grayscale: 0, blur: 2, hueRotate: 0, invert: 0 },
   },
 ];
 
 const ImageFilter: React.FC = () => {
+  const { t } = useTranslation('imageFilter');
+  const filterLabel = (id: string) => t(`preset_${id}`);
   const [images, setImages] = useState<FilterImage[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<string>('原图');
+  const [selectedFilter, setSelectedFilter] = useState<string>('original');
   const [settings, setSettings] = useState<FilterSettings>(PRESET_FILTERS[0].settings);
   const [isProcessing, setIsProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -118,7 +121,7 @@ const ImageFilter: React.FC = () => {
           resolve({
             ...image,
             status: 'error',
-            error: 'Canvas not supported',
+            error: t('errCanvas'),
           });
           return;
         }
@@ -144,7 +147,7 @@ const ImageFilter: React.FC = () => {
               resolve({
                 ...image,
                 status: 'error',
-                error: '处理失败',
+                error: t('errProcess'),
               });
               return;
             }
@@ -166,7 +169,7 @@ const ImageFilter: React.FC = () => {
         resolve({
           ...image,
           status: 'error',
-          error: '加载图片失败',
+          error: t('errLoad'),
         });
       };
 
@@ -225,18 +228,18 @@ const ImageFilter: React.FC = () => {
       }
     });
     setImages([]);
-    setSelectedFilter('原图');
+    setSelectedFilter('original');
     setSettings(PRESET_FILTERS[0].settings);
   };
 
   const handlePresetSelect = (preset: typeof PRESET_FILTERS[0]) => {
-    setSelectedFilter(preset.name);
+    setSelectedFilter(preset.id);
     setSettings(preset.settings);
   };
 
   const updateSetting = (key: keyof FilterSettings, value: number) => {
     setSettings(prev => ({ ...prev, [key]: value }));
-    setSelectedFilter('自定义');
+    setSelectedFilter('custom');
   };
 
   const getFilterString = () => {
@@ -247,9 +250,9 @@ const ImageFilter: React.FC = () => {
     <div className="max-w-7xl mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">图片滤镜工具</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
         <p className="text-ink-muted">
-          提供 12 种预设滤镜，支持自定义亮度、对比度、饱和度等参数，批量处理
+          {t('description')}
         </p>
       </div>
 
@@ -257,15 +260,15 @@ const ImageFilter: React.FC = () => {
       <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <Sparkles className="w-5 h-5" />
-          预设滤镜
+          {t('presetFiltersTitle')}
         </h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
           {PRESET_FILTERS.map((preset) => (
             <button
-              key={preset.name}
+              key={preset.id}
               onClick={() => handlePresetSelect(preset)}
               className={`p-3 rounded-lg border-2 transition text-center ${
-                selectedFilter === preset.name
+                selectedFilter === preset.id
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
                   : 'border-edge hover:border-edge-strong'
               }`}
@@ -274,7 +277,7 @@ const ImageFilter: React.FC = () => {
                 className="w-full aspect-square rounded mb-2 bg-gradient-to-br from-gray-200 to-gray-300"
                 style={{ filter: `brightness(${preset.settings.brightness}%) contrast(${preset.settings.contrast}%) saturate(${preset.settings.saturation}%) sepia(${preset.settings.sepia}%)` }}
               />
-              <p className="text-sm font-medium">{preset.name}</p>
+              <p className="text-sm font-medium">{filterLabel(preset.id)}</p>
             </button>
           ))}
         </div>
@@ -284,11 +287,11 @@ const ImageFilter: React.FC = () => {
       <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <Sliders className="w-5 h-5" />
-          高级调整
+          {t('advancedSettingsTitle')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div>
-            <label className="block text-sm font-medium mb-2">亮度 ({settings.brightness}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('brightnessLabel', { value: settings.brightness })}</label>
             <input
               type="range"
               min="0"
@@ -299,7 +302,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">对比度 ({settings.contrast}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('contrastLabel', { value: settings.contrast })}</label>
             <input
               type="range"
               min="0"
@@ -310,7 +313,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">饱和度 ({settings.saturation}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('saturationLabel', { value: settings.saturation })}</label>
             <input
               type="range"
               min="0"
@@ -321,7 +324,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">色温 ({settings.sepia}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('sepiaLabel', { value: settings.sepia })}</label>
             <input
               type="range"
               min="0"
@@ -332,7 +335,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">灰度 ({settings.grayscale}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('grayscaleLabel', { value: settings.grayscale })}</label>
             <input
               type="range"
               min="0"
@@ -343,7 +346,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">模糊 ({settings.blur}px)</label>
+            <label className="block text-sm font-medium mb-2">{t('blurLabel', { value: settings.blur })}</label>
             <input
               type="range"
               min="0"
@@ -355,7 +358,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">色相旋转 ({settings.hueRotate}°)</label>
+            <label className="block text-sm font-medium mb-2">{t('hueRotateLabel', { value: settings.hueRotate })}</label>
             <input
               type="range"
               min="0"
@@ -366,7 +369,7 @@ const ImageFilter: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">反色 ({settings.invert}%)</label>
+            <label className="block text-sm font-medium mb-2">{t('invertLabel', { value: settings.invert })}</label>
             <input
               type="range"
               min="0"
@@ -386,8 +389,8 @@ const ImageFilter: React.FC = () => {
           className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
           <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
-          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-ink-muted">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <p className="text-lg font-medium text-ink mb-2">{t('dropHint')}</p>
+          <p className="text-sm text-ink-muted">{t('formatsHint')}</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -408,25 +411,25 @@ const ImageFilter: React.FC = () => {
             className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            {isProcessing ? '处理中...' : `应用滤镜 (${images.length}张)`}
+            {isProcessing ? t('processing') : t('applyFilterCount', { count: images.length })}
           </button>
-          
+
           {images.some(img => img.status === 'done') && (
             <button
               onClick={handleDownloadAll}
               className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
-              下载全部
+              {t('downloadAll')}
             </button>
           )}
-          
+
           <button
             onClick={clearAll}
             className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-2"
           >
             <X className="w-5 h-5" />
-            清空
+            {t('clear')}
           </button>
         </div>
       )}
@@ -461,9 +464,9 @@ const ImageFilter: React.FC = () => {
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
                 <div className="flex justify-between text-sm text-ink-muted">
-                  <span>原始：{formatFileSize(image.originalSize || image.originalFile.size)}</span>
+                  <span>{t('originalLabel')}{formatFileSize(image.originalSize || image.originalFile.size)}</span>
                   {image.processedSize && (
-                    <span>处理后：{formatFileSize(image.processedSize)}</span>
+                    <span>{t('processedLabel')}{formatFileSize(image.processedSize)}</span>
                   )}
                 </div>
                 {image.status === 'done' && (
@@ -472,7 +475,7 @@ const ImageFilter: React.FC = () => {
                     className="mt-3 w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    下载
+                    {t('download')}
                   </button>
                 )}
                 {image.status === 'error' && (

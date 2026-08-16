@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Search } from 'lucide-react'
 import { ZipCodeInfo } from '../types'
 
 const ZipCode: React.FC = () => {
+  const { t } = useTranslation('zipCode')
   const [query, setQuery] = useState('')
   const [result, setResult] = useState<ZipCodeInfo | null>(null)
   const [loading, setLoading] = useState(false)
@@ -27,25 +29,25 @@ const ZipCode: React.FC = () => {
           // 邮编查询
           setResult({
             code: query,
-            province: '北京市',
-            city: '北京市',
-            district: '海淀区',
-            address: '北京市海淀区中关村街道'
+            province: t('mockProvince'),
+            city: t('mockCity'),
+            district: t('mockDistrict'),
+            address: t('mockAddress')
           })
         } else {
           // 地址查询
           setResult({
             code: '100080',
-            province: '北京市',
-            city: '北京市',
-            district: '海淀区',
+            province: t('mockProvince'),
+            city: t('mockCity'),
+            district: t('mockDistrict'),
             address: query
           })
         }
       }
     } catch (err) {
       console.error('查询失败:', err)
-      setError('查询失败，请稍后重试')
+      setError(t('errSearchFailed'))
     } finally {
       setLoading(false)
     }
@@ -60,12 +62,12 @@ const ZipCode: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
-        <h1 className="text-3xl font-bold text-ink mb-6">邮政编码查询</h1>
+        <h1 className="text-3xl font-bold text-ink mb-6">{t('title')}</h1>
 
         <div className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-ink mb-2">
-              输入地址或邮编
+              {t('inputLabel')}
             </label>
             <div className="flex space-x-4">
               <input
@@ -73,7 +75,7 @@ const ZipCode: React.FC = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="例如：北京海淀区 或 100080"
+                placeholder={t('inputPlaceholder')}
                 className="input flex-1"
               />
               <button
@@ -82,11 +84,11 @@ const ZipCode: React.FC = () => {
                 className="btn btn-primary flex items-center whitespace-nowrap"
               >
                 <Search className="w-4 h-4 mr-2" />
-                {loading ? '查询中...' : '查询'}
+                {loading ? t('searching') : t('search')}
               </button>
             </div>
             <p className="mt-2 text-sm text-ink-muted">
-              支持输入地址查询邮编，或输入6位邮编查询对应地址
+              {t('inputHint')}
             </p>
           </div>
 
@@ -98,26 +100,26 @@ const ZipCode: React.FC = () => {
 
           {result && (
             <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg p-6">
-              <h2 className="text-xl font-bold text-ink mb-4">查询结果</h2>
+              <h2 className="text-xl font-bold text-ink mb-4">{t('resultTitle')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-ink-muted mb-1">邮政编码</p>
+                  <p className="text-sm text-ink-muted mb-1">{t('resultCode')}</p>
                   <p className="text-2xl font-bold text-indigo-600">{result.code}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-ink-muted mb-1">所属省份</p>
+                  <p className="text-sm text-ink-muted mb-1">{t('resultProvince')}</p>
                   <p className="text-lg font-medium text-ink">{result.province}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-ink-muted mb-1">所属城市</p>
+                  <p className="text-sm text-ink-muted mb-1">{t('resultCity')}</p>
                   <p className="text-lg font-medium text-ink">{result.city}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-ink-muted mb-1">所属区县</p>
+                  <p className="text-sm text-ink-muted mb-1">{t('resultDistrict')}</p>
                   <p className="text-lg font-medium text-ink">{result.district}</p>
                 </div>
                 <div className="md:col-span-2">
-                  <p className="text-sm text-ink-muted mb-1">详细地址</p>
+                  <p className="text-sm text-ink-muted mb-1">{t('resultAddress')}</p>
                   <p className="text-lg font-medium text-ink">{result.address}</p>
                 </div>
               </div>
@@ -127,12 +129,12 @@ const ZipCode: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-ink mb-4">使用说明</h2>
+        <h2 className="text-xl font-bold text-ink mb-4">{t('usageTitle')}</h2>
         <ul className="list-disc pl-5 space-y-2 text-ink-muted">
-          <li>支持两种查询方式：输入地址查询邮编，或输入6位数字邮编查询地址</li>
-          <li>地址支持省、市、区、街道等各级地址查询</li>
-          <li>数据覆盖全国所有省市县，数据来源官方公开数据</li>
-          <li>如果查询不到结果，请尝试更精确的地址名称</li>
+          <li>{t('usage1')}</li>
+          <li>{t('usage2')}</li>
+          <li>{t('usage3')}</li>
+          <li>{t('usage4')}</li>
         </ul>
       </div>
     </div>

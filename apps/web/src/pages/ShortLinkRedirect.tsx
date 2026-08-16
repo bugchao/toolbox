@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Link2, AlertCircle } from 'lucide-react'
 
 const STORAGE_KEY = 'shortLinks'
@@ -16,6 +17,7 @@ interface ShortLinkRecord {
 }
 
 const ShortLinkRedirect: React.FC = () => {
+  const { t } = useTranslation('shortLinkRedirect')
   const { code } = useParams<{ code: string }>()
   const [status, setStatus] = useState<'redirecting' | 'not_found' | 'expired' | 'disabled' | null>(null)
 
@@ -62,17 +64,17 @@ const ShortLinkRedirect: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[40vh] text-gray-500 dark:text-gray-400">
         <Link2 className="w-12 h-12 animate-pulse mb-4 text-indigo-500" />
-        <p>正在跳转…</p>
+        <p>{t('redirecting')}</p>
       </div>
     )
   }
 
   const messages: Record<string, string> = {
-    not_found: '短链接不存在或已被删除',
-    expired: '该短链接已过期',
-    disabled: '该短链接已禁用',
+    not_found: t('notFound'),
+    expired: t('expired'),
+    disabled: t('disabled'),
   }
-  const msg = messages[status] ?? '链接无效'
+  const msg = messages[status] ?? t('invalidLink')
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[40vh] px-4">
@@ -82,7 +84,7 @@ const ShortLinkRedirect: React.FC = () => {
         to="/short-link"
         className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
       >
-        去生成短链接
+        {t('goCreateLink')}
       </Link>
     </div>
   )

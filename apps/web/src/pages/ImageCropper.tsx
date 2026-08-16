@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, Download, Scissors, RotateCcw, X, Plus, Check } from 'lucide-react';
 
 interface CropImage {
@@ -17,17 +18,14 @@ interface CropArea {
   height: number;
 }
 
-const PRESET_RATIOS = [
-  { label: '自由', value: 'free' },
-  { label: '1:1', value: '1:1' },
-  { label: '4:3', value: '4:3' },
-  { label: '3:2', value: '3:2' },
-  { label: '16:9', value: '16:9' },
-  { label: '9:16', value: '9:16' },
-  { label: 'A4', value: 'a4' },
-];
+const PRESET_RATIO_VALUES = ['free', '1:1', '4:3', '3:2', '16:9', '9:16', 'a4'] as const;
 
 const ImageCropper: React.FC = () => {
+  const { t } = useTranslation('imageCropper');
+  const PRESET_RATIOS = PRESET_RATIO_VALUES.map((value) => ({
+    value,
+    label: value === 'free' ? t('ratioFree') : value === 'a4' ? t('ratioA4') : value,
+  }));
   const [images, setImages] = useState<CropImage[]>([]);
   const [selectedImage, setSelectedImage] = useState<CropImage | null>(null);
   const [aspectRatio, setAspectRatio] = useState<string>('free');
@@ -179,10 +177,10 @@ const ImageCropper: React.FC = () => {
       ));
       setSelectedImage(prev => prev ? { ...prev, processedUrl, status: 'done' } : null);
     } catch (error) {
-      setSelectedImage(prev => prev ? { 
-        ...prev, 
-        status: 'error', 
-        error: '裁剪失败：' + (error as Error).message 
+      setSelectedImage(prev => prev ? {
+        ...prev,
+        status: 'error',
+        error: t('cropFailed', { message: (error as Error).message })
       } : null);
     }
   };
@@ -238,9 +236,9 @@ const ImageCropper: React.FC = () => {
     <div className="max-w-7xl mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">图片裁剪工具</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
         <p className="text-ink-muted">
-          自由裁剪或按预设比例裁剪图片，支持旋转、翻转，批量处理
+          {t('description')}
         </p>
       </div>
 
@@ -249,12 +247,12 @@ const ImageCropper: React.FC = () => {
         <div className="lg:col-span-1">
           <div className="bg-surface rounded-lg shadow p-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-semibold">图片列表</h2>
+              <h2 className="font-semibold">{t('imageListTitle')}</h2>
               <button
                 onClick={clearAll}
                 className="text-sm text-red-500 hover:text-red-600"
               >
-                清空
+                {t('clear')}
               </button>
             </div>
 
@@ -263,7 +261,7 @@ const ImageCropper: React.FC = () => {
               className="border-2 border-dashed border-edge-strong rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition mb-4"
             >
               <Plus className="w-8 h-8 mx-auto text-ink-subtle mb-2" />
-              <p className="text-sm text-ink-muted">添加图片</p>
+              <p className="text-sm text-ink-muted">{t('addImage')}</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -313,7 +311,7 @@ const ImageCropper: React.FC = () => {
               {/* Controls */}
               <div className="mb-4 flex flex-wrap gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">裁剪比例</label>
+                  <label className="block text-sm font-medium mb-2">{t('cropRatio')}</label>
                   <select
                     value={aspectRatio}
                     onChange={(e) => setAspectRatio(e.target.value)}
@@ -326,7 +324,7 @@ const ImageCropper: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">旋转</label>
+                  <label className="block text-sm font-medium mb-2">{t('rotate')}</label>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setRotation(prev => prev - 90)}
@@ -339,7 +337,7 @@ const ImageCropper: React.FC = () => {
                       className="px-3 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center gap-1"
                     >
                       <RotateCcw className="w-4 h-4" />
-                      重置
+                      {t('reset')}
                     </button>
                     <button
                       onClick={() => setRotation(prev => prev + 90)}
@@ -351,7 +349,7 @@ const ImageCropper: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">翻转</label>
+                  <label className="block text-sm font-medium mb-2">{t('flip')}</label>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setFlipHorizontal(!flipHorizontal)}
@@ -359,7 +357,7 @@ const ImageCropper: React.FC = () => {
                         flipHorizontal ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                       }`}
                     >
-                      水平
+                      {t('horizontal')}
                     </button>
                     <button
                       onClick={() => setFlipVertical(!flipVertical)}
@@ -367,7 +365,7 @@ const ImageCropper: React.FC = () => {
                         flipVertical ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                       }`}
                     >
-                      垂直
+                      {t('vertical')}
                     </button>
                   </div>
                 </div>
@@ -377,7 +375,7 @@ const ImageCropper: React.FC = () => {
                     onClick={handleReset}
                     className="px-4 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
                   >
-                    重置全部
+                    {t('resetAll')}
                   </button>
                 </div>
               </div>
@@ -401,7 +399,7 @@ const ImageCropper: React.FC = () => {
               {cropArea.width > 0 && cropArea.height > 0 && (
                 <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                   <p className="text-sm text-blue-800 dark:text-blue-300">
-                    裁剪区域：{Math.round(cropArea.width)} × {Math.round(cropArea.height)} px
+                    {t('cropAreaInfo', { width: Math.round(cropArea.width), height: Math.round(cropArea.height) })}
                     {aspectRatio !== 'free' && ` (${aspectRatio})`}
                   </p>
                 </div>
@@ -415,7 +413,7 @@ const ImageCropper: React.FC = () => {
                   className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
                 >
                   <Scissors className="w-5 h-5" />
-                  {selectedImage.status === 'processing' ? '处理中...' : '裁剪'}
+                  {selectedImage.status === 'processing' ? t('processing') : t('crop')}
                 </button>
 
                 {selectedImage.status === 'done' && (
@@ -424,7 +422,7 @@ const ImageCropper: React.FC = () => {
                     className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-2"
                   >
                     <Download className="w-5 h-5" />
-                    下载
+                    {t('download')}
                   </button>
                 )}
               </div>
@@ -432,10 +430,10 @@ const ImageCropper: React.FC = () => {
               {/* Processed Preview */}
               {selectedImage.processedUrl && (
                 <div className="mt-6">
-                  <h3 className="font-semibold mb-3">裁剪结果</h3>
+                  <h3 className="font-semibold mb-3">{t('cropResultTitle')}</h3>
                   <img
                     src={selectedImage.processedUrl}
-                    alt="Cropped"
+                    alt={t('croppedAlt')}
                     className="max-w-full rounded-lg shadow"
                   />
                 </div>
@@ -444,7 +442,7 @@ const ImageCropper: React.FC = () => {
           ) : (
             <div className="bg-surface rounded-lg shadow p-12 text-center">
               <Scissors className="w-16 h-16 mx-auto text-ink-subtle mb-4" />
-              <p className="text-lg text-ink-muted">选择或上传图片开始裁剪</p>
+              <p className="text-lg text-ink-muted">{t('selectOrUploadPrompt')}</p>
             </div>
           )}
         </div>

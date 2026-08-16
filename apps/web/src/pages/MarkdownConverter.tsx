@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Copy, Download, Eye, Edit, Code, Check, Palette, Clipboard } from 'lucide-react';
 import { remark } from 'remark';
 import html from 'remark-html';
@@ -15,6 +16,20 @@ interface Template {
   css: string;
   description: string;
 }
+
+const templateLabelKeys: Record<string, string> = {
+  '默认样式': 'templateDefault',
+  '微信公众号': 'templateWechat',
+  '掘金风格': 'templateJuejin',
+  '简约深色': 'templateDark',
+};
+
+const templateDescKeys: Record<string, string> = {
+  '默认样式': 'templateDefaultDesc',
+  '微信公众号': 'templateWechatDesc',
+  '掘金风格': 'templateJuejinDesc',
+  '简约深色': 'templateDarkDesc',
+};
 
 const templates: Template[] = [
   {
@@ -132,45 +147,8 @@ function scopeTemplateCssForPreview(css: string): string {
 }
 
 const MarkdownConverter: React.FC = () => {
-  const [markdown, setMarkdown] = useState(`# Markdown 转换工具
-
-## 功能特性
-
-- 🎨 支持多种输出样式（默认、公众号、掘金、深色模式）
-- 📝 实时预览，所见即所得
-- 📋 一键复制HTML，直接粘贴到公众号/博客
-- 💾 支持导出HTML文件
-- 🔧 支持GFM语法、代码高亮、数学公式
-
-## 示例内容
-
-### 代码块
-\`\`\`javascript
-function hello() {
-  console.log('Hello World!');
-}
-\`\`\`
-
-### 列表
-- 项目1
-- 项目2
-- 项目3
-
-### 表格
-| 功能 | 支持 |
-|------|------|
-| GFM | ✅ |
-| 代码高亮 | ✅ |
-| 数学公式 | ✅ |
-| 导出HTML | ✅ |
-
-### 数学公式
-$$ E = mc^2 $$
-
-> 这是一个引用块示例
-
-**加粗文本** *斜体文本* [链接](https://example.com)
-`);
+  const { t } = useTranslation('markdownConverter');
+  const [markdown, setMarkdown] = useState(() => t('defaultMarkdownContent'));
   const [htmlOutput, setHtmlOutput] = useState('');
   const [previewHtml, setPreviewHtml] = useState('');
   const [contentHtml, setContentHtml] = useState('');
@@ -183,7 +161,7 @@ $$ E = mc^2 $$
   const convertMarkdown = async (md: string, templateName: string) => {
     setIsConverting(true);
     try {
-      const template = templates.find(t => t.name === templateName) || templates[0];
+      const template = templates.find(tpl => tpl.name === templateName) || templates[0];
       
       const file = await remark()
         .use(gfm)
@@ -202,7 +180,7 @@ $$ E = mc^2 $$
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Markdown 文档</title>
+<title>${t('exportedDocTitle')}</title>
 <style>${template.css}</style>
 </head>
 <body>
@@ -248,7 +226,7 @@ ${contentHtml}
   const handleCopyHtml = async () => {
     try {
       // 只复制 body 内容和样式，适合公众号粘贴（使用原始 template.css，含 body）
-      const template = templates.find(t => t.name === selectedTemplate) || templates[0];
+      const template = templates.find(tpl => tpl.name === selectedTemplate) || templates[0];
       const copyContent = `
         <style>${template.css}</style>
         <div class="markdown-body">
@@ -292,9 +270,9 @@ ${contentHtml}
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl min-w-0">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">Markdown 格式转换</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">{t('pageTitle')}</h1>
         <p className="text-gray-600 dark:text-gray-300">
-          支持转换为HTML、微信公众号、掘金等多种格式，一键复制直接使用
+          {t('pageDescription')}
         </p>
       </div>
 
@@ -302,7 +280,7 @@ ${contentHtml}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow mb-6 p-4 border border-gray-200 dark:border-gray-700">
         <div className="flex flex-wrap gap-4 items-center">
           <div className="flex items-center gap-2 min-w-0">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">输出样式:</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">{t('outputStyleLabel')}</label>
             <select
               value={selectedTemplate}
               onChange={(e) => setSelectedTemplate(e.target.value)}
@@ -310,35 +288,35 @@ ${contentHtml}
             >
               {templates.map(template => (
                 <option key={template.name} value={template.name}>
-                  {template.name}
+                  {t(templateLabelKeys[template.name] ?? template.name)}
                 </option>
               ))}
             </select>
           </div>
 
           <div className="flex items-center gap-2 min-w-0 shrink-0">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">视图模式:</label>
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">{t('viewModeLabel')}</label>
             <div className="flex border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
               <button
                 onClick={() => setViewMode('edit')}
                 className={`px-3 py-1.5 text-sm ${viewMode === 'edit' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Edit className="h-4 w-4 inline mr-1" />
-                编辑
+                {t('editTab')}
               </button>
               <button
                 onClick={() => setViewMode('split')}
                 className={`px-3 py-1.5 text-sm ${viewMode === 'split' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Code className="h-4 w-4 inline mr-1" />
-                分栏
+                {t('splitTab')}
               </button>
               <button
                 onClick={() => setViewMode('preview')}
                 className={`px-3 py-1.5 text-sm ${viewMode === 'preview' ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600'}`}
               >
                 <Eye className="h-4 w-4 inline mr-1" />
-                预览
+                {t('previewTab')}
               </button>
             </div>
           </div>
@@ -349,33 +327,33 @@ ${contentHtml}
               className="px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center gap-1 text-sm"
             >
               <Clipboard className="h-4 w-4" />
-              粘贴
+              {t('pasteButton')}
             </button>
             <button
               onClick={handleClear}
               className="px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md flex items-center gap-1 text-sm"
             >
-              清空
+              {t('clearButton')}
             </button>
             <button
               onClick={handleCopyHtml}
               className="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md flex items-center gap-1 text-sm"
             >
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              {copied ? '已复制' : '复制HTML'}
+              {copied ? t('copiedLabel') : t('copyHtmlLabel')}
             </button>
             <button
               onClick={handleDownload}
               className="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md flex items-center gap-1 text-sm"
             >
               <Download className="h-4 w-4" />
-              导出HTML
+              {t('exportHtmlLabel')}
             </button>
           </div>
         </div>
 
         <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          {templates.find(t => t.name === selectedTemplate)?.description}
+          {t(templateDescKeys[selectedTemplate] ?? '')}
         </div>
       </div>
 
@@ -387,10 +365,10 @@ ${contentHtml}
             <div className="border-b border-gray-200 dark:border-gray-600 px-4 py-2 bg-gray-50 dark:bg-gray-700/50 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2 min-w-0">
                 <Edit className="h-4 w-4 text-gray-500 dark:text-gray-400 shrink-0" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">Markdown 编辑器</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">{t('editorLabel')}</span>
               </div>
               <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
-                {markdown.length} 字符
+                {t('charCount', { count: markdown.length })}
               </span>
             </div>
             <textarea
@@ -398,7 +376,7 @@ ${contentHtml}
               value={markdown}
               onChange={(e) => setMarkdown(e.target.value)}
               className="w-full min-h-[400px] h-[50vh] lg:h-[600px] p-4 font-mono text-sm resize-none focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
-              placeholder="在此输入Markdown内容..."
+              placeholder={t('editorPlaceholder')}
               spellCheck="false"
             />
           </div>
@@ -409,13 +387,13 @@ ${contentHtml}
           <div className={`min-w-0 flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-gray-700 ${viewMode === 'preview' ? 'lg:col-span-2' : ''}`}>
             <div className="border-b border-gray-200 dark:border-gray-600 px-4 py-2 bg-gray-50 dark:bg-gray-700/50 flex items-center gap-2 shrink-0">
               <Eye className="h-4 w-4 text-gray-500 dark:text-gray-400 shrink-0" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">预览效果</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('previewLabel')}</span>
             </div>
             <iframe
               srcDoc={previewHtml}
               className="w-full min-h-[400px] h-[50vh] lg:h-[600px] border-0 bg-white"
               sandbox="allow-same-origin"
-              title="Markdown 预览"
+              title={t('previewTitle')}
             />
           </div>
         )}
@@ -425,21 +403,21 @@ ${contentHtml}
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow p-4 border border-gray-200 dark:border-gray-700">
         <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
           <Palette className="h-4 w-4" />
-          支持的语法
+          {t('syntaxSupportTitle')}
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs text-gray-600 dark:text-gray-400">
-          <div>✅ 标题 (H1-H6)</div>
-          <div>✅ 粗体/斜体</div>
-          <div>✅ 列表 (有序/无序)</div>
-          <div>✅ 链接/图片</div>
-          <div>✅ 引用块</div>
-          <div>✅ 代码块/行内代码</div>
-          <div>✅ 表格</div>
-          <div>✅ 分割线</div>
-          <div>✅ GFM 任务列表</div>
-          <div>✅ 删除线</div>
-          <div>✅ 数学公式 (LaTeX)</div>
-          <div>✅ 代码语法高亮</div>
+          <div>{t('syntaxHeading')}</div>
+          <div>{t('syntaxBoldItalic')}</div>
+          <div>{t('syntaxList')}</div>
+          <div>{t('syntaxLinkImage')}</div>
+          <div>{t('syntaxQuote')}</div>
+          <div>{t('syntaxCode')}</div>
+          <div>{t('syntaxTable')}</div>
+          <div>{t('syntaxDivider')}</div>
+          <div>{t('syntaxTaskList')}</div>
+          <div>{t('syntaxStrikethrough')}</div>
+          <div>{t('syntaxMath')}</div>
+          <div>{t('syntaxHighlight')}</div>
         </div>
       </div>
     </div>

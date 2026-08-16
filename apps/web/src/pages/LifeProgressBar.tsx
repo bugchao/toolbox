@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Calendar, Heart, Clock, TrendingUp } from 'lucide-react';
 
 interface LifeStats {
@@ -14,6 +15,7 @@ interface LifeStats {
 }
 
 export default function LifeProgressBar() {
+  const { t } = useTranslation('lifeProgressBar');
   const [birthDate, setBirthDate] = useState('');
   const [lifeExpectancy, setLifeExpectancy] = useState(80);
   const [stats, setStats] = useState<LifeStats | null>(null);
@@ -67,18 +69,18 @@ export default function LifeProgressBar() {
   };
 
   const getMotivationalQuote = (percentage: number) => {
-    if (percentage < 25) return '人生才刚刚开始，未来充满无限可能！';
-    if (percentage < 50) return '正值人生黄金时期，把握当下，创造精彩！';
-    if (percentage < 75) return '人生过半，经验丰富，智慧增长！';
-    return '时光珍贵，珍惜每一天，活出精彩！';
+    if (percentage < 25) return t('quote25');
+    if (percentage < 50) return t('quote50');
+    if (percentage < 75) return t('quote75');
+    return t('quote100');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-purple-900 dark:text-purple-300 mb-2">⏳ 人生进度条</h1>
-          <p className="text-purple-700 dark:text-purple-400">可视化你的人生时间，珍惜每一刻</p>
+          <h1 className="text-4xl font-bold text-purple-900 dark:text-purple-300 mb-2">{t('title')}</h1>
+          <p className="text-purple-700 dark:text-purple-400">{t('subtitle')}</p>
         </div>
 
         {/* 输入区域 */}
@@ -87,7 +89,7 @@ export default function LifeProgressBar() {
             <div>
               <label className="block text-ink font-medium mb-2">
                 <Calendar className="inline w-5 h-5 mr-2" />
-                出生日期
+                {t('birthDateLabel')}
               </label>
               <input
                 type="date"
@@ -99,7 +101,7 @@ export default function LifeProgressBar() {
             <div>
               <label className="block text-ink font-medium mb-2">
                 <Heart className="inline w-5 h-5 mr-2" />
-                预期寿命（岁）
+                {t('lifeExpectancyLabel')}
               </label>
               <input
                 type="number"
@@ -116,7 +118,7 @@ export default function LifeProgressBar() {
             disabled={!birthDate}
             className="w-full py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
-            计算人生进度
+            {t('calculateButton')}
           </button>
         </div>
 
@@ -126,7 +128,7 @@ export default function LifeProgressBar() {
             {/* 主进度条 */}
             <div className="bg-surface rounded-2xl shadow-xl p-6">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-2xl font-bold text-ink">人生进度</span>
+                <span className="text-2xl font-bold text-ink">{t('progressLabel')}</span>
                 <span className="text-3xl font-bold text-purple-600">
                   {stats.percentage.toFixed(2)}%
                 </span>
@@ -137,7 +139,7 @@ export default function LifeProgressBar() {
                   style={{ width: `${stats.percentage}%` }}
                 >
                   <span className="text-white font-bold text-sm">
-                    {stats.age} 岁
+                    {t('ageSuffix', { age: stats.age })}
                   </span>
                 </div>
               </div>
@@ -151,23 +153,23 @@ export default function LifeProgressBar() {
               <div className="bg-surface rounded-2xl shadow-xl p-6">
                 <div className="flex items-center mb-4">
                   <Clock className="w-6 h-6 text-blue-600 mr-2" />
-                  <h3 className="text-xl font-bold text-ink">已度过</h3>
+                  <h3 className="text-xl font-bold text-ink">{t('lived')}</h3>
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">年</span>
+                    <span className="text-ink-muted">{t('yearsUnit')}</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.yearsLived.toFixed(1)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">天</span>
+                    <span className="text-ink-muted">{t('daysUnit')}</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.daysLived.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">周</span>
+                    <span className="text-ink-muted">{t('weeksUnit')}</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.weeksLived.toLocaleString()}
                     </span>
@@ -178,23 +180,23 @@ export default function LifeProgressBar() {
               <div className="bg-surface rounded-2xl shadow-xl p-6">
                 <div className="flex items-center mb-4">
                   <TrendingUp className="w-6 h-6 text-green-600 mr-2" />
-                  <h3 className="text-xl font-bold text-ink">还剩余</h3>
+                  <h3 className="text-xl font-bold text-ink">{t('remaining')}</h3>
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">年</span>
+                    <span className="text-ink-muted">{t('yearsUnit')}</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.yearsRemaining.toFixed(1)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">天</span>
+                    <span className="text-ink-muted">{t('daysUnit')}</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.daysRemaining.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-ink-muted">周</span>
+                    <span className="text-ink-muted">{t('weeksUnit')}</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.weeksRemaining.toLocaleString()}
                     </span>
@@ -205,7 +207,7 @@ export default function LifeProgressBar() {
 
             {/* 人生格子 */}
             <div className="bg-surface rounded-2xl shadow-xl p-6">
-              <h3 className="text-xl font-bold text-ink mb-4">人生格子图（每格代表一年）</h3>
+              <h3 className="text-xl font-bold text-ink mb-4">{t('gridTitle')}</h3>
               <div className="grid grid-cols-10 gap-2">
                 {Array.from({ length: stats.lifeExpectancy }, (_, i) => (
                   <div
@@ -215,28 +217,28 @@ export default function LifeProgressBar() {
                         ? 'bg-purple-500'
                         : 'bg-surface-inset'
                     }`}
-                    title={`${i + 1} 岁`}
+                    title={t('yearTitle', { year: i + 1 })}
                   />
                 ))}
               </div>
               <div className="flex items-center justify-center gap-6 mt-4 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-purple-500 rounded"></div>
-                  <span className="text-ink-muted">已度过</span>
+                  <span className="text-ink-muted">{t('lived')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-surface-inset rounded"></div>
-                  <span className="text-ink-muted">未来</span>
+                  <span className="text-ink-muted">{t('future')}</span>
                 </div>
               </div>
             </div>
 
             {/* 励志语录 */}
             <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-xl p-6 text-white text-center">
-              <p className="text-xl font-medium mb-2">💡 时间提醒</p>
+              <p className="text-xl font-medium mb-2">{t('reminderTitle')}</p>
               <p className="text-lg">
-                "时间是最公平的资源，每个人每天都只有24小时。<br />
-                珍惜当下，活出精彩，让每一天都有意义！"
+                "{t('reminderLine1')}<br />
+                {t('reminderLine2')}"
               </p>
             </div>
           </div>

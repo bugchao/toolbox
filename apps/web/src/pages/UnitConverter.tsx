@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRightLeft } from 'lucide-react';
 
 interface Unit {
@@ -13,7 +14,60 @@ interface Category {
   units: Unit[];
 }
 
+// 分类内部标识（category.name）保持原值不变，用于状态匹配；显示文案通过该映射翻译
+const categoryLabelKeys: Record<string, string> = {
+  '长度': 'categoryLength',
+  '重量': 'categoryWeight',
+  '温度': 'categoryTemperature',
+  '面积': 'categoryArea',
+  '体积': 'categoryVolume',
+  '时间': 'categoryTime',
+  '速度': 'categorySpeed',
+  '数据存储': 'categoryDataStorage',
+  '压力': 'categoryPressure',
+  '功率': 'categoryPower',
+  '能量': 'categoryEnergy',
+  '角度': 'categoryAngle',
+};
+
+// 单位符号（unit.symbol）保持原值不变，用于状态匹配；显示的单位名称通过该映射翻译
+const unitLabelKeys: Record<string, string> = {
+  km: 'unitKilometer', m: 'unitMeter', dm: 'unitDecimeter', cm: 'unitCentimeter',
+  mm: 'unitMillimeter', 'μm': 'unitMicrometer', nm: 'unitNanometer', in: 'unitInch',
+  ft: 'unitFoot', yd: 'unitYard', mi: 'unitMile', nmi: 'unitNauticalMile',
+  t: 'unitTonne', kg: 'unitKilogram', g: 'unitGram', mg: 'unitMilligram',
+  'μg': 'unitMicrogram', lb: 'unitPound', oz: 'unitOunce', ct: 'unitCarat',
+  '斤': 'unitJin', '两': 'unitLiang',
+  '°C': 'unitCelsius', '°F': 'unitFahrenheit', K: 'unitKelvin',
+  'km²': 'unitSquareKilometer', 'm²': 'unitSquareMeter', 'dm²': 'unitSquareDecimeter',
+  'cm²': 'unitSquareCentimeter', 'mm²': 'unitSquareMillimeter', ha: 'unitHectare',
+  ac: 'unitAcre', 'in²': 'unitSquareInch', 'ft²': 'unitSquareFoot', 'yd²': 'unitSquareYard',
+  'mi²': 'unitSquareMile', '亩': 'unitMu',
+  'm³': 'unitCubicMeter', 'dm³': 'unitCubicDecimeter', 'cm³': 'unitCubicCentimeter',
+  L: 'unitLiter', dL: 'unitDeciliter', cL: 'unitCentiliter', mL: 'unitMilliliter',
+  'in³': 'unitCubicInch', 'ft³': 'unitCubicFoot', 'yd³': 'unitCubicYard',
+  'gal(US)': 'unitGallonUS', 'gal(UK)': 'unitGallonUK',
+  'fl oz(US)': 'unitFluidOunceUS', 'fl oz(UK)': 'unitFluidOunceUK',
+  y: 'unitYear', mo: 'unitMonth', wk: 'unitWeek', d: 'unitDay', h: 'unitHour',
+  min: 'unitMinute', s: 'unitSecond', ms: 'unitMillisecond', 'μs': 'unitMicrosecond',
+  ns: 'unitNanosecond',
+  'm/s': 'unitMeterPerSecond', 'km/h': 'unitKilometerPerHour', mph: 'unitMilePerHour',
+  kn: 'unitKnot', 'ft/s': 'unitFootPerSecond', Ma: 'unitMach',
+  bit: 'unitBit', B: 'unitByte', KB: 'unitKilobyte', MB: 'unitMegabyte',
+  GB: 'unitGigabyte', TB: 'unitTerabyte', PB: 'unitPetabyte', EB: 'unitExabyte',
+  Pa: 'unitPascal', kPa: 'unitKilopascal', MPa: 'unitMegapascal', bar: 'unitBar',
+  atm: 'unitAtmosphere', mmHg: 'unitMillimeterMercury', inHg: 'unitInchMercury',
+  psi: 'unitPsi',
+  W: 'unitWatt', kW: 'unitKilowatt', MW: 'unitMegawatt', hp: 'unitHorsepowerImperial',
+  ps: 'unitHorsepowerMetric', 'kcal/s': 'unitKcalPerSecond', 'Btu/s': 'unitBtuPerSecond',
+  J: 'unitJoule', kJ: 'unitKilojoule', cal: 'unitCalorie', kcal: 'unitKilocalorie',
+  'kW·h': 'unitKilowattHour', Btu: 'unitBtu', 'ft·lb': 'unitFootPound',
+  '°': 'unitDegree', rad: 'unitRadian', "'": 'unitArcminute', '"': 'unitArcsecond',
+  rev: 'unitRevolution', grad: 'unitGradian',
+};
+
 const UnitConverter: React.FC = () => {
+  const { t } = useTranslation('unitConverter');
   const categories: Category[] = [
     {
       name: '长度',
@@ -271,13 +325,13 @@ const UnitConverter: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-ink">单位换算器</h1>
+      <h1 className="text-3xl font-bold mb-6 text-ink">{t('title')}</h1>
 
       <div className="bg-surface rounded-lg shadow-md p-6">
         {/* 分类选择 */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-ink mb-2">
-            选择分类
+            {t('selectCategoryLabel')}
           </label>
           <select
             value={selectedCategory}
@@ -286,7 +340,7 @@ const UnitConverter: React.FC = () => {
           >
             {categories.map(category => (
               <option key={category.name} value={category.name}>
-                {category.name}
+                {t(categoryLabelKeys[category.name] ?? category.name)}
               </option>
             ))}
           </select>
@@ -297,7 +351,7 @@ const UnitConverter: React.FC = () => {
           {/* 输入部分 */}
           <div>
             <label className="block text-sm font-medium text-ink mb-2">
-              输入数值
+              {t('inputValueLabel')}
             </label>
             <div className="flex gap-4">
               <input
@@ -305,7 +359,7 @@ const UnitConverter: React.FC = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="输入数值"
+                placeholder={t('inputValueLabel')}
               />
               <select
                 value={fromUnit}
@@ -314,7 +368,7 @@ const UnitConverter: React.FC = () => {
               >
                 {currentCategory?.units.map(unit => (
                   <option key={unit.symbol} value={unit.symbol}>
-                    {unit.name} ({unit.symbol})
+                    {t(unitLabelKeys[unit.symbol] ?? unit.name)} ({unit.symbol})
                   </option>
                 ))}
               </select>
@@ -334,7 +388,7 @@ const UnitConverter: React.FC = () => {
           {/* 结果部分 */}
           <div>
             <label className="block text-sm font-medium text-ink mb-2">
-              转换结果
+              {t('resultLabel')}
             </label>
             <div className="flex gap-4">
               <input
@@ -342,7 +396,7 @@ const UnitConverter: React.FC = () => {
                 value={result}
                 readOnly
                 className="flex-1 px-4 py-2 border border-edge-strong rounded-lg bg-surface-muted"
-                placeholder="转换结果"
+                placeholder={t('resultLabel')}
               />
               <select
                 value={toUnit}
@@ -351,7 +405,7 @@ const UnitConverter: React.FC = () => {
               >
                 {currentCategory?.units.map(unit => (
                   <option key={unit.symbol} value={unit.symbol}>
-                    {unit.name} ({unit.symbol})
+                    {t(unitLabelKeys[unit.symbol] ?? unit.name)} ({unit.symbol})
                   </option>
                 ))}
               </select>
@@ -362,41 +416,41 @@ const UnitConverter: React.FC = () => {
 
       {/* 常用单位说明 */}
       <div className="mt-6 bg-surface rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4 text-ink">📖 单位说明</h2>
+        <h2 className="text-xl font-semibold mb-4 text-ink">{t('unitExplanationTitle')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-ink">
           {selectedCategory === '长度' && (
             <>
               <div>
-                <span className="font-semibold">公制单位：</span>
-                千米(km)、米(m)、分米(dm)、厘米(cm)、毫米(mm)
+                <span className="font-semibold">{t('metricUnitsLabel')}</span>
+                {t('lengthMetricList')}
               </div>
               <div>
-                <span className="font-semibold">英制单位：</span>
-                英寸(in)、英尺(ft)、码(yd)、英里(mi)
+                <span className="font-semibold">{t('imperialUnitsLabel')}</span>
+                {t('lengthImperialList')}
               </div>
             </>
           )}
           {selectedCategory === '重量' && (
             <>
               <div>
-                <span className="font-semibold">公制单位：</span>
-                吨(t)、千克(kg)、克(g)、毫克(mg)
+                <span className="font-semibold">{t('metricUnitsLabel')}</span>
+                {t('weightMetricList')}
               </div>
               <div>
-                <span className="font-semibold">英制/市制：</span>
-                磅(lb)、盎司(oz)、斤、两
+                <span className="font-semibold">{t('imperialTraditionalLabel')}</span>
+                {t('weightImperialList')}
               </div>
             </>
           )}
           {selectedCategory === '数据存储' && (
             <>
               <div>
-                <span className="font-semibold">换算关系：</span>
-                1字节(B) = 8比特(bit)
+                <span className="font-semibold">{t('conversionRelationLabel')}</span>
+                {t('byteBitRelation')}
               </div>
               <div>
-                <span className="font-semibold">二进制换算：</span>
-                1KB = 1024B, 1MB = 1024KB, 1GB = 1024MB
+                <span className="font-semibold">{t('binaryConversionLabel')}</span>
+                {t('binaryConversionText')}
               </div>
             </>
           )}
@@ -405,31 +459,31 @@ const UnitConverter: React.FC = () => {
 
       {/* 功能特性 */}
       <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-300">✨ 功能特性</h2>
+        <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-300">{t('featuresTitle')}</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-blue-700 dark:text-blue-400">
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>支持12大类、上百种单位的互相转换</span>
+            <span>{t('featureBullet1')}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>实时转换，输入数值立即得到结果</span>
+            <span>{t('featureBullet2')}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>一键交换单位，快速对比换算</span>
+            <span>{t('featureBullet3')}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>高精度转换，保留6位小数</span>
+            <span>{t('featureBullet4')}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>包含公制、英制、市制等多种单位体系</span>
+            <span>{t('featureBullet5')}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
-            <span>所有转换本地完成，无需联网</span>
+            <span>{t('featureBullet6')}</span>
           </li>
         </ul>
       </div>

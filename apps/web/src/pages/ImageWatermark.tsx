@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, Download, Type, Image as ImageIcon, X, Plus, Trash2, Settings } from 'lucide-react';
 
 interface WatermarkImage {
@@ -35,6 +36,14 @@ interface LogoConfig {
 }
 
 const ImageWatermark: React.FC = () => {
+  const { t } = useTranslation('imageWatermark');
+  const positionLabels: Record<string, string> = {
+    'top-left': t('positionTopLeft'),
+    'top-right': t('positionTopRight'),
+    'bottom-left': t('positionBottomLeft'),
+    'bottom-right': t('positionBottomRight'),
+    center: t('positionCenter'),
+  };
   const [images, setImages] = useState<WatermarkImage[]>([]);
   const [watermarkType, setWatermarkType] = useState<'text' | 'logo'>('text');
   const [textConfig, setTextConfig] = useState<WatermarkConfig>({
@@ -136,7 +145,7 @@ const ImageWatermark: React.FC = () => {
           resolve({
             ...image,
             status: 'error',
-            error: 'Canvas not supported',
+            error: t('errCanvas'),
           });
           return;
         }
@@ -202,7 +211,7 @@ const ImageWatermark: React.FC = () => {
                   resolve({
                     ...image,
                     status: 'error',
-                    error: 'Failed to process image',
+                    error: t('errProcessFail'),
                   });
                   return;
                 }
@@ -230,7 +239,7 @@ const ImageWatermark: React.FC = () => {
               resolve({
                 ...image,
                 status: 'error',
-                error: 'Failed to process image',
+                error: t('errProcessFail'),
               });
               return;
             }
@@ -252,7 +261,7 @@ const ImageWatermark: React.FC = () => {
         resolve({
           ...image,
           status: 'error',
-          error: 'Failed to load image',
+          error: t('errLoadFail'),
         });
       };
       
@@ -320,9 +329,9 @@ const ImageWatermark: React.FC = () => {
     <div className="max-w-6xl mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">图片水印工具</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
         <p className="text-ink-muted">
-          为图片添加文字或 Logo 水印，支持批量处理、自定义位置、透明度和旋转
+          {t('description')}
         </p>
       </div>
 
@@ -330,9 +339,9 @@ const ImageWatermark: React.FC = () => {
       <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center">
           <Settings className="w-5 h-5 mr-2" />
-          水印设置
+          {t('settingsTitle')}
         </h2>
-        
+
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setWatermarkType('text')}
@@ -343,7 +352,7 @@ const ImageWatermark: React.FC = () => {
             }`}
           >
             <Type className="w-4 h-4" />
-            文字水印
+            {t('typeText')}
           </button>
           <button
             onClick={() => setWatermarkType('logo')}
@@ -354,26 +363,26 @@ const ImageWatermark: React.FC = () => {
             }`}
           >
             <ImageIcon className="w-4 h-4" />
-            Logo 水印
+            {t('typeLogo')}
           </button>
         </div>
 
         {watermarkType === 'text' ? (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">水印文字</label>
+              <label className="block text-sm font-medium mb-2">{t('textLabel')}</label>
               <input
                 type="text"
                 value={textConfig.text}
                 onChange={(e) => setTextConfig(prev => ({ ...prev, text: e.target.value }))}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="输入水印文字"
+                placeholder={t('textPlaceholder')}
               />
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">字体大小</label>
+                <label className="block text-sm font-medium mb-2">{t('fontSize')}</label>
                 <input
                   type="number"
                   value={textConfig.fontSize}
@@ -383,9 +392,9 @@ const ImageWatermark: React.FC = () => {
                   max="200"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-2">文字颜色</label>
+                <label className="block text-sm font-medium mb-2">{t('fontColor')}</label>
                 <input
                   type="color"
                   value={textConfig.fontColor}
@@ -393,9 +402,9 @@ const ImageWatermark: React.FC = () => {
                   className="w-full h-10 px-1 py-1 border rounded-lg"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-2">透明度</label>
+                <label className="block text-sm font-medium mb-2">{t('opacity')}</label>
                 <input
                   type="range"
                   min="0.1"
@@ -407,9 +416,9 @@ const ImageWatermark: React.FC = () => {
                 />
                 <div className="text-sm text-ink-muted mt-1">{Math.round(textConfig.opacity * 100)}%</div>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-2">旋转角度</label>
+                <label className="block text-sm font-medium mb-2">{t('rotationAngle')}</label>
                 <input
                   type="number"
                   value={textConfig.rotation}
@@ -422,7 +431,7 @@ const ImageWatermark: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">位置</label>
+              <label className="block text-sm font-medium mb-2">{t('position')}</label>
               <div className="grid grid-cols-3 gap-2">
                 {['top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'].map((pos) => (
                   <button
@@ -434,7 +443,7 @@ const ImageWatermark: React.FC = () => {
                         : 'bg-surface hover:bg-surface-muted border-edge-strong'
                     }`}
                   >
-                    {pos.replace('-', ' ')}
+                    {positionLabels[pos]}
                   </button>
                 ))}
               </div>
@@ -442,7 +451,7 @@ const ImageWatermark: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">水平偏移 (px)</label>
+                <label className="block text-sm font-medium mb-2">{t('offsetX')}</label>
                 <input
                   type="number"
                   value={textConfig.offsetX}
@@ -451,7 +460,7 @@ const ImageWatermark: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">垂直偏移 (px)</label>
+                <label className="block text-sm font-medium mb-2">{t('offsetY')}</label>
                 <input
                   type="number"
                   value={textConfig.offsetY}
@@ -464,14 +473,14 @@ const ImageWatermark: React.FC = () => {
         ) : (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">上传 Logo</label>
+              <label className="block text-sm font-medium mb-2">{t('uploadLogo')}</label>
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => logoInputRef.current?.click()}
                   className="px-4 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center gap-2"
                 >
                   <Upload className="w-4 h-4" />
-                  {logoConfig.file ? '更换 Logo' : '选择 Logo 图片'}
+                  {logoConfig.file ? t('changeLogo') : t('selectLogo')}
                 </button>
                 <input
                   ref={logoInputRef}
@@ -482,16 +491,16 @@ const ImageWatermark: React.FC = () => {
                 />
                 {logoConfig.file && (
                   <div className="flex items-center gap-2">
-                    <img src={logoConfig.url} alt="Logo preview" className="h-12 w-auto border rounded" />
+                    <img src={logoConfig.url} alt={t('logoPreviewAlt')} className="h-12 w-auto border rounded" />
                     <span className="text-sm text-ink-muted">{logoConfig.file.name}</span>
                   </div>
                 )}
               </div>
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Logo 大小</label>
+                <label className="block text-sm font-medium mb-2">{t('logoSize')}</label>
                 <input
                   type="number"
                   value={logoConfig.size}
@@ -501,9 +510,9 @@ const ImageWatermark: React.FC = () => {
                   max="500"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-2">透明度</label>
+                <label className="block text-sm font-medium mb-2">{t('opacity')}</label>
                 <input
                   type="range"
                   min="0.1"
@@ -515,26 +524,26 @@ const ImageWatermark: React.FC = () => {
                 />
                 <div className="text-sm text-ink-muted mt-1">{Math.round(logoConfig.opacity * 100)}%</div>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-2">位置</label>
+                <label className="block text-sm font-medium mb-2">{t('position')}</label>
                 <select
                   value={logoConfig.position}
                   onChange={(e) => setLogoConfig(prev => ({ ...prev, position: e.target.value as any }))}
                   className="w-full px-4 py-2 border rounded-lg"
                 >
-                  <option value="top-left">左上角</option>
-                  <option value="top-right">右上角</option>
-                  <option value="bottom-left">左下角</option>
-                  <option value="bottom-right">右下角</option>
-                  <option value="center">居中</option>
+                  <option value="top-left">{positionLabels['top-left']}</option>
+                  <option value="top-right">{positionLabels['top-right']}</option>
+                  <option value="bottom-left">{positionLabels['bottom-left']}</option>
+                  <option value="bottom-right">{positionLabels['bottom-right']}</option>
+                  <option value="center">{positionLabels.center}</option>
                 </select>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">水平偏移 (px)</label>
+                <label className="block text-sm font-medium mb-2">{t('offsetX')}</label>
                 <input
                   type="number"
                   value={logoConfig.offsetX}
@@ -543,7 +552,7 @@ const ImageWatermark: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">垂直偏移 (px)</label>
+                <label className="block text-sm font-medium mb-2">{t('offsetY')}</label>
                 <input
                   type="number"
                   value={logoConfig.offsetY}
@@ -563,8 +572,8 @@ const ImageWatermark: React.FC = () => {
           className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
           <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
-          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-ink-muted">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <p className="text-lg font-medium text-ink mb-2">{t('uploadHint')}</p>
+          <p className="text-sm text-ink-muted">{t('uploadFormats')}</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -585,25 +594,25 @@ const ImageWatermark: React.FC = () => {
             className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            {isProcessing ? '处理中...' : `添加水印 (${images.length}张)`}
+            {isProcessing ? t('processingEllipsis') : t('addWatermark', { count: images.length })}
           </button>
-          
+
           {images.some(img => img.status === 'done') && (
             <button
               onClick={handleDownloadAll}
               className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
-              下载全部
+              {t('downloadAll')}
             </button>
           )}
-          
+
           <button
             onClick={clearAll}
             className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-2"
           >
             <Trash2 className="w-5 h-5" />
-            清空
+            {t('clear')}
           </button>
         </div>
       )}
@@ -617,7 +626,7 @@ const ImageWatermark: React.FC = () => {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-sm text-ink-muted mt-2">正在处理：{Math.round(progress)}%</p>
+          <p className="text-sm text-ink-muted mt-2">{t('processingStatus', { percent: Math.round(progress) })}</p>
         </div>
       )}
 
@@ -648,9 +657,9 @@ const ImageWatermark: React.FC = () => {
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
                 <div className="flex justify-between text-sm text-ink-muted">
-                  <span>原始：{formatFileSize(image.originalSize)}</span>
+                  <span>{t('original', { size: formatFileSize(image.originalSize) })}</span>
                   {image.processedSize && (
-                    <span>处理后：{formatFileSize(image.processedSize)}</span>
+                    <span>{t('processed', { size: formatFileSize(image.processedSize) })}</span>
                   )}
                 </div>
                 {image.status === 'done' && (
@@ -659,7 +668,7 @@ const ImageWatermark: React.FC = () => {
                     className="mt-3 w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    下载
+                    {t('download')}
                   </button>
                 )}
                 {image.status === 'error' && (

@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { RefreshCw, ExternalLink } from 'lucide-react'
 import { NewsItem } from '../types'
 
 const HotNews: React.FC = () => {
+  const { t } = useTranslation('hotNews')
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   const categories = [
-    { value: 'all', label: '全部' },
-    { value: '科技', label: '科技' },
-    { value: '体育', label: '体育' },
+    { value: 'all', label: t('categoryAll') },
+    { value: '科技', label: t('categoryTech') },
+    { value: '体育', label: t('categorySports') },
     { value: 'AI', label: 'AI' },
     { value: 'OpenClaw', label: 'OpenClaw' },
     { value: 'MCP', label: 'MCP' },
-    { value: '国际', label: '国际' },
+    { value: '国际', label: t('categoryInternational') },
   ]
 
   const fetchNews = async () => {
@@ -30,40 +32,40 @@ const HotNews: React.FC = () => {
         setNews([
           {
             id: '1',
-            title: 'OpenClaw 发布最新版本，支持更多AI代理功能',
-            source: 'OpenClaw官方',
+            title: t('mockTitle1'),
+            source: t('mockSource1'),
             time: '2026-03-09 10:30',
             url: 'https://openclaw.ai',
             category: 'OpenClaw'
           },
           {
             id: '2',
-            title: 'MCP协议获得重大更新，跨代理通信效率提升300%',
-            source: '技术日报',
+            title: t('mockTitle2'),
+            source: t('mockSource2'),
             time: '2026-03-09 09:15',
             url: '#',
             category: 'MCP'
           },
           {
             id: '3',
-            title: 'Google发布新一代AI模型，性能超越GPT-5',
-            source: '科技新闻',
+            title: t('mockTitle3'),
+            source: t('mockSource3'),
             time: '2026-03-09 08:45',
             url: '#',
             category: 'AI'
           },
           {
             id: '4',
-            title: 'React 19正式发布，带来众多革命性特性',
-            source: '前端技术',
+            title: t('mockTitle4'),
+            source: t('mockSource4'),
             time: '2026-03-09 11:20',
             url: '#',
             category: '科技'
           },
           {
             id: '5',
-            title: '国际奥委会宣布2032年奥运会举办城市',
-            source: '新华社',
+            title: t('mockTitle5'),
+            source: t('mockSource5'),
             time: '2026-03-09 07:30',
             url: '#',
             category: '国际'
@@ -76,24 +78,24 @@ const HotNews: React.FC = () => {
       setNews([
         {
           id: '1',
-          title: 'OpenClaw 发布最新版本，支持更多AI代理功能',
-          source: 'OpenClaw官方',
+          title: t('mockTitle1'),
+          source: t('mockSource1'),
           time: '2026-03-09 10:30',
           url: 'https://openclaw.ai',
           category: 'OpenClaw'
         },
         {
           id: '2',
-          title: 'MCP协议获得重大更新，跨代理通信效率提升300%',
-          source: '技术日报',
+          title: t('mockTitle2'),
+          source: t('mockSource2'),
           time: '2026-03-09 09:15',
           url: '#',
           category: 'MCP'
         },
         {
           id: '3',
-          title: 'Google发布新一代AI模型，性能超越GPT-5',
-          source: '科技新闻',
+          title: t('mockTitle3'),
+          source: t('mockSource3'),
           time: '2026-03-09 08:45',
           url: '#',
           category: 'AI'
@@ -128,14 +130,14 @@ const HotNews: React.FC = () => {
     <div className="max-w-4xl mx-auto">
       <div className="card">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-ink">每日热点</h1>
+          <h1 className="text-3xl font-bold text-ink">{t('title')}</h1>
           <button
             onClick={fetchNews}
             disabled={loading}
             className="btn btn-primary flex items-center"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            {loading ? '刷新中...' : '刷新'}
+            {loading ? t('refreshing') : t('refresh')}
           </button>
         </div>
 
@@ -193,20 +195,20 @@ const HotNews: React.FC = () => {
             ))
           ) : (
             <div className="text-center py-12 text-ink-muted">
-              暂无新闻数据，请点击刷新按钮
+              {t('emptyState')}
             </div>
           )}
         </div>
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-ink mb-4">功能说明</h2>
+        <h2 className="text-xl font-bold text-ink mb-4">{t('featuresTitle')}</h2>
         <ul className="list-disc pl-5 space-y-2 text-ink-muted">
-          <li>新闻数据实时爬取，覆盖科技、体育、AI、OpenClaw、MCP、国际等多个领域</li>
-          <li>支持按分类筛选，快速找到感兴趣的内容</li>
-          <li>点击新闻标题可跳转到原始来源查看详情</li>
-          <li>点击刷新按钮获取最新的热点新闻</li>
-          <li>爬虫脚本每天自动更新数据源，确保内容时效性</li>
+          <li>{t('feature1')}</li>
+          <li>{t('feature2')}</li>
+          <li>{t('feature3')}</li>
+          <li>{t('feature4')}</li>
+          <li>{t('feature5')}</li>
         </ul>
       </div>
     </div>
