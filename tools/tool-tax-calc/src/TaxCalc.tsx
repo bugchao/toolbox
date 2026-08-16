@@ -118,43 +118,43 @@ const TaxCalc: React.FC = () => {
     <div className="w-full space-y-6 pb-24">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
 
       {/* Input section */}
-      <section className="rounded-lg border border-gray-200 bg-white p-5 space-y-5">
-        <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface p-5 space-y-5">
+        <h2 className="text-base font-semibold text-ink flex items-center gap-2">
           <Wallet className="w-4 h-4" /> {t('section.basic')}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-gray-700 mb-1">{t('field.monthlyPretax')}</label>
+            <label className="block text-sm text-ink mb-1">{t('field.monthlyPretax')}</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">¥</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle text-sm">¥</span>
               <input
                 type="number"
                 min={0}
                 step={100}
                 value={monthlyPretax}
                 onChange={(e) => setMonthlyPretax(Math.max(0, Number(e.target.value) || 0))}
-                className="w-full pl-7 pr-3 py-2 text-base border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-7 pr-3 py-2 text-base border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-gray-700 mb-1">
+            <label className="block text-sm text-ink mb-1">
               {t('field.insurance')}{' '}
-              <span className="text-xs text-gray-400">({t('field.insuranceHint')})</span>
+              <span className="text-xs text-ink-subtle">({t('field.insuranceHint')})</span>
             </label>
             <div className="flex gap-2">
               <select
                 value={insuranceMode}
                 onChange={(e) => setInsuranceMode(e.target.value as 'amount' | 'rate')}
-                className="px-2 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="px-2 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="rate">{t('field.insuranceModeRate')}</option>
                 <option value="amount">{t('field.insuranceModeAmount')}</option>
@@ -168,25 +168,25 @@ const TaxCalc: React.FC = () => {
                     step={0.5}
                     value={insuranceRate}
                     onChange={(e) => setInsuranceRate(Math.max(0, Math.min(50, Number(e.target.value) || 0)))}
-                    className="w-full pr-7 pl-3 py-2 text-base border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pr-7 pl-3 py-2 text-base border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">%</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-subtle text-sm">%</span>
                 </div>
               ) : (
                 <div className="relative flex-1">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">¥</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle text-sm">¥</span>
                   <input
                     type="number"
                     min={0}
                     step={50}
                     value={insuranceAmount}
                     onChange={(e) => setInsuranceAmount(Math.max(0, Number(e.target.value) || 0))}
-                    className="w-full pl-7 pr-3 py-2 text-base border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full pl-7 pr-3 py-2 text-base border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               )}
             </div>
-            <div className="text-xs text-gray-400 mt-1">
+            <div className="text-xs text-ink-subtle mt-1">
               ≈ ¥{fmtMoney(insurancePerMonth)} / {t('field.perMonth')}
             </div>
           </div>
@@ -194,29 +194,29 @@ const TaxCalc: React.FC = () => {
       </section>
 
       {/* Itemized deductions */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setItemizedOpen((v) => !v)}
           aria-expanded={itemizedOpen}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink hover:bg-surface-muted rounded-lg transition-colors"
         >
           <Sparkles className="w-4 h-4" />
           {t('section.itemized')}
-          <span className="text-xs text-gray-400 font-normal">
+          <span className="text-xs text-ink-subtle font-normal">
             ¥{fmtMoney(itemizedMonthly)} / {t('field.perMonth')}
           </span>
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               itemizedOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {itemizedOpen && (
-          <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
+          <div className="px-4 pb-4 border-t border-edge pt-3 space-y-3">
             {/* 子女教育 */}
             <div className="flex flex-wrap items-center gap-3">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-700 flex-1 min-w-0">
+              <label className="inline-flex items-center gap-2 text-sm text-ink flex-1 min-w-0">
                 <input
                   type="checkbox"
                   checked={itemized.childEducation.enabled}
@@ -226,14 +226,14 @@ const TaxCalc: React.FC = () => {
                       childEducation: { ...itemized.childEducation, enabled: e.target.checked },
                     })
                   }
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('itemized.childEducation')}{' '}
-                <span className="text-xs text-gray-400">(¥1000/{t('itemized.perChild')})</span>
+                <span className="text-xs text-ink-subtle">(¥1000/{t('itemized.perChild')})</span>
               </label>
               {itemized.childEducation.enabled && (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-500">{t('itemized.childCount')}</span>
+                  <span className="text-xs text-ink-muted">{t('itemized.childCount')}</span>
                   <input
                     type="number"
                     min={1}
@@ -248,7 +248,7 @@ const TaxCalc: React.FC = () => {
                         },
                       })
                     }
-                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-16 px-2 py-1 text-sm border border-edge-strong rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               )}
@@ -256,7 +256,7 @@ const TaxCalc: React.FC = () => {
 
             {/* 婴幼儿照护 */}
             <div className="flex flex-wrap items-center gap-3">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-700 flex-1 min-w-0">
+              <label className="inline-flex items-center gap-2 text-sm text-ink flex-1 min-w-0">
                 <input
                   type="checkbox"
                   checked={itemized.babyCare.enabled}
@@ -266,14 +266,14 @@ const TaxCalc: React.FC = () => {
                       babyCare: { ...itemized.babyCare, enabled: e.target.checked },
                     })
                   }
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('itemized.babyCare')}{' '}
-                <span className="text-xs text-gray-400">(¥2000/{t('itemized.perChild')})</span>
+                <span className="text-xs text-ink-subtle">(¥2000/{t('itemized.perChild')})</span>
               </label>
               {itemized.babyCare.enabled && (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-500">{t('itemized.childCount')}</span>
+                  <span className="text-xs text-ink-muted">{t('itemized.childCount')}</span>
                   <input
                     type="number"
                     min={1}
@@ -288,41 +288,41 @@ const TaxCalc: React.FC = () => {
                         },
                       })
                     }
-                    className="w-16 px-2 py-1 text-sm border border-gray-300 rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-16 px-2 py-1 text-sm border border-edge-strong rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               )}
             </div>
 
             {/* 继续教育 */}
-            <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <label className="inline-flex items-center gap-2 text-sm text-ink">
               <input
                 type="checkbox"
                 checked={itemized.continuingEducation}
                 onChange={(e) =>
                   setItemized({ ...itemized, continuingEducation: e.target.checked })
                 }
-                className="rounded border-gray-300"
+                className="rounded border-edge-strong"
               />
               {t('itemized.continuingEducation')}{' '}
-              <span className="text-xs text-gray-400">(¥400/{t('field.perMonth')})</span>
+              <span className="text-xs text-ink-subtle">(¥400/{t('field.perMonth')})</span>
             </label>
 
             {/* 住房贷款利息 */}
-            <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+            <label className="inline-flex items-center gap-2 text-sm text-ink">
               <input
                 type="checkbox"
                 checked={itemized.housingLoan}
                 onChange={(e) => setItemized({ ...itemized, housingLoan: e.target.checked })}
-                className="rounded border-gray-300"
+                className="rounded border-edge-strong"
               />
               {t('itemized.housingLoan')}{' '}
-              <span className="text-xs text-gray-400">(¥1000/{t('field.perMonth')})</span>
+              <span className="text-xs text-ink-subtle">(¥1000/{t('field.perMonth')})</span>
             </label>
 
             {/* 住房租金 */}
             <div className="flex flex-wrap items-center gap-3">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-700 flex-1 min-w-0">
+              <label className="inline-flex items-center gap-2 text-sm text-ink flex-1 min-w-0">
                 <input
                   type="checkbox"
                   checked={itemized.housingRent.enabled}
@@ -332,7 +332,7 @@ const TaxCalc: React.FC = () => {
                       housingRent: { ...itemized.housingRent, enabled: e.target.checked },
                     })
                   }
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('itemized.housingRent')}
               </label>
@@ -348,7 +348,7 @@ const TaxCalc: React.FC = () => {
                       },
                     })
                   }
-                  className="px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="px-2 py-1 text-sm border border-edge-strong rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="cityA">{t('itemized.cityA')} (¥1500)</option>
                   <option value="cityB">{t('itemized.cityB')} (¥1100)</option>
@@ -359,7 +359,7 @@ const TaxCalc: React.FC = () => {
 
             {/* 赡养老人 */}
             <div className="flex flex-wrap items-center gap-3">
-              <label className="inline-flex items-center gap-2 text-sm text-gray-700 flex-1 min-w-0">
+              <label className="inline-flex items-center gap-2 text-sm text-ink flex-1 min-w-0">
                 <input
                   type="checkbox"
                   checked={itemized.elderlySupport.enabled}
@@ -369,13 +369,13 @@ const TaxCalc: React.FC = () => {
                       elderlySupport: { ...itemized.elderlySupport, enabled: e.target.checked },
                     })
                   }
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('itemized.elderlySupport')}
               </label>
               {itemized.elderlySupport.enabled && (
                 <div className="flex items-center gap-2 flex-wrap">
-                  <label className="inline-flex items-center gap-1 text-xs text-gray-600">
+                  <label className="inline-flex items-center gap-1 text-xs text-ink-muted">
                     <input
                       type="radio"
                       checked={itemized.elderlySupport.sole}
@@ -388,7 +388,7 @@ const TaxCalc: React.FC = () => {
                     />
                     {t('itemized.elderlySole')} (¥3000)
                   </label>
-                  <label className="inline-flex items-center gap-1 text-xs text-gray-600">
+                  <label className="inline-flex items-center gap-1 text-xs text-ink-muted">
                     <input
                       type="radio"
                       checked={!itemized.elderlySupport.sole}
@@ -417,7 +417,7 @@ const TaxCalc: React.FC = () => {
                           },
                         })
                       }
-                      className="w-20 px-2 py-1 text-sm border border-gray-300 rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-20 px-2 py-1 text-sm border border-edge-strong rounded font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                   )}
                 </div>
@@ -428,22 +428,22 @@ const TaxCalc: React.FC = () => {
       </section>
 
       {/* Year-end bonus */}
-      <section className="rounded-lg border border-gray-200 bg-white p-5 space-y-3">
-        <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface p-5 space-y-3">
+        <h2 className="text-base font-semibold text-ink flex items-center gap-2">
           <TrendingUp className="w-4 h-4" /> {t('section.bonus')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3 items-end">
           <div>
-            <label className="block text-sm text-gray-700 mb-1">{t('field.yearEndBonus')}</label>
+            <label className="block text-sm text-ink mb-1">{t('field.yearEndBonus')}</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">¥</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle text-sm">¥</span>
               <input
                 type="number"
                 min={0}
                 step={1000}
                 value={yearEndBonus}
                 onChange={(e) => setYearEndBonus(Math.max(0, Number(e.target.value) || 0))}
-                className="w-full pl-7 pr-3 py-2 text-base border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-7 pr-3 py-2 text-base border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -452,30 +452,30 @@ const TaxCalc: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div
               className={`rounded-md border p-3 ${
-                bonusComparison.better === 'single' ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200 bg-gray-50'
+                bonusComparison.better === 'single' ? 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20' : 'border-edge bg-surface-muted'
               }`}
             >
-              <div className="text-xs text-gray-500">{t('bonus.singleTax')}</div>
-              <div className="text-xl font-mono font-semibold text-gray-800">
+              <div className="text-xs text-ink-muted">{t('bonus.singleTax')}</div>
+              <div className="text-xl font-mono font-semibold text-ink">
                 ¥{fmtMoney(bonusComparison.single)}
               </div>
               {bonusComparison.better === 'single' && (
-                <div className="text-xs text-emerald-700 mt-1">
+                <div className="text-xs text-emerald-700 dark:text-emerald-300 mt-1">
                   {t('bonus.betterBy', { amount: fmtMoney(bonusComparison.diff) })}
                 </div>
               )}
             </div>
             <div
               className={`rounded-md border p-3 ${
-                bonusComparison.better === 'merged' ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200 bg-gray-50'
+                bonusComparison.better === 'merged' ? 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20' : 'border-edge bg-surface-muted'
               }`}
             >
-              <div className="text-xs text-gray-500">{t('bonus.mergedDelta')}</div>
-              <div className="text-xl font-mono font-semibold text-gray-800">
+              <div className="text-xs text-ink-muted">{t('bonus.mergedDelta')}</div>
+              <div className="text-xl font-mono font-semibold text-ink">
                 ¥{fmtMoney(bonusComparison.mergedDelta)}
               </div>
               {bonusComparison.better === 'merged' && (
-                <div className="text-xs text-emerald-700 mt-1">
+                <div className="text-xs text-emerald-700 dark:text-emerald-300 mt-1">
                   {t('bonus.betterBy', { amount: fmtMoney(bonusComparison.diff) })}
                 </div>
               )}
@@ -483,14 +483,14 @@ const TaxCalc: React.FC = () => {
           </div>
         )}
         {yearEndBonus > 0 && !bonusComparison && (
-          <div className="text-xs text-gray-400">{t('bonus.computingHint')}</div>
+          <div className="text-xs text-ink-subtle">{t('bonus.computingHint')}</div>
         )}
-        <p className="text-xs text-gray-400">{t('bonus.hint')}</p>
+        <p className="text-xs text-ink-subtle">{t('bonus.hint')}</p>
       </section>
 
       {/* Annual summary */}
-      <section className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 p-5 md:p-6 space-y-3">
-        <h2 className="text-base font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-2xl border border-indigo-200 dark:border-indigo-800 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 p-5 md:p-6 space-y-3">
+        <h2 className="text-base font-semibold text-ink flex items-center gap-2">
           <Calculator className="w-4 h-4" /> {t('section.summary')}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
@@ -510,7 +510,7 @@ const TaxCalc: React.FC = () => {
             accent="emerald"
           />
         </div>
-        <div className="text-xs text-gray-500 grid grid-cols-1 sm:grid-cols-2 gap-1">
+        <div className="text-xs text-ink-muted grid grid-cols-1 sm:grid-cols-2 gap-1">
           <span>
             {t('summary.taxableAnnual')}: <span className="font-mono">¥{fmtMoney(annualSummary.taxable)}</span>
           </span>
@@ -522,25 +522,25 @@ const TaxCalc: React.FC = () => {
       </section>
 
       {/* Monthly withholding table */}
-      <section className="rounded-lg border border-gray-200 bg-white">
+      <section className="rounded-lg border border-edge bg-surface">
         <button
           type="button"
           onClick={() => setTableOpen((v) => !v)}
           aria-expanded={tableOpen}
-          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-ink hover:bg-surface-muted rounded-lg transition-colors"
         >
           <Receipt className="w-4 h-4" />
           {t('section.monthly')}
           <ChevronDown
-            className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+            className={`w-4 h-4 ml-auto text-ink-subtle transition-transform ${
               tableOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
         {tableOpen && (
-          <div className="border-t border-gray-100 overflow-x-auto">
+          <div className="border-t border-edge overflow-x-auto">
             <table className="w-full text-xs md:text-sm">
-              <thead className="bg-gray-50 text-gray-600">
+              <thead className="bg-surface-muted text-ink-muted">
                 <tr>
                   <th className="px-3 py-2 text-left">{t('table.month')}</th>
                   <th className="px-3 py-2 text-right">{t('table.pretax')}</th>
@@ -550,30 +550,30 @@ const TaxCalc: React.FC = () => {
                   <th className="px-3 py-2 text-right">{t('table.takeHome')}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-edge">
                 {monthlyRows.map((r, i) => {
                   // Highlight when monthly tax jumps (= moved to a higher bracket)
                   const jumped = i > 0 && r.monthlyTax > monthlyRows[i - 1].monthlyTax + 0.01
                   return (
-                    <tr key={r.month} className="hover:bg-gray-50">
-                      <td className="px-3 py-2 text-gray-700 font-medium">{r.month}</td>
+                    <tr key={r.month} className="hover:bg-surface-muted">
+                      <td className="px-3 py-2 text-ink font-medium">{r.month}</td>
                       <td className="px-3 py-2 text-right font-mono tabular-nums">
                         {fmtMoney(r.pretax)}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono tabular-nums text-gray-500">
+                      <td className="px-3 py-2 text-right font-mono tabular-nums text-ink-muted">
                         {fmtMoney(r.insurance)}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono tabular-nums text-gray-500">
+                      <td className="px-3 py-2 text-right font-mono tabular-nums text-ink-muted">
                         {fmtMoney(r.cumulativeTaxable)}
                       </td>
                       <td
                         className={`px-3 py-2 text-right font-mono tabular-nums ${
-                          jumped ? 'text-rose-600 font-semibold' : 'text-rose-500'
+                          jumped ? 'text-rose-600 dark:text-rose-400 font-semibold' : 'text-rose-500 dark:text-rose-400'
                         }`}
                       >
                         {fmtMoney(r.monthlyTax)}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono tabular-nums text-emerald-700 font-semibold">
+                      <td className="px-3 py-2 text-right font-mono tabular-nums text-emerald-700 dark:text-emerald-300 font-semibold">
                         {fmtMoney(r.takeHome)}
                       </td>
                     </tr>
@@ -586,14 +586,14 @@ const TaxCalc: React.FC = () => {
       </section>
 
       {/* Reference brackets */}
-      <details className="rounded-lg border border-gray-200 bg-white">
-        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 list-none flex items-center gap-2">
+      <details className="rounded-lg border border-edge bg-surface">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-ink hover:bg-surface-muted list-none flex items-center gap-2">
           <AlertCircle className="w-4 h-4" />
           {t('section.brackets')}
         </summary>
         <div className="px-4 pb-4 pt-2 overflow-x-auto">
           <table className="w-full text-xs md:text-sm">
-            <thead className="text-gray-500">
+            <thead className="text-ink-muted">
               <tr>
                 <th className="px-2 py-1 text-left">{t('table.range')}</th>
                 <th className="px-2 py-1 text-right">{t('table.rate')}</th>
@@ -608,7 +608,7 @@ const TaxCalc: React.FC = () => {
                     ? `> ¥${fmtMoney(prev)}`
                     : `¥${fmtMoney(prev)} ~ ¥${fmtMoney(b.upper)}`
                 return (
-                  <tr key={i} className="border-t border-gray-100">
+                  <tr key={i} className="border-t border-edge">
                     <td className="px-2 py-1 font-mono">{rangeText}</td>
                     <td className="px-2 py-1 text-right font-mono">{(b.rate * 100).toFixed(0)}%</td>
                     <td className="px-2 py-1 text-right font-mono">¥{fmtMoney(b.deduct)}</td>
@@ -618,7 +618,7 @@ const TaxCalc: React.FC = () => {
             </tbody>
           </table>
           {!isZh && (
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-ink-subtle mt-2">
               Source: State Taxation Administration of China (2019 reform onwards).
             </p>
           )}
@@ -636,13 +636,13 @@ interface StatProps {
 const Stat: React.FC<StatProps> = ({ label, value, accent }) => {
   const color =
     accent === 'rose'
-      ? 'text-rose-700'
+      ? 'text-rose-700 dark:text-rose-300'
       : accent === 'emerald'
-        ? 'text-emerald-700'
-        : 'text-gray-800'
+        ? 'text-emerald-700 dark:text-emerald-300'
+        : 'text-ink'
   return (
-    <div className="rounded-md bg-white/70 border border-gray-200 p-2">
-      <div className="text-xs text-gray-500">{label}</div>
+    <div className="rounded-md bg-surface/70 border border-edge p-2">
+      <div className="text-xs text-ink-muted">{label}</div>
       <div className={`text-base md:text-lg font-mono font-semibold tabular-nums ${color}`}>
         {value}
       </div>

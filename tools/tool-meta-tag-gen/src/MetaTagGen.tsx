@@ -206,7 +206,7 @@ const MetaTagGen: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-sm text-gray-400 py-12">{t('loading')}</div>
+        <div className="text-center text-sm text-ink-subtle py-12">{t('loading')}</div>
       </div>
     )
   }
@@ -258,11 +258,11 @@ const MetaTagGen: React.FC = () => {
                 className="sm:col-span-2"
               />
               <label className="block text-sm">
-                <span className="block text-xs text-gray-500 mb-0.5">{t('field.robots')}</span>
+                <span className="block text-xs text-ink-muted mb-0.5">{t('field.robots')}</span>
                 <select
                   value={data.robots}
                   onChange={(e) => update('robots', e.target.value as RobotsValue)}
-                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md bg-surface focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="index,follow">index, follow</option>
                   <option value="noindex,follow">noindex, follow</option>
@@ -276,7 +276,7 @@ const MetaTagGen: React.FC = () => {
                 onChange={(v) => update('viewport', v)}
               />
               <label className="block text-sm sm:col-span-2">
-                <span className="block text-xs text-gray-500 mb-0.5">
+                <span className="block text-xs text-ink-muted mb-0.5">
                   {t('field.themeColor')}
                 </span>
                 <div className="flex items-center gap-2">
@@ -284,13 +284,13 @@ const MetaTagGen: React.FC = () => {
                     type="color"
                     value={data.themeColor || '#000000'}
                     onChange={(e) => update('themeColor', e.target.value)}
-                    className="w-10 h-9 rounded border border-gray-300 cursor-pointer"
+                    className="w-10 h-9 rounded border border-edge-strong cursor-pointer"
                   />
                   <input
                     type="text"
                     value={data.themeColor}
                     onChange={(e) => update('themeColor', e.target.value)}
-                    className="w-28 px-2 py-1.5 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-28 px-2 py-1.5 text-sm border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     spellCheck={false}
                   />
                 </div>
@@ -305,12 +305,12 @@ const MetaTagGen: React.FC = () => {
             icon={<Globe className="w-4 h-4" />}
             title={t('section.og')}
             right={
-              <label className="inline-flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
+              <label className="inline-flex items-center gap-1.5 text-xs text-ink-muted cursor-pointer">
                 <input
                   type="checkbox"
                   checked={data.includeOg}
                   onChange={(e) => update('includeOg', e.target.checked)}
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('toggle.og')}
               </label>
@@ -336,11 +336,11 @@ const MetaTagGen: React.FC = () => {
                 className="sm:col-span-2"
               />
               <label className="block text-sm">
-                <span className="block text-xs text-gray-500 mb-0.5">{t('field.ogType')}</span>
+                <span className="block text-xs text-ink-muted mb-0.5">{t('field.ogType')}</span>
                 <select
                   value={data.ogType}
                   onChange={(e) => update('ogType', e.target.value as OgType)}
-                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md bg-surface focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="website">website</option>
                   <option value="article">article</option>
@@ -355,7 +355,7 @@ const MetaTagGen: React.FC = () => {
                 placeholder={data.canonical}
               />
               <label className="block text-sm sm:col-span-2">
-                <span className="block text-xs text-gray-500 mb-0.5">
+                <span className="block text-xs text-ink-muted mb-0.5">
                   {t('field.ogImage')}
                 </span>
                 <input
@@ -363,7 +363,7 @@ const MetaTagGen: React.FC = () => {
                   value={data.ogImage}
                   onChange={(e) => update('ogImage', e.target.value)}
                   placeholder="https://...jpg"
-                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   spellCheck={false}
                 />
                 {data.ogImage.trim() ? (
@@ -373,7 +373,7 @@ const MetaTagGen: React.FC = () => {
                     onError={(e) => {
                       ;(e.currentTarget as HTMLImageElement).style.opacity = '0.2'
                     }}
-                    className="mt-1.5 w-20 h-20 object-cover rounded border border-gray-200 bg-gray-50"
+                    className="mt-1.5 w-20 h-20 object-cover rounded border border-edge bg-surface-muted"
                   />
                 ) : null}
               </label>
@@ -397,12 +397,12 @@ const MetaTagGen: React.FC = () => {
             icon={<Twitter className="w-4 h-4" />}
             title={t('section.twitter')}
             right={
-              <label className="inline-flex items-center gap-1.5 text-xs text-gray-600 cursor-pointer">
+              <label className="inline-flex items-center gap-1.5 text-xs text-ink-muted cursor-pointer">
                 <input
                   type="checkbox"
                   checked={data.includeTwitter}
                   onChange={(e) => update('includeTwitter', e.target.checked)}
-                  className="rounded border-gray-300"
+                  className="rounded border-edge-strong"
                 />
                 {t('toggle.twitter')}
               </label>
@@ -414,13 +414,13 @@ const MetaTagGen: React.FC = () => {
               }`}
             >
               <label className="block text-sm sm:col-span-2">
-                <span className="block text-xs text-gray-500 mb-0.5">
+                <span className="block text-xs text-ink-muted mb-0.5">
                   {t('field.twitterCard')}
                 </span>
                 <select
                   value={data.twitterCard}
                   onChange={(e) => update('twitterCard', e.target.value as TwitterCardType)}
-                  className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md bg-surface focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="summary">summary</option>
                   <option value="summary_large_image">summary_large_image</option>
@@ -447,7 +447,7 @@ const MetaTagGen: React.FC = () => {
             <button
               type="button"
               onClick={() => save(DEFAULT_STATE)}
-              className="text-xs text-gray-500 hover:text-red-500 inline-flex items-center gap-1"
+              className="text-xs text-ink-muted hover:text-red-500 dark:hover:text-red-400 inline-flex items-center gap-1"
             >
               <RotateCcw className="w-3 h-3" /> {t('reset')}
             </button>
@@ -456,8 +456,8 @@ const MetaTagGen: React.FC = () => {
 
         {/* ============ Right: preview ============ */}
         <div className="space-y-3">
-          <div className="rounded-lg border border-gray-200 bg-white overflow-hidden sticky top-4">
-            <div className="flex border-b border-gray-200 bg-gray-50">
+          <div className="rounded-lg border border-edge bg-surface overflow-hidden sticky top-4">
+            <div className="flex border-b border-edge bg-surface-muted">
               <PreviewTabBtn
                 active={previewTab === 'google'}
                 onClick={() => setPreviewTab('google')}
@@ -474,7 +474,7 @@ const MetaTagGen: React.FC = () => {
                 label={t('preview.facebook')}
               />
             </div>
-            <div className="p-4 bg-gray-50 min-h-[280px]">
+            <div className="p-4 bg-surface-muted min-h-[280px]">
               {previewTab === 'google' && (
                 <GooglePreview
                   title={previewTitle}
@@ -509,9 +509,9 @@ const MetaTagGen: React.FC = () => {
       </div>
 
       {/* ============ Bottom: HTML output ============ */}
-      <section className="rounded-lg border border-gray-200 bg-white">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-          <h2 className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-edge">
+          <h2 className="text-sm font-semibold text-ink flex items-center gap-2">
             <Code2 className="w-4 h-4" /> {t('section.output')}
           </h2>
           <div className="flex gap-2">
@@ -553,8 +553,8 @@ interface CollapsibleProps {
   children: React.ReactNode
 }
 const Collapsible: React.FC<CollapsibleProps> = ({ open, onToggle, icon, title, right, children }) => (
-  <section className="rounded-lg border border-gray-200 bg-white">
-    <div className="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50 rounded-lg transition-colors">
+  <section className="rounded-lg border border-edge bg-surface">
+    <div className="w-full flex items-center gap-2 px-4 py-3 text-sm font-semibold text-ink hover:bg-surface-muted rounded-lg transition-colors">
       <button
         type="button"
         onClick={onToggle}
@@ -569,14 +569,14 @@ const Collapsible: React.FC<CollapsibleProps> = ({ open, onToggle, icon, title, 
         type="button"
         onClick={onToggle}
         aria-label="toggle"
-        className="text-gray-400"
+        className="text-ink-subtle"
       >
         <ChevronDown
           className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`}
         />
       </button>
     </div>
-    {open && <div className="px-4 pb-4 border-t border-gray-100 pt-3">{children}</div>}
+    {open && <div className="px-4 pb-4 border-t border-edge pt-3">{children}</div>}
   </section>
 )
 
@@ -589,7 +589,7 @@ interface CounterProps {
 const Counter: React.FC<CounterProps> = ({ n, max, t }) => {
   const over = n > max
   return (
-    <span className={`ml-2 text-xs ${over ? 'text-red-500 font-medium' : 'text-gray-400'}`}>
+    <span className={`ml-2 text-xs ${over ? 'text-red-500 dark:text-red-400 font-medium' : 'text-ink-subtle'}`}>
       {t('counter', { n, max })}
     </span>
   )
@@ -612,7 +612,7 @@ const FieldText: React.FC<FieldTextProps> = ({
   counter,
 }) => (
   <label className={`block text-sm ${className}`}>
-    <span className="flex items-center text-xs text-gray-500 mb-0.5">
+    <span className="flex items-center text-xs text-ink-muted mb-0.5">
       <span>{label}</span>
       {counter && <Counter {...counter} />}
     </span>
@@ -621,7 +621,7 @@ const FieldText: React.FC<FieldTextProps> = ({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
       spellCheck={false}
     />
   </label>
@@ -637,7 +637,7 @@ const FieldTextarea: React.FC<FieldTextareaProps> = ({
   counter,
 }) => (
   <label className={`block text-sm ${className}`}>
-    <span className="flex items-center text-xs text-gray-500 mb-0.5">
+    <span className="flex items-center text-xs text-ink-muted mb-0.5">
       <span>{label}</span>
       {counter && <Counter {...counter} />}
     </span>
@@ -646,7 +646,7 @@ const FieldTextarea: React.FC<FieldTextareaProps> = ({
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       rows={3}
-      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-y"
+      className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-y"
       spellCheck={false}
     />
   </label>
@@ -663,8 +663,8 @@ const PreviewTabBtn: React.FC<PreviewTabBtnProps> = ({ active, onClick, label })
     onClick={onClick}
     className={`flex-1 px-3 py-2 text-xs font-medium transition-colors ${
       active
-        ? 'bg-white text-indigo-600 border-b-2 border-indigo-600'
-        : 'text-gray-500 hover:text-gray-800'
+        ? 'bg-surface text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600'
+        : 'text-ink-muted hover:text-ink'
     }`}
   >
     {label}
@@ -682,14 +682,14 @@ const GooglePreview: React.FC<{
   const displayDesc = truncate(description || '—', 160)
   const displayUrl = url || `https://${domain}`
   return (
-    <div className="bg-white rounded-md p-4 border border-gray-200">
-      <div className="flex items-center gap-2 text-xs text-gray-700">
-        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 border border-gray-200 text-[10px] text-gray-500 font-bold">
+    <div className="bg-surface rounded-md p-4 border border-edge">
+      <div className="flex items-center gap-2 text-xs text-ink">
+        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-inset border border-edge text-[10px] text-ink-muted font-bold">
           {domain.charAt(0).toUpperCase() || 'S'}
         </span>
         <div className="leading-tight">
-          <div className="font-medium text-gray-800">{domain}</div>
-          <div className="text-[11px] text-gray-500 truncate max-w-[280px]">{displayUrl}</div>
+          <div className="font-medium text-ink">{domain}</div>
+          <div className="text-[11px] text-ink-muted truncate max-w-[280px]">{displayUrl}</div>
         </div>
       </div>
       <a
@@ -699,7 +699,7 @@ const GooglePreview: React.FC<{
       >
         {displayTitle}
       </a>
-      <p className="text-sm text-gray-600 leading-snug mt-1">{displayDesc}</p>
+      <p className="text-sm text-ink-muted leading-snug mt-1">{displayDesc}</p>
     </div>
   )
 }
@@ -716,8 +716,8 @@ const TwitterPreview: React.FC<{
   const isLarge = card === 'summary_large_image' || card === 'player'
   if (isLarge) {
     return (
-      <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 max-w-md">
-        <div className="bg-gray-100 aspect-[1.91/1] flex items-center justify-center">
+      <div className="bg-surface rounded-2xl overflow-hidden border border-edge max-w-md">
+        <div className="bg-surface-inset aspect-[1.91/1] flex items-center justify-center">
           {image ? (
             <img
               src={image}
@@ -728,21 +728,21 @@ const TwitterPreview: React.FC<{
               className="w-full h-full object-cover"
             />
           ) : (
-            <span className="text-xs text-gray-400">{noImageLabel}</span>
+            <span className="text-xs text-ink-subtle">{noImageLabel}</span>
           )}
         </div>
-        <div className="px-3 py-2 border-t border-gray-100">
-          <div className="text-[11px] text-gray-500">{domain}</div>
-          <div className="text-sm font-medium text-gray-900 line-clamp-1">{title || '—'}</div>
-          <div className="text-xs text-gray-500 line-clamp-2">{description}</div>
+        <div className="px-3 py-2 border-t border-edge">
+          <div className="text-[11px] text-ink-muted">{domain}</div>
+          <div className="text-sm font-medium text-ink line-clamp-1">{title || '—'}</div>
+          <div className="text-xs text-ink-muted line-clamp-2">{description}</div>
         </div>
       </div>
     )
   }
   // summary / app: small square thumbnail on the left
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 max-w-md flex">
-      <div className="bg-gray-100 w-28 aspect-square flex items-center justify-center shrink-0">
+    <div className="bg-surface rounded-2xl overflow-hidden border border-edge max-w-md flex">
+      <div className="bg-surface-inset w-28 aspect-square flex items-center justify-center shrink-0">
         {image ? (
           <img
             src={image}
@@ -753,13 +753,13 @@ const TwitterPreview: React.FC<{
             className="w-full h-full object-cover"
           />
         ) : (
-          <span className="text-[10px] text-gray-400">{noImageLabel}</span>
+          <span className="text-[10px] text-ink-subtle">{noImageLabel}</span>
         )}
       </div>
       <div className="px-3 py-2 flex-1 min-w-0">
-        <div className="text-[11px] text-gray-500">{domain}</div>
-        <div className="text-sm font-medium text-gray-900 line-clamp-2">{title || '—'}</div>
-        <div className="text-xs text-gray-500 line-clamp-2 mt-0.5">{description}</div>
+        <div className="text-[11px] text-ink-muted">{domain}</div>
+        <div className="text-sm font-medium text-ink line-clamp-2">{title || '—'}</div>
+        <div className="text-xs text-ink-muted line-clamp-2 mt-0.5">{description}</div>
       </div>
     </div>
   )
@@ -774,8 +774,8 @@ const FacebookPreview: React.FC<{
   siteName: string
   noImageLabel: string
 }> = ({ title, description, image, domain, siteName, noImageLabel }) => (
-  <div className="bg-white border border-gray-200 max-w-md">
-    <div className="bg-gray-100 aspect-[1.91/1] flex items-center justify-center">
+  <div className="bg-surface border border-edge max-w-md">
+    <div className="bg-surface-inset aspect-[1.91/1] flex items-center justify-center">
       {image ? (
         <img
           src={image}
@@ -786,20 +786,20 @@ const FacebookPreview: React.FC<{
           className="w-full h-full object-cover"
         />
       ) : (
-        <span className="text-xs text-gray-400 inline-flex items-center gap-1.5">
+        <span className="text-xs text-ink-subtle inline-flex items-center gap-1.5">
           <ImageIcon className="w-4 h-4" />
           {noImageLabel}
         </span>
       )}
     </div>
-    <div className="px-3 py-2 bg-[#f2f3f5] border-t border-gray-200">
-      <div className="text-[11px] text-gray-500 uppercase tracking-wider">
+    <div className="px-3 py-2 bg-[#f2f3f5] border-t border-edge">
+      <div className="text-[11px] text-ink-muted uppercase tracking-wider">
         {siteName || domain}
       </div>
-      <div className="text-[15px] font-semibold text-gray-900 line-clamp-2">
+      <div className="text-[15px] font-semibold text-ink line-clamp-2">
         {title || '—'}
       </div>
-      <div className="text-xs text-gray-500 line-clamp-2 mt-0.5">{description}</div>
+      <div className="text-xs text-ink-muted line-clamp-2 mt-0.5">{description}</div>
     </div>
   </div>
 )

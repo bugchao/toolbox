@@ -229,14 +229,14 @@ const PomodoroTimer: React.FC = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">番茄钟</h1>
-        <p className="text-gray-600">专注工作 25 分钟，休息 5 分钟，提高效率</p>
+        <p className="text-ink-muted">专注工作 25 分钟，休息 5 分钟，提高效率</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Timer Section */}
         <div className="space-y-6">
           {/* Mode Selector */}
-          <div className="bg-white rounded-lg shadow p-4">
+          <div className="bg-surface rounded-lg shadow p-4">
             <div className="grid grid-cols-3 gap-2">
               {Object.entries(modeLabels).map(([key, label]) => (
                 <button
@@ -245,7 +245,7 @@ const PomodoroTimer: React.FC = () => {
                   className={`px-4 py-3 rounded-lg font-medium transition ${
                     mode === key
                       ? `${modeColors[key as TimerMode]} text-white`
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      : 'bg-surface-inset text-ink-muted hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   {label}
@@ -296,7 +296,7 @@ const PomodoroTimer: React.FC = () => {
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={toggleTimer}
-                className="w-16 h-16 rounded-full bg-white text-gray-800 flex items-center justify-center hover:bg-gray-100 transition shadow-lg"
+                className="w-16 h-16 rounded-full bg-surface text-ink flex items-center justify-center hover:bg-surface-inset transition shadow-lg"
               >
                 {isRunning ? (
                   <Pause className="w-8 h-8" />
@@ -306,13 +306,13 @@ const PomodoroTimer: React.FC = () => {
               </button>
               <button
                 onClick={resetTimer}
-                className="w-16 h-16 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition"
+                className="w-16 h-16 rounded-full bg-surface/20 text-white flex items-center justify-center hover:bg-surface/30 transition"
               >
                 <RotateCcw className="w-8 h-8" />
               </button>
               <button
                 onClick={() => setShowSettings(!showSettings)}
-                className="w-16 h-16 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/30 transition"
+                className="w-16 h-16 rounded-full bg-surface/20 text-white flex items-center justify-center hover:bg-surface/30 transition"
               >
                 <Settings className="w-8 h-8" />
               </button>
@@ -321,7 +321,7 @@ const PomodoroTimer: React.FC = () => {
 
           {/* Settings Panel */}
           {showSettings && (
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-surface rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold mb-4">设置</h3>
               
               <div className="space-y-4">
@@ -331,7 +331,7 @@ const PomodoroTimer: React.FC = () => {
                     type="number"
                     value={workDuration}
                     onChange={(e) => setWorkDuration(parseInt(e.target.value) || 25)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-4 py-2 border border-edge-strong rounded-lg"
                     min="1"
                     max="60"
                   />
@@ -344,7 +344,7 @@ const PomodoroTimer: React.FC = () => {
                       type="number"
                       value={shortBreakDuration}
                       onChange={(e) => setShortBreakDuration(parseInt(e.target.value) || 5)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-4 py-2 border border-edge-strong rounded-lg"
                       min="1"
                       max="30"
                     />
@@ -355,7 +355,7 @@ const PomodoroTimer: React.FC = () => {
                       type="number"
                       value={longBreakDuration}
                       onChange={(e) => setLongBreakDuration(parseInt(e.target.value) || 15)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-4 py-2 border border-edge-strong rounded-lg"
                       min="1"
                       max="60"
                     />
@@ -370,7 +370,7 @@ const PomodoroTimer: React.FC = () => {
                       autoStartBreaks ? 'bg-green-500' : 'bg-gray-300'
                     }`}
                   >
-                    <div className={`w-5 h-5 bg-white rounded-full shadow transform transition ${
+                    <div className={`w-5 h-5 bg-surface rounded-full shadow transform transition ${
                       autoStartBreaks ? 'translate-x-6' : 'translate-x-0.5'
                     }`} />
                   </button>
@@ -387,7 +387,7 @@ const PomodoroTimer: React.FC = () => {
                       soundEnabled ? 'bg-green-500' : 'bg-gray-300'
                     }`}
                   >
-                    <div className={`w-5 h-5 bg-white rounded-full shadow transform transition ${
+                    <div className={`w-5 h-5 bg-surface rounded-full shadow transform transition ${
                       soundEnabled ? 'translate-x-6' : 'translate-x-0.5'
                     }`} />
                   </button>
@@ -404,16 +404,16 @@ const PomodoroTimer: React.FC = () => {
           )}
 
           {/* Stats */}
-          <div className="bg-white rounded-lg shadow p-4">
+          <div className="bg-surface rounded-lg shadow p-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-500">{pomodorosCompleted}</div>
-              <div className="text-sm text-gray-600">今日完成番茄数</div>
+              <div className="text-3xl font-bold text-red-500 dark:text-red-400">{pomodorosCompleted}</div>
+              <div className="text-sm text-ink-muted">今日完成番茄数</div>
             </div>
           </div>
         </div>
 
         {/* Tasks Section */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4">今日任务</h2>
           
           {/* Add Task */}
@@ -423,7 +423,7 @@ const PomodoroTimer: React.FC = () => {
               value={newTaskName}
               onChange={(e) => setNewTaskName(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && addTask()}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="添加任务..."
             />
             <button
@@ -437,7 +437,7 @@ const PomodoroTimer: React.FC = () => {
           {/* Task List */}
           <div className="space-y-2">
             {tasks.length === 0 ? (
-              <div className="text-center py-8 text-gray-400">
+              <div className="text-center py-8 text-ink-subtle">
                 <div className="text-sm">暂无任务</div>
               </div>
             ) : (
@@ -447,8 +447,8 @@ const PomodoroTimer: React.FC = () => {
                   onClick={() => setActiveTaskId(task.id)}
                   className={`p-3 rounded-lg border-2 cursor-pointer transition ${
                     activeTaskId === task.id
-                      ? 'border-blue-500 bg-blue-50'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                      : 'border-edge hover:border-edge-strong'
                   } ${task.completed ? 'opacity-50' : ''}`}
                 >
                   <div className="flex items-center gap-3">
@@ -460,7 +460,7 @@ const PomodoroTimer: React.FC = () => {
                       className={`w-6 h-6 rounded border-2 flex items-center justify-center transition ${
                         task.completed
                           ? 'bg-green-500 border-green-500 text-white'
-                          : 'border-gray-300'
+                          : 'border-edge-strong'
                       }`}
                     >
                       {task.completed && <Check className="w-4 h-4" />}
@@ -468,11 +468,11 @@ const PomodoroTimer: React.FC = () => {
                     
                     <div className="flex-1 min-w-0">
                       <div className={`font-medium truncate ${
-                        task.completed ? 'line-through text-gray-500' : ''
+                        task.completed ? 'line-through text-ink-muted' : ''
                       }`}>
                         {task.name}
                       </div>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-ink-muted">
                         🍅 {task.pomodoros} 个番茄
                       </div>
                     </div>
@@ -482,7 +482,7 @@ const PomodoroTimer: React.FC = () => {
                         e.stopPropagation();
                         deleteTask(task.id);
                       }}
-                      className="p-2 text-gray-400 hover:text-red-500 transition"
+                      className="p-2 text-ink-subtle hover:text-red-500 dark:hover:text-red-400 transition"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -493,9 +493,9 @@ const PomodoroTimer: React.FC = () => {
           </div>
 
           {/* Tips */}
-          <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h4 className="font-semibold text-yellow-800 mb-2">🍅 番茄工作法</h4>
-            <ul className="text-sm text-yellow-700 space-y-1 list-disc list-inside">
+          <div className="mt-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+            <h4 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">🍅 番茄工作法</h4>
+            <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1 list-disc list-inside">
               <li>选择一个任务，设置 25 分钟倒计时</li>
               <li>专注工作，直到番茄钟响起</li>
               <li>休息 5 分钟，起来走动一下</li>

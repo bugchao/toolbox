@@ -45,13 +45,13 @@ const PostmanLite: React.FC = () => {
   const methods: HttpMethod[] = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
 
   const methodColors: Record<HttpMethod, string> = {
-    GET: 'text-green-600 bg-green-50 border-green-200',
-    POST: 'text-blue-600 bg-blue-50 border-blue-200',
-    PUT: 'text-yellow-600 bg-yellow-50 border-yellow-200',
-    DELETE: 'text-red-600 bg-red-50 border-red-200',
-    PATCH: 'text-purple-600 bg-purple-50 border-purple-200',
-    HEAD: 'text-gray-600 bg-gray-50 border-gray-200',
-    OPTIONS: 'text-gray-600 bg-gray-50 border-gray-200',
+    GET: 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+    POST: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
+    PUT: 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800',
+    DELETE: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800',
+    PATCH: 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
+    HEAD: 'text-ink-muted bg-surface-muted border-edge',
+    OPTIONS: 'text-ink-muted bg-surface-muted border-edge',
   };
 
   const addHeader = () => {
@@ -201,22 +201,22 @@ const PostmanLite: React.FC = () => {
   };
 
   const getStatusColor = (status: number) => {
-    if (status >= 200 && status < 300) return 'text-green-600 bg-green-50';
-    if (status >= 300 && status < 400) return 'text-yellow-600 bg-yellow-50';
-    if (status >= 400 && status < 500) return 'text-red-600 bg-red-50';
-    if (status >= 500) return 'text-purple-600 bg-purple-50';
-    return 'text-gray-600 bg-gray-50';
+    if (status >= 200 && status < 300) return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
+    if (status >= 300 && status < 400) return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20';
+    if (status >= 400 && status < 500) return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20';
+    if (status >= 500) return 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20';
+    return 'text-ink-muted bg-surface-muted';
   };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Postman Lite</h1>
-        <p className="text-gray-600">轻量级 API 测试工具，支持 HTTP 请求、自定义 Headers、Body、查看响应</p>
+        <p className="text-ink-muted">轻量级 API 测试工具，支持 HTTP 请求、自定义 Headers、Body、查看响应</p>
       </div>
 
       {/* Request Bar */}
-      <div className="bg-white rounded-lg shadow p-4 mb-4">
+      <div className="bg-surface rounded-lg shadow p-4 mb-4">
         <div className="flex gap-2">
           <select
             value={method}
@@ -232,7 +232,7 @@ const PostmanLite: React.FC = () => {
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="flex-1 px-4 py-2 border-2 border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="https://api.example.com/endpoint"
           />
           
@@ -247,7 +247,7 @@ const PostmanLite: React.FC = () => {
         </div>
 
         {responseTime !== null && (
-          <div className="mt-2 text-sm text-gray-500 flex items-center gap-2">
+          <div className="mt-2 text-sm text-ink-muted flex items-center gap-2">
             <Clock className="w-4 h-4" />
             Response time: {responseTime}ms
           </div>
@@ -255,12 +255,12 @@ const PostmanLite: React.FC = () => {
       </div>
 
       {/* Headers */}
-      <div className="bg-white rounded-lg shadow p-4 mb-4">
+      <div className="bg-surface rounded-lg shadow p-4 mb-4">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-semibold">Headers</h2>
           <button
             onClick={addHeader}
-            className="text-sm text-blue-500 hover:underline flex items-center gap-1"
+            className="text-sm text-blue-500 dark:text-blue-400 hover:underline flex items-center gap-1"
           >
             <Plus className="w-4 h-4" />
             Add Header
@@ -280,19 +280,19 @@ const PostmanLite: React.FC = () => {
                 type="text"
                 value={header.key}
                 onChange={(e) => updateHeader(header.id, 'key', e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Key"
               />
               <input
                 type="text"
                 value={header.value}
                 onChange={(e) => updateHeader(header.id, 'value', e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Value"
               />
               <button
                 onClick={() => removeHeader(header.id)}
-                className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition"
+                className="p-2 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -303,14 +303,14 @@ const PostmanLite: React.FC = () => {
 
       {/* Body */}
       {['POST', 'PUT', 'PATCH'].includes(method) && (
-        <div className="bg-white rounded-lg shadow p-4 mb-4">
+        <div className="bg-surface rounded-lg shadow p-4 mb-4">
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Body</h2>
             <div className="flex gap-2 items-center">
               <select
                 value={bodyType}
                 onChange={(e) => setBodyType(e.target.value as BodyType)}
-                className="px-3 py-1 border border-gray-300 rounded-lg text-sm"
+                className="px-3 py-1 border border-edge-strong rounded-lg text-sm"
               >
                 <option value="none">none</option>
                 <option value="json">JSON</option>
@@ -321,7 +321,7 @@ const PostmanLite: React.FC = () => {
               {bodyType === 'json' && (
                 <button
                   onClick={formatJSON}
-                  className="text-sm text-blue-500 hover:underline"
+                  className="text-sm text-blue-500 dark:text-blue-400 hover:underline"
                 >
                   Format
                 </button>
@@ -333,7 +333,7 @@ const PostmanLite: React.FC = () => {
             <textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg font-mono text-sm h-32 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-lg font-mono text-sm h-32 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder={bodyType === 'json' ? '{\n  "key": "value"\n}' : bodyType === 'form-data' ? 'key1=value1\nkey2=value2' : 'Enter body content...'}
             />
           )}
@@ -341,15 +341,15 @@ const PostmanLite: React.FC = () => {
       )}
 
       {/* Response / History Tabs */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="bg-surface rounded-lg shadow">
         <div className="border-b">
           <div className="flex gap-4 px-4">
             <button
               onClick={() => setActiveTab('response')}
               className={`py-3 px-2 border-b-2 transition ${
                 activeTab === 'response'
-                  ? 'border-blue-500 text-blue-500'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-blue-500 text-blue-500 dark:text-blue-400'
+                  : 'border-transparent text-ink-muted hover:text-ink'
               }`}
             >
               Response
@@ -358,8 +358,8 @@ const PostmanLite: React.FC = () => {
               onClick={() => setActiveTab('history')}
               className={`py-3 px-2 border-b-2 transition ${
                 activeTab === 'history'
-                  ? 'border-blue-500 text-blue-500'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-blue-500 text-blue-500 dark:text-blue-400'
+                  : 'border-transparent text-ink-muted hover:text-ink'
               }`}
             >
               History ({history.length})
@@ -378,7 +378,7 @@ const PostmanLite: React.FC = () => {
                       {response.status} {response.statusText}
                     </span>
                     {responseTime !== null && (
-                      <span className="text-sm text-gray-500">{responseTime}ms</span>
+                      <span className="text-sm text-ink-muted">{responseTime}ms</span>
                     )}
                   </div>
                   <div className="flex gap-2">
@@ -387,11 +387,11 @@ const PostmanLite: React.FC = () => {
                       value={response ? JSON.stringify(response, null, 2) : ''}
                       label="复制"
                       copiedLabel="已复制"
-                      className="text-sm !text-blue-500 hover:underline"
+                      className="text-sm !text-blue-500 dark:text-blue-400 hover:underline"
                     />
                     <button
                       onClick={downloadResponse}
-                      className="text-sm text-blue-500 hover:underline flex items-center gap-1"
+                      className="text-sm text-blue-500 dark:text-blue-400 hover:underline flex items-center gap-1"
                     >
                       <Download className="w-4 h-4" />
                       下载
@@ -401,20 +401,20 @@ const PostmanLite: React.FC = () => {
               )}
               
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg mb-4">
                   <strong>Error:</strong> {error}
                 </div>
               )}
               
               {loading && (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-ink-muted">
                   <Spinner size="md" className="mr-2" />
                   Waiting for response...
                 </div>
               )}
               
               {response && !loading && (
-                <pre className="bg-gray-50 p-4 rounded-lg overflow-auto max-h-96 text-sm font-mono">
+                <pre className="bg-surface-muted p-4 rounded-lg overflow-auto max-h-96 text-sm font-mono">
                   {typeof response.data === 'string' 
                     ? response.data 
                     : JSON.stringify(response.data, null, 2)}
@@ -422,7 +422,7 @@ const PostmanLite: React.FC = () => {
               )}
               
               {!response && !loading && !error && (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-ink-subtle">
                   Send a request to see the response
                 </div>
               )}
@@ -437,7 +437,7 @@ const PostmanLite: React.FC = () => {
                 {history.length > 0 && (
                   <button
                     onClick={clearHistory}
-                    className="text-sm text-red-500 hover:underline flex items-center gap-1"
+                    className="text-sm text-red-500 dark:text-red-400 hover:underline flex items-center gap-1"
                   >
                     <Trash2 className="w-4 h-4" />
                     清空
@@ -446,7 +446,7 @@ const PostmanLite: React.FC = () => {
               </div>
               
               {history.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-ink-subtle">
                   No request history yet
                 </div>
               ) : (
@@ -455,7 +455,7 @@ const PostmanLite: React.FC = () => {
                     <div
                       key={item.id}
                       onClick={() => loadHistoryItem(item)}
-                      className="border rounded-lg p-3 hover:bg-gray-50 cursor-pointer transition"
+                      className="border rounded-lg p-3 hover:bg-surface-muted cursor-pointer transition"
                     >
                       <div className="flex items-center gap-3">
                         <span className={`px-2 py-1 rounded text-xs font-bold ${methodColors[item.method as HttpMethod]}`}>
@@ -467,9 +467,9 @@ const PostmanLite: React.FC = () => {
                             {item.response.status}
                           </span>
                         )}
-                        <span className="text-xs text-gray-400">{item.response?.time}ms</span>
+                        <span className="text-xs text-ink-subtle">{item.response?.time}ms</span>
                       </div>
-                      <div className="text-xs text-gray-400 mt-1">
+                      <div className="text-xs text-ink-subtle mt-1">
                         {new Date(item.timestamp).toLocaleString()}
                       </div>
                     </div>
@@ -482,9 +482,9 @@ const PostmanLite: React.FC = () => {
       </div>
 
       {/* Quick Start Guide */}
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-800 mb-2">💡 使用指南</h3>
-        <ol className="text-sm text-blue-700 space-y-1 list-decimal list-inside">
+      <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 使用指南</h3>
+        <ol className="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-decimal list-inside">
           <li>选择 HTTP 方法（GET, POST, PUT, DELETE 等）</li>
           <li>输入 API 端点 URL</li>
           <li>可选：添加自定义 Headers（如 Authorization, Content-Type）</li>

@@ -410,7 +410,7 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'edit'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <Settings className="w-4 h-4 inline mr-2" />
@@ -421,7 +421,7 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === 'preview'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <Eye className="w-4 h-4 inline mr-2" />
@@ -433,7 +433,7 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             <select
               value={selectedTemplate}
               onChange={(e) => setSelectedTemplate(e.target.value as any)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="modern">现代模板</option>
               <option value="simple">简约模板</option>
@@ -473,38 +473,38 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* 基本信息 */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-              <User className="w-5 h-5 mr-2 text-indigo-600" />
+            <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
+              <User className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
               基本信息
             </h3>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                  <label className="block text-sm font-medium text-ink mb-1">姓名</label>
                   <input
                     type="text"
                     value={resumeData.basicInfo.name}
                     onChange={(e) => updateBasicInfo('name', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">求职意向</label>
+                  <label className="block text-sm font-medium text-ink mb-1">求职意向</label>
                   <input
                     type="text"
                     value={resumeData.basicInfo.position}
                     onChange={(e) => updateBasicInfo('position', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">个人简介</label>
+                <label className="block text-sm font-medium text-ink mb-1">个人简介</label>
                 <textarea
                   value={resumeData.basicInfo.summary}
                   onChange={(e) => updateBasicInfo('summary', e.target.value)}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                  className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                   placeholder="简要介绍你的优势、经验和技能..."
                 />
               </div>
@@ -513,68 +513,68 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
 
           {/* 联系方式 */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-              <Phone className="w-5 h-5 mr-2 text-indigo-600" />
+            <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
+              <Phone className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
               联系方式
             </h3>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">手机号码</label>
+                  <label className="block text-sm font-medium text-ink mb-1">手机号码</label>
                   <input
                     type="tel"
                     value={resumeData.contact.phone}
                     onChange={(e) => updateContact('phone', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
+                  <label className="block text-sm font-medium text-ink mb-1">邮箱</label>
                   <input
                     type="email"
                     value={resumeData.contact.email}
                     onChange={(e) => updateContact('email', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">所在城市</label>
+                  <label className="block text-sm font-medium text-ink mb-1">所在城市</label>
                   <input
                     type="text"
                     value={resumeData.contact.location}
                     onChange={(e) => updateContact('location', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">个人网站</label>
+                  <label className="block text-sm font-medium text-ink mb-1">个人网站</label>
                   <input
                     type="url"
                     value={resumeData.contact.website}
                     onChange={(e) => updateContact('website', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">GitHub</label>
+                  <label className="block text-sm font-medium text-ink mb-1">GitHub</label>
                   <input
                     type="url"
                     value={resumeData.contact.github}
                     onChange={(e) => updateContact('github', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                  <label className="block text-sm font-medium text-ink mb-1">LinkedIn</label>
                   <input
                     type="url"
                     value={resumeData.contact.linkedin}
                     onChange={(e) => updateContact('linkedin', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                 </div>
               </div>
@@ -584,8 +584,8 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
           {/* 工作经历 */}
           <div className="card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <Briefcase className="w-5 h-5 mr-2 text-indigo-600" />
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <Briefcase className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
                 工作经历
               </h3>
               <button
@@ -598,61 +598,61 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             </div>
             <div className="space-y-6">
               {resumeData.experiences.map((exp) => (
-                <div key={exp.id} className="p-4 border border-gray-200 rounded-lg relative">
+                <div key={exp.id} className="p-4 border border-edge rounded-lg relative">
                   <button
                     onClick={() => deleteExperience(exp.id)}
-                    className="absolute top-2 right-2 text-gray-400 hover:text-red-600 transition-colors"
+                    className="absolute top-2 right-2 text-ink-subtle hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">公司名称</label>
+                      <label className="block text-sm font-medium text-ink mb-1">公司名称</label>
                       <input
                         type="text"
                         value={exp.company}
                         onChange={(e) => updateExperience(exp.id, 'company', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">职位</label>
+                      <label className="block text-sm font-medium text-ink mb-1">职位</label>
                       <input
                         type="text"
                         value={exp.position}
                         onChange={(e) => updateExperience(exp.id, 'position', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">开始时间</label>
+                      <label className="block text-sm font-medium text-ink mb-1">开始时间</label>
                       <input
                         type="month"
                         value={exp.startDate}
                         onChange={(e) => updateExperience(exp.id, 'startDate', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">结束时间</label>
+                      <label className="block text-sm font-medium text-ink mb-1">结束时间</label>
                       <input
                         type="month"
                         value={exp.endDate}
                         onChange={(e) => updateExperience(exp.id, 'endDate', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         placeholder="至今"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">工作描述</label>
+                    <label className="block text-sm font-medium text-ink mb-1">工作描述</label>
                     <textarea
                       value={exp.description}
                       onChange={(e) => updateExperience(exp.id, 'description', e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                       placeholder="描述你的工作内容、取得的成绩和贡献..."
                     />
                   </div>
@@ -664,8 +664,8 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
           {/* 教育背景 */}
           <div className="card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <GraduationCap className="w-5 h-5 mr-2 text-indigo-600" />
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <GraduationCap className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
                 教育背景
               </h3>
               <button
@@ -678,72 +678,72 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             </div>
             <div className="space-y-6">
               {resumeData.educations.map((edu) => (
-                <div key={edu.id} className="p-4 border border-gray-200 rounded-lg relative">
+                <div key={edu.id} className="p-4 border border-edge rounded-lg relative">
                   <button
                     onClick={() => deleteEducation(edu.id)}
-                    className="absolute top-2 right-2 text-gray-400 hover:text-red-600 transition-colors"
+                    className="absolute top-2 right-2 text-ink-subtle hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">学校名称</label>
+                      <label className="block text-sm font-medium text-ink mb-1">学校名称</label>
                       <input
                         type="text"
                         value={edu.school}
                         onChange={(e) => updateEducation(edu.id, 'school', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">学位</label>
+                      <label className="block text-sm font-medium text-ink mb-1">学位</label>
                       <input
                         type="text"
                         value={edu.degree}
                         onChange={(e) => updateEducation(edu.id, 'degree', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         placeholder="本科/硕士/博士"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">专业</label>
+                      <label className="block text-sm font-medium text-ink mb-1">专业</label>
                       <input
                         type="text"
                         value={edu.major}
                         onChange={(e) => updateEducation(edu.id, 'major', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">开始时间</label>
+                        <label className="block text-sm font-medium text-ink mb-1">开始时间</label>
                         <input
                           type="month"
                           value={edu.startDate}
                           onChange={(e) => updateEducation(edu.id, 'startDate', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                          className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">结束时间</label>
+                        <label className="block text-sm font-medium text-ink mb-1">结束时间</label>
                         <input
                           type="month"
                           value={edu.endDate}
                           onChange={(e) => updateEducation(edu.id, 'endDate', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                          className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         />
                       </div>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">描述</label>
+                    <label className="block text-sm font-medium text-ink mb-1">描述</label>
                     <textarea
                       value={edu.description}
                       onChange={(e) => updateEducation(edu.id, 'description', e.target.value)}
                       rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                       placeholder="GPA、获得的奖项、参加的活动等..."
                     />
                   </div>
@@ -755,8 +755,8 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
           {/* 专业技能 */}
           <div className="card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <Award className="w-5 h-5 mr-2 text-indigo-600" />
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <Award className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
                 专业技能
               </h3>
               <button
@@ -769,18 +769,18 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             </div>
             <div className="space-y-4">
               {resumeData.skills.map((skill) => (
-                <div key={skill.id} className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
+                <div key={skill.id} className="flex items-center space-x-3 p-3 border border-edge rounded-lg">
                   <input
                     type="text"
                     value={skill.name}
                     onChange={(e) => updateSkill(skill.id, 'name', e.target.value)}
                     placeholder="技能名称"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="flex-1 px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   />
                   <select
                     value={skill.level}
                     onChange={(e) => updateSkill(skill.id, 'level', parseInt(e.target.value))}
-                    className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   >
                     <option value={1}>了解</option>
                     <option value={2}>基础</option>
@@ -790,7 +790,7 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
                   </select>
                   <button
                     onClick={() => deleteSkill(skill.id)}
-                    className="text-gray-400 hover:text-red-600 transition-colors"
+                    className="text-ink-subtle hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -802,8 +802,8 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
           {/* 项目经历 */}
           <div className="card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                <Book className="w-5 h-5 mr-2 text-indigo-600" />
+              <h3 className="text-lg font-semibold text-ink flex items-center">
+                <Book className="w-5 h-5 mr-2 text-indigo-600 dark:text-indigo-400" />
                 项目经历
               </h3>
               <button
@@ -816,70 +816,70 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
             </div>
             <div className="space-y-6">
               {resumeData.projects.map((project) => (
-                <div key={project.id} className="p-4 border border-gray-200 rounded-lg relative">
+                <div key={project.id} className="p-4 border border-edge rounded-lg relative">
                   <button
                     onClick={() => deleteProject(project.id)}
-                    className="absolute top-2 right-2 text-gray-400 hover:text-red-600 transition-colors"
+                    className="absolute top-2 right-2 text-ink-subtle hover:text-red-600 dark:hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">项目名称</label>
+                      <label className="block text-sm font-medium text-ink mb-1">项目名称</label>
                       <input
                         type="text"
                         value={project.name}
                         onChange={(e) => updateProject(project.id, 'name', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">担任角色</label>
+                      <label className="block text-sm font-medium text-ink mb-1">担任角色</label>
                       <input
                         type="text"
                         value={project.role}
                         onChange={(e) => updateProject(project.id, 'role', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">开始时间</label>
+                      <label className="block text-sm font-medium text-ink mb-1">开始时间</label>
                       <input
                         type="month"
                         value={project.startDate}
                         onChange={(e) => updateProject(project.id, 'startDate', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">结束时间</label>
+                      <label className="block text-sm font-medium text-ink mb-1">结束时间</label>
                       <input
                         type="month"
                         value={project.endDate}
                         onChange={(e) => updateProject(project.id, 'endDate', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                   </div>
                   <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">技术栈</label>
+                    <label className="block text-sm font-medium text-ink mb-1">技术栈</label>
                     <input
                       type="text"
                       value={project.techStack}
                       onChange={(e) => updateProject(project.id, 'techStack', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       placeholder="React, TypeScript, Node.js..."
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">项目描述</label>
+                    <label className="block text-sm font-medium text-ink mb-1">项目描述</label>
                     <textarea
                       value={project.description}
                       onChange={(e) => updateProject(project.id, 'description', e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                       placeholder="描述项目背景、你的职责、取得的成果..."
                     />
                   </div>
@@ -1246,27 +1246,27 @@ ${resumeData.certifications.map(cert => `- ${cert}`).join('\n')}
       )}
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted">
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             所有数据保存在浏览器本地，不会上传到服务器，保护个人隐私
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             支持三种模板风格：现代、简约、创意，满足不同求职场景需求
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             可以导出为高清PDF格式，也可以复制为Markdown格式方便编辑
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             内置默认示例，可以直接修改使用，快速生成专业简历
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             支持添加多条工作经历、教育背景、技能和项目经历，灵活扩展
           </li>
         </ul>

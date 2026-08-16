@@ -475,7 +475,7 @@ const MatrixCalc: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-sm text-gray-400 py-12">
+        <div className="text-center text-sm text-ink-subtle py-12">
           {t('loading')}
         </div>
       </div>
@@ -486,7 +486,7 @@ const MatrixCalc: React.FC = () => {
     <div className="w-full space-y-6 pb-12">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
@@ -507,7 +507,7 @@ const MatrixCalc: React.FC = () => {
       />
 
       {/* Operations */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-4">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-4">
         <OpGroup title={t('op.section.unary')}>
           <OpButton
             label={t('op.transpose')}
@@ -556,13 +556,13 @@ const MatrixCalc: React.FC = () => {
 
         <OpGroup title={t('op.section.scalar')}>
           <div className="flex items-center gap-2">
-            <label className="text-xs text-gray-500">{t('matrix.scalar')}</label>
+            <label className="text-xs text-ink-muted">{t('matrix.scalar')}</label>
             <input
               type="text"
               inputMode="decimal"
               value={data.scalar}
               onChange={(e) => setScalar(e.target.value)}
-              className="w-20 px-2 py-1 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-20 px-2 py-1 text-sm border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               spellCheck={false}
             />
           </div>
@@ -575,30 +575,30 @@ const MatrixCalc: React.FC = () => {
       </section>
 
       {/* Result */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-3">
+        <h2 className="text-sm font-semibold text-ink flex items-center gap-2">
           <Sigma className="w-4 h-4" /> {t('result.title')}
         </h2>
         {!result && (
-          <p className="text-sm text-gray-400">{t('result.empty')}</p>
+          <p className="text-sm text-ink-subtle">{t('result.empty')}</p>
         )}
         {result?.kind === 'error' && (
-          <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2 flex items-start gap-2">
+          <div className="text-sm text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md px-3 py-2 flex items-start gap-2">
             <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
             <span className="break-all">{result.message}</span>
           </div>
         )}
         {result?.kind === 'scalar' && (
-          <div className="text-base font-mono text-gray-800">
-            <span className="text-gray-500 mr-2">{result.expr}</span>
-            <span className="text-indigo-600 font-semibold tabular-nums">
+          <div className="text-base font-mono text-ink">
+            <span className="text-ink-muted mr-2">{result.expr}</span>
+            <span className="text-indigo-600 dark:text-indigo-400 font-semibold tabular-nums">
               {fmt(result.value)}
             </span>
           </div>
         )}
         {result?.kind === 'matrix' && (
           <div className="space-y-2">
-            <div className="text-sm text-gray-500 font-mono">{result.expr}</div>
+            <div className="text-sm text-ink-muted font-mono">{result.expr}</div>
             <MatrixView matrix={result.value} />
           </div>
         )}
@@ -626,9 +626,9 @@ const MatrixEditor: React.FC<MatrixEditorProps> = ({
 }) => {
   const { t } = useTranslation(NAMESPACE)
   return (
-    <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
+    <section className="rounded-lg border border-edge bg-surface p-4 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-sm font-semibold text-gray-800">{label}</h2>
+        <h2 className="text-sm font-semibold text-ink">{label}</h2>
         <div className="flex flex-wrap items-center gap-2">
           <DimStepper
             label={t('matrix.rows')}
@@ -649,7 +649,7 @@ const MatrixEditor: React.FC<MatrixEditorProps> = ({
         <button
           type="button"
           onClick={() => onFill('clear')}
-          className="px-2 py-1 text-xs text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center gap-1"
+          className="px-2 py-1 text-xs text-ink border border-edge-strong rounded-md hover:bg-surface-muted flex items-center gap-1"
         >
           <Eraser className="w-3 h-3" /> {t('matrix.clear')}
         </button>
@@ -657,7 +657,7 @@ const MatrixEditor: React.FC<MatrixEditorProps> = ({
           type="button"
           onClick={() => onFill('identity')}
           disabled={state.rows !== state.cols}
-          className="px-2 py-1 text-xs text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed flex items-center gap-1"
+          className="px-2 py-1 text-xs text-ink border border-edge-strong rounded-md hover:bg-surface-muted disabled:text-ink-subtle disabled:cursor-not-allowed flex items-center gap-1"
           title={
             state.rows !== state.cols
               ? t('errors.notSquare', { op: t('matrix.identity') })
@@ -669,7 +669,7 @@ const MatrixEditor: React.FC<MatrixEditorProps> = ({
         <button
           type="button"
           onClick={() => onFill('random')}
-          className="px-2 py-1 text-xs text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center gap-1"
+          className="px-2 py-1 text-xs text-ink border border-edge-strong rounded-md hover:bg-surface-muted flex items-center gap-1"
         >
           <Shuffle className="w-3 h-3" /> {t('matrix.random')}
         </button>
@@ -685,25 +685,25 @@ interface DimStepperProps {
 }
 const DimStepper: React.FC<DimStepperProps> = ({ label, value, onChange }) => (
   <div className="flex items-center gap-1">
-    <span className="text-xs text-gray-500">{label}</span>
-    <div className="inline-flex items-center border border-gray-300 rounded-md overflow-hidden">
+    <span className="text-xs text-ink-muted">{label}</span>
+    <div className="inline-flex items-center border border-edge-strong rounded-md overflow-hidden">
       <button
         type="button"
         onClick={() => onChange(value - 1)}
         disabled={value <= MIN_DIM}
-        className="px-1.5 py-1 text-gray-600 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+        className="px-1.5 py-1 text-ink-muted hover:bg-surface-muted disabled:text-ink-subtle disabled:cursor-not-allowed"
         aria-label="decrement"
       >
         <Minus className="w-3 h-3" />
       </button>
-      <span className="px-2 py-0.5 text-xs font-mono text-gray-800 min-w-[1.75rem] text-center tabular-nums">
+      <span className="px-2 py-0.5 text-xs font-mono text-ink min-w-[1.75rem] text-center tabular-nums">
         {value}
       </span>
       <button
         type="button"
         onClick={() => onChange(value + 1)}
         disabled={value >= MAX_DIM}
-        className="px-1.5 py-1 text-gray-600 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+        className="px-1.5 py-1 text-ink-muted hover:bg-surface-muted disabled:text-ink-subtle disabled:cursor-not-allowed"
         aria-label="increment"
       >
         <Plus className="w-3 h-3" />
@@ -738,7 +738,7 @@ const MatrixGrid: React.FC<MatrixGridProps> = ({ state, onCellChange }) => {
   const gridId = useMemo(() => `mg-${Math.random().toString(36).slice(2, 8)}`, [])
   return (
     <div
-      className="inline-grid gap-1 p-2 border border-gray-200 rounded-md bg-gray-50 max-w-full overflow-x-auto"
+      className="inline-grid gap-1 p-2 border border-edge rounded-md bg-surface-muted max-w-full overflow-x-auto"
       style={{
         gridTemplateColumns: `repeat(${state.cols}, minmax(3.5rem, 1fr))`,
       }}
@@ -755,7 +755,7 @@ const MatrixGrid: React.FC<MatrixGridProps> = ({ state, onCellChange }) => {
             onChange={(e) => onCellChange(r, c, e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, r, c)}
             onFocus={(e) => e.currentTarget.select()}
-            className="w-full px-1 py-1 text-xs font-mono text-center bg-white border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-1 py-1 text-xs font-mono text-center bg-surface border border-edge rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             spellCheck={false}
           />
         )),
@@ -772,14 +772,14 @@ const MatrixView: React.FC<MatrixViewProps> = ({ matrix }) => {
   const cols = matrix[0]?.length ?? 0
   return (
     <div
-      className="inline-grid gap-1 p-2 border border-indigo-200 rounded-md bg-indigo-50/40 max-w-full overflow-x-auto"
+      className="inline-grid gap-1 p-2 border border-indigo-200 dark:border-indigo-800 rounded-md bg-indigo-50/40 dark:bg-indigo-900/30 max-w-full overflow-x-auto"
       style={{ gridTemplateColumns: `repeat(${cols}, minmax(3.5rem, 1fr))` }}
     >
       {Array.from({ length: rows }, (_, r) =>
         Array.from({ length: cols }, (_, c) => (
           <span
             key={`${r}-${c}`}
-            className="px-1 py-1 text-xs font-mono text-center text-indigo-900 bg-white border border-indigo-100 rounded tabular-nums"
+            className="px-1 py-1 text-xs font-mono text-center text-indigo-900 dark:text-indigo-300 bg-surface border border-indigo-100 rounded tabular-nums"
           >
             {fmt(matrix[r][c])}
           </span>
@@ -795,7 +795,7 @@ interface OpGroupProps {
 }
 const OpGroup: React.FC<OpGroupProps> = ({ title, children }) => (
   <div className="space-y-2">
-    <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+    <h3 className="text-xs font-medium text-ink-muted uppercase tracking-wide">
       {title}
     </h3>
     <div className="flex flex-wrap items-center gap-2">{children}</div>
@@ -813,7 +813,7 @@ const OpButton: React.FC<OpButtonProps> = ({ label, status, onClick }) => (
     onClick={onClick}
     disabled={!status.ok}
     title={status.ok ? label : status.reason}
-    className="px-3 py-1.5 text-sm border border-gray-300 bg-white rounded-md hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-700 disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed transition-colors font-mono"
+    className="px-3 py-1.5 text-sm border border-edge-strong bg-surface rounded-md hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-300 disabled:bg-surface-inset disabled:text-ink-subtle disabled:border-edge disabled:cursor-not-allowed transition-colors font-mono"
   >
     {label}
   </button>

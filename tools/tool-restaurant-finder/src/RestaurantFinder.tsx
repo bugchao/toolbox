@@ -151,11 +151,11 @@ export default function RestaurantFinder() {
     return (
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
-          <span key={i} className={i < fullStars ? 'text-yellow-400' : 'text-gray-300'}>
+          <span key={i} className={i < fullStars ? 'text-yellow-400 dark:text-yellow-300' : 'text-ink-subtle'}>
             {i < fullStars ? '★' : (i === fullStars && hasHalfStar ? '⯨' : '☆')}
           </span>
         ))}
-        <span className="text-sm text-gray-600 ml-1">{rating}</span>
+        <span className="text-sm text-ink-muted ml-1">{rating}</span>
       </div>
     );
   };
@@ -164,30 +164,30 @@ export default function RestaurantFinder() {
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🍽️ 餐厅推荐</h1>
-          <p className="text-gray-600">根据时间、预算和偏好，找到最适合的餐厅</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">🍽️ 餐厅推荐</h1>
+          <p className="text-ink-muted">根据时间、预算和偏好，找到最适合的餐厅</p>
         </div>
 
         {/* 搜索表单 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">📍 位置</label>
+              <label className="block text-sm font-medium text-ink mb-2">📍 位置</label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="输入地址或地标"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">🍜 菜系</label>
+              <label className="block text-sm font-medium text-ink mb-2">🍜 菜系</label>
               <select
                 value={cuisine}
                 onChange={(e) => setCuisine(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               >
                 {CUISINES.map(c => (
                   <option key={c} value={c}>{c}</option>
@@ -196,11 +196,11 @@ export default function RestaurantFinder() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">💰 价格区间</label>
+              <label className="block text-sm font-medium text-ink mb-2">💰 价格区间</label>
               <select
                 value={priceRange}
                 onChange={(e) => setPriceRange(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               >
                 {PRICE_RANGES.map(p => (
                   <option key={p} value={p}>{p}</option>
@@ -211,7 +211,7 @@ export default function RestaurantFinder() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">⏰ 用餐时间</label>
+              <label className="block text-sm font-medium text-ink mb-2">⏰ 用餐时间</label>
               <div className="flex gap-2">
                 {MEAL_TIMES.map(time => (
                   <button
@@ -220,7 +220,7 @@ export default function RestaurantFinder() {
                     className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       mealTime === time
                         ? 'bg-red-500 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                     }`}
                   >
                     {time}
@@ -230,11 +230,11 @@ export default function RestaurantFinder() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">👥 用餐人数</label>
+              <label className="block text-sm font-medium text-ink mb-2">👥 用餐人数</label>
               <select
                 value={partySize}
                 onChange={(e) => setPartySize(Number(e.target.value))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
                   <option key={num} value={num}>{num} 人</option>
@@ -244,7 +244,7 @@ export default function RestaurantFinder() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">✨ 偏好（可多选）</label>
+            <label className="block text-sm font-medium text-ink mb-2">✨ 偏好（可多选）</label>
             <div className="flex flex-wrap gap-2">
               {PREFERENCE_OPTIONS.map(pref => (
                 <button
@@ -253,7 +253,7 @@ export default function RestaurantFinder() {
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     preferences.includes(pref)
                       ? 'bg-red-500 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   {pref}
@@ -274,15 +274,15 @@ export default function RestaurantFinder() {
         {/* 搜索结果 */}
         {restaurants.length > 0 && (
           <div>
-            <div className="mb-4 text-gray-600">
-              找到 <span className="font-semibold text-red-600">{restaurants.length}</span> 家餐厅
+            <div className="mb-4 text-ink-muted">
+              找到 <span className="font-semibold text-red-600 dark:text-red-400">{restaurants.length}</span> 家餐厅
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {restaurants.map(restaurant => (
                 <div
                   key={restaurant.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                  className="bg-surface rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
                 >
                   <div className="h-32 bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center text-6xl">
                     🍽️
@@ -290,8 +290,8 @@ export default function RestaurantFinder() {
 
                   <div className="p-5">
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="text-xl font-bold text-gray-800">{restaurant.name}</h3>
-                      <span className="text-sm font-medium text-red-600">{restaurant.priceRange}</span>
+                      <h3 className="text-xl font-bold text-ink">{restaurant.name}</h3>
+                      <span className="text-sm font-medium text-red-600 dark:text-red-400">{restaurant.priceRange}</span>
                     </div>
 
                     <div className="flex items-center gap-2 mb-3">
@@ -299,31 +299,31 @@ export default function RestaurantFinder() {
                     </div>
 
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2 text-sm text-ink-muted">
                         <span>🍜</span>
                         <span>{restaurant.cuisine}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2 text-sm text-ink-muted">
                         <span>📍</span>
                         <span>{restaurant.address}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2 text-sm text-ink-muted">
                         <span>⏰</span>
                         <span>{restaurant.openHours}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2 text-sm text-ink-muted">
                         <span>🚶</span>
                         <span>{restaurant.distance} · 预计等位 {restaurant.estimatedWait}</span>
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <div className="text-sm font-semibold text-gray-700 mb-2">招牌菜</div>
+                      <div className="text-sm font-semibold text-ink mb-2">招牌菜</div>
                       <div className="flex flex-wrap gap-2">
                         {restaurant.specialties.map((dish, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-orange-50 text-orange-600 text-xs rounded-full"
+                            className="px-2 py-1 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 text-xs rounded-full"
                           >
                             {dish}
                           </span>
@@ -335,7 +335,7 @@ export default function RestaurantFinder() {
                       {restaurant.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-red-50 text-red-600 text-xs rounded-full font-medium"
+                          className="px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs rounded-full font-medium"
                         >
                           {tag}
                         </span>
@@ -346,7 +346,7 @@ export default function RestaurantFinder() {
                       <button className="flex-1 bg-red-500 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-600 transition-colors">
                         查看详情
                       </button>
-                      <button className="px-4 bg-gray-100 text-gray-700 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                      <button className="px-4 bg-surface-inset text-ink py-2 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                         导航
                       </button>
                     </div>
@@ -358,9 +358,9 @@ export default function RestaurantFinder() {
         )}
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
-          <h3 className="font-semibold text-red-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-red-700 space-y-1">
+        <div className="mt-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+          <h3 className="font-semibold text-red-800 dark:text-red-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-red-700 dark:text-red-300 space-y-1">
             <li>• 根据用餐时间、人数和预算智能推荐餐厅</li>
             <li>• 可以选择多个偏好条件，找到最符合需求的餐厅</li>
             <li>• 显示预计等位时间，合理安排用餐计划</li>

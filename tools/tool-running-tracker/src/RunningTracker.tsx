@@ -130,46 +130,46 @@ export default function RunningTracker() {
     : 0;
 
   const getPaceLevel = (pace: number) => {
-    if (pace < 5) return { label: '极快', color: 'text-red-600 bg-red-50' };
-    if (pace < 6) return { label: '快速', color: 'text-orange-600 bg-orange-50' };
-    if (pace < 7) return { label: '良好', color: 'text-green-600 bg-green-50' };
-    if (pace < 8) return { label: '一般', color: 'text-blue-600 bg-blue-50' };
-    return { label: '慢跑', color: 'text-gray-600 bg-gray-50' };
+    if (pace < 5) return { label: '极快', color: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20' };
+    if (pace < 6) return { label: '快速', color: 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20' };
+    if (pace < 7) return { label: '良好', color: 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' };
+    if (pace < 8) return { label: '一般', color: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20' };
+    return { label: '慢跑', color: 'text-ink-muted bg-surface-muted' };
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🏃 跑步数据分析</h1>
-          <p className="text-gray-600">记录跑步数据，分析配速和趋势</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">🏃 跑步数据分析</h1>
+          <p className="text-ink-muted">记录跑步数据，分析配速和趋势</p>
         </div>
 
         {/* 统计卡片 */}
         {records.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="text-sm text-gray-600 mb-1">总次数</div>
-              <div className="text-3xl font-bold text-orange-600">{records.length}</div>
-              <div className="text-xs text-gray-500 mt-1">次</div>
+            <div className="bg-surface rounded-xl shadow-lg p-6">
+              <div className="text-sm text-ink-muted mb-1">总次数</div>
+              <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">{records.length}</div>
+              <div className="text-xs text-ink-muted mt-1">次</div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="text-sm text-gray-600 mb-1">总里程</div>
-              <div className="text-3xl font-bold text-red-600">{totalDistance.toFixed(1)}</div>
-              <div className="text-xs text-gray-500 mt-1">公里</div>
+            <div className="bg-surface rounded-xl shadow-lg p-6">
+              <div className="text-sm text-ink-muted mb-1">总里程</div>
+              <div className="text-3xl font-bold text-red-600 dark:text-red-400">{totalDistance.toFixed(1)}</div>
+              <div className="text-xs text-ink-muted mt-1">公里</div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="text-sm text-gray-600 mb-1">总时长</div>
-              <div className="text-3xl font-bold text-blue-600">{totalDuration.toFixed(0)}</div>
-              <div className="text-xs text-gray-500 mt-1">分钟</div>
+            <div className="bg-surface rounded-xl shadow-lg p-6">
+              <div className="text-sm text-ink-muted mb-1">总时长</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{totalDuration.toFixed(0)}</div>
+              <div className="text-xs text-ink-muted mt-1">分钟</div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="text-sm text-gray-600 mb-1">平均配速</div>
-              <div className="text-3xl font-bold text-purple-600">{avgPace}</div>
-              <div className="text-xs text-gray-500 mt-1">分钟/公里</div>
+            <div className="bg-surface rounded-xl shadow-lg p-6">
+              <div className="text-sm text-ink-muted mb-1">平均配速</div>
+              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{avgPace}</div>
+              <div className="text-xs text-ink-muted mt-1">分钟/公里</div>
             </div>
           </div>
         )}
@@ -191,13 +191,13 @@ export default function RunningTracker() {
           <div className="flex gap-2 mb-6">
             <button
               onClick={exportData}
-              className="flex-1 bg-white text-orange-600 border-2 border-orange-500 py-2 rounded-lg font-medium hover:bg-orange-50 transition-colors"
+              className="flex-1 bg-surface text-orange-600 dark:text-orange-400 border-2 border-orange-500 py-2 rounded-lg font-medium hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors"
             >
               📥 导出数据
             </button>
             <button
               onClick={clearAllRecords}
-              className="flex-1 bg-white text-red-600 border-2 border-red-500 py-2 rounded-lg font-medium hover:bg-red-50 transition-colors"
+              className="flex-1 bg-surface text-red-600 dark:text-red-400 border-2 border-red-500 py-2 rounded-lg font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
             >
               🗑️ 清空数据
             </button>
@@ -206,12 +206,12 @@ export default function RunningTracker() {
 
         {/* 跑步数据图表 */}
         {records.length >= 2 && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4">📊 跑步数据分析（最近10次）</h2>
             
             {/* 距离趋势 */}
             <div className="mb-8">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">距离趋势</h3>
+              <h3 className="text-sm font-medium text-ink mb-3">距离趋势</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={getChartData()}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -226,7 +226,7 @@ export default function RunningTracker() {
 
             {/* 配速分析 */}
             <div className="mb-8">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">配速分析</h3>
+              <h3 className="text-sm font-medium text-ink mb-3">配速分析</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={getChartData()}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -241,7 +241,7 @@ export default function RunningTracker() {
 
             {/* 卡路里消耗 */}
             <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-3">卡路里消耗</h3>
+              <h3 className="text-sm font-medium text-ink mb-3">卡路里消耗</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={getChartData()}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -258,12 +258,12 @@ export default function RunningTracker() {
 
         {/* 添加表单 */}
         {showForm && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4">记录跑步数据</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   距离 (公里) *
                 </label>
                 <input
@@ -272,12 +272,12 @@ export default function RunningTracker() {
                   onChange={(e) => setDistance(e.target.value)}
                   placeholder="例如：5.0"
                   step="0.1"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   时长 (分钟) *
                 </label>
                 <input
@@ -286,39 +286,39 @@ export default function RunningTracker() {
                   onChange={(e) => setDuration(e.target.value)}
                   placeholder="例如：30"
                   step="0.1"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             {distance && duration && parseFloat(distance) > 0 && parseFloat(duration) > 0 && (
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div className="p-3 bg-orange-50 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">配速</div>
-                  <div className="text-2xl font-bold text-orange-600">
+                <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">配速</div>
+                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                     {calculatePace(parseFloat(distance), parseFloat(duration))}
                   </div>
-                  <div className="text-xs text-gray-500">分钟/公里</div>
+                  <div className="text-xs text-ink-muted">分钟/公里</div>
                 </div>
 
-                <div className="p-3 bg-red-50 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-1">消耗热量</div>
-                  <div className="text-2xl font-bold text-red-600">
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">消耗热量</div>
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-400">
                     {calculateCalories(parseFloat(distance))}
                   </div>
-                  <div className="text-xs text-gray-500">千卡</div>
+                  <div className="text-xs text-ink-muted">千卡</div>
                 </div>
               </div>
             )}
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">备注</label>
+              <label className="block text-sm font-medium text-ink mb-2">备注</label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="记录天气、路线、感受等..."
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
               />
             </div>
 
@@ -331,7 +331,7 @@ export default function RunningTracker() {
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="px-6 bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                className="px-6 bg-surface-inset text-ink py-2 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
                 取消
               </button>
@@ -342,19 +342,19 @@ export default function RunningTracker() {
         {/* 记录列表 */}
         <div className="space-y-4">
           {records.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="bg-surface rounded-xl shadow-lg p-12 text-center">
               <div className="text-6xl mb-4">🏃</div>
-              <p className="text-gray-500">还没有跑步记录</p>
-              <p className="text-sm text-gray-400 mt-2">点击上方按钮添加第一条记录</p>
+              <p className="text-ink-muted">还没有跑步记录</p>
+              <p className="text-sm text-ink-subtle mt-2">点击上方按钮添加第一条记录</p>
             </div>
           ) : (
             records.map((record) => {
               const paceLevel = getPaceLevel(record.pace);
               return (
-                <div key={record.id} className="bg-white rounded-xl shadow-lg p-6">
+                <div key={record.id} className="bg-surface rounded-xl shadow-lg p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <div className="text-lg font-semibold text-gray-800">{record.date}</div>
+                      <div className="text-lg font-semibold text-ink">{record.date}</div>
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${paceLevel.color}`}>
                           {paceLevel.label}
@@ -363,38 +363,38 @@ export default function RunningTracker() {
                     </div>
                     <button
                       onClick={() => deleteRecord(record.id)}
-                      className="text-red-500 hover:text-red-700 text-sm"
+                      className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm"
                     >
                       删除
                     </button>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                    <div className="bg-orange-50 p-3 rounded-lg">
-                      <div className="text-xs text-gray-600 mb-1">距离</div>
-                      <div className="text-xl font-bold text-orange-600">{record.distance} km</div>
+                    <div className="bg-orange-50 dark:bg-orange-900/20 p-3 rounded-lg">
+                      <div className="text-xs text-ink-muted mb-1">距离</div>
+                      <div className="text-xl font-bold text-orange-600 dark:text-orange-400">{record.distance} km</div>
                     </div>
 
-                    <div className="bg-blue-50 p-3 rounded-lg">
-                      <div className="text-xs text-gray-600 mb-1">时长</div>
-                      <div className="text-xl font-bold text-blue-600">{record.duration} min</div>
+                    <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                      <div className="text-xs text-ink-muted mb-1">时长</div>
+                      <div className="text-xl font-bold text-blue-600 dark:text-blue-400">{record.duration} min</div>
                     </div>
 
-                    <div className="bg-purple-50 p-3 rounded-lg">
-                      <div className="text-xs text-gray-600 mb-1">配速</div>
-                      <div className="text-xl font-bold text-purple-600">{record.pace} min/km</div>
+                    <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg">
+                      <div className="text-xs text-ink-muted mb-1">配速</div>
+                      <div className="text-xl font-bold text-purple-600 dark:text-purple-400">{record.pace} min/km</div>
                     </div>
 
-                    <div className="bg-red-50 p-3 rounded-lg">
-                      <div className="text-xs text-gray-600 mb-1">热量</div>
-                      <div className="text-xl font-bold text-red-600">{record.calories} kcal</div>
+                    <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+                      <div className="text-xs text-ink-muted mb-1">热量</div>
+                      <div className="text-xl font-bold text-red-600 dark:text-red-400">{record.calories} kcal</div>
                     </div>
                   </div>
 
                   {record.notes && (
-                    <div className="p-3 bg-gray-50 rounded-lg">
-                      <div className="text-xs text-gray-600 mb-1">备注</div>
-                      <div className="text-sm text-gray-700">{record.notes}</div>
+                    <div className="p-3 bg-surface-muted rounded-lg">
+                      <div className="text-xs text-ink-muted mb-1">备注</div>
+                      <div className="text-sm text-ink">{record.notes}</div>
                     </div>
                   )}
                 </div>
@@ -404,9 +404,9 @@ export default function RunningTracker() {
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
-          <h3 className="font-semibold text-orange-800 mb-2">💡 跑步建议</h3>
-          <ul className="text-sm text-orange-700 space-y-1">
+        <div className="mt-6 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+          <h3 className="font-semibold text-orange-800 dark:text-orange-300 mb-2">💡 跑步建议</h3>
+          <ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
             <li>• 初学者建议配速 7-8 分钟/公里，循序渐进</li>
             <li>• 跑前热身 5-10 分钟，跑后拉伸放松</li>
             <li>• 每周跑步 3-4 次，每次 30-60 分钟</li>

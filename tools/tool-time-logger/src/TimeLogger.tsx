@@ -186,32 +186,32 @@ export default function TimeLogger() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">⏱️ 时间日志分析</h1>
-          <p className="text-gray-600">记录你的时间都去哪了，优化时间分配</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">⏱️ 时间日志分析</h1>
+          <p className="text-ink-muted">记录你的时间都去哪了，优化时间分配</p>
         </div>
 
         {/* 记录区域 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">📝 记录活动</h2>
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">活动名称</label>
+              <label className="block text-sm font-medium text-ink mb-2">活动名称</label>
               <input
                 type="text"
                 value={activity}
                 onChange={(e) => setActivity(e.target.value)}
                 placeholder="例如：写代码、看书、开会..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">分类</label>
+              <label className="block text-sm font-medium text-ink mb-2">分类</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {CATEGORIES.map(cat => (
                   <option key={cat.name} value={cat.name}>{cat.name}</option>
@@ -225,21 +225,21 @@ export default function TimeLogger() {
                   <button
                     onClick={startTracking}
                     disabled={!activity.trim()}
-                    className="flex-1 bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    className="flex-1 bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
                   >
                     ▶️ 开始计时
                   </button>
                   <button
                     onClick={() => addManualEntry(30)}
                     disabled={!activity.trim()}
-                    className="px-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    className="px-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
                   >
                     +30分钟
                   </button>
                   <button
                     onClick={() => addManualEntry(60)}
                     disabled={!activity.trim()}
-                    className="px-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    className="px-6 bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
                   >
                     +1小时
                   </button>
@@ -255,15 +255,15 @@ export default function TimeLogger() {
             </div>
 
             {currentEntry && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-green-800">{currentEntry.activity}</p>
-                    <p className="text-sm text-green-600">分类：{currentEntry.category}</p>
+                    <p className="font-semibold text-green-800 dark:text-green-300">{currentEntry.activity}</p>
+                    <p className="text-sm text-green-600 dark:text-green-400">分类：{currentEntry.category}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-green-600">开始时间</p>
-                    <p className="font-semibold text-green-800">{formatTime(currentEntry.startTime)}</p>
+                    <p className="text-sm text-green-600 dark:text-green-400">开始时间</p>
+                    <p className="font-semibold text-green-800 dark:text-green-300">{formatTime(currentEntry.startTime)}</p>
                   </div>
                 </div>
               </div>
@@ -272,7 +272,7 @@ export default function TimeLogger() {
         </div>
 
         {/* 统计区域 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold">📊 时间统计</h2>
             <div className="flex gap-2">
@@ -280,13 +280,13 @@ export default function TimeLogger() {
                 <>
                   <button
                     onClick={exportData}
-                    className="px-3 py-1 text-sm bg-white text-blue-600 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors"
+                    className="px-3 py-1 text-sm bg-surface text-blue-600 dark:text-blue-400 border border-blue-500 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                   >
                     导出
                   </button>
                   <button
                     onClick={clearAllEntries}
-                    className="px-3 py-1 text-sm bg-white text-red-600 border border-red-500 rounded-lg hover:bg-red-50 transition-colors"
+                    className="px-3 py-1 text-sm bg-surface text-red-600 dark:text-red-400 border border-red-500 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                   >
                     清空
                   </button>
@@ -295,7 +295,7 @@ export default function TimeLogger() {
               <button
                 onClick={() => setViewMode('day')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  viewMode === 'day' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  viewMode === 'day' ? 'bg-blue-500 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 日
@@ -303,7 +303,7 @@ export default function TimeLogger() {
               <button
                 onClick={() => setViewMode('week')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  viewMode === 'week' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  viewMode === 'week' ? 'bg-blue-500 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 周
@@ -311,7 +311,7 @@ export default function TimeLogger() {
               <button
                 onClick={() => setViewMode('month')}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  viewMode === 'month' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  viewMode === 'month' ? 'bg-blue-500 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 月
@@ -324,14 +324,14 @@ export default function TimeLogger() {
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
           <div className="mb-6">
             <div className="text-center py-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
-              <p className="text-sm text-gray-600 mb-1">总时长</p>
-              <p className="text-3xl font-bold text-blue-600">{formatDuration(totalTime)}</p>
+              <p className="text-sm text-ink-muted mb-1">总时长</p>
+              <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{formatDuration(totalTime)}</p>
             </div>
           </div>
 
@@ -340,12 +340,12 @@ export default function TimeLogger() {
               {stats.map(stat => (
                 <div key={stat.category}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-medium text-gray-700">{stat.category}</span>
-                    <span className="text-sm text-gray-600">
+                    <span className="font-medium text-ink">{stat.category}</span>
+                    <span className="text-sm text-ink-muted">
                       {formatDuration(stat.totalMinutes)} ({stat.percentage.toFixed(1)}%)
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="w-full bg-surface-inset rounded-full h-3">
                     <div
                       className="h-3 rounded-full transition-all duration-300"
                       style={{
@@ -358,7 +358,7 @@ export default function TimeLogger() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-ink-muted">
               <p>暂无数据</p>
               <p className="text-sm mt-2">开始记录你的时间吧！</p>
             </div>
@@ -366,7 +366,7 @@ export default function TimeLogger() {
         </div>
 
         {/* 记录列表 */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6">
           <h2 className="text-xl font-semibold mb-4">📋 活动记录</h2>
           
           {filteredEntries.length > 0 ? (
@@ -374,7 +374,7 @@ export default function TimeLogger() {
               {filteredEntries.map(entry => (
                 <div
                   key={entry.id}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-between p-4 bg-surface-muted rounded-lg hover:bg-surface-inset transition-colors"
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
@@ -384,17 +384,17 @@ export default function TimeLogger() {
                           backgroundColor: CATEGORIES.find(c => c.name === entry.category)?.color || '#6b7280'
                         }}
                       />
-                      <span className="font-semibold text-gray-800">{entry.activity}</span>
-                      <span className="text-sm text-gray-500">{entry.category}</span>
+                      <span className="font-semibold text-ink">{entry.activity}</span>
+                      <span className="text-sm text-ink-muted">{entry.category}</span>
                     </div>
-                    <div className="text-sm text-gray-600 ml-6">
+                    <div className="text-sm text-ink-muted ml-6">
                       {formatTime(entry.startTime)} - {entry.endTime ? formatTime(entry.endTime) : '进行中'}
                       <span className="ml-3 font-medium">{formatDuration(entry.duration)}</span>
                     </div>
                   </div>
                   <button
                     onClick={() => deleteEntry(entry.id)}
-                    className="text-red-500 hover:text-red-700 px-3 py-1 rounded hover:bg-red-50 transition-colors"
+                    className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 px-3 py-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                   >
                     删除
                   </button>
@@ -402,16 +402,16 @@ export default function TimeLogger() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-ink-muted">
               <p>该时间段暂无记录</p>
             </div>
           )}
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
             <li>• 可以实时计时，也可以手动添加已完成的活动</li>
             <li>• 支持按日/周/月查看时间分配统计</li>
             <li>• 数据保存在本地浏览器，不会上传到服务器</li>
