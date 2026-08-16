@@ -182,6 +182,7 @@
 | IP Binary/Hex 转换 | `/ip-binary-hex` | `tools/tool-ip-ops-suite` → IpBinaryHex |
 | IP 地址分类检测 | `/ip-class` | `tools/tool-ip-ops-suite` → IpClass |
 | 公网 IP 查询 | `/ip-public` | `tools/tool-ip-ops-suite` → IpPublic |
+| 本机 IP 查询（WebRTC STUN 探测局域网 IP + 公网出口 IP，含 Chrome mDNS 混淆识别） | `/local-ip` | `tools/tool-local-ip` → LocalIp |
 | IP 是否 CDN | `/ip-cdn-check` | `tools/tool-ip-ops-suite` → IpCdnCheck |
 | IP 黑名单检测 | `/ip-blacklist` | `tools/tool-ip-ops-suite` → IpBlacklist |
 | DNS SOA 记录解析 | `/dns-soa` | `tools/tool-dns-soa` → DnsSoa |

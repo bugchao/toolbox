@@ -1,0 +1,27 @@
+{
+  "title": "Local IP Finder",
+  "description": "Detect LAN IP via WebRTC STUN and look up your public egress IP",
+  "copy": "Copy",
+  "copied": "Copied",
+  "lan": {
+    "title": "LAN IP",
+    "description": "Browsers have no direct API to read your local network IP, so this uses the WebRTC + STUN trick. It may find more than one IP if you have multiple network interfaces.",
+    "detect": "Detect",
+    "detecting": "Detecting…",
+    "candidateLabel": "Candidate IP",
+    "noResult": "No LAN IP candidates were found — this can happen due to browser restrictions or your network environment.",
+    "errorTitle": "Detection failed",
+    "mdnsTitle": "Your browser hid the real LAN IP",
+    "mdnsDescription": "Recent versions of Chrome replace the real LAN IP with an mDNS-obfuscated hostname (like xxxxxxxx-xxxx-....local) for privacy, so it can't be read directly. Open chrome://flags, search for \"Anonymize local IPs exposed by WebRTC\", disable it, and retry — or use a different browser."
+  },
+  "public": {
+    "title": "Public Egress IP",
+    "description": "Look up the public IP address your network exposes to the internet.",
+    "detect": "Detect",
+    "detecting": "Detecting…",
+    "ipLabel": "Public IP",
+    "classificationLabel": "Classification",
+    "errorTitle": "Detection failed",
+    "error": "Request failed, please try again later"
+  }
+}

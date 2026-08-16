@@ -1,0 +1,27 @@
+{
+  "title": "本机 IP 查询",
+  "description": "通过 WebRTC STUN 探测局域网 IP，并查询当前公网出口 IP",
+  "copy": "复制",
+  "copied": "已复制",
+  "lan": {
+    "title": "局域网 IP",
+    "description": "浏览器没有直接获取本机局域网 IP 的 API，这里用 WebRTC + STUN 的技巧探测，可能找到多个网卡对应的 IP。",
+    "detect": "检测",
+    "detecting": "检测中…",
+    "candidateLabel": "候选 IP",
+    "noResult": "未检测到局域网 IP 候选地址，可能是浏览器限制或网络环境导致。",
+    "errorTitle": "检测失败",
+    "mdnsTitle": "浏览器隐藏了真实局域网 IP",
+    "mdnsDescription": "你的浏览器（较新版本的 Chrome）出于隐私保护，将真实局域网 IP 替换成了 mDNS 混淆主机名（形如 xxxxxxxx-xxxx-....local），因此无法直接读取。可以在地址栏打开 chrome://flags，搜索并关闭「Anonymize local IPs exposed by WebRTC」后重试，或改用其他浏览器。"
+  },
+  "public": {
+    "title": "公网出口 IP",
+    "description": "查询当前网络对外暴露的公网 IP 地址。",
+    "detect": "检测",
+    "detecting": "检测中…",
+    "ipLabel": "公网 IP",
+    "classificationLabel": "归属分类",
+    "errorTitle": "检测失败",
+    "error": "请求失败，请稍后重试"
+  }
+}
