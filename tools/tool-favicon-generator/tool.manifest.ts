@@ -6,7 +6,7 @@ const toolFaviconGeneratorManifest = defineToolManifest({
   path: '/favicon-generator',
   namespace: 'toolFaviconGenerator',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: ImageDown,
   keywords: [
     'favicon',

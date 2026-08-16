@@ -6,7 +6,7 @@ const toolDuplicateFinderManifest = defineToolManifest({
   path: '/duplicate-finder',
   namespace: 'toolDuplicateFinder',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Copy,
   keywords: ['重复', '查重', '去重', 'duplicate', 'dedup', 'hash', 'sha-256'],
   meta: {

@@ -6,7 +6,7 @@ const toolFileSplitterManifest = defineToolManifest({
   path: '/file-splitter',
   namespace: 'toolFileSplitter',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: SplitSquareHorizontal,
   keywords: ['文件', '分割', '合并', '切片', 'split', 'merge', 'chunk'],
   meta: {

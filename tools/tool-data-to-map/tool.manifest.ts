@@ -6,7 +6,7 @@ const toolDataToMapManifest = defineToolManifest({
   path: '/data-to-map',
   namespace: 'toolDataToMap',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Map,
   keywords: [
     'map',

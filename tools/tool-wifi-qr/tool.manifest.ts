@@ -6,7 +6,7 @@ const toolWifiQrManifest = defineToolManifest({
   path: '/wifi-qr',
   namespace: 'toolWifiQr',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Wifi,
   keywords: [
     'wifi',

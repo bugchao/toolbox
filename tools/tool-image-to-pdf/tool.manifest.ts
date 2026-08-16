@@ -6,7 +6,7 @@ const toolImageToPdfManifest = defineToolManifest({
   path: '/image-to-pdf',
   namespace: 'toolImageToPdf',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: FilePlus2,
   keywords: [
     'image',

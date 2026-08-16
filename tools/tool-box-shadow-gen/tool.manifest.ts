@@ -6,7 +6,7 @@ const toolBoxShadowGenManifest = defineToolManifest({
   path: '/box-shadow-gen',
   namespace: 'toolBoxShadowGen',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: BoxSelect,
   keywords: [
     'box-shadow',

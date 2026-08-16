@@ -6,7 +6,7 @@ const toolFileHashCheckManifest = defineToolManifest({
   path: '/file-hash-check',
   namespace: 'toolFileHashCheck',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: FileCheck2,
   keywords: ['hash', '哈希', '校验', 'md5', 'sha-1', 'sha-256', 'sha-512', 'checksum', '完整性'],
   meta: {

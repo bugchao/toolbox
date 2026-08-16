@@ -6,7 +6,7 @@ const toolZipExtractorManifest = defineToolManifest({
   path: '/zip-extractor',
   namespace: 'toolZipExtractor',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: FolderArchive,
   keywords: ['zip', '解压', '压缩包', '文件树', 'extract', 'archive'],
   meta: {

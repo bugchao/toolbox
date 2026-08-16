@@ -8,6 +8,7 @@ const appPath = path.join(rootDir, 'apps/web/src/App.tsx')
 const roadmapPath = path.join(rootDir, 'docs/TOOLS_ROADMAP.md')
 const configDir = path.join(rootDir, 'apps/web/src/config')
 const toolsDir = path.join(rootDir, 'tools')
+const layoutPath = path.join(rootDir, 'apps/web/src/components/Layout.tsx')
 
 function read(filePath) {
   return fs.readFileSync(filePath, 'utf8')
@@ -60,6 +61,7 @@ function collectManifestEntries() {
     const source = read(filePath)
     const pathMatch = source.match(/path:\s*'([^']+)'/)
     const namespaceMatch = source.match(/namespace:\s*'([^']+)'/)
+    const categoryKeyMatch = source.match(/categoryKey:\s*'([^']+)'/)
 
     if (!pathMatch) continue
 
@@ -67,10 +69,20 @@ function collectManifestEntries() {
       file: relative(filePath),
       path: pathMatch[1],
       namespace: namespaceMatch ? namespaceMatch[1] : null,
+      categoryKey: categoryKeyMatch ? categoryKeyMatch[1] : null,
     })
   }
 
   return entries
+}
+
+// 侧边栏只渲染 Layout.tsx 里 CATEGORIES 数组列出的 id；categoryKey 拼错或用了
+// 未注册的值不会报错，只会让工具从导航里静默消失（例如曾经的 'utility' vs 'utils'）。
+function collectValidCategoryKeys() {
+  const source = read(layoutPath)
+  const match = source.match(/CATEGORIES[^=]*=\s*\[([\s\S]*?)\]\s*(?:\n|const|$)/)
+  if (!match) return null
+  return new Set([...match[1].matchAll(/id:\s*'([^']+)'/g)].map((m) => m[1]))
 }
 
 function collectExplicitRoutes() {
@@ -124,6 +136,7 @@ const configEntries = collectConfigEntries()
 const manifestEntries = collectManifestEntries()
 const explicitRoutes = collectExplicitRoutes()
 const roadmapRows = collectRoadmapDevelopedRows()
+const validCategoryKeys = collectValidCategoryKeys()
 
 const manifestByPath = new Map(manifestEntries.map((entry) => [entry.path, entry]))
 const explicitRouteSet = new Set(explicitRoutes)
@@ -186,6 +199,16 @@ for (const entry of configEntries) {
   const manifest = manifestByPath.get(entry.path)
   if (manifest && !entry.i18nNamespace) {
     warnings.push(`manifest 工具缺少导航 i18nNamespace 配置 ${entry.path} (${entry.file})`)
+  }
+}
+
+if (validCategoryKeys) {
+  for (const entry of manifestEntries) {
+    if (entry.categoryKey && !validCategoryKeys.has(entry.categoryKey)) {
+      errors.push(
+        `manifest categoryKey 未在 Layout.tsx 的 CATEGORIES 中注册，工具会从侧边栏导航静默消失 ${entry.path}: '${entry.categoryKey}' (${entry.file})`
+      )
+    }
   }
 }
 

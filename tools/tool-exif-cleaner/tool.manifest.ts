@@ -6,7 +6,7 @@ const toolExifCleanerManifest = defineToolManifest({
   path: '/exif-cleaner',
   namespace: 'toolExifCleaner',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: ShieldCheck,
   keywords: [
     'exif',

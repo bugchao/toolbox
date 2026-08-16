@@ -6,7 +6,7 @@ const toolMetaTagGenManifest = defineToolManifest({
   path: '/meta-tag-gen',
   namespace: 'toolMetaTagGen',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Tags,
   keywords: ['seo', 'meta', 'og', 'open graph', 'twitter card', '社交卡片', '搜索优化'],
   meta: {

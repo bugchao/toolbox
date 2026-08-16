@@ -6,7 +6,7 @@ const toolCalendarManifest = defineToolManifest({
   path: '/calendar',
   namespace: 'toolCalendar',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: CalendarIcon,
   keywords: ['万年历', '农历', '黄历', '节气', '节假日', 'calendar', 'lunar'],
   meta: {

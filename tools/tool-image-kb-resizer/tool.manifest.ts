@@ -6,7 +6,7 @@ const toolImageKbResizerManifest = defineToolManifest({
   path: '/image-kb-resizer',
   namespace: 'toolImageKbResizer',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Maximize2,
   keywords: ['图片', '压缩', '文件大小', 'kb', 'resize', 'compress', 'image size'],
   meta: {

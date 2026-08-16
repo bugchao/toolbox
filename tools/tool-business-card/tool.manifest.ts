@@ -6,7 +6,7 @@ const toolBusinessCardManifest = defineToolManifest({
   path: '/business-card',
   namespace: 'toolBusinessCard',
   mode: 'client',
-  categoryKey: 'utility',
+  categoryKey: 'utils',
   icon: Contact,
   keywords: ['名片', '名片设计', 'business card', 'vcard', 'qr', '设计'],
   meta: {
