@@ -103,13 +103,13 @@ const CalorieCalculator: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">卡路里计算器</h1>
-        <p className="text-gray-600">科学计算每日所需卡路里和宏量营养素，支持减脂/维持/增肌目标</p>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">卡路里计算器</h1>
+        <p className="text-gray-600 dark:text-gray-400">科学计算每日所需卡路里和宏量营养素，支持减脂/维持/增肌目标</p>
       </div>
 
       {/* Input Form */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
           <Calculator className="w-5 h-5 text-blue-500" />
           基本信息
         </h2>
@@ -117,7 +117,7 @@ const CalorieCalculator: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* Gender */}
           <div>
-            <label className="block text-sm font-medium mb-1">性别</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">性别</label>
             <div className="flex gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -127,7 +127,7 @@ const CalorieCalculator: React.FC = () => {
                   onChange={() => setGender('male')}
                   className="w-4 h-4"
                 />
-                <span>男</span>
+                <span className="text-gray-800 dark:text-gray-200">男</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -137,19 +137,19 @@ const CalorieCalculator: React.FC = () => {
                   onChange={() => setGender('female')}
                   className="w-4 h-4"
                 />
-                <span>女</span>
+                <span className="text-gray-800 dark:text-gray-200">女</span>
               </label>
             </div>
           </div>
 
           {/* Age */}
           <div>
-            <label className="block text-sm font-medium mb-1">年龄</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">年龄</label>
             <input
               type="number"
               value={age}
               onChange={(e) => setAge(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="岁"
             />
           </div>
@@ -158,19 +158,19 @@ const CalorieCalculator: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* Height */}
           <div>
-            <label className="block text-sm font-medium mb-1">身高</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">身高</label>
             <div className="flex gap-2">
               <input
                 type="number"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={heightUnit === 'cm' ? 'cm' : 'ft'}
               />
               <select
                 value={heightUnit}
                 onChange={(e) => setHeightUnit(e.target.value as 'cm' | 'ft')}
-                className="px-3 py-2 border border-gray-300 rounded-lg"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="cm">cm</option>
                 <option value="ft">ft</option>
@@ -180,19 +180,19 @@ const CalorieCalculator: React.FC = () => {
 
           {/* Weight */}
           <div>
-            <label className="block text-sm font-medium mb-1">体重</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">体重</label>
             <div className="flex gap-2">
               <input
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={weightUnit === 'kg' ? 'kg' : 'lb'}
               />
               <select
                 value={weightUnit}
                 onChange={(e) => setWeightUnit(e.target.value as 'kg' | 'lb')}
-                className="px-3 py-2 border border-gray-300 rounded-lg"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="kg">kg</option>
                 <option value="lb">lb</option>
@@ -202,14 +202,14 @@ const CalorieCalculator: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-1 flex items-center gap-2">
+          <label className="block text-sm font-medium mb-1 flex items-center gap-2 text-gray-700 dark:text-gray-300">
             <Activity className="w-4 h-4 text-green-500" />
             活动水平
           </label>
           <select
             value={activityLevel}
             onChange={(e) => setActivityLevel(e.target.value as ActivityLevel)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             {Object.entries(activityLabels).map(([key, label]) => (
               <option key={key} value={key}>{label}</option>
@@ -218,7 +218,7 @@ const CalorieCalculator: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium mb-1 flex items-center gap-2">
+          <label className="block text-sm font-medium mb-1 flex items-center gap-2 text-gray-700 dark:text-gray-300">
             <Target className="w-4 h-4 text-purple-500" />
             目标
           </label>
@@ -227,34 +227,34 @@ const CalorieCalculator: React.FC = () => {
               onClick={() => setGoal('cut')}
               className={`px-4 py-3 rounded-lg border-2 transition ${
                 goal === 'cut'
-                  ? 'border-red-500 bg-red-50 text-red-600'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              <div className="font-semibold">减脂</div>
-              <div className="text-xs text-gray-500">-500 卡/天</div>
+              <div className="font-semibold text-gray-900 dark:text-gray-100">减脂</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">-500 卡/天</div>
             </button>
             <button
               onClick={() => setGoal('maintain')}
               className={`px-4 py-3 rounded-lg border-2 transition ${
                 goal === 'maintain'
-                  ? 'border-green-500 bg-green-50 text-green-600'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              <div className="font-semibold">维持</div>
-              <div className="text-xs text-gray-500">保持现状</div>
+              <div className="font-semibold text-gray-900 dark:text-gray-100">维持</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">保持现状</div>
             </button>
             <button
               onClick={() => setGoal('bulk')}
               className={`px-4 py-3 rounded-lg border-2 transition ${
                 goal === 'bulk'
-                  ? 'border-blue-500 bg-blue-50 text-blue-600'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              <div className="font-semibold">增肌</div>
-              <div className="text-xs text-gray-500">+500 卡/天</div>
+              <div className="font-semibold text-gray-900 dark:text-gray-100">增肌</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400">+500 卡/天</div>
             </button>
           </div>
         </div>
@@ -268,7 +268,7 @@ const CalorieCalculator: React.FC = () => {
           </button>
           <button
             onClick={reset}
-            className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+            className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition"
           >
             重置
           </button>
@@ -280,25 +280,25 @@ const CalorieCalculator: React.FC = () => {
         <div className="space-y-6">
           {/* Main Results */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
-              <div className="text-sm text-blue-600 font-medium mb-1">基础代谢率 (BMR)</div>
-              <div className="text-3xl font-bold text-blue-700">{results.bmr}</div>
-              <div className="text-xs text-blue-500 mt-1">卡路里/天</div>
-              <div className="text-xs text-gray-600 mt-2">静息状态下身体消耗的能量</div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+              <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">基础代谢率 (BMR)</div>
+              <div className="text-3xl font-bold text-blue-700 dark:text-blue-300">{results.bmr}</div>
+              <div className="text-xs text-blue-500 dark:text-blue-400 mt-1">卡路里/天</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">静息状态下身体消耗的能量</div>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
-              <div className="text-sm text-green-600 font-medium mb-1">每日总消耗 (TDEE)</div>
-              <div className="text-3xl font-bold text-green-700">{results.tdee}</div>
-              <div className="text-xs text-green-500 mt-1">卡路里/天</div>
-              <div className="text-xs text-gray-600 mt-2">包含日常活动和运动</div>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-6">
+              <div className="text-sm text-green-600 dark:text-green-400 font-medium mb-1">每日总消耗 (TDEE)</div>
+              <div className="text-3xl font-bold text-green-700 dark:text-green-300">{results.tdee}</div>
+              <div className="text-xs text-green-500 dark:text-green-400 mt-1">卡路里/天</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">包含日常活动和运动</div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-6">
-              <div className="text-sm text-purple-600 font-medium mb-1">目标摄入量</div>
-              <div className="text-3xl font-bold text-purple-700">{results.targetCalories}</div>
-              <div className="text-xs text-purple-500 mt-1">卡路里/天</div>
-              <div className="text-xs text-gray-600 mt-2">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/30 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
+              <div className="text-sm text-purple-600 dark:text-purple-400 font-medium mb-1">目标摄入量</div>
+              <div className="text-3xl font-bold text-purple-700 dark:text-purple-300">{results.targetCalories}</div>
+              <div className="text-xs text-purple-500 dark:text-purple-400 mt-1">卡路里/天</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-2">
                 {goal === 'cut' && '建议每周减重约 0.5kg'}
                 {goal === 'maintain' && '保持当前体重'}
                 {goal === 'bulk' && '建议每周增重约 0.25kg'}
@@ -307,34 +307,34 @@ const CalorieCalculator: React.FC = () => {
           </div>
 
           {/* Macros */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold mb-4">宏量营养素分配</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">宏量营养素分配</h3>
             <div className="grid grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-red-50 rounded-lg">
-                <div className="text-2xl font-bold text-red-600">{results.macros.protein}g</div>
-                <div className="text-sm text-red-500">蛋白质</div>
-                <div className="text-xs text-gray-500 mt-1">30% 热量</div>
+              <div className="text-center p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                <div className="text-2xl font-bold text-red-600 dark:text-red-400">{results.macros.protein}g</div>
+                <div className="text-sm text-red-500 dark:text-red-400">蛋白质</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">30% 热量</div>
               </div>
-              <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                <div className="text-2xl font-bold text-yellow-600">{results.macros.carbs}g</div>
-                <div className="text-sm text-yellow-500">碳水化合物</div>
-                <div className="text-xs text-gray-500 mt-1">40% 热量</div>
+              <div className="text-center p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{results.macros.carbs}g</div>
+                <div className="text-sm text-yellow-500 dark:text-yellow-400">碳水化合物</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">40% 热量</div>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">{results.macros.fat}g</div>
-                <div className="text-sm text-blue-500">脂肪</div>
-                <div className="text-xs text-gray-500 mt-1">30% 热量</div>
+              <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{results.macros.fat}g</div>
+                <div className="text-sm text-blue-500 dark:text-blue-400">脂肪</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">30% 热量</div>
               </div>
             </div>
           </div>
 
           {/* Tips */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2 flex items-center gap-2">
               <Info className="w-4 h-4" />
               健康建议
             </h4>
-            <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
+            <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-disc list-inside">
               <li>安全减重速度：每周 0.5-1kg，过快可能导致肌肉流失</li>
               <li>增肌期建议配合力量训练，最大化肌肉增长</li>
               <li>保证充足蛋白质摄入（1.6-2.2g/kg 体重）</li>

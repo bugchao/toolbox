@@ -311,33 +311,33 @@ const DiceRoller: React.FC = () => {
       `}</style>
 
       {/* Controls */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 flex flex-wrap items-center gap-4">
+      <section className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-medium text-gray-700">{t('diceCount')}</label>
-          <div className="inline-flex items-center border border-gray-300 rounded-md overflow-hidden">
+          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('diceCount')}</label>
+          <div className="inline-flex items-center border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
             <button
               type="button"
               onClick={() => setCount(data.count - 1)}
               disabled={data.count <= MIN_DICE || rolling || loading}
-              className="px-2 py-1.5 text-gray-600 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+              className="px-2 py-1.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed"
               aria-label={t('decrement')}
             >
               <Minus className="w-4 h-4" />
             </button>
-            <span className="px-3 py-1 text-sm font-mono text-gray-800 min-w-[2rem] text-center tabular-nums">
+            <span className="px-3 py-1 text-sm font-mono text-gray-800 dark:text-gray-200 min-w-[2rem] text-center tabular-nums">
               {data.count}
             </span>
             <button
               type="button"
               onClick={() => setCount(data.count + 1)}
               disabled={data.count >= MAX_DICE || rolling || loading}
-              className="px-2 py-1.5 text-gray-600 hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed"
+              className="px-2 py-1.5 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed"
               aria-label={t('increment')}
             >
               <Plus className="w-4 h-4" />
             </button>
           </div>
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-gray-400 dark:text-gray-500">
             {t('rangeHint', { min: MIN_DICE, max: MAX_DICE })}
           </span>
         </div>
@@ -346,7 +346,7 @@ const DiceRoller: React.FC = () => {
           type="button"
           onClick={() => setHidden((h) => !h)}
           disabled={rolling || loading || !hasResult}
-          className="ml-auto px-3 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:text-gray-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+          className="ml-auto px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed transition-colors flex items-center gap-2 text-gray-700 dark:text-gray-300"
           title={hidden ? t('reveal') : t('hide')}
         >
           {hidden ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
@@ -355,7 +355,7 @@ const DiceRoller: React.FC = () => {
       </section>
 
       {/* Dice display */}
-      <section className="rounded-lg border border-gray-200 bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-6 min-h-[220px]">
+      <section className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-indigo-900/20 dark:via-gray-800 dark:to-purple-900/20 p-6 min-h-[220px]">
         <div className="flex flex-wrap items-center justify-center gap-4 md:gap-5 mb-4">
           {values.map((v, i) => (
             <Die
@@ -368,12 +368,12 @@ const DiceRoller: React.FC = () => {
           ))}
         </div>
         <div className="text-center">
-          <div className="text-xs text-gray-500 uppercase tracking-wide">{t('sumLabel')}</div>
-          <div className="text-4xl md:text-5xl font-bold text-indigo-600 tabular-nums">
+          <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">{t('sumLabel')}</div>
+          <div className="text-4xl md:text-5xl font-bold text-indigo-600 dark:text-indigo-400 tabular-nums">
             {rolling || hidden ? '…' : sum}
           </div>
           {!rolling && !hidden && values.length > 1 && (
-            <div className="text-xs text-gray-400 mt-1 font-mono">
+            <div className="text-xs text-gray-400 dark:text-gray-500 mt-1 font-mono">
               {values.join(' + ')} = {sum}
             </div>
           )}
@@ -382,18 +382,18 @@ const DiceRoller: React.FC = () => {
 
       {/* History + stats — collapsed by default, click header to expand */}
       {data.history.length > 0 && (
-        <section className="rounded-lg border border-gray-200 bg-white">
+        <section className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
           <div className="flex items-stretch">
             <button
               type="button"
               onClick={() => setHistoryOpen((v) => !v)}
               aria-expanded={historyOpen}
-              className="flex-1 flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-l-lg transition-colors text-left"
+              className="flex-1 flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-l-lg transition-colors text-left"
             >
               <History className="w-4 h-4" />
               {t('historyLabel')} ({data.history.length})
               <ChevronDown
-                className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+                className={`w-4 h-4 ml-auto text-gray-400 dark:text-gray-500 transition-transform ${
                   historyOpen ? 'rotate-180' : ''
                 }`}
               />
@@ -402,7 +402,7 @@ const DiceRoller: React.FC = () => {
               <button
                 type="button"
                 onClick={clearHistory}
-                className="px-3 my-2 mr-3 text-xs text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-300 rounded transition-colors flex items-center gap-1"
+                className="px-3 my-2 mr-3 text-xs text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700 rounded transition-colors flex items-center gap-1"
               >
                 <Trash2 className="w-3 h-3" />
                 {t('clearHistory')}
@@ -411,47 +411,47 @@ const DiceRoller: React.FC = () => {
           </div>
 
           {historyOpen && (
-            <div className="px-4 pb-4 border-t border-gray-100">
+            <div className="px-4 pb-4 border-t border-gray-100 dark:border-gray-700">
               {stats && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 my-4 text-center">
-                  <div className="px-3 py-2 bg-gray-50 rounded">
-                    <div className="text-xs text-gray-500">{t('statRolls')}</div>
-                    <div className="text-lg font-semibold text-gray-800 tabular-nums">{stats.rolls}</div>
+                  <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/30 rounded">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{t('statRolls')}</div>
+                    <div className="text-lg font-semibold text-gray-800 dark:text-gray-200 tabular-nums">{stats.rolls}</div>
                   </div>
-                  <div className="px-3 py-2 bg-gray-50 rounded">
-                    <div className="text-xs text-gray-500">{t('statMin')}</div>
-                    <div className="text-lg font-semibold text-gray-800 tabular-nums">{stats.min}</div>
+                  <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/30 rounded">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{t('statMin')}</div>
+                    <div className="text-lg font-semibold text-gray-800 dark:text-gray-200 tabular-nums">{stats.min}</div>
                   </div>
-                  <div className="px-3 py-2 bg-gray-50 rounded">
-                    <div className="text-xs text-gray-500">{t('statMax')}</div>
-                    <div className="text-lg font-semibold text-gray-800 tabular-nums">{stats.max}</div>
+                  <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/30 rounded">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{t('statMax')}</div>
+                    <div className="text-lg font-semibold text-gray-800 dark:text-gray-200 tabular-nums">{stats.max}</div>
                   </div>
-                  <div className="px-3 py-2 bg-gray-50 rounded">
-                    <div className="text-xs text-gray-500">{t('statAvg')}</div>
-                    <div className="text-lg font-semibold text-gray-800 tabular-nums">
+                  <div className="px-3 py-2 bg-gray-50 dark:bg-gray-700/30 rounded">
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{t('statAvg')}</div>
+                    <div className="text-lg font-semibold text-gray-800 dark:text-gray-200 tabular-nums">
                       {stats.avg.toFixed(2)}
                     </div>
                   </div>
                 </div>
               )}
 
-              <ul className="divide-y divide-gray-100 max-h-80 overflow-y-auto">
+              <ul className="divide-y divide-gray-100 dark:divide-gray-700 max-h-80 overflow-y-auto">
                 {data.history.map((r, i) => (
                   <li
                     key={`${r.timestamp}-${i}`}
                     className="py-2 grid grid-cols-[1fr_auto_auto] items-baseline gap-3 text-sm"
                   >
-                    <span className="font-mono text-xs text-gray-500 truncate">
+                    <span className="font-mono text-xs text-gray-500 dark:text-gray-400 truncate">
                       [{r.values.join(', ')}]
                     </span>
                     <time
-                      className="text-xs text-gray-400 tabular-nums shrink-0"
+                      className="text-xs text-gray-400 dark:text-gray-500 tabular-nums shrink-0"
                       dateTime={new Date(r.timestamp).toISOString()}
                       title={new Date(r.timestamp).toLocaleString()}
                     >
                       {formatTimestamp(r.timestamp, nowTick)}
                     </time>
-                    <span className="font-mono font-semibold text-indigo-600 tabular-nums shrink-0 min-w-[2.5rem] text-right">
+                    <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums shrink-0 min-w-[2.5rem] text-right">
                       {r.sum}
                     </span>
                   </li>

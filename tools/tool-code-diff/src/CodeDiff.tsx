@@ -134,11 +134,11 @@ const CodeDiff: React.FC = () => {
   const getLineClass = (type: string) => {
     switch (type) {
       case 'insert':
-        return 'bg-green-50 border-l-4 border-green-500'
+        return 'bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500'
       case 'delete':
-        return 'bg-red-50 border-l-4 border-red-500'
+        return 'bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500'
       default:
-        return 'bg-white'
+        return 'bg-white dark:bg-gray-800'
     }
   }
 
@@ -152,14 +152,14 @@ const CodeDiff: React.FC = () => {
         />
 
         {/* 控制栏 */}
-        <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 space-y-4">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-gray-700">{t('language')}:</label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('language')}:</label>
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="javascript">JavaScript</option>
                 <option value="typescript">TypeScript</option>
@@ -181,7 +181,7 @@ const CodeDiff: React.FC = () => {
                 onChange={(e) => setShowLineNumbers(e.target.checked)}
                 className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
               />
-              <span className="text-sm font-medium text-gray-700">{t('showLineNumbers')}</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('showLineNumbers')}</span>
             </label>
 
             <label className="flex items-center gap-2 cursor-pointer">
@@ -191,7 +191,7 @@ const CodeDiff: React.FC = () => {
                 onChange={(e) => setCollapseUnchanged(e.target.checked)}
                 className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
               />
-              <span className="text-sm font-medium text-gray-700">{t('collapseUnchanged')}</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('collapseUnchanged')}</span>
             </label>
 
             <div className="flex gap-2 ml-auto">
@@ -226,16 +226,16 @@ const CodeDiff: React.FC = () => {
           {/* 统计信息 */}
           {diffLines.length > 0 && (
             <div className="flex gap-6 text-sm">
-              <span className="text-green-600 font-medium">
+              <span className="text-green-600 dark:text-green-400 font-medium">
                 +{stats.additions} {t('additions')}
               </span>
-              <span className="text-red-600 font-medium">
+              <span className="text-red-600 dark:text-red-400 font-medium">
                 -{stats.deletions} {t('deletions')}
               </span>
-              <span className="text-gray-600">
+              <span className="text-gray-600 dark:text-gray-400">
                 {stats.unchanged} {t('unchanged')}
               </span>
-              <span className="text-gray-500">
+              <span className="text-gray-500 dark:text-gray-400">
                 {t('total')}: {stats.total}
               </span>
             </div>
@@ -245,29 +245,29 @@ const CodeDiff: React.FC = () => {
         {/* 编辑器区域 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* 左侧编辑器 */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="bg-gray-100 px-4 py-2 border-b border-gray-200">
-              <h3 className="text-sm font-medium text-gray-700">{t('original')}</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+            <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('original')}</h3>
             </div>
             <textarea
               value={leftCode}
               onChange={(e) => setLeftCode(e.target.value)}
               placeholder={t('pasteOriginal')}
-              className="w-full h-96 p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full h-96 p-4 font-mono text-sm resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               spellCheck={false}
             />
           </div>
 
           {/* 右侧编辑器 */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="bg-gray-100 px-4 py-2 border-b border-gray-200">
-              <h3 className="text-sm font-medium text-gray-700">{t('modified')}</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+            <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('modified')}</h3>
             </div>
             <textarea
               value={rightCode}
               onChange={(e) => setRightCode(e.target.value)}
               placeholder={t('pasteModified')}
-              className="w-full h-96 p-4 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full h-96 p-4 font-mono text-sm resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               spellCheck={false}
             />
           </div>
@@ -275,9 +275,9 @@ const CodeDiff: React.FC = () => {
 
         {/* 差异显示区域 */}
         {diffLines.length > 0 && (
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="bg-gray-100 px-4 py-2 border-b border-gray-200">
-              <h3 className="text-sm font-medium text-gray-700">{t('diffResult')}</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+            <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('diffResult')}</h3>
             </div>
             <div className="overflow-x-auto">
               <div className="font-mono text-sm">
@@ -286,7 +286,7 @@ const CodeDiff: React.FC = () => {
                     return (
                       <div
                         key={`collapsed-${index}`}
-                        className="bg-gray-50 border-y border-gray-200 px-4 py-2 text-gray-500 text-center cursor-pointer hover:bg-gray-100"
+                        className="bg-gray-50 dark:bg-gray-700/30 border-y border-gray-200 dark:border-gray-700 px-4 py-2 text-gray-500 dark:text-gray-400 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                         onClick={() => setCollapseUnchanged(false)}
                       >
                         <ChevronDown className="w-4 h-4 inline mr-2" />
@@ -302,16 +302,16 @@ const CodeDiff: React.FC = () => {
                       className={`flex ${getLineClass(line.type)} hover:bg-opacity-80`}
                     >
                       {showLineNumbers && (
-                        <div className="flex-shrink-0 w-24 px-2 py-1 text-gray-500 text-right select-none border-r border-gray-200">
+                        <div className="flex-shrink-0 w-24 px-2 py-1 text-gray-500 dark:text-gray-400 text-right select-none border-r border-gray-200 dark:border-gray-700">
                           <span className="inline-block w-10">{line.lineNumber.left || ''}</span>
                           <span className="inline-block w-10 ml-2">{line.lineNumber.right || ''}</span>
                         </div>
                       )}
                       <div className="flex-1 px-4 py-1 overflow-x-auto">
                         <span className={`inline-block w-4 ${
-                          line.type === 'insert' ? 'text-green-600' : 
-                          line.type === 'delete' ? 'text-red-600' : 
-                          'text-gray-400'
+                          line.type === 'insert' ? 'text-green-600 dark:text-green-400' :
+                          line.type === 'delete' ? 'text-red-600 dark:text-red-400' :
+                          'text-gray-400 dark:text-gray-500'
                         }`}>
                           {line.type === 'insert' ? '+' : line.type === 'delete' ? '-' : ' '}
                         </span>

@@ -61,11 +61,11 @@ const Base64: React.FC = () => {
 
       <div className="space-y-6">
         <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-md">
+          <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-md">
             <button
               onClick={() => setMode('encode')}
               className={`px-4 py-2 rounded-md transition-colors ${
-                mode === 'encode' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                mode === 'encode' ? 'bg-indigo-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               编码
@@ -73,7 +73,7 @@ const Base64: React.FC = () => {
             <button
               onClick={() => setMode('decode')}
               className={`px-4 py-2 rounded-md transition-colors ${
-                mode === 'decode' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                mode === 'decode' ? 'bg-indigo-600 text-white' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               解码
@@ -117,33 +117,33 @@ const Base64: React.FC = () => {
         </div>
 
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             {mode === 'encode' ? '输入要编码的文本' : '输入要解码的Base64字符串'}
           </label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={mode === 'encode' ? '输入文本...' : '输入Base64字符串...'}
-            className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-64 p-4 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">输出结果</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">输出结果</label>
           {mode === 'encode' && output.startsWith('data:image/') ? (
-            <div className="p-4 border border-gray-300 rounded-md bg-gray-50">
-              <p className="text-sm text-gray-600 mb-2">图片预览:</p>
+            <div className="p-4 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700/30">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">图片预览:</p>
               <img src={output} alt="Base64 preview" className="max-h-64 max-w-full object-contain mb-4" />
               <textarea
                 value={output}
                 readOnly
-                className="w-full h-32 p-4 border border-gray-300 rounded-md font-mono text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full h-32 p-4 border border-gray-300 dark:border-gray-600 rounded-md font-mono text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           ) : (
@@ -151,7 +151,7 @@ const Base64: React.FC = () => {
               value={output}
               readOnly
               placeholder="转换结果会显示在这里"
-              className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full h-64 p-4 border border-gray-300 dark:border-gray-600 rounded-md font-mono text-sm bg-gray-50 dark:bg-gray-900/50 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           )}
         </div>

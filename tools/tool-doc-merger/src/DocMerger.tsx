@@ -139,30 +139,30 @@ export default function DocMerger() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
       <PageHero
         icon={FileText}
         title={t('title')}
         description={t('description')}
       />
-      
+
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Upload Area */}
         <div
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer bg-white"
+          className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center hover:border-blue-400 dark:hover:border-blue-500 transition-colors cursor-pointer bg-white dark:bg-gray-800"
           {...dropzoneProps}
           onClick={openPicker}
         >
-          <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-          <h3 className="text-lg font-semibold mb-2">{t('uploadArea.title')}</h3>
-          <p className="text-gray-600 mb-2">{t('uploadArea.description')}</p>
-          <p className="text-sm text-gray-500">{t('uploadArea.hint')}</p>
+          <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400 dark:text-gray-500" />
+          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">{t('uploadArea.title')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-2">{t('uploadArea.description')}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t('uploadArea.hint')}</p>
           <input {...inputProps} accept="application/pdf" multiple />
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
+          <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-400">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -170,18 +170,18 @@ export default function DocMerger() {
 
         {/* File List */}
         {files.length > 0 && (
-          <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
+          <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">{t('fileList.title')} ({files.length})</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('fileList.title')} ({files.length})</h3>
               <button
                 onClick={clearAll}
-                className="text-sm text-red-600 hover:text-red-700 flex items-center gap-1"
+                className="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 flex items-center gap-1"
               >
                 <Trash2 className="w-4 h-4" />
                 {t('actions.clear')}
               </button>
             </div>
-            
+
             <div className="space-y-2">
               {files.map((file, index) => (
                 <div
@@ -190,29 +190,29 @@ export default function DocMerger() {
                   onDragStart={() => handleDragStart(index)}
                   onDragEnter={() => handleDragEnter(index)}
                   onDragEnd={handleDragEnd}
-                  className={`flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 cursor-move transition-colors ${
+                  className={`flex items-center gap-3 p-3 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30 cursor-move transition-colors ${
                     draggedIndex === index ? 'opacity-50' : ''
                   }`}
                 >
-                  <GripVertical className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                  <GripVertical className="w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                   <FileText className="w-5 h-5 text-blue-500 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium truncate">{file.name}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="font-medium truncate text-gray-900 dark:text-gray-100">{file.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       {formatFileSize(file.size)} • {file.pages} {t('fileList.pages')}
                     </p>
                   </div>
                   <button
                     onClick={() => removeFile(file.id)}
-                    className="text-red-600 hover:text-red-700 p-1"
+                    className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 p-1"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               ))}
             </div>
-            
-            <p className="text-sm text-gray-500 mt-4 text-center">{t('fileList.dragHint')}</p>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">{t('fileList.dragHint')}</p>
           </div>
         )}
 
@@ -241,8 +241,8 @@ export default function DocMerger() {
 
         {/* Empty State */}
         {files.length === 0 && (
-          <div className="mt-8 text-center text-gray-500">
-            <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+          <div className="mt-8 text-center text-gray-500 dark:text-gray-400">
+            <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
             <p>{t('fileList.empty')}</p>
           </div>
         )}

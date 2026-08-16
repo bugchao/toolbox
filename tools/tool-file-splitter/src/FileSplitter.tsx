@@ -51,20 +51,20 @@ const FileSplitter: React.FC = () => {
     <div className="w-full space-y-6 pb-24">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
 
       {/* Mode tabs */}
-      <div className="grid grid-cols-2 border border-gray-300 rounded-md overflow-hidden">
+      <div className="grid grid-cols-2 border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
         <button
           type="button"
           onClick={() => setMode('split')}
           className={`px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
             mode === 'split'
               ? 'bg-indigo-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
+              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
           }`}
         >
           <SplitSquareHorizontal className="w-4 h-4" />
@@ -76,7 +76,7 @@ const FileSplitter: React.FC = () => {
           className={`px-4 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
             mode === 'merge'
               ? 'bg-emerald-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-50'
+              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
           }`}
         >
           <Combine className="w-4 h-4" />
@@ -171,33 +171,33 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
       {!file ? (
         <div
           onClick={() => inputRef.current?.click()}
-          className="rounded-2xl border-2 border-dashed border-gray-300 bg-white p-8 text-center cursor-pointer hover:border-gray-400 transition-colors"
+          className="rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-8 text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
         >
-          <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-          <p className="text-sm text-gray-700">{t('split.choose')}</p>
+          <Upload className="w-10 h-10 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
+          <p className="text-sm text-gray-700 dark:text-gray-300">{t('split.choose')}</p>
           <input ref={inputRef} type="file" onChange={onSelectFile} className="hidden" />
         </div>
       ) : (
         <>
-          <div className="rounded-lg border border-gray-200 bg-white p-3 flex items-center gap-2">
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 flex items-center gap-2">
             <FileIcon className="w-4 h-4 text-indigo-500 shrink-0" />
-            <span className="text-sm font-medium text-gray-800 truncate flex-1" title={file.name}>
+            <span className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate flex-1" title={file.name}>
               {file.name}
             </span>
-            <span className="text-xs text-gray-400">{fmtSize(file.size)}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">{fmtSize(file.size)}</span>
             <button
               type="button"
               onClick={() => setFile(null)}
-              className="text-gray-400 hover:text-red-500"
+              className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 space-y-3">
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-700">{t('split.modeLabel')}:</span>
-              <label className="inline-flex items-center gap-1 text-sm">
+              <span className="text-sm text-gray-700 dark:text-gray-300">{t('split.modeLabel')}:</span>
+              <label className="inline-flex items-center gap-1 text-sm text-gray-700 dark:text-gray-300">
                 <input
                   type="radio"
                   checked={splitMode === 'size'}
@@ -205,7 +205,7 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
                 />
                 {t('split.bySize')}
               </label>
-              <label className="inline-flex items-center gap-1 text-sm">
+              <label className="inline-flex items-center gap-1 text-sm text-gray-700 dark:text-gray-300">
                 <input
                   type="radio"
                   checked={splitMode === 'count'}
@@ -217,18 +217,18 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
 
             {splitMode === 'size' ? (
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">{t('split.partSize')}:</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('split.partSize')}:</span>
                 <input
                   type="number"
                   min={1}
                   value={size}
                   onChange={(e) => setSize(Math.max(1, Number(e.target.value) || 1))}
-                  className="w-24 px-2 py-1.5 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-24 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value as SizeUnit)}
-                  className="px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="KB">KB</option>
                   <option value="MB">MB</option>
@@ -237,19 +237,19 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">{t('split.partCount')}:</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{t('split.partCount')}:</span>
                 <input
                   type="number"
                   min={2}
                   max={1000}
                   value={count}
                   onChange={(e) => setCount(Math.max(2, Math.min(1000, Number(e.target.value) || 2)))}
-                  className="w-24 px-2 py-1.5 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-24 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
             )}
 
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-gray-500 dark:text-gray-400">
               {t('split.preview', {
                 count: numParts,
                 each: fmtSize(partSize),
@@ -260,17 +260,17 @@ const SplitPanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
 
           {/* Parts preview */}
           {partPreview.length > 0 && (
-            <div className="rounded-lg border border-gray-200 bg-white p-3 max-h-48 overflow-y-auto">
-              <div className="text-xs text-gray-500 mb-2">{t('split.partsList')}:</div>
+            <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 max-h-48 overflow-y-auto">
+              <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">{t('split.partsList')}:</div>
               <ul className="space-y-0.5 text-xs font-mono">
                 {partPreview.slice(0, 30).map((p, i) => (
-                  <li key={i} className="flex items-center gap-2 text-gray-700">
+                  <li key={i} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                     <span className="flex-1 truncate">{p.name}</span>
-                    <span className="text-gray-400 shrink-0">{fmtSize(p.size)}</span>
+                    <span className="text-gray-400 dark:text-gray-500 shrink-0">{fmtSize(p.size)}</span>
                   </li>
                 ))}
                 {partPreview.length > 30 && (
-                  <li className="text-gray-400 italic">
+                  <li className="text-gray-400 dark:text-gray-500 italic">
                     … {t('split.morePartsHidden', { n: partPreview.length - 30 })}
                   </li>
                 )}
@@ -360,11 +360,11 @@ const MergePanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
     <section className="space-y-4">
       <div
         onClick={() => inputRef.current?.click()}
-        className="rounded-2xl border-2 border-dashed border-gray-300 bg-white p-6 text-center cursor-pointer hover:border-gray-400 transition-colors"
+        className="rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-6 text-center cursor-pointer hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
       >
-        <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-        <p className="text-sm text-gray-700">{t('merge.choose')}</p>
-        <p className="text-xs text-gray-400 mt-1">{t('merge.tip')}</p>
+        <Upload className="w-8 h-8 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
+        <p className="text-sm text-gray-700 dark:text-gray-300">{t('merge.choose')}</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t('merge.tip')}</p>
         <input
           ref={inputRef}
           type="file"
@@ -376,30 +376,30 @@ const MergePanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
 
       {files.length > 0 && (
         <>
-          <div className="rounded-lg border border-gray-200 bg-white p-3 space-y-2">
-            <div className="flex items-center justify-between text-xs text-gray-500">
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 space-y-2">
+            <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
               <span>{t('merge.partsTitle', { count: files.length, size: fmtSize(totalSize) })}</span>
               <button
                 type="button"
                 onClick={() => setFiles([])}
-                className="text-gray-500 hover:text-red-600"
+                className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400"
               >
                 {t('merge.clearAll')}
               </button>
             </div>
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-y divide-gray-100 dark:divide-gray-700">
               {files.map((f, i) => (
                 <li key={`${f.name}-${i}`} className="py-1.5 flex items-center gap-2 text-sm">
-                  <span className="text-xs text-gray-400 w-8 shrink-0">#{i + 1}</span>
-                  <span className="flex-1 truncate font-mono text-xs" title={f.name}>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 w-8 shrink-0">#{i + 1}</span>
+                  <span className="flex-1 truncate font-mono text-xs text-gray-700 dark:text-gray-300" title={f.name}>
                     {f.name}
                   </span>
-                  <span className="text-xs text-gray-400 shrink-0">{fmtSize(f.size)}</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">{fmtSize(f.size)}</span>
                   <button
                     type="button"
                     onClick={() => move(i, -1)}
                     disabled={i === 0}
-                    className="p-0.5 text-gray-400 hover:text-gray-700 disabled:opacity-30"
+                    className="p-0.5 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-30"
                   >
                     <ArrowUp className="w-3 h-3" />
                   </button>
@@ -407,14 +407,14 @@ const MergePanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
                     type="button"
                     onClick={() => move(i, 1)}
                     disabled={i === files.length - 1}
-                    className="p-0.5 text-gray-400 hover:text-gray-700 disabled:opacity-30"
+                    className="p-0.5 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-30"
                   >
                     <ArrowDown className="w-3 h-3" />
                   </button>
                   <button
                     type="button"
                     onClick={() => remove(i)}
-                    className="p-0.5 text-gray-400 hover:text-red-500"
+                    className="p-0.5 text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -423,14 +423,14 @@ const MergePanel: React.FC<{ t: (k: string, opts?: Record<string, unknown>) => s
             </ul>
           </div>
 
-          <div className="rounded-lg border border-gray-200 bg-white p-3 space-y-2">
-            <label className="text-xs text-gray-500 block">{t('merge.outputName')}</label>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3 space-y-2">
+            <label className="text-xs text-gray-500 dark:text-gray-400 block">{t('merge.outputName')}</label>
             <input
               type="text"
               value={outputName}
               onChange={(e) => setOutputName(e.target.value)}
               placeholder="merged-file.ext"
-              className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 

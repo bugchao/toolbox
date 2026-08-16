@@ -102,7 +102,7 @@ const FileHashCheck: React.FC = () => {
     <div className="w-full space-y-6 pb-24">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
@@ -112,12 +112,12 @@ const FileHashCheck: React.FC = () => {
         {...dropzoneProps}
         className={`rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
           isDragActive
-            ? 'border-indigo-500 bg-indigo-50'
-            : 'border-gray-300 bg-white hover:border-gray-400'
+            ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30'
+            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500'
         }`}
       >
-        <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-        <p className="text-sm text-gray-700 mb-2">{t('drop.hint')}</p>
+        <Upload className="w-10 h-10 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{t('drop.hint')}</p>
         <button
           type="button"
           onClick={openPicker}
@@ -129,27 +129,27 @@ const FileHashCheck: React.FC = () => {
       </section>
 
       {/* Expected hash compare */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
-        <label className="text-sm font-medium text-gray-700 block">
+      <section className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 space-y-2">
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block">
           {t('compare.label')}
-          <span className="ml-2 text-xs text-gray-400">{t('compare.hint')}</span>
+          <span className="ml-2 text-xs text-gray-400 dark:text-gray-500">{t('compare.hint')}</span>
         </label>
         <input
           type="text"
           value={expected}
           onChange={(e) => setExpected(e.target.value)}
           placeholder={t('compare.placeholder')}
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
           spellCheck={false}
         />
         {expected.trim() && (
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-gray-500 dark:text-gray-400">
             {expectedAlgo ? (
-              <span className="text-emerald-700">
+              <span className="text-emerald-700 dark:text-emerald-400">
                 {t('compare.detected', { algo: expectedAlgo })}
               </span>
             ) : (
-              <span className="text-amber-700">{t('compare.unknown')}</span>
+              <span className="text-amber-700 dark:text-amber-400">{t('compare.unknown')}</span>
             )}
           </div>
         )}
@@ -159,7 +159,7 @@ const FileHashCheck: React.FC = () => {
       {entries.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-gray-800">
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
               {t('entries.title')} ({entries.length})
             </h3>
             <div className="flex gap-2">
@@ -167,7 +167,7 @@ const FileHashCheck: React.FC = () => {
                 type="button"
                 onClick={downloadAll}
                 disabled={!entries.some((e) => e.status === 'done')}
-                className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 disabled:opacity-40 transition-colors flex items-center gap-1"
+                className="px-2 py-1 text-xs text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 border border-gray-200 dark:border-gray-700 rounded hover:border-indigo-300 dark:hover:border-indigo-500 disabled:opacity-40 transition-colors flex items-center gap-1"
               >
                 <Download className="w-3 h-3" />
                 {t('entries.downloadAll')}
@@ -175,7 +175,7 @@ const FileHashCheck: React.FC = () => {
               <button
                 type="button"
                 onClick={clearAll}
-                className="px-2 py-1 text-xs text-gray-500 hover:text-red-600 border border-gray-200 rounded hover:border-red-300 transition-colors flex items-center gap-1"
+                className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 border border-gray-200 dark:border-gray-700 rounded hover:border-red-300 dark:hover:border-red-700 transition-colors flex items-center gap-1"
               >
                 <Trash2 className="w-3 h-3" />
                 {t('entries.clearAll')}
@@ -227,31 +227,31 @@ const FileRow: React.FC<FileRowProps> = ({
 
   return (
     <div
-      className={`rounded-lg border bg-white p-3 ${
+      className={`rounded-lg border bg-white dark:bg-gray-800 p-3 ${
         matchedAlgo
-          ? 'border-emerald-300 bg-emerald-50/40'
+          ? 'border-emerald-300 dark:border-emerald-700 bg-emerald-50/40 dark:bg-emerald-900/10'
           : mismatchAlgo
-            ? 'border-red-300 bg-red-50/40'
-            : 'border-gray-200'
+            ? 'border-red-300 dark:border-red-700 bg-red-50/40 dark:bg-red-900/10'
+            : 'border-gray-200 dark:border-gray-700'
       }`}
     >
       <div className="flex items-center gap-2 mb-2">
         <FileCheck2 className="w-4 h-4 text-indigo-500 shrink-0" />
-        <span className="text-sm font-medium text-gray-800 truncate flex-1" title={entry.name}>
+        <span className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate flex-1" title={entry.name}>
           {entry.name}
         </span>
-        <span className="text-xs text-gray-400 shrink-0">{formatSize(entry.size)}</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">{formatSize(entry.size)}</span>
         {entry.status === 'hashing' && (
-          <Spinner size="sm" className="text-gray-400 shrink-0" />
+          <Spinner size="sm" className="text-gray-400 dark:text-gray-500 shrink-0" />
         )}
         {matchedAlgo && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-emerald-100 text-emerald-700 border border-emerald-300">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
             <ShieldCheck className="w-3 h-3" />
             {t('row.matched', { algo: matchedAlgo })}
           </span>
         )}
         {mismatchAlgo && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-red-100 text-red-700 border border-red-300">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-700">
             <ShieldX className="w-3 h-3" />
             {t('row.mismatch', { algo: mismatchAlgo })}
           </span>
@@ -259,7 +259,7 @@ const FileRow: React.FC<FileRowProps> = ({
         <button
           type="button"
           onClick={onRemove}
-          className="text-gray-400 hover:text-red-500 shrink-0"
+          className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 shrink-0"
           title={t('row.remove')}
         >
           <X className="w-4 h-4" />
@@ -267,7 +267,7 @@ const FileRow: React.FC<FileRowProps> = ({
       </div>
 
       {entry.status === 'error' && (
-        <div className="text-xs text-red-700 bg-red-50 border border-red-200 rounded px-2 py-1">
+        <div className="text-xs text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded px-2 py-1">
           {entry.error}
         </div>
       )}
@@ -283,19 +283,19 @@ const FileRow: React.FC<FileRowProps> = ({
                 key={a}
                 className={`flex items-center gap-2 px-2 py-1 rounded ${
                   isMatched
-                    ? 'bg-emerald-100/60'
+                    ? 'bg-emerald-100/60 dark:bg-emerald-900/20'
                     : isMismatched
-                      ? 'bg-red-100/60'
-                      : 'hover:bg-gray-50'
+                      ? 'bg-red-100/60 dark:bg-red-900/20'
+                      : 'hover:bg-gray-50 dark:hover:bg-gray-700/30'
                 }`}
               >
-                <span className="text-gray-500 w-16 shrink-0">{a}</span>
-                <span className="flex-1 break-all text-gray-800">{hash}</span>
+                <span className="text-gray-500 dark:text-gray-400 w-16 shrink-0">{a}</span>
+                <span className="flex-1 break-all text-gray-800 dark:text-gray-200">{hash}</span>
                 <CopyButton
                   value={hash}
                   size="sm"
                   label={t('row.copy')}
-                  className="!text-gray-400 hover:!text-indigo-600 shrink-0"
+                  className="!text-gray-400 dark:!text-gray-500 hover:!text-indigo-600 dark:hover:!text-indigo-400 shrink-0"
                 />
               </div>
             )

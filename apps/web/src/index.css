@@ -24,9 +24,32 @@ body {
   color: #1e293b;
 }
 
+/* 语义色 token：新代码优先用 bg-surface / text-ink / border-edge 等，
+   自动随主题切换，不用再逐个类名手写 dark: 配对。
+   数值为 R G B 三元组（配合 tailwind.config.js 里的 rgb(var(--x) / <alpha-value>)，
+   支持 bg-surface/50 这种透明度写法）。 */
+:root {
+  --color-surface: 255 255 255;        /* 卡片/面板背景，对应旧 bg-white */
+  --color-surface-muted: 249 250 251;  /* 次级面板背景，对应旧 bg-gray-50 */
+  --color-surface-inset: 243 244 246;  /* 嵌套小块背景，对应旧 bg-gray-100 */
+  --color-ink: 17 24 39;               /* 主文字，对应旧 text-gray-900 */
+  --color-ink-muted: 107 114 128;      /* 次要文字，对应旧 text-gray-500/600 */
+  --color-ink-subtle: 156 163 175;     /* 更弱的提示文字，对应旧 text-gray-400 */
+  --color-edge: 229 231 235;           /* 常规边框，对应旧 border-gray-200 */
+  --color-edge-strong: 209 213 219;    /* 更明显的边框，对应旧 border-gray-300 */
+}
+
 /* 暗色模式：全局生效，提升小字与次要文字可读性 */
 html.dark {
   color-scheme: dark;
+  --color-surface: 31 41 55;           /* gray-800 */
+  --color-surface-muted: 17 24 39;     /* gray-900，配合 /50 透明度使用 */
+  --color-surface-inset: 55 65 81;     /* gray-700 */
+  --color-ink: 243 244 246;            /* gray-100 */
+  --color-ink-muted: 156 163 175;      /* gray-400 */
+  --color-ink-subtle: 107 114 128;     /* gray-500 */
+  --color-edge: 55 65 81;              /* gray-700 */
+  --color-edge-strong: 75 85 99;       /* gray-600 */
 }
 
 html.dark body {

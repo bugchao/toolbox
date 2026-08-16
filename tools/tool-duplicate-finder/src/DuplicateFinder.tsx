@@ -238,7 +238,7 @@ const DuplicateFinder: React.FC = () => {
     <div className="w-full space-y-6 pb-24">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
@@ -248,13 +248,13 @@ const DuplicateFinder: React.FC = () => {
         {...dropzoneProps}
         className={`rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
           isDragActive
-            ? 'border-indigo-500 bg-indigo-50'
-            : 'border-gray-300 bg-white hover:border-gray-400'
+            ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30'
+            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:border-gray-400 dark:hover:border-gray-500'
         }`}
       >
-        <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-        <p className="text-sm text-gray-700 mb-1">{t('drop.hint')}</p>
-        <p className="text-xs text-gray-400 mb-3">{t('drop.tip')}</p>
+        <Upload className="w-10 h-10 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-1">{t('drop.hint')}</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">{t('drop.tip')}</p>
         <button
           type="button"
           onClick={openPicker}
@@ -271,17 +271,17 @@ const DuplicateFinder: React.FC = () => {
           <StatCard
             label={t('stats.total')}
             value={String(entries.length)}
-            color="text-gray-800"
+            color="text-gray-800 dark:text-gray-200"
           />
           <StatCard
             label={t('stats.dupGroups')}
             value={String(analysis.duplicateGroups.length)}
-            color="text-rose-600"
+            color="text-rose-600 dark:text-rose-400"
           />
           <StatCard
             label={t('stats.canFree')}
             value={fmtSize(analysis.duplicateRedundantSize)}
-            color="text-emerald-600"
+            color="text-emerald-600 dark:text-emerald-400"
           />
           <StatCard
             label={t('stats.hashing')}
@@ -295,7 +295,7 @@ const DuplicateFinder: React.FC = () => {
                 t('stats.done')
               )
             }
-            color="text-indigo-600"
+            color="text-indigo-600 dark:text-indigo-400"
           />
         </section>
       )}
@@ -304,14 +304,14 @@ const DuplicateFinder: React.FC = () => {
       {analysis.duplicateGroups.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-gray-800">
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
               {t('groups.title')} ({analysis.duplicateGroups.length})
             </h3>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={exportReport}
-                className="px-2 py-1 text-xs text-gray-700 hover:text-indigo-600 border border-gray-200 rounded hover:border-indigo-300 transition-colors flex items-center gap-1"
+                className="px-2 py-1 text-xs text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 border border-gray-200 dark:border-gray-700 rounded hover:border-indigo-300 dark:hover:border-indigo-500 transition-colors flex items-center gap-1"
               >
                 <Download className="w-3 h-3" />
                 {t('groups.exportCsv')}
@@ -319,7 +319,7 @@ const DuplicateFinder: React.FC = () => {
               <button
                 type="button"
                 onClick={clearAll}
-                className="px-2 py-1 text-xs text-gray-500 hover:text-red-600 border border-gray-200 rounded hover:border-red-300 transition-colors flex items-center gap-1"
+                className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 border border-gray-200 dark:border-gray-700 rounded hover:border-red-300 dark:hover:border-red-700 transition-colors flex items-center gap-1"
               >
                 <Trash2 className="w-3 h-3" />
                 {t('groups.clearAll')}
@@ -333,22 +333,22 @@ const DuplicateFinder: React.FC = () => {
               return (
                 <div
                   key={g.hash}
-                  className="rounded-lg border border-rose-200 bg-rose-50/30 p-3"
+                  className="rounded-lg border border-rose-200 dark:border-rose-800 bg-rose-50/30 dark:bg-rose-900/10 p-3"
                 >
                   <div className="flex items-center gap-2 mb-2 text-sm">
-                    <span className="text-rose-700 font-semibold">#{idx + 1}</span>
-                    <span className="text-gray-600">
+                    <span className="text-rose-700 dark:text-rose-400 font-semibold">#{idx + 1}</span>
+                    <span className="text-gray-600 dark:text-gray-400">
                       {t('groups.summary', {
                         count: g.files.length,
                         size: fmtSize(g.files[0].size),
                         waste: fmtSize(waste),
                       })}
                     </span>
-                    <code className="ml-auto text-xs text-gray-400 font-mono truncate max-w-[200px]">
+                    <code className="ml-auto text-xs text-gray-400 dark:text-gray-500 font-mono truncate max-w-[200px]">
                       sha256: {g.hash.slice(0, 16)}…
                     </code>
                   </div>
-                  <ul className="divide-y divide-rose-100">
+                  <ul className="divide-y divide-rose-100 dark:divide-rose-800/50">
                     {g.files.map((f) => {
                       const isKeep = f.id === keepId
                       return (
@@ -364,31 +364,31 @@ const DuplicateFinder: React.FC = () => {
                             className="shrink-0"
                           />
                           {isKeep ? (
-                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">
+                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                               <Star className="w-3 h-3" />
                               {t('groups.keep')}
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] rounded-full bg-red-100 text-red-700 border border-red-200">
+                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">
                               <Trash2 className="w-3 h-3" />
                               {t('groups.delete')}
                             </span>
                           )}
                           <span
                             className={`flex-1 truncate ${
-                              isKeep ? 'text-gray-800' : 'text-gray-500 line-through'
+                              isKeep ? 'text-gray-800 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400 line-through'
                             }`}
                             title={f.name}
                           >
                             {f.name}
                           </span>
-                          <span className="text-xs text-gray-400 shrink-0">
+                          <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
                             {fmtSize(f.size)}
                           </span>
                           <button
                             type="button"
                             onClick={() => downloadFile(f)}
-                            className="text-gray-400 hover:text-indigo-600 shrink-0"
+                            className="text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 shrink-0"
                             title={t('action.download')}
                           >
                             <Download className="w-3.5 h-3.5" />
@@ -396,7 +396,7 @@ const DuplicateFinder: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => removeEntry(f.id)}
-                            className="text-gray-400 hover:text-red-500 shrink-0"
+                            className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 shrink-0"
                             title={t('action.remove')}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -414,33 +414,33 @@ const DuplicateFinder: React.FC = () => {
 
       {/* 唯一文件折叠 */}
       {analysis.uniqueEntries.length > 0 && (
-        <section className="rounded-lg border border-gray-200 bg-white">
+        <section className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
           <button
             type="button"
             onClick={() => setUniqueOpen((v) => !v)}
-            className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+            className="w-full flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/30 rounded-lg transition-colors"
           >
-            <FileCheck2 className="w-4 h-4 text-emerald-600" />
+            <FileCheck2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             {t('unique.title')} ({analysis.uniqueEntries.length})
             <ChevronDown
-              className={`w-4 h-4 ml-auto text-gray-400 transition-transform ${
+              className={`w-4 h-4 ml-auto text-gray-400 dark:text-gray-500 transition-transform ${
                 uniqueOpen ? 'rotate-180' : ''
               }`}
             />
           </button>
           {uniqueOpen && (
-            <ul className="px-4 pb-4 border-t border-gray-100 pt-3 divide-y divide-gray-100">
+            <ul className="px-4 pb-4 border-t border-gray-100 dark:border-gray-700 pt-3 divide-y divide-gray-100 dark:divide-gray-700">
               {analysis.uniqueEntries.map((f) => (
                 <li key={f.id} className="py-1.5 flex items-center gap-2 text-sm">
-                  <FileCheck2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                  <span className="flex-1 truncate text-gray-700" title={f.name}>
+                  <FileCheck2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0" />
+                  <span className="flex-1 truncate text-gray-700 dark:text-gray-300" title={f.name}>
                     {f.name}
                   </span>
-                  <span className="text-xs text-gray-400 shrink-0">{fmtSize(f.size)}</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">{fmtSize(f.size)}</span>
                   <button
                     type="button"
                     onClick={() => removeEntry(f.id)}
-                    className="text-gray-400 hover:text-red-500 shrink-0"
+                    className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 shrink-0"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -452,7 +452,7 @@ const DuplicateFinder: React.FC = () => {
       )}
 
       {entries.length === 0 && (
-        <p className="text-xs text-gray-400 text-center flex items-center justify-center gap-1">
+        <p className="text-xs text-gray-400 dark:text-gray-500 text-center flex items-center justify-center gap-1">
           <CopyIcon className="w-3 h-3" /> {t('emptyHint')}
         </p>
       )}
@@ -466,8 +466,8 @@ interface StatCardProps {
   color: string
 }
 const StatCard: React.FC<StatCardProps> = ({ label, value, color }) => (
-  <div className="rounded-lg border border-gray-200 bg-white p-3">
-    <div className="text-xs text-gray-500">{label}</div>
+  <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-3">
+    <div className="text-xs text-gray-500 dark:text-gray-400">{label}</div>
     <div className={`text-lg font-semibold tabular-nums mt-0.5 ${color}`}>{value}</div>
   </div>
 )

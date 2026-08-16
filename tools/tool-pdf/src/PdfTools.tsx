@@ -332,15 +332,15 @@ const PdfTools: React.FC = () => {
               }}
               className={`p-4 rounded-lg border-2 transition-all text-left ${
                 mode === tool.value
-                  ? 'border-indigo-600 bg-indigo-50'
-                  : 'border-gray-200 hover:border-indigo-300 hover:bg-gray-50'
+                  ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-700/30'
               }`}
             >
-              <tool.icon className={`w-6 h-6 mb-2 ${mode === tool.value ? 'text-indigo-600' : 'text-gray-500'}`} />
-              <div className={`font-medium ${mode === tool.value ? 'text-indigo-900' : 'text-gray-900'}`}>
+              <tool.icon className={`w-6 h-6 mb-2 ${mode === tool.value ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-500 dark:text-gray-400'}`} />
+              <div className={`font-medium ${mode === tool.value ? 'text-indigo-900 dark:text-indigo-300' : 'text-gray-900 dark:text-gray-100'}`}>
                 {tool.label}
               </div>
-              <div className="text-xs text-gray-500 mt-1">{tool.description}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{tool.description}</div>
             </button>
           ))}
         </div>
@@ -348,7 +348,7 @@ const PdfTools: React.FC = () => {
 
       {/* 上传区域 */}
       <div className="card">
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-indigo-500 transition-colors">
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center hover:border-indigo-500 transition-colors">
           <input
             ref={fileInputRef}
             type="file"
@@ -357,9 +357,9 @@ const PdfTools: React.FC = () => {
             onChange={handleFileUpload}
             className="hidden"
           />
-          <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">上传PDF文件</h3>
-          <p className="text-gray-500 mb-4">
+          <FileText className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">上传PDF文件</h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">
             {mode === 'merge' ? '支持多选，拖拽或点击上传多个PDF文件' : '点击上传单个PDF文件'}
           </p>
           <button
@@ -368,17 +368,17 @@ const PdfTools: React.FC = () => {
           >
             选择文件
           </button>
-          <p className="text-xs text-gray-400 mt-4">最大支持单个文件 50MB</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-4">最大支持单个文件 50MB</p>
         </div>
 
         {/* 文件列表 */}
         {files.length > 0 && (
           <div className="mt-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium text-gray-900">已上传文件 ({files.length})</h3>
+              <h3 className="font-medium text-gray-900 dark:text-gray-100">已上传文件 ({files.length})</h3>
               <button
                 onClick={clearAll}
-                className="text-sm text-gray-500 hover:text-red-600 transition-colors flex items-center"
+                className="text-sm text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors flex items-center"
               >
                 <X className="w-4 h-4 mr-1" />
                 清空全部
@@ -388,32 +388,32 @@ const PdfTools: React.FC = () => {
               {files.map((file) => (
                 <div
                   key={file.id}
-                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200"
+                  className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/30 rounded-lg border border-gray-200 dark:border-gray-700"
                 >
                   <div className="flex items-center space-x-3">
-                    <File className="w-5 h-5 text-indigo-600" />
+                    <File className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                     <div>
-                      <div className="font-medium text-gray-900">{file.name}</div>
-                      <div className="text-xs text-gray-500">{formatFileSize(file.size)}</div>
+                      <div className="font-medium text-gray-900 dark:text-gray-100">{file.name}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">{formatFileSize(file.size)}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     {file.status === 'processing' && (
                       <div className="flex items-center space-x-2">
-                        <Spinner size="sm" className="text-indigo-600" />
-                        <span className="text-sm text-gray-600">{file.progress}%</span>
+                        <Spinner size="sm" className="text-indigo-600 dark:text-indigo-400" />
+                        <span className="text-sm text-gray-600 dark:text-gray-400">{file.progress}%</span>
                       </div>
                     )}
                     {file.status === 'completed' && (
-                      <Check className="w-5 h-5 text-green-500" />
+                      <Check className="w-5 h-5 text-green-500 dark:text-green-400" />
                     )}
                     {file.status === 'error' && (
-                      <X className="w-5 h-5 text-red-500" />
+                      <X className="w-5 h-5 text-red-500 dark:text-red-400" />
                     )}
                     {file.status === 'idle' && (
                       <button
                         onClick={() => removeFile(file.id)}
-                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -428,7 +428,7 @@ const PdfTools: React.FC = () => {
         {/* 合并导出文件名 */}
         {mode === 'merge' && files.length > 0 && (
           <div className="mt-6">
-            <h3 className="font-medium text-gray-900 mb-3">导出文件名</h3>
+            <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-3">导出文件名</h3>
             <div className="flex flex-wrap gap-2 mb-3">
               {([
                 { value: 'collection', label: '文件合集' },
@@ -440,8 +440,8 @@ const PdfTools: React.FC = () => {
                   onClick={() => setMergeNameStrategy(value)}
                   className={`px-4 py-1.5 rounded-lg text-sm font-medium border-2 transition-colors ${
                     mergeNameStrategy === value
-                      ? 'border-indigo-600 bg-indigo-50 text-indigo-700'
-                      : 'border-gray-200 text-gray-600 hover:border-indigo-300'
+                      ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300'
+                      : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-indigo-300 dark:hover:border-indigo-500'
                   }`}
                 >
                   {label}
@@ -454,12 +454,12 @@ const PdfTools: React.FC = () => {
                 value={customMergeName}
                 onChange={(e) => setCustomMergeName(e.target.value)}
                 placeholder="输入文件名（无需加 .pdf）"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none mb-2"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 outline-none mb-2"
               />
             )}
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               导出文件名：
-              <span className="font-mono text-gray-700">
+              <span className="font-mono text-gray-700 dark:text-gray-300">
                 {resolveMergeFilename(mergeNameStrategy, customMergeName, files.map((f) => f.name))}
               </span>
             </p>
@@ -468,7 +468,7 @@ const PdfTools: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
+          <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400">
             {error}
           </div>
         )}
@@ -498,10 +498,10 @@ const PdfTools: React.FC = () => {
 
         {/* 处理完成 */}
         {processed && downloadUrl && (
-          <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
-            <Check className="w-12 h-12 text-green-500 mx-auto mb-3" />
-            <h3 className="text-lg font-medium text-green-900 mb-2">处理完成！</h3>
-            <p className="text-gray-600 mb-4">文件已成功处理，点击下方按钮下载</p>
+          <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-center">
+            <Check className="w-12 h-12 text-green-500 dark:text-green-400 mx-auto mb-3" />
+            <h3 className="text-lg font-medium text-green-900 dark:text-green-300 mb-2">处理完成！</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">文件已成功处理，点击下方按钮下载</p>
             <button
               onClick={downloadResult}
               className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center mx-auto"
@@ -514,35 +514,35 @@ const PdfTools: React.FC = () => {
       </div>
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-gray-50 dark:bg-gray-900/50">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">使用说明</h3>
+        <ul className="space-y-2 text-gray-600 dark:text-gray-400">
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             PDF合并：选择多个PDF文件，点击开始处理，将按上传顺序合并为一个PDF；导出文件名可选「文件合集」「文件名摘要」两种自动命名，也可以完全自定义
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             PDF分割：上传单个PDF文件，将每页分割为独立的PDF文件，打包为ZIP下载
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             PDF转图片：每页导出为PNG，单页直接下载图片，多页自动打包为ZIP
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             PDF转文字：按页提取文本内容，导出为TXT文件
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             PDF压缩：将每页重新渲染为有损JPEG再拼回PDF，对图片/扫描件类文件效果明显；压缩后文字将不再可选中/可搜索
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             所有文件处理均在本地浏览器中完成，不会上传到服务器，保护您的文件隐私
           </li>
           <li className="flex items-start">
-            <span className="text-indigo-600 mr-2">•</span>
+            <span className="text-indigo-600 dark:text-indigo-400 mr-2">•</span>
             大文件处理可能需要较长时间，请耐心等待，不要关闭页面
           </li>
         </ul>

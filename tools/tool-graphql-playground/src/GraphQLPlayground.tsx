@@ -187,20 +187,20 @@ query {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">GraphQL Playground</h1>
-        <p className="text-gray-600">GraphQL API 探索和测试工具，支持查询执行、Schema 内省、历史记录</p>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">GraphQL Playground</h1>
+        <p className="text-gray-600 dark:text-gray-400">GraphQL API 探索和测试工具，支持查询执行、Schema 内省、历史记录</p>
       </div>
 
       {/* Endpoint & Auth */}
-      <div className="mb-4 bg-white rounded-lg shadow p-4">
+      <div className="mb-4 bg-white dark:bg-gray-800 rounded-lg shadow p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">GraphQL Endpoint</label>
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">GraphQL Endpoint</label>
             <input
               type="url"
               value={endpoint}
               onChange={(e) => setEndpoint(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="https://api.example.com/graphql"
             />
           </div>
@@ -224,16 +224,16 @@ query {
           </div>
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium mb-1">Headers (JSON)</label>
+          <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Headers (JSON)</label>
           <textarea
             value={headers}
             onChange={(e) => setHeaders(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg font-mono text-sm h-20 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm h-20 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder='{"Authorization": "Bearer token"}'
           />
           <button
             onClick={() => formatJSON(headers, setHeaders)}
-            className="mt-1 text-xs text-blue-500 hover:underline"
+            className="mt-1 text-xs text-blue-500 dark:text-blue-400 hover:underline"
           >
             格式化 JSON
           </button>
@@ -243,12 +243,12 @@ query {
       {/* Main Editor */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         {/* Query Editor */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">Query</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Query</h2>
             <button
               onClick={() => formatJSON(query, setQuery)}
-              className="text-xs text-blue-500 hover:underline"
+              className="text-xs text-blue-500 dark:text-blue-400 hover:underline"
             >
               格式化
             </button>
@@ -256,18 +256,18 @@ query {
           <textarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg font-mono text-sm h-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm h-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Write your GraphQL query..."
           />
         </div>
 
         {/* Variables Editor */}
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">Variables</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Variables</h2>
             <button
               onClick={() => formatJSON(variables, setVariables)}
-              className="text-xs text-blue-500 hover:underline"
+              className="text-xs text-blue-500 dark:text-blue-400 hover:underline"
             >
               格式化
             </button>
@@ -275,22 +275,22 @@ query {
           <textarea
             value={variables}
             onChange={(e) => setVariables(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg font-mono text-sm h-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-mono text-sm h-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder='{"key": "value"}'
           />
         </div>
       </div>
 
       {/* Result Tabs */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="border-b">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <div className="flex gap-4 px-4">
             <button
               onClick={() => setActiveTab('result')}
               className={`py-3 px-2 border-b-2 transition ${
                 activeTab === 'result'
-                  ? 'border-blue-500 text-blue-500'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-blue-500 text-blue-500 dark:text-blue-400'
+                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
               }`}
             >
               Result
@@ -299,8 +299,8 @@ query {
               onClick={() => setActiveTab('schema')}
               className={`py-3 px-2 border-b-2 transition ${
                 activeTab === 'schema'
-                  ? 'border-blue-500 text-blue-500'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-blue-500 text-blue-500 dark:text-blue-400'
+                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
               }`}
             >
               Schema
@@ -309,8 +309,8 @@ query {
               onClick={() => setActiveTab('history')}
               className={`py-3 px-2 border-b-2 transition ${
                 activeTab === 'history'
-                  ? 'border-blue-500 text-blue-500'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-blue-500 text-blue-500 dark:text-blue-400'
+                  : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
               }`}
             >
               History ({history.length})
@@ -323,7 +323,7 @@ query {
           {activeTab === 'result' && (
             <div>
               <div className="flex justify-between items-center mb-2">
-                <h3 className="font-semibold">Response</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Response</h3>
                 <div className="flex gap-2">
                   {result && (
                     <CopyButton
@@ -331,29 +331,29 @@ query {
                       value={JSON.stringify(result, null, 2)}
                       label="复制"
                       copiedLabel="已复制"
-                      className="text-sm !text-blue-500 hover:underline"
+                      className="text-sm !text-blue-500 dark:!text-blue-400 hover:underline"
                     />
                   )}
                 </div>
               </div>
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg mb-4">
                   <strong>Error:</strong> {error}
                 </div>
               )}
               {loading && (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                   <Spinner size="md" className="mr-2" />
                   Executing query...
                 </div>
               )}
               {result && !loading && (
-                <pre className="bg-gray-50 p-4 rounded-lg overflow-auto max-h-96 text-sm font-mono">
+                <pre className="bg-gray-50 dark:bg-gray-900/50 text-gray-900 dark:text-gray-100 p-4 rounded-lg overflow-auto max-h-96 text-sm font-mono">
                   {JSON.stringify(result, null, 2)}
                 </pre>
               )}
               {!result && !loading && !error && (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-gray-400 dark:text-gray-500">
                   Execute a query to see the result
                 </div>
               )}
@@ -363,35 +363,35 @@ query {
           {/* Schema Tab */}
           {activeTab === 'schema' && (
             <div>
-              <h3 className="font-semibold mb-4">Schema Types ({schema.length})</h3>
+              <h3 className="font-semibold mb-4 text-gray-900 dark:text-gray-100">Schema Types ({schema.length})</h3>
               {schema.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-gray-400 dark:text-gray-500">
                   Click "获取 Schema" to load the schema
                 </div>
               ) : (
                 <div className="space-y-4 max-h-96 overflow-auto">
                   {schema.map((type) => (
-                    <div key={type.name} className="border rounded-lg p-4">
-                      <h4 className="font-mono font-bold text-lg text-purple-600">{type.name}</h4>
+                    <div key={type.name} className="border dark:border-gray-700 rounded-lg p-4">
+                      <h4 className="font-mono font-bold text-lg text-purple-600 dark:text-purple-400">{type.name}</h4>
                       {type.description && (
-                        <p className="text-gray-600 text-sm mb-2">{type.description}</p>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{type.description}</p>
                       )}
                       {type.fields && type.fields.length > 0 && (
                         <div className="mt-2 space-y-1">
                           {type.fields.map((field) => (
-                            <div key={field.name} className="pl-4 border-l-2 border-gray-200">
+                            <div key={field.name} className="pl-4 border-l-2 border-gray-200 dark:border-gray-700">
                               <div className="font-mono text-sm">
-                                <span className="text-blue-600">{field.name}</span>
+                                <span className="text-blue-600 dark:text-blue-400">{field.name}</span>
                                 {field.args && field.args.length > 0 && (
-                                  <span className="text-gray-500">
+                                  <span className="text-gray-500 dark:text-gray-400">
                                     ({field.args.map(a => `${a.name}: ${a.type}`).join(', ')})
                                   </span>
                                 )}
-                                <span className="text-gray-400">: </span>
-                                <span className="text-green-600">{field.type}</span>
+                                <span className="text-gray-400 dark:text-gray-500">: </span>
+                                <span className="text-green-600 dark:text-green-400">{field.type}</span>
                               </div>
                               {field.description && (
-                                <p className="text-gray-500 text-xs">{field.description}</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-xs">{field.description}</p>
                               )}
                             </div>
                           ))}
@@ -408,11 +408,11 @@ query {
           {activeTab === 'history' && (
             <div>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold">Query History</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Query History</h3>
                 {history.length > 0 && (
                   <button
                     onClick={clearHistory}
-                    className="text-sm text-red-500 hover:underline flex items-center gap-1"
+                    className="text-sm text-red-500 dark:text-red-400 hover:underline flex items-center gap-1"
                   >
                     <Trash2 className="w-4 h-4" />
                     清空
@@ -420,7 +420,7 @@ query {
                 )}
               </div>
               {history.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-gray-400 dark:text-gray-500">
                   No query history yet
                 </div>
               ) : (
@@ -429,18 +429,18 @@ query {
                     <div
                       key={item.id}
                       onClick={() => loadHistoryItem(item)}
-                      className="border rounded-lg p-3 hover:bg-gray-50 cursor-pointer transition"
+                      className="border dark:border-gray-700 rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-gray-700/30 cursor-pointer transition"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <pre className="text-xs font-mono text-gray-700 line-clamp-2">
+                          <pre className="text-xs font-mono text-gray-700 dark:text-gray-300 line-clamp-2">
                             {item.query}
                           </pre>
-                          <div className="text-xs text-gray-400 mt-1">
+                          <div className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                             {new Date(item.timestamp).toLocaleString()}
                           </div>
                         </div>
-                        <div className="text-xs text-gray-400 ml-4">
+                        <div className="text-xs text-gray-400 dark:text-gray-500 ml-4">
                           {item.result?.data ? '✅' : item.result?.errors ? '❌' : '⏳'}
                         </div>
                       </div>
@@ -454,9 +454,9 @@ query {
       </div>
 
       {/* Quick Start Guide */}
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-800 mb-2">💡 使用指南</h3>
-        <ol className="text-sm text-blue-700 space-y-1 list-decimal list-inside">
+      <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 使用指南</h3>
+        <ol className="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-decimal list-inside">
           <li>输入 GraphQL API 端点 URL（如 GitHub: https://api.github.com/graphql）</li>
           <li>在 Headers 中输入认证信息（如 Authorization: Bearer YOUR_TOKEN）</li>
           <li>在 Query 编辑器中编写 GraphQL 查询</li>

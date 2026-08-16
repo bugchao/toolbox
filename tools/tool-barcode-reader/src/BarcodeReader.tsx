@@ -71,24 +71,24 @@ export default function BarcodeReader() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📷 条形码识别</h1>
-          <p className="text-gray-600">上传图片或手动输入，快速识别条形码</p>
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-2">📷 条形码识别</h1>
+          <p className="text-gray-600 dark:text-gray-400">上传图片或手动输入，快速识别条形码</p>
         </div>
 
         {/* 上传区域 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">上传条形码图片</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">上传条形码图片</h2>
 
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-purple-300 rounded-lg p-12 text-center cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition-colors"
+            className="border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-lg p-12 text-center cursor-pointer hover:border-purple-500 dark:hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
           >
             <div className="text-6xl mb-4">📷</div>
-            <p className="text-gray-600 mb-2">点击上传条形码图片</p>
-            <p className="text-sm text-gray-500">支持 JPG、PNG、GIF 格式</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-2">点击上传条形码图片</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">支持 JPG、PNG、GIF 格式</p>
           </div>
 
           <input
@@ -101,8 +101,8 @@ export default function BarcodeReader() {
         </div>
 
         {/* 手动输入 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4">手动输入条形码</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">手动输入条形码</h2>
 
           <div className="flex gap-2">
             <input
@@ -111,7 +111,7 @@ export default function BarcodeReader() {
               onChange={(e) => setManualCode(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleManualInput()}
               placeholder="输入条形码数字..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
             <button
               onClick={handleManualInput}
@@ -121,26 +121,26 @@ export default function BarcodeReader() {
             </button>
           </div>
 
-          <div className="mt-3 text-sm text-gray-500">
+          <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">
             支持格式：EAN-13 (13位)、EAN-8 (8位)、UPC-A (12位)、UPC-E (6位)
           </div>
         </div>
 
         {/* 识别结果 */}
         {result && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-            <h2 className="text-lg font-semibold mb-4">识别结果</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+            <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">识别结果</h2>
 
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-6 mb-4">
-              <div className="text-sm text-gray-600 mb-2">条形码</div>
-              <div className="text-3xl font-bold text-purple-600 mb-3 font-mono">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-6 mb-4">
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">条形码</div>
+              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-3 font-mono">
                 {result.code}
               </div>
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
                   {result.type}
                 </span>
-                <span className="text-sm text-gray-500">{result.timestamp}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{result.timestamp}</span>
               </div>
             </div>
 
@@ -164,12 +164,12 @@ export default function BarcodeReader() {
 
         {/* 历史记录 */}
         {history.length > 0 && (
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">历史记录</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">历史记录</h2>
               <button
                 onClick={clearHistory}
-                className="text-sm text-red-500 hover:text-red-700"
+                className="text-sm text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
               >
                 清空
               </button>
@@ -179,15 +179,15 @@ export default function BarcodeReader() {
               {history.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
+                  className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
                 >
                   <div className="flex-1">
-                    <div className="font-mono font-semibold text-gray-800">{item.code}</div>
+                    <div className="font-mono font-semibold text-gray-800 dark:text-gray-200">{item.code}</div>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+                      <span className="text-xs bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 px-2 py-0.5 rounded-full">
                         {item.type}
                       </span>
-                      <span className="text-xs text-gray-500">{item.timestamp}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{item.timestamp}</span>
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -196,11 +196,11 @@ export default function BarcodeReader() {
                       value={item.code}
                       label="复制"
                       copiedLabel="已复制"
-                      className="!text-blue-500 hover:!text-blue-700 text-sm"
+                      className="!text-blue-500 dark:!text-blue-400 hover:!text-blue-700 dark:hover:!text-blue-300 text-sm"
                     />
                     <button
                       onClick={() => searchOnline(item.code)}
-                      className="text-green-500 hover:text-green-700 text-sm"
+                      className="text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 text-sm"
                     >
                       搜索
                     </button>
@@ -212,9 +212,9 @@ export default function BarcodeReader() {
         )}
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-purple-50 border border-purple-200 rounded-lg p-4">
-          <h3 className="font-semibold text-purple-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-purple-700 space-y-1">
+        <div className="mt-6 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+          <h3 className="font-semibold text-purple-800 dark:text-purple-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-purple-700 dark:text-purple-300 space-y-1">
             <li>• 上传清晰的条形码图片，确保条形码完整可见</li>
             <li>• 支持常见的条形码格式：EAN-13、EAN-8、UPC-A、UPC-E</li>
             <li>• 识别后可以复制条形码或在线搜索商品信息</li>
