@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './ProxySpeedTest.css';
+import { I18N_NAMESPACE } from './namespace';
+
+export { I18N_NAMESPACE };
 
 interface ProxyConfig {
   id: string;
@@ -21,6 +25,7 @@ interface TestResult {
 }
 
 export const ProxySpeedTest: React.FC = () => {
+  const { t } = useTranslation(I18N_NAMESPACE);
   const [proxies, setProxies] = useState<ProxyConfig[]>([]);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isTestingAll, setIsTestingAll] = useState(false);
@@ -34,7 +39,7 @@ export const ProxySpeedTest: React.FC = () => {
 
   const addProxy = () => {
     if (!newProxy.name || !newProxy.host || !newProxy.port) {
-      alert('请填写代理名称、主机和端口');
+      alert(t('alertMissingFields'));
       return;
     }
 
@@ -103,7 +108,7 @@ export const ProxySpeedTest: React.FC = () => {
       result.speed = speed;
     } catch (error) {
       result.status = 'failed';
-      result.error = error instanceof Error ? error.message : '测试失败';
+      result.error = error instanceof Error ? error.message : t('testFailedDefault');
     }
 
     setTestResults(prev => {
@@ -189,28 +194,28 @@ export const ProxySpeedTest: React.FC = () => {
   return (
     <div className="proxy-speed-test">
       <div className="tool-header">
-        <h1>🚀 代理速度测试</h1>
-        <p>测试代理服务器的延迟和速度</p>
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
       </div>
 
       <div className="add-proxy-section">
-        <h2>添加代理</h2>
+        <h2>{t('addProxyHeading')}</h2>
         <div className="proxy-form">
           <input
             type="text"
-            placeholder="代理名称"
+            placeholder={t('proxyNamePlaceholder')}
             value={newProxy.name}
             onChange={e => setNewProxy({ ...newProxy, name: e.target.value })}
           />
           <input
             type="text"
-            placeholder="主机地址"
+            placeholder={t('proxyHostPlaceholder')}
             value={newProxy.host}
             onChange={e => setNewProxy({ ...newProxy, host: e.target.value })}
           />
           <input
             type="text"
-            placeholder="端口"
+            placeholder={t('proxyPortPlaceholder')}
             value={newProxy.port}
             onChange={e => setNewProxy({ ...newProxy, port: e.target.value })}
           />
@@ -222,13 +227,13 @@ export const ProxySpeedTest: React.FC = () => {
             <option value="https">HTTPS</option>
             <option value="socks5">SOCKS5</option>
           </select>
-          <button onClick={addProxy}>添加</button>
+          <button onClick={addProxy}>{t('addButton')}</button>
         </div>
 
         <div className="import-section">
-          <h3>批量导入</h3>
+          <h3>{t('importHeading')}</h3>
           <textarea
-            placeholder="每行一个代理，格式：名称|主机:端口|类型 或 主机:端口"
+            placeholder={t('importPlaceholder')}
             rows={5}
             onChange={e => {
               if (e.target.value.trim()) {
@@ -242,16 +247,16 @@ export const ProxySpeedTest: React.FC = () => {
 
       <div className="proxy-list-section">
         <div className="section-header">
-          <h2>代理列表 ({proxies.length})</h2>
+          <h2>{t('proxyListHeading', { count: proxies.length })}</h2>
           <div className="actions">
             <button
               onClick={testAllProxies}
               disabled={isTestingAll || proxies.length === 0}
             >
-              {isTestingAll ? '测试中...' : '测试全部'}
+              {isTestingAll ? t('testingAll') : t('testAll')}
             </button>
             {testResults.length > 0 && (
-              <button onClick={exportResults}>导出结果</button>
+              <button onClick={exportResults}>{t('exportResults')}</button>
             )}
           </div>
         </div>
@@ -272,15 +277,15 @@ export const ProxySpeedTest: React.FC = () => {
                 <div className="proxy-result">
                   {result && (
                     <>
-                      {result.status === 'testing' && <span className="status">测试中...</span>}
+                      {result.status === 'testing' && <span className="status">{t('statusTesting')}</span>}
                       {result.status === 'success' && (
                         <div className="success-result">
-                          <span className="latency">延迟: {result.latency}ms</span>
-                          <span className="speed">速度: {result.speed?.toFixed(2)} MB/s</span>
+                          <span className="latency">{t('latencyLabel', { value: result.latency })}</span>
+                          <span className="speed">{t('speedLabel', { value: result.speed?.toFixed(2) })}</span>
                         </div>
                       )}
                       {result.status === 'failed' && (
-                        <span className="error">失败: {result.error}</span>
+                        <span className="error">{t('failedLabel', { message: result.error })}</span>
                       )}
                     </>
                   )}
@@ -291,9 +296,9 @@ export const ProxySpeedTest: React.FC = () => {
                     onClick={() => testProxy(proxy)}
                     disabled={result?.status === 'testing'}
                   >
-                    测试
+                    {t('testButton')}
                   </button>
-                  <button onClick={() => removeProxy(proxy.id)}>删除</button>
+                  <button onClick={() => removeProxy(proxy.id)}>{t('deleteButton')}</button>
                 </div>
               </div>
             );
@@ -302,18 +307,18 @@ export const ProxySpeedTest: React.FC = () => {
 
         {proxies.length === 0 && (
           <div className="empty-state">
-            <p>暂无代理，请添加代理后开始测试</p>
+            <p>{t('emptyState')}</p>
           </div>
         )}
       </div>
 
       <div className="info-section">
-        <h3>⚠️ 注意事项</h3>
+        <h3>{t('noticeHeading')}</h3>
         <ul>
-          <li>浏览器环境无法直接测试代理，本工具仅作演示</li>
-          <li>实际应用需要后端服务支持代理测试</li>
-          <li>测试结果仅供参考，实际速度可能因网络环境而异</li>
-          <li>建议使用专业的代理测试工具进行生产环境测试</li>
+          <li>{t('noticeItem1')}</li>
+          <li>{t('noticeItem2')}</li>
+          <li>{t('noticeItem3')}</li>
+          <li>{t('noticeItem4')}</li>
         </ul>
       </div>
     </div>

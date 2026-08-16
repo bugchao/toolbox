@@ -1,5 +1,9 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import './AITokenCost.css';
+import { I18N_NAMESPACE } from './namespace';
+
+export { I18N_NAMESPACE };
 
 interface ModelPricing {
   provider: string;
@@ -42,7 +46,24 @@ const MODEL_PRICING: ModelPricing[] = [
   { provider: '字节跳动', model: '豆包', inputPrice: 0.3, outputPrice: 0.6, contextWindow: 32000, category: 'fast' },
 ];
 
+// 中文服务商/模型名称 -> i18n key（用于表格展示的翻译；英文名称如 OpenAI/GPT-4o 保持字面量）
+const PROVIDER_LABEL_KEYS: Record<string, string> = {
+  '阿里云': 'providerAlibaba',
+  '百度': 'providerBaidu',
+  '智谱AI': 'providerZhipu',
+  '月之暗面': 'providerMoonshot',
+  '字节跳动': 'providerBytedance',
+};
+
+const MODEL_LABEL_KEYS: Record<string, string> = {
+  '通义千问 Turbo': 'modelQwenTurbo',
+  '通义千问 Plus': 'modelQwenPlus',
+  '通义千问 Max': 'modelQwenMax',
+  '豆包': 'modelDoubao',
+};
+
 export const AITokenCost: React.FC = () => {
+  const { t } = useTranslation(I18N_NAMESPACE);
   const [inputTokens, setInputTokens] = useState<number>(1000);
   const [outputTokens, setOutputTokens] = useState<number>(1000);
   const [selectedProviders, setSelectedProviders] = useState<string[]>(['OpenAI', 'Anthropic', 'Google']);
@@ -107,11 +128,11 @@ export const AITokenCost: React.FC = () => {
 
   const getCategoryBadge = (category: string) => {
     const badges = {
-      flagship: { label: '旗舰', color: '#8b5cf6' },
-      standard: { label: '标准', color: '#3b82f6' },
-      fast: { label: '快速', color: '#10b981' },
-      vision: { label: '视觉', color: '#f59e0b' },
-      embedding: { label: '嵌入', color: '#6366f1' },
+      flagship: { label: t('categoryFlagship'), color: '#8b5cf6' },
+      standard: { label: t('categoryStandard'), color: '#3b82f6' },
+      fast: { label: t('categoryFast'), color: '#10b981' },
+      vision: { label: t('categoryVision'), color: '#f59e0b' },
+      embedding: { label: t('categoryEmbedding'), color: '#6366f1' },
     };
     const badge = badges[category as keyof typeof badges];
     return (
@@ -121,18 +142,24 @@ export const AITokenCost: React.FC = () => {
     );
   };
 
+  const translateProvider = (provider: string) =>
+    PROVIDER_LABEL_KEYS[provider] ? t(PROVIDER_LABEL_KEYS[provider]) : provider;
+
+  const translateModel = (model: string) =>
+    MODEL_LABEL_KEYS[model] ? t(MODEL_LABEL_KEYS[model]) : model;
+
   return (
     <div className="ai-token-cost">
       <div className="tool-header">
-        <h1>💰 AI Token 费用计算器</h1>
-        <p>对比各大 AI 模型的 Token 费用</p>
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
       </div>
 
       <div className="calculator-section">
-        <h2>输入 Token 数量</h2>
+        <h2>{t('inputTokensHeading')}</h2>
         <div className="token-inputs">
           <div className="input-group">
-            <label>输入 Tokens</label>
+            <label>{t('inputTokensLabel')}</label>
             <input
               type="number"
               value={inputTokens}
@@ -143,7 +170,7 @@ export const AITokenCost: React.FC = () => {
           </div>
 
           <div className="input-group">
-            <label>输出 Tokens</label>
+            <label>{t('outputTokensLabel')}</label>
             <input
               type="number"
               value={outputTokens}
@@ -156,23 +183,23 @@ export const AITokenCost: React.FC = () => {
 
         <div className="quick-presets">
           <button onClick={() => { setInputTokens(1000); setOutputTokens(1000); }}>
-            1K + 1K
+            {t('preset1k')}
           </button>
           <button onClick={() => { setInputTokens(10000); setOutputTokens(10000); }}>
-            10K + 10K
+            {t('preset10k')}
           </button>
           <button onClick={() => { setInputTokens(100000); setOutputTokens(100000); }}>
-            100K + 100K
+            {t('preset100k')}
           </button>
           <button onClick={() => { setInputTokens(1000000); setOutputTokens(1000000); }}>
-            1M + 1M
+            {t('preset1m')}
           </button>
         </div>
       </div>
 
       <div className="filters-section">
         <div className="filter-group">
-          <h3>服务商</h3>
+          <h3>{t('providerHeading')}</h3>
           <div className="filter-buttons">
             {providers.map(provider => (
               <button
@@ -180,78 +207,78 @@ export const AITokenCost: React.FC = () => {
                 className={selectedProviders.includes(provider) ? 'active' : ''}
                 onClick={() => toggleProvider(provider)}
               >
-                {provider}
+                {translateProvider(provider)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="filter-group">
-          <h3>模型类型</h3>
+          <h3>{t('categoryHeading')}</h3>
           <div className="filter-buttons">
             <button
               className={selectedCategories.includes('flagship') ? 'active' : ''}
               onClick={() => toggleCategory('flagship')}
             >
-              旗舰
+              {t('categoryFlagship')}
             </button>
             <button
               className={selectedCategories.includes('standard') ? 'active' : ''}
               onClick={() => toggleCategory('standard')}
             >
-              标准
+              {t('categoryStandard')}
             </button>
             <button
               className={selectedCategories.includes('fast') ? 'active' : ''}
               onClick={() => toggleCategory('fast')}
             >
-              快速
+              {t('categoryFast')}
             </button>
           </div>
         </div>
 
         <div className="filter-group">
-          <h3>排序方式</h3>
+          <h3>{t('sortHeading')}</h3>
           <div className="filter-buttons">
             <button
               className={sortBy === 'cost' ? 'active' : ''}
               onClick={() => setSortBy('cost')}
             >
-              按费用
+              {t('sortByCost')}
             </button>
             <button
               className={sortBy === 'provider' ? 'active' : ''}
               onClick={() => setSortBy('provider')}
             >
-              按服务商
+              {t('sortByProvider')}
             </button>
             <button
               className={sortBy === 'model' ? 'active' : ''}
               onClick={() => setSortBy('model')}
             >
-              按模型
+              {t('sortByModel')}
             </button>
           </div>
         </div>
       </div>
 
       <div className="results-section">
-        <h2>费用对比 ({calculatedCosts.length} 个模型)</h2>
+        <h2>{t('resultsHeading', { count: calculatedCosts.length })}</h2>
         <div className="results-table">
           <div className="table-header">
-            <div className="col-provider">服务商</div>
-            <div className="col-model">模型</div>
-            <div className="col-category">类型</div>
-            <div className="col-context">上下文</div>
-            <div className="col-input">输入费用</div>
-            <div className="col-output">输出费用</div>
-            <div className="col-total">总费用</div>
+            <div className="col-provider">{t('providerHeading')}</div>
+            <div className="col-model">{t('colModel')}</div>
+            <div className="col-category">{t('colCategory')}</div>
+            <div className="col-context">{t('colContext')}</div>
+            <div className="col-input">{t('colInputCost')}</div>
+            <div className="col-output">{t('colOutputCost')}</div>
+            <div className="col-total">{t('colTotalCost')}</div>
           </div>
 
           {calculatedCosts.map((model, index) => (
             <div key={index} className="table-row">
-              <div className="col-provider">{model.provider}</div>
-              <div className="col-model">{model.model}</div>
+              <div className="col-provider">{translateProvider(model.provider)}</div>
+              <div className="col-model">{translateModel(model.model)}</div>
               <div className="col-category">{getCategoryBadge(model.category)}</div>
               <div className="col-context">{formatTokens(model.contextWindow)}</div>
               <div className="col-input">{formatCost(model.inputCost)}</div>
@@ -265,20 +292,20 @@ export const AITokenCost: React.FC = () => {
 
         {calculatedCosts.length === 0 && (
           <div className="empty-state">
-            <p>请选择至少一个服务商和模型类型</p>
+            <p>{t('emptyState')}</p>
           </div>
         )}
       </div>
 
       <div className="info-section">
-        <h3>💡 使用说明</h3>
+        <h3>{t('infoHeading')}</h3>
         <ul>
-          <li>价格单位：美元 / 百万 Tokens（$/ 1M tokens）</li>
-          <li>价格数据更新时间：2024年1月（实际价格以官方为准）</li>
-          <li>输入 Tokens：发送给模型的文本长度</li>
-          <li>输出 Tokens：模型生成的文本长度</li>
-          <li>上下文窗口：模型支持的最大 Token 数量</li>
-          <li>1 Token ≈ 0.75 个英文单词 ≈ 1.5 个中文字符</li>
+          <li>{t('infoLine1')}</li>
+          <li>{t('infoLine2')}</li>
+          <li>{t('infoLine3')}</li>
+          <li>{t('infoLine4')}</li>
+          <li>{t('infoLine5')}</li>
+          <li>{t('infoLine6')}</li>
         </ul>
       </div>
     </div>

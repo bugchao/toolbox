@@ -1,0 +1,19 @@
+{
+  "themeClassic": "经典黑白",
+  "themeVintage": "复古表盘",
+  "themeMechanical": "机械表盘",
+  "themeLuxury": "奢华金色",
+  "themeOcean": "海洋蓝",
+  "themeForest": "森林绿",
+  "themeSunset": "日落橙",
+  "themePurple": "紫罗兰",
+  "themeDark": "暗夜模式",
+  "themeRose": "玫瑰金",
+  "themeMint": "薄荷绿",
+  "themeSilver": "银色经典",
+  "openStandalone": "独立打开",
+  "openStandaloneTitle": "在新窗口中独立打开",
+  "themesButton": "主题",
+  "fullscreenButton": "全屏",
+  "exitFullscreenButton": "退出全屏"
+}

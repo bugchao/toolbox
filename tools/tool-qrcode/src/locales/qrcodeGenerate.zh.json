@@ -1,0 +1,21 @@
+{
+  "title": "二维码生成器",
+  "contentLabel": "二维码内容",
+  "contentPlaceholder": "输入要生成二维码的内容，例如网址、文本等",
+  "sizeLabel": "二维码大小 (px)",
+  "fgColorLabel": "前景颜色",
+  "bgColorLabel": "背景颜色",
+  "generating": "生成中...",
+  "generate": "生成二维码",
+  "download": "下载",
+  "copy": "复制",
+  "copiedAlert": "二维码已复制到剪贴板",
+  "copyFailedAlert": "复制失败，请重试",
+  "qrImageAlt": "生成的二维码",
+  "emptyHint": "生成的二维码将显示在这里",
+  "usageTitle": "使用说明",
+  "usage1": "支持生成网址、文本、联系信息等各种内容的二维码",
+  "usage2": "可以自定义二维码的大小、前景色和背景色",
+  "usage3": "生成的二维码可以下载为PNG图片或复制到剪贴板",
+  "usage4": "建议内容不要过长，否则二维码会过于密集难以识别"
+}

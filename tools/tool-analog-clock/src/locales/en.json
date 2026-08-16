@@ -1,0 +1,19 @@
+{
+  "themeClassic": "Classic Black & White",
+  "themeVintage": "Vintage Dial",
+  "themeMechanical": "Mechanical Dial",
+  "themeLuxury": "Luxury Gold",
+  "themeOcean": "Ocean Blue",
+  "themeForest": "Forest Green",
+  "themeSunset": "Sunset Orange",
+  "themePurple": "Violet",
+  "themeDark": "Dark Mode",
+  "themeRose": "Rose Gold",
+  "themeMint": "Mint Green",
+  "themeSilver": "Classic Silver",
+  "openStandalone": "Open Standalone",
+  "openStandaloneTitle": "Open in a new standalone window",
+  "themesButton": "Themes",
+  "fullscreenButton": "Fullscreen",
+  "exitFullscreenButton": "Exit Fullscreen"
+}

@@ -1,8 +1,12 @@
 import React, { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Download, Copy } from 'lucide-react'
 import QRCode from 'qrcode'
 
+const I18N_NAMESPACE = 'toolQrcodeGenerate'
+
 const QrCodeGenerator: React.FC = () => {
+  const { t } = useTranslation(I18N_NAMESPACE)
   const [text, setText] = useState('')
   const [size, setSize] = useState(256)
   const [color, setColor] = useState('#000000')
@@ -51,28 +55,28 @@ const QrCodeGenerator: React.FC = () => {
           'image/png': blob
         })
       ])
-      alert('二维码已复制到剪贴板')
+      alert(t('copiedAlert'))
     } catch (err) {
       console.error('复制失败:', err)
-      alert('复制失败，请重试')
+      alert(t('copyFailedAlert'))
     }
   }
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">二维码生成器</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">{t('title')}</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                二维码内容
+                {t('contentLabel')}
               </label>
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="输入要生成二维码的内容，例如网址、文本等"
+                placeholder={t('contentPlaceholder')}
                 className="input h-32 resize-none"
               />
             </div>
@@ -80,7 +84,7 @@ const QrCodeGenerator: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  二维码大小 (px)
+                  {t('sizeLabel')}
                 </label>
                 <input
                   type="number"
@@ -94,7 +98,7 @@ const QrCodeGenerator: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  前景颜色
+                  {t('fgColorLabel')}
                 </label>
                 <input
                   type="color"
@@ -107,7 +111,7 @@ const QrCodeGenerator: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                背景颜色
+                {t('bgColorLabel')}
               </label>
               <input
                 type="color"
@@ -122,7 +126,7 @@ const QrCodeGenerator: React.FC = () => {
               disabled={!text.trim() || loading}
               className="btn btn-primary w-full"
             >
-              {loading ? '生成中...' : '生成二维码'}
+              {loading ? t('generating') : t('generate')}
             </button>
           </div>
 
@@ -132,7 +136,7 @@ const QrCodeGenerator: React.FC = () => {
                 <div className="p-4 bg-white dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm">
                   <img
                     src={qrCodeUrl}
-                    alt="生成的二维码"
+                    alt={t('qrImageAlt')}
                     className="max-w-full mx-auto"
                   />
                 </div>
@@ -142,14 +146,14 @@ const QrCodeGenerator: React.FC = () => {
                     className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    下载
+                    {t('download')}
                   </button>
                   <button
                     onClick={copyToClipboard}
                     className="btn bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-500 flex items-center"
                   >
                     <Copy className="w-4 h-4 mr-2" />
-                    复制
+                    {t('copy')}
                   </button>
                 </div>
               </div>
@@ -157,7 +161,7 @@ const QrCodeGenerator: React.FC = () => {
               <div className="w-full aspect-square border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center text-gray-400 dark:text-gray-500">
                 <div className="text-center">
                   <div className="text-6xl mb-4">📱</div>
-                  <p>生成的二维码将显示在这里</p>
+                  <p>{t('emptyHint')}</p>
                 </div>
               </div>
             )}
@@ -166,12 +170,12 @@ const QrCodeGenerator: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">使用说明</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">{t('usageTitle')}</h2>
         <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-          <li>支持生成网址、文本、联系信息等各种内容的二维码</li>
-          <li>可以自定义二维码的大小、前景色和背景色</li>
-          <li>生成的二维码可以下载为PNG图片或复制到剪贴板</li>
-          <li>建议内容不要过长，否则二维码会过于密集难以识别</li>
+          <li>{t('usage1')}</li>
+          <li>{t('usage2')}</li>
+          <li>{t('usage3')}</li>
+          <li>{t('usage4')}</li>
         </ul>
       </div>
     </div>

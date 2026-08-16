@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Binary,
   Calculator,
@@ -14,6 +15,9 @@ import {
   Ruler,
   X,
 } from 'lucide-react';
+import { I18N_NAMESPACE } from './namespace';
+
+export { I18N_NAMESPACE };
 
 type CalculatorType = 'basic' | 'scientific' | 'unit' | 'date' | 'percentage' | 'base';
 type ScientificOperation = 'sin' | 'cos' | 'tan' | 'sqrt' | 'log' | 'ln' | 'exp' | 'abs';
@@ -23,21 +27,21 @@ type PercentageOperation = 'of' | 'is' | 'change';
 type NumericField = 'sciValue' | 'unitValue' | 'daysToAdd' | 'percentValue' | 'percentTotal' | 'baseValue';
 
 const calculators = [
-  { id: 'basic' as CalculatorType, name: '基础计算', icon: Calculator, hint: '表达式 + 按键' },
-  { id: 'scientific' as CalculatorType, name: '科学计算', icon: Calculator, hint: '函数运算' },
-  { id: 'unit' as CalculatorType, name: '单位转换', icon: Ruler, hint: '多单位换算' },
-  { id: 'date' as CalculatorType, name: '日期计算', icon: Calendar, hint: '日期差与加减' },
-  { id: 'percentage' as CalculatorType, name: '百分比', icon: Percent, hint: '百分比场景' },
-  { id: 'base' as CalculatorType, name: '进制转换', icon: Binary, hint: '2/8/10/16 进制' },
+  { id: 'basic' as CalculatorType, nameKey: 'calcBasicName', icon: Calculator, hintKey: 'calcBasicHint' },
+  { id: 'scientific' as CalculatorType, nameKey: 'calcScientificName', icon: Calculator, hintKey: 'calcScientificHint' },
+  { id: 'unit' as CalculatorType, nameKey: 'calcUnitName', icon: Ruler, hintKey: 'calcUnitHint' },
+  { id: 'date' as CalculatorType, nameKey: 'calcDateName', icon: Calendar, hintKey: 'calcDateHint' },
+  { id: 'percentage' as CalculatorType, nameKey: 'calcPercentageName', icon: Percent, hintKey: 'calcPercentageHint' },
+  { id: 'base' as CalculatorType, nameKey: 'calcBaseName', icon: Binary, hintKey: 'calcBaseHint' },
 ];
 
-const fieldLabels: Record<NumericField, string> = {
-  sciValue: '科学计算数值',
-  unitValue: '单位转换数值',
-  daysToAdd: '日期增减天数',
-  percentValue: '百分比数值 1',
-  percentTotal: '百分比数值 2',
-  baseValue: '进制转换数值',
+const fieldLabelKeys: Record<NumericField, string> = {
+  sciValue: 'fieldLabelSciValue',
+  unitValue: 'fieldLabelUnitValue',
+  daysToAdd: 'fieldLabelDaysToAdd',
+  percentValue: 'fieldLabelPercentValue',
+  percentTotal: 'fieldLabelPercentTotal',
+  baseValue: 'fieldLabelBaseValue',
 };
 
 const basicPad = [
@@ -88,6 +92,7 @@ function sanitizeBaseInput(value: string, base: string) {
 }
 
 const RapidTables: React.FC = () => {
+  const { t } = useTranslation(I18N_NAMESPACE);
   const [activeCalculator, setActiveCalculator] = useState<CalculatorType>('basic');
 
   const [basicExpr, setBasicExpr] = useState('');
@@ -435,16 +440,15 @@ const RapidTables: React.FC = () => {
               RAPID TABLES
             </div>
             <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white md:text-4xl">
-              多模式计算工作台
+              {t('pageTitle')}
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
-              保留输入框直输，同时补上一套像手机计算器一样顺手的按键输入。基础计算走完整表达式键盘，
-              其他模式会把当前聚焦字段接到数字键盘上。
+              {t('pageDescription')}
             </p>
           </div>
           <div className="rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
-            当前模式：
-            <span className="ml-2 font-semibold text-slate-900 dark:text-white">{activeCalculatorMeta?.name}</span>
+            {t('currentModeLabel')}
+            <span className="ml-2 font-semibold text-slate-900 dark:text-white">{activeCalculatorMeta && t(activeCalculatorMeta.nameKey)}</span>
           </div>
         </div>
       </div>
@@ -464,8 +468,8 @@ const RapidTables: React.FC = () => {
             <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-current/15 bg-current/5">
               <calculator.icon className="h-5 w-5" />
             </div>
-            <div className="text-sm font-semibold">{calculator.name}</div>
-            <div className="mt-1 text-xs opacity-70">{calculator.hint}</div>
+            <div className="text-sm font-semibold">{t(calculator.nameKey)}</div>
+            <div className="mt-1 text-xs opacity-70">{t(calculator.hintKey)}</div>
           </button>
         ))}
       </div>
@@ -473,14 +477,14 @@ const RapidTables: React.FC = () => {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_360px]">
         <div className="rounded-[28px] border border-slate-200 bg-white/90 p-6 shadow-[0_18px_60px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-950/80">
           <div className="mb-6 flex items-center justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{activeCalculatorMeta?.name}</h2>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{activeCalculatorMeta && t(activeCalculatorMeta.nameKey)}</h2>
             <button
               type="button"
               onClick={resetAll}
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:text-white"
             >
               <RotateCcw className="h-4 w-4" />
-              重置
+              {t('resetButton')}
             </button>
           </div>
 
@@ -488,19 +492,19 @@ const RapidTables: React.FC = () => {
             <div className="space-y-5">
               <div className="rounded-[28px] bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 p-5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
                 <div className="mb-2 text-xs uppercase tracking-[0.2em] text-slate-400">Expression</div>
-                <label className="mb-2 block text-sm font-medium text-slate-300">表达式输入</label>
+                <label className="mb-2 block text-sm font-medium text-slate-300">{t('expressionInputLabel')}</label>
                 <input
                   type="text"
                   value={basicExpr}
                   onChange={(event) => setBasicExpr(event.target.value)}
                   onKeyDown={(event) => event.key === 'Enter' && calculateBasic()}
                   className="w-full border-0 bg-transparent px-0 py-2 font-mono text-3xl tracking-tight text-white outline-none placeholder:text-slate-500"
-                  placeholder="例如：(2 + 3) * 4"
+                  placeholder={t('expressionPlaceholder')}
                 />
                 <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="text-xs uppercase tracking-[0.2em] text-slate-400">Result</div>
                   <div className="mt-2 min-h-[40px] text-2xl font-semibold text-cyan-300">
-                    {basicResult ?? '等待计算'}
+                    {basicResult ?? t('waitingForCalc')}
                   </div>
                 </div>
               </div>
@@ -526,7 +530,7 @@ const RapidTables: React.FC = () => {
           {activeCalculator === 'scientific' && (
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">数值</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('valueLabel')}</label>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -534,24 +538,24 @@ const RapidTables: React.FC = () => {
                   onFocus={() => setActiveNumberField('sciValue')}
                   onChange={(event) => setSciValue(event.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                  placeholder="输入数值"
+                  placeholder={t('valuePlaceholder')}
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">函数</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('functionLabel')}</label>
                 <select
                   value={sciOperation}
                   onChange={(event) => setSciOperation(event.target.value as ScientificOperation)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                 >
-                  <option value="sin">sin(x) - 正弦</option>
-                  <option value="cos">cos(x) - 余弦</option>
-                  <option value="tan">tan(x) - 正切</option>
-                  <option value="sqrt">√x - 平方根</option>
-                  <option value="log">log₁₀(x) - 常用对数</option>
-                  <option value="ln">ln(x) - 自然对数</option>
-                  <option value="exp">eˣ - 指数</option>
-                  <option value="abs">|x| - 绝对值</option>
+                  <option value="sin">{t('sciSin')}</option>
+                  <option value="cos">{t('sciCos')}</option>
+                  <option value="tan">{t('sciTan')}</option>
+                  <option value="sqrt">{t('sciSqrt')}</option>
+                  <option value="log">{t('sciLog')}</option>
+                  <option value="ln">{t('sciLn')}</option>
+                  <option value="exp">{t('sciExp')}</option>
+                  <option value="abs">{t('sciAbs')}</option>
                 </select>
               </div>
               <button
@@ -559,11 +563,11 @@ const RapidTables: React.FC = () => {
                 onClick={calculateScientific}
                 className="w-full rounded-2xl bg-cyan-600 px-4 py-3 font-semibold text-white transition hover:bg-cyan-700"
               >
-                计算
+                {t('calculateButton')}
               </button>
               {sciResult && (
                 <div className="rounded-2xl border border-emerald-300 bg-emerald-500/10 p-4 dark:border-emerald-700/60">
-                  <div className="text-sm text-slate-600 dark:text-slate-300">结果</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('resultLabel')}</div>
                   <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{sciResult}</div>
                 </div>
               )}
@@ -573,7 +577,7 @@ const RapidTables: React.FC = () => {
           {activeCalculator === 'unit' && (
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">类别</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('categoryLabel')}</label>
                 <select
                   value={unitCategory}
                   onChange={(event) => {
@@ -590,15 +594,15 @@ const RapidTables: React.FC = () => {
                   }}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                 >
-                  <option value="length">长度</option>
-                  <option value="weight">重量</option>
-                  <option value="temperature">温度</option>
-                  <option value="speed">速度</option>
-                  <option value="area">面积</option>
+                  <option value="length">{t('unitLength')}</option>
+                  <option value="weight">{t('unitWeight')}</option>
+                  <option value="temperature">{t('unitTemperature')}</option>
+                  <option value="speed">{t('unitSpeed')}</option>
+                  <option value="area">{t('unitArea')}</option>
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">数值</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('valueLabel')}</label>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -606,12 +610,12 @@ const RapidTables: React.FC = () => {
                   onFocus={() => setActiveNumberField('unitValue')}
                   onChange={(event) => setUnitValue(event.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                  placeholder="输入数值"
+                  placeholder={t('valuePlaceholder')}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">从</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('fromLabel')}</label>
                   <select
                     value={unitFrom}
                     onChange={(event) => setUnitFrom(event.target.value)}
@@ -620,7 +624,7 @@ const RapidTables: React.FC = () => {
                     {unitCategory === 'temperature'
                       ? ['C', 'F', 'K'].map((unit) => (
                           <option key={unit} value={unit}>
-                            {unit === 'C' ? '摄氏度 (°C)' : unit === 'F' ? '华氏度 (°F)' : '开尔文 (K)'}
+                            {unit === 'C' ? t('celsiusLabel') : unit === 'F' ? t('fahrenheitLabel') : t('kelvinLabel')}
                           </option>
                         ))
                       : Object.keys(unitRates[unitCategory]).map((unit) => (
@@ -631,7 +635,7 @@ const RapidTables: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">到</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('toLabel')}</label>
                   <select
                     value={unitTo}
                     onChange={(event) => setUnitTo(event.target.value)}
@@ -640,7 +644,7 @@ const RapidTables: React.FC = () => {
                     {unitCategory === 'temperature'
                       ? ['C', 'F', 'K'].map((unit) => (
                           <option key={unit} value={unit}>
-                            {unit === 'C' ? '摄氏度 (°C)' : unit === 'F' ? '华氏度 (°F)' : '开尔文 (K)'}
+                            {unit === 'C' ? t('celsiusLabel') : unit === 'F' ? t('fahrenheitLabel') : t('kelvinLabel')}
                           </option>
                         ))
                       : Object.keys(unitRates[unitCategory]).map((unit) => (
@@ -656,11 +660,11 @@ const RapidTables: React.FC = () => {
                 onClick={convertUnit}
                 className="w-full rounded-2xl bg-cyan-600 px-4 py-3 font-semibold text-white transition hover:bg-cyan-700"
               >
-                转换
+                {t('convertButton')}
               </button>
               {unitResult && (
                 <div className="rounded-2xl border border-emerald-300 bg-emerald-500/10 p-4 dark:border-emerald-700/60">
-                  <div className="text-sm text-slate-600 dark:text-slate-300">结果</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('resultLabel')}</div>
                   <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{unitResult}</div>
                 </div>
               )}
@@ -670,21 +674,21 @@ const RapidTables: React.FC = () => {
           {activeCalculator === 'date' && (
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">操作</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('operationLabel')}</label>
                 <select
                   value={dateOperation}
                   onChange={(event) => setDateOperation(event.target.value as DateOperation)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                 >
-                  <option value="diff">计算日期差</option>
-                  <option value="add">日期加天数</option>
-                  <option value="subtract">日期减天数</option>
+                  <option value="diff">{t('dateDiffOption')}</option>
+                  <option value="add">{t('dateAddOption')}</option>
+                  <option value="subtract">{t('dateSubtractOption')}</option>
                 </select>
               </div>
               {dateOperation === 'diff' ? (
                 <>
                   <div>
-                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">日期 1</label>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('date1Label')}</label>
                     <input
                       type="date"
                       value={date1}
@@ -693,7 +697,7 @@ const RapidTables: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">日期 2</label>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('date2Label')}</label>
                     <input
                       type="date"
                       value={date2}
@@ -705,7 +709,7 @@ const RapidTables: React.FC = () => {
               ) : (
                 <>
                   <div>
-                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">日期</label>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('dateLabel')}</label>
                     <input
                       type="date"
                       value={date1}
@@ -714,7 +718,7 @@ const RapidTables: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">天数</label>
+                    <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('daysLabel')}</label>
                     <input
                       type="text"
                       inputMode="numeric"
@@ -722,7 +726,7 @@ const RapidTables: React.FC = () => {
                       onFocus={() => setActiveNumberField('daysToAdd')}
                       onChange={(event) => setDaysToAdd(event.target.value)}
                       className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                      placeholder="输入天数"
+                      placeholder={t('daysPlaceholder')}
                     />
                   </div>
                 </>
@@ -732,11 +736,11 @@ const RapidTables: React.FC = () => {
                 onClick={calculateDate}
                 className="w-full rounded-2xl bg-cyan-600 px-4 py-3 font-semibold text-white transition hover:bg-cyan-700"
               >
-                计算
+                {t('calculateButton')}
               </button>
               {dateResult && (
                 <div className="rounded-2xl border border-emerald-300 bg-emerald-500/10 p-4 dark:border-emerald-700/60">
-                  <div className="text-sm text-slate-600 dark:text-slate-300">结果</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('resultLabel')}</div>
                   <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{dateResult}</div>
                 </div>
               )}
@@ -746,19 +750,19 @@ const RapidTables: React.FC = () => {
           {activeCalculator === 'percentage' && (
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">操作</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('operationLabel')}</label>
                 <select
                   value={percentOperation}
                   onChange={(event) => setPercentOperation(event.target.value as PercentageOperation)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                 >
-                  <option value="of">求百分比值 (X% of Y)</option>
-                  <option value="is">求百分比 (X is what % of Y)</option>
-                  <option value="change">求变化率 (X to Y)</option>
+                  <option value="of">{t('percentOfOption')}</option>
+                  <option value="is">{t('percentIsOption')}</option>
+                  <option value="change">{t('percentChangeOption')}</option>
                 </select>
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">数值 1 (X)</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('value1LabelX')}</label>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -766,11 +770,11 @@ const RapidTables: React.FC = () => {
                   onFocus={() => setActiveNumberField('percentValue')}
                   onChange={(event) => setPercentValue(event.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                  placeholder="输入数值"
+                  placeholder={t('valuePlaceholder')}
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">数值 2 (Y)</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('value2LabelY')}</label>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -778,7 +782,7 @@ const RapidTables: React.FC = () => {
                   onFocus={() => setActiveNumberField('percentTotal')}
                   onChange={(event) => setPercentTotal(event.target.value)}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                  placeholder="输入数值"
+                  placeholder={t('valuePlaceholder')}
                 />
               </div>
               <button
@@ -786,11 +790,11 @@ const RapidTables: React.FC = () => {
                 onClick={calculatePercentage}
                 className="w-full rounded-2xl bg-cyan-600 px-4 py-3 font-semibold text-white transition hover:bg-cyan-700"
               >
-                计算
+                {t('calculateButton')}
               </button>
               {percentResult && (
                 <div className="rounded-2xl border border-emerald-300 bg-emerald-500/10 p-4 dark:border-emerald-700/60">
-                  <div className="text-sm text-slate-600 dark:text-slate-300">结果</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('resultLabel')}</div>
                   <div className="text-xl font-bold text-emerald-700 dark:text-emerald-300">{percentResult}</div>
                 </div>
               )}
@@ -800,19 +804,19 @@ const RapidTables: React.FC = () => {
           {activeCalculator === 'base' && (
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">数值</label>
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('valueLabel')}</label>
                 <input
                   type="text"
                   value={baseValue}
                   onFocus={() => setActiveNumberField('baseValue')}
                   onChange={(event) => setBaseValue(sanitizeBaseInput(event.target.value, baseFrom))}
                   className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-mono text-lg uppercase focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-                  placeholder="输入数值"
+                  placeholder={t('valuePlaceholder')}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">从 (进制)</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('fromBaseLabel')}</label>
                   <select
                     value={baseFrom}
                     onChange={(event) => {
@@ -822,23 +826,23 @@ const RapidTables: React.FC = () => {
                     }}
                     className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                   >
-                    <option value="2">二进制 (2)</option>
-                    <option value="8">八进制 (8)</option>
-                    <option value="10">十进制 (10)</option>
-                    <option value="16">十六进制 (16)</option>
+                    <option value="2">{t('baseBinaryOption')}</option>
+                    <option value="8">{t('baseOctalOption')}</option>
+                    <option value="10">{t('baseDecimalOption')}</option>
+                    <option value="16">{t('baseHexOption')}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">到 (进制)</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('toBaseLabel')}</label>
                   <select
                     value={baseTo}
                     onChange={(event) => setBaseTo(event.target.value)}
                     className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                   >
-                    <option value="2">二进制 (2)</option>
-                    <option value="8">八进制 (8)</option>
-                    <option value="10">十进制 (10)</option>
-                    <option value="16">十六进制 (16)</option>
+                    <option value="2">{t('baseBinaryOption')}</option>
+                    <option value="8">{t('baseOctalOption')}</option>
+                    <option value="10">{t('baseDecimalOption')}</option>
+                    <option value="16">{t('baseHexOption')}</option>
                   </select>
                 </div>
               </div>
@@ -847,11 +851,11 @@ const RapidTables: React.FC = () => {
                 onClick={convertBase}
                 className="w-full rounded-2xl bg-cyan-600 px-4 py-3 font-semibold text-white transition hover:bg-cyan-700"
               >
-                转换
+                {t('convertButton')}
               </button>
               {baseResult && (
                 <div className="rounded-2xl border border-emerald-300 bg-emerald-500/10 p-4 dark:border-emerald-700/60">
-                  <div className="text-sm text-slate-600 dark:text-slate-300">结果</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('resultLabel')}</div>
                   <div className="font-mono text-2xl font-bold text-emerald-700 dark:text-emerald-300">{baseResult}</div>
                 </div>
               )}
@@ -864,13 +868,13 @@ const RapidTables: React.FC = () => {
             <div className="rounded-[28px] border border-slate-200 bg-white/90 p-5 shadow-[0_18px_60px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-950/80">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <div>
-                  <div className="text-sm font-semibold text-slate-900 dark:text-white">按键输入</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white">{t('keypadInputHeading')}</div>
                   <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                    当前输入目标：{fieldLabels[activeNumberField]}
+                    {t('currentTargetLabel', { label: t(fieldLabelKeys[activeNumberField]) })}
                   </div>
                 </div>
                 <div className="rounded-full border border-cyan-300/60 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:border-cyan-700/60 dark:bg-cyan-500/10 dark:text-cyan-200">
-                  {getNumberFieldValue(activeNumberField) || '未输入'}
+                  {getNumberFieldValue(activeNumberField) || t('notEntered')}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -895,13 +899,13 @@ const RapidTables: React.FC = () => {
             <div className="rounded-[28px] border border-slate-200 bg-white/90 p-5 shadow-[0_18px_60px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-950/80">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <div>
-                  <div className="text-sm font-semibold text-slate-900 dark:text-white">天数键盘</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white">{t('daysKeypadHeading')}</div>
                   <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                    保留手输，也可以直接点按键填充天数。
+                    {t('daysKeypadHint')}
                   </div>
                 </div>
                 <div className="rounded-full border border-cyan-300/60 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-700 dark:border-cyan-700/60 dark:bg-cyan-500/10 dark:text-cyan-200">
-                  {daysToAdd || '未输入'}
+                  {daysToAdd || t('notEntered')}
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -913,10 +917,10 @@ const RapidTables: React.FC = () => {
           )}
 
           <div className="rounded-[28px] border border-slate-200 bg-slate-50/80 p-5 dark:border-slate-800 dark:bg-slate-950/60">
-            <h3 className="mb-3 text-sm font-semibold text-slate-900 dark:text-white">常用公式参考</h3>
+            <h3 className="mb-3 text-sm font-semibold text-slate-900 dark:text-white">{t('referenceHeading')}</h3>
             <div className="grid gap-4 text-sm text-slate-600 dark:text-slate-300 md:grid-cols-2">
               <div className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                <strong className="text-slate-900 dark:text-white">温度转换</strong>
+                <strong className="text-slate-900 dark:text-white">{t('temperatureConversionTitle')}</strong>
                 <ul className="mt-2 space-y-1">
                   <li>°C → °F: (°C × 9/5) + 32</li>
                   <li>°F → °C: (°F - 32) × 5/9</li>
@@ -924,11 +928,11 @@ const RapidTables: React.FC = () => {
                 </ul>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                <strong className="text-slate-900 dark:text-white">常用单位</strong>
+                <strong className="text-slate-900 dark:text-white">{t('commonUnitsTitle')}</strong>
                 <ul className="mt-2 space-y-1">
-                  <li>1 英里 = 1.609 公里</li>
-                  <li>1 英尺 = 0.3048 米</li>
-                  <li>1 磅 = 0.4536 千克</li>
+                  <li>{t('unitMileToKm')}</li>
+                  <li>{t('unitFootToMeter')}</li>
+                  <li>{t('unitPoundToKg')}</li>
                 </ul>
               </div>
             </div>

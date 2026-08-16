@@ -563,4 +563,32 @@ export const TOOL_NAMESPACE_LOADERS: Record<string, { zh: LocaleLoader; en: Loca
     zh: () => import('@toolbox/tool-water-reminder/locales/zh-CN.json'),
     en: () => import('@toolbox/tool-water-reminder/locales/en-US.json'),
   },
+  toolQrcodeGenerate: {
+    zh: () => import('@toolbox/tool-qrcode/src/locales/qrcodeGenerate.zh.json'),
+    en: () => import('@toolbox/tool-qrcode/src/locales/qrcodeGenerate.en.json'),
+  },
+  toolQrcodeRead: {
+    zh: () => import('@toolbox/tool-qrcode/src/locales/qrcodeRead.zh.json'),
+    en: () => import('@toolbox/tool-qrcode/src/locales/qrcodeRead.en.json'),
+  },
+  toolQrcodeBeautifier: {
+    zh: () => import('@toolbox/tool-qrcode/src/locales/qrcodeBeautifier.zh.json'),
+    en: () => import('@toolbox/tool-qrcode/src/locales/qrcodeBeautifier.en.json'),
+  },
+  toolAiTokenCost: {
+    zh: () => import('@toolbox/tool-ai-token-cost/src/locales/zh.json'),
+    en: () => import('@toolbox/tool-ai-token-cost/src/locales/en.json'),
+  },
+  toolAnalogClock: {
+    zh: () => import('@toolbox/tool-analog-clock/src/locales/zh.json'),
+    en: () => import('@toolbox/tool-analog-clock/src/locales/en.json'),
+  },
+  toolProxySpeedTest: {
+    zh: () => import('@toolbox/tool-proxy-speed-test/src/locales/zh.json'),
+    en: () => import('@toolbox/tool-proxy-speed-test/src/locales/en.json'),
+  },
+  toolRapidTables: {
+    zh: () => import('@toolbox/tool-rapid-tables/src/locales/zh.json'),
+    en: () => import('@toolbox/tool-rapid-tables/src/locales/en.json'),
+  },
 }

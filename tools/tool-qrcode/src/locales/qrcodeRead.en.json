@@ -1,0 +1,15 @@
+{
+  "title": "QR Code Reader",
+  "uploadButton": "Upload QR Code Image",
+  "cameraStart": "Scan with Camera",
+  "cameraStop": "Stop Scanning",
+  "errDecodeFailed": "Could not read the QR code — make sure the image is clear and shows the full code",
+  "errCameraAccess": "Could not access the camera — please grant camera permission",
+  "resultLabel": "Decoded Result",
+  "resultPlaceholder": "The QR code content will appear here",
+  "usageTitle": "Usage Tips",
+  "usage1": "Decode QR codes from uploaded images in common formats",
+  "usage2": "Scan QR codes live with your camera, front or back",
+  "usage3": "Copy the decoded result with one click",
+  "usage4": "Keep the QR code clear and unobstructed, avoiding glare and distortion"
+}

@@ -1,6 +1,6 @@
 # 国际化 TODO
 
-更新时间：`2026-04-18`
+更新时间：`2026-08-17`
 
 这份清单用于持续跟踪“还没有完成国际化”的前端模块。  
 目标不是一次性全部清完，而是给后续改造一个统一入口，避免每次都重新盘点。
@@ -27,9 +27,9 @@
 
 ## 本次扫描摘要
 
-- 确认完全没有工具级国际化的工具包：`5`
+- 确认完全没有工具级国际化的工具包：`0`（P0 已清空，2026-08-17）
 - 缺少独立 locale 资源的工具包：`10`
-- 完全没有页面国际化的老页面：`16`
+- 完全没有页面国际化的老页面：`0`（P0 已清空，2026-08-17）
 - 已接 i18n 但仍有大量硬编码中文的老页面：`23`
 - 有 locale 资源但页面层疑似未真正消费 i18n 的工具包：`76`
 
@@ -52,34 +52,11 @@
 
 ## P0：完全没有页面国际化的老页面
 
-这批优先级最高，因为页面里仍是整块硬编码 UI。
-
-- [apps/web/src/pages/BMICalculator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/BMICalculator.tsx)
-- [apps/web/src/pages/ElectronicWoodenFish.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ElectronicWoodenFish.tsx)
-- [apps/web/src/pages/HotNews.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/HotNews.tsx)
-- [apps/web/src/pages/ImageBackgroundRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageBackgroundRemover.tsx)
-- [apps/web/src/pages/ImageCompressor.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCompressor.tsx)
-- [apps/web/src/pages/ImageCropper.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageCropper.tsx)
-- [apps/web/src/pages/ImageFilter.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageFilter.tsx)
-- [apps/web/src/pages/ImageRotator.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageRotator.tsx)
-- [apps/web/src/pages/ImageStitcher.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageStitcher.tsx)
-- [apps/web/src/pages/ImageWatermark.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageWatermark.tsx)
-- [apps/web/src/pages/ImageWatermarkRemover.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ImageWatermarkRemover.tsx)
-- [apps/web/src/pages/LifeProgressBar.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/LifeProgressBar.tsx)
-- [apps/web/src/pages/MarkdownConverter.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/MarkdownConverter.tsx)
-- [apps/web/src/pages/ShortLinkRedirect.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ShortLinkRedirect.tsx)
-- [apps/web/src/pages/UnitConverter.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/UnitConverter.tsx)
-- [apps/web/src/pages/ZipCode.tsx](/Users/dyck/workspaces/ai/toolbox-codex/apps/web/src/pages/ZipCode.tsx)
+（已于 2026-08-17 全部完成，清单见 git 历史。）
 
 ## P0：确认没有工具级国际化的工具包
 
-这批工具包同时缺少 locale 资源，并且页面组件没有使用 `useTranslation`。
-
-- [tools/tool-ai-token-cost](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-ai-token-cost)
-- [tools/tool-analog-clock](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-analog-clock)
-- [tools/tool-proxy-speed-test](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-proxy-speed-test)
-- [tools/tool-qrcode](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-qrcode)
-- [tools/tool-rapid-tables](/Users/dyck/workspaces/ai/toolbox-codex/tools/tool-rapid-tables)
+（已于 2026-08-17 全部完成，清单见 git 历史。）
 
 ## P1：缺少独立 locale 资源的工具包
 
@@ -207,9 +184,7 @@
 
 ## 建议处理顺序
 
-1. 先清 `P0`：
-   - 老页面完全没国际化的 16 个
-   - 工具级完全没 i18n 的 5 个
+1. `P0` 已于 2026-08-17 清空（老页面 16 个 + 工具级 5 个，含 1 个复核后发现已提前完成的 ImageCompressor.tsx）。
 2. 再清 `P1`：
    - 缺少独立 locale 资源的 10 个工具包
    - 已接 i18n 但页面仍有硬编码中文的 23 个老页面

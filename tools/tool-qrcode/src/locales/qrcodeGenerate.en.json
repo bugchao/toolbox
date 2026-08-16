@@ -1,0 +1,21 @@
+{
+  "title": "QR Code Generator",
+  "contentLabel": "QR Code Content",
+  "contentPlaceholder": "Enter the content to encode, e.g. a URL or plain text",
+  "sizeLabel": "QR Code Size (px)",
+  "fgColorLabel": "Foreground Color",
+  "bgColorLabel": "Background Color",
+  "generating": "Generating...",
+  "generate": "Generate QR Code",
+  "download": "Download",
+  "copy": "Copy",
+  "copiedAlert": "QR code copied to clipboard",
+  "copyFailedAlert": "Copy failed, please try again",
+  "qrImageAlt": "Generated QR code",
+  "emptyHint": "The generated QR code will appear here",
+  "usageTitle": "Usage Tips",
+  "usage1": "Generate QR codes for URLs, text, contact info, and more",
+  "usage2": "Customize the QR code size, foreground and background colors",
+  "usage3": "Download the generated QR code as a PNG or copy it to the clipboard",
+  "usage4": "Keep the content short — overly long content makes the QR code too dense to scan reliably"
+}

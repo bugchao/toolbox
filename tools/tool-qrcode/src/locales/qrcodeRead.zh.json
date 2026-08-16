@@ -1,0 +1,15 @@
+{
+  "title": "二维码解析器",
+  "uploadButton": "上传二维码图片",
+  "cameraStart": "摄像头扫描",
+  "cameraStop": "停止扫描",
+  "errDecodeFailed": "未能识别二维码，请确保图片清晰且包含完整的二维码",
+  "errCameraAccess": "无法访问摄像头，请确保已授予摄像头权限",
+  "resultLabel": "解析结果",
+  "resultPlaceholder": "二维码内容将显示在这里",
+  "usageTitle": "使用说明",
+  "usage1": "支持上传二维码图片进行解析，支持常见的图片格式",
+  "usage2": "可以使用摄像头实时扫描二维码，支持前后摄像头切换",
+  "usage3": "解析成功后可以一键复制结果内容",
+  "usage4": "确保二维码清晰、完整，避免反光和扭曲"
+}

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Maximize2, Minimize2, Palette, ExternalLink } from 'lucide-react'
+import { I18N_NAMESPACE } from './namespace'
 
-// 12种主题配置
+export { I18N_NAMESPACE }
+
+// 12种主题配置（nameKey 对应 locales 中的翻译键）
 const themes = [
   {
     id: 'classic',
-    name: '经典黑白',
+    nameKey: 'themeClassic',
     bg: 'bg-white',
     face: 'bg-gray-50',
     border: 'border-gray-800',
@@ -20,7 +24,7 @@ const themes = [
   },
   {
     id: 'vintage',
-    name: '复古表盘',
+    nameKey: 'themeVintage',
     bg: 'bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50',
     face: 'bg-gradient-to-br from-amber-100 via-yellow-100 to-orange-100',
     border: 'border-amber-800',
@@ -35,7 +39,7 @@ const themes = [
   },
   {
     id: 'mechanical',
-    name: '机械表盘',
+    nameKey: 'themeMechanical',
     bg: 'bg-gradient-to-br from-slate-800 via-gray-800 to-zinc-800',
     face: 'bg-gradient-to-br from-slate-700 via-gray-700 to-zinc-700',
     border: 'border-slate-400',
@@ -51,7 +55,7 @@ const themes = [
   },
   {
     id: 'luxury',
-    name: '奢华金色',
+    nameKey: 'themeLuxury',
     bg: 'bg-gradient-to-br from-amber-50 to-yellow-50',
     face: 'bg-gradient-to-br from-amber-100 to-yellow-100',
     border: 'border-amber-600',
@@ -65,7 +69,7 @@ const themes = [
   },
   {
     id: 'ocean',
-    name: '海洋蓝',
+    nameKey: 'themeOcean',
     bg: 'bg-gradient-to-br from-blue-50 to-cyan-50',
     face: 'bg-gradient-to-br from-blue-100 to-cyan-100',
     border: 'border-blue-600',
@@ -79,7 +83,7 @@ const themes = [
   },
   {
     id: 'forest',
-    name: '森林绿',
+    nameKey: 'themeForest',
     bg: 'bg-gradient-to-br from-green-50 to-emerald-50',
     face: 'bg-gradient-to-br from-green-100 to-emerald-100',
     border: 'border-green-700',
@@ -93,7 +97,7 @@ const themes = [
   },
   {
     id: 'sunset',
-    name: '日落橙',
+    nameKey: 'themeSunset',
     bg: 'bg-gradient-to-br from-orange-50 to-red-50',
     face: 'bg-gradient-to-br from-orange-100 to-red-100',
     border: 'border-orange-600',
@@ -107,7 +111,7 @@ const themes = [
   },
   {
     id: 'purple',
-    name: '紫罗兰',
+    nameKey: 'themePurple',
     bg: 'bg-gradient-to-br from-purple-50 to-pink-50',
     face: 'bg-gradient-to-br from-purple-100 to-pink-100',
     border: 'border-purple-600',
@@ -121,7 +125,7 @@ const themes = [
   },
   {
     id: 'dark',
-    name: '暗夜模式',
+    nameKey: 'themeDark',
     bg: 'bg-gray-900',
     face: 'bg-gray-800',
     border: 'border-gray-600',
@@ -135,7 +139,7 @@ const themes = [
   },
   {
     id: 'rose',
-    name: '玫瑰金',
+    nameKey: 'themeRose',
     bg: 'bg-gradient-to-br from-rose-50 to-pink-50',
     face: 'bg-gradient-to-br from-rose-100 to-pink-100',
     border: 'border-rose-400',
@@ -149,7 +153,7 @@ const themes = [
   },
   {
     id: 'mint',
-    name: '薄荷绿',
+    nameKey: 'themeMint',
     bg: 'bg-gradient-to-br from-teal-50 to-cyan-50',
     face: 'bg-gradient-to-br from-teal-100 to-cyan-100',
     border: 'border-teal-500',
@@ -163,7 +167,7 @@ const themes = [
   },
   {
     id: 'silver',
-    name: '银色经典',
+    nameKey: 'themeSilver',
     bg: 'bg-gradient-to-br from-slate-100 to-gray-100',
     face: 'bg-gradient-to-br from-slate-200 to-gray-200',
     border: 'border-slate-500',
@@ -178,6 +182,7 @@ const themes = [
 ]
 
 export default function AnalogClock() {
+  const { t } = useTranslation(I18N_NAMESPACE)
   const location = useLocation()
   const [time, setTime] = useState(new Date())
   const [themeIndex, setThemeIndex] = useState(0)
@@ -440,10 +445,10 @@ export default function AnalogClock() {
                   window.open(url, '_blank', 'noopener,noreferrer')
                 }}
                 className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
-                title="在新窗口中独立打开"
+                title={t('openStandaloneTitle')}
               >
                 <ExternalLink className="w-4 h-4" />
-                独立打开
+                {t('openStandalone')}
               </button>
             )}
             <button
@@ -451,14 +456,14 @@ export default function AnalogClock() {
               className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <Palette className="w-4 h-4" />
-              主题
+              {t('themesButton')}
             </button>
             <button
               onClick={toggleFullscreen}
               className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <Maximize2 className="w-4 h-4" />
-              全屏
+              {t('fullscreenButton')}
             </button>
           </div>
         )}
@@ -473,10 +478,10 @@ export default function AnalogClock() {
                   window.open(url, '_blank', 'noopener,noreferrer')
                 }}
                 className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
-                title="在新窗口中独立打开"
+                title={t('openStandaloneTitle')}
               >
                 <ExternalLink className="w-5 h-5" />
-                独立打开
+                {t('openStandalone')}
               </button>
             )}
             <button
@@ -484,14 +489,14 @@ export default function AnalogClock() {
               className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
             >
               <Palette className="w-5 h-5" />
-              主题
+              {t('themesButton')}
             </button>
             <button
               onClick={toggleFullscreen}
               className="px-6 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg whitespace-nowrap"
             >
               <Minimize2 className="w-5 h-5" />
-              退出全屏
+              {t('exitFullscreenButton')}
             </button>
           </div>
         )}
@@ -504,9 +509,9 @@ export default function AnalogClock() {
               : 'absolute -bottom-36 left-1/2 transform -translate-x-1/2 w-[500px]'
           } bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl shadow-2xl p-4 z-50`}>
             <div className="grid grid-cols-2 gap-2">
-              {themes.map((t, i) => (
+              {themes.map((th, i) => (
                 <button
-                  key={t.id}
+                  key={th.id}
                   onClick={() => {
                     setThemeIndex(i)
                     setShowThemes(false)
@@ -517,7 +522,7 @@ export default function AnalogClock() {
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
-                  {t.name}
+                  {t(th.nameKey)}
                 </button>
               ))}
             </div>

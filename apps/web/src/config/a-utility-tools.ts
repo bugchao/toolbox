@@ -45,7 +45,7 @@ export const UTILITY_TOOLS: ToolEntry[] = [
   { path: '/copywriting-generator', nameKey: 'tools.copywriting_generator', icon: NotebookPen, categoryKey: 'utils', keywords: ['文案'] },
 
   // 二维码工具（3 个）
-  { path: '/qrcode/generate', nameKey: 'tools.qrcode_generate', icon: QrCode, categoryKey: 'qrcode', keywords: ['qr', '二维码'] },
-  { path: '/qrcode/read', nameKey: 'tools.qrcode_read', icon: ScanLine, categoryKey: 'qrcode', keywords: ['qr', '解析'] },
-  { path: '/qrcode/beautifier', nameKey: 'tools.qrcode_beautifier', icon: Wand2, categoryKey: 'qrcode', keywords: ['qr', '美化'] },
+  { path: '/qrcode/generate', nameKey: 'tools.qrcode_generate', icon: QrCode, categoryKey: 'qrcode', keywords: ['qr', '二维码'], i18nNamespace: 'toolQrcodeGenerate' },
+  { path: '/qrcode/read', nameKey: 'tools.qrcode_read', icon: ScanLine, categoryKey: 'qrcode', keywords: ['qr', '解析'], i18nNamespace: 'toolQrcodeRead' },
+  { path: '/qrcode/beautifier', nameKey: 'tools.qrcode_beautifier', icon: Wand2, categoryKey: 'qrcode', keywords: ['qr', '美化'], i18nNamespace: 'toolQrcodeBeautifier' },
 ]
