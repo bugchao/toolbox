@@ -236,11 +236,11 @@ const TextComparator: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-white">原始文本</h3>
+            <h3 className="font-semibold text-ink">原始文本</h3>
             <div className="flex space-x-2">
               <button
                 onClick={() => leftFileInputRef.current?.click()}
-                className="text-sm bg-white/20 text-white px-3 py-1 rounded-lg hover:bg-white/30 transition-colors flex items-center"
+                className="text-sm bg-surface-inset text-ink px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center"
               >
                 <Upload className="w-3 h-3 mr-1" />
                 上传文件
@@ -267,11 +267,11 @@ const TextComparator: React.FC = () => {
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-white">对比文本</h3>
+            <h3 className="font-semibold text-ink">对比文本</h3>
             <div className="flex space-x-2">
               <button
                 onClick={() => rightFileInputRef.current?.click()}
-                className="text-sm bg-white/20 text-white px-3 py-1 rounded-lg hover:bg-white/30 transition-colors flex items-center"
+                className="text-sm bg-surface-inset text-ink px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center"
               >
                 <Upload className="w-3 h-3 mr-1" />
                 上传文件
@@ -301,18 +301,18 @@ const TextComparator: React.FC = () => {
       {differences.length > 0 && (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-white">对比结果</h3>
+            <h3 className="font-semibold text-ink">对比结果</h3>
             <div className="flex space-x-2">
               <button
                 onClick={copyResult}
-                className="bg-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors flex items-center"
+                className="bg-surface-inset text-ink px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center"
               >
                 <Copy className="w-4 h-4 mr-2" />
                 复制结果
               </button>
               <button
                 onClick={downloadResult}
-                className="bg-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors flex items-center"
+                className="bg-surface-inset text-ink px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center"
               >
                 <Download className="w-4 h-4 mr-2" />
                 导出文件
@@ -340,7 +340,7 @@ const TextComparator: React.FC = () => {
           </div>
 
           {/* 图例 */}
-          <div className="flex justify-center space-x-6 text-sm text-white">
+          <div className="flex justify-center space-x-6 text-sm text-ink-muted">
             <div className="flex items-center">
               <div className="w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded mr-2"></div>
               <span>新增内容</span>
