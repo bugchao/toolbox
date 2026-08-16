@@ -74,18 +74,18 @@ export default function LifeProgressBar() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-purple-900 mb-2">⏳ 人生进度条</h1>
-          <p className="text-purple-700">可视化你的人生时间，珍惜每一刻</p>
+          <h1 className="text-4xl font-bold text-purple-900 dark:text-purple-300 mb-2">⏳ 人生进度条</h1>
+          <p className="text-purple-700 dark:text-purple-400">可视化你的人生时间，珍惜每一刻</p>
         </div>
 
         {/* 输入区域 */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+        <div className="bg-surface rounded-2xl shadow-xl p-6 mb-6">
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-gray-700 font-medium mb-2">
+              <label className="block text-ink font-medium mb-2">
                 <Calendar className="inline w-5 h-5 mr-2" />
                 出生日期
               </label>
@@ -93,11 +93,11 @@ export default function LifeProgressBar() {
                 type="date"
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-2">
+              <label className="block text-ink font-medium mb-2">
                 <Heart className="inline w-5 h-5 mr-2" />
                 预期寿命（岁）
               </label>
@@ -107,14 +107,14 @@ export default function LifeProgressBar() {
                 onChange={(e) => setLifeExpectancy(Number(e.target.value))}
                 min="1"
                 max="150"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
             </div>
           </div>
           <button
             onClick={calculateStats}
             disabled={!birthDate}
-            className="w-full py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition-colors"
+            className="w-full py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
             计算人生进度
           </button>
@@ -124,14 +124,14 @@ export default function LifeProgressBar() {
         {stats && (
           <div className="space-y-6">
             {/* 主进度条 */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
+            <div className="bg-surface rounded-2xl shadow-xl p-6">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-2xl font-bold text-gray-800">人生进度</span>
+                <span className="text-2xl font-bold text-ink">人生进度</span>
                 <span className="text-3xl font-bold text-purple-600">
                   {stats.percentage.toFixed(2)}%
                 </span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+              <div className="w-full bg-surface-inset rounded-full h-8 overflow-hidden">
                 <div
                   className={`h-full ${getProgressColor(stats.percentage)} transition-all duration-1000 flex items-center justify-end pr-4`}
                   style={{ width: `${stats.percentage}%` }}
@@ -141,33 +141,33 @@ export default function LifeProgressBar() {
                   </span>
                 </div>
               </div>
-              <p className="text-center text-gray-600 mt-4 text-lg">
+              <p className="text-center text-ink-muted mt-4 text-lg">
                 {getMotivationalQuote(stats.percentage)}
               </p>
             </div>
 
             {/* 详细统计 */}
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="bg-surface rounded-2xl shadow-xl p-6">
                 <div className="flex items-center mb-4">
                   <Clock className="w-6 h-6 text-blue-600 mr-2" />
-                  <h3 className="text-xl font-bold text-gray-800">已度过</h3>
+                  <h3 className="text-xl font-bold text-ink">已度过</h3>
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">年</span>
+                    <span className="text-ink-muted">年</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.yearsLived.toFixed(1)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">天</span>
+                    <span className="text-ink-muted">天</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.daysLived.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">周</span>
+                    <span className="text-ink-muted">周</span>
                     <span className="text-2xl font-bold text-blue-600">
                       {stats.weeksLived.toLocaleString()}
                     </span>
@@ -175,26 +175,26 @@ export default function LifeProgressBar() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-xl p-6">
+              <div className="bg-surface rounded-2xl shadow-xl p-6">
                 <div className="flex items-center mb-4">
                   <TrendingUp className="w-6 h-6 text-green-600 mr-2" />
-                  <h3 className="text-xl font-bold text-gray-800">还剩余</h3>
+                  <h3 className="text-xl font-bold text-ink">还剩余</h3>
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">年</span>
+                    <span className="text-ink-muted">年</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.yearsRemaining.toFixed(1)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">天</span>
+                    <span className="text-ink-muted">天</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.daysRemaining.toLocaleString()}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-600">周</span>
+                    <span className="text-ink-muted">周</span>
                     <span className="text-2xl font-bold text-green-600">
                       {stats.weeksRemaining.toLocaleString()}
                     </span>
@@ -204,8 +204,8 @@ export default function LifeProgressBar() {
             </div>
 
             {/* 人生格子 */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">人生格子图（每格代表一年）</h3>
+            <div className="bg-surface rounded-2xl shadow-xl p-6">
+              <h3 className="text-xl font-bold text-ink mb-4">人生格子图（每格代表一年）</h3>
               <div className="grid grid-cols-10 gap-2">
                 {Array.from({ length: stats.lifeExpectancy }, (_, i) => (
                   <div
@@ -213,7 +213,7 @@ export default function LifeProgressBar() {
                     className={`aspect-square rounded ${
                       i < stats.age
                         ? 'bg-purple-500'
-                        : 'bg-gray-200'
+                        : 'bg-surface-inset'
                     }`}
                     title={`${i + 1} 岁`}
                   />
@@ -222,11 +222,11 @@ export default function LifeProgressBar() {
               <div className="flex items-center justify-center gap-6 mt-4 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-purple-500 rounded"></div>
-                  <span className="text-gray-600">已度过</span>
+                  <span className="text-ink-muted">已度过</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-gray-200 rounded"></div>
-                  <span className="text-gray-600">未来</span>
+                  <div className="w-4 h-4 bg-surface-inset rounded"></div>
+                  <span className="text-ink-muted">未来</span>
                 </div>
               </div>
             </div>

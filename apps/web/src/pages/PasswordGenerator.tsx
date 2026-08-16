@@ -127,18 +127,18 @@ const PasswordGenerator: React.FC = () => {
 
       <div className="space-y-6">
         {/* 密码展示 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
           <div className="flex items-center gap-4 mb-4">
             <div className="flex-1 relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 readOnly
-                className="w-full px-4 py-3 border border-gray-300 rounded-md font-mono text-lg pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 border border-edge-strong rounded-md font-mono text-lg pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-ink-subtle hover:text-ink-muted"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -156,15 +156,15 @@ const PasswordGenerator: React.FC = () => {
           {/* 强度显示 */}
           <div className="mb-2">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-sm text-gray-600">密码强度</span>
-              <span className="text-sm font-medium text-gray-900">{strengthInfo.text}</span>
+              <span className="text-sm text-ink-muted">密码强度</span>
+              <span className="text-sm font-medium text-ink">{strengthInfo.text}</span>
             </div>
             <div className="flex gap-1 h-2">
               {[1, 2, 3, 4, 5].map((level) => (
                 <div
                   key={level}
                   className={`flex-1 rounded-full transition-colors ${
-                    level <= strength ? strengthInfo.color : 'bg-gray-200'
+                    level <= strength ? strengthInfo.color : 'bg-surface-inset'
                   }`}
                 />
               ))}
@@ -173,14 +173,14 @@ const PasswordGenerator: React.FC = () => {
         </div>
 
         {/* 配置项 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">密码配置</h3>
-          
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
+          <h3 className="text-lg font-medium text-ink mb-4">密码配置</h3>
+
           <div className="space-y-4">
             {/* 长度选择 */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-medium text-gray-700">密码长度: {length}</label>
+                <label className="text-sm font-medium text-ink">密码长度: {length}</label>
               </div>
               <input
                 type="range"
@@ -188,9 +188,9 @@ const PasswordGenerator: React.FC = () => {
                 max="32"
                 value={length}
                 onChange={(e) => setLength(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                className="w-full h-2 bg-surface-inset rounded-lg appearance-none cursor-pointer accent-indigo-600"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-ink-muted mt-1">
                 <span>4</span>
                 <span>16</span>
                 <span>32</span>
@@ -199,54 +199,54 @@ const PasswordGenerator: React.FC = () => {
 
             {/* 字符选项 */}
             <div className="grid grid-cols-2 gap-3">
-              <label className="flex items-center gap-2 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 p-3 border border-edge rounded-md cursor-pointer hover:bg-surface-muted">
                 <input
                   type="checkbox"
                   checked={includeUppercase}
                   onChange={(e) => setIncludeUppercase(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
-                <span className="text-sm text-gray-700">包含大写字母 (A-Z)</span>
+                <span className="text-sm text-ink">包含大写字母 (A-Z)</span>
               </label>
 
-              <label className="flex items-center gap-2 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 p-3 border border-edge rounded-md cursor-pointer hover:bg-surface-muted">
                 <input
                   type="checkbox"
                   checked={includeLowercase}
                   onChange={(e) => setIncludeLowercase(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
-                <span className="text-sm text-gray-700">包含小写字母 (a-z)</span>
+                <span className="text-sm text-ink">包含小写字母 (a-z)</span>
               </label>
 
-              <label className="flex items-center gap-2 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 p-3 border border-edge rounded-md cursor-pointer hover:bg-surface-muted">
                 <input
                   type="checkbox"
                   checked={includeNumbers}
                   onChange={(e) => setIncludeNumbers(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
-                <span className="text-sm text-gray-700">包含数字 (0-9)</span>
+                <span className="text-sm text-ink">包含数字 (0-9)</span>
               </label>
 
-              <label className="flex items-center gap-2 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 p-3 border border-edge rounded-md cursor-pointer hover:bg-surface-muted">
                 <input
                   type="checkbox"
                   checked={includeSymbols}
                   onChange={(e) => setIncludeSymbols(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
-                <span className="text-sm text-gray-700">包含特殊字符 (!@#$...)</span>
+                <span className="text-sm text-ink">包含特殊字符 (!@#$...)</span>
               </label>
 
-              <label className="flex items-center gap-2 p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+              <label className="flex items-center gap-2 p-3 border border-edge rounded-md cursor-pointer hover:bg-surface-muted">
                 <input
                   type="checkbox"
                   checked={excludeSimilar}
                   onChange={(e) => setExcludeSimilar(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
-                <span className="text-sm text-gray-700">排除相似字符 (0,O,1,l,I)</span>
+                <span className="text-sm text-ink">排除相似字符 (0,O,1,l,I)</span>
               </label>
             </div>
           </div>
@@ -261,9 +261,9 @@ const PasswordGenerator: React.FC = () => {
         </div>
 
         {/* 安全提示 */}
-        <div className="bg-yellow-50 p-4 rounded-md border border-yellow-200">
-          <h3 className="text-sm font-medium text-yellow-800 mb-2">安全建议</h3>
-          <ul className="text-sm text-yellow-700 space-y-1">
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-md border border-yellow-200 dark:border-yellow-800">
+          <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-300 mb-2">安全建议</h3>
+          <ul className="text-sm text-yellow-700 dark:text-yellow-400 space-y-1">
             <li>• 建议密码长度至少12位以上</li>
             <li>• 不同网站使用不同的密码，避免撞库风险</li>
             <li>• 定期更换重要账号的密码</li>

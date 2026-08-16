@@ -124,11 +124,11 @@ const UuidGenerator: React.FC = () => {
 
       <div className="space-y-6">
         {/* 模式选择 */}
-        <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-md w-fit">
+        <div className="flex items-center gap-2 bg-surface-inset p-1 rounded-md w-fit">
           <button
             onClick={() => setMode('uuid')}
             className={`px-4 py-2 rounded-md transition-colors ${
-              mode === 'uuid' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+              mode === 'uuid' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             UUID生成
@@ -136,7 +136,7 @@ const UuidGenerator: React.FC = () => {
           <button
             onClick={() => setMode('random')}
             className={`px-4 py-2 rounded-md transition-colors ${
-              mode === 'random' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+              mode === 'random' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             随机字符串
@@ -144,30 +144,30 @@ const UuidGenerator: React.FC = () => {
         </div>
 
         {/* 配置项 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">配置选项</h3>
-          
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
+          <h3 className="text-lg font-medium text-ink mb-4">配置选项</h3>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">生成数量</label>
+              <label className="block text-sm font-medium text-ink mb-2">生成数量</label>
               <input
                 type="number"
                 min="1"
                 max="20"
                 value={count}
                 onChange={(e) => setCount(Math.min(20, Math.max(1, Number(e.target.value))))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
             {mode === 'uuid' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">UUID版本</label>
+                  <label className="block text-sm font-medium text-ink mb-2">UUID版本</label>
                   <select
                     value={version}
                     onChange={(e) => setVersion(e.target.value as any)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
                     <option value="v1">v1 (基于时间戳)</option>
                     <option value="v4">v4 (随机数)</option>
@@ -179,21 +179,21 @@ const UuidGenerator: React.FC = () => {
                 {(version === 'v3' || version === 'v5') && (
                   <>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">命名空间 (Namespace)</label>
+                      <label className="block text-sm font-medium text-ink mb-2">命名空间 (Namespace)</label>
                       <input
                         type="text"
                         value={namespace}
                         onChange={(e) => setNamespace(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">名称 (Name)</label>
+                      <label className="block text-sm font-medium text-ink mb-2">名称 (Name)</label>
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       />
                     </div>
                   </>
@@ -204,9 +204,9 @@ const UuidGenerator: React.FC = () => {
                     type="checkbox"
                     checked={uppercase}
                     onChange={(e) => setUppercase(e.target.checked)}
-                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                   />
-                  <label className="text-sm text-gray-700">转为大写</label>
+                  <label className="text-sm text-ink">转为大写</label>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -214,9 +214,9 @@ const UuidGenerator: React.FC = () => {
                     type="checkbox"
                     checked={removeHyphens}
                     onChange={(e) => setRemoveHyphens(e.target.checked)}
-                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                   />
-                  <label className="text-sm text-gray-700">移除横杠(-)</label>
+                  <label className="text-sm text-ink">移除横杠(-)</label>
                 </div>
               </>
             )}
@@ -224,7 +224,7 @@ const UuidGenerator: React.FC = () => {
             {mode === 'random' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">字符串长度</label>
+                  <label className="block text-sm font-medium text-ink mb-2">字符串长度</label>
                   <input
                     type="number"
                     min="1"
@@ -234,7 +234,7 @@ const UuidGenerator: React.FC = () => {
                       ...randomConfig,
                       length: Math.min(128, Math.max(1, Number(e.target.value)))
                     })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
 
@@ -244,9 +244,9 @@ const UuidGenerator: React.FC = () => {
                       type="checkbox"
                       checked={randomConfig.includeUppercase}
                       onChange={(e) => setRandomConfig({...randomConfig, includeUppercase: e.target.checked})}
-                      className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span className="text-sm text-gray-700">包含大写字母 (A-Z)</span>
+                    <span className="text-sm text-ink">包含大写字母 (A-Z)</span>
                   </label>
 
                   <label className="flex items-center gap-2">
@@ -254,9 +254,9 @@ const UuidGenerator: React.FC = () => {
                       type="checkbox"
                       checked={randomConfig.includeLowercase}
                       onChange={(e) => setRandomConfig({...randomConfig, includeLowercase: e.target.checked})}
-                      className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span className="text-sm text-gray-700">包含小写字母 (a-z)</span>
+                    <span className="text-sm text-ink">包含小写字母 (a-z)</span>
                   </label>
 
                   <label className="flex items-center gap-2">
@@ -264,9 +264,9 @@ const UuidGenerator: React.FC = () => {
                       type="checkbox"
                       checked={randomConfig.includeNumbers}
                       onChange={(e) => setRandomConfig({...randomConfig, includeNumbers: e.target.checked})}
-                      className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span className="text-sm text-gray-700">包含数字 (0-9)</span>
+                    <span className="text-sm text-ink">包含数字 (0-9)</span>
                   </label>
 
                   <label className="flex items-center gap-2">
@@ -274,9 +274,9 @@ const UuidGenerator: React.FC = () => {
                       type="checkbox"
                       checked={randomConfig.includeSymbols}
                       onChange={(e) => setRandomConfig({...randomConfig, includeSymbols: e.target.checked})}
-                      className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span className="text-sm text-gray-700">包含特殊字符 (!@#$...)</span>
+                    <span className="text-sm text-ink">包含特殊字符 (!@#$...)</span>
                   </label>
                 </div>
               </>
@@ -296,7 +296,7 @@ const UuidGenerator: React.FC = () => {
         {uuids.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium text-gray-900">生成结果</h3>
+              <h3 className="text-lg font-medium text-ink">生成结果</h3>
               <button
                 onClick={copyAll}
                 className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
@@ -308,12 +308,12 @@ const UuidGenerator: React.FC = () => {
 
             <div className="space-y-3">
               {uuids.map((uuid, index) => (
-                <div key={index} className="flex items-center gap-3 bg-white p-3 rounded-lg border border-gray-200">
-                  <span className="text-sm text-gray-500 w-8">{index + 1}.</span>
-                  <code className="flex-1 font-mono text-sm break-all">{uuid}</code>
+                <div key={index} className="flex items-center gap-3 bg-surface p-3 rounded-lg border border-edge">
+                  <span className="text-sm text-ink-muted w-8">{index + 1}.</span>
+                  <code className="flex-1 font-mono text-sm break-all text-ink">{uuid}</code>
                   <button
                     onClick={() => copyToClipboard(uuid)}
-                    className="text-gray-400 hover:text-indigo-600"
+                    className="text-ink-subtle hover:text-indigo-600"
                   >
                     {copied === uuid ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
                   </button>
@@ -324,9 +324,9 @@ const UuidGenerator: React.FC = () => {
         )}
 
         {/* 说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">UUID版本说明</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">UUID版本说明</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
             <li>• v1: 基于MAC地址和时间戳生成，唯一性高，但包含MAC地址信息</li>
             <li>• v4: 完全随机生成，最常用的版本，无信息泄露风险</li>
             <li>• v3/v5: 基于命名空间和名称生成，相同输入会得到相同的UUID</li>

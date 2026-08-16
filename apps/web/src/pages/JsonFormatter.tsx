@@ -76,11 +76,11 @@ const JsonFormatter: React.FC = () => {
         {/* 操作栏 */}
         <div className="flex flex-wrap gap-4 items-center">
           <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">缩进大小:</label>
+            <label className="text-sm font-medium text-ink">缩进大小:</label>
             <select
               value={indentSize}
               onChange={(e) => setIndentSize(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value={2}>2空格</option>
               <option value={4}>4空格</option>
@@ -131,7 +131,7 @@ const JsonFormatter: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md flex items-center gap-2 text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md flex items-center gap-2 text-red-700 dark:text-red-400">
             <AlertCircle className="w-5 h-5" />
             {error}
           </div>
@@ -139,23 +139,23 @@ const JsonFormatter: React.FC = () => {
 
         {/* 输入框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">输入JSON内容</label>
+          <label className="block text-sm font-medium text-ink mb-2">输入JSON内容</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder='{"name": "工具盒子", "features": ["JSON格式化", "Base64编解码"]}'
-            className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-64 p-4 border border-edge-strong rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 输出框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">输出结果</label>
+          <label className="block text-sm font-medium text-ink mb-2">输出结果</label>
           <textarea
             value={output}
             readOnly
             placeholder="格式化后的JSON会显示在这里"
-            className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-64 p-4 border border-edge-strong rounded-md font-mono text-sm bg-surface-muted focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
       </div>

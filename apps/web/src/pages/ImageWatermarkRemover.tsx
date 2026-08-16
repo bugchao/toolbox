@@ -261,7 +261,7 @@ const ImageWatermarkRemover: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片去水印工具</h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           智能识别并涂抹水印区域，AI 算法自动修复，保持原图画质
         </p>
       </div>
@@ -269,12 +269,12 @@ const ImageWatermarkRemover: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar - Image List */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow p-4">
+          <div className="bg-surface rounded-lg shadow p-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold">图片列表</h2>
               <button
                 onClick={clearAll}
-                className="text-sm text-red-500 hover:text-red-600"
+                className="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300"
               >
                 清空
               </button>
@@ -282,10 +282,10 @@ const ImageWatermarkRemover: React.FC = () => {
 
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition mb-4"
+              className="border-2 border-dashed border-edge-strong rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition mb-4"
             >
-              <Plus className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-              <p className="text-sm text-gray-600">添加图片</p>
+              <Plus className="w-8 h-8 mx-auto text-ink-subtle mb-2" />
+              <p className="text-sm text-ink-muted">添加图片</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -303,8 +303,8 @@ const ImageWatermarkRemover: React.FC = () => {
                   onClick={() => handleImageSelect(image)}
                   className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition ${
                     selectedImage?.id === image.id
-                      ? 'bg-blue-100 border-2 border-blue-500'
-                      : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+                      ? 'bg-blue-100 dark:bg-blue-900/30 border-2 border-blue-500'
+                      : 'bg-surface-muted hover:bg-surface-inset border-2 border-transparent'
                   }`}
                 >
                   <img
@@ -314,11 +314,11 @@ const ImageWatermarkRemover: React.FC = () => {
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{image.originalFile.name}</p>
-                    <p className="text-xs text-gray-500">{formatFileSize(image.originalFile.size)}</p>
+                    <p className="text-xs text-ink-muted">{formatFileSize(image.originalFile.size)}</p>
                   </div>
                   <button
                     onClick={(e) => { e.stopPropagation(); removeImage(image.id); }}
-                    className="p-1 text-gray-400 hover:text-red-500"
+                    className="p-1 text-ink-subtle hover:text-red-500 dark:hover:text-red-400"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -329,7 +329,7 @@ const ImageWatermarkRemover: React.FC = () => {
 
           {/* Tools */}
           {selectedImage && (
-            <div className="mt-4 bg-white rounded-lg shadow p-4">
+            <div className="mt-4 bg-surface rounded-lg shadow p-4">
               <h3 className="font-semibold mb-3">工具</h3>
               
               <div className="mb-4">
@@ -349,7 +349,7 @@ const ImageWatermarkRemover: React.FC = () => {
               <div className="space-y-2">
                 <button
                   onClick={handleClearMask}
-                  className="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center gap-2"
+                  className="w-full px-4 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center justify-center gap-2"
                 >
                   <X className="w-4 h-4" />
                   清除标记
@@ -370,9 +370,9 @@ const ImageWatermarkRemover: React.FC = () => {
         {/* Main - Editor */}
         <div className="lg:col-span-3">
           {selectedImage ? (
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-sm text-yellow-800">
+            <div className="bg-surface rounded-lg shadow p-6">
+              <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                <p className="text-sm text-yellow-800 dark:text-yellow-300">
                   <strong>使用说明：</strong>使用红色画笔涂抹水印区域，然后点击"去除水印"按钮。AI 会自动分析周围像素并智能修复。
                 </p>
               </div>
@@ -397,9 +397,9 @@ const ImageWatermarkRemover: React.FC = () => {
 
               {/* Stats */}
               {maskPoints.length > 0 && (
-                <div className="mb-4 p-3 bg-blue-50 rounded-lg flex items-center gap-2">
+                <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center gap-2">
                   <Circle className="w-4 h-4 text-red-500" />
-                  <p className="text-sm text-blue-800">
+                  <p className="text-sm text-blue-800 dark:text-blue-300">
                     已标记 {maskPoints.length} 个点，红色区域将被修复
                   </p>
                 </div>
@@ -424,7 +424,7 @@ const ImageWatermarkRemover: React.FC = () => {
                   <h3 className="font-semibold mb-3">处理结果</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-gray-600 mb-2">原图</p>
+                      <p className="text-sm text-ink-muted mb-2">原图</p>
                       <img
                         src={selectedImage.previewUrl}
                         alt="Original"
@@ -432,7 +432,7 @@ const ImageWatermarkRemover: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600 mb-2">处理后</p>
+                      <p className="text-sm text-ink-muted mb-2">处理后</p>
                       <img
                         src={selectedImage.processedUrl}
                         alt="Processed"
@@ -444,9 +444,9 @@ const ImageWatermarkRemover: React.FC = () => {
               )}
             </div>
           ) : (
-            <div className="bg-white rounded-lg shadow p-12 text-center">
-              <Eraser className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-              <p className="text-lg text-gray-600">选择或上传图片开始去水印</p>
+            <div className="bg-surface rounded-lg shadow p-12 text-center">
+              <Eraser className="w-16 h-16 mx-auto text-ink-subtle mb-4" />
+              <p className="text-lg text-ink-muted">选择或上传图片开始去水印</p>
             </div>
           )}
         </div>

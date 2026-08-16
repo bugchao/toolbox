@@ -66,7 +66,7 @@ const RegexTester: React.FC = () => {
           parts.push(testString.slice(lastIndex, match.index))
         }
         parts.push(
-          <span key={index} className="bg-yellow-200 px-1 rounded font-medium">
+          <span key={index} className="bg-yellow-200 dark:bg-yellow-900/50 px-1 rounded font-medium">
             {match[0]}
           </span>
         )
@@ -100,26 +100,26 @@ const RegexTester: React.FC = () => {
 
       <div className="space-y-6">
         {/* 正则输入 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">正则表达式</h3>
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
+          <h3 className="text-lg font-medium text-ink mb-4">正则表达式</h3>
           <div className="flex gap-4">
             <div className="flex-1">
-              <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                <span className="px-3 py-3 bg-gray-50 text-gray-500">/</span>
+              <div className="flex items-center border border-edge-strong rounded-md overflow-hidden">
+                <span className="px-3 py-3 bg-surface-muted text-ink-muted">/</span>
                 <input
                   type="text"
                   value={pattern}
                   onChange={(e) => setPattern(e.target.value)}
                   placeholder="输入正则表达式，例如: \d+"
-                  className="flex-1 px-2 py-3 focus:outline-none font-mono"
+                  className="flex-1 px-2 py-3 focus:outline-none font-mono bg-surface text-ink"
                 />
-                <span className="px-3 py-3 bg-gray-50 text-gray-500">/</span>
+                <span className="px-3 py-3 bg-surface-muted text-ink-muted">/</span>
                 <input
                   type="text"
                   value={flags}
                   onChange={(e) => setFlags(e.target.value)}
                   placeholder="g"
-                  className="w-16 px-2 py-3 border-l border-gray-300 focus:outline-none font-mono"
+                  className="w-16 px-2 py-3 border-l border-edge-strong focus:outline-none font-mono bg-surface text-ink"
                 />
               </div>
             </div>
@@ -133,32 +133,32 @@ const RegexTester: React.FC = () => {
           </div>
 
           {/* 标志说明 */}
-          <div className="mt-2 text-sm text-gray-600">
+          <div className="mt-2 text-sm text-ink-muted">
             <p>标志: g(全局) i(忽略大小写) m(多行) s(点匹配换行符) u(Unicode) y(粘性)</p>
           </div>
         </div>
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md flex items-center gap-2 text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md flex items-center gap-2 text-red-700 dark:text-red-400">
             <AlertCircle className="w-5 h-5" />
             {error}
           </div>
         )}
 
         {/* 常用正则 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">常用正则表达式</h3>
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
+          <h3 className="text-lg font-medium text-ink mb-4">常用正则表达式</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {commonPatterns.map((item, index) => (
               <div
                 key={index}
-                className="p-3 border border-gray-200 rounded-md hover:border-indigo-300 cursor-pointer transition-colors"
+                className="p-3 border border-edge rounded-md hover:border-indigo-300 cursor-pointer transition-colors"
                 onClick={() => loadPattern(item.pattern)}
               >
-                <div className="font-medium text-gray-900 mb-1">{item.name}</div>
-                <div className="text-xs font-mono text-gray-600 mb-1">{item.pattern}</div>
-                <div className="text-xs text-gray-500">{item.description}</div>
+                <div className="font-medium text-ink mb-1">{item.name}</div>
+                <div className="text-xs font-mono text-ink-muted mb-1">{item.pattern}</div>
+                <div className="text-xs text-ink-muted">{item.description}</div>
               </div>
             ))}
           </div>
@@ -166,45 +166,45 @@ const RegexTester: React.FC = () => {
 
         {/* 测试字符串 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">测试字符串</label>
+          <label className="block text-sm font-medium text-ink mb-2">测试字符串</label>
           <textarea
             value={testString}
             onChange={(e) => setTestString(e.target.value)}
             placeholder="输入要测试的字符串..."
-            className="w-full h-48 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-48 p-4 border border-edge-strong rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 匹配结果 */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700">匹配结果</label>
-            <span className="text-sm text-gray-500">找到 {matches.length} 个匹配</span>
+            <label className="block text-sm font-medium text-ink">匹配结果</label>
+            <span className="text-sm text-ink-muted">找到 {matches.length} 个匹配</span>
           </div>
 
           {/* 高亮显示 */}
-          <div className="p-4 border border-gray-300 rounded-md bg-gray-50 min-h-[100px] whitespace-pre-wrap font-mono text-sm mb-4">
+          <div className="p-4 border border-edge-strong rounded-md bg-surface-muted min-h-[100px] whitespace-pre-wrap font-mono text-sm mb-4 text-ink">
             {getHighlightedText()}
           </div>
 
           {/* 匹配详情 */}
           {matches.length > 0 && (
-            <div className="bg-white border border-gray-200 rounded-md overflow-hidden">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+            <div className="bg-surface border border-edge rounded-md overflow-hidden">
+              <table className="min-w-full divide-y divide-edge">
+                <thead className="bg-surface-muted">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">序号</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">匹配内容</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">位置</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ink-muted uppercase tracking-wider">序号</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ink-muted uppercase tracking-wider">匹配内容</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ink-muted uppercase tracking-wider">位置</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ink-muted uppercase tracking-wider">操作</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-surface divide-y divide-edge">
                   {matches.map((match, index) => (
                     <tr key={index}>
-                      <td className="px-4 py-2 text-sm text-gray-900">{index + 1}</td>
-                      <td className="px-4 py-2 text-sm font-mono text-gray-900">{match[0]}</td>
-                      <td className="px-4 py-2 text-sm text-gray-500">{match.index}</td>
+                      <td className="px-4 py-2 text-sm text-ink">{index + 1}</td>
+                      <td className="px-4 py-2 text-sm font-mono text-ink">{match[0]}</td>
+                      <td className="px-4 py-2 text-sm text-ink-muted">{match.index}</td>
                       <td className="px-4 py-2 text-sm">
                         <button
                           onClick={() => copyToClipboard(match[0])}

@@ -132,11 +132,11 @@ const TextComparator: React.FC = () => {
       <div className="card">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">对比粒度</label>
+            <label className="block text-sm font-medium text-ink mb-2">对比粒度</label>
             <select
               value={diffType}
               onChange={(e) => setDiffType(e.target.value as DiffType)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="chars">字符对比</option>
               <option value="words">单词对比</option>
@@ -150,18 +150,18 @@ const TextComparator: React.FC = () => {
                 type="checkbox"
                 checked={ignoreWhitespace}
                 onChange={(e) => setIgnoreWhitespace(e.target.checked)}
-                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
               />
-              <span className="text-sm text-gray-700">忽略空白字符</span>
+              <span className="text-sm text-ink">忽略空白字符</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 checked={ignoreCase}
                 onChange={(e) => setIgnoreCase(e.target.checked)}
-                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
               />
-              <span className="text-sm text-gray-700">忽略大小写</span>
+              <span className="text-sm text-ink">忽略大小写</span>
             </label>
           </div>
 
@@ -175,14 +175,14 @@ const TextComparator: React.FC = () => {
             </button>
             <button
               onClick={swapTexts}
-              className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+              className="bg-surface-inset text-ink px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               title="交换文本"
             >
               <ArrowLeftRight className="w-4 h-4" />
             </button>
             <button
               onClick={clearTexts}
-              className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+              className="bg-surface-inset text-ink px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               title="清空"
             >
               <X className="w-4 h-4" />
@@ -193,22 +193,22 @@ const TextComparator: React.FC = () => {
 
       {/* 统计信息 */}
       {showStats && (
-        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
+        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-800">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">+{stats.added}</div>
-              <div className="text-sm text-gray-600">新增字符</div>
+              <div className="text-sm text-ink-muted">新增字符</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-red-600">-{stats.removed}</div>
-              <div className="text-sm text-gray-600">删除字符</div>
+              <div className="text-sm text-ink-muted">删除字符</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-600">{stats.same}</div>
-              <div className="text-sm text-gray-600">相同字符</div>
+              <div className="text-2xl font-bold text-ink-muted">{stats.same}</div>
+              <div className="text-sm text-ink-muted">相同字符</div>
             </div>
           </div>
-          <div className="mt-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="mt-4 h-2 bg-surface-inset rounded-full overflow-hidden">
             <div className="flex h-full">
               <div
                 className="bg-red-500 h-full"
@@ -219,12 +219,12 @@ const TextComparator: React.FC = () => {
                 style={{ width: `${(stats.added / (stats.added + stats.removed + stats.same)) * 100}%` }}
               />
               <div
-                className="bg-gray-300 h-full"
+                className="bg-gray-300 dark:bg-gray-600 h-full"
                 style={{ width: `${(stats.same / (stats.added + stats.removed + stats.same)) * 100}%` }}
               />
             </div>
           </div>
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-ink-muted mt-1">
             <span>删除</span>
             <span>新增</span>
             <span>相同</span>
@@ -261,7 +261,7 @@ const TextComparator: React.FC = () => {
             value={leftText}
             onChange={(e) => setLeftText(e.target.value)}
             placeholder="请输入或粘贴原始文本..."
-            className="w-full h-64 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none font-mono text-sm"
+            className="w-full h-64 p-4 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none font-mono text-sm bg-surface text-ink"
           />
         </div>
 
@@ -292,7 +292,7 @@ const TextComparator: React.FC = () => {
             value={rightText}
             onChange={(e) => setRightText(e.target.value)}
             placeholder="请输入或粘贴要对比的文本..."
-            className="w-full h-64 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none font-mono text-sm"
+            className="w-full h-64 p-4 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none font-mono text-sm bg-surface text-ink"
           />
         </div>
       </div>
@@ -327,10 +327,10 @@ const TextComparator: React.FC = () => {
                   key={i}
                   className={`${
                     part.added
-                      ? 'bg-green-100 text-green-800'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                       : part.removed
-                      ? 'bg-red-100 text-red-800 line-through'
-                      : 'text-gray-800'
+                      ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 line-through'
+                      : 'text-ink'
                   }`}
                 >
                   {part.value}
@@ -342,15 +342,15 @@ const TextComparator: React.FC = () => {
           {/* 图例 */}
           <div className="flex justify-center space-x-6 text-sm text-white">
             <div className="flex items-center">
-              <div className="w-4 h-4 bg-green-100 rounded mr-2"></div>
+              <div className="w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded mr-2"></div>
               <span>新增内容</span>
             </div>
             <div className="flex items-center">
-              <div className="w-4 h-4 bg-red-100 rounded mr-2"></div>
+              <div className="w-4 h-4 bg-red-100 dark:bg-red-900/30 rounded mr-2"></div>
               <span>删除内容</span>
             </div>
             <div className="flex items-center">
-              <div className="w-4 h-4 bg-gray-100 rounded mr-2"></div>
+              <div className="w-4 h-4 bg-surface-inset rounded mr-2"></div>
               <span>相同内容</span>
             </div>
           </div>

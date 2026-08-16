@@ -98,14 +98,14 @@ const Timestamp: React.FC = () => {
       <div className="space-y-6">
         {/* 操作栏 */}
         <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-md">
+          <div className="flex items-center gap-2 bg-surface-inset p-1 rounded-md">
             <button
               onClick={() => {
                 setUnit('second')
                 if (timestamp) convertToDatetime()
               }}
               className={`px-4 py-2 rounded-md transition-colors ${
-                unit === 'second' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                unit === 'second' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               秒级
@@ -116,7 +116,7 @@ const Timestamp: React.FC = () => {
                 if (timestamp) convertToDatetime()
               }}
               className={`px-4 py-2 rounded-md transition-colors ${
-                unit === 'millisecond' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                unit === 'millisecond' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               毫秒级
@@ -141,15 +141,15 @@ const Timestamp: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
 
         {/* 时间戳输入 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700">时间戳</label>
+            <label className="block text-sm font-medium text-ink">时间戳</label>
             {timestamp && (
               <button
                 onClick={() => copyToClipboard(timestamp)}
@@ -166,7 +166,7 @@ const Timestamp: React.FC = () => {
               value={timestamp}
               onChange={(e) => setTimestamp(e.target.value)}
               placeholder="输入时间戳"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-md font-mono text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 px-4 py-3 border border-edge-strong rounded-md font-mono text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <button
               onClick={() => convertToDatetime()}
@@ -178,9 +178,9 @@ const Timestamp: React.FC = () => {
         </div>
 
         {/* 日期时间输入 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-gray-700">日期时间</label>
+            <label className="block text-sm font-medium text-ink">日期时间</label>
             {datetime && (
               <button
                 onClick={() => copyToClipboard(datetime)}
@@ -197,7 +197,7 @@ const Timestamp: React.FC = () => {
               value={datetime}
               onChange={(e) => setDatetime(e.target.value)}
               placeholder="YYYY-MM-DD HH:mm:ss"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-md font-mono text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 px-4 py-3 border border-edge-strong rounded-md font-mono text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <button
               onClick={convertToTimestamp}
@@ -209,9 +209,9 @@ const Timestamp: React.FC = () => {
         </div>
 
         {/* 时间说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">小知识</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">小知识</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
             <li>• Unix时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数</li>
             <li>• 10位数字是秒级时间戳，13位数字是毫秒级时间戳</li>
             <li>• JavaScript中Date.now()返回的是13位毫秒级时间戳</li>

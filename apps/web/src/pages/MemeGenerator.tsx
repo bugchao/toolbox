@@ -331,7 +331,7 @@ const MemeGenerator: React.FC = () => {
                 className={`flex-1 px-4 py-2 rounded-lg font-medium ${
                   activeTab === 'upload'
                     ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <Upload className="w-4 h-4 inline mr-2" />
@@ -342,7 +342,7 @@ const MemeGenerator: React.FC = () => {
                 className={`flex-1 px-4 py-2 rounded-lg font-medium ${
                   activeTab === 'template'
                     ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <ImageIcon className="w-4 h-4 inline mr-2" />
@@ -351,7 +351,7 @@ const MemeGenerator: React.FC = () => {
             </div>
 
             {activeTab === 'upload' && (
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-indigo-500 transition-colors">
+              <div className="border-2 border-dashed border-edge-strong rounded-lg p-8 text-center hover:border-indigo-500 transition-colors">
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -359,8 +359,8 @@ const MemeGenerator: React.FC = () => {
                   onChange={handleImageUpload}
                   className="hidden"
                 />
-                <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500 mb-4">点击或拖拽上传图片</p>
+                <ImageIcon className="w-12 h-12 text-ink-subtle mx-auto mb-4" />
+                <p className="text-ink-muted mb-4">点击或拖拽上传图片</p>
                 <button
                   onClick={() => fileInputRef.current?.click()}
                   className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
@@ -376,14 +376,14 @@ const MemeGenerator: React.FC = () => {
                   <button
                     key={template.id}
                     onClick={() => useTemplate(template)}
-                    className="border border-gray-200 rounded-lg overflow-hidden hover:border-indigo-500 transition-colors group"
+                    className="border border-edge rounded-lg overflow-hidden hover:border-indigo-500 transition-colors group"
                   >
                     <img
                       src={template.url}
                       alt={template.name}
                       className="w-full h-24 object-cover group-hover:scale-105 transition-transform"
                     />
-                    <p className="p-2 text-sm text-gray-700 truncate">{template.name}</p>
+                    <p className="p-2 text-sm text-ink truncate">{template.name}</p>
                   </button>
                 ))}
               </div>
@@ -394,7 +394,7 @@ const MemeGenerator: React.FC = () => {
           {originalImage && (
             <div className="card">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">文字编辑</h3>
+                <h3 className="text-lg font-semibold text-ink">文字编辑</h3>
                 <div className="flex space-x-2">
                   <button
                     onClick={addText}
@@ -418,33 +418,33 @@ const MemeGenerator: React.FC = () => {
               {selectedText ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">文字内容</label>
+                    <label className="block text-sm font-medium text-ink mb-1">文字内容</label>
                     <input
                       type="text"
                       value={selectedText.text}
                       onChange={(e) => updateText(selectedText.id, 'text', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">字体大小</label>
+                      <label className="block text-sm font-medium text-ink mb-1">字体大小</label>
                       <input
                         type="number"
                         value={selectedText.fontSize}
                         onChange={(e) => updateText(selectedText.id, 'fontSize', Number(e.target.value))}
                         min="12"
                         max="120"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">字体粗细</label>
+                      <label className="block text-sm font-medium text-ink mb-1">字体粗细</label>
                       <select
                         value={selectedText.fontWeight}
                         onChange={(e) => updateText(selectedText.id, 'fontWeight', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       >
                         <option value="normal">正常</option>
                         <option value="bold">粗体</option>
@@ -454,7 +454,7 @@ const MemeGenerator: React.FC = () => {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">文字颜色</label>
+                      <label className="block text-sm font-medium text-ink mb-1">文字颜色</label>
                       <div className="flex">
                         <input
                           type="color"
@@ -466,12 +466,12 @@ const MemeGenerator: React.FC = () => {
                           type="text"
                           value={selectedText.color}
                           onChange={(e) => updateText(selectedText.id, 'color', e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
+                          className="flex-1 px-3 py-2 border border-edge-strong rounded-r-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">描边颜色</label>
+                      <label className="block text-sm font-medium text-ink mb-1">描边颜色</label>
                       <div className="flex">
                         <input
                           type="color"
@@ -483,33 +483,33 @@ const MemeGenerator: React.FC = () => {
                           type="text"
                           value={selectedText.strokeColor}
                           onChange={(e) => updateText(selectedText.id, 'strokeColor', e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
+                          className="flex-1 px-3 py-2 border border-edge-strong rounded-r-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
                         />
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">描边宽度</label>
+                    <label className="block text-sm font-medium text-ink mb-1">描边宽度</label>
                     <input
                       type="range"
                       min="0"
                       max="10"
                       value={selectedText.strokeWidth}
                       onChange={(e) => updateText(selectedText.id, 'strokeWidth', Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                      className="w-full h-2 bg-surface-inset rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="text-center text-sm text-gray-600 mt-1">
+                    <div className="text-center text-sm text-ink-muted mt-1">
                       {selectedText.strokeWidth}px
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">字体</label>
+                    <label className="block text-sm font-medium text-ink mb-1">字体</label>
                     <select
                       value={selectedText.fontFamily}
                       onChange={(e) => updateText(selectedText.id, 'fontFamily', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full px-3 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     >
                       <option value="Impact, sans-serif">Impact (经典)</option>
                       <option value="'Microsoft YaHei', sans-serif">微软雅黑</option>
@@ -529,7 +529,7 @@ const MemeGenerator: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-ink-muted">
                   <Type className="w-12 h-12 mx-auto mb-2 opacity-50" />
                   <p>点击"添加文字"按钮开始制作表情包</p>
                 </div>
@@ -540,7 +540,7 @@ const MemeGenerator: React.FC = () => {
           {/* 导出操作 */}
           {originalImage && (
             <div className="card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">导出操作</h3>
+              <h3 className="text-lg font-semibold text-ink mb-4">导出操作</h3>
               <div className="space-y-3">
                 <button
                   onClick={exportImage}
@@ -579,7 +579,7 @@ const MemeGenerator: React.FC = () => {
 
                 <button
                   onClick={clearAll}
-                  className="w-full bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center"
+                  className="w-full bg-surface-inset text-ink px-4 py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
                 >
                   <Trash2 className="w-5 h-5 mr-2" />
                   清空内容
@@ -592,13 +592,13 @@ const MemeGenerator: React.FC = () => {
         {/* 右侧预览区 */}
         <div className="lg:col-span-2">
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
               <Maximize2 className="w-5 h-5 mr-2 text-indigo-600" />
               预览区域
             </h3>
 
             {originalImage ? (
-              <div 
+              <div
                 className="relative bg-gray-100 rounded-lg overflow-hidden flex justify-center"
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -610,17 +610,17 @@ const MemeGenerator: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="h-96 flex flex-col items-center justify-center text-gray-400 bg-gray-50 rounded-lg">
+              <div className="h-96 flex flex-col items-center justify-center text-ink-subtle bg-surface-muted rounded-lg">
                 <ImageIcon className="w-24 h-24 mb-4 opacity-30" />
                 <p className="text-lg">上传图片或选择模板开始制作表情包</p>
               </div>
             )}
 
             {originalImage && (
-              <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+              <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <div className="flex items-start">
                   <Move className="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-blue-800">
+                  <div className="text-sm text-blue-800 dark:text-blue-300">
                     <p className="font-medium mb-1">操作提示</p>
                     <ul className="space-y-1 list-disc pl-4">
                       <li>点击文字可以选中并编辑样式</li>
@@ -637,9 +637,9 @@ const MemeGenerator: React.FC = () => {
       </div>
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             支持上传本地图片或选择内置模板制作表情包

@@ -53,11 +53,11 @@ const UrlEncoder: React.FC = () => {
       <div className="space-y-6">
         {/* 操作栏 */}
         <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-md">
+          <div className="flex items-center gap-2 bg-surface-inset p-1 rounded-md">
             <button
               onClick={() => setMode('encode')}
               className={`px-4 py-2 rounded-md transition-colors ${
-                mode === 'encode' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                mode === 'encode' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               编码
@@ -65,7 +65,7 @@ const UrlEncoder: React.FC = () => {
             <button
               onClick={() => setMode('decode')}
               className={`px-4 py-2 rounded-md transition-colors ${
-                mode === 'decode' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                mode === 'decode' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               解码
@@ -99,39 +99,39 @@ const UrlEncoder: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
 
         {/* 输入框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink mb-2">
             {mode === 'encode' ? '输入要编码的URL或参数' : '输入要解码的URL或参数'}
           </label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={mode === 'encode' ? '例如: https://example.com?name=工具盒子' : '例如: https%3A%2F%2Fexample.com%3Fname%3D%E5%B7%A5%E5%85%B7%E7%9B%92%E5%AD%90'}
-            className="w-full h-48 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-48 p-4 border border-edge-strong rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 输出框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">输出结果</label>
+          <label className="block text-sm font-medium text-ink mb-2">输出结果</label>
           <textarea
             value={output}
             readOnly
             placeholder="转换结果会显示在这里"
-            className="w-full h-48 p-4 border border-gray-300 rounded-md font-mono text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-48 p-4 border border-edge-strong rounded-md font-mono text-sm bg-surface-muted focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">使用说明</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">使用说明</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
             <li>• URL编码（Percent-encoding）是一种浏览器用来打包表单输入的格式</li>
             <li>• 会将非ASCII字符、特殊字符转换为%XX的格式</li>
             <li>• 常用于处理URL参数、表单提交、爬虫等场景</li>

@@ -144,7 +144,7 @@ const ShortLinkGenerator: React.FC = () => {
       <div className="card">
         <form onSubmit={generateShortLink} className="space-y-4">
           <div>
-            <label htmlFor="originalUrl" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="originalUrl" className="block text-sm font-medium text-ink mb-2">
               原始链接
             </label>
             <div className="relative">
@@ -154,19 +154,19 @@ const ShortLinkGenerator: React.FC = () => {
                 value={originalUrl}
                 onChange={(e) => setOriginalUrl(e.target.value)}
                 placeholder="请输入要缩短的长链接（包含 http:// 或 https://）"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
-              <Link2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Link2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-subtle w-5 h-5" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="customCode" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="customCode" className="block text-sm font-medium text-ink mb-2">
                 自定义后缀（可选）
               </label>
-              <div className="flex rounded-lg border border-gray-300 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
-                <span className="flex items-center shrink-0 px-3 py-3 bg-gray-50 text-gray-500 text-sm border-r border-gray-200 truncate max-w-[min(100%,14rem)]">
+              <div className="flex rounded-lg border border-edge-strong overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
+                <span className="flex items-center shrink-0 px-3 py-3 bg-surface-muted text-ink-muted text-sm border-r border-edge truncate max-w-[min(100%,14rem)]">
                   {window.location.origin}/s/
                 </span>
                 <input
@@ -175,16 +175,16 @@ const ShortLinkGenerator: React.FC = () => {
                   value={customCode}
                   onChange={(e) => setCustomCode(e.target.value)}
                   placeholder="例如：my-link"
-                  className="flex-1 min-w-0 px-4 py-3 border-0 focus:ring-0 focus:outline-none"
+                  className="flex-1 min-w-0 px-4 py-3 border-0 focus:ring-0 focus:outline-none bg-surface text-ink"
                 />
               </div>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-ink-muted mt-1">
                 支持字母、数字、下划线、中划线，长度 3–20 位
               </p>
             </div>
 
             <div>
-              <label htmlFor="expiresDays" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="expiresDays" className="block text-sm font-medium text-ink mb-2">
                 过期时间（可选）
               </label>
               <div className="relative">
@@ -196,10 +196,10 @@ const ShortLinkGenerator: React.FC = () => {
                   placeholder="永久有效"
                   min="1"
                   max="365"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full pl-10 pr-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
-                <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-subtle w-5 h-5" />
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-ink-muted">
                   天
                 </span>
               </div>
@@ -207,7 +207,7 @@ const ShortLinkGenerator: React.FC = () => {
           </div>
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400">
               {error}
             </div>
           )}
@@ -224,18 +224,18 @@ const ShortLinkGenerator: React.FC = () => {
 
       {/* 生成结果 */}
       {generatedLink && (
-        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
-          <h3 className="text-lg font-semibold text-indigo-900 mb-4 flex items-center">
+        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-800">
+          <h3 className="text-lg font-semibold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center">
             <Check className="w-5 h-5 mr-2 text-green-600" />
             短链接生成成功！
           </h3>
-          
+
           <div className="flex items-center space-x-2">
             <input
               type="text"
               readOnly
               value={generatedLink.shortUrl}
-              className="flex-1 px-4 py-2 border border-indigo-300 rounded-lg bg-white font-mono"
+              className="flex-1 px-4 py-2 border border-indigo-300 dark:border-indigo-700 rounded-lg bg-surface font-mono text-ink"
             />
             <button
               onClick={() => copyToClipboard(generatedLink.shortUrl)}
@@ -250,7 +250,7 @@ const ShortLinkGenerator: React.FC = () => {
               href={generatedLink.shortUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center"
+              className="px-4 py-2 bg-surface-inset text-ink rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center"
               title="访问"
             >
               <ExternalLink className="w-4 h-4" />
@@ -259,7 +259,7 @@ const ShortLinkGenerator: React.FC = () => {
 
           <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-gray-500">原始链接：</span>
+              <span className="text-ink-muted">原始链接：</span>
               <a 
                 href={generatedLink.originalUrl} 
                 target="_blank" 
@@ -270,13 +270,13 @@ const ShortLinkGenerator: React.FC = () => {
               </a>
             </div>
             <div>
-              <span className="text-gray-500">创建时间：</span>
-              <span className="text-gray-900">{formatDate(generatedLink.createdAt)}</span>
+              <span className="text-ink-muted">创建时间：</span>
+              <span className="text-ink">{formatDate(generatedLink.createdAt)}</span>
             </div>
             {generatedLink.expiresAt && (
               <div>
-                <span className="text-gray-500">过期时间：</span>
-                <span className="text-gray-900">{formatDate(generatedLink.expiresAt)}</span>
+                <span className="text-ink-muted">过期时间：</span>
+                <span className="text-ink">{formatDate(generatedLink.expiresAt)}</span>
               </div>
             )}
           </div>
@@ -287,7 +287,7 @@ const ShortLinkGenerator: React.FC = () => {
       {shortLinks.length > 0 && (
         <div className="card">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+            <h3 className="text-lg font-semibold text-ink flex items-center">
               <BarChart2 className="w-5 h-5 mr-2 text-indigo-600" />
               历史记录
             </h3>
@@ -298,7 +298,7 @@ const ShortLinkGenerator: React.FC = () => {
                   setGeneratedLink(null)
                 }
               }}
-              className="text-sm text-red-600 hover:text-red-800"
+              className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
             >
               清空历史
             </button>
@@ -307,18 +307,18 @@ const ShortLinkGenerator: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">短链接</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">原始链接</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">点击量</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">创建时间</th>
-                  <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">状态</th>
-                  <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">操作</th>
+                <tr className="border-b border-edge">
+                  <th className="text-left py-3 px-4 text-sm font-medium text-ink-muted">短链接</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-ink-muted">原始链接</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-ink-muted">点击量</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-ink-muted">创建时间</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-ink-muted">状态</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-ink-muted">操作</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-edge">
                 {shortLinks.map((link) => (
-                  <tr key={link.id} className="hover:bg-gray-50">
+                  <tr key={link.id} className="hover:bg-surface-muted">
                     <td className="py-3 px-4">
                       <a 
                         href={link.shortUrl} 
@@ -334,23 +334,23 @@ const ShortLinkGenerator: React.FC = () => {
                         href={link.originalUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-gray-900 hover:underline text-sm"
+                        className="text-ink hover:underline text-sm"
                         title={link.originalUrl}
                       >
                         {link.originalUrl}
                       </a>
                     </td>
-                    <td className="py-3 px-4 text-sm text-gray-900">{link.clicks}</td>
-                    <td className="py-3 px-4 text-sm text-gray-500">
+                    <td className="py-3 px-4 text-sm text-ink">{link.clicks}</td>
+                    <td className="py-3 px-4 text-sm text-ink-muted">
                       {formatDate(link.createdAt).split(' ')[0]}
                     </td>
                     <td className="py-3 px-4">
                       <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                         isExpired(link)
-                          ? 'bg-gray-100 text-gray-800'
+                          ? 'bg-surface-inset text-ink'
                           : link.active
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
                       }`}>
                         {isExpired(link) ? '已过期' : link.active ? '正常' : '已禁用'}
                       </span>
@@ -366,7 +366,7 @@ const ShortLinkGenerator: React.FC = () => {
                       <button
                         onClick={() => toggleLinkStatus(link.id)}
                         className={`${
-                          link.active ? 'text-yellow-600 hover:text-yellow-900' : 'text-green-600 hover:text-green-900'
+                          link.active ? 'text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300' : 'text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300'
                         }`}
                         title={link.active ? '禁用' : '启用'}
                       >
@@ -374,7 +374,7 @@ const ShortLinkGenerator: React.FC = () => {
                       </button>
                       <button
                         onClick={() => deleteLink(link.id)}
-                        className="text-red-600 hover:text-red-900"
+                        className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                         title="删除"
                       >
                         <Trash2 className="w-4 h-4 inline" />
@@ -389,9 +389,9 @@ const ShortLinkGenerator: React.FC = () => {
       )}
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             所有短链接数据保存在浏览器本地，不会上传到服务器，保护隐私

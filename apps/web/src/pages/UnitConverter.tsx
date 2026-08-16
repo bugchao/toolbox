@@ -271,18 +271,18 @@ const UnitConverter: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">单位换算器</h1>
-      
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <h1 className="text-3xl font-bold mb-6 text-ink">单位换算器</h1>
+
+      <div className="bg-surface rounded-lg shadow-md p-6">
         {/* 分类选择 */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-ink mb-2">
             选择分类
           </label>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             {categories.map(category => (
               <option key={category.name} value={category.name}>
@@ -296,7 +296,7 @@ const UnitConverter: React.FC = () => {
         <div className="space-y-6">
           {/* 输入部分 */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink mb-2">
               输入数值
             </label>
             <div className="flex gap-4">
@@ -304,13 +304,13 @@ const UnitConverter: React.FC = () => {
                 type="number"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="输入数值"
               />
               <select
                 value={fromUnit}
                 onChange={(e) => setFromUnit(e.target.value)}
-                className="w-40 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-40 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {currentCategory?.units.map(unit => (
                   <option key={unit.symbol} value={unit.symbol}>
@@ -325,15 +325,15 @@ const UnitConverter: React.FC = () => {
           <div className="flex justify-center">
             <button
               onClick={swapUnits}
-              className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+              className="p-2 bg-surface-inset rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
-              <ArrowRightLeft className="w-6 h-6 text-gray-600" />
+              <ArrowRightLeft className="w-6 h-6 text-ink-muted" />
             </button>
           </div>
 
           {/* 结果部分 */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink mb-2">
               转换结果
             </label>
             <div className="flex gap-4">
@@ -341,13 +341,13 @@ const UnitConverter: React.FC = () => {
                 type="text"
                 value={result}
                 readOnly
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                className="flex-1 px-4 py-2 border border-edge-strong rounded-lg bg-surface-muted"
                 placeholder="转换结果"
               />
               <select
                 value={toUnit}
                 onChange={(e) => setToUnit(e.target.value)}
-                className="w-40 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-40 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {currentCategory?.units.map(unit => (
                   <option key={unit.symbol} value={unit.symbol}>
@@ -361,9 +361,9 @@ const UnitConverter: React.FC = () => {
       </div>
 
       {/* 常用单位说明 */}
-      <div className="mt-6 bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">📖 单位说明</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+      <div className="mt-6 bg-surface rounded-lg shadow-md p-6">
+        <h2 className="text-xl font-semibold mb-4 text-ink">📖 单位说明</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-ink">
           {selectedCategory === '长度' && (
             <>
               <div>
@@ -404,9 +404,9 @@ const UnitConverter: React.FC = () => {
       </div>
 
       {/* 功能特性 */}
-      <div className="mt-6 bg-blue-50 rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-4 text-blue-800">✨ 功能特性</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-blue-700">
+      <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
+        <h2 className="text-xl font-semibold mb-4 text-blue-800 dark:text-blue-300">✨ 功能特性</h2>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-blue-700 dark:text-blue-400">
           <li className="flex items-start gap-2">
             <span className="font-bold">•</span>
             <span>支持12大类、上百种单位的互相转换</span>

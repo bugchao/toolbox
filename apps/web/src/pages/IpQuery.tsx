@@ -95,18 +95,18 @@ const IpQuery: React.FC = () => {
   }
 
   const InfoItem = ({ label, value, icon: Icon, copyable = false }: { label: string; value: string | number; icon: React.ElementType; copyable?: boolean }) => (
-    <div className="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
+    <div className="flex items-start space-x-3 p-3 hover:bg-surface-muted rounded-lg transition-colors">
       <div className="mt-1 text-indigo-600">
         <Icon className="w-5 h-5" />
       </div>
       <div className="flex-1">
-        <div className="text-sm text-gray-500">{label}</div>
-        <div className="text-gray-900 font-medium mt-0.5 flex items-center">
+        <div className="text-sm text-ink-muted">{label}</div>
+        <div className="text-ink font-medium mt-0.5 flex items-center">
           {value}
           {copyable && (
             <button
               onClick={() => copyToClipboard(String(value), label)}
-              className="ml-2 text-gray-400 hover:text-indigo-600 transition-colors"
+              className="ml-2 text-ink-subtle hover:text-indigo-600 transition-colors"
               title="复制"
             >
               {copiedField === label ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
@@ -129,7 +129,7 @@ const IpQuery: React.FC = () => {
         <form onSubmit={queryIp} className="space-y-4">
           <div className="flex space-x-4">
             <div className="flex-1">
-              <label htmlFor="ip" className="block text-sm font-medium text-gray-700 mb-2">IP地址</label>
+              <label htmlFor="ip" className="block text-sm font-medium text-ink mb-2">IP地址</label>
               <div className="relative">
                 <input
                   type="text"
@@ -137,16 +137,16 @@ const IpQuery: React.FC = () => {
                   value={ip}
                   onChange={(e) => setIp(e.target.value)}
                   placeholder="请输入要查询的IP地址，例如：8.8.8.8"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full pl-10 pr-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-subtle w-5 h-5" />
               </div>
             </div>
             <div className="flex items-end space-x-2">
               <button
                 type="button"
                 onClick={queryCurrentIp}
-                className="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                className="bg-surface-inset text-ink px-6 py-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
               >
                 查本机IP
               </button>
@@ -161,7 +161,7 @@ const IpQuery: React.FC = () => {
             </div>
           </div>
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 flex items-center">
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 flex items-center">
               <Info className="w-5 h-5 mr-2" />
               {error}
             </div>
@@ -173,16 +173,16 @@ const IpQuery: React.FC = () => {
       {loading && (
         <div className="card text-center py-12">
           <Loader2 className="w-12 h-12 text-indigo-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">正在查询中，请稍候...</p>
+          <p className="text-ink-muted">正在查询中，请稍候...</p>
         </div>
       )}
 
       {ipInfo && !loading && (
         <div className="space-y-6">
           {/* 基础信息卡片 */}
-          <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
+          <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-800">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-indigo-900">查询结果</h3>
+              <h3 className="text-xl font-bold text-indigo-900 dark:text-indigo-300">查询结果</h3>
               <div className="text-sm text-indigo-600 font-medium">
                 查询时间：{new Date().toLocaleString('zh-CN')}
               </div>
@@ -205,8 +205,8 @@ const IpQuery: React.FC = () => {
 
           {/* 地图预览 */}
           <div className="card">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">地理位置预览</h3>
-            <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+            <h3 className="text-lg font-bold text-ink mb-4">地理位置预览</h3>
+            <div className="aspect-video rounded-lg overflow-hidden bg-surface-inset">
               <iframe
                 width="100%"
                 height="100%"
@@ -237,7 +237,7 @@ const IpQuery: React.FC = () => {
           <div className="flex justify-center space-x-4">
             <button
               onClick={() => copyToClipboard(JSON.stringify(ipInfo, null, 2), '全部信息')}
-              className="bg-white text-indigo-600 border border-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition-colors font-medium flex items-center"
+              className="bg-surface text-indigo-600 border border-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors font-medium flex items-center"
             >
               {copiedField === '全部信息' ? <Check className="w-5 h-5 mr-2" /> : <Copy className="w-5 h-5 mr-2" />}
               复制全部信息
@@ -247,9 +247,9 @@ const IpQuery: React.FC = () => {
       )}
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             页面加载时会自动查询您当前的公网IP地址信息

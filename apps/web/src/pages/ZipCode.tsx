@@ -60,11 +60,11 @@ const ZipCode: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">邮政编码查询</h1>
-        
+        <h1 className="text-3xl font-bold text-ink mb-6">邮政编码查询</h1>
+
         <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink mb-2">
               输入地址或邮编
             </label>
             <div className="flex space-x-4">
@@ -85,40 +85,40 @@ const ZipCode: React.FC = () => {
                 {loading ? '查询中...' : '查询'}
               </button>
             </div>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-ink-muted">
               支持输入地址查询邮编，或输入6位邮编查询对应地址
             </p>
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-400">
               {error}
             </div>
           )}
 
           {result && (
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 rounded-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">查询结果</h2>
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg p-6">
+              <h2 className="text-xl font-bold text-ink mb-4">查询结果</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">邮政编码</p>
+                  <p className="text-sm text-ink-muted mb-1">邮政编码</p>
                   <p className="text-2xl font-bold text-indigo-600">{result.code}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">所属省份</p>
-                  <p className="text-lg font-medium text-gray-900">{result.province}</p>
+                  <p className="text-sm text-ink-muted mb-1">所属省份</p>
+                  <p className="text-lg font-medium text-ink">{result.province}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">所属城市</p>
-                  <p className="text-lg font-medium text-gray-900">{result.city}</p>
+                  <p className="text-sm text-ink-muted mb-1">所属城市</p>
+                  <p className="text-lg font-medium text-ink">{result.city}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500 mb-1">所属区县</p>
-                  <p className="text-lg font-medium text-gray-900">{result.district}</p>
+                  <p className="text-sm text-ink-muted mb-1">所属区县</p>
+                  <p className="text-lg font-medium text-ink">{result.district}</p>
                 </div>
                 <div className="md:col-span-2">
-                  <p className="text-sm text-gray-500 mb-1">详细地址</p>
-                  <p className="text-lg font-medium text-gray-900">{result.address}</p>
+                  <p className="text-sm text-ink-muted mb-1">详细地址</p>
+                  <p className="text-lg font-medium text-ink">{result.address}</p>
                 </div>
               </div>
             </div>
@@ -127,8 +127,8 @@ const ZipCode: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">使用说明</h2>
-        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+        <h2 className="text-xl font-bold text-ink mb-4">使用说明</h2>
+        <ul className="list-disc pl-5 space-y-2 text-ink-muted">
           <li>支持两种查询方式：输入地址查询邮编，或输入6位数字邮编查询地址</li>
           <li>地址支持省、市、区、街道等各级地址查询</li>
           <li>数据覆盖全国所有省市县，数据来源官方公开数据</li>
