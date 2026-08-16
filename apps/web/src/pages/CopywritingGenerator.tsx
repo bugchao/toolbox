@@ -198,17 +198,17 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
         <div className="lg:col-span-1 space-y-6">
           {/* 基础配置 */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
               <Settings className="w-5 h-5 mr-2 text-indigo-600" />
               生成配置
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">文案类型</label>
+                <label className="block text-sm font-medium text-ink mb-2">文案类型</label>
                 <select
                   value={copyType}
                   onChange={(e) => setCopyType(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 >
                   {typeOptions.map(option => (
                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -217,11 +217,11 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">语气风格</label>
+                <label className="block text-sm font-medium text-ink mb-2">语气风格</label>
                 <select
                   value={tone}
                   onChange={(e) => setTone(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 >
                   {toneOptions.map(option => (
                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -230,11 +230,11 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">长度</label>
+                <label className="block text-sm font-medium text-ink mb-2">长度</label>
                 <select
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 >
                   {lengthOptions.map(option => (
                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -246,13 +246,13 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
 
           {/* 快捷模板 */}
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">快捷模板</h3>
+            <h3 className="text-lg font-semibold text-ink mb-4">快捷模板</h3>
             <div className="space-y-2">
               {templates.map((template, index) => (
                 <button
                   key={index}
                   onClick={() => useTemplate(template.prompt)}
-                  className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm text-gray-700 transition-colors"
+                  className="w-full text-left px-3 py-2 bg-surface-muted hover:bg-surface-inset rounded-lg text-sm text-ink transition-colors"
                 >
                   {template.name}
                 </button>
@@ -264,7 +264,7 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
           {history.length > 0 && (
             <div className="card">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+                <h3 className="text-lg font-semibold text-ink flex items-center">
                   <History className="w-5 h-5 mr-2 text-indigo-600" />
                   历史记录
                 </h3>
@@ -277,11 +277,11 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
               </div>
               <div className="space-y-2 max-h-64 overflow-y-auto">
                 {history.map((item) => (
-                  <div key={item.id} className="p-2 bg-gray-50 rounded-lg text-sm group">
+                  <div key={item.id} className="p-2 bg-surface-muted rounded-lg text-sm group">
                     <div className="flex justify-between items-start">
                       <div className="flex-1 cursor-pointer" onClick={() => useHistoryItem(item)}>
-                        <p className="text-gray-900 font-medium truncate">{item.prompt}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-ink font-medium truncate">{item.prompt}</p>
+                        <p className="text-xs text-ink-muted">
                           {new Date(item.createdAt).toLocaleString('zh-CN')}
                         </p>
                       </div>
@@ -290,7 +290,7 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
                           e.stopPropagation()
                           deleteHistoryItem(item.id)
                         }}
-                        className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-600 transition-opacity"
+                        className="opacity-0 group-hover:opacity-100 text-ink-subtle hover:text-red-600 transition-opacity"
                       >
                         <Trash2 className="w-3 h-3" />
                       </button>
@@ -307,7 +307,7 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
           {/* 输入区域 */}
           <div className="card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              <h3 className="text-lg font-semibold text-ink flex items-center">
                 <Type className="w-5 h-5 mr-2 text-indigo-600" />
                 输入需求
               </h3>
@@ -323,10 +323,10 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="请描述您的文案需求，例如：写一个奶茶店的新品宣传文案，要活泼有趣，适合发朋友圈..."
               rows={6}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+              className="w-full px-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
             />
             <div className="mt-4 flex justify-between items-center">
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-ink-muted">
                 {prompt.length} 字
               </div>
               <button
@@ -353,7 +353,7 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
           {generatedContent && (
             <div className="card">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">生成结果</h3>
+                <h3 className="text-lg font-semibold text-ink">生成结果</h3>
                 <div className="flex space-x-2">
                   <button
                     onClick={copyToClipboard}
@@ -371,8 +371,8 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
                   </button>
                 </div>
               </div>
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <pre className="whitespace-pre-wrap font-sans text-gray-800 text-sm">
+              <div className="p-4 bg-surface-muted rounded-lg border border-edge">
+                <pre className="whitespace-pre-wrap font-sans text-ink text-sm">
                   {generatedContent}
                 </pre>
               </div>
@@ -382,9 +382,9 @@ ${'#话题标签 #热点 #活动 #推广'.repeat(Math.floor(Math.random() * 2) +
       </div>
 
       {/* 使用说明 */}
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             选择文案类型、语气风格和长度，输入您的具体需求，点击生成即可

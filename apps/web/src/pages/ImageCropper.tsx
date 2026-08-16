@@ -239,7 +239,7 @@ const ImageCropper: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片裁剪工具</h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           自由裁剪或按预设比例裁剪图片，支持旋转、翻转，批量处理
         </p>
       </div>
@@ -247,7 +247,7 @@ const ImageCropper: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar - Image List */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow p-4">
+          <div className="bg-surface rounded-lg shadow p-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-semibold">图片列表</h2>
               <button
@@ -260,10 +260,10 @@ const ImageCropper: React.FC = () => {
 
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition mb-4"
+              className="border-2 border-dashed border-edge-strong rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition mb-4"
             >
-              <Plus className="w-8 h-8 mx-auto text-gray-400 mb-2" />
-              <p className="text-sm text-gray-600">添加图片</p>
+              <Plus className="w-8 h-8 mx-auto text-ink-subtle mb-2" />
+              <p className="text-sm text-ink-muted">添加图片</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -281,8 +281,8 @@ const ImageCropper: React.FC = () => {
                   onClick={() => handleImageSelect(image)}
                   className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition ${
                     selectedImage?.id === image.id
-                      ? 'bg-blue-100 border-2 border-blue-500'
-                      : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+                      ? 'bg-blue-100 dark:bg-blue-900/30 border-2 border-blue-500'
+                      : 'bg-surface-muted hover:bg-surface-inset border-2 border-transparent'
                   }`}
                 >
                   <img
@@ -292,11 +292,11 @@ const ImageCropper: React.FC = () => {
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{image.originalFile.name}</p>
-                    <p className="text-xs text-gray-500">{formatFileSize(image.originalFile.size)}</p>
+                    <p className="text-xs text-ink-muted">{formatFileSize(image.originalFile.size)}</p>
                   </div>
                   <button
                     onClick={(e) => { e.stopPropagation(); removeImage(image.id); }}
-                    className="p-1 text-gray-400 hover:text-red-500"
+                    className="p-1 text-ink-subtle hover:text-red-500"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -309,7 +309,7 @@ const ImageCropper: React.FC = () => {
         {/* Main - Editor */}
         <div className="lg:col-span-3">
           {selectedImage ? (
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-surface rounded-lg shadow p-6">
               {/* Controls */}
               <div className="mb-4 flex flex-wrap gap-4">
                 <div>
@@ -317,7 +317,7 @@ const ImageCropper: React.FC = () => {
                   <select
                     value={aspectRatio}
                     onChange={(e) => setAspectRatio(e.target.value)}
-                    className="px-4 py-2 border rounded-lg"
+                    className="px-4 py-2 border border-edge-strong rounded-lg bg-surface"
                   >
                     {PRESET_RATIOS.map(ratio => (
                       <option key={ratio.value} value={ratio.value}>{ratio.label}</option>
@@ -330,20 +330,20 @@ const ImageCropper: React.FC = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setRotation(prev => prev - 90)}
-                      className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                      className="px-3 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
                     >
                       -90°
                     </button>
                     <button
                       onClick={() => setRotation(0)}
-                      className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center gap-1"
+                      className="px-3 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center gap-1"
                     >
                       <RotateCcw className="w-4 h-4" />
                       重置
                     </button>
                     <button
                       onClick={() => setRotation(prev => prev + 90)}
-                      className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                      className="px-3 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
                     >
                       +90°
                     </button>
@@ -356,7 +356,7 @@ const ImageCropper: React.FC = () => {
                     <button
                       onClick={() => setFlipHorizontal(!flipHorizontal)}
                       className={`px-3 py-2 rounded-lg ${
-                        flipHorizontal ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                        flipHorizontal ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                       }`}
                     >
                       水平
@@ -364,7 +364,7 @@ const ImageCropper: React.FC = () => {
                     <button
                       onClick={() => setFlipVertical(!flipVertical)}
                       className={`px-3 py-2 rounded-lg ${
-                        flipVertical ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                        flipVertical ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                       }`}
                     >
                       垂直
@@ -375,7 +375,7 @@ const ImageCropper: React.FC = () => {
                 <div className="flex items-end">
                   <button
                     onClick={handleReset}
-                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                    className="px-4 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
                   >
                     重置全部
                   </button>
@@ -383,7 +383,7 @@ const ImageCropper: React.FC = () => {
               </div>
 
               {/* Canvas */}
-              <div ref={containerRef} className="mb-4 bg-gray-100 rounded-lg overflow-hidden">
+              <div ref={containerRef} className="mb-4 bg-surface-inset rounded-lg overflow-hidden">
                 <canvas
                   ref={canvasRef}
                   onMouseDown={handleMouseDown}
@@ -399,8 +399,8 @@ const ImageCropper: React.FC = () => {
 
               {/* Crop Info */}
               {cropArea.width > 0 && cropArea.height > 0 && (
-                <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-800">
+                <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <p className="text-sm text-blue-800 dark:text-blue-300">
                     裁剪区域：{Math.round(cropArea.width)} × {Math.round(cropArea.height)} px
                     {aspectRatio !== 'free' && ` (${aspectRatio})`}
                   </p>
@@ -442,9 +442,9 @@ const ImageCropper: React.FC = () => {
               )}
             </div>
           ) : (
-            <div className="bg-white rounded-lg shadow p-12 text-center">
-              <Scissors className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-              <p className="text-lg text-gray-600">选择或上传图片开始裁剪</p>
+            <div className="bg-surface rounded-lg shadow p-12 text-center">
+              <Scissors className="w-16 h-16 mx-auto text-ink-subtle mb-4" />
+              <p className="text-lg text-ink-muted">选择或上传图片开始裁剪</p>
             </div>
           )}
         </div>

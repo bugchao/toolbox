@@ -78,14 +78,14 @@ const HashGenerator: React.FC = () => {
       <div className="space-y-6">
         {/* 操作栏 */}
         <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-md">
+          <div className="flex items-center gap-2 bg-surface-inset p-1 rounded-md">
             <button
               onClick={() => {
                 setInputType('text')
                 clearAll()
               }}
               className={`px-4 py-2 rounded-md transition-colors ${
-                inputType === 'text' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                inputType === 'text' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               文本
@@ -96,7 +96,7 @@ const HashGenerator: React.FC = () => {
                 clearAll()
               }}
               className={`px-4 py-2 rounded-md transition-colors ${
-                inputType === 'file' ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-200'
+                inputType === 'file' ? 'bg-indigo-600 text-white' : 'text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               文件
@@ -125,7 +125,7 @@ const HashGenerator: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
@@ -133,23 +133,23 @@ const HashGenerator: React.FC = () => {
         {/* 输入框 */}
         {inputType === 'text' ? (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">输入文本</label>
+            <label className="block text-sm font-medium text-ink mb-2">输入文本</label>
             <textarea
               value={input}
               onChange={handleTextChange}
               placeholder="输入要计算哈希的文本..."
-              className="w-full h-48 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full h-48 p-4 border border-edge-strong rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         ) : (
-          <div className="p-6 border-2 border-dashed border-gray-300 rounded-md text-center">
+          <div className="p-6 border-2 border-dashed border-edge-strong rounded-md text-center">
             {input ? (
-              <div className="flex items-center justify-center gap-2 text-gray-700">
+              <div className="flex items-center justify-center gap-2 text-ink">
                 <FileText className="w-5 h-5 text-indigo-600" />
                 <span>{input}</span>
               </div>
             ) : (
-              <p className="text-gray-500">点击上方按钮上传文件，支持任意文件类型</p>
+              <p className="text-ink-muted">点击上方按钮上传文件，支持任意文件类型</p>
             )}
           </div>
         )}
@@ -157,12 +157,12 @@ const HashGenerator: React.FC = () => {
         {/* 哈希结果 */}
         {Object.keys(hashes).length > 0 && (
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-4">计算结果</h3>
+            <h3 className="text-lg font-medium text-ink mb-4">计算结果</h3>
             <div className="space-y-3">
               {Object.entries(hashes).map(([type, hash]) => (
-                <div key={type} className="bg-white p-4 rounded-lg border border-gray-200">
+                <div key={type} className="bg-surface p-4 rounded-lg border border-edge">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900">{type}</span>
+                    <span className="font-medium text-ink">{type}</span>
                     <button
                       onClick={() => copyToClipboard(hash, type)}
                       className="text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
@@ -175,7 +175,7 @@ const HashGenerator: React.FC = () => {
                       {copied === type ? '已复制' : '复制'}
                     </button>
                   </div>
-                  <div className="font-mono text-sm break-all bg-gray-50 p-3 rounded-md border border-gray-200">
+                  <div className="font-mono text-sm break-all bg-surface-muted p-3 rounded-md border border-edge">
                     {hash}
                   </div>
                 </div>
@@ -185,9 +185,9 @@ const HashGenerator: React.FC = () => {
         )}
 
         {/* 说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">算法说明</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">算法说明</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
             <li>• MD5: 输出128位哈希值，常用于文件校验，但不推荐用于安全场景</li>
             <li>• SHA1: 输出160位哈希值，安全性高于MD5，但已被证明存在碰撞风险</li>
             <li>• SHA256/SHA512: SHA2家族算法，安全性高，推荐用于密码存储、数字签名等场景</li>

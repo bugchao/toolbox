@@ -72,7 +72,7 @@ export default function ElectronicWoodenFish() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 p-8">
       <style>{`
         @keyframes float-up {
           0% {
@@ -95,14 +95,14 @@ export default function ElectronicWoodenFish() {
 
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-amber-900 mb-2">🪵 电子木鱼</h1>
-          <p className="text-amber-700">敲木鱼，积功德，放松身心</p>
+          <h1 className="text-4xl font-bold text-amber-900 dark:text-amber-200 mb-2">🪵 电子木鱼</h1>
+          <p className="text-amber-700 dark:text-amber-400">敲木鱼，积功德，放松身心</p>
         </div>
 
         {/* 功德计数器 */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6 text-center">
+        <div className="bg-surface rounded-2xl shadow-xl p-8 mb-6 text-center">
           <div className="text-6xl font-bold text-amber-600 mb-2">{merit}</div>
-          <div className="text-xl text-amber-800">功德</div>
+          <div className="text-xl text-amber-800 dark:text-amber-300">功德</div>
         </div>
 
         {/* 木鱼 */}
@@ -117,9 +117,9 @@ export default function ElectronicWoodenFish() {
         </div>
 
         {/* 控制面板 */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="bg-surface rounded-2xl shadow-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">自动敲击</span>
+            <span className="text-ink font-medium">自动敲击</span>
             <button
               onClick={toggleAutoMode}
               className={`px-6 py-2 rounded-lg font-medium transition-colors ${
@@ -134,7 +134,7 @@ export default function ElectronicWoodenFish() {
 
           {autoMode && (
             <div>
-              <label className="block text-gray-700 font-medium mb-2">
+              <label className="block text-ink font-medium mb-2">
                 敲击速度: {(1000 / speed).toFixed(1)} 次/秒
               </label>
               <input
@@ -150,15 +150,15 @@ export default function ElectronicWoodenFish() {
           )}
 
           <div className="flex items-center justify-between">
-            <span className="text-gray-700 font-medium">音效</span>
+            <span className="text-ink font-medium">音效</span>
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-surface-inset transition-colors"
             >
               {soundEnabled ? (
                 <Volume2 className="w-6 h-6 text-amber-600" />
               ) : (
-                <VolumeX className="w-6 h-6 text-gray-400" />
+                <VolumeX className="w-6 h-6 text-ink-subtle" />
               )}
             </button>
           </div>

@@ -151,14 +151,14 @@ const BMICalculator: React.FC = () => {
           <Calculator className="h-8 w-8 text-indigo-600" />
           BMI健康计算器
         </h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           计算身体质量指数，了解健康状况，获取个性化建议
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* 输入表单 */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <User className="h-5 w-5 text-indigo-600" />
             基本信息
@@ -166,14 +166,14 @@ const BMICalculator: React.FC = () => {
 
           {/* 单位切换 */}
           <div className="flex items-center justify-between mb-6">
-            <span className="text-sm font-medium text-gray-700">单位制</span>
-            <div className="flex border border-gray-300 rounded-md overflow-hidden">
+            <span className="text-sm font-medium text-ink">单位制</span>
+            <div className="flex border border-edge-strong rounded-md overflow-hidden">
               <button
                 onClick={() => setUnitSystem('metric')}
                 className={`px-4 py-1.5 text-sm ${
                   unitSystem === 'metric'
                     ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                    : 'bg-surface text-ink hover:bg-surface-muted'
                 }`}
               >
                 公制
@@ -183,7 +183,7 @@ const BMICalculator: React.FC = () => {
                 className={`px-4 py-1.5 text-sm ${
                   unitSystem === 'imperial'
                     ? 'bg-indigo-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                    : 'bg-surface text-ink hover:bg-surface-muted'
                 }`}
               >
                 英制
@@ -193,7 +193,7 @@ const BMICalculator: React.FC = () => {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+              <label className="block text-sm font-medium text-ink mb-1 flex items-center gap-1">
                 <Ruler className="h-4 w-4" />
                 身高 ({unitLabels.height})
               </label>
@@ -201,7 +201,7 @@ const BMICalculator: React.FC = () => {
                 type="number"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 min="50"
                 max="250"
                 step="0.1"
@@ -209,7 +209,7 @@ const BMICalculator: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+              <label className="block text-sm font-medium text-ink mb-1 flex items-center gap-1">
                 <Scale className="h-4 w-4" />
                 体重 ({unitLabels.weight})
               </label>
@@ -217,7 +217,7 @@ const BMICalculator: React.FC = () => {
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 min="20"
                 max="300"
                 step="0.1"
@@ -225,21 +225,21 @@ const BMICalculator: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink mb-1">
                 年龄
               </label>
               <input
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 min="1"
                 max="120"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-ink mb-1">
                 性别
               </label>
               <div className="flex gap-4">
@@ -249,7 +249,7 @@ const BMICalculator: React.FC = () => {
                     value="male"
                     checked={gender === 'male'}
                     onChange={(e) => setGender(e.target.value as 'male')}
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-edge-strong"
                   />
                   <span>男</span>
                 </label>
@@ -259,7 +259,7 @@ const BMICalculator: React.FC = () => {
                     value="female"
                     checked={gender === 'female'}
                     onChange={(e) => setGender(e.target.value as 'female')}
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-edge-strong"
                   />
                   <span>女</span>
                 </label>
@@ -267,7 +267,7 @@ const BMICalculator: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+              <label className="block text-sm font-medium text-ink mb-2 flex items-center gap-1">
                 <Activity className="h-4 w-4" />
                 活动水平
               </label>
@@ -277,8 +277,8 @@ const BMICalculator: React.FC = () => {
                     key={level.value}
                     className={`flex items-start gap-2 p-3 border rounded-md cursor-pointer transition-colors ${
                       activityLevel === level.value
-                        ? 'border-indigo-500 bg-indigo-50'
-                        : 'border-gray-300 hover:bg-gray-50'
+                        ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/30'
+                        : 'border-edge-strong hover:bg-surface-muted'
                     }`}
                   >
                     <input
@@ -286,11 +286,11 @@ const BMICalculator: React.FC = () => {
                       value={level.value}
                       checked={activityLevel === level.value}
                       onChange={(e) => setActivityLevel(parseFloat(e.target.value))}
-                      className="h-4 w-4 mt-1 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                      className="h-4 w-4 mt-1 text-indigo-600 focus:ring-indigo-500 border-edge-strong"
                     />
                     <div>
                       <div className="font-medium text-sm">{level.label}</div>
-                      <div className="text-xs text-gray-500">{level.description}</div>
+                      <div className="text-xs text-ink-muted">{level.description}</div>
                     </div>
                   </label>
                 ))}
@@ -299,7 +299,7 @@ const BMICalculator: React.FC = () => {
 
             <button
               onClick={handleReset}
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors"
+              className="w-full bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 text-ink font-medium py-2 px-4 rounded-md transition-colors"
             >
               重置
             </button>
@@ -307,7 +307,7 @@ const BMICalculator: React.FC = () => {
         </div>
 
         {/* 结果展示 */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Heart className="h-5 w-5 text-red-500" />
             健康评估
@@ -323,31 +323,31 @@ const BMICalculator: React.FC = () => {
                 <div className={`text-2xl font-semibold mb-1 ${healthData.bmiColor}`}>
                   {healthData.bmiCategory}
                 </div>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-ink-muted">
                   正常范围: 18.5 - 23.9
                 </div>
               </div>
 
               {/* 健康数据卡片 */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-500 mb-1">理想体重范围</div>
+                <div className="bg-surface-muted p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">理想体重范围</div>
                   <div className="text-lg font-semibold">
                     {healthData.idealWeightRange[0]} - {healthData.idealWeightRange[1]} {unitLabels.weight}
                   </div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-sm text-gray-500 mb-1">基础代谢率 (BMR)</div>
+                <div className="bg-surface-muted p-4 rounded-lg">
+                  <div className="text-sm text-ink-muted mb-1">基础代谢率 (BMR)</div>
                   <div className="text-lg font-semibold">
                     {healthData.bmr} 千卡/天
                   </div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg col-span-2">
-                  <div className="text-sm text-gray-500 mb-1">每日总热量消耗 (TDEE)</div>
+                <div className="bg-surface-muted p-4 rounded-lg col-span-2">
+                  <div className="text-sm text-ink-muted mb-1">每日总热量消耗 (TDEE)</div>
                   <div className="text-lg font-semibold">
                     {healthData.tdee} 千卡/天
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
+                  <div className="text-xs text-ink-muted mt-1">
                     维持当前体重每日需要摄入的热量
                   </div>
                 </div>
@@ -366,7 +366,7 @@ const BMICalculator: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500">
+              <div className="flex justify-between text-xs text-ink-muted">
                 <span>偏瘦</span>
                 <span>正常</span>
                 <span>超重</span>
@@ -374,12 +374,12 @@ const BMICalculator: React.FC = () => {
               </div>
 
               {/* 健康建议 */}
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-blue-800 mb-2 flex items-center gap-1">
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2 flex items-center gap-1">
                   <Heart className="h-4 w-4" />
                   健康建议
                 </h3>
-                <ul className="space-y-1 text-sm text-blue-700">
+                <ul className="space-y-1 text-sm text-blue-700 dark:text-blue-400">
                   {healthData.healthTips.map((tip, index) => (
                     <li key={index} className="flex gap-2">
                       <span className="text-blue-500">•</span>
@@ -390,9 +390,9 @@ const BMICalculator: React.FC = () => {
               </div>
 
               {/* 健康小知识 */}
-              <div className="border-t pt-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2">健康小知识</h3>
-                <div className="text-xs text-gray-600 space-y-1">
+              <div className="border-t border-edge pt-4">
+                <h3 className="text-sm font-medium text-ink mb-2">健康小知识</h3>
+                <div className="text-xs text-ink-muted space-y-1">
                   <p>• BMI（身体质量指数）是国际通用的衡量人体胖瘦程度以及是否健康的标准</p>
                   <p>• 本计算器仅供参考，具体健康状况请咨询专业医生</p>
                   <p>• 建议每周至少进行150分钟中等强度有氧运动，保持健康生活方式</p>

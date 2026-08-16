@@ -110,19 +110,19 @@ const ImageBackgroundRemover: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">图片去背景工具</h1>
-      
+      <h1 className="text-3xl font-bold mb-6 text-ink">图片去背景工具</h1>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 左侧上传区 */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-surface rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <Upload className="w-5 h-5 text-blue-600" /> 上传图片
             </h2>
-            
+
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors bg-gray-50"
+              className="border-2 border-dashed border-edge-strong rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors bg-surface-muted"
             >
               {originalImage ? (
                 <div className="space-y-4">
@@ -131,14 +131,14 @@ const ImageBackgroundRemover: React.FC = () => {
                     alt="原始图片"
                     className="max-h-64 mx-auto rounded"
                   />
-                  <p className="text-sm text-gray-500">点击更换图片</p>
+                  <p className="text-sm text-ink-muted">点击更换图片</p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <ImageIcon className="w-16 h-16 mx-auto text-gray-400" />
+                  <ImageIcon className="w-16 h-16 mx-auto text-ink-subtle" />
                   <div>
-                    <p className="text-lg font-medium text-gray-700">点击或拖拽上传图片</p>
-                    <p className="text-sm text-gray-500 mt-1">支持 JPG、PNG 格式，建议背景为纯色</p>
+                    <p className="text-lg font-medium text-ink">点击或拖拽上传图片</p>
+                    <p className="text-sm text-ink-muted mt-1">支持 JPG、PNG 格式，建议背景为纯色</p>
                   </div>
                 </div>
               )}
@@ -174,9 +174,9 @@ const ImageBackgroundRemover: React.FC = () => {
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-surface rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">💡 使用说明</h2>
-            <ul className="space-y-2 text-gray-700">
+            <ul className="space-y-2 text-ink">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 font-bold">•</span>
                 <span>上传背景为纯色的图片，去除效果最佳</span>
@@ -196,9 +196,9 @@ const ImageBackgroundRemover: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h3 className="font-semibold text-yellow-800 mb-2">⚠️ 功能说明</h3>
-            <p className="text-sm text-yellow-700">
+          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+            <h3 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">⚠️ 功能说明</h3>
+            <p className="text-sm text-yellow-700 dark:text-yellow-400">
               当前版本为基础版，仅支持纯色背景去除。如需复杂背景AI去除功能，可联系管理员开通高级版API接入。
             </p>
           </div>
@@ -206,11 +206,12 @@ const ImageBackgroundRemover: React.FC = () => {
 
         {/* 右侧结果区 */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-surface rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">处理结果</h2>
-            
-            <div 
-              className="border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIi8+PHJlY3QgeD0iMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIvPjxyZWN0IHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiLz48L2c+PC9zdmc+')] bg-[length:20px_20px]"
+
+            {/* ponytail: transparency checkerboard stays neutral so users can judge real alpha, not app theme */}
+            <div
+              className="border-2 border-edge rounded-lg p-4 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iI2ZmZiI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIi8+PHJlY3QgeD0iMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIvPjxyZWN0IHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiLz48L2c+PC9zdmc+')] bg-[length:20px_20px]"
               style={{ minHeight: '300px' }}
             >
               {processedImage ? (
@@ -253,7 +254,7 @@ const ImageBackgroundRemover: React.FC = () => {
               <div className="mt-4">
                 <button
                   onClick={reset}
-                  className="w-full py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="w-full py-2 bg-surface-inset text-ink rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                 >
                   重新上传
                 </button>
@@ -261,28 +262,28 @@ const ImageBackgroundRemover: React.FC = () => {
             )}
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-surface rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">✨ 功能特性</h2>
             <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
+              <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <div className="text-2xl mb-2">⚡</div>
-                <h3 className="font-semibold text-gray-800">快速处理</h3>
-                <p className="text-sm text-gray-600 mt-1">本地处理，无需等待</p>
+                <h3 className="font-semibold text-ink">快速处理</h3>
+                <p className="text-sm text-ink-muted mt-1">本地处理，无需等待</p>
               </div>
-              <div className="text-center p-4 bg-green-50 rounded-lg">
+              <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                 <div className="text-2xl mb-2">🔒</div>
-                <h3 className="font-semibold text-gray-800">隐私安全</h3>
-                <p className="text-sm text-gray-600 mt-1">不上传服务器，数据安全</p>
+                <h3 className="font-semibold text-ink">隐私安全</h3>
+                <p className="text-sm text-ink-muted mt-1">不上传服务器，数据安全</p>
               </div>
-              <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                 <div className="text-2xl mb-2">🎯</div>
-                <h3 className="font-semibold text-gray-800">高质量输出</h3>
-                <p className="text-sm text-gray-600 mt-1">无损画质，透明背景</p>
+                <h3 className="font-semibold text-ink">高质量输出</h3>
+                <p className="text-sm text-ink-muted mt-1">无损画质，透明背景</p>
               </div>
-              <div className="text-center p-4 bg-orange-50 rounded-lg">
+              <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                 <div className="text-2xl mb-2">🆓</div>
-                <h3 className="font-semibold text-gray-800">完全免费</h3>
-                <p className="text-sm text-gray-600 mt-1">无限制使用，无水印</p>
+                <h3 className="font-semibold text-ink">完全免费</h3>
+                <p className="text-sm text-ink-muted mt-1">无限制使用，无水印</p>
               </div>
             </div>
           </div>

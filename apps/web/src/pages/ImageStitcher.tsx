@@ -149,13 +149,13 @@ const ImageStitcher: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片拼接工具</h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           将多张图片横向或纵向拼接成一张，支持自定义间距和背景色
         </p>
       </div>
 
       {/* Settings */}
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4">拼接设置</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -168,7 +168,7 @@ const ImageStitcher: React.FC = () => {
                 className={`flex-1 px-4 py-3 rounded-lg flex items-center justify-center gap-2 transition ${
                   direction === 'horizontal'
                     ? 'bg-blue-500 text-white'
-                    : 'bg-gray-100 hover:bg-gray-200'
+                    : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <Columns className="w-5 h-5" />
@@ -179,7 +179,7 @@ const ImageStitcher: React.FC = () => {
                 className={`flex-1 px-4 py-3 rounded-lg flex items-center justify-center gap-2 transition ${
                   direction === 'vertical'
                     ? 'bg-blue-500 text-white'
-                    : 'bg-gray-100 hover:bg-gray-200'
+                    : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <Rows className="w-5 h-5" />
@@ -205,7 +205,7 @@ const ImageStitcher: React.FC = () => {
               max="100"
               value={gap}
               onChange={(e) => setGap(parseInt(e.target.value) || 0)}
-              className="w-full mt-2 px-4 py-2 border rounded-lg"
+              className="w-full mt-2 px-4 py-2 border border-edge-strong rounded-lg bg-surface"
             />
           </div>
 
@@ -217,13 +217,13 @@ const ImageStitcher: React.FC = () => {
                 type="color"
                 value={backgroundColor}
                 onChange={(e) => setBackgroundColor(e.target.value)}
-                className="w-12 h-10 border rounded-lg cursor-pointer"
+                className="w-12 h-10 border border-edge-strong rounded-lg cursor-pointer"
               />
               <input
                 type="text"
                 value={backgroundColor}
                 onChange={(e) => setBackgroundColor(e.target.value)}
-                className="flex-1 px-4 py-2 border rounded-lg"
+                className="flex-1 px-4 py-2 border border-edge-strong rounded-lg bg-surface"
                 placeholder="#ffffff"
               />
             </div>
@@ -235,11 +235,11 @@ const ImageStitcher: React.FC = () => {
       <div className="mb-6">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
+          className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
-          <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-700 mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-gray-500">至少需要 2 张图片，支持批量上传</p>
+          <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
+          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
+          <p className="text-sm text-ink-muted">至少需要 2 张图片，支持批量上传</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -253,7 +253,7 @@ const ImageStitcher: React.FC = () => {
 
       {/* Image List */}
       {images.length > 0 && (
-        <div className="mb-6 bg-white rounded-lg shadow p-6">
+        <div className="mb-6 bg-surface rounded-lg shadow p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">图片列表 ({images.length}张)</h2>
             <button
@@ -268,7 +268,7 @@ const ImageStitcher: React.FC = () => {
           <div className={`grid gap-4 ${direction === 'horizontal' ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-1'}`}>
             {images.map((image, index) => (
               <div key={image.id} className="relative group">
-                <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                <div className="aspect-video bg-surface-inset rounded-lg overflow-hidden">
                   <img
                     src={image.previewUrl}
                     alt={image.file.name}
@@ -300,10 +300,10 @@ const ImageStitcher: React.FC = () => {
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="mt-2 text-sm text-gray-600 truncate">
+                <div className="mt-2 text-sm text-ink-muted truncate">
                   {index + 1}. {image.file.name}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-ink-muted">
                   {formatFileSize(image.file.size)}
                 </div>
               </div>
@@ -338,9 +338,9 @@ const ImageStitcher: React.FC = () => {
 
       {/* Result Preview */}
       {resultUrl && (
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-surface rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4">拼接结果</h2>
-          <div className="bg-gray-100 rounded-lg overflow-auto max-h-96 flex items-center justify-center p-4">
+          <div className="bg-surface-inset rounded-lg overflow-auto max-h-96 flex items-center justify-center p-4">
             <img src={resultUrl} alt="Stitched result" className="max-w-full max-h-80 object-contain" />
           </div>
         </div>

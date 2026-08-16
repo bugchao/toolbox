@@ -90,24 +90,24 @@ const CronGenerator: React.FC = () => {
 
       <div className="space-y-6">
         {/* 结果展示 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-gray-900">Cron表达式</h3>
+            <h3 className="text-lg font-medium text-ink">Cron表达式</h3>
             <div className="flex items-center gap-2">
-              <label className="flex items-center gap-2 text-sm text-gray-700">
+              <label className="flex items-center gap-2 text-sm text-ink">
                 <input
                   type="checkbox"
                   checked={useSeconds}
                   onChange={(e) => setUseSeconds(e.target.checked)}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
                 />
                 包含秒位
               </label>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
-            <div className="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-md font-mono text-lg text-center">
+            <div className="flex-1 px-4 py-3 bg-surface-muted border border-edge-strong rounded-md font-mono text-lg text-center">
               {cron}
             </div>
             <button
@@ -118,25 +118,25 @@ const CronGenerator: React.FC = () => {
               {copied ? '已复制' : '复制'}
             </button>
           </div>
-          
-          <div className="mt-4 text-center text-gray-600">
+
+          <div className="mt-4 text-center text-ink-muted">
             <p className="text-lg">{description}</p>
           </div>
         </div>
 
         {/* 常用模板 */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">常用模板</h3>
+        <div className="bg-surface p-6 rounded-lg shadow-sm border border-edge">
+          <h3 className="text-lg font-medium text-ink mb-4">常用模板</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {commonTemplates.map((template, index) => (
               <div
                 key={index}
-                className="p-3 border border-gray-200 rounded-md hover:border-indigo-300 cursor-pointer transition-colors"
+                className="p-3 border border-edge rounded-md hover:border-indigo-300 cursor-pointer transition-colors"
                 onClick={() => loadTemplate(template.cron)}
               >
-                <div className="font-medium text-gray-900 mb-1">{template.name}</div>
-                <div className="text-xs font-mono text-gray-600 mb-1">{template.cron}</div>
-                <div className="text-xs text-gray-500">{template.desc}</div>
+                <div className="font-medium text-ink mb-1">{template.name}</div>
+                <div className="text-xs font-mono text-ink-muted mb-1">{template.cron}</div>
+                <div className="text-xs text-ink-muted">{template.desc}</div>
               </div>
             ))}
           </div>
@@ -145,104 +145,104 @@ const CronGenerator: React.FC = () => {
         {/* Cron配置项 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {useSeconds && (
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
               <div className="flex items-center gap-2 mb-3">
                 <Clock className="w-5 h-5 text-indigo-600" />
-                <h4 className="font-medium text-gray-900">秒 (Seconds)</h4>
+                <h4 className="font-medium text-ink">秒 (Seconds)</h4>
               </div>
               <input
                 type="text"
                 value={second}
                 onChange={(e) => setSecond(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="*"
               />
-              <p className="mt-2 text-xs text-gray-500">允许值: 0-59, * / , -</p>
+              <p className="mt-2 text-xs text-ink-muted">允许值: 0-59, * / , -</p>
             </div>
           )}
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-medium text-gray-900">分 (Minutes)</h4>
+              <h4 className="font-medium text-ink">分 (Minutes)</h4>
             </div>
             <input
               type="text"
               value={minute}
               onChange={(e) => setMinute(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="*"
             />
-            <p className="mt-2 text-xs text-gray-500">允许值: 0-59, * / , -</p>
+            <p className="mt-2 text-xs text-ink-muted">允许值: 0-59, * / , -</p>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-medium text-gray-900">时 (Hours)</h4>
+              <h4 className="font-medium text-ink">时 (Hours)</h4>
             </div>
             <input
               type="text"
               value={hour}
               onChange={(e) => setHour(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="*"
             />
-            <p className="mt-2 text-xs text-gray-500">允许值: 0-23, * / , -</p>
+            <p className="mt-2 text-xs text-ink-muted">允许值: 0-23, * / , -</p>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-medium text-gray-900">日 (Day)</h4>
+              <h4 className="font-medium text-ink">日 (Day)</h4>
             </div>
             <input
               type="text"
               value={day}
               onChange={(e) => setDay(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="*"
             />
-            <p className="mt-2 text-xs text-gray-500">允许值: 1-31, * / , - ?</p>
+            <p className="mt-2 text-xs text-ink-muted">允许值: 1-31, * / , - ?</p>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-medium text-gray-900">月 (Month)</h4>
+              <h4 className="font-medium text-ink">月 (Month)</h4>
             </div>
             <input
               type="text"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="*"
             />
-            <p className="mt-2 text-xs text-gray-500">允许值: 1-12, * / , -</p>
+            <p className="mt-2 text-xs text-ink-muted">允许值: 1-12, * / , -</p>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-surface p-4 rounded-lg shadow-sm border border-edge">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="w-5 h-5 text-indigo-600" />
-              <h4 className="font-medium text-gray-900">周 (Week)</h4>
+              <h4 className="font-medium text-ink">周 (Week)</h4>
             </div>
             <input
               type="text"
               value={week}
               onChange={(e) => setWeek(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="*"
             />
-            <p className="mt-2 text-xs text-gray-500">允许值: 0-7 (0/7是周日), * / , - ?</p>
+            <p className="mt-2 text-xs text-ink-muted">允许值: 0-7 (0/7是周日), * / , - ?</p>
           </div>
         </div>
 
         {/* Cron说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">Cron表达式结构</h3>
-          <div className="text-sm text-blue-700 space-y-1">
-            <p>• 5位结构: <code className="bg-blue-100 px-1 rounded">分 时 日 月 周</code></p>
-            <p>• 6位结构: <code className="bg-blue-100 px-1 rounded">秒 分 时 日 月 周</code></p>
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">Cron表达式结构</h3>
+          <div className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
+            <p>• 5位结构: <code className="bg-blue-100 dark:bg-blue-900/40 px-1 rounded">分 时 日 月 周</code></p>
+            <p>• 6位结构: <code className="bg-blue-100 dark:bg-blue-900/40 px-1 rounded">秒 分 时 日 月 周</code></p>
             <p>• <code>*</code> 表示匹配该域的任意值</p>
             <p>• <code>/</code> 表示步长，例如 <code>0/5</code> 表示每隔5个单位</p>
             <p>• <code>-</code> 表示范围，例如 <code>1-5</code> 表示1到5</p>

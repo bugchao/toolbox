@@ -114,21 +114,21 @@ const HotNews: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      '科技': 'bg-blue-100 text-blue-800',
-      '体育': 'bg-green-100 text-green-800',
-      'AI': 'bg-purple-100 text-purple-800',
-      'OpenClaw': 'bg-orange-100 text-orange-800',
-      'MCP': 'bg-red-100 text-red-800',
-      '国际': 'bg-indigo-100 text-indigo-800',
+      '科技': 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+      '体育': 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
+      'AI': 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
+      'OpenClaw': 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300',
+      'MCP': 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
+      '国际': 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300',
     }
-    return colors[category] || 'bg-gray-100 text-gray-800'
+    return colors[category] || 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
   }
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="card">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">每日热点</h1>
+          <h1 className="text-3xl font-bold text-ink">每日热点</h1>
           <button
             onClick={fetchNews}
             disabled={loading}
@@ -148,7 +148,7 @@ const HotNews: React.FC = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedCategory === category.value
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {category.label}
@@ -161,8 +161,8 @@ const HotNews: React.FC = () => {
           {loading ? (
             Array(5).fill(0).map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                <div className="h-6 bg-surface-inset rounded w-3/4 mb-2"></div>
+                <div className="h-4 bg-surface-inset rounded w-1/4"></div>
               </div>
             ))
           ) : filteredNews.length > 0 ? (
@@ -172,14 +172,14 @@ const HotNews: React.FC = () => {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
+                className="block p-4 border border-edge rounded-lg hover:bg-surface-muted transition-colors"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-indigo-600">
+                    <h3 className="text-lg font-semibold text-ink mb-2 hover:text-indigo-600">
                       {item.title}
                     </h3>
-                    <div className="flex items-center text-sm text-gray-500 space-x-4">
+                    <div className="flex items-center text-sm text-ink-muted space-x-4">
                       <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(item.category)}`}>
                         {item.category}
                       </span>
@@ -187,12 +187,12 @@ const HotNews: React.FC = () => {
                       <span>{item.time}</span>
                     </div>
                   </div>
-                  <ExternalLink className="w-5 h-5 text-gray-400 ml-4 flex-shrink-0" />
+                  <ExternalLink className="w-5 h-5 text-ink-subtle ml-4 flex-shrink-0" />
                 </div>
               </a>
             ))
           ) : (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-ink-muted">
               暂无新闻数据，请点击刷新按钮
             </div>
           )}
@@ -200,8 +200,8 @@ const HotNews: React.FC = () => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">功能说明</h2>
-        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+        <h2 className="text-xl font-bold text-ink mb-4">功能说明</h2>
+        <ul className="list-disc pl-5 space-y-2 text-ink-muted">
           <li>新闻数据实时爬取，覆盖科技、体育、AI、OpenClaw、MCP、国际等多个领域</li>
           <li>支持按分类筛选，快速找到感兴趣的内容</li>
           <li>点击新闻标题可跳转到原始来源查看详情</li>

@@ -413,11 +413,11 @@ const ColorGenerator: React.FC = () => {
       <div className="card">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">配色模式</label>
+            <label className="block text-sm font-medium text-ink mb-2">配色模式</label>
             <select
               value={paletteType}
               onChange={(e) => setPaletteType(e.target.value as any)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="random">随机配色</option>
               <option value="analogous">类似色</option>
@@ -429,46 +429,46 @@ const ColorGenerator: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">基准颜色</label>
+            <label className="block text-sm font-medium text-ink mb-2">基准颜色</label>
             <div className="flex items-center space-x-2">
               <input
                 type="color"
                 value={baseColor}
                 onChange={(e) => setBaseColor(e.target.value)}
-                className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                className="w-12 h-10 rounded border border-edge-strong cursor-pointer"
               />
               <input
                 type="text"
                 value={baseColor}
                 onChange={(e) => setBaseColor(e.target.value)}
                 placeholder="#3b82f6"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
+                className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">颜色数量</label>
+            <label className="block text-sm font-medium text-ink mb-2">颜色数量</label>
             <input
               type="range"
               min="3"
               max="10"
               value={colorCount}
               onChange={(e) => setColorCount(Number(e.target.value))}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              className="w-full h-2 bg-surface-inset rounded-lg appearance-none cursor-pointer"
             />
-            <div className="text-center text-sm text-gray-600 mt-1">
+            <div className="text-center text-sm text-ink-muted mt-1">
               {colorCount} 种颜色
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">显示格式</label>
+            <label className="block text-sm font-medium text-ink mb-2">显示格式</label>
             <div className="flex space-x-2">
               <button
                 onClick={() => setColorMode('hex')}
                 className={`flex-1 px-3 py-2 rounded-lg font-medium ${
-                  colorMode === 'hex' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  colorMode === 'hex' ? 'bg-indigo-600 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 HEX
@@ -476,7 +476,7 @@ const ColorGenerator: React.FC = () => {
               <button
                 onClick={() => setColorMode('rgb')}
                 className={`flex-1 px-3 py-2 rounded-lg font-medium ${
-                  colorMode === 'rgb' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  colorMode === 'rgb' ? 'bg-indigo-600 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 RGB
@@ -484,7 +484,7 @@ const ColorGenerator: React.FC = () => {
               <button
                 onClick={() => setColorMode('hsl')}
                 className={`flex-1 px-3 py-2 rounded-lg font-medium ${
-                  colorMode === 'hsl' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  colorMode === 'hsl' ? 'bg-indigo-600 text-white' : 'bg-surface-inset text-ink hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 HSL
@@ -500,14 +500,14 @@ const ColorGenerator: React.FC = () => {
                 type="checkbox"
                 checked={contrastCheck}
                 onChange={(e) => setContrastCheck(e.target.checked)}
-                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="rounded border-edge-strong text-indigo-600 focus:ring-indigo-500"
               />
-              <span className="text-sm text-gray-700">显示对比度</span>
+              <span className="text-sm text-ink">显示对比度</span>
             </label>
 
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              className="flex items-center px-4 py-2 bg-surface-inset text-ink rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
               <Upload className="w-4 h-4 mr-2" />
               从图片提取
@@ -532,38 +532,38 @@ const ColorGenerator: React.FC = () => {
 
             <div className="relative group">
               <button
-                className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                className="flex items-center px-4 py-2 bg-surface-inset text-ink rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
                 <Download className="w-4 h-4 mr-2" />
                 导出
                 <ChevronDown className="w-4 h-4 ml-1" />
               </button>
-              <div className="absolute right-0 z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div className="absolute right-0 z-10 mt-2 w-48 rounded-md shadow-lg bg-surface ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                 <div className="py-1">
                   <button
                     onClick={savePalette}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                    className="w-full text-left px-4 py-2 text-sm text-ink hover:bg-surface-inset flex items-center"
                   >
                     <Palette className="w-4 h-4 mr-2" />
                     保存到我的配色
                   </button>
                   <button
                     onClick={exportPalette}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                    className="w-full text-left px-4 py-2 text-sm text-ink hover:bg-surface-inset flex items-center"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     导出JSON
                   </button>
                   <button
                     onClick={exportAsCSS}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                    className="w-full text-left px-4 py-2 text-sm text-ink hover:bg-surface-inset flex items-center"
                   >
                     <FileCode className="w-4 h-4 mr-2" />
                     导出CSS变量
                   </button>
                   <button
                     onClick={exportAsTailwind}
-                    className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                    className="w-full text-left px-4 py-2 text-sm text-ink hover:bg-surface-inset flex items-center"
                   >
                     <Code className="w-4 h-4 mr-2" />
                     导出Tailwind配置
@@ -634,7 +634,7 @@ const ColorGenerator: React.FC = () => {
               <div className="flex flex-col space-y-2">
                 <button
                   onClick={() => copyColor(color.hex, index)}
-                  className="px-4 py-2 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors flex items-center"
+                  className="px-4 py-2 bg-surface text-ink rounded-lg hover:bg-surface-inset transition-colors flex items-center"
                 >
                   {copiedIndex === index ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
                   {copiedIndex === index ? '已复制' : '复制'}
@@ -647,7 +647,7 @@ const ColorGenerator: React.FC = () => {
 
       {/* 渐变色预览 */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+        <h3 className="text-lg font-semibold text-ink mb-4 flex items-center">
           <Palette className="w-5 h-5 mr-2 text-indigo-600" />
           渐变色预览
         </h3>
@@ -677,7 +677,7 @@ const ColorGenerator: React.FC = () => {
       {savedPalettes.length > 0 && (
         <div className="card">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+            <h3 className="text-lg font-semibold text-ink flex items-center">
               <Save className="w-5 h-5 mr-2 text-indigo-600" />
               我的收藏
             </h3>
@@ -694,7 +694,7 @@ const ColorGenerator: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {savedPalettes.map((palette) => (
-              <div key={palette.id} className="border border-gray-200 rounded-lg overflow-hidden">
+              <div key={palette.id} className="border border-edge rounded-lg overflow-hidden">
                 <div className="flex h-16">
                   {palette.colors.map((color, i) => (
                     <div
@@ -706,8 +706,8 @@ const ColorGenerator: React.FC = () => {
                 </div>
                 <div className="p-3">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-gray-900">{palette.name}</h4>
-                    <div className="text-xs text-gray-500">
+                    <h4 className="font-medium text-ink">{palette.name}</h4>
+                    <div className="text-xs text-ink-muted">
                       {new Date(palette.createdAt).toLocaleDateString('zh-CN')}
                     </div>
                   </div>

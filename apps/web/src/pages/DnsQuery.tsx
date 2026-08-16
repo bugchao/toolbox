@@ -118,15 +118,15 @@ const DnsQuery: React.FC = () => {
     const typeName = TYPE_NAMES[r.type] ?? `TYPE${r.type}`
     const displayData = r.type === 6 ? formatSoaData(r.data) : r.data
     return (
-      <tr key={`${r.name}-${r.data}-${r.TTL}`} className="border-b border-gray-100 last:border-0">
-        <td className="py-2 px-3 text-gray-700 font-mono text-sm">{r.name}</td>
+      <tr key={`${r.name}-${r.data}-${r.TTL}`} className="border-b border-edge last:border-0">
+        <td className="py-2 px-3 text-ink font-mono text-sm">{r.name}</td>
         <td className="py-2 px-3">
-          <span className="inline-flex px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-xs font-medium">
+          <span className="inline-flex px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 text-xs font-medium">
             {typeName}
           </span>
         </td>
-        <td className="py-2 px-3 text-gray-600 text-sm">{r.TTL}</td>
-        <td className="py-2 px-3 text-gray-900 font-mono text-sm break-all">{displayData}</td>
+        <td className="py-2 px-3 text-ink-muted text-sm">{r.TTL}</td>
+        <td className="py-2 px-3 text-ink font-mono text-sm break-all">{displayData}</td>
       </tr>
     )
   }
@@ -142,30 +142,30 @@ const DnsQuery: React.FC = () => {
         <form onSubmit={queryDns} className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
-              <label htmlFor="dns-domain" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="dns-domain" className="block text-sm font-medium text-ink mb-2">
                 域名
               </label>
               <div className="relative">
-                <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle w-5 h-5" />
                 <input
                   type="text"
                   id="dns-domain"
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   placeholder="example.com"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full pl-10 pr-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 />
               </div>
             </div>
             <div className="w-full sm:w-40">
-              <label htmlFor="dns-type" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="dns-type" className="block text-sm font-medium text-ink mb-2">
                 记录类型
               </label>
               <select
                 id="dns-type"
                 value={recordType}
                 onChange={(e) => setRecordType(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                className="w-full px-4 py-3 border border-edge-strong rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-surface"
               >
                 {RECORD_TYPES.map(({ value, label }) => (
                   <option key={value} value={value}>{label}</option>
@@ -174,7 +174,7 @@ const DnsQuery: React.FC = () => {
             </div>
           </div>
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 flex items-center">
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 flex items-center">
               <AlertCircle className="w-5 h-5 mr-2 shrink-0" />
               {error}
             </div>
@@ -197,14 +197,14 @@ const DnsQuery: React.FC = () => {
       {loading && (
         <div className="card text-center py-12">
           <Loader2 className="w-12 h-12 text-indigo-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">正在查询 DNS…</p>
+          <p className="text-ink-muted">正在查询 DNS…</p>
         </div>
       )}
 
       {result && !loading && (
-        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200">
+        <div className="card bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-800">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-indigo-900 flex items-center">
+            <h3 className="text-lg font-semibold text-indigo-900 dark:text-indigo-300 flex items-center">
               <Server className="w-5 h-5 mr-2" />
               查询结果
             </h3>
@@ -217,15 +217,15 @@ const DnsQuery: React.FC = () => {
               {copied ? '已复制' : '复制 JSON'}
             </button>
           </div>
-          <div className="text-sm text-gray-600 mb-3">
+          <div className="text-sm text-ink-muted mb-3">
             状态: {result.Status === 0 ? '成功' : result.Status === 3 ? 'NXDOMAIN' : `错误 (${result.Status})`}
             {result.Question?.length ? ` · 查询: ${result.Question.map((q) => `${q.name} ${TYPE_NAMES[q.type] || q.type}`).join(', ')}` : ''}
           </div>
           {(result.Answer?.length ?? 0) > 0 && (
-            <div className="overflow-x-auto rounded-lg border border-indigo-100 bg-white">
+            <div className="overflow-x-auto rounded-lg border border-indigo-100 dark:border-indigo-800 bg-surface">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-indigo-50 text-gray-700">
+                  <tr className="bg-indigo-50 dark:bg-indigo-900/30 text-ink">
                     <th className="py-2 px-3 text-sm font-medium">名称</th>
                     <th className="py-2 px-3 text-sm font-medium">类型</th>
                     <th className="py-2 px-3 text-sm font-medium">TTL</th>
@@ -240,11 +240,11 @@ const DnsQuery: React.FC = () => {
           )}
           {(result.Authority?.length ?? 0) > 0 && (
             <>
-              <h4 className="text-sm font-medium text-gray-700 mt-4 mb-2">权威记录 (Authority)</h4>
-              <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+              <h4 className="text-sm font-medium text-ink mt-4 mb-2">权威记录 (Authority)</h4>
+              <div className="overflow-x-auto rounded-lg border border-edge bg-surface">
                 <table className="w-full text-left">
                   <thead>
-                    <tr className="bg-gray-50 text-gray-600">
+                    <tr className="bg-surface-muted text-ink-muted">
                       <th className="py-2 px-3 text-sm font-medium">名称</th>
                       <th className="py-2 px-3 text-sm font-medium">类型</th>
                       <th className="py-2 px-3 text-sm font-medium">TTL</th>
@@ -259,17 +259,17 @@ const DnsQuery: React.FC = () => {
             </>
           )}
           {(!result.Answer?.length && !result.Authority?.length) && result.Status === 0 && (
-            <p className="text-gray-500 text-sm">该查询无记录返回。</p>
+            <p className="text-ink-muted text-sm">该查询无记录返回。</p>
           )}
           {result.Status === 3 && (
-            <p className="text-amber-700 text-sm">域名不存在 (NXDOMAIN)。</p>
+            <p className="text-amber-700 dark:text-amber-400 text-sm">域名不存在 (NXDOMAIN)。</p>
           )}
         </div>
       )}
 
-      <div className="card bg-gray-50">
-        <h3 className="text-lg font-bold text-gray-900 mb-3">使用说明</h3>
-        <ul className="space-y-2 text-gray-600 text-sm">
+      <div className="card bg-surface-muted">
+        <h3 className="text-lg font-bold text-ink mb-3">使用说明</h3>
+        <ul className="space-y-2 text-ink-muted text-sm">
           <li className="flex items-start">
             <span className="text-indigo-600 mr-2">•</span>
             输入域名即可查询，支持 A、AAAA、MX、TXT、CNAME、NS、SOA 等常见记录类型。

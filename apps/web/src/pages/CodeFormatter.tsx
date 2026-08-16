@@ -154,11 +154,11 @@ const CodeFormatter: React.FC = () => {
         {/* 操作栏 */}
         <div className="flex flex-wrap gap-4 items-center">
           <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">语言:</label>
+            <label className="text-sm font-medium text-ink">语言:</label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               {languages.map(lang => (
                 <option key={lang.value} value={lang.value}>{lang.label}</option>
@@ -167,11 +167,11 @@ const CodeFormatter: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">缩进大小:</label>
+            <label className="text-sm font-medium text-ink">缩进大小:</label>
             <select
               value={indentSize}
               onChange={(e) => setIndentSize(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-3 py-2 border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value={2}>2空格</option>
               <option value={4}>4空格</option>
@@ -222,37 +222,37 @@ const CodeFormatter: React.FC = () => {
 
         {/* 错误提示 */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
             {error}
           </div>
         )}
 
         {/* 输入框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">输入代码</label>
+          <label className="block text-sm font-medium text-ink mb-2">输入代码</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="输入要格式化的代码..."
-            className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-64 p-4 border border-edge-strong rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 输出框 */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">格式化结果</label>
+          <label className="block text-sm font-medium text-ink mb-2">格式化结果</label>
           <textarea
             value={output}
             readOnly
             placeholder="格式化后的代码会显示在这里"
-            className="w-full h-64 p-4 border border-gray-300 rounded-md font-mono text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full h-64 p-4 border border-edge-strong rounded-md font-mono text-sm bg-surface-muted focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* 说明 */}
-        <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
-          <h3 className="text-sm font-medium text-blue-800 mb-2">支持的语言</h3>
-          <ul className="text-sm text-blue-700 space-y-1 grid grid-cols-2 md:grid-cols-3">
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md border border-blue-200 dark:border-blue-800">
+          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">支持的语言</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1 grid grid-cols-2 md:grid-cols-3">
             <li>• JSON / JSON5</li>
             <li>• JavaScript / ES6+</li>
             <li>• TypeScript</li>
