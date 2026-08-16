@@ -181,4 +181,20 @@ export default defineConfig({
       '@toolbox/storage',
     ],
   },
+  build: {
+    // 各工具的重量级依赖（Monaco/ECharts/mermaid/cytoscape/WebLLM 等）都是通过
+    // loadComponent: () => import(...) 懒加载的独立 chunk，只有打开对应工具才下载，
+    // 几百 KB～几 MB 是预期内的，不是回归；500KB 默认阈值对这类多工具单体应用噪音太大。
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        // 把很少变化的框架级依赖单独分包，跟经常变化的业务代码分开，
+        // 用户重新部署后不用重新下载 React 本身，长期缓存命中率更高。
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-i18n': ['i18next', 'react-i18next'],
+        },
+      },
+    },
+  },
 })
