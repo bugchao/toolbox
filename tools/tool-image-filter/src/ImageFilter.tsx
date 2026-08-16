@@ -249,13 +249,13 @@ const ImageFilter: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片滤镜工具</h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           提供 12 种预设滤镜，支持自定义亮度、对比度、饱和度等参数，批量处理
         </p>
       </div>
 
       {/* Preset Filters */}
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <Sparkles className="w-5 h-5" />
           预设滤镜
@@ -267,12 +267,12 @@ const ImageFilter: React.FC = () => {
               onClick={() => handlePresetSelect(preset)}
               className={`p-3 rounded-lg border-2 transition text-center ${
                 selectedFilter === preset.name
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                  : 'border-edge hover:border-edge-strong'
               }`}
             >
               <div
-                className="w-full aspect-square rounded mb-2 bg-gradient-to-br from-gray-200 to-gray-300"
+                className="w-full aspect-square rounded mb-2 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600"
                 style={{ filter: `brightness(${preset.settings.brightness}%) contrast(${preset.settings.contrast}%) saturate(${preset.settings.saturation}%) sepia(${preset.settings.sepia}%)` }}
               />
               <p className="text-sm font-medium">{preset.name}</p>
@@ -282,7 +282,7 @@ const ImageFilter: React.FC = () => {
       </div>
 
       {/* Advanced Settings */}
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <Sliders className="w-5 h-5" />
           高级调整
@@ -384,11 +384,11 @@ const ImageFilter: React.FC = () => {
       <div className="mb-6">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
+          className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
-          <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-700 mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-gray-500">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
+          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
+          <p className="text-sm text-ink-muted">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -406,7 +406,7 @@ const ImageFilter: React.FC = () => {
           <button
             onClick={handleProcessAll}
             disabled={isProcessing}
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
+            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 dark:disabled:bg-gray-700 transition flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
             {isProcessing ? '处理中...' : `应用滤镜 (${images.length}张)`}
@@ -436,8 +436,8 @@ const ImageFilter: React.FC = () => {
       {images.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image) => (
-            <div key={image.id} className="bg-white rounded-lg shadow overflow-hidden">
-              <div className="relative aspect-video bg-gray-100">
+            <div key={image.id} className="bg-surface rounded-lg shadow overflow-hidden">
+              <div className="relative aspect-video bg-surface-inset">
                 <img
                   src={image.processedUrl || image.previewUrl}
                   alt={image.originalFile.name}
@@ -461,7 +461,7 @@ const ImageFilter: React.FC = () => {
               
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-ink-muted">
                   <span>原始：{formatFileSize(image.originalSize || image.originalFile.size)}</span>
                   {image.processedSize && (
                     <span>处理后：{formatFileSize(image.processedSize)}</span>
@@ -477,7 +477,7 @@ const ImageFilter: React.FC = () => {
                   </button>
                 )}
                 {image.status === 'error' && (
-                  <p className="mt-2 text-sm text-red-500">{image.error}</p>
+                  <p className="mt-2 text-sm text-red-500 dark:text-red-400">{image.error}</p>
                 )}
               </div>
             </div>

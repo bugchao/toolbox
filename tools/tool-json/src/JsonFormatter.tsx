@@ -34,7 +34,7 @@ type ViewMode = 'text' | 'graph'
 const tabBase =
   'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md border transition-colors'
 const tabActive = 'bg-indigo-600 text-white border-indigo-600'
-const tabIdle = 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+const tabIdle = 'bg-surface text-ink border-edge-strong hover:bg-surface-muted'
 
 const JsonFormatter: React.FC = () => {
   const { t } = useTranslation(I18N_NAMESPACE)
@@ -115,11 +115,11 @@ const JsonFormatter: React.FC = () => {
 
       <div className="flex flex-wrap gap-3 items-center mb-4">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-medium text-gray-700">{t('indentSize')}:</label>
+          <label className="text-sm font-medium text-ink">{t('indentSize')}:</label>
           <select
             value={indentSize}
             onChange={(e) => setIndentSize(Number(e.target.value))}
-            className="px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-1.5 border border-edge-strong rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value={2}>{t('indent2')}</option>
             <option value={4}>{t('indent4')}</option>
@@ -155,7 +155,7 @@ const JsonFormatter: React.FC = () => {
         <button
           onClick={downloadJson}
           disabled={!formatted}
-          className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-1.5"
+          className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed flex items-center gap-1.5"
         >
           <Download className="w-4 h-4" />
           {t('downloadJson')}
@@ -171,7 +171,7 @@ const JsonFormatter: React.FC = () => {
       </div>
 
       {error && (
-        <div className="p-3 mb-4 bg-red-50 border border-red-200 rounded-md flex items-start gap-2 text-red-700 text-sm">
+        <div className="p-3 mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md flex items-start gap-2 text-red-700 dark:text-red-400 text-sm">
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
           <span className="break-all">{error}</span>
         </div>
@@ -180,8 +180,8 @@ const JsonFormatter: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-sm font-medium text-gray-700">{t('inputLabel')}</label>
-            <span className="text-xs text-gray-500">{t('monacoHint')}</span>
+            <label className="text-sm font-medium text-ink">{t('inputLabel')}</label>
+            <span className="text-xs text-ink-muted">{t('monacoHint')}</span>
           </div>
           <JsonEditor
             value={input}
@@ -213,11 +213,11 @@ const JsonFormatter: React.FC = () => {
             </div>
             {viewMode === 'graph' && (
               <div className="flex items-center gap-2">
-                <label className="text-xs text-gray-600">{t('layoutDirection')}:</label>
+                <label className="text-xs text-ink-muted">{t('layoutDirection')}:</label>
                 <select
                   value={layoutDirection}
                   onChange={(e) => setLayoutDirection(e.target.value as LayoutDirection)}
-                  className="px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="px-2 py-1 text-xs border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="RIGHT">{t('layoutRight')}</option>
                   <option value="LEFT">{t('layoutLeft')}</option>
@@ -238,7 +238,7 @@ const JsonFormatter: React.FC = () => {
           ) : (
             <Suspense
               fallback={
-                <div className="h-[600px] flex items-center justify-center text-gray-400 border border-gray-200 rounded-md bg-gray-50">
+                <div className="h-[600px] flex items-center justify-center text-ink-subtle border border-edge rounded-md bg-surface-muted">
                   {t('graphLoading')}
                 </div>
               }

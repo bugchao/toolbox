@@ -187,7 +187,7 @@ const HmacSign: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-sm text-gray-400 py-12">{t('loading')}</div>
+        <div className="text-center text-sm text-ink-subtle py-12">{t('loading')}</div>
       </div>
     )
   }
@@ -196,23 +196,23 @@ const HmacSign: React.FC = () => {
     <div className="w-full space-y-6 pb-24">
       <PageHero title={t('title')} description={t('description')} />
 
-      <div className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 flex items-start gap-2">
+      <div className="text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md px-3 py-2 flex items-start gap-2">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
         <span>{t('disclaimer')}</span>
       </div>
 
       {/* Config */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-3">
+        <h2 className="text-sm font-semibold text-ink flex items-center gap-2">
           <FileSignature className="w-4 h-4" /> {t('section.config')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">{t('field.algorithm')}</label>
+            <label className="block text-xs text-ink-muted mb-1">{t('field.algorithm')}</label>
             <select
               value={data.algorithm}
               onChange={(e) => update('algorithm', e.target.value as HashAlg)}
-              className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="SHA-1">HMAC-SHA1</option>
               <option value="SHA-256">HMAC-SHA256</option>
@@ -221,11 +221,11 @@ const HmacSign: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">{t('field.outputEncoding')}</label>
+            <label className="block text-xs text-ink-muted mb-1">{t('field.outputEncoding')}</label>
             <select
               value={data.outputEncoding}
               onChange={(e) => update('outputEncoding', e.target.value as Encoding)}
-              className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-2 py-1.5 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <option value="hex">Hex</option>
               <option value="base64">Base64</option>
@@ -233,13 +233,13 @@ const HmacSign: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">{t('field.mode')}</label>
-            <div className="grid grid-cols-2 border border-gray-300 rounded-md overflow-hidden">
+            <label className="block text-xs text-ink-muted mb-1">{t('field.mode')}</label>
+            <div className="grid grid-cols-2 border border-edge-strong rounded-md overflow-hidden">
               <button
                 type="button"
                 onClick={() => setMode('sign')}
                 className={`px-2 py-1.5 text-sm font-medium transition-colors ${
-                  mode === 'sign' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
+                  mode === 'sign' ? 'bg-indigo-600 text-white' : 'bg-surface text-ink hover:bg-surface-muted'
                 }`}
               >
                 {t('action.sign')}
@@ -248,7 +248,7 @@ const HmacSign: React.FC = () => {
                 type="button"
                 onClick={() => setMode('verify')}
                 className={`px-2 py-1.5 text-sm font-medium transition-colors ${
-                  mode === 'verify' ? 'bg-emerald-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
+                  mode === 'verify' ? 'bg-emerald-600 text-white' : 'bg-surface text-ink hover:bg-surface-muted'
                 }`}
               >
                 {t('action.verify')}
@@ -259,13 +259,13 @@ const HmacSign: React.FC = () => {
       </section>
 
       {/* Key */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-2">
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-gray-700">{t('field.key')}</label>
+          <label className="text-sm font-medium text-ink">{t('field.key')}</label>
           <button
             type="button"
             onClick={generateRandomKey}
-            className="text-xs text-gray-500 hover:text-indigo-600 inline-flex items-center gap-1"
+            className="text-xs text-ink-muted hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex items-center gap-1"
           >
             <Shuffle className="w-3 h-3" /> {t('key.random')}
           </button>
@@ -275,7 +275,7 @@ const HmacSign: React.FC = () => {
           value={key}
           onChange={(e) => setKey(e.target.value)}
           placeholder={t('key.placeholder')}
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
           autoComplete="off"
           spellCheck={false}
         />
@@ -287,13 +287,13 @@ const HmacSign: React.FC = () => {
       </section>
 
       {/* Message */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
-        <label className="text-sm font-medium text-gray-700 block">{t('field.message')}</label>
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-2">
+        <label className="text-sm font-medium text-ink block">{t('field.message')}</label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={t('message.placeholder')}
-          className="w-full h-40 px-3 py-2 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+          className="w-full h-40 px-3 py-2 text-sm border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
           spellCheck={false}
         />
         <EncodingPicker
@@ -305,24 +305,24 @@ const HmacSign: React.FC = () => {
 
       {/* Verify mode: expected signature */}
       {mode === 'verify' && (
-        <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
-          <label className="text-sm font-medium text-gray-700 block">{t('field.expected')}</label>
+        <section className="rounded-lg border border-edge bg-surface p-4 space-y-2">
+          <label className="text-sm font-medium text-ink block">{t('field.expected')}</label>
           <input
             type="text"
             value={expected}
             onChange={(e) => setExpected(e.target.value)}
             placeholder={t('verify.placeholder')}
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
             spellCheck={false}
           />
-          <p className="text-xs text-gray-400">{t('verify.hint')}</p>
+          <p className="text-xs text-ink-subtle">{t('verify.hint')}</p>
         </section>
       )}
 
       {/* Output */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-2">
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-gray-700">{t('field.output')}</label>
+          <label className="text-sm font-medium text-ink">{t('field.output')}</label>
           <CopyButton
             value={output}
             disabled={!output}
@@ -331,22 +331,22 @@ const HmacSign: React.FC = () => {
             buttonVariant="ghost"
             label={t('copy')}
             copiedLabel={t('copied')}
-            className="!px-2 !py-1 text-xs border border-gray-200 rounded hover:border-indigo-300 hover:!text-indigo-600"
+            className="!px-2 !py-1 text-xs border border-edge rounded hover:border-indigo-300 dark:hover:border-indigo-600 hover:!text-indigo-600 dark:hover:!text-indigo-400"
           />
         </div>
         <textarea
           value={output}
           readOnly
           placeholder={t('output.placeholder')}
-          className="w-full h-24 px-3 py-2 text-sm border border-gray-300 rounded-md font-mono bg-gray-50 resize-none break-all"
+          className="w-full h-24 px-3 py-2 text-sm border border-edge-strong rounded-md font-mono bg-surface-muted resize-none break-all"
           spellCheck={false}
         />
         {verifyResult && (
           <div
             className={`flex items-center gap-2 text-sm rounded-md border px-3 py-2 ${
               verifyResult === 'match'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
-                : 'bg-red-50 border-red-200 text-red-700'
+                ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400'
+                : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400'
             }`}
           >
             {verifyResult === 'match' ? (
@@ -358,7 +358,7 @@ const HmacSign: React.FC = () => {
           </div>
         )}
         {error && (
-          <div className="flex items-start gap-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+          <div className="flex items-start gap-2 text-sm text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md px-3 py-2">
             <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
             <span className="break-all">{error}</span>
           </div>
@@ -372,7 +372,7 @@ const HmacSign: React.FC = () => {
           disabled={running}
           className={`w-full max-w-md px-6 py-3 text-base font-medium rounded-full shadow-lg transition-colors flex items-center justify-center gap-2 ${
             mode === 'sign' ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-emerald-600 hover:bg-emerald-700'
-          } text-white disabled:bg-gray-300 disabled:cursor-not-allowed`}
+          } text-white disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed`}
         >
           <FileSignature className="w-5 h-5" />
           {running ? t('running') : mode === 'sign' ? t('action.sign') : t('action.verify')}
@@ -389,15 +389,15 @@ interface EncodingPickerProps {
 }
 const EncodingPicker: React.FC<EncodingPickerProps> = ({ value, onChange, label }) => (
   <div className="flex items-center gap-2">
-    <span className="text-xs text-gray-500 shrink-0">{label}:</span>
-    <div className="inline-flex border border-gray-300 rounded-md overflow-hidden">
+    <span className="text-xs text-ink-muted shrink-0">{label}:</span>
+    <div className="inline-flex border border-edge-strong rounded-md overflow-hidden">
       {(['utf8', 'base64', 'hex'] as Encoding[]).map((o) => (
         <button
           key={o}
           type="button"
           onClick={() => onChange(o)}
           className={`px-2 py-1 text-xs uppercase ${
-            value === o ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'
+            value === o ? 'bg-indigo-600 text-white' : 'bg-surface text-ink hover:bg-surface-muted'
           }`}
         >
           {o}

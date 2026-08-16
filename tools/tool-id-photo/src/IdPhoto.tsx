@@ -96,18 +96,18 @@ export default function IdPhoto() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">📸 证件照工具</h1>
-          <p className="text-gray-600">标准尺寸裁剪、背景色更换</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">📸 证件照工具</h1>
+          <p className="text-ink-muted">标准尺寸裁剪、背景色更换</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 左侧：设置 */}
           <div className="space-y-4">
             {/* 规格选择 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-lg font-semibold mb-4">选择规格</h2>
               <div className="space-y-2">
                 {PHOTO_SPECS.map((spec) => (
@@ -117,7 +117,7 @@ export default function IdPhoto() {
                     className={`w-full text-left p-3 rounded-lg transition-colors ${
                       selectedSpec.name === spec.name
                         ? 'bg-blue-500 text-white'
-                        : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
+                        : 'bg-surface-muted hover:bg-surface-inset text-ink'
                     }`}
                   >
                     <div className="font-medium">{spec.name}</div>
@@ -130,7 +130,7 @@ export default function IdPhoto() {
             </div>
 
             {/* 背景色选择 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-lg font-semibold mb-4">背景颜色</h2>
               <div className="grid grid-cols-2 gap-2">
                 {BACKGROUND_COLORS.map((color) => (
@@ -140,20 +140,20 @@ export default function IdPhoto() {
                     className={`p-3 rounded-lg border-2 transition-colors ${
                       backgroundColor === color.value
                         ? 'border-blue-500'
-                        : 'border-gray-200 hover:border-gray-300'
+                        : 'border-edge hover:border-edge-strong'
                     }`}
                   >
                     <div
                       className="w-full h-12 rounded mb-2"
                       style={{ backgroundColor: color.value }}
                     />
-                    <div className="text-sm text-gray-700">{color.name}</div>
+                    <div className="text-sm text-ink">{color.name}</div>
                   </button>
                 ))}
               </div>
 
               <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-ink mb-2">
                   自定义颜色
                 </label>
                 <input
@@ -166,7 +166,7 @@ export default function IdPhoto() {
             </div>
 
             {/* 上传按钮 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <button
                 onClick={() => fileInputRef.current?.click()}
                 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-600 transition-colors"
@@ -187,7 +187,7 @@ export default function IdPhoto() {
           <div className="lg:col-span-2 space-y-4">
             {/* 原图预览 */}
             {uploadedImage && (
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-surface rounded-xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold mb-4">原始照片</h2>
                 <div className="flex justify-center">
                   <img
@@ -207,7 +207,7 @@ export default function IdPhoto() {
 
             {/* 处理后预览 */}
             {processedImage && (
-              <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="bg-surface rounded-xl shadow-lg p-6">
                 <h2 className="text-lg font-semibold mb-4">证件照预览</h2>
                 <div className="flex justify-center mb-4">
                   <img
@@ -225,7 +225,7 @@ export default function IdPhoto() {
                   </button>
                   <button
                     onClick={processPhoto}
-                    className="px-6 bg-gray-100 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                    className="px-6 bg-surface-inset text-ink py-3 rounded-lg font-medium hover:bg-surface-inset transition-colors"
                   >
                     🔄 重新生成
                   </button>
@@ -235,10 +235,10 @@ export default function IdPhoto() {
 
             {/* 空状态 */}
             {!uploadedImage && (
-              <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+              <div className="bg-surface rounded-xl shadow-lg p-12 text-center">
                 <div className="text-6xl mb-4">📸</div>
-                <p className="text-gray-500 mb-2">还没有上传照片</p>
-                <p className="text-sm text-gray-400">点击左侧按钮上传照片开始制作</p>
+                <p className="text-ink-muted mb-2">还没有上传照片</p>
+                <p className="text-sm text-ink-subtle">点击左侧按钮上传照片开始制作</p>
               </div>
             )}
           </div>
@@ -248,9 +248,9 @@ export default function IdPhoto() {
         <canvas ref={canvasRef} className="hidden" />
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-semibold text-blue-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
             <li>• 上传正面免冠照片，确保五官清晰可见</li>
             <li>• 选择需要的证件照规格和背景颜色</li>
             <li>• 生成后可下载为高清 JPG 格式</li>

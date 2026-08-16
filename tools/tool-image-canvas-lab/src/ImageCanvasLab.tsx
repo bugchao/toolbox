@@ -138,22 +138,22 @@ export default function ImageCanvasLab() {
   const selectedLayerData = layers.find(l => l.id === selectedLayer);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🎨 Canvas 图像工作台</h1>
-          <p className="text-gray-600">多图层合成、水印添加、像素级处理</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">🎨 Canvas 图像工作台</h1>
+          <p className="text-ink-muted">多图层合成、水印添加、像素级处理</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* 左侧：工具栏 */}
           <div className="lg:col-span-1 space-y-4">
             {/* 画布设置 */}
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <h3 className="font-semibold mb-3">画布设置</h3>
               <div className="space-y-2">
                 <div>
-                  <label className="text-xs text-gray-600">宽度</label>
+                  <label className="text-xs text-ink-muted">宽度</label>
                   <input
                     type="number"
                     value={canvasSize.width}
@@ -162,7 +162,7 @@ export default function ImageCanvasLab() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-600">高度</label>
+                  <label className="text-xs text-ink-muted">高度</label>
                   <input
                     type="number"
                     value={canvasSize.height}
@@ -174,7 +174,7 @@ export default function ImageCanvasLab() {
             </div>
 
             {/* 添加图层 */}
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <h3 className="font-semibold mb-3">添加图层</h3>
               <label className="block w-full bg-indigo-500 text-white text-center py-2 rounded-lg cursor-pointer hover:bg-indigo-600 transition-colors">
                 📁 上传图片
@@ -188,7 +188,7 @@ export default function ImageCanvasLab() {
             </div>
 
             {/* 水印 */}
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <h3 className="font-semibold mb-3">添加水印</h3>
               <div className="space-y-2">
                 <input
@@ -199,7 +199,7 @@ export default function ImageCanvasLab() {
                   className="w-full px-2 py-1 border rounded text-sm"
                 />
                 <div>
-                  <label className="text-xs text-gray-600">透明度</label>
+                  <label className="text-xs text-ink-muted">透明度</label>
                   <input
                     type="range"
                     min="0"
@@ -220,7 +220,7 @@ export default function ImageCanvasLab() {
             </div>
 
             {/* 操作 */}
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <h3 className="font-semibold mb-3">操作</h3>
               <div className="space-y-2">
                 <button
@@ -241,13 +241,13 @@ export default function ImageCanvasLab() {
 
           {/* 中间：画布 */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <div className="overflow-auto">
                 <canvas
                   ref={canvasRef}
                   width={canvasSize.width}
                   height={canvasSize.height}
-                  className="border border-gray-300 mx-auto"
+                  className="border border-edge-strong mx-auto"
                 />
               </div>
             </div>
@@ -255,11 +255,11 @@ export default function ImageCanvasLab() {
 
           {/* 右侧：图层面板 */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-4">
+            <div className="bg-surface rounded-xl shadow-lg p-4">
               <h3 className="font-semibold mb-3">图层 ({layers.length})</h3>
 
               {layers.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
+                <div className="text-center py-8 text-ink-subtle">
                   <div className="text-4xl mb-2">🖼️</div>
                   <p className="text-sm">暂无图层</p>
                 </div>
@@ -269,7 +269,7 @@ export default function ImageCanvasLab() {
                     <div
                       key={layer.id}
                       className={`p-2 border rounded cursor-pointer ${
-                        selectedLayer === layer.id ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200'
+                        selectedLayer === layer.id ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-edge'
                       }`}
                       onClick={() => setSelectedLayer(layer.id)}
                     >
@@ -281,7 +281,7 @@ export default function ImageCanvasLab() {
                               e.stopPropagation();
                               moveLayer(layer.id, 'up');
                             }}
-                            className="text-xs px-1 hover:bg-gray-200 rounded"
+                            className="text-xs px-1 hover:bg-surface-inset rounded"
                           >
                             ↑
                           </button>
@@ -290,7 +290,7 @@ export default function ImageCanvasLab() {
                               e.stopPropagation();
                               moveLayer(layer.id, 'down');
                             }}
-                            className="text-xs px-1 hover:bg-gray-200 rounded"
+                            className="text-xs px-1 hover:bg-surface-inset rounded"
                           >
                             ↓
                           </button>
@@ -299,7 +299,7 @@ export default function ImageCanvasLab() {
                               e.stopPropagation();
                               deleteLayer(layer.id);
                             }}
-                            className="text-xs px-1 text-red-500 hover:bg-red-100 rounded"
+                            className="text-xs px-1 text-red-500 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 rounded"
                           >
                             ×
                           </button>
@@ -309,7 +309,7 @@ export default function ImageCanvasLab() {
                       {selectedLayer === layer.id && (
                         <div className="space-y-1 text-xs">
                           <div>
-                            <label className="text-gray-600">透明度</label>
+                            <label className="text-ink-muted">透明度</label>
                             <input
                               type="range"
                               min="0"
@@ -341,9 +341,9 @@ export default function ImageCanvasLab() {
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-indigo-50 border border-indigo-200 rounded-lg p-4">
-          <h3 className="font-semibold text-indigo-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-indigo-700 space-y-1">
+        <div className="mt-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-4">
+          <h3 className="font-semibold text-indigo-800 dark:text-indigo-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-indigo-700 dark:text-indigo-400 space-y-1">
             <li>• 支持多图层叠加，可调整图层顺序和透明度</li>
             <li>• 添加文字水印，自定义透明度和位置</li>
             <li>• 所有操作在浏览器本地完成，不上传服务器</li>

@@ -177,13 +177,13 @@ const ImageRotator: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片旋转/翻转工具</h1>
-        <p className="text-gray-600">
+        <p className="text-ink-muted">
           支持 90° 倍旋转、任意角度旋转、水平/垂直翻转，批量处理
         </p>
       </div>
 
       {/* Controls */}
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4">旋转设置</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -193,39 +193,39 @@ const ImageRotator: React.FC = () => {
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={() => setRotation(prev => prev - 90)}
-                className="px-3 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center gap-1"
+                className="px-3 py-3 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center justify-center gap-1"
               >
                 <RotateCw className="w-5 h-5 rotate-180" />
                 -90°
               </button>
               <button
                 onClick={() => setRotation(0)}
-                className="px-3 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                className="px-3 py-3 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
               >
                 0°
               </button>
               <button
                 onClick={() => setRotation(prev => prev + 90)}
-                className="px-3 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center gap-1"
+                className="px-3 py-3 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center justify-center gap-1"
               >
                 <RotateCw className="w-5 h-5" />
                 +90°
               </button>
               <button
                 onClick={() => setRotation(180)}
-                className="px-3 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                className="px-3 py-3 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
               >
                 180°
               </button>
               <button
                 onClick={() => setRotation(270)}
-                className="px-3 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg"
+                className="px-3 py-3 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg"
               >
                 270°
               </button>
               <button
                 onClick={handleReset}
-                className="px-3 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg"
+                className="px-3 py-3 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900/50 text-blue-700 dark:text-blue-400 rounded-lg"
               >
                 重置
               </button>
@@ -258,7 +258,7 @@ const ImageRotator: React.FC = () => {
                 }}
                 className="w-full px-4 py-2 border rounded-lg"
               />
-              <p className="text-sm text-gray-500 text-center">当前：{rotation}°</p>
+              <p className="text-sm text-ink-muted text-center">当前：{rotation}°</p>
             </div>
           </div>
 
@@ -269,7 +269,7 @@ const ImageRotator: React.FC = () => {
               <button
                 onClick={() => setFlipH(!flipH)}
                 className={`w-full px-4 py-3 rounded-lg flex items-center justify-center gap-2 transition ${
-                  flipH ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                  flipH ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <FlipHorizontal className="w-5 h-5" />
@@ -278,7 +278,7 @@ const ImageRotator: React.FC = () => {
               <button
                 onClick={() => setFlipV(!flipV)}
                 className={`w-full px-4 py-3 rounded-lg flex items-center justify-center gap-2 transition ${
-                  flipV ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                  flipV ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <FlipVertical className="w-5 h-5" />
@@ -289,8 +289,8 @@ const ImageRotator: React.FC = () => {
         </div>
 
         {/* Current Settings */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <p className="text-sm text-gray-600">
+        <div className="mt-6 p-4 bg-surface-muted rounded-lg">
+          <p className="text-sm text-ink-muted">
             当前设置：旋转 <span className="font-medium">{rotation}°</span>
             {flipH && <span className="ml-2">| 水平翻转</span>}
             {flipV && <span className="ml-2">| 垂直翻转</span>}
@@ -302,11 +302,11 @@ const ImageRotator: React.FC = () => {
       <div className="mb-6">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
+          className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
-          <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-700 mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-gray-500">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
+          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
+          <p className="text-sm text-ink-muted">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -353,8 +353,8 @@ const ImageRotator: React.FC = () => {
       {images.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image) => (
-            <div key={image.id} className="bg-white rounded-lg shadow overflow-hidden">
-              <div className="relative aspect-video bg-gray-100">
+            <div key={image.id} className="bg-surface rounded-lg shadow overflow-hidden">
+              <div className="relative aspect-video bg-surface-inset">
                 <img
                   src={image.processedUrl || image.previewUrl}
                   alt={image.originalFile.name}
@@ -380,7 +380,7 @@ const ImageRotator: React.FC = () => {
               
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-ink-muted">
                   <span>原始：{formatFileSize(image.originalSize || image.originalFile.size)}</span>
                   {image.processedSize && (
                     <span>处理后：{formatFileSize(image.processedSize)}</span>
@@ -396,7 +396,7 @@ const ImageRotator: React.FC = () => {
                   </button>
                 )}
                 {image.status === 'error' && (
-                  <p className="mt-2 text-sm text-red-500">{image.error}</p>
+                  <p className="mt-2 text-sm text-red-500 dark:text-red-400">{image.error}</p>
                 )}
               </div>
             </div>

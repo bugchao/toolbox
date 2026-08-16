@@ -96,22 +96,22 @@ export default function HttpDebugger() {
   };
 
   const getStatusColor = (status: number) => {
-    if (status >= 200 && status < 300) return 'text-green-600 bg-green-50';
-    if (status >= 300 && status < 400) return 'text-blue-600 bg-blue-50';
-    if (status >= 400 && status < 500) return 'text-orange-600 bg-orange-50';
-    return 'text-red-600 bg-red-50';
+    if (status >= 200 && status < 300) return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
+    if (status >= 300 && status < 400) return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20';
+    if (status >= 400 && status < 500) return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20';
+    return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/40 dark:to-blue-950/40 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">🔧 HTTP 请求调试器</h1>
-          <p className="text-gray-600">在线发送 HTTP 请求，调试 API 接口</p>
+          <h1 className="text-4xl font-bold text-ink mb-2">🔧 HTTP 请求调试器</h1>
+          <p className="text-ink-muted">在线发送 HTTP 请求，调试 API 接口</p>
         </div>
 
         {/* 请求配置 */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-surface rounded-xl shadow-lg p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">请求配置</h2>
 
           {/* 方法和 URL */}
@@ -119,7 +119,7 @@ export default function HttpDebugger() {
             <select
               value={method}
               onChange={(e) => setMethod(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              className="px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             >
               <option value="GET">GET</option>
               <option value="POST">POST</option>
@@ -135,13 +135,13 @@ export default function HttpDebugger() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://api.example.com/endpoint"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              className="flex-1 px-4 py-2 border border-edge-strong rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             />
 
             <button
               onClick={sendRequest}
               disabled={loading}
-              className="px-8 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="px-8 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg font-semibold hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-300 disabled:to-gray-300 dark:disabled:from-gray-700 dark:disabled:to-gray-700 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? '发送中...' : '发送'}
             </button>
@@ -150,10 +150,10 @@ export default function HttpDebugger() {
           {/* Headers */}
           <div className="mb-4">
             <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-gray-700">请求头 (Headers)</label>
+              <label className="text-sm font-medium text-ink">请求头 (Headers)</label>
               <button
                 onClick={addHeader}
-                className="text-sm text-cyan-600 hover:text-cyan-700 font-medium"
+                className="text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-medium"
               >
                 + 添加
               </button>
@@ -167,19 +167,19 @@ export default function HttpDebugger() {
                     value={header.key}
                     onChange={(e) => updateHeader(index, 'key', e.target.value)}
                     placeholder="Key"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-edge-strong rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                   <input
                     type="text"
                     value={header.value}
                     onChange={(e) => updateHeader(index, 'value', e.target.value)}
                     placeholder="Value"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-edge-strong rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                   {headers.length > 1 && (
                     <button
                       onClick={() => removeHeader(index)}
-                      className="px-3 text-red-500 hover:text-red-700"
+                      className="px-3 text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                     >
                       ×
                     </button>
@@ -192,7 +192,7 @@ export default function HttpDebugger() {
           {/* Body */}
           {method !== 'GET' && method !== 'HEAD' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-ink mb-2">
                 请求体 (Body)
               </label>
               <textarea
@@ -200,7 +200,7 @@ export default function HttpDebugger() {
                 onChange={(e) => setBody(e.target.value)}
                 placeholder='{"key": "value"}'
                 rows={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2 border border-edge-strong rounded-lg font-mono text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
               />
             </div>
           )}
@@ -208,12 +208,12 @@ export default function HttpDebugger() {
 
         {/* 错误信息 */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
-            <div className="flex items-center gap-2 text-red-700">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-6">
+            <div className="flex items-center gap-2 text-red-700 dark:text-red-400">
               <span className="text-xl">⚠️</span>
               <span className="font-medium">请求失败</span>
             </div>
-            <div className="mt-2 text-sm text-red-600">{error}</div>
+            <div className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</div>
           </div>
         )}
 
@@ -221,35 +221,35 @@ export default function HttpDebugger() {
         {response && (
           <div className="space-y-4">
             {/* 状态信息 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-lg font-semibold mb-4">响应状态</h2>
               <div className="flex items-center gap-4">
                 <div className={`px-4 py-2 rounded-lg font-semibold ${getStatusColor(response.status)}`}>
                   {response.status} {response.statusText}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-ink-muted">
                   耗时: <span className="font-semibold">{response.time}ms</span>
                 </div>
               </div>
             </div>
 
             {/* 响应头 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-lg font-semibold mb-4">响应头 (Response Headers)</h2>
-              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+              <div className="bg-surface-muted rounded-lg p-4 font-mono text-sm overflow-x-auto">
                 {Object.entries(response.headers).map(([key, value]) => (
                   <div key={key} className="mb-1">
-                    <span className="text-cyan-600">{key}:</span>{' '}
-                    <span className="text-gray-700">{String(value)}</span>
+                    <span className="text-cyan-600 dark:text-cyan-400">{key}:</span>{' '}
+                    <span className="text-ink">{String(value)}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* 响应体 */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-surface rounded-xl shadow-lg p-6">
               <h2 className="text-lg font-semibold mb-4">响应体 (Response Body)</h2>
-              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+              <div className="bg-surface-muted rounded-lg p-4 font-mono text-sm overflow-x-auto">
                 <pre className="whitespace-pre-wrap break-words">
                   {typeof response.data === 'string'
                     ? response.data
@@ -261,9 +261,9 @@ export default function HttpDebugger() {
         )}
 
         {/* 使用提示 */}
-        <div className="mt-6 bg-cyan-50 border border-cyan-200 rounded-lg p-4">
-          <h3 className="font-semibold text-cyan-800 mb-2">💡 使用提示</h3>
-          <ul className="text-sm text-cyan-700 space-y-1">
+        <div className="mt-6 bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800 rounded-lg p-4">
+          <h3 className="font-semibold text-cyan-800 dark:text-cyan-300 mb-2">💡 使用提示</h3>
+          <ul className="text-sm text-cyan-700 dark:text-cyan-400 space-y-1">
             <li>• 支持常见的 HTTP 方法：GET、POST、PUT、PATCH、DELETE 等</li>
             <li>• 可以自定义请求头，例如 Authorization、Content-Type 等</li>
             <li>• POST/PUT/PATCH 请求可以添加请求体（JSON 或其他格式）</li>

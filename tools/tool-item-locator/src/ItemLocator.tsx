@@ -226,7 +226,7 @@ const ItemLocator: React.FC = () => {
     return (
       <div className="w-full space-y-6">
         <PageHero title={t('title')} description={t('description')} />
-        <div className="text-center text-sm text-gray-400 py-12">{t('loading')}</div>
+        <div className="text-center text-sm text-ink-subtle py-12">{t('loading')}</div>
       </div>
     )
   }
@@ -236,16 +236,16 @@ const ItemLocator: React.FC = () => {
       <PageHero title={t('title')} description={t('description')} />
 
       {/* 搜索 + 操作 */}
-      <section className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
+      <section className="rounded-lg border border-edge bg-surface p-4 space-y-3">
         <div className="flex flex-wrap gap-2 items-center">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-subtle" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t('search.placeholder')}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full pl-9 pr-3 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <button
@@ -260,12 +260,12 @@ const ItemLocator: React.FC = () => {
             type="button"
             onClick={exportJson}
             disabled={data.items.length === 0}
-            className="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 transition-colors flex items-center gap-1.5"
+            className="px-3 py-2 text-sm text-ink bg-surface border border-edge-strong rounded-md hover:bg-surface-muted disabled:opacity-50 transition-colors flex items-center gap-1.5"
             title={t('action.exportTitle')}
           >
             <Download className="w-4 h-4" />
           </button>
-          <label className="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-1.5 cursor-pointer">
+          <label className="px-3 py-2 text-sm text-ink bg-surface border border-edge-strong rounded-md hover:bg-surface-muted transition-colors flex items-center gap-1.5 cursor-pointer">
             <Upload className="w-4 h-4" />
             <input type="file" accept="application/json" onChange={importJson} className="hidden" />
           </label>
@@ -273,14 +273,14 @@ const ItemLocator: React.FC = () => {
 
         {/* 筛选器 */}
         <div className="flex flex-wrap gap-2 items-center text-xs">
-          <span className="text-gray-500">{t('filter.category')}:</span>
+          <span className="text-ink-muted">{t('filter.category')}:</span>
           <button
             type="button"
             onClick={() => setCatFilter('all')}
             className={`px-2 py-0.5 rounded-full border ${
               catFilter === 'all'
                 ? 'bg-indigo-600 text-white border-indigo-600'
-                : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+                : 'bg-surface text-ink-muted border-edge-strong hover:border-gray-400 dark:hover:border-gray-500'
             }`}
           >
             {t('filter.all')}
@@ -297,7 +297,7 @@ const ItemLocator: React.FC = () => {
                 className={`px-2 py-0.5 rounded-full border flex items-center gap-1 ${
                   active
                     ? 'bg-indigo-600 text-white border-indigo-600'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+                    : 'bg-surface text-ink-muted border-edge-strong hover:border-gray-400 dark:hover:border-gray-500'
                 }`}
               >
                 <span>{c.emoji}</span>
@@ -309,14 +309,14 @@ const ItemLocator: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 items-center text-xs">
-          <span className="text-gray-500">{t('filter.scenario')}:</span>
+          <span className="text-ink-muted">{t('filter.scenario')}:</span>
           <button
             type="button"
             onClick={() => setScenFilter('all')}
             className={`px-2 py-0.5 rounded-full border ${
               scenFilter === 'all'
                 ? 'bg-emerald-600 text-white border-emerald-600'
-                : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+                : 'bg-surface text-ink-muted border-edge-strong hover:border-gray-400 dark:hover:border-gray-500'
             }`}
           >
             {t('filter.all')}
@@ -333,7 +333,7 @@ const ItemLocator: React.FC = () => {
                 className={`px-2 py-0.5 rounded-full border flex items-center gap-1 ${
                   active
                     ? 'bg-emerald-600 text-white border-emerald-600'
-                    : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+                    : 'bg-surface text-ink-muted border-edge-strong hover:border-gray-400 dark:hover:border-gray-500'
                 }`}
               >
                 <span>{s.emoji}</span>
@@ -360,12 +360,12 @@ const ItemLocator: React.FC = () => {
           ))}
         </section>
       ) : (
-        <section className="rounded-lg border border-dashed border-gray-300 bg-gray-50 p-12 text-center text-sm text-gray-500">
+        <section className="rounded-lg border border-dashed border-edge-strong bg-surface-muted p-12 text-center text-sm text-ink-muted">
           {data.items.length === 0 ? t('empty.first') : t('empty.filtered')}
         </section>
       )}
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-ink-subtle text-center">
         {t('disclaimer', { count: data.items.length })}
       </p>
 
@@ -397,14 +397,14 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, isZh, onEdit, onRemove, t }) 
   const scen = SCENARIO_BY_ID[item.scenario]
   const updatedStr = new Date(item.updatedAt).toLocaleDateString(isZh ? 'zh-CN' : 'en-US')
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 flex flex-col gap-2">
+    <div className="rounded-xl border border-edge bg-surface p-4 flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <span className="text-2xl shrink-0">{cat?.emoji ?? '📦'}</span>
-        <h3 className="text-base font-semibold text-gray-800 truncate flex-1">{item.name}</h3>
+        <h3 className="text-base font-semibold text-ink truncate flex-1">{item.name}</h3>
         <button
           type="button"
           onClick={onEdit}
-          className="text-gray-400 hover:text-indigo-600"
+          className="text-ink-subtle hover:text-indigo-600 dark:hover:text-indigo-400"
           title={t('action.edit')}
         >
           <Pencil className="w-3.5 h-3.5" />
@@ -412,29 +412,29 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, isZh, onEdit, onRemove, t }) 
         <button
           type="button"
           onClick={onRemove}
-          className="text-gray-400 hover:text-red-500"
+          className="text-ink-subtle hover:text-red-500 dark:hover:text-red-400"
           title={t('action.delete')}
         >
           <Trash2 className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      <div className="flex items-start gap-1.5 text-sm text-gray-700">
-        <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0 text-emerald-500" />
+      <div className="flex items-start gap-1.5 text-sm text-ink">
+        <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0 text-emerald-500 dark:text-emerald-400" />
         <span className="break-words">{item.location}</span>
       </div>
 
       <div className="flex flex-wrap gap-1.5 text-xs">
-        <span className="px-2 py-0.5 rounded-full border bg-indigo-50 text-indigo-700 border-indigo-200">
+        <span className="px-2 py-0.5 rounded-full border bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800">
           {cat?.emoji} {isZh ? cat?.zh : cat?.en}
         </span>
-        <span className="px-2 py-0.5 rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">
+        <span className="px-2 py-0.5 rounded-full border bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800">
           {scen?.emoji} {isZh ? scen?.zh : scen?.en}
         </span>
       </div>
 
       {item.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1 text-xs text-gray-500">
+        <div className="flex flex-wrap gap-1 text-xs text-ink-muted">
           {item.tags.map((tag, i) => (
             <span key={i} className="inline-flex items-center gap-0.5">
               <Tag className="w-3 h-3" />
@@ -445,12 +445,12 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, isZh, onEdit, onRemove, t }) 
       )}
 
       {item.note && (
-        <div className="text-xs text-gray-500 italic border-l-2 border-gray-200 pl-2 break-words">
+        <div className="text-xs text-ink-muted italic border-l-2 border-edge pl-2 break-words">
           {item.note}
         </div>
       )}
 
-      <div className="text-[10px] text-gray-400 mt-auto">{t('updatedAt', { date: updatedStr })}</div>
+      <div className="text-[10px] text-ink-subtle mt-auto">{t('updatedAt', { date: updatedStr })}</div>
     </div>
   )
 }
@@ -474,13 +474,13 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
   t,
 }) => {
   return (
-    <Modal onClose={onClose} className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] flex flex-col">
-        <header className="flex items-center gap-2 p-4 border-b border-gray-200">
-          <Boxes className="w-5 h-5 text-indigo-600" />
-          <h3 className="text-base font-semibold text-gray-800 flex-1">
+    <Modal onClose={onClose} className="bg-surface rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] flex flex-col">
+        <header className="flex items-center gap-2 p-4 border-b border-edge">
+          <Boxes className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <h3 className="text-base font-semibold text-ink flex-1">
             {isEditing ? t('form.editTitle') : t('form.addTitle')}
           </h3>
-          <button type="button" onClick={onClose} className="text-gray-400 hover:text-gray-700">
+          <button type="button" onClick={onClose} className="text-ink-subtle hover:text-ink">
             <X className="w-5 h-5" />
           </button>
         </header>
@@ -492,7 +492,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               value={draft.name}
               onChange={(e) => setDraft({ ...draft, name: e.target.value })}
               placeholder={t('field.namePlaceholder')}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               autoFocus
             />
           </Field>
@@ -502,7 +502,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               value={draft.location}
               onChange={(e) => setDraft({ ...draft, location: e.target.value })}
               placeholder={t('field.locationPlaceholder')}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </Field>
           <div className="grid grid-cols-2 gap-3">
@@ -510,7 +510,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               <select
                 value={draft.category}
                 onChange={(e) => setDraft({ ...draft, category: e.target.value as CategoryId })}
-                className="w-full px-2 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-2 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -523,7 +523,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               <select
                 value={draft.scenario}
                 onChange={(e) => setDraft({ ...draft, scenario: e.target.value as ScenarioId })}
-                className="w-full px-2 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-2 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
                 {SCENARIOS.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -539,7 +539,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               value={draft.tagsInput}
               onChange={(e) => setDraft({ ...draft, tagsInput: e.target.value })}
               placeholder={t('field.tagsPlaceholder')}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </Field>
           <Field label={t('field.note')}>
@@ -548,16 +548,16 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
               onChange={(e) => setDraft({ ...draft, note: e.target.value })}
               placeholder={t('field.notePlaceholder')}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+              className="w-full px-3 py-2 text-sm border border-edge-strong rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
             />
           </Field>
         </div>
 
-        <footer className="p-4 border-t border-gray-200 flex justify-end gap-2">
+        <footer className="p-4 border-t border-edge flex justify-end gap-2">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            className="px-4 py-2 text-sm text-ink bg-surface border border-edge-strong rounded-md hover:bg-surface-muted transition-colors"
           >
             {t('action.cancel')}
           </button>
@@ -565,7 +565,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
             type="button"
             onClick={onSave}
             disabled={!draft.name.trim() || !draft.location.trim()}
-            className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-300 transition-colors"
+            className="px-4 py-2 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 transition-colors"
           >
             {isEditing ? t('action.update') : t('action.save')}
           </button>
@@ -576,7 +576,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({
 
 const Field: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <label className="block text-sm">
-    <span className="block text-xs text-gray-500 mb-1">{label}</span>
+    <span className="block text-xs text-ink-muted mb-1">{label}</span>
     {children}
   </label>
 )

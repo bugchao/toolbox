@@ -290,10 +290,10 @@ const ImageWatermark: React.FC = () => {
     <div className="max-w-6xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">图片水印工具</h1>
-        <p className="text-gray-600">为图片添加文字或 Logo 水印，支持批量处理、自定义位置、透明度和旋转</p>
+        <p className="text-ink-muted">为图片添加文字或 Logo 水印，支持批量处理、自定义位置、透明度和旋转</p>
       </div>
 
-      <div className="mb-6 bg-white rounded-lg shadow p-6">
+      <div className="mb-6 bg-surface rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold mb-4 flex items-center">
           <Settings className="w-5 h-5 mr-2" />
           水印设置
@@ -303,7 +303,7 @@ const ImageWatermark: React.FC = () => {
           <button
             onClick={() => setWatermarkType('text')}
             className={`px-4 py-2 rounded-lg flex items-center gap-2 transition ${
-              watermarkType === 'text' ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+              watermarkType === 'text' ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             <Type className="w-4 h-4" />
@@ -312,7 +312,7 @@ const ImageWatermark: React.FC = () => {
           <button
             onClick={() => setWatermarkType('logo')}
             className={`px-4 py-2 rounded-lg flex items-center gap-2 transition ${
-              watermarkType === 'logo' ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+              watermarkType === 'logo' ? 'bg-blue-500 text-white' : 'bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             <ImageIcon className="w-4 h-4" />
@@ -364,7 +364,7 @@ const ImageWatermark: React.FC = () => {
                   onChange={(e) => setTextConfig(prev => ({ ...prev, opacity: parseFloat(e.target.value) }))}
                   className="w-full"
                 />
-                <div className="text-sm text-gray-600 mt-1">{Math.round(textConfig.opacity * 100)}%</div>
+                <div className="text-sm text-ink-muted mt-1">{Math.round(textConfig.opacity * 100)}%</div>
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">旋转角度</label>
@@ -386,7 +386,7 @@ const ImageWatermark: React.FC = () => {
                     key={pos}
                     onClick={() => setTextConfig(prev => ({ ...prev, position: pos as any }))}
                     className={`px-3 py-2 rounded border text-sm transition ${
-                      textConfig.position === pos ? 'bg-blue-500 text-white border-blue-500' : 'bg-white hover:bg-gray-50 border-gray-300'
+                      textConfig.position === pos ? 'bg-blue-500 text-white border-blue-500' : 'bg-surface hover:bg-surface-muted border-edge-strong'
                     }`}
                   >
                     {pos.replace('-', ' ')}
@@ -422,7 +422,7 @@ const ImageWatermark: React.FC = () => {
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => logoInputRef.current?.click()}
-                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center gap-2"
+                  className="px-4 py-2 bg-surface-inset hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg flex items-center gap-2"
                 >
                   <Upload className="w-4 h-4" />
                   {logoConfig.file ? '更换 Logo' : '选择 Logo 图片'}
@@ -437,7 +437,7 @@ const ImageWatermark: React.FC = () => {
                 {logoConfig.file && (
                   <div className="flex items-center gap-2">
                     <img src={logoConfig.url} alt="Logo preview" className="h-12 w-auto border rounded" />
-                    <span className="text-sm text-gray-600">{logoConfig.file.name}</span>
+                    <span className="text-sm text-ink-muted">{logoConfig.file.name}</span>
                   </div>
                 )}
               </div>
@@ -465,7 +465,7 @@ const ImageWatermark: React.FC = () => {
                   onChange={(e) => setLogoConfig(prev => ({ ...prev, opacity: parseFloat(e.target.value) }))}
                   className="w-full"
                 />
-                <div className="text-sm text-gray-600 mt-1">{Math.round(logoConfig.opacity * 100)}%</div>
+                <div className="text-sm text-ink-muted mt-1">{Math.round(logoConfig.opacity * 100)}%</div>
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">位置</label>
@@ -509,11 +509,11 @@ const ImageWatermark: React.FC = () => {
       <div className="mb-6">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
+          className="border-2 border-dashed border-edge-strong rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition"
         >
-          <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-700 mb-2">点击或拖拽上传图片</p>
-          <p className="text-sm text-gray-500">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
+          <Upload className="w-12 h-12 mx-auto text-ink-subtle mb-4" />
+          <p className="text-lg font-medium text-ink mb-2">点击或拖拽上传图片</p>
+          <p className="text-sm text-ink-muted">支持 JPG、PNG、WebP 等格式，支持批量上传</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -530,7 +530,7 @@ const ImageWatermark: React.FC = () => {
           <button
             onClick={handleProcessAll}
             disabled={isProcessing}
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition flex items-center gap-2"
+            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 dark:disabled:bg-gray-700 transition flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
             {isProcessing ? '处理中...' : `添加水印 (${images.length}张)`}
@@ -556,18 +556,18 @@ const ImageWatermark: React.FC = () => {
 
       {isProcessing && (
         <div className="mb-6">
-          <div className="bg-gray-200 rounded-full h-2">
+          <div className="bg-surface-inset rounded-full h-2">
             <div className="bg-blue-500 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} />
           </div>
-          <p className="text-sm text-gray-600 mt-2">正在处理：{Math.round(progress)}%</p>
+          <p className="text-sm text-ink-muted mt-2">正在处理：{Math.round(progress)}%</p>
         </div>
       )}
 
       {images.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image) => (
-            <div key={image.id} className="bg-white rounded-lg shadow overflow-hidden">
-              <div className="relative aspect-video bg-gray-100">
+            <div key={image.id} className="bg-surface rounded-lg shadow overflow-hidden">
+              <div className="relative aspect-video bg-surface-inset">
                 <img src={image.processedUrl || image.previewUrl} alt={image.originalFile.name} className="w-full h-full object-contain" />
                 {image.status === 'processing' && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -580,7 +580,7 @@ const ImageWatermark: React.FC = () => {
               </div>
               <div className="p-4">
                 <p className="font-medium truncate mb-2">{image.originalFile.name}</p>
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm text-ink-muted">
                   <span>原始：{formatFileSize(image.originalSize || image.originalFile.size)}</span>
                   {image.processedSize && <span>处理后：{formatFileSize(image.processedSize)}</span>}
                 </div>
@@ -590,7 +590,7 @@ const ImageWatermark: React.FC = () => {
                     下载
                   </button>
                 )}
-                {image.status === 'error' && <p className="mt-2 text-sm text-red-500">{image.error}</p>}
+                {image.status === 'error' && <p className="mt-2 text-sm text-red-500 dark:text-red-400">{image.error}</p>}
               </div>
             </div>
           ))}
