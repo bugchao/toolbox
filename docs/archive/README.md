@@ -21,3 +21,6 @@
   - 已被当前架构方案替代的历史分析文档
 - `2026-08-notes/`
   - 2026-08 的合并记录、批量改造复盘
+  - `TOOLS_ROADMAP_2.md`：第二期 100 工具规划草稿，自述已与现状脱节，且用的分类口径和当前 `categoryKey` 不一致，已被 `TOOLS_ROADMAP.md` 取代
+  - `AUTO_DEV_SPEC.md`：自动化批量开发工具的调度器设计草案，引用的 `memory/tool-dev-status.json` 从未在仓库中出现过，未落地实现
+  - `TYPING_PRACTICE_SPEC.md`：打字练习工具规划，对应工具从未创建，也未进入 `TOOLS_ROADMAP.md` 立项

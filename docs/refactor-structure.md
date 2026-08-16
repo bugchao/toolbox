@@ -47,6 +47,7 @@ tools/
 - 新工具默认带 `tool.manifest.ts`
 - 新工具文案保留在工具目录内
 - 通用 UI 和外部 UI 库封装统一收进 `packages/ui-kit`
+- 灰阶/背景/边框优先用语义色 token（`bg-surface`/`text-ink`/`border-edge` 等，见 `apps/web/src/index.css`），跟随 `.dark` class 自动切换，不要写只在浅色模式下能看清的类名
 - 需要服务端能力时，优先考虑 `api-gateway + service/bridge` 接入，不要把逻辑继续堆回根入口
 
 ## 新增工具的最小清单

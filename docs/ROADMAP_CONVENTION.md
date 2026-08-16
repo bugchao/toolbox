@@ -4,19 +4,23 @@
 
 ## 分类命名
 
-后续规划和更新统一使用当前应用中的分类 key：
+`categoryKey` 必须是 `apps/web/src/components/Layout.tsx` 的 `CATEGORIES` 数组里已注册的 id——侧边栏只渲染这个数组里列出的分类，写一个没注册的 id（比如把 `utils` 拼成 `utility`）不会报错，只会让工具从导航里静默消失。`pnpm check:consistency` 会校验这一点。
 
 | 分类 | 说明 |
 |------|------|
-| `utility` | 图片、文档、格式转换、生成器等实用工具 |
+| `utils` | 图片、文档、格式转换、生成器等实用工具 |
 | `dev` | 编解码、调试、格式化、开发辅助 |
 | `query` | 基础查询类工具 |
 | `news` | 资讯聚合 |
 | `ai` | AI 辅助或生成类工具 |
-| `network` | DNS / IP / 子网 / DHCP / GSLB / 安全 / 运维 |
+| `network` | 综合网络工具 |
+| `dns` / `domain` / `ip` / `ipam` / `security` | DNS / 域名 / IP 与子网 / IPAM / 安全与运维细分类别 |
+| `qrcode` | 二维码相关工具 |
 | `life` | 习惯、健康、消费、日常效率 |
+| `social_game` | 聚会、聊天室互动小游戏 |
 | `travel` | 行程、预算、翻译、旅行辅助 |
-| `learning` | 学习效率、知识理解、编程与语言学习 |
+| `learn` | 学习效率、知识理解、编程与语言学习 |
+| `blockchain` | 链上查询、转账等区块链工具 |
 
 ## 新增规划怎么写
 

@@ -47,6 +47,10 @@ tools/tool-xxx/
 - 先用 `packages/ui-kit`
 - 如果需要引入新的外部 UI 能力，先封装进 `ui-kit`，再给工具使用
 
+### 4. 暗色主题
+
+灰阶/背景/边框优先用语义色 token（`bg-surface`、`text-ink`、`border-edge` 等，定义在 `apps/web/src/index.css` + `apps/web/tailwind.config.js`），跟随 `.dark` class 自动切换。不要写只在浅色模式下能看清的类名（`text-gray-900`、`bg-white` 而没有暗色对应）。详细规则和常见陷阱见 `.claude/skills/toolbox-tool-dev/SKILL.md`。
+
 ### 4. 后端接入
 
 如果工具需要服务端能力：
