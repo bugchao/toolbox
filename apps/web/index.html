@@ -11,6 +11,17 @@
         const host = window.location.hostname
         if (host === 'localhost' || host === '127.0.0.1') return
 
+        const gtagScript = document.createElement('script')
+        gtagScript.async = true
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-48MPGJY24X'
+        document.head.appendChild(gtagScript)
+        window.dataLayer = window.dataLayer || []
+        function gtag() {
+          window.dataLayer.push(arguments)
+        }
+        gtag('js', new Date())
+        gtag('config', 'G-48MPGJY24X')
+
         ;(function (c, l, a, r, i, t, y) {
           c[a] =
             c[a] ||
