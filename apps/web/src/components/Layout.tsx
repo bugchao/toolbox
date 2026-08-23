@@ -9,7 +9,8 @@ import {
   Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
   Radio, Shield, Database, Network, ScrollText,
-  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins, Gamepad2
+  Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins, Gamepad2,
+  MessageCircleQuestion
 } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
@@ -17,6 +18,7 @@ import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '
 import { setLocale, type Locale } from '../i18n'
 import { TOOLS, TOOLS_BY_PATH, getToolTitle, getToolByPath } from '../config/tools'
 import { CommandPalette } from './CommandPalette'
+import { FeedbackDialog } from './FeedbackDialog'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -118,6 +120,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['dev', 'utils', 'network']))
   const [langOpen, setLangOpen] = useState(false)
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+  const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [tabs, setTabs] = useState<{ path: string; title: string }[]>(() => {
     try {
       const raw = sessionStorage.getItem(TAB_STORAGE_KEY)
@@ -434,6 +437,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </nav>
           </div>
           <div className="flex items-center gap-1 shrink-0">
+            <button
+              type="button"
+              onClick={() => setFeedbackOpen(true)}
+              className="relative rounded-xl bg-indigo-50 p-2 text-indigo-600 transition-all hover:-translate-y-0.5 hover:bg-indigo-100 hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:bg-indigo-950/50 dark:text-indigo-300 dark:hover:bg-indigo-900/60"
+              title={tCommon('feedback.trigger')}
+              aria-label={tCommon('feedback.trigger')}
+            >
+              <MessageCircleQuestion className="w-5 h-5" />
+              <span className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-emerald-400 ring-2 ring-indigo-50 dark:ring-indigo-950" />
+            </button>
             {/* 独立打开按钮 - 仅在工具页面显示 */}
             {location.pathname !== '/' && location.pathname !== '/favorites' && location.pathname !== '/changelog' && (
               <button
@@ -557,9 +570,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <footer className="py-4 px-4 sm:px-6 lg:px-8 border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/30">
           <div className="text-center">
-            <p className="text-gray-500 dark:text-gray-400 text-sm mb-1">
-              {tFooter('copyright')}
-            </p>
+            <div className="mb-1 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+              <span>{tFooter('copyright')}</span>
+              <span aria-hidden="true" className="text-gray-300 dark:text-gray-600">·</span>
+              <button
+                type="button"
+                onClick={() => setFeedbackOpen(true)}
+                className="inline-flex items-center gap-1 font-medium text-indigo-600 transition-colors hover:text-indigo-700 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:text-indigo-400 dark:hover:text-indigo-300 dark:ring-offset-gray-900"
+              >
+                <MessageCircleQuestion className="h-3.5 w-3.5" />
+                {tCommon('feedback.footerLink')}
+              </button>
+            </div>
             <p className="text-gray-400 dark:text-gray-500 text-xs">
               🛠️ {visibleTools} / {totalTools} 个工具
               {settings.hideServerTools && (
@@ -617,6 +639,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         })()}
 
       <CommandPalette open={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
+      <FeedbackDialog
+        open={feedbackOpen}
+        onClose={() => setFeedbackOpen(false)}
+        pageTitle={location.pathname === '/' ? t('home') : getTitleForPath(location.pathname)}
+        route={location.pathname}
+        pageUrl={typeof window === 'undefined' ? location.pathname : window.location.href}
+      />
     </div>
   )
 }

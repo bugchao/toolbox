@@ -9,7 +9,31 @@
     "backgroundShow": "Show tool page background",
     "backgroundHide": "Hide tool page background",
     "lang_zh": "中文",
-    "lang_en": "English"
+    "lang_en": "English",
+    "feedback": {
+      "trigger": "Feedback & ideas",
+      "footerLink": "Feedback & ideas",
+      "eyebrow": "Help shape the toolbox",
+      "title": "Feedback & ideas",
+      "description": "Found a problem or have a tool in mind? Choose a channel and we will include the current page context for you.",
+      "close": "Close feedback dialog",
+      "problem": "Report a problem",
+      "problemDescription": "Errors, confusing UX, or incorrect results",
+      "tool": "Suggest a tool",
+      "toolDescription": "Propose a new tool or an improvement",
+      "chooseChannel": "Choose a channel",
+      "github": "GitHub Issue",
+      "githubDescription": "Discuss and track it publicly",
+      "email": "Send an email",
+      "privacy": "Feedback is not stored or uploaded by this site. Submission goes directly to GitHub or your email client.",
+      "problemSubject": "[Bug Tide] Problem report: {{pageTitle}}",
+      "toolSubject": "[Bug Tide] Tool suggestion: {{pageTitle}}",
+      "problemPrompt": "Please describe what happened, what you expected, and how to reproduce it:",
+      "toolPrompt": "Please describe the tool or improvement you would like and the problem it would solve:",
+      "contextPage": "Page",
+      "contextRoute": "Route",
+      "contextUrl": "URL"
+    }
   },
   "nav": {
     "home": "Home",
