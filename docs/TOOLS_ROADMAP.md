@@ -101,6 +101,7 @@
 | 正则表达式测试器（增强版） | `/regex-tester-pro` | `tools/tool-regex-tester-pro` → RegexTesterPro |
 | SQL 格式化工具 | `/sql-formatter` | `tools/tool-sql-formatter` → SqlFormatter |
 | Mock API 数据生成器（faker schema） | `/mock-api` | `tools/tool-mock-api` → MockApi |
+| 多国家地址生成器（59 个国家/地区格式、批量、Seed、JSON/CSV/TXT） | `/address-generator` | `tools/tool-address-generator` → AddressGenerator |
 | API 响应模拟器（REST 模板 + curl） | `/api-mock` | `tools/tool-api-mock` → ApiMock |
 | Slug 生成器（中英拼音 + Unicode 规范化） | `/slug-generator` | `tools/tool-slug-generator` → SlugGenerator |
 | CSS 缓动曲线可视化（cubic-bezier） | `/cubic-bezier` | `tools/tool-cubic-bezier` → CubicBezier |

@@ -1,0 +1,54 @@
+{
+  "eyebrow": "WORLD POSTAL ATLAS · 世界邮政图鉴",
+  "title": "多国家地址生成器",
+  "description": "为国际化表单、结账流程和产品原型生成结构清晰、可复现的合成地址。所有数据仅在浏览器中生成。",
+  "coverage": "{{count}} 个国家 / 地区格式",
+  "localOnly": "纯本地运行",
+  "repeatable": "Seed 可复现",
+  "controls": {
+    "title": "填写投递参数",
+    "step": "01 / 生成设置",
+    "search": "搜索国家 / 地区",
+    "searchPlaceholder": "输入中文、英文或 ISO 代码",
+    "country": "国家 / 地区",
+    "randomCountry": "每条随机国家",
+    "randomCountryHint": "批量生成时为每一条独立选择受支持格式",
+    "quantity": "生成数量",
+    "quantityHint": "每批 1–50 条",
+    "seed": "Seed（可选）",
+    "seedPlaceholder": "例如 checkout-regression-001",
+    "seedHint": "相同设置与 Seed 会得到相同结果",
+    "generate": "生成地址",
+    "generating": "正在生成",
+    "regenerate": "重新生成"
+  },
+  "results": {
+    "title": "地址标签",
+    "step": "02 / 检查与导出",
+    "count": "本批共 {{count}} 条",
+    "emptyTitle": "等待第一批地址",
+    "emptyBody": "选择国家与数量后点击生成。这里会出现可以直接复制、比对和导出的邮政标签。",
+    "cards": "卡片",
+    "singleLine": "单行",
+    "json": "JSON",
+    "copyAll": "复制全部",
+    "copyOne": "复制这条地址",
+    "copied": "已复制",
+    "download": "下载 {{format}}",
+    "record": "地址 {{index}}",
+    "locale": "格式 {{locale}}",
+    "liveEmpty": "尚未生成地址",
+    "liveCount": "已生成 {{count}} 条合成地址"
+  },
+  "fields": {
+    "line1": "街道与门牌",
+    "line2": "单元 / 房间",
+    "city": "城市",
+    "region": "州 / 省 / 地区",
+    "postalCode": "邮政编码"
+  },
+  "disclaimer": {
+    "title": "合成数据，不是真实投递地址",
+    "body": "字段仅按当地常见形态与顺序组合，不保证街道、城市、行政区和邮编在现实中相互对应。请仅用于开发、测试与设计演示，不得用于冒充身份、真实投递或欺诈。"
+  }
+}

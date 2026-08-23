@@ -1,0 +1,54 @@
+{
+  "eyebrow": "WORLD POSTAL ATLAS",
+  "title": "Global Address Generator",
+  "description": "Create structured, repeatable synthetic addresses for international forms, checkout flows, and product prototypes. Everything runs in your browser.",
+  "coverage": "{{count}} country / region formats",
+  "localOnly": "Local-only",
+  "repeatable": "Repeatable seed",
+  "controls": {
+    "title": "Set delivery parameters",
+    "step": "01 / Generator settings",
+    "search": "Search country or region",
+    "searchPlaceholder": "Type a name or ISO code",
+    "country": "Country or region",
+    "randomCountry": "Random country per record",
+    "randomCountryHint": "Choose a supported format independently for every address",
+    "quantity": "Quantity",
+    "quantityHint": "1–50 records per batch",
+    "seed": "Seed (optional)",
+    "seedPlaceholder": "e.g. checkout-regression-001",
+    "seedHint": "The same settings and seed reproduce the same records",
+    "generate": "Generate addresses",
+    "generating": "Generating",
+    "regenerate": "Regenerate"
+  },
+  "results": {
+    "title": "Address labels",
+    "step": "02 / Review and export",
+    "count": "{{count}} records in this batch",
+    "emptyTitle": "Your first address batch starts here",
+    "emptyBody": "Choose a country and quantity, then generate. Copy-ready postal labels will appear in this workspace.",
+    "cards": "Cards",
+    "singleLine": "Single line",
+    "json": "JSON",
+    "copyAll": "Copy all",
+    "copyOne": "Copy this address",
+    "copied": "Copied",
+    "download": "Download {{format}}",
+    "record": "Address {{index}}",
+    "locale": "Locale {{locale}}",
+    "liveEmpty": "No addresses generated yet",
+    "liveCount": "Generated {{count}} synthetic addresses"
+  },
+  "fields": {
+    "line1": "Street and number",
+    "line2": "Unit / suite",
+    "city": "City",
+    "region": "State / province / region",
+    "postalCode": "Postal code"
+  },
+  "disclaimer": {
+    "title": "Synthetic data, not a deliverable address",
+    "body": "Fields follow common local shapes and ordering, but streets, cities, regions, and postal codes may not correspond in the real world. Use only for development, testing, and design demos—never for impersonation, delivery, or fraud."
+  }
+}
