@@ -9,6 +9,7 @@ import { contentService } from '@toolbox/content-service'
 import { dnsService } from '@toolbox/dns-service'
 import { ipService } from '@toolbox/ip-service'
 import { meetingAudioService } from '@toolbox/meeting-audio-service'
+import { remoteShellService } from '@toolbox/remote-shell-service'
 import { securityService } from '@toolbox/security-service'
 import { storageService } from '@toolbox/storage-service'
 import { utilityService } from '@toolbox/utility-service'
@@ -19,11 +20,26 @@ export async function createApiGatewayApp({ rootDir }) {
   app.use(createRequestContextMiddleware())
   app.use(express.json({ limit: '1mb' }))
 
-  const services = await registerServiceModules(
-    app,
-    [dnsService, ipService, securityService, contentService, utilityService, storageService, meetingAudioService],
-    { rootDir }
-  )
+  const serviceModules = [
+    dnsService,
+    ipService,
+    securityService,
+    contentService,
+    utilityService,
+    storageService,
+    meetingAudioService,
+    remoteShellService,
+  ]
+
+  const services = await registerServiceModules(app, serviceModules, { rootDir })
+
+  // WebSocket 服务拿不到 Express app，只能拿 http.Server，所以留一个钩子
+  // 让 main.js 在 listen() 之后回调。没有 attachUpgrade 的 service 直接跳过。
+  const attachUpgrade = (server) => {
+    for (const service of serviceModules) {
+      if (typeof service.attachUpgrade === 'function') service.attachUpgrade(server)
+    }
+  }
 
   app.get('/health', (req, res) => {
     const readyServices = services.filter((service) => service.status === 'ready')
@@ -87,5 +103,6 @@ export async function createApiGatewayApp({ rootDir }) {
     app,
     services,
     staticDir,
+    attachUpgrade,
   }
 }

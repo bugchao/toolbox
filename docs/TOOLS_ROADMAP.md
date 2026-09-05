@@ -221,6 +221,7 @@
 | 中文域名转换 | `/idn-converter` | `tools/tool-idn-converter` → IdnConverter |
 | HTTP 状态检测 | `/http-status` | `tools/tool-http-status` → HttpStatus |
 | TCP 端口检测 | `/tcp-port-check` | `tools/tool-tcp-port` → TcpPortCheck |
+| Web SSH 终端 | `/remote-shell` | `tools/tool-remote-shell` → RemoteShell（开箱可用；公网部署建议设 `REMOTE_SHELL_TOKEN`，见 tools/tool-remote-shell/README.md） |
 | Ping 测试 | `/ping` | `tools/tool-ping` → Ping |
 | DNS 延迟分析 | `/dns-latency` | `tools/tool-dns-latency` → DnsLatency |
 | 权威 DNS 检测 | `/dns-authoritative` | `tools/tool-dns-authoritative` → DnsAuthoritative |

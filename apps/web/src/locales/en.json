@@ -236,6 +236,7 @@
       "http_headers": "HTTP Header Inspector",
       "ssl_cert": "SSL Certificate Check",
       "http_status": "HTTP Status Check",
+      "remote_shell": "Web SSH Terminal",
       "tcp_port_check": "TCP Port Check",
       "ping": "Ping Test",
       "traceroute": "Traceroute",

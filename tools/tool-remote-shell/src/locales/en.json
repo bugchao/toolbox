@@ -1,0 +1,85 @@
+{
+  "title": "Web SSH Terminal",
+  "description": "SSH into a server straight from your browser. Credentials are encrypted locally under a master password; the server stores and logs nothing.",
+  "privacy": {
+    "title": "Credentials stay between your browser and the target host",
+    "description": "Passwords and keys are sent only in the connect frame, then dropped from memory once the session is up. Nothing is written to disk or logs. When you tick save, credentials are encrypted in your browser under your master password.",
+    "dismiss": "Don't show again"
+  },
+  "vault": {
+    "unlockTitle": "Unlock credential vault",
+    "unlockHint": "Enter your master password to decrypt saved hosts. It is never stored anywhere — forget it and the vault has to be rebuilt.",
+    "createTitle": "Set a master password",
+    "createHint": "The master password encrypts your server credentials locally. You can also skip this and type credentials manually every time.",
+    "masterPlaceholder": "Master password",
+    "unlock": "Unlock",
+    "create": "Create vault",
+    "skip": "Skip — don't save credentials",
+    "wrongPassword": "Wrong master password — the vault could not be decrypted",
+    "destroy": "Destroy local vault (erase all saved credentials)"
+  },
+  "saved": {
+    "title": "Saved hosts",
+    "delete": "Delete"
+  },
+  "form": {
+    "host": "Host",
+    "port": "Port",
+    "user": "Username",
+    "alias": "Alias",
+    "aliasPlaceholder": "Optional label",
+    "auth_password": "Password",
+    "auth_key": "Private key",
+    "password": "Password",
+    "privateKey": "Private key",
+    "passphrase": "Key passphrase (optional)",
+    "token": "Access passphrase",
+    "remember": "Save this host's credentials to the encrypted vault",
+    "connect": "Connect",
+    "connecting": "Connecting…"
+  },
+  "terminal": {
+    "connecting": "Connecting",
+    "connected": "Connected",
+    "closed": "Disconnected",
+    "resumed": "Resumed",
+    "disconnect": "Disconnect",
+    "reconnect": "Reconnect",
+    "needCredentials": "Sessions restored after a refresh keep no password — reconnect from \"New connection\""
+  },
+  "tabs": {
+    "new": "New connection",
+    "close": "Close {{title}}",
+    "openCount": "{{count}} terminal(s) open",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen"
+  },
+  "hostkey": {
+    "title": "Confirm host fingerprint",
+    "description": "This is the first connection to {{host}}:{{port}} — no host key fingerprint has been recorded yet.",
+    "verifyHint": "Verify it on the target with ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub. A mismatch may mean a man-in-the-middle.",
+    "trust": "Fingerprint matches — trust and connect",
+    "cancel": "Cancel"
+  },
+  "errors": {
+    "connect_failed": "Connection failed",
+    "dns_failed": "DNS lookup failed — check the hostname",
+    "refused": "Connection refused — check that SSH is running on that port",
+    "timeout": "Connection timed out — host unreachable or blocked by a firewall",
+    "auth_failed": "Authentication failed — check the username, password or key",
+    "hostkey_mismatch": "Host key fingerprint does not match the stored one. The server may have been rebuilt — or this may be a man-in-the-middle. Remove the stored fingerprint before reconnecting.",
+    "too_many_sessions": "You have reached the concurrent session limit — disconnect one first",
+    "server_busy": "The server has no free session slots — try again shortly",
+    "locked_out": "Too many failed authentications — temporarily locked out",
+    "connect_timeout": "Timed out waiting for the connect frame",
+    "bad_request": "Incomplete connection parameters",
+    "socket_error": "Lost the connection to the gateway",
+    "ws_unreachable": "Cannot reach the terminal gateway — the upgrade request got no response. Check that the backend is running (pnpm dev / pnpm dev:full locally, pnpm start in production), and that any reverse proxy in front of it forwards WebSocket upgrades.",
+    "gateway_timeout": "The gateway accepted the connection but never answered — check the backend logs"
+  },
+  "closed": {
+    "remote_closed": "The remote end closed the session",
+    "idle_timeout": "Idle timeout — connection closed",
+    "ssh closed": "Connection closed"
+  }
+}

@@ -3,7 +3,7 @@
 
 import type { ToolEntry } from './tools'
 import {
-  SearchCode, Route, Waypoints, MapIcon, ShieldAlert, BarChart3, AlarmClock,
+  TerminalSquare, SearchCode, Route, Waypoints, MapIcon, ShieldAlert, BarChart3, AlarmClock,
   Landmark, Bug, CloudOff, EyeOff, HardDrive, RefreshCw, Server, Mail, FileType,
   Webhook, ShieldCheck, CheckCircle, Power, Radar, Gauge, Crown, GitBranch, Lock,
   Database, Cable, FileCog, GitFork, BarChart2, AlertTriangle, Scale, MonitorCheck,
@@ -70,6 +70,7 @@ export const NETWORK_TOOLS: ToolEntry[] = [
   { path: '/http-headers', nameKey: 'tools.http_headers', icon: Webhook, categoryKey: 'network', keywords: ['http', 'header', '响应头', '安全'], i18nNamespace: 'toolHttpHeaders', mode: 'server' },
   { path: '/ssl-cert', nameKey: 'tools.ssl_cert', icon: ShieldCheck, categoryKey: 'network', keywords: ['ssl', 'tls', '证书', 'https'], i18nNamespace: 'toolSslCert', mode: 'server' },
   { path: '/http-status', nameKey: 'tools.http_status', icon: CheckCircle, categoryKey: 'network', keywords: ['http', 'status', '状态码', '可用性'], i18nNamespace: 'toolHttpStatus', mode: 'server' },
+  { path: '/remote-shell', nameKey: 'tools.remote_shell', icon: TerminalSquare, categoryKey: 'network', keywords: ['ssh', '终端', '远程', 'terminal', 'web ssh'], i18nNamespace: 'toolRemoteShell', mode: 'server' },
   { path: '/tcp-port-check', nameKey: 'tools.tcp_port_check', icon: Power, categoryKey: 'network', keywords: ['tcp', 'port', '端口', '连通性'], i18nNamespace: 'toolTcpPort', mode: 'server' },
   { path: '/ping', nameKey: 'tools.ping', icon: Radar, categoryKey: 'network', keywords: ['ping', '延迟', '可达性'], i18nNamespace: 'toolPing', mode: 'server' },
   { path: '/traceroute', nameKey: 'tools.traceroute', icon: GitFork, categoryKey: 'network', keywords: ['traceroute', '路由', '追踪', '网络'], i18nNamespace: 'toolTraceroute', mode: 'server' },

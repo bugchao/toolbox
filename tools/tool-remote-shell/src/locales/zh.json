@@ -1,0 +1,85 @@
+{
+  "title": "Web SSH 终端",
+  "description": "在浏览器里直接 SSH 登录服务器。凭据用主密码在本地加密，服务端不保存、不写日志。",
+  "privacy": {
+    "title": "凭据不会离开你的浏览器与目标主机之间",
+    "description": "密码与私钥仅在建立连接的那一帧发给网关，连接建立后立即从内存丢弃，服务端不落盘、不写日志。勾选保存时，凭据由你的主密码在本地加密后存入浏览器。",
+    "dismiss": "不再显示"
+  },
+  "vault": {
+    "unlockTitle": "解锁凭据金库",
+    "unlockHint": "输入主密码以解密已保存的主机。主密码不会存在任何地方，忘记则只能重建金库。",
+    "createTitle": "设置主密码",
+    "createHint": "主密码用于在本地加密你的服务器凭据。也可以跳过，选择每次手动输入、什么都不保存。",
+    "masterPlaceholder": "主密码",
+    "unlock": "解锁",
+    "create": "创建金库",
+    "skip": "跳过，不保存凭据",
+    "wrongPassword": "主密码错误，无法解密金库",
+    "destroy": "销毁本地金库（清除所有已保存的凭据）"
+  },
+  "saved": {
+    "title": "已保存的主机",
+    "delete": "删除"
+  },
+  "form": {
+    "host": "主机",
+    "port": "端口",
+    "user": "用户名",
+    "alias": "别名",
+    "aliasPlaceholder": "可选，便于识别",
+    "auth_password": "密码",
+    "auth_key": "私钥",
+    "password": "密码",
+    "privateKey": "私钥内容",
+    "passphrase": "私钥口令（可选）",
+    "token": "访问口令",
+    "remember": "把这台主机的凭据加密保存到金库",
+    "connect": "连接",
+    "connecting": "连接中…"
+  },
+  "terminal": {
+    "connecting": "连接中",
+    "connected": "已连接",
+    "closed": "已断开",
+    "resumed": "已恢复",
+    "disconnect": "断开",
+    "reconnect": "重新连接",
+    "needCredentials": "刷新恢复的会话不保存密码，重连请到「新建连接」重新填写"
+  },
+  "tabs": {
+    "new": "新建连接",
+    "close": "关闭 {{title}}",
+    "openCount": "已打开 {{count}} 个终端",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏"
+  },
+  "hostkey": {
+    "title": "确认主机指纹",
+    "description": "这是第一次连接 {{host}}:{{port}}，尚未记录过它的主机密钥指纹。",
+    "verifyHint": "请在目标主机上执行 ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub 比对。指纹不一致说明可能存在中间人。",
+    "trust": "指纹一致，信任并连接",
+    "cancel": "取消"
+  },
+  "errors": {
+    "connect_failed": "连接失败",
+    "dns_failed": "域名解析失败，请检查主机名",
+    "refused": "目标主机拒绝连接，请确认 SSH 服务与端口",
+    "timeout": "连接超时，目标不可达或被防火墙拦截",
+    "auth_failed": "认证失败，请检查用户名、密码或私钥",
+    "hostkey_mismatch": "主机密钥指纹与记录不符！可能是服务器重装，也可能是中间人攻击。确认无误后请先删除本地记录再重连。",
+    "too_many_sessions": "你的并发会话数已达上限，请先断开一个再试",
+    "server_busy": "服务器会话数已满，请稍后再试",
+    "locked_out": "认证失败次数过多，已临时锁定，请稍后再试",
+    "connect_timeout": "等待连接指令超时",
+    "bad_request": "连接参数不完整",
+    "socket_error": "与网关的连接中断",
+    "ws_unreachable": "连不上终端网关：升级请求没有得到响应。请确认后端正在运行（本地开发用 pnpm dev 或 pnpm dev:full，生产用 pnpm start），如果前面有 Nginx 等反向代理，还要确认它转发了 WebSocket 升级。",
+    "gateway_timeout": "网关已连接但没有按协议应答，请检查后端日志"
+  },
+  "closed": {
+    "remote_closed": "远端已关闭会话",
+    "idle_timeout": "空闲超时，连接已断开",
+    "ssh closed": "连接已关闭"
+  }
+}

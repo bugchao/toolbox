@@ -9,6 +9,8 @@ import { createCertToolsApiMiddleware } from '../../tools/tool-cert-suite-shared
 import { createSslCertApiMiddleware } from '../../tools/tool-ssl-cert/server/ssl-cert-api.js'
 import { createHttpsInspectorApiMiddleware } from '../../tools/tool-https-inspector/server/https-inspector-api.js'
 import { createMeetingAudioApiMiddleware } from '../../services/meeting-audio-service/src/api.js'
+import { createRemoteShellApiMiddleware } from '../../tools/tool-remote-shell/server/remote-shell-api.js'
+import { attachRemoteShellWebSocket } from '../../tools/tool-remote-shell/server/ws-gateway.js'
 import fs from 'fs'
 
 const root = path.resolve(__dirname, '../..')
@@ -140,6 +142,16 @@ export default defineConfig({
       name: 'toolbox-meeting-audio-api',
       configureServer(server) {
         server.middlewares.use(createMeetingAudioApiMiddleware())
+      },
+    },
+    {
+      name: 'toolbox-remote-shell',
+      configureServer(server) {
+        server.middlewares.use(createRemoteShellApiMiddleware())
+        // WS 要挂在真正的 http.Server 上，不是 connect 中间件栈。
+        // 未设 REMOTE_SHELL_ENABLED=1 时 attach 直接返回 null，不装监听器，
+        // 也就不会碰 Vite 自己的 HMR upgrade。
+        if (server.httpServer) attachRemoteShellWebSocket(server.httpServer)
       },
     },
   ],

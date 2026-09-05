@@ -236,6 +236,7 @@
       "http_headers": "HTTP Header 检测",
       "ssl_cert": "SSL 证书检测",
       "http_status": "HTTP 状态检测",
+      "remote_shell": "Web SSH 终端",
       "tcp_port_check": "TCP 端口检测",
       "ping": "Ping 测试",
       "traceroute": "Traceroute 路由追踪",

@@ -10,15 +10,19 @@ export async function startApiGateway(options = {}) {
   const rootDir = options.rootDir ?? defaultRootDir
   const port = Number(process.env.PORT || 3000)
   const host = process.env.HOST || '0.0.0.0'
-  const { app, staticDir, services } = await createApiGatewayApp({ rootDir })
+  const { app, staticDir, services, attachUpgrade } = await createApiGatewayApp({ rootDir })
 
-  return app.listen(port, host, () => {
+  const server = app.listen(port, host, () => {
     console.log(`[api-gateway] listening on http://${host}:${port}`)
     if (staticDir) {
       console.log(`[api-gateway] serving static assets from ${staticDir}`)
     }
     console.log(`[api-gateway] registered services: ${services.map((service) => service.id).join(', ')}`)
   })
+
+  attachUpgrade(server)
+
+  return server
 }
 
 if (process.argv[1] === __filename) {

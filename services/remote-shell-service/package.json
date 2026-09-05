@@ -1,0 +1,11 @@
+{
+  "name": "@toolbox/remote-shell-service",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@toolbox/service-core": "workspace:*",
+    "ssh2": "^1.16.0",
+    "ws": "^8.18.0"
+  }
+}
