@@ -5,15 +5,15 @@ const weatherToolManifest = defineToolManifest({
   path: '/weather',
   namespace: 'toolWeather',
   mode: 'hybrid',
-  keywords: ['weather', 'forecast', '天气', '预报'],
+  keywords: ['weather', 'forecast', '天气', '预报', '未来7天', '未来14天', '天气趋势'],
   meta: {
     zh: {
       title: '天气查询',
-      description: '默认基于 IP 定位当前城市，支持最近 7 天、最近 30 天以及自定义时间范围天气查询。',
+      description: '默认基于 IP 定位当前城市，一键查看未来 7 天 / 14 天 / 一个月天气，也支持历史回顾与自定义范围。',
     },
     en: {
       title: 'Weather',
-      description: 'Default to IP-based location lookup and support weather queries for the last 7 days, last 30 days, or a custom range.',
+      description: 'Resolves your city from IP and gives one-click next 7 days / 14 days / month forecasts, plus historical lookback and custom ranges.',
     },
   },
   loadComponent: () => import('./src/index'),

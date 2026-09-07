@@ -4,7 +4,6 @@ import {
   Cloud,
   CloudRain,
   Compass,
-  Droplets,
   MapPin,
   Search,
   Sun,
@@ -20,8 +19,19 @@ import {
   PageHero,
   Spinner,
 } from '@toolbox/ui-kit'
-
-type RangeMode = '7d' | '30d' | 'custom'
+import {
+  ENSEMBLE_HORIZON_DAYS,
+  MAX_RANGE_DAYS,
+  PRESET_MODES,
+  diffDaysInclusive,
+  getPresetRange,
+  parseDate,
+  planSegments,
+  shiftDays,
+  toDateInputValue,
+  type RangeMode,
+  type SegmentSource,
+} from './lib/range'
 
 interface WeatherLocation {
   name: string
@@ -47,6 +57,8 @@ interface DailyWeatherRow {
   weatherCode: number
   precipitation: number
   windSpeed: number
+  /** true = 来自 16 天以外的集合预报，精度低，界面上要标出来 */
+  isOutlook: boolean
 }
 
 interface GeocodeResult {
@@ -100,42 +112,6 @@ const WEATHER_CODE_META: Record<number, { zh: string; en: string; icon: string }
   95: { zh: '雷暴', en: 'Thunderstorm', icon: '⛈️' },
   96: { zh: '雷暴伴小冰雹', en: 'Thunderstorm with slight hail', icon: '⛈️' },
   99: { zh: '雷暴伴大冰雹', en: 'Thunderstorm with heavy hail', icon: '⛈️' },
-}
-
-function toDateInputValue(date: Date) {
-  return date.toISOString().slice(0, 10)
-}
-
-function parseDate(value: string) {
-  return new Date(`${value}T00:00:00`)
-}
-
-function diffDaysInclusive(start: string, end: string) {
-  const startDate = parseDate(start)
-  const endDate = parseDate(end)
-  const diff = endDate.getTime() - startDate.getTime()
-  return Math.floor(diff / 86400000) + 1
-}
-
-function shiftDays(date: Date, days: number) {
-  const next = new Date(date)
-  next.setDate(next.getDate() + days)
-  return next
-}
-
-function getPresetRange(mode: Exclude<RangeMode, 'custom'>) {
-  const today = new Date()
-  if (mode === '7d') {
-    return {
-      start: toDateInputValue(shiftDays(today, -6)),
-      end: toDateInputValue(today),
-    }
-  }
-
-  return {
-    start: toDateInputValue(shiftDays(today, -29)),
-    end: toDateInputValue(today),
-  }
 }
 
 function getWeatherMeta(code: number, lang: string) {
@@ -276,39 +252,46 @@ async function fetchCurrentWeather(location: WeatherLocation) {
   } satisfies CurrentWeatherSnapshot
 }
 
+const DAILY_FIELDS = 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max'
+
+// 集合预报把 16 天窗口延到 35 天，用 GFS 0.5° 的控制成员（字段名与普通预报一致，可直接复用解析）
+const SEGMENT_ENDPOINTS: Record<SegmentSource, string> = {
+  archive: 'https://archive-api.open-meteo.com/v1/archive',
+  forecast: 'https://api.open-meteo.com/v1/forecast',
+  ensemble: 'https://ensemble-api.open-meteo.com/v1/ensemble?models=gfs05',
+}
+
 async function fetchDailyWeather(location: WeatherLocation, startDate: string, endDate: string) {
-  const today = toDateInputValue(new Date())
-  const yesterday = toDateInputValue(shiftDays(new Date(), -1))
   const rows = new Map<string, DailyWeatherRow>()
 
-  async function fetchSegment(endpoint: string, start: string, end: string) {
+  async function fetchSegment({ source, start, end }: ReturnType<typeof planSegments>[number]) {
+    const endpoint = SEGMENT_ENDPOINTS[source]
     const response = await fetch(
-      `${endpoint}?latitude=${location.latitude}&longitude=${location.longitude}&start_date=${start}&end_date=${end}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=${encodeURIComponent(location.timezone)}`
+      `${endpoint}${endpoint.includes('?') ? '&' : '?'}latitude=${location.latitude}&longitude=${location.longitude}&start_date=${start}&end_date=${end}&daily=${DAILY_FIELDS}&timezone=${encodeURIComponent(location.timezone)}`
     )
     if (!response.ok) throw new Error('Failed to load weather range')
     const data = await response.json()
     const times = data.daily?.time || []
 
     times.forEach((date: string, index: number) => {
+      const high = data.daily.temperature_2m_max[index]
+      const low = data.daily.temperature_2m_min[index]
+      // 集合预报窗口末尾会返回 null 占位，归档接口对最近几天也可能缺数据，直接跳过
+      if (high === null || low === null || rows.has(date)) return
       rows.set(date, {
         date,
-        high: Math.round(data.daily.temperature_2m_max[index]),
-        low: Math.round(data.daily.temperature_2m_min[index]),
-        weatherCode: data.daily.weather_code[index],
+        high: Math.round(high),
+        low: Math.round(low),
+        weatherCode: data.daily.weather_code[index] ?? 0,
         precipitation: Number(data.daily.precipitation_sum[index] || 0),
         windSpeed: Math.round(data.daily.wind_speed_10m_max[index] || 0),
+        isOutlook: source === 'ensemble',
       })
     })
   }
 
-  if (startDate <= yesterday) {
-    const pastEnd = endDate < today ? endDate : yesterday
-    await fetchSegment('https://archive-api.open-meteo.com/v1/archive', startDate, pastEnd)
-  }
-
-  if (endDate >= today) {
-    const futureStart = startDate > today ? startDate : today
-    await fetchSegment('https://api.open-meteo.com/v1/forecast', futureStart, endDate)
+  for (const segment of planSegments(startDate, endDate)) {
+    await fetchSegment(segment)
   }
 
   return Array.from(rows.values()).sort((a, b) => a.date.localeCompare(b.date))
@@ -317,11 +300,11 @@ async function fetchDailyWeather(location: WeatherLocation, startDate: string, e
 export default function WeatherTool() {
   const { t, i18n } = useTranslation('toolWeather')
   const lang = i18n.language
-  const preset7d = getPresetRange('7d')
+  const defaultRange = getPresetRange('next7d')
   const [query, setQuery] = useState('')
-  const [rangeMode, setRangeMode] = useState<RangeMode>('7d')
-  const [startDate, setStartDate] = useState(preset7d.start)
-  const [endDate, setEndDate] = useState(preset7d.end)
+  const [rangeMode, setRangeMode] = useState<RangeMode>('next7d')
+  const [startDate, setStartDate] = useState(defaultRange.start)
+  const [endDate, setEndDate] = useState(defaultRange.end)
   const [location, setLocation] = useState<WeatherLocation | null>(null)
   const [currentWeather, setCurrentWeather] = useState<CurrentWeatherSnapshot | null>(null)
   const [dailyWeather, setDailyWeather] = useState<DailyWeatherRow[]>([])
@@ -329,7 +312,9 @@ export default function WeatherTool() {
   const [locating, setLocating] = useState(true)
   const [error, setError] = useState('')
 
-  const maxCustomEndDate = useMemo(() => toDateInputValue(shiftDays(new Date(), 15)), [])
+  const maxCustomEndDate = useMemo(() => toDateInputValue(shiftDays(new Date(), ENSEMBLE_HORIZON_DAYS)), [])
+
+  const outlookDays = useMemo(() => dailyWeather.filter((day) => day.isOutlook).length, [dailyWeather])
 
   const summary = useMemo(() => {
     if (!dailyWeather.length) return null
@@ -355,7 +340,9 @@ export default function WeatherTool() {
   const validateRange = (nextStart: string, nextEnd: string) => {
     if (!nextStart || !nextEnd) throw new Error(t('errors.missingDate'))
     if (nextStart > nextEnd) throw new Error(t('errors.invalidRange'))
-    if (diffDaysInclusive(nextStart, nextEnd) > 31) throw new Error(t('errors.tooLong'))
+    if (diffDaysInclusive(nextStart, nextEnd) > MAX_RANGE_DAYS) {
+      throw new Error(t('errors.tooLong', { days: MAX_RANGE_DAYS }))
+    }
     if (parseDate(nextEnd).getTime() > parseDate(maxCustomEndDate).getTime()) {
       throw new Error(t('errors.futureLimit', { date: maxCustomEndDate }))
     }
@@ -388,7 +375,7 @@ export default function WeatherTool() {
       setError('')
       try {
         const currentLocation = await fetchIpLocation(lang)
-        await loadWeather(currentLocation, preset7d.start, preset7d.end)
+        await loadWeather(currentLocation, defaultRange.start, defaultRange.end)
       } catch {
         setLocating(false)
         setError(t('errors.ipLocateFallback'))
@@ -500,10 +487,11 @@ export default function WeatherTool() {
 
       <Card className="space-y-4">
         <div className="flex flex-wrap gap-3">
-          {(['7d', '30d', 'custom'] as RangeMode[]).map((mode) => (
+          {([...PRESET_MODES, 'custom'] as RangeMode[]).map((mode) => (
             <button
               key={mode}
               type="button"
+              disabled={loading}
               onClick={() => {
                 if (mode === 'custom') {
                   setRangeMode('custom')
@@ -511,13 +499,13 @@ export default function WeatherTool() {
                 }
                 void applyPreset(mode)
               }}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition disabled:opacity-60 ${
                 rangeMode === mode
                   ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900'
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'
               }`}
             >
-              {mode === '7d' ? t('presets.last7d') : mode === '30d' ? t('presets.last30d') : t('presets.custom')}
+              {t(`presets.${mode}`)}
             </button>
           ))}
         </div>
@@ -544,7 +532,9 @@ export default function WeatherTool() {
           </div>
         </div>
 
-        <p className="text-sm text-slate-500 dark:text-slate-400">{t('rangeHint', { date: maxCustomEndDate })}</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          {t('rangeHint', { date: maxCustomEndDate, days: MAX_RANGE_DAYS })}
+        </p>
       </Card>
 
       {error ? <NoticeCard tone="danger" title={error} /> : null}
@@ -621,6 +611,9 @@ export default function WeatherTool() {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {t('rangeResolved', { start: startDate, end: endDate, days: dailyWeather.length })}
           </p>
+          {outlookDays > 0 ? (
+            <p className="mt-1 text-sm text-amber-600 dark:text-amber-400">{t('outlookNotice', { days: outlookDays })}</p>
+          ) : null}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -628,7 +621,17 @@ export default function WeatherTool() {
             const meta = getWeatherMeta(day.weatherCode, lang)
             return (
               <Card key={day.date} className="border-slate-200 bg-slate-50 transition hover:-translate-y-0.5 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900">
-                <div className="text-sm font-medium text-slate-500 dark:text-slate-400">{formatDay(day.date)}</div>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-sm font-medium text-slate-500 dark:text-slate-400">{formatDay(day.date)}</div>
+                  {day.isOutlook ? (
+                    <span
+                      title={t('outlookHint')}
+                      className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                    >
+                      {t('outlookBadge')}
+                    </span>
+                  ) : null}
+                </div>
                 <div className="mt-3 flex items-center gap-3">
                   <div className="text-3xl">{meta.icon}</div>
                   <div>
@@ -659,7 +662,7 @@ export default function WeatherTool() {
       <Card className="space-y-3">
         <div className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{t('notesTitle')}</div>
         <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
-          {[t('notes.note1'), t('notes.note2'), t('notes.note3'), t('notes.note4')].map((note) => (
+          {[t('notes.note1'), t('notes.note2'), t('notes.note3'), t('notes.note4', { days: MAX_RANGE_DAYS })].map((note) => (
             <li key={note} className="rounded-xl bg-slate-50 px-3 py-2 dark:bg-slate-900/50">
               {note}
             </li>

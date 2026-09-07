@@ -18,6 +18,31 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: '2026-09-07',
+    title: {
+      zh: '天气查询新增未来预报快捷方式 + 万年历新增中国法定节假日与日/周/月/年视图',
+      en: 'Weather gains forecast shortcuts + Perpetual Calendar gains Chinese public holidays and day/week/month/year views',
+    },
+    items: [
+      {
+        type: 'updated',
+        summary: {
+          zh: '天气查询新增未来预报快捷方式：未来 7 天 / 未来 14 天 / 未来一个月一键切换，默认进入即展示未来 7 天。7/14 天走 Open-Meteo 逐日预报，未来一个月超出 16 天窗口的部分改用 GFS 集合预报补齐并标注「趋势」；同时修掉 toISOString() 取当天日期在东八区凌晨会退回前一天的问题，日期区间拆分逻辑抽到 lib/range.ts 并补齐单测。',
+          en: 'Weather gains forecast shortcuts: one-click Next 7 Days / Next 14 Days / Next Month, with Next 7 Days as the new default view. 7/14 days come from the Open-Meteo daily forecast; the portion of Next Month beyond the 16-day window is filled from the GFS ensemble and badged "Outlook". Also fixed today\'s date being computed via toISOString() (off by a day before 08:00 in UTC+8) and extracted the range-splitting logic into lib/range.ts with unit tests.',
+        },
+        paths: ['/weather'],
+      },
+      {
+        type: 'updated',
+        summary: {
+          zh: '万年历升级：内置国务院办公厅发布的 2024–2026 年放假与调休安排，日期格上直接标注「休 / 班」并在详情中说明属于哪个节假日；视图从单一月历扩展为日 / 周 / 月 / 年四种，月视图补齐相邻月份凑满整周、年视图 12 宫格点击可下钻到对应月份（类 macOS 日历）。节假日数据可用 scripts/sync-holidays.mjs 逐年同步。',
+          en: 'Perpetual Calendar upgrade: bundles the State Council public-holiday and make-up-workday schedule for 2024-2026, badging each cell as off/working day and naming the holiday in the detail panel; the single month grid becomes four views (day/week/month/year), with the month grid padded to whole weeks and a 12-month year grid that drills into a month on click, macOS Calendar style. Holiday data is refreshed per year via scripts/sync-holidays.mjs.',
+        },
+        paths: ['/calendar'],
+      },
+    ],
+  },
+  {
     date: '2026-07-04',
     title: {
       zh: '会议纪要新增系统音频转写 + 图片压缩器重构',
