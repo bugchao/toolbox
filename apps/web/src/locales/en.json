@@ -3,11 +3,14 @@
     "appName": "Bug Tide",
     "loading": "Loading...",
     "theme": {
+      "label": "Theme",
+      "system": "System",
       "light": "Light",
       "dark": "Dark"
     },
     "backgroundShow": "Show tool page background",
     "backgroundHide": "Hide tool page background",
+    "lang_system": "System",
     "lang_zh": "中文",
     "lang_en": "English",
     "feedback": {

@@ -6,16 +6,21 @@ import {
   QrCode, Newspaper, MapPin, Cloud, Menu, X, ChevronRight, ChevronDown,
   Code, FileCode, Clock, Link2, Shuffle, Calendar, Key,
   Fingerprint, Braces, Hash, Image, FileText, Heart, Palette, Wand2,
-  Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Languages, Layers, Sparkles,
+  Eraser, Ruler, Search, File, Globe, Server, Sun, Moon, Monitor, Languages, Layers, Sparkles,
   PanelLeftClose, PanelLeft, ChevronRight as BreadcrumbSep,
   Radio, Shield, Database, Network, ScrollText,
   Plane, BookOpen, Heart as HeartIcon, UtensilsCrossed, ExternalLink, Coins, Gamepad2,
   MessageCircleQuestion
 } from 'lucide-react'
-import { useTheme } from '../contexts/ThemeContext'
+import { useTheme, THEME_PREFERENCES, type ThemePreference } from '../contexts/ThemeContext'
 import { useSettings } from '../contexts/SettingsContext'
 import { GlobalBackground, ParticlesBackground, useBackgroundVisibility } from '@toolbox/ui-kit'
-import { setLocale, type Locale } from '../i18n'
+import {
+  setLocalePreference,
+  getLocalePreference,
+  LANGUAGE_PREFERENCES,
+  type LanguagePreference,
+} from '../i18n'
 import { TOOLS, TOOLS_BY_PATH, getToolTitle, getToolByPath } from '../config/tools'
 import { CommandPalette } from './CommandPalette'
 import { FeedbackDialog } from './FeedbackDialog'
@@ -89,7 +94,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t: tFooter } = useTranslation('footer')
   const { t: tCommonTheme } = useTranslation('common')
   const { t: tCp } = useTranslation('commandPalette')
-  const { theme, toggleTheme } = useTheme()
+  const { theme, preference: themePreference, setPreference: setThemePreference } = useTheme()
   const { settings, updateSettings } = useSettings()
   const { visible: backgroundVisible, setVisible: setBackgroundVisible } = useBackgroundVisibility()
   const navigate = useNavigate()
@@ -119,6 +124,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['dev', 'utils', 'network']))
   const [langOpen, setLangOpen] = useState(false)
+  const [themeOpen, setThemeOpen] = useState(false)
+  // i18n 的偏好存在 localStorage 里，读进来只为给下拉高亮当前项
+  const [langPreference, setLangPreference] = useState<LanguagePreference>(getLocalePreference)
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [tabs, setTabs] = useState<{ path: string; title: string }[]>(() => {
@@ -135,6 +143,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null)
   const [flyoutTop, setFlyoutTop] = useState(0)
   const langRef = useRef<HTMLDivElement>(null)
+  const themeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)')
@@ -233,6 +242,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false)
+      if (themeRef.current && !themeRef.current.contains(e.target as Node)) setThemeOpen(false)
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -495,14 +505,43 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 )}
               </span>
             </button>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-              title={theme === 'dark' ? tCommonTheme('theme.light') : tCommonTheme('theme.dark')}
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+            <div className="relative" ref={themeRef}>
+              <button
+                type="button"
+                onClick={() => setThemeOpen(!themeOpen)}
+                className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                title={tCommonTheme('theme.' + themePreference)}
+                aria-label={tCommonTheme('theme.label')}
+              >
+                {/* 图标表示当前状态：跟随系统时用显示器图标，否则显示实际生效的外观 */}
+                {themePreference === 'system' ? (
+                  <Monitor className="w-5 h-5" />
+                ) : theme === 'dark' ? (
+                  <Moon className="w-5 h-5" />
+                ) : (
+                  <Sun className="w-5 h-5" />
+                )}
+              </button>
+              {themeOpen && (
+                <div className="absolute right-0 top-full z-20 mt-1 w-28 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 dark:ring-white/10 py-1">
+                  {THEME_PREFERENCES.map((pref: ThemePreference) => (
+                    <button
+                      key={pref}
+                      type="button"
+                      onClick={() => { setThemePreference(pref); setThemeOpen(false) }}
+                      aria-current={pref === themePreference ? 'true' : undefined}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        pref === themePreference
+                          ? 'text-indigo-600 dark:text-indigo-400 font-medium'
+                          : 'text-gray-700 dark:text-gray-200'
+                      }`}
+                    >
+                      {tCommonTheme('theme.' + pref)}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className="relative" ref={langRef}>
               <button
                 type="button"
@@ -513,15 +552,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Languages className="w-5 h-5" />
               </button>
               {langOpen && (
-                <div className="absolute right-0 top-full z-20 mt-1 w-24 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 dark:ring-white/10 py-1">
-                  {(['zh', 'en'] as Locale[]).map((lng) => (
+                <div className="absolute right-0 top-full z-20 mt-1 w-28 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 dark:ring-white/10 py-1">
+                  {LANGUAGE_PREFERENCES.map((pref: LanguagePreference) => (
                     <button
-                      key={lng}
+                      key={pref}
                       type="button"
-                      onClick={() => { setLocale(lng); setLangOpen(false) }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+                      onClick={() => {
+                        setLocalePreference(pref)
+                        setLangPreference(pref)
+                        setLangOpen(false)
+                      }}
+                      aria-current={pref === langPreference ? 'true' : undefined}
+                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        pref === langPreference
+                          ? 'text-indigo-600 dark:text-indigo-400 font-medium'
+                          : 'text-gray-700 dark:text-gray-200'
+                      }`}
                     >
-                      {tCommon('lang_' + lng)}
+                      {tCommon('lang_' + pref)}
                     </button>
                   ))}
                 </div>

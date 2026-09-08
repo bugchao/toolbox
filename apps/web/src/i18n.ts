@@ -19,7 +19,10 @@ import { ipOpsZh, ipOpsEn } from '@toolbox/tool-ip-ops-suite/src/locales'
 import { subnetZh, subnetEn } from '@toolbox/tool-subnet-suite/src/locales'
 import { TOOL_NAMESPACE_LOADERS } from './i18n-tool-loaders'
 
+/** 当前生效的语言，仅作缓存；权威来源是下面的偏好键 */
 const STORAGE_KEY = 'toolbox-lang'
+/** 用户的选择：'system' | 'zh' | 'en' */
+const PREF_KEY = 'toolbox-lang-pref'
 
 export const defaultNS = 'common'
 
@@ -64,9 +67,53 @@ export const resources = {
 } as const
 
 export type Locale = keyof typeof resources
+/** 'system' 表示跟随浏览器/系统语言，生效值随系统变化 */
+export type LanguagePreference = 'system' | Locale
 
-const saved = (typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEY)) as Locale | null
-const fallbackLng: Locale = saved && resources[saved] ? saved : 'zh'
+export const LANGUAGE_PREFERENCES: LanguagePreference[] = ['system', 'zh', 'en']
+
+function isLocale(value: unknown): value is Locale {
+  return typeof value === 'string' && value in resources
+}
+
+/** 浏览器语言里只要有一条是英文就用英文，否则中文 */
+export function systemLocale(): Locale {
+  if (typeof navigator === 'undefined') return 'zh'
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language]
+  for (const lang of langs) {
+    if (!lang) continue
+    const base = lang.toLowerCase().split('-')[0]
+    if (isLocale(base)) return base
+  }
+  return 'zh'
+}
+
+/**
+ * 存的是「偏好」而不是「生效值」。
+ *
+ * 存生效值会让跟随系统失效：系统是英文 → 我们切到 en → 又把 'en' 写回去，
+ * 下次启动就变成固定英文了。
+ *
+ * 兼容老数据：以前只有 toolbox-lang，存的是用户明确选过的语言，继续当固定值。
+ */
+export function getLocalePreference(): LanguagePreference {
+  if (typeof localStorage === 'undefined') return 'system'
+  try {
+    const pref = localStorage.getItem(PREF_KEY)
+    if (pref === 'system' || isLocale(pref)) return pref
+    const legacy = localStorage.getItem(STORAGE_KEY)
+    if (isLocale(legacy)) return legacy
+  } catch (_) {
+    /* 隐私模式下读不到，按跟随系统处理 */
+  }
+  return 'system'
+}
+
+export function resolveLocale(pref: LanguagePreference): Locale {
+  return pref === 'system' ? systemLocale() : pref
+}
+
+const fallbackLng: Locale = resolveLocale(getLocalePreference())
 
 /**
  * 工具 namespace 懒加载 backend
@@ -103,14 +150,26 @@ i18n.use(lazyToolBackend).use(initReactI18next).init({
   react: { useSuspense: true },
 })
 
-i18n.on('languageChanged', (lng) => {
-  try {
-    localStorage.setItem(STORAGE_KEY, lng)
-  } catch (_) {}
-})
+// 这里刻意不再把生效语言写回 STORAGE_KEY。
+// 写了会和下面的老数据迁移撞车：跟随系统解析出 'en' → 写进 toolbox-lang →
+// 下次启动迁移逻辑把它当成「用户明确选过英文」→ 跟随系统静默失效。
+// 现在 STORAGE_KEY 只读不写，纯粹用于识别升级前的老用户。
 
-export function setLocale(lng: Locale) {
-  i18n.changeLanguage(lng)
+// 跟随系统时，系统语言变了要实时跟上
+if (typeof window !== 'undefined') {
+  window.addEventListener('languagechange', () => {
+    if (getLocalePreference() === 'system') i18n.changeLanguage(systemLocale())
+  })
+}
+
+/** 设置语言偏好。传具体语言即脱离跟随系统 */
+export function setLocalePreference(pref: LanguagePreference) {
+  try {
+    localStorage.setItem(PREF_KEY, pref)
+  } catch (_) {
+    /* 存不住就只在本次会话内生效 */
+  }
+  i18n.changeLanguage(resolveLocale(pref))
 }
 
 export default i18n

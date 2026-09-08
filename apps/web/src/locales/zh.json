@@ -3,11 +3,14 @@
     "appName": "Bug 潮",
     "loading": "加载中...",
     "theme": {
+      "label": "主题",
+      "system": "跟随系统",
       "light": "浅色",
       "dark": "深色"
     },
     "backgroundShow": "显示工具页背景",
     "backgroundHide": "隐藏工具页背景",
+    "lang_system": "跟随系统",
     "lang_zh": "中文",
     "lang_en": "English",
     "feedback": {
